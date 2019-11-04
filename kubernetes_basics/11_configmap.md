@@ -15,8 +15,8 @@ metadata:
   name: my-pod
 spec:
   containers:
-  - image: an-image
-    name: env-printer
+  - name: env-printer
+    image: an-image
     command:
       - /bin/sh
       - -c
@@ -28,7 +28,7 @@ spec:
             key: a-key
             name: a-configmap
 ```
-2. Verify everything fine via
+2. Verify everything is fine via
 ```bash
 kubectl get pods
 kubectl logs my-pod

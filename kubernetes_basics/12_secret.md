@@ -3,11 +3,11 @@
 1. Create the following ConfigMap and Pod. Fix the errors.
 ```yaml 
 apiVersion: v1
-kind: ConfigMap
+kind: Secret
 metadata:
-  name: my-configmap
-data:
-  hello: world
+  name: my-secret
+stringData:
+  secret: value
 ---
 apiVersion: v1
 kind: Pod
@@ -15,26 +15,26 @@ metadata:
   name: my-pod
 spec:
   containers:
-  - image: an-image
-    name: env-printer
+  - name: vol-printer
+    image: an-image
     command:
       - /bin/sh
       - -c
-      - "echo $my_env_var && sleep 99d"
-    env:
-      - name: my-env-var
-        valueFrom:
-          configMapKeyRef:
-            key: a-key
-            name: a-configmap
+      - "sleep 99d"
+    volumeMounts:
+      - name: volume-name
+        mountPath: /opt/my-volume
+  volumes:
+    - name: my-volume-name
+      secret:
+        secretName: the-secret
 ```
 2. Verify everything fine via
 ```bash
-kubectl get pods
-kubectl logs my-pod
-world
+kubectl exec -it my-pod -- cat /opt/my-volume/secret
 ```
 3. Cleanup
 ```bash
-kubectl delete po,cm --all
+kubectl delete pod my-pod
+kubectl delete secret my-secret
 ```
