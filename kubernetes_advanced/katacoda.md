@@ -9,11 +9,3 @@ Network Policy
 prometheus
 Helm
 Kustomize
-
-
-
-
-
-
-
-
