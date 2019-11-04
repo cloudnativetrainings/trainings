@@ -1,4 +1,4 @@
-# Jobs
+# Job
 In this course we will create a job and parallelize its execution.
 
 1. Create a Job like this
