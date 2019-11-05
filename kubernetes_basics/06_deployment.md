@@ -19,8 +19,8 @@ spec:
         app: my-deployment
     spec:
       containers:
-      - name: my-deployment-container
-        image: nginx
+        - name: my-deployment-container
+          image: nginx
 ```
 2. Create the Deployment
 ```bash

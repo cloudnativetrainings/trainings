@@ -6,5 +6,3 @@ resourcequota
 pod budgets
 security policy
 network policy
-
-222

@@ -1,3 +1,0 @@
-# Draining Nodes
-
-TODO
