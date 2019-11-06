@@ -32,14 +32,7 @@ spec:
     spec:
       terminationGracePeriodSeconds: 0
       containers:
-        - name: web-server
-          image: nginx
-          ports:
-            - containerPort: 80
-          volumeMounts:
-            - name: state
-              mountPath: /usr/share/nginx/html
-        - name: file-writer
+        - name: my-stateful-set
           image: busybox
           command: 
             - "/bin/sh"
@@ -67,23 +60,32 @@ spec:
           requests:
             storage: 1Gi
 ```
-
-kubectl get sts,pv,pvc,pods
-
+```bash
+kubectl create -f sts.yaml
+```
+2. Watch the creation of the resources. Take note that the replicas are created one by one and not all at the same time.
+```bash
+watch -n 1 kubectl get sts,pv,pvc,pods
+```
+3. Printout the content of the state file of the last built Pod.
+```bash
 kubectl exec -it my-stateful-set-2 -- cat /tmp/state
-
+pod my-stateful-set-2 - 10.24.0.36
+pod my-stateful-set-2 - 10.24.0.36
+```
+4. Scale down the StatefulSet.
+```bash
 kubectl scale sts my-stateful-set --replicas 2
-
-kubectl get sts,pv,pvc,pods
-
+```
+4. Scale up the StatefulSet.
+```bash
 kubectl scale sts my-stateful-set --replicas 3
-
-pod my-stateful-set-2 - 10.24.0.36
-pod my-stateful-set-2 - 10.24.0.36
-pod my-stateful-set-2 - 10.24.0.36
+```
+5. Printout the content of the state file of the last built Pod. Take note that the same PersistentVolume got bound to the Pod.
+```bash
+kubectl exec -it my-stateful-set-2 -- cat /tmp/state
 pod my-stateful-set-2 - 10.24.0.36
 pod my-stateful-set-2 - 10.24.0.36
 pod my-stateful-set-2 - 10.24.0.37
-
-kubectl exec -it my-stateful-set-0 -c file-writer -- sh
+```
 
