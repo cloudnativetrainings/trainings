@@ -1,0 +1,7 @@
+
+.kube/config
+
+kubetail
+
+krew
+
