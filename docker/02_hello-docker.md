@@ -14,15 +14,19 @@ apache2ctl -DFOREGROUND
 ```
 4. Visit the welcome page of your browser. To get the external IP you can visit https://console.cloud.google.com/networking/addresses/.
 5. Stop the process in the Docker Container via the CTRL+C keys.
-6. Take a look at the running Docker Containers.
+6. Exit the container via
+```bash
+exit
+```
+7. Take a look at the running Docker Containers.
 ```bash
 docker ps
 ```
-7. The Container is already in state `EXITED`. To see the Container do the following
+8. The Container is already in state `EXITED`. To see the Container do the following
 ```bash
 docker ps -a
 ```
-8. Remove the Container
+9. Remove the Container
 ```bash
 docker rm <TAB>
 ```

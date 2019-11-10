@@ -4,12 +4,12 @@
 In this step we shall create Dockerfile. 
 
 Create a Dockerfile with following content in current directory.
-```
-`cat > Dockerfile << EOF
+```bash
+cat > Dockerfile << EOF
 FROM ubuntu:18.04
 RUN apt-get update && apt-get install apache2 -y && apt-get clean
 CMD ["apache2ctl", "-DFOREGROUND"]
-EOF`
+EOF
 ```
 
 Verify the file: `cat Dockerfile`
@@ -64,13 +64,14 @@ We need to create a `index.html` file in `html` directory with following content
 </pre>
 
 Enhance our existing Dockerfile with following content.
-
-`cat > Dockerfile << EOF
+```bash
+cat > Dockerfile << EOF
 FROM ubuntu:18.04
 RUN apt-get update && apt-get install apache2 -y && apt-get clean
 COPY html /var/www/html
 CMD ["apache2ctl", "-DFOREGROUND"]
-EOF`
+EOF
+```
 
 Verify the Dockerfile: `cat Dockerfile`
 Verify the html file: `cat html/index.html`
@@ -92,7 +93,7 @@ Verify the updated output with curl:
 
 Change the following things:
 * Web content should contain `Docker is awesome!`
-* Dockerfile should an `ENTRYPOINT` with the default argument `-DFOREGROUND`
+* Dockerfile should have an `ENTRYPOINT` with the default argument `-DFOREGROUND`
 
 ### Validate
 

@@ -34,7 +34,6 @@ What's about the sha of the image.
 
 `docker inspect debian | grep Id`
 
-
 You can also use these to run the container:
 
 `docker run -it sha256:0af60a5c6dd017d7023f6b6c71f3ffbb9beb2948d842bcb1ba36d597fb96e75a`
