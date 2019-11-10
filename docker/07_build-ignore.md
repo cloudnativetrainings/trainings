@@ -9,19 +9,45 @@ A Dockerfile copies the working directory into the Docker Image. As a result,
 this would include potentially sensitive information such as a passwords file 
 which we'd want to manage outside the image. View the Dockerfile with 
 
-`cd ~/scrapbook/tutorial`
-`cat Dockerfile`
+Create a folder, cd into it and create some files
+```bash
+mkdir build-ignore
+cd build-ignore
+touch passwords.txt
+touch somelargefile.img
+```
 
-Build the image with `docker build -t password .` .
+Create a Dockerfile with this content
+```bash
+FROM alpine
+ADD . /app
+COPY cmd.sh /cmd.sh
+CMD ["sh", "-c", "/cmd.sh"]
+```
 
-Look at the output using `docker run password ls /app`
+Create a bash script called `cmd.sh` with this content
+```bash
+#!/usr/bin/env bash
+echo "Hello World"
+```
+
+Build the image with 
+```bash
+docker build -t password .
+```
+
+Look at the output using 
+```bash
+docker run password ls /app
+```
 
 This will include the passwords file.
 
 ### Ignore File
 The following command would include passwords.txt in our .dockerignore file and ensure that it didn't accidentally end up in a container. The .dockerignore file would be stored in source control and share with the team to ensure that everyone is consistent.
-
-`echo passwords.txt >> .dockerignore`
+```bash
+echo passwords.txt >> .dockerignore
+```
 
 The ignore file supports directories and Regular expressions to define the 
 restrictions, very similar to .gitignore. This file can also be used to improve 
@@ -29,12 +55,14 @@ build times which we'll investigate in the next step.
 
 Build the image, because of the Docker Ignore file it shouldn't include the 
 passwords file.
-
-`docker build -t nopassword .` .
+```bash
+docker build -t nopassword .
+```
 
 Look at the output using 
-
-`docker run nopassword ls /app`
+```bash
+docker run nopassword ls /app
+```
 
 ## Step 2 - Docker Build Context
 The *.dockerignore* file can ensure that sensitive details are not included in a 
@@ -46,8 +74,9 @@ entire path contents to the Engine for it to calculate which files to include. A
 result sending the 100M file is unrequired and creates a slower build.
 
 You can see the 100M impact by executing following the command.
-
-`docker build -t large-file-context .`.
+```bash
+docker build -t large-file-context .
+```
 
 In the next step, we'll demonstrate how to improve the performance of the build.
 
@@ -65,14 +94,14 @@ during the build.
 ### Optimizing
 To speed up our build, simply include the filename of the large file in the ignore
 file.
-
-`echo somelargefile.img >> .dockerignore`
+```bash
+echo somelargefile.img >> .dockerignore
+```
 
 When we rebuild the image, it will be much faster as it doesn't have to copy the 
 large file.
-
-`docker build -t no-large-file-context .` .
+```bash
+docker build -t no-large-file-context .
+```
 
 This optimisation has a greater impact when ignoring large directories such as *.git*.
-
-TODO - Content of the trainingsss
