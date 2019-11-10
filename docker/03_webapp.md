@@ -12,25 +12,36 @@ It is a single place to manage Docker images. Users can create account
 and push their own images to registry.
 
 Use following command to search our desired image in registry.
-`docker search loodse`
+```bash
+docker search loodse
+```
 
 You will get list of images belongs to a user `loodse`.
 
 Now we know that our desired image exists in registry, we need to pull 
 it to our local system to create containers of it.
 
-Execute `docker pull loodse/demo-www`. `docker pull` command 
-downloads image from docker hub (which serves as a default registry for 
-docker installation). 
+Execute 
+```bash
+docker pull loodse/demo-www
+```
 
-You can see list of downloaded images using `docker images`.
+`docker pull` command downloads image from docker hub (which serves as a default registry for docker installation). 
+
+You can see list of downloaded images using 
+```bash
+docker images
+```
 
 You can see `loodse/demo-www` entry there.
 
 ## Creating a container
 
 Now we have image downloaded and ready to use, we can create container using
-`docker run -d loodse/demo-www`.
+```bash
+docker run -d loodse/demo-www
+```
+
 The `-d` flag instructs docker to create container and run it in background.
 
 You can see list of running containers using `docker ps`. You can 
@@ -50,16 +61,20 @@ MacAddress, Hostname etc.
 ## List container
 
 List all running container.
-
-`docker ps`
+```bash
+docker ps
+```
 
 The `docker ps` command only shows running containers by default. To see all containers, use the `-a` (or `--all`) flag:
-
-`docker ps -a`
+```bash
+docker ps -a
+```
 
 Let’s start a second webserver. 
 
-`docker run -t -p 8080:80 loodse/demo-www`
+```bash
+docker run -t -p 8080:80 loodse/demo-www
+```
 
 With `docker ps` you see now two running containers.
 
@@ -72,10 +87,12 @@ Stop the started container. The main process inside the container will receive `
 ***Use the second terminal***: `docker stop --time 5 <yourContainerId>`
 
 You can also restart your container, try:
-
-`docker restart <yourContainerId>`
+```bash
+docker restart <yourContainerId>
+```
 
 If you have e.g. an hanging container, it's possible to send the `SIGKILL` signal directly. Try
-
-`docker kill <yourContainerId>`
+```bash
+docker kill <yourContainerId>
+```
 

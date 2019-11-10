@@ -12,7 +12,10 @@ CMD ["apache2ctl", "-DFOREGROUND"]
 EOF
 ```
 
-Verify the file: `cat Dockerfile`
+Verify the file: 
+```bash
+cat Dockerfile
+```
 
 Above Dockerfile content describes a `Debian jessie` Docker image with Apache web server installed.
 
@@ -23,7 +26,10 @@ Above Dockerfile content describes a `Debian jessie` Docker image with Apache we
 
 ## Build it !
 
-We can build a docker image by executing `docker build -t webserver .`
+We can build a docker image by executing 
+```bash
+docker build -t webserver .
+```
 
 The docker build command builds an image from a Dockerfile and a context. The 
 build’s context is the files at a specified location PATH or URL. The PATH is a 
@@ -34,34 +40,38 @@ the result of each instruction to a new image if necessary, before finally
 outputting the ID of your new image.
 
 View the stored images on your host:
-
-`docker images`
+```bash
+docker images
+```
 
 ## Run an image
 
 Now we have an image created from Dockerfile, we'll run it.
-
-`docker run -d -p 8080:80 --name www webserver`
+```bash
+docker run -d -p 8080:80 --name www webserver
+```
 
 Verify the output with curl:
-
-`curl localhost:8080`
+```bash
+curl localhost:8080
+```
 
 ## Build a webapp image
 
 We need to create a `index.html` file in `html` directory with following content.
 
+```html
 <pre class="file" data-filename="html/index.html" data-target="prepend">
-&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-  &lt;head&gt;
-    &lt;title&gt;This is a title&lt;/title&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;p&gt;Hello world!&lt;/p&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-</pre>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>This is a title</title>
+  </head>
+  <body>
+    <p>Hello world!</p>
+  </body>
+</html>
+```
 
 Enhance our existing Dockerfile with following content.
 ```bash
@@ -73,21 +83,30 @@ CMD ["apache2ctl", "-DFOREGROUND"]
 EOF
 ```
 
-Verify the Dockerfile: `cat Dockerfile`
-Verify the html file: `cat html/index.html`
+Verify the Dockerfile: 
+```bash
+cat Dockerfile
+```
+
+Verify the html file: 
+```bash
+cat html/index.html
+```
 
 The `COPY` instruction copies new files or directories from <src> and adds them 
 to the filesystem of the container at the path <dest>.
 
 ## Build and Run it Again 
 
-`docker build -t webserver .`
-
-`docker run -d -p 8090:80 --name www1 webserver`
+```bash
+docker build -t webserver .
+docker run -d -p 8090:80 --name www1 webserver
+```
 
 Verify the updated output with curl:
-
-`curl localhost:8090`
+```bash
+curl localhost:8090
+```
 
 ### Try it yourself
 
@@ -97,7 +116,7 @@ Change the following things:
 
 ### Validate
 
-```
+```bash
 docker run -it -p 80:80 -n my-web my-image
 
 # interactive shell in the container
@@ -114,4 +133,6 @@ ps -aufx
 
 Verify if you get your HTML text `Docker is awesome!`:
 
-`curl localhost:80`
+```bash
+curl localhost:80
+```
