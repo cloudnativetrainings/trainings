@@ -15,9 +15,11 @@ below, and create a data volume using the -v parameter. This specifies that
 any data saved inside the container to the /data directory should be persisted on 
 the host in the directory /docker/redis-data.
 
-`docker run  -v /docker/redis-data:/data \
+```bash
+docker run  -v /docker/redis-data:/data \
   --name r1 -d redis \
-  redis-server --appendonly yes`
+  redis-server --appendonly yes
+```
 
 Create a file called `data` with the follwing content:
 ```
@@ -28,21 +30,25 @@ QUIT
 ```  
 
 We can pipe data into the Redis instance using the following command.
-
-`cat data | docker exec -i r1 redis-cli --pipe`
+```bash
+cat data | docker exec -i r1 redis-cli --pipe
+```
 
 Redis will save this data to disk. Check:
-
-`docker exec -i r1 redis-cli GET counter`
+```bash
+docker exec -i r1 redis-cli GET counter
+```
 
 On the host we can investigate the mapped direct which should contain the Redis data file.
-
-`ls -lah /docker/redis-data`
+```bash
+ls -lah /docker/redis-data
+```
 
 This same directory can be mounted to a second container. One usage is to have a 
 Docker Container performing backup operations on your data.
-
-`docker run  -v /docker/redis-data:/backup ubuntu ls /backup`
+```bash
+docker run  -v /docker/redis-data:/backup ubuntu ls /backup
+```
 
 ## Shared Volumes
 
@@ -57,7 +63,9 @@ In this case, we're mapping our Redis container's volume to an Ubuntu container.
 The /data directory only exists within our Redis container, however, because of 
 -volumes-from our Ubuntu container can access the data.
 
-`docker run --volumes-from r1 -it ubuntu ls /data`
+```bash
+docker run --volumes-from r1 -it ubuntu ls /data
+```
 
 This allows us to access volumes from other containers without having to be concerned how they're persisted on the host.
 
@@ -66,4 +74,6 @@ Mounting Volumes gives the container full read and write access to the directory
 
 If the container attempts to modify data within the directory it will error.
 
-`docker run -v /docker/redis-data:/data:ro -it ubuntu rm -rf /data`
+```bash
+docker run -v /docker/redis-data:/data:ro -it ubuntu rm -rf /data
+```
