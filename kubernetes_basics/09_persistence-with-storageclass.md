@@ -30,6 +30,9 @@ spec:
       storage: 1Gi
     storageClassName: "my-storage-class"
 ```
+```bash
+kubectl create -f persistence.yaml
+```
 2. There is an issue with this structure. Try to fix the error and verify via `kubectl get pv,pvc`. You are finished if you get a similar output like this:
 ```bash
 kubectl get pv,pvc

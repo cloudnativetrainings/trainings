@@ -48,7 +48,7 @@ spec:
               topologyKey: "kubernetes.io/hostname"  
 ```
 ```bash
-kubectl create -f fire.yaml
+kubectl create -f water.yaml
 ```
 3. Verify that the Pods `water` are not on the same node like the node `fire`
 ```bash

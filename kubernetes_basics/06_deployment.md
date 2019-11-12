@@ -7,7 +7,7 @@ kind: Deployment
 metadata:
   name: my-deployment
 spec:
-  replicas: 1
+  replicas: 3
   strategy:
     type: Recreate
   selector:
@@ -30,15 +30,15 @@ kubectl create -f deployment.yaml
 ```bash
 watch -n 1 kubectl get pods
 ```
-4. Scale the number of replicas to 3 and take a look ath the second terminal
+4. Scale the number of replicas to 1 and take a look ath the second terminal
 ```bash
-kubectl scale deployment my-deployment --replicas 3
+kubectl scale deployment my-deployment --replicas 1
 ```
 5. Change the image of the deployment and take a look at the second terminal
 ```bash
 kubectl set image deployment my-deployment my-deployment-container=nginx:alpine
 ```
-6. Change the rollout strategy in the deployment to the following. Set the replicas to 3 within the yaml file.
+6. Change the rollout strategy in the deployment to the following.
 ```yaml
 ...
 strategy:
@@ -48,11 +48,15 @@ strategy:
   type: RollingUpdate
 ...
 ```
-5. Change the image of the deployment and take a look at the second terminal
+7. Update the Deployment
+```bash
+kubectl apply -f deployment.yaml
+```
+8. Change the image of the deployment and take a look at the second terminal.
 ```bash
 kubectl set image deployment my-deployment my-deployment-container=nginx:1.16.1
 ```
-6. Cleanup
+9. Cleanup
 ```bash
 kubectl delete deployment --all
 ```

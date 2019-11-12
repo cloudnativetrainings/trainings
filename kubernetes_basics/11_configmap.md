@@ -28,6 +28,9 @@ spec:
             key: a-key
             name: a-configmap
 ```
+```bash
+kubectl create -f pod.yaml
+```
 2. Verify everything is fine via
 ```bash
 kubectl get pods

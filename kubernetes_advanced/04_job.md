@@ -18,7 +18,7 @@ spec:
       restartPolicy: Never
 ```
 ```bash
-kubectl apply -f job.yaml
+kubectl create -f job.yaml
 ```
 2. Take a look at running jobs and the pods. It can take a while that the job is completed
 ```bash
@@ -32,6 +32,9 @@ spec:
   parallelism: 5
   template:
     ...
+```
+```bash
+kubectl apply -f job.yaml
 ```
 4. Watch the running jobs and the pods.
 ```bash
