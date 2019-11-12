@@ -31,9 +31,9 @@ kubectl logs -f multi-container-pod
 3. Exec into the Pod. Pay attention to the output. 
 ```bash
 kubectl exec -it multi-container-pod -- /bin/sh
-Defaulting container name to container-a.
-Use 'kubectl describe pod/multi-container-pod -n default' to see all of the containers in this pod.
 ```
+Defaulting container name to container-a.
+Use `kubectl describe pod/multi-container-pod -n default`to see all of the containers in this pod.
 4. Find out how to exec into Container-B of the Pod.
 5. Share a directory between 2 Containers in a Pod.
 ```yaml

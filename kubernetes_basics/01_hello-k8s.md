@@ -17,6 +17,8 @@ kubectl get services
 # Curl the application (or visit it in your Browser)
 curl http://<EXTERNAL-IP>:<PORT>
 ```
+***NOTE:*** On GCP you may have to open the firewall with node-port range of kubernetes.
+
 3. Change the application
 ```bash
 # Exec into the container

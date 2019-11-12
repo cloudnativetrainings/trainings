@@ -14,7 +14,7 @@ spec:
 ```
 2. Apply the Pod to your cluster
 ```bash
-kubectl create -f pod.yaml
+kubectl create -f customized-image-pod.yaml
 ```
 3. Take a look at the Pods. Why is the Pod not in state `RUNNING`?
 ```bash
@@ -36,6 +36,9 @@ kubectl describe pod customized-image-pod | grep -A4 "Last State:"
 ```bash
 kubectl delete pod customized-image-pod
 kubectl create -f customized-image-pod.yaml
+
+#alternative
+kubectl replace --force -f customized-image-pod.yaml
 ```
 7. Get the logs of the Container
 ```bash
