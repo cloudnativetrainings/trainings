@@ -6,18 +6,16 @@ In this course we will create an application which will be reachable in the WWW.
 # Create the application
 kubectl run my-nginx --image nginx --port 80
 # Expose the application
-kubectl expose deployment my-nginx --type NodePort
+kubectl expose deployment my-nginx --type LoadBalancer
 ```
 2. Access the application
 ```bash
-# Get the external IP address of the node
-kubectl get nodes -o wide
 # Get the port of the application
-kubectl get services
+kubectl get services -o wide
 # Curl the application (or visit it in your Browser)
 curl http://<EXTERNAL-IP>:<PORT>
 ```
-***NOTE:*** On GCP you may have to open the firewall with node-port range of kubernetes.
+***NOTE:*** On GCP you may have to open the firewall with node-port range of kubernetes, so we use a external `LoadBalancer`
 
 3. Change the application
 ```bash
@@ -35,4 +33,12 @@ curl http://<EXTERNAL-IP>:<PORT>
 4. Cleanup the application
 ```bash
 kubectl delete deployment,svc my-nginx
+```
+
+5. Enable `kubectl` autocompletion
+```bash
+## bash completion
+echo 'source <(kubectl completion bash)' >> ~/.bashrc
+## open a new bash
+bash
 ```
