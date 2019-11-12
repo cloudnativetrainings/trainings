@@ -20,6 +20,9 @@ spec:
       - name: my-container
         image: my-image        
 ```
+```bash
+kubectl create -f replicaset.yaml
+```
 2. Take a look at the number of Pods
 ```bash
 kubectl get pods

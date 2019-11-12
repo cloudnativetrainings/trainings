@@ -1,18 +1,18 @@
 # Commands and Args
 In this training we will create a customized Pod
 
-1. Create a file called `customized-image-pod.yaml` with the following content
+1. Create a file called `pod.yaml` with the following content
 ```yaml
 apiVersion: v1
 kind: Pod
 metadata:
-  name: customized-image-pod
+  name: my-pod
 spec:
   containers:
-    - name: customized-image-container
+    - name: my-container
       image: busybox
 ```
-2. Apply the Pod to your cluster
+2. Create the Pod.
 ```bash
 kubectl create -f pod.yaml
 ```
@@ -22,26 +22,22 @@ kubectl get pods
 ```
 4. Get more info about the Pod. Pay attention to the structure  `Last State:`
 ```bash
-kubectl describe pod customized-image-pod | grep -A4 "Last State:"
+kubectl describe pod my-pod | grep -A4 "Last State:"
 ```
 5. Add the following `command` and `args` to the container
 ```yaml
 ...
-- name: customized-image-container
+- name: my-container
   image: busybox
-  command: [ "echo" ]
-  args: [ "hello k8s" ]
+  command: [ "sleep" ]
+  args: [ "600" ]
 ```
 6. Delete and re create the Pod
 ```bash
-kubectl delete pod customized-image-pod
-kubectl create -f customized-image-pod.yaml
+kubectl delete pod my-pod
+kubectl create -f my-pod.yaml
 ```
-7. Get the logs of the Container
+7. Cleanup
 ```bash
-kubectl logs customized-image-pod
-```
-8. Cleanup
-```bash
-kubectl delete pod customized-image-pod
+kubectl delete pod my-pod
 ```

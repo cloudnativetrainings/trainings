@@ -21,7 +21,7 @@ spec:
           restartPolicy: OnFailure
 ```
 ```bash
-kubectl apply -f cronjob.yaml
+kubectl create -f cronjob.yaml
 ```
 2. Take a look at running cronjobs and the pods. It can take a while that the job is completed
 ```bash

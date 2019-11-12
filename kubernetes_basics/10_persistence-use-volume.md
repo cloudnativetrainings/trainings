@@ -31,6 +31,9 @@ spec:
   volumes:
     - name: pvc-storage-class-example
 ```
+```bash
+kubectl create -f pod.yaml
+```
 2. There is an issue with this structure. Try to fix the error and verify via `kubectl get po`. You are finished if you get a similar output like this:
 ```bash
 kubectl get po

@@ -26,6 +26,9 @@ subjects:
     name: tiller
     namespace: kube-system
 ```
+```bash
+kubectl apply -f rbac.yaml
+```
 3. Install Helm to your cluster.
 ```bash
 helm init --service-account=tiller --history-max 300

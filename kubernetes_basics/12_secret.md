@@ -29,6 +29,9 @@ spec:
       secret:
         secretName: the-secret
 ```
+```bash
+kubectl create -f pod.yaml
+```
 2. Verify everything fine via
 ```bash
 kubectl exec -it my-pod -- cat /opt/my-volume/secret

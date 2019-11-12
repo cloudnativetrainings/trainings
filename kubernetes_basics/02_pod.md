@@ -44,14 +44,14 @@ kubectl get --help
 # Get info about a specific yaml structure
 kubectl explain pod.metadata.name
 # Get short info about a specific yaml structure
-kubectl explain --recursive pod.metadata.ports
+kubectl explain --recursive pod.spec.containers.ports
 ```
 2. Getting Pod Information
 ```bash
 # Show all Pods
 kubectl get pods
 # Show all Pods with labels
-kubectl get pods --show-lables
+kubectl get pods --show-labels
 # Show all Pods with IP address
 kubectl get pods -o wide
 # Store a Pod's yaml definition into a file

@@ -20,7 +20,7 @@ spec:
   targetCPUUtilizationPercentage: 1
 ```
 ```bash
-kubectl apply -f hpa.yaml
+kubectl create -f hpa.yaml
 ```
 3. Take a look at the resource consumption of your nodes and your pods.
 ```bash

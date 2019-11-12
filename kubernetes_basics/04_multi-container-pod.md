@@ -24,6 +24,9 @@ spec:
         - "-c"
         - "while true; do echo hello B; sleep 1; done;"
 ```
+```bash
+kubectl create -f multi-container-pod.yaml
+```
 2. Get the logs of the Pod. This will not work, please follow the instructions and consult --help.
 ```bash
 kubectl logs -f multi-container-pod 
@@ -67,6 +70,9 @@ spec:
     - name: buffer
       emptyDir: {}
 ```  
+```bash
+kubectl create -f multi-container-pod.yaml
+```
 6. Cleanup
 ```bash
 kubectl delete pod multi-container-pod

@@ -66,6 +66,9 @@ spec:
       command: [ "/bin/sh" ]
       args: [ "-c", "sleep 1h" ]
 ```
+```bash
+kubectl create -f pod.yaml
+```
 15. Exec into the Pod
 ```bash
 kubectl exec -it spy -- bash
