@@ -14,7 +14,7 @@ spec:
 ```
 2. Create the Pod.
 ```bash
-kubectl create -f customized-image-pod.yaml
+kubectl create -f pod.yaml
 ```
 3. Take a look at the Pods. Why is the Pod not in state `RUNNING`?
 ```bash
@@ -35,10 +35,10 @@ kubectl describe pod my-pod | grep -A4 "Last State:"
 6. Delete and re create the Pod
 ```bash
 kubectl delete pod my-pod
-kubectl create -f my-pod.yaml
+kubectl create -f pod.yaml
 
 #alternative
-kubectl replace --force -f my-pod.yaml
+kubectl replace --force -f pod.yaml
 ```
 7. Cleanup
 ```bash
