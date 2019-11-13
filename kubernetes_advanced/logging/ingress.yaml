@@ -23,7 +23,7 @@ subjects:
     name: ingress-service-account
     namespace: ingress
 ---
-  apiVersion: apps/v1
+apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: ingress-controller
