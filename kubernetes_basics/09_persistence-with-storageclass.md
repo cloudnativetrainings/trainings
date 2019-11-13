@@ -28,7 +28,7 @@ spec:
   resources:
     requests:
       storage: 1Gi
-    storageClassName: "my-storage-class"
+  storageClassName: "my-storage-class"
 ```
 ```bash
 kubectl create -f persistence.yaml
