@@ -42,19 +42,17 @@ volume-example   2/2     Running   0          3m52s
 ```
 3. Expose the Pod. This command will fail.
 ```bash
-kubectl expose pod volume-example --type NodePort
+kubectl expose pod volume-example --type LoadBalancer
 error: couldn't retrieve selectors via --selector flag or introspection: the pod has no labels and cannot be exposed
 ```
 4. Label the Pod via the following command and expose the Pod afterwards
 ```bash
 kubectl label pod volume-example app=volume-example
-kubectl expose pod volume-example --type NodePort
+kubectl expose pod volume-example --type LoadBalancer
 ```
 5. Access the application
 ```bash
-# Get the external IP address of the node
-kubectl get nodes -o wide
-# Get the port of the application
+# Get the external IP and the port of the application
 kubectl get services
 # Curl the application (or visit it in your Browser)
 curl http://<EXTERNAL-IP>:<PORT>
