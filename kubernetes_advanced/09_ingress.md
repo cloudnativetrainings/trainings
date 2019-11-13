@@ -21,7 +21,7 @@ kubectl expose deployment blue
 ```
 4. Change the content of the file `/usr/share/nginx/html/index.html` in the Pod `red`. You have to install vim upfront.
 ```html
-<!DOCTYPE html><html><body style="background-color:red;"></body></html>
+<!DOCTYPE html><html><body style="background-color:blue;"></body></html>
 ```
 5. Verify your steps
 ```bash
