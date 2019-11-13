@@ -103,11 +103,7 @@ spec:
   rules:
   - http:
       paths:
-      - path: /elasticsearch
-        backend:
-          serviceName: elasticsearch
-          servicePort: 9200
-      - path: /kibana
+      - path: /
         backend:
           serviceName: kibana
           servicePort: 5601
