@@ -6,7 +6,6 @@ metadata:
   labels:
     app: elasticsearch
 spec:
-  type: NodePort
   ports:
   - name: elasticsearch
     port: 9200
