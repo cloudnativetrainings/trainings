@@ -23,16 +23,16 @@ kubectl create -f pod.yaml
 ```
 3. Expose the Pod
 ```bash
-kubectl expose pod my-pod --type NodePort
+kubectl expose pod my-pod --type LoadBalancer
 ```
 4. Access the application
 ```bash
-# Get the external IP address of the node
-kubectl get nodes -o wide
-# Get the port of the application
+# Get the external IP and the port of the application
+# be aware that external LoadBalancer could maybe take a while to get provisioned
 kubectl get services
 # Curl the application (or visit it in your Browser)
 curl http://<EXTERNAL-IP>:<PORT>
+
 ```
 
 # Learn kubectl
