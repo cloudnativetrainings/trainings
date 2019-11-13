@@ -23,7 +23,7 @@ kubectl create -f pod.yaml
 ```
 3. Expose the Pod
 ```bash
-kubectl expose pod my-pod --type NodePort
+kubectl expose pod my-pod --type LoadBalancer
 ```
 4. Access the application
 ```bash
