@@ -28,6 +28,7 @@ spec:
   resources:
     requests:
       storage: 1Gi
+    storageClassName: "my-storage-class"
 ```
 ```bash
 kubectl create -f persistence.yaml
@@ -40,4 +41,10 @@ persistentvolume/pv-storage-class-example   5Gi        RWX            Retain    
 
 NAME                                              STATUS   VOLUME                     CAPACITY   ACCESS MODES   STORAGECLASS    AGE
 persistentvolumeclaim/pvc-storage-class-example   Bound    pv-storage-class-example   5Gi        RWX            local-storage   5s
+```
+
+3. If you running your cluster e.g. GKE you could potential use the default storage class. Try to create just a `PersistenVolumeClaim` what uses the name of the cloud provider storage class.
+```bash
+# show available storage classes
+kubectl get sc -o wide
 ```
