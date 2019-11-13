@@ -1,0 +1,24 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress
+  namespace: logging
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.frontend.rule.type: PathPrefixStrip
+spec:
+  rules:
+    - host: elasticsearch.k8s.stroebitzer.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: elasticsearch
+              servicePort: 9200
+    - host: kibana.k8s.stroebitzer.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: kibana
+              servicePort: 5601    
