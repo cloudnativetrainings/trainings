@@ -5,7 +5,7 @@
 kubectl get nodes
 kubectl cordon <NODE-NAME>
 ```
-2. Take a look at the pods at the node. Note that there is still some workloads on that workern node.
+2. Take a look at the pods at the node. Note that there is still some workloads on that worker node.
 ```bash
 kubectl describe node <NODE-NAME>
 ```

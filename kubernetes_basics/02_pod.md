@@ -23,17 +23,19 @@ kubectl create -f pod.yaml
 ```
 3. Expose the Pod
 ```bash
-kubectl expose pod my-pod --type LoadBalancer
+kubectl expose pod my-pod --type NodePort
 ```
 4. Access the application
 ```bash
-# Get the external IP and the port of the application
-# be aware that external LoadBalancer could maybe take a while to get provisioned
+# Get the external IP address of the node
+kubectl get nodes -o wide
+# Get the port of the application
 kubectl get services
 # Curl the application (or visit it in your Browser)
 curl http://<EXTERNAL-IP>:<PORT>
-
 ```
+
+***NOTE:*** On GCP you may have to open the firewall with the default node-port range of Kubernetes - see [kubernetes_cluster/01_gke-create-cluster.md#allow-nodeport-range](../kubernetes_cluster/01_gke-create-cluster.md#allow-nodeport-range) - or use a Service type `LoadBalancer`.
 
 # Learn kubectl
 

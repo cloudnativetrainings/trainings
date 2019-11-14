@@ -88,4 +88,16 @@ pod my-stateful-set-2 - 10.24.0.36
 pod my-stateful-set-2 - 10.24.0.36
 pod my-stateful-set-2 - 10.24.0.37
 ```
+Note that the IP has changed, but we have still same hostname and FQN.
 
+6. Find out the FQN of your 3rd stateful pod:
+```bash
+kubectl exec -it my-stateful-set-0 -- nslookup TODO_FQN
+### potential output
+Server:		10.23.240.10
+Address:	10.23.240.10:53
+
+Non-authoritative answer:
+Name:	xxx.xxx.xxx.svc.cluster.local
+Address: 10.24.0.37
+```

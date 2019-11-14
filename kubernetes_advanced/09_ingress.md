@@ -8,9 +8,13 @@ kubectl run red --image nginx --port 80
 # Expose the Deployment
 kubectl expose deployment red
 ```
-2. Change the content of the file `/usr/share/nginx/html/index.html` in the Pod `red`. You have to install vim upfront.
+2. Change the content of the file `/usr/share/nginx/html/index.html` in the Pod `red` by using `echo`
 ```html
-<!DOCTYPE html><html><body style="background-color:red;"></body></html>
+kubectl exec -it red-xxx -- bash
+# update the index.html
+echo '<!DOCTYPE html><html><body style="background-color:red;"></body></html>' >> /usr/share/nginx/html/index.html
+# verify
+cat /usr/share/nginx/html
 ```
 3. Create the Application `blue`
 ```bash
@@ -21,17 +25,18 @@ kubectl expose deployment blue
 ```
 4. Change the content of the file `/usr/share/nginx/html/index.html` in the Pod `blue`. You have to install vim upfront.
 ```html
-<!DOCTYPE html><html><body style="background-color:blue;"></body></html>
+kubectl exec -it blue-xxx -- bash
+echo '<!DOCTYPE html><html><body style="background-color:blue;"></body></html>' >> /usr/share/nginx/html/index.html
 ```
 5. Verify your steps
 ```bash
 kubectl get deployments,pods,svc
 ```
-6. Create a Namespace for the Ingress ressources
+6. Create a Namespace for the Ingress resources
 ```bash
 kubectl create ns ingress
 ```
-7. Create the RBAC ressources
+7. Create the RBAC resources and the ingress controller (copy of https://github.com/kubernetes/ingress-nginx/blob/master/docs/deploy/index.md)
 ```yaml
 apiVersion: v1
 kind: ServiceAccount
@@ -52,12 +57,7 @@ subjects:
   - kind: ServiceAccount
     name: ingress-service-account
     namespace: ingress
-```
-```bash
-kubectl create rbac.yaml
-```
-8. Create the Ingress Controller
-```yaml
+---
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
@@ -116,7 +116,7 @@ kubectl create controller.yaml
 ```bash
 kubectl -n ingress get ds,pods
 ```
-10. Create the LoadBalancer
+10. Create the LoadBalancer to enable external traffic to the ingress
 ```yaml
 apiVersion: v1
 kind: Service
@@ -138,7 +138,7 @@ spec:
 ```bash
 kubectl -n ingress get svc
 ```
-12. Create your Ingress
+12. Create your Ingress route
 ```yaml
 apiVersion: extensions/v1beta1
 kind: Ingress

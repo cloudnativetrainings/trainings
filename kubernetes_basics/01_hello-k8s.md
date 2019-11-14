@@ -6,16 +6,18 @@ In this course we will create an application which will be reachable in the WWW.
 # Create the application
 kubectl run my-nginx --image nginx --port 80
 # Expose the application
-kubectl expose deployment my-nginx --type LoadBalancer
+kubectl expose deployment my-nginx --type NodePort
 ```
 2. Access the application
 ```bash
+# Get the external IP address of the node
+kubectl get nodes -o wide
 # Get the port of the application
-kubectl get services -o wide
+kubectl get services
 # Curl the application (or visit it in your Browser)
 curl http://<EXTERNAL-IP>:<PORT>
 ```
-***NOTE:*** On GCP you may have to open the firewall with node-port range of kubernetes, so we use a external `LoadBalancer`
+***NOTE:*** On GCP you may have to open the firewall with the default node-port range of Kubernetes - see [kubernetes_cluster/01_gke-create-cluster.md#allow-nodeport-range](../kubernetes_cluster/01_gke-create-cluster.md#allow-nodeport-range) - or use a Service type `LoadBalancer`.
 
 3. Change the application
 ```bash
@@ -35,10 +37,7 @@ curl http://<EXTERNAL-IP>:<PORT>
 kubectl delete deployment,svc my-nginx
 ```
 
-5. Enable `kubectl` autocompletion
+5. To speed up your CLI handling - enable `kubectl` auto completion
 ```bash
-## bash completion
-echo 'source <(kubectl completion bash)' >> ~/.bashrc
-## open a new bash
-bash
+echo 'source <(kubectl completion bash)' >> ~/.bashrc && source ~/.bashrc
 ```

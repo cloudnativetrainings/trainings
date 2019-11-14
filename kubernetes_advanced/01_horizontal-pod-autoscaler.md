@@ -7,6 +7,7 @@ kubectl expose deployment my-deployment --type NodePort --port 80
 ```
 2. Create an Horizontal Pod Autoscaler and apply it to the cluster.
 ```yaml
+apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
   name: my-autoscaler
