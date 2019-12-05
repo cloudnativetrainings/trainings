@@ -1,50 +1,63 @@
 # Persistence with StorageClass
 
-1. Create a PV and a PVC. 
+1. Create a file `persistence.yaml` with a storage class and two claims.
+
 ```yaml 
-kind: PersistentVolume
-apiVersion: v1
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
 metadata:
-  name: pv-storage-class-example
-  labels:
-    type: hostpath
-spec:
-  capacity:
-    storage: 5Gi
-  accessModes:
-    - ReadWriteMany
-  storageClassName: "local-storage"
-  hostPath:
-    type: DirectoryOrCreate
-    path: "/tmp/mypvsc"
+  name: slow
+provisioner: kubernetes.io/gce-pd
+parameters:
+  type: pd-standard
+  zones: us-east1-b
+reclaimPolicy: Delete
 ---
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: pvc-storage-class-example
+  name: pvc-30-slow
 spec:
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
+  storageClassName: slow
   resources:
     requests:
-      storage: 1Gi
-  storageClassName: "my-storage-class"
+      storage: 30Gi
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: pvc-10-slow
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: slow
+  resources:
+    requests:
+      storage: 10Gi
 ```
-```bash
-kubectl create -f persistence.yaml
-```
-2. There is an issue with this structure. Try to fix the error and verify via `kubectl get pv,pvc`. You are finished if you get a similar output like this:
-```bash
-kubectl get pv,pvc
-NAME                                        CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM                               STORAGECLASS    REASON   AGE
-persistentvolume/pv-storage-class-example   5Gi        RWX            Retain           Bound    default/pvc-storage-class-example   local-storage            5s
 
-NAME                                              STATUS   VOLUME                     CAPACITY   ACCESS MODES   STORAGECLASS    AGE
-persistentvolumeclaim/pvc-storage-class-example   Bound    pv-storage-class-example   5Gi        RWX            local-storage   5s
+```bash
+$ kubectl create -f persistence.yaml
 ```
 
-3. If you running your cluster e.g. GKE you could potential use the default storage class. Try to create just a `PersistenVolumeClaim` what uses the name of the cloud provider storage class.
+2. Run `kubectl get pv,pvc`. Take a look at the number and the names of the volumes:
+
 ```bash
-# show available storage classes
+$ kubectl get pv,pvc
+NAME                                                        CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM                STORAGECLASS   REASON   AGE
+persistentvolume/pvc-719e1838-16f3-11ea-9419-42010a8e0162   30Gi       RWO            Delete           Bound    default/pvc-30-slow   slow                    22m
+persistentvolume/pvc-9f8b0df2-16f3-11ea-9419-42010a8e0162   10Gi       RWO            Delete           Bound    default/pvc-10-slow   slow                    20m
+NAME                                STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+persistentvolumeclaim/pvc-10-slow   Bound    pvc-9f8b0df2-16f3-11ea-9419-42010a8e0162   10Gi       RWO            slow           20m
+persistentvolumeclaim/pvc-30-slow   Bound    pvc-719e1838-16f3-11ea-9419-42010a8e0162   30Gi       RWO            slow           22m
+```
+
+3. Show the available storage classes. Possibly there are standard ones.
+
+```bash
+$ show available storage classes
 kubectl get sc -o wide
 ```
+
