@@ -110,7 +110,7 @@ spec:
             - --v=2
 ```
 ```bash
-kubectl create controller.yaml
+kubectl create -f controller.yaml
 ```
 9. Verify everything is running
 ```bash
