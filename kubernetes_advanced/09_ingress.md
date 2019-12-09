@@ -8,13 +8,10 @@ kubectl run red --image nginx --port 80
 # Expose the Deployment
 kubectl expose deployment red
 ```
-2. Change the content of the file `/usr/share/nginx/html/index.html` in the Pod `red` by using `echo`
-```html
-kubectl exec -it red-xxx -- bash
-# update the index.html
-echo '<!DOCTYPE html><html><body style="background-color:red;"></body></html>' > /usr/share/nginx/html/index.html
-# verify
-cat /usr/share/nginx/html/index.html
+2. Change the content of the file `/usr/share/nginx/html/index.html` in the Pod `red` 
+```bash
+echo '<!DOCTYPE html><html><body style="background-color:red;"></body></html>' > red.yaml
+kubectl cp red.yaml <POD-NAME>:/usr/share/nginx/html/index.html
 ```
 3. Create the Application `blue`
 ```bash
@@ -24,9 +21,9 @@ kubectl run blue --image nginx --port 80
 kubectl expose deployment blue
 ```
 4. Change the content of the file `/usr/share/nginx/html/index.html` in the Pod `blue`. You have to install vim upfront.
-```html
-kubectl exec -it blue-xxx -- bash
-echo '<!DOCTYPE html><html><body style="background-color:blue;"></body></html>' > /usr/share/nginx/html/index.html
+```bash
+echo '<!DOCTYPE html><html><body style="background-color:blue;"></body></html>' > blue.yaml
+kubectl cp blue.yaml <POD-NAME>:/usr/share/nginx/html/index.html
 ```
 5. Verify your steps
 ```bash
