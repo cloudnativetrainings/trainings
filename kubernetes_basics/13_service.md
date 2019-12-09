@@ -6,7 +6,7 @@ kubectl run -it nginx --image nginx --port 80
 ```
 2. Create the yaml configuration for the Service via the following command
 ```bash
-kubectl expose deployment nginx --type NodePort --dry-run -o yaml > svc.yaml
+kubectl expose deployment nginx --type NodePort --dry-run -o yaml > service.yaml
 ```
 3. Inspect the created file `service.yaml` and apply it.
 ```bash
