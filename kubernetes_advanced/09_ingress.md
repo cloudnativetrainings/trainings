@@ -168,3 +168,8 @@ kubectl describe ing ingress
 14. Visit the Applications A and B in your Browser via
 * `http://<EXTERNAL-IP>/red`
 * `http://<EXTERNAL-IP>/blue`
+15. Clean up
+```bash
+kubectl delete ns ingress
+kubectl delete deployment,svc --all
+```
