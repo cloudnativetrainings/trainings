@@ -47,6 +47,7 @@ echo <CA-CRT-CONTENT> | base64 -d > ca.crt
 12. Get the content of the field `token` and store it into a file and into an Variable
 ```bash
 echo <TOKEN-CONTENT> | base64 -d > token
+TOKEN=$(cat token)
 ```
 13. Curl the api-server again.
 ```bash
