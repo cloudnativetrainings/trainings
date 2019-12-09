@@ -101,3 +101,7 @@ Non-authoritative answer:
 Name:	xxx.xxx.xxx.svc.cluster.local
 Address: 10.24.0.37
 ```
+7. Clean up
+```bash
+kubectl delete sts,pv,pvc
+```
