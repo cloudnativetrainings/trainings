@@ -20,7 +20,7 @@ kubectl run blue --image nginx --port 80
 # Expose the Deployment
 kubectl expose deployment blue
 ```
-4. Change the content of the file `/usr/share/nginx/html/index.html` in the Pod `blue`. You have to install vim upfront.
+4. Change the content of the file `/usr/share/nginx/html/index.html` in the Pod `blue`.
 ```bash
 echo '<!DOCTYPE html><html><body style="background-color:blue;"></body></html>' > blue.yaml
 kubectl cp blue.yaml <POD-NAME>:/usr/share/nginx/html/index.html
