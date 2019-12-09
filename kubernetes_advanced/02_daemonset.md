@@ -36,7 +36,7 @@ spec:
 ```bash
 kubectl create -f daemonset.yaml
 ```
-2. Take a loot at your Pods and Nodes. You should get something similar like this:
+2. Take a look at your Pods and Nodes. You should get something similar like this:
 ```bash
 kubectl get po,no
 NAME                     READY   STATUS    RESTARTS   AGE
