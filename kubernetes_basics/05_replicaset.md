@@ -41,7 +41,7 @@ kubectl get pods
 ```
 6. Expose the ReplicaSet
 ```bash
-kubectl expose replicaset my-replicaset --type NodePort
+kubectl expose replicaset my-replicaset --type NodePort --port 80
 ```
 7. Take a look at the Endpoints and Pod IPs
 ```bash
