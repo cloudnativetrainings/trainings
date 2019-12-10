@@ -10,7 +10,7 @@ metadata:
 provisioner: kubernetes.io/gce-pd
 parameters:
   type: pd-standard
-  zones: us-east1-b
+  zones: europe-west3-a
 reclaimPolicy: Delete
 ---
 kind: PersistentVolumeClaim
@@ -60,4 +60,15 @@ persistentvolumeclaim/pvc-30-slow   Bound    pvc-719e1838-16f3-11ea-9419-42010a8
 $ show available storage classes
 kubectl get sc -o wide
 ```
+
+4. Delete the PVCs
+```bash
+kubectl delete pvc --all
+```
+
+5. Note that besides the PVCs also the PVs got deleted due to the `reclaimPolicy` of the StorageClass
+```bash
+kubectl get pvc,pv
+```
+
 
