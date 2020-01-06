@@ -3,24 +3,16 @@ In this course we will install Docker to a Debian machine.
 
 1. Install some necessary packages upfront
 ```bash
-sudo apt install -y \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    gnupg2 \
-    software-properties-common \
-    bash-completion
+sudo apt update
+sudo apt install apt-transport-https ca-certificates curl software-properties-common
 ```
 2. Add Docker’s official GPG key:
 ```bash
-curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 ```
 3. Setup the Docker Repository
 ```bash
-sudo add-apt-repository \
-   "deb [arch=amd64] https://download.docker.com/linux/debian \
-   $(lsb_release -cs) \
-   stable"
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
 ```
 4. Update the package index
 ```bash
@@ -28,11 +20,11 @@ sudo apt update
 ```
 5. Install the latest version of Docker
 ```bash
-sudo apt install docker-ce docker-ce-cli containerd.io -y
+sudo apt install docker-ce
 ```
 6. Add your user to the group `docker`. Note that you have to logout and login to your terminal for this to take effect.
 ```bash
-sudo usermod -aG docker <USER>
+sudo usermod -aG docker ${USER}
 ```
 7. Add docker bash completion. Note that you have to logout and login to your terminal for this to take effect.
 ```bash
