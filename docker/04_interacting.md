@@ -8,7 +8,7 @@ input, output, and standard error.
 It can even pretend to be a TTY (this is what most command line executables 
 expect) and pass along signals.
 ```bash
-docker run -t -p 80:80 loodse/demo-www
+docker run -it -p 80:80 loodse/demo-www
 ```
 
 To stop it, press ^C.
