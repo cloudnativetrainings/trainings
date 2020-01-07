@@ -17,7 +17,7 @@ Verify the file:
 cat Dockerfile
 ```
 
-Above Dockerfile content describes a `Debian jessie` Docker image with Apache web server installed.
+Above Dockerfile content describes a `Ubuntu 18.04` Docker image with Apache web server installed.
 
 - `FROM` indicates the base image for our build
 - Each `RUN` line will be executed by Docker during the build
@@ -117,7 +117,7 @@ Change the following things:
 ### Validate
 
 ```bash
-docker run -it -p 80:80 -n my-web my-image
+docker run -it -p 80:80 --name my-web my-image
 
 # interactive shell in the container
 # verify hostname and envrionment is the id of the conainer
