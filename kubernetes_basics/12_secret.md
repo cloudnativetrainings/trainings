@@ -1,6 +1,6 @@
-# ConfigMap
+# Secret
 
-1. Create the following ConfigMap and Pod. Fix the errors.
+1. Create the following Secret and Pod. Fix the errors.
 ```yaml 
 apiVersion: v1
 kind: Secret
