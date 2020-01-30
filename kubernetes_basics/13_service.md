@@ -40,10 +40,10 @@ curl http://<EXTERNAL-IP>:<PORT>
 ```bash
 # edit your yaml definition
 # modify type to 'type: LoadBalancer'
-vim svc.yaml
+vim service.yaml
 
 # update the service object
-kubectl apply -f svc.yaml
+kubectl apply -f service.yaml
 
 # Get the external IP and the port of the application
 # be aware that external LoadBalancer could maybe take a while to get provisioned

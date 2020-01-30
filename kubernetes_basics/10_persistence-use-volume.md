@@ -61,7 +61,7 @@ curl http://<EXTERNAL-IP>:<PORT>
 ```
 ***NOTE:*** On GCP you may have to open the firewall with the default node-port range of Kubernetes - see [kubernetes_cluster/01_gke-create-cluster.md#allow-nodeport-range](../kubernetes_cluster/01_gke-create-cluster.md#allow-nodeport-range) - or use a Service type `LoadBalancer`.
 
-6. Delete the Pod via `kubectl delte pod volume-example`
+6. Delete the Pod via `kubectl delete pod volume-example`
 7. Re-create the Pod, take care about the proper labels. 
 8. Verify if the output contains the timestamps from step 7.
 9. Clean up

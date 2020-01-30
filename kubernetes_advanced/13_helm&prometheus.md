@@ -85,3 +85,8 @@ echo <ADMIN-PASSWORD> | base64 -d
 17. Paste the number 1860 into the field `Grafana.com Dashboard` and click `Load` (Visit https://grafana.com/grafana/dashboards for other Dashboards)
 18. Choose the Datasource Prometheus in the field `Prometheus` and `Import` afterwards.
 19. Investigate the Dashboard. Take care to a proper time range via the button on the right above.
+
+20. Clean up
+```bash
+kubectl delete ns monitoring
+```

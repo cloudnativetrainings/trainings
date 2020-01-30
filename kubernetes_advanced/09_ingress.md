@@ -131,6 +131,9 @@ spec:
   selector:
     app: ingress-controller
 ```
+```bash
+kubectl create -f loadbalancer.yaml
+```
 11. Wait until you get an external IP Address
 ```bash
 kubectl -n ingress get svc
@@ -157,6 +160,9 @@ spec:
         backend:
           serviceName: blue
           servicePort: 80
+```
+```bash
+kubectl create -f ingress.yaml
 ```
 13. Verify your steps
 ```bash

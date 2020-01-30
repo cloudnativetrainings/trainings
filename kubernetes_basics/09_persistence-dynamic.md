@@ -1,6 +1,6 @@
 # Persistence with StorageClass
 
-1. Create a file `persistence.yaml` with a storage class and two claims.
+1. Create a file `persistence.yaml` with a storage class and two claims. Take care that the zone of your StorageClass matches the zone of your Kubernetes Cluster.
 
 ```yaml 
 kind: StorageClass

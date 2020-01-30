@@ -28,8 +28,7 @@ Run a container.
 docker run -it --name counter loodse/counter
 ```
 
-It will create and run a new container with name `counter` from image 
-`loodse/counter` and will print a a numbers in increasing fashion on screen.
+It will create and run a new container with name `counter` from image `loodse/counter` and will print  numbers in increasing fashion on screen.
 
 You can detach from this running container using `CTRL-p CTRL-q` key sequence.
 
