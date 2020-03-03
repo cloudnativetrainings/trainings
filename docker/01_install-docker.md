@@ -1,10 +1,10 @@
 # Install Docker
-In this course we will install Docker to a Debian machine.
+In this course we will install Docker to a Ubuntu machine.
 
 1. Install some necessary packages upfront
 ```bash
 sudo apt update
-sudo apt install apt-transport-https ca-certificates curl software-properties-common
+sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
 ```
 2. Add Docker’s official GPG key:
 ```bash
@@ -20,7 +20,7 @@ sudo apt update
 ```
 5. Install the latest version of Docker
 ```bash
-sudo apt install docker-ce
+sudo apt install -y docker-ce
 ```
 6. Add your user to the group `docker`. Note that you have to logout and login to your terminal for this to take effect.
 ```bash
