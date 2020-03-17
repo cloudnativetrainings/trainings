@@ -49,7 +49,7 @@ kubectl apply -f service.yaml
 # be aware that external LoadBalancer could maybe take a while to get provisioned
 kubectl get services
 # Curl the application (or visit it in your Browser)
-curl http://<EXTERNAL-IP>:<PORT>
+curl http://<EXTERNAL-IP>
 ```
 9. Clean up
 ```bash
