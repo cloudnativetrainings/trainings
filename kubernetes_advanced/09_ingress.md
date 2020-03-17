@@ -10,8 +10,8 @@ kubectl expose deployment red
 ```
 2. Change the content of the file `/usr/share/nginx/html/index.html` in the Pod `red` 
 ```bash
-echo '<!DOCTYPE html><html><body style="background-color:red;"></body></html>' > red.yaml
-kubectl cp red.yaml <POD-NAME>:/usr/share/nginx/html/index.html
+echo '<!DOCTYPE html><html><body style="background-color:red;"></body></html>' > red.html
+kubectl cp red.html <POD-NAME>:/usr/share/nginx/html/index.html
 ```
 3. Create the Application `blue`
 ```bash
@@ -22,8 +22,8 @@ kubectl expose deployment blue
 ```
 4. Change the content of the file `/usr/share/nginx/html/index.html` in the Pod `blue`.
 ```bash
-echo '<!DOCTYPE html><html><body style="background-color:blue;"></body></html>' > blue.yaml
-kubectl cp blue.yaml <POD-NAME>:/usr/share/nginx/html/index.html
+echo '<!DOCTYPE html><html><body style="background-color:blue;"></body></html>' > blue.html
+kubectl cp blue.html <POD-NAME>:/usr/share/nginx/html/index.html
 ```
 5. Verify your steps
 ```bash
