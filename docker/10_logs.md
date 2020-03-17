@@ -11,7 +11,7 @@ Using the Docker client, we can access the standard out and standard error outpu
 using 
 
 ```bash
-docker run -d --name redis-server
+docker run -d --name redis-server redis
 docker logs redis-server
 ```
 
