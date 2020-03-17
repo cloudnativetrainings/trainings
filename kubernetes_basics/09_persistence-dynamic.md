@@ -6,7 +6,7 @@
 kind: StorageClass
 apiVersion: storage.k8s.io/v1
 metadata:
-  name: slow
+  name: myStorageclass
 provisioner: kubernetes.io/gce-pd
 parameters:
   type: pd-standard
@@ -16,11 +16,11 @@ reclaimPolicy: Delete
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: pvc-30-slow
+  name: pvc-30-myStorageclass
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: slow
+  storageClassName: myStorageclass
   resources:
     requests:
       storage: 30Gi
@@ -28,11 +28,11 @@ spec:
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: pvc-10-slow
+  name: pvc-10-myStorageclass
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: slow
+  storageClassName: myStorageclass
   resources:
     requests:
       storage: 10Gi
@@ -47,11 +47,11 @@ $ kubectl create -f persistence.yaml
 ```bash
 $ kubectl get pv,pvc
 NAME                                                        CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM                STORAGECLASS   REASON   AGE
-persistentvolume/pvc-719e1838-16f3-11ea-9419-42010a8e0162   30Gi       RWO            Delete           Bound    default/pvc-30-slow   slow                    22m
-persistentvolume/pvc-9f8b0df2-16f3-11ea-9419-42010a8e0162   10Gi       RWO            Delete           Bound    default/pvc-10-slow   slow                    20m
+persistentvolume/pvc-719e1838-16f3-11ea-9419-42010a8e0162   30Gi       RWO            Delete           Bound    default/pvc-30-myStorageclass   myStorageclass                    22m
+persistentvolume/pvc-9f8b0df2-16f3-11ea-9419-42010a8e0162   10Gi       RWO            Delete           Bound    default/pvc-10-myStorageclass   myStorageclass                    20m
 NAME                                STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
-persistentvolumeclaim/pvc-10-slow   Bound    pvc-9f8b0df2-16f3-11ea-9419-42010a8e0162   10Gi       RWO            slow           20m
-persistentvolumeclaim/pvc-30-slow   Bound    pvc-719e1838-16f3-11ea-9419-42010a8e0162   30Gi       RWO            slow           22m
+persistentvolumeclaim/pvc-10-myStorageclass   Bound    pvc-9f8b0df2-16f3-11ea-9419-42010a8e0162   10Gi       RWO            myStorageclass           20m
+persistentvolumeclaim/pvc-30-myStorageclass   Bound    pvc-719e1838-16f3-11ea-9419-42010a8e0162   30Gi       RWO            myStorageclass           22m
 ```
 
 3. Show the available storage classes. Possibly there are standard ones.
