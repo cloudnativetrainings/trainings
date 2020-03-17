@@ -1,7 +1,0 @@
-
-.kube/config
-
-kubetail
-
-krew
-
