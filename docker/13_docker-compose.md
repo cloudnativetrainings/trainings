@@ -72,5 +72,5 @@ curl localhost:8080/metrics
 # Visit Grafana in your Browser (User admin, Password admin)
 http://<EXTERNAL-IP>
 ```
-6. Create a Datasource of type `Prometheus` and the URL `http://<INTERNAL-URL>:9090`
+6. Create a Datasource of type `Prometheus` and the URL `http://prometheus:9090`
 7. Import the Dashboard with id `193`. Set the Datasource to the previously generated.
