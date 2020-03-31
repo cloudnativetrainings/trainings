@@ -30,6 +30,8 @@ spec:
           done
   volumes:
     - name: pvc-storage-class-example
+      persistentVolumeClaim:
+        claimName: my-pvc
 ```
 ```bash
 kubectl create -f pod.yaml
