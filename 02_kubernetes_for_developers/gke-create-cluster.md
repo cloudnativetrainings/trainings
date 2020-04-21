@@ -11,8 +11,8 @@ gcloud beta container clusters create training \
     --cluster-version "1.15.11-gke.5" \
     --machine-type "n1-standard-4" --num-nodes "2" \
     --image-type "UBUNTU" --disk-type "pd-standard" --disk-size "50" \
-    --enable-network-policy --enable-ip-alias --no-enable-autoupgrade \
-    --addons HorizontalPodAutoscaling 
+    --enable-network-policy --enable-ip-alias --no-enable-autoupgrade --no-enable-stackdriver-kubernetes \
+    --addons HorizontalPodAutoscaling,HttpLoadBalancing
 
 # add firewall rule
 gcloud compute firewall-rules create training \
