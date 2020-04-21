@@ -143,6 +143,7 @@ kubectl -n ingress get svc
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
+  namespace: default
   name: ingress
   annotations:
     kubernetes.io/ingress.class: "nginx"
