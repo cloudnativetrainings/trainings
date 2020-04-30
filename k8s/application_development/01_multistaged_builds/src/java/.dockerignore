@@ -1,0 +1,9 @@
+.gradle
+.vscode
+bin
+build
+gradle
+.gitignore
+build.sh
+Dockerfile
+gradlew
