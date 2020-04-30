@@ -43,3 +43,4 @@
 * writing operators
 * healthchecks
 * accessing api-server from app
+* docker caching
