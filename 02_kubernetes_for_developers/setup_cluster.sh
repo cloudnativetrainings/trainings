@@ -17,7 +17,7 @@ gcloud config set compute/zone $ZONE
 gcloud compute networks create $NETWORK_NAME --subnet-mode=custom
 
 # create cluster
-gcloud beta container clusters create training \
+gcloud beta container clusters create $CLUSTER_NAME \
     --network $NETWORK_NAME  --create-subnetwork=name=$NETWORK_NAME-subnet,range=10.0.0.0/24 \
     --services-ipv4-cidr=10.0.1.0/24 --default-max-pods-per-node=110 \
     --zone=$ZONE \
