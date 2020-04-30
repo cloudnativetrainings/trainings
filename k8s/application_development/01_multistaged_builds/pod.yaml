@@ -1,9 +1,0 @@
-apiVersion: v1
-kind: Pod
-metadata:
-    name: monitor
-spec:
-    containers:
-        - name: monitor
-          image: monitor:0.0.1
-          

@@ -8,4 +8,4 @@ export IMAGE=$CONTAINER_REGISTRY/$APP:$VERSION
 
 docker build -t $IMAGE src/java --build-arg APP=$APP --build-arg VERSION=$VERSION
 docker push $IMAGE
-docker run -it --rm -p 8080:8080 $IMAGE
+#docker run -it --rm -p 8080:8080 $IMAGE
