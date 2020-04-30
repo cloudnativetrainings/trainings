@@ -12,4 +12,8 @@ gcloud beta container clusters delete $CLUSTER_NAME --quiet
 gcloud compute firewall-rules delete $FIREWALL_NAME --quiet
 gcloud compute networks delete $NETWORK_NAME  --quiet
 
-# TODO delete all created containers
+# TODO
+# gcloud container images list --repository eu.gcr.io/ps-workspace/loodse-training
+# for image in $(gcloud container images list --repository eu.gcr.io/ps-workspace/loodse-training --format='get(name)'); \
+#   do gcloud container images delete -q --force-delete-tags ${image}; \
+# done;
