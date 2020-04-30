@@ -1,10 +1,13 @@
-apiVersion: v1
-kind: Pod
+apiVersion: batch/v1
+kind: Job
 metadata:
-    namespace: default
-    name: my-curl
+  namespace: my-namespace
+  name: my-curl
 spec:
-    containers:
+  template:
+    spec:
+      containers:
         - name: my-curl
           image: eu.gcr.io/ps-workspace/loodse-training/curl:0.0.1
-          args: [ "loodse.com" ]
+          args: [ "my-app" ]
+      restartPolicy: Never
