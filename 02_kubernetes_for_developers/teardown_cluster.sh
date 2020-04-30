@@ -1,4 +1,4 @@
-#!/bin bash
+#!/bin/bash
 
 export PROJECT_NAME=ps-workspace
 export REGION=europe-west3

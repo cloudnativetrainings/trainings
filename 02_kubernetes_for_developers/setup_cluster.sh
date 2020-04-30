@@ -1,4 +1,4 @@
-#!/bin bash
+#!/bin/bash
 
 # variables
 export PROJECT_NAME=ps-workspace
@@ -40,16 +40,9 @@ gcloud container clusters get-credentials $CLUSTER_NAME
 source <(kubectl completion bash)
 
 # verify
-kubectl run my-pod --generator run-pod/v1 --image nginx --port 80 -l app=my-pod
-kubectl expose pod my-pod --type NodePort
-export NODE=$(kubectl get nodes -o jsonpath="{.items[0].status.addresses[?(@.type=='ExternalIP')].address}")
-export PORT=$(kubectl get svc my-pod -o jsonpath="{.spec.ports[0].nodePort}")
-curl http://$NODE:$PORT
-kubectl delete pod,svc my-pod
-```
-
-# Teardown
-```bash
-gcloud beta container clusters delete training
-gcloud compute firewall-rules delete training
-```
+# kubectl run my-pod --generator run-pod/v1 --image nginx --port 80 -l app=my-pod
+# kubectl expose pod my-pod --type NodePort
+# export NODE=$(kubectl get nodes -o jsonpath="{.items[0].status.addresses[?(@.type=='ExternalIP')].address}")
+# export PORT=$(kubectl get svc my-pod -o jsonpath="{.spec.ports[0].nodePort}")
+# curl http://$NODE:$PORT
+# kubectl delete pod,svc my-pod
