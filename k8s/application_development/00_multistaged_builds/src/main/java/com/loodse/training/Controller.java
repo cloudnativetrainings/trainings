@@ -13,7 +13,7 @@ public class Controller {
 
 	@GetMapping("/")
 	public String root() {
-        LOG.debug("root request");
+        LOG.info("root request");
 		return "hello";
     }
    

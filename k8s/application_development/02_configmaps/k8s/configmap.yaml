@@ -5,5 +5,5 @@ metadata:
   namespace: default
 data: 
   application.properties: |-
-    logging.level.root=INFO
-    logging.level.com.loodse.training=DEBUG
+    server.port=8081
+    
