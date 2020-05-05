@@ -14,10 +14,12 @@ spec:
         - containerPort: 8081
       imagePullPolicy: Always
       livenessProbe:
+        initialDelaySeconds: 10
         httpGet:
           port: 8080
           path: /actuator/liveness
       readinessProbe:
+        initialDelaySeconds: 10
         httpGet:
           port: 8080
           path: /actuator/readiness                
