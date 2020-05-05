@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class MyLifecycle implements SmartLifecycle {
 
-    private static final Logger LOG = LoggerFactory.getLogger(MyLifeCycle.class);
+    private static final Logger LOG = LoggerFactory.getLogger(MyLifecycle.class);
 
     private boolean isRunning = false;
 
@@ -68,4 +68,5 @@ public class MyLifecycle implements SmartLifecycle {
         return isRunning;
     }
 
+    
 }
