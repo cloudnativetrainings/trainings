@@ -6,13 +6,21 @@ metadata:
   labels:
     app: my-app
 spec:
-  terminationGracePeriodSeconds: 0
+  terminationGracePeriodSeconds: 30
   containers:
     - name: my-app
       image: eu.gcr.io/ps-workspace/loodse-training/app:0.0.1
       ports:
         - containerPort: 8081
       imagePullPolicy: Always
+      livenessProbe:
+        httpGet:
+          port: 8080
+          path: /actuator/liveness
+      readinessProbe:
+        httpGet:
+          port: 8080
+          path: /actuator/readiness                
       volumeMounts:
         - name: my-volume
           mountPath: /srv/app/config

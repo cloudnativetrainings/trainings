@@ -6,5 +6,5 @@ metadata:
 data: 
   application.properties: |-
     management.endpoints.web.exposure.include=prometheus,liveness,readiness
-    my-app.start-lag=3
-    my-app.stop-lag=10
+    my-app.start-lag=10
+    my-app.stop-lag=20
