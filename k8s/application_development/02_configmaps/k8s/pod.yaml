@@ -13,7 +13,7 @@ spec:
         - containerPort: 8081
       volumeMounts:
         - name: my-volume
-          mountPath: /srv/app
+          mountPath: /srv/app/config
   volumes:
     - name: my-volume
       configMap:
