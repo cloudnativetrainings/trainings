@@ -3,6 +3,7 @@ kind: ConfigMap
 metadata:
   name: my-configmap
   namespace: default
-data:
-  logging.level.root=INFO
-  logging.level.com.loodse.training=DEBUG
+data: 
+  application.properties: |-
+    logging.level.root=INFO
+    logging.level.com.loodse.training=DEBUG
