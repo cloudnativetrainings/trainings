@@ -36,6 +36,11 @@ public class MyLifecycle implements SmartLifecycle {
     @Override
     public void stop() {
         LOG.debug("App is stopping");
+    }
+
+    @Override
+    public void stop(final Runnable callback) {
+        LOG.info("App shutdown initiated");
         try {
             for (int i = 0; i < stopLag; ++i) {
                 LOG.info("Stopping in " + (stopLag - i) + " seconds");
@@ -45,11 +50,6 @@ public class MyLifecycle implements SmartLifecycle {
         } catch (Exception e) {
             LOG.error("Error on stopping", e);
         }
-    }
-
-    @Override
-    public void stop(final Runnable callback) {
-        LOG.info("App shutdown initiated");
 
         try {
             callback.run();
