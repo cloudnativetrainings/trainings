@@ -1,6 +1,4 @@
 .gradle/
-gradlew
-gradle/
 build/
 bin/
 gradlew

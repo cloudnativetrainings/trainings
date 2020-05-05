@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# build application
+#./gradlew clean build
+
+# run application
+#java -jar build/libs/app-0.0.1.jar
+
 export APP=multistaged-builds
 export VERSION=0.0.1
 export PROJECT_NAME=ps-workspace

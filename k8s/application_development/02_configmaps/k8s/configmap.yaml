@@ -4,4 +4,4 @@ metadata:
   name: my-configmap
   namespace: default
 data:
-  my.property: something
+  server.port: 8081

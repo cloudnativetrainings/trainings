@@ -10,7 +10,7 @@ spec:
     - name: my-app
       image: eu.gcr.io/ps-workspace/loodse-training/multistaged-builds:0.0.3
       ports:
-        - containerPort: 8080
+        - containerPort: 8081
       volumeMounts:
         - name: my-volume
           mountPath: /srv/app/application.properties

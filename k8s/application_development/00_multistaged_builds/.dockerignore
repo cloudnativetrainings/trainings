@@ -1,9 +1,11 @@
 .gradle
-.vscode
-bin
-build
 gradle
+gradlew
+build
+
+.vscode
+.project
+bin
 .gitignore
 build.sh
 Dockerfile
-gradlew

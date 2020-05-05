@@ -11,19 +11,10 @@ public class Controller {
 
     private static final Logger LOG = LoggerFactory.getLogger(Controller.class);
 
-    @Value("${my.property}")
-    private String myProperty;
-
 	@GetMapping("/")
 	public String root() {
         LOG.info("root request");
 		return "hello";
-    }
-
-    @GetMapping("/applicationProperty")
-	public String getApplicationProperty() {
-        LOG.info("applicationProperty request");
-		return "my.property is set to " + myProperty;
     }
    
 }
