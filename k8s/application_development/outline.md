@@ -45,3 +45,4 @@
 * [ ] accessing api-server from app
 * [ ] docker caching
 * [ ] request loss debugging
+* [ ] https://github.com/fabric8io/kubernetes-client/releases/tag/v4.10.0
