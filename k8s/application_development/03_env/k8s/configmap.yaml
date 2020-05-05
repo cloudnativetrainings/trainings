@@ -3,6 +3,8 @@ kind: ConfigMap
 metadata:
   namespace: default
   name: my-configmap
-data: 
-  application.properties: |-
-    server.port=8081
+data:
+  MY_ENV_1: foo
+  MY_ENV_2: bar
+  MY_ENV_3: baz
+    

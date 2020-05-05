@@ -9,6 +9,6 @@ spec:
     terminationGracePeriodSeconds: 0
     containers:
         - name: my-app
-          image: eu.gcr.io/ps-workspace/loodse-training/app:0.2.3
+          image: eu.gcr.io/ps-workspace/loodse-training/app:0.0.1
           ports:
             - containerPort: 8080

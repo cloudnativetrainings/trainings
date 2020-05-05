@@ -1,7 +1,7 @@
 #!/bin/bash
 
 export APP=app
-export VERSION=0.2.3
+export VERSION=0.0.1
 export PROJECT_NAME=ps-workspace
 export CONTAINER_REGISTRY=eu.gcr.io/$PROJECT_NAME/loodse-training
 export IMAGE=$CONTAINER_REGISTRY/$APP:$VERSION

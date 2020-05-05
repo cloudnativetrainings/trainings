@@ -13,7 +13,8 @@
   * [ ] Architectural consideration for developing Cloud Native Applications
   * Deep Dives
     * [x] Namespaces & DNS
-    * [ ] ConfigMaps & Secrets
+    * [x] ConfigMaps 
+    * [ ] Secrets
     * [ ] Environment Variables
     * [ ] Downward API
     * [ ] Liveness and Readiness
