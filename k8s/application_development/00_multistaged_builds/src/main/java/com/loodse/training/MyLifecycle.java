@@ -13,10 +13,10 @@ public class MyLifecycle implements SmartLifecycle {
 
     private boolean isRunning = false;
 
-    @Value("${my-app.start-lag:3}")
+    @Value("${my-app.start-lag:0}")
     private Integer startLag;
 
-    @Value("${my-app.stop-lag:10}")
+    @Value("${my-app.stop-lag:0}")
     private Integer stopLag;
 
     @Override
@@ -68,5 +68,5 @@ public class MyLifecycle implements SmartLifecycle {
         return isRunning;
     }
 
-    
+
 }

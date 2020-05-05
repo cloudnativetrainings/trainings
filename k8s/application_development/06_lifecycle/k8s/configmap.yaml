@@ -6,4 +6,5 @@ metadata:
 data: 
   application.properties: |-
     management.endpoints.web.exposure.include=prometheus,liveness,readiness
-    server.port=8081
+    my-app.start-lag=3
+    my-app.stop-lag=10
