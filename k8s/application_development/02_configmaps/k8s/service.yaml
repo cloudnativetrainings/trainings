@@ -9,5 +9,4 @@ spec:
     app: my-app
   ports:
     - port: 8080
-      targetPort: 8081
       nodePort: 30000

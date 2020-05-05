@@ -14,7 +14,7 @@ export IMAGE=$CONTAINER_REGISTRY/$APP:$VERSION
 
 # TODO inject build version and app name
 
-docker build -t $IMAGE src/java
+docker build -t $IMAGE .
 docker push $IMAGE
 #docker run -it --rm -p 8080:8080 $IMAGE
 

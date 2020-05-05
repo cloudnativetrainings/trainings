@@ -4,4 +4,5 @@ metadata:
   name: my-configmap
   namespace: default
 data:
-  server.port: 8081
+  logging.level.root=INFO
+  logging.level.com.loodse.training=DEBUG

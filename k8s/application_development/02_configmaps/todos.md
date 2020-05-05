@@ -3,10 +3,8 @@
 
 # steps
 
-## add property to code
+## add application.properties configmap flag: server.port
 
-## build version 0.0.2
+## change pod and service ports
 
-## add property config map to pod
-
-## apply
+## make the application work again
