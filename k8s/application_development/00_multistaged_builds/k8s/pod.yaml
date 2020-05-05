@@ -12,3 +12,4 @@ spec:
           image: eu.gcr.io/ps-workspace/loodse-training/app:0.0.1
           ports:
             - containerPort: 8080
+          imagePullPolicy: Always

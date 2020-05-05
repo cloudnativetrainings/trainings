@@ -10,4 +10,6 @@ spec:
         - name: my-curl
           image: eu.gcr.io/ps-workspace/loodse-training/curl:0.0.1
           args: [ "my-app" ]
+          imagePullPolicy: Always
       restartPolicy: Never
+
