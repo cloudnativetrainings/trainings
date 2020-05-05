@@ -15,7 +15,7 @@
     * [x] Namespaces & DNS
     * [x] ConfigMaps 
     * [ ] Secrets
-    * [ ] Environment Variables
+    * [x] Environment Variables
     * [ ] Downward API
     * [ ] Liveness and Readiness
 * Application Design
@@ -32,6 +32,7 @@
   * [ ] Writing own metrics
   * [ ] Prometheus Query Language
   * [ ] Visualization with Grafana
+  * [ ] interceptor for timings
 * Logging
   * [ ] Logging with the EFK stack
 * Addons

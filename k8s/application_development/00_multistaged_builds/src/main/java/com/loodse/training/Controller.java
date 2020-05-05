@@ -25,5 +25,15 @@ public class Controller {
         builder.append("MY_ENV_3: " + System.getenv("MY_ENV_3") + "\n");        
 		return builder.toString();
     }
+
+    @GetMapping("/downward_api")
+	public String downwardApi() {
+        LOG.info("downward_api request");
+        StringBuilder builder = new StringBuilder();
+        builder.append("MY_NODE_NAME: " + System.getenv("MY_NODE_NAME") + "\n");
+        builder.append("MY_POD_NAME: " + System.getenv("MY_POD_NAME") + "\n");
+        builder.append("MY_POD_IP: " + System.getenv("MY_POD_IP") + "\n");        
+		return builder.toString();
+    }
    
 }
