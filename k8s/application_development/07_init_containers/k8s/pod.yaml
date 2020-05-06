@@ -8,6 +8,12 @@ metadata:
 spec:
   terminationGracePeriodSeconds: 30
   initContainers:
+    - name: my-init-container-00
+      image: busybox:1.31.1
+      command: [ "touch /shared/file" ]
+      volumeMounts: 
+        - name: my-volume
+          mountPath: /shared
     - name: my-init-container-01
       image: busybox:1.31.1
       command: [ "echo $(date) my-init-container-01 >> /shared/file" ]
