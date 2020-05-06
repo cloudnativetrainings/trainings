@@ -9,40 +9,40 @@ spec:
   terminationGracePeriodSeconds: 30
   initContainers:
     - name: my-init-container-01
-      image: busybox:1.13.1
+      image: busybox:1.31.1
       command: [ "echo $(date) my-init-container-01 >>/shared-file" ]
       volumeMounts: 
         - name: my-volume
           mountPath: /shared-file
     - name: my-init-container-02
-      image: busybox:1.13.1
+      image: busybox:1.31.1
       command: [ "echo $(date) my-init-container-02 >>/shared-file" ]
       volumeMounts: 
         - name: my-volume
           mountPath: /shared-file
     - name: my-init-container-03
-      image: busybox:1.13.1
+      image: busybox:1.31.1
       command: [ "echo $(date) my-init-container-03 >>/shared-file" ]
       volumeMounts: 
         - name: my-volume
           mountPath: /shared-file
   containers:
     - name: my-container-01
-      image: busybox:1.13.1
+      image: busybox:1.31.1
       command: [ "while true; do echo $(date) my-container-01 >>/shared-file; sleep 10; done" ]
       imagePullPolicy: Always
       volumeMounts: 
         - name: my-volume
           mountPath: /shared-file
     - name: my-container-02
-      image: busybox:1.13.1
+      image: busybox:1.31.1
       command: [ "while true; do echo $(date) my-container-02 >>/shared-file; sleep 10; done" ]
       imagePullPolicy: Always
       volumeMounts: 
         - name: my-volume
           mountPath: /shared-file
     - name: my-container-03
-      image: busybox:1.13.1
+      image: busybox:1.31.1
       command: [ "while true; do echo $(date) my-container-03 >>/shared-file; sleep 10; done" ]
       imagePullPolicy: Always
       volumeMounts: 
