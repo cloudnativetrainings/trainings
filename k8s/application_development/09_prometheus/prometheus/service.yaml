@@ -6,6 +6,7 @@ metadata:
   labels:
     app: prometheus
 spec:
+  type: NodePort
   ports:
   - name: prometheus
     port: 9090
