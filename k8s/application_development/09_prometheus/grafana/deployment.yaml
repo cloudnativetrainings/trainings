@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: monitoring
+  name: grafana
+  labels:
+    app: grafana
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grafana
+  template:
+    metadata:
+      labels:
+        app: grafana
+    spec:
+      securityContext:
+        fsGroup: 472
+      containers:
+        - name: grafana
+          image: grafana/grafana:6.2.5
+          env:
+            - name: GF_AUTH_ANONYMOUS_ENABLED
+              value: "true"
+            - name: GF_AUTH_ANONYMOUS_ORG_ROLE
+              value: "Admin"
+#          resources:
+#            requests:
+#              memory: "0.5Gi"
+#              cpu: "0.5"
+#            limits:
+#              memory: "1Gi"
+#              cpu: "1"
+          ports:
+            - containerPort: 3000
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/grafana
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: grafana

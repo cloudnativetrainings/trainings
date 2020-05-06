@@ -1,0 +1,41 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: monitoring
+  name: prometheus
+  labels:
+    app: prometheus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prometheus
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: prometheus
+    spec:
+      serviceAccountName: prometheus-service-account
+      securityContext:
+        fsGroup: 65534
+      containers:
+      - name: prometheus
+        image: prom/prometheus:v2.10.0
+        args: [ "--config.file=/etc/prometheus/prometheus.yml", "--web.enable-lifecycle" ]
+        ports:
+          - containerPort: 9090
+        volumeMounts:
+          - name: config
+            mountPath: /etc/prometheus
+          - name: data
+            mountPath: /prometheus
+      volumes:
+        - name: config
+          configMap:
+            name: prometheus
+        - name: data
+          persistentVolumeClaim:
+            claimName: prometheus

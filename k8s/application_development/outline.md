@@ -21,7 +21,7 @@
     * [x] Lifecycle
 * Application Design
   * [ ] Graceful Shutdown
-  * [ ] Init Containers
+  * [x] Init Containers
   * [ ] 12 factor Apps
   * [ ] Multi-Container Pod Design Patterns
   * [ ] Programatically access the K8s API

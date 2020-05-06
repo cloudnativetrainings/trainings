@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: monitoring
+  name: kube-state-metrics
+  labels:
+    app: kube-state-metrics
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kube-state-metrics
+  template:
+    metadata:
+      labels:
+        app: kube-state-metrics
+    spec:
+      serviceAccountName: kube-state-metrics
+      securityContext:
+        fsGroup: 65534
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: kube-state-metrics
+        image: quay.io/coreos/kube-state-metrics:v1.6.0
+        resources:
+          requests:
+            memory: "200Mi"
+            cpu: "100m"
+          limits:
+            memory: "400Mi"
+            cpu: "200m"
+        ports:
+          - containerPort: 8080
+          - containerPort: 8081

@@ -3,7 +3,6 @@
 
 # steps
 
+## run pod
 
-initialDelaySeconds
-
-#ENTRYPOINT java $JAVA_OPTS -jar $APP issue
+## kubectl exec my-pod -- cat /shared/file

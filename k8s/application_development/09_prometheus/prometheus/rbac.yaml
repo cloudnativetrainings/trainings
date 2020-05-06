@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: prometheus-service-account
+  namespace: monitoring
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: prometheus-cluster-role
+  namespace: monitoring
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - nodes
+      - pods
+      - services
+    verbs:
+      - get
+      - list
+      - watch
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: prometheus-cluster-role-binding
+  namespace: monitoring
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: prometheus-cluster-role
+subjects:
+  - kind: ServiceAccount
+    name: prometheus-service-account
+    namespace: monitoring
