@@ -30,10 +30,10 @@
   * [ ] KNative Build
 * Monitoring
   * [x] Monitoring with Prometheus
-  * [ ] Writing own metrics
-  * [ ] Prometheus Query Language
-  * [ ] Visualization with Grafana
-  * [ ] interceptor for timings
+  * [x] Writing own metrics
+  * [x] Prometheus Query Language
+  * [x] Visualization with Grafana
+  * [x] interceptor for timings
 * Logging
   * [ ] Logging with the EFK stack
 * Addons

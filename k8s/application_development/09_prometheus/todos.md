@@ -30,5 +30,9 @@ predict_linear(pvc:usage:percent[1d], 7*24*3600) > 90
 # metric types
 With histograms, quantiles are calculated on the Prometheus server. With summaries, they are calculated on the application server
 
+# mention label cardinality issues
+
+# mention interceptors
+
 
 

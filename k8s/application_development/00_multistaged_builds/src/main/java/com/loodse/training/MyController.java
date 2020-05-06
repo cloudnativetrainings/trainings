@@ -19,7 +19,7 @@ public class MyController {
     private final Counter rootCounter;
 
     public MyController(MeterRegistry meterRegistry) {
-        rootCounter = Counter.builder("my_coutner").tag("app", "my-app").tag("path", "root").register(meterRegistry);
+        rootCounter = Counter.builder("my_counter").tag("app", "my-app").tag("path", "root").register(meterRegistry);
     }
 
     @GetMapping("/")
