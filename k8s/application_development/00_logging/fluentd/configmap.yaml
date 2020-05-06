@@ -24,7 +24,11 @@ data:
 
     # we use kubernetes metadata plugin to add metadatas to the log
     <filter kubernetes.**>
-        @type kubernetes_metadata
+        @type grep
+        <regexp>
+            key $.kubernetes.labels.fluentd
+            pattern true
+        </regexp>
     </filter>
 
     # we send the logs to Elasticsearch
