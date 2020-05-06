@@ -30,13 +30,14 @@ data:
             target_label: __address__
             replacement: ${1}:10255
       - job_name: cadvisor
+        metrics_path: /metrics/cadvisor
         kubernetes_sd_configs:
           - role: node
         relabel_configs:
           - source_labels: [__address__]
             regex: (.*):(\d+)
             target_label: __address__
-            replacement: ${1}:10255/cadvisor            
+            replacement: ${1}:10255
       - job_name: kube-state-metrics
         static_configs:
           - targets:
