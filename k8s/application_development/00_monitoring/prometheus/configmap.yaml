@@ -43,14 +43,9 @@ data:
           - targets:
             - kube-state-metrics:8080
             - kube-state-metrics:8081
-      - job_name: my-apps
-        metrics_path: /actuator/prometheus
-        static_configs:
-          - targets:
-            - my-app.default.svc:8080
-      # - job_name: services
+      # - job_name: my-apps
       #   metrics_path: /actuator/prometheus
-      #   kubernetes_sd_configs:
-      #     - role: service
-
+      #   static_configs:
+      #     - targets:
+      #       - my-app.default.svc:8080
    

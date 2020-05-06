@@ -1,17 +1,13 @@
+1. Ensure you are using the right Container Registry
 
-# prerequits
-* my-app is running
+2. Ensure that the app 'my-app' is running
 
-# steps
-## build and push curl image
+3.  Adapt the PROJECT_NAME in the build.sh file
 
-## create namespace 
+4. Build and push the Container
 
-## run job and try to fix the issue
-* kubectl -n my-namespace get jobs
-* kubectl -n my-namespace get pods
-* add default and port to the command   args: [ "my-app.default:8080" ]
-* delete the job and retry
+5. Create the namespace 
 
-# verification
-* check if job was successful
+6. Run the job and check the logs, this time the curl will fail
+
+7. Fix the url of 'my-app' to 'my-app.default:8080' and retry 

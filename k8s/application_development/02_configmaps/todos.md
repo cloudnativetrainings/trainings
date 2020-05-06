@@ -1,11 +1,5 @@
+1. Ensure you are using the right Container Registry
 
-# prerequits
+2. Apply the yaml files in the k8s folder
 
-# steps
-
-## add application.properties configmap flag: server.port
-
-## change pod and service ports
-
-## make the application work again
-
+3. You cannot reach the application via browser due the application is bound to a different port. Try to fix the pod and the service

@@ -1,8 +1,5 @@
+1. Ensure you are using the right Container Registry
 
-# prerequits
+2. Apply the yaml files in the k8s folder
 
-# steps
-
-## add env rest endpoint
-
-## add envFrom section to pod
+3. Verify the environment variables via the /env endpoint 

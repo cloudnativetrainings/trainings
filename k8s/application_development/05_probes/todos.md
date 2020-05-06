@@ -1,15 +1,11 @@
+1. Ensure you are using the right Container Registry
 
-# prerequits
+2. Apply the yaml files in the k8s folder
 
-# steps
+3. Send a /set_ready/false request
 
-## customize liveness and readiness probes
+4. Berify READY via 'kubectl get pods'
 
-## send a /set_ready/false request
+5. Send a /set_healthy/false request
 
-## verify READY via kubectl get pods
-
-## send a /set_healthy/false request
-
-## verify restart via kubectl get pods
-
+6. Verify restart via 'kubectl get pods'

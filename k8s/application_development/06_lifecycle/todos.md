@@ -1,9 +1,11 @@
+1. Ensure you are using the right Container Registry
 
-# prerequits
+2. Apply the yaml files in the k8s folder
 
-# steps
+3. Stop the Pod
 
+4. Check the logs of the Pod. The app has not enough time to gracefully shutdown. Fix this.
 
-initialDelaySeconds
+5. Take a look at 'kubectl get events' - it looks that there are failing readiness probes
 
-#ENTRYPOINT java $JAVA_OPTS -jar $APP issue
+6. Add a delay, so the application can start up properly

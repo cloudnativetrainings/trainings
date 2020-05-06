@@ -1,17 +1,20 @@
+1. Ensure you are using the right Container Registry
 
-# apply monitoring
+2. Apply the yaml files in the k8s folder
 
-# apply k8s
+3. Apply all yaml files in the 00_monitoring folder
 
-# add service to prometheus config
+4. Adapt the Prometheus ConfigMap to scrape 'my-app'. You have to reload the Prometheus configuration via 'curl -X POST http://<NODE-IP>:30001/-/reload' afterwards
 
-# update prometheus
-curl -X POST http://localhost:9090/-/reload
-curl -X POST http://34.89.199.229:30001/-/reload
+5. Take a look at the metrics via the spy 'kubectl exec -it spy -- bash'. Curl the prometheus endpoint via 'curl my-app:8080/actuator/prometheus'
 
-# verify metrics
-kubectl exec -it spy -- bash
-curl my-app:8080/actuator/prometheus
+6. Ensure that there is a metric called 'my_counter'
+
+7. Play around with PromQL
+
+8. Create a Dashboard with Grafana
+
+---
 
 # create graphs
 sum (kubelet_volume_stats_used_bytes) by (namespace, persistentvolumeclaim) / (sum(kubelet_volume_stats_capacity_bytes) by (namespace, persistentvolumeclaim) / 100)

@@ -11,7 +11,7 @@ spec:
     - name: my-app
       image: eu.gcr.io/loodse-training-playground/loodse-training/app:0.0.1
       ports:
-        - containerPort: 8081
+        - containerPort: 8080
       imagePullPolicy: Always
       livenessProbe:
         initialDelaySeconds: 10
@@ -19,7 +19,7 @@ spec:
           port: 8080
           path: /actuator/liveness
       readinessProbe:
-        initialDelaySeconds: 10
+        initialDelaySeconds: 0
         httpGet:
           port: 8080
           path: /actuator/readiness                

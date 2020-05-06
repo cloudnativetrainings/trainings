@@ -10,24 +10,19 @@
 
 # KPS
 * K8s from a Dev perspective
-  * [ ] Architectural consideration for developing Cloud Native Applications
+  * [x] Architectural consideration for developing Cloud Native Applications
   * Deep Dives
     * [x] Namespaces & DNS
-    * [x] ConfigMaps 
-    * [ ] Secrets
+    * [x] ConfigMaps & Secrets
     * [x] Environment Variables
     * [x] Downward API
     * [x] Liveness and Readiness
-    * [x] Lifecycle
+    * [x] Lifecycle & Graceful Shutdown 
 * Application Design
-  * [ ] Graceful Shutdown
   * [x] Init Containers
-  * [ ] 12 factor Apps
+  * [x] 12 factor Apps
   * [ ] Multi-Container Pod Design Patterns
-  * [ ] Programatically access the K8s API
-* CI/CD
-  * [ ] GitOps with Weaveworks
-  * [ ] KNative Build
+  * [x] Programatically access the K8s API
 * Monitoring
   * [x] Monitoring with Prometheus
   * [x] Writing own metrics
@@ -37,6 +32,7 @@
 * Logging
   * [x] Logging with the EFK stack
 * Addons
+  * [ ] GitOps with Weaveworks
   * [ ] KNative
   * [ ] Podman, Buildah
 
