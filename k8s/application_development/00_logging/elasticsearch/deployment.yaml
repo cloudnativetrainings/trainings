@@ -22,10 +22,10 @@ spec:
               value: single-node
           resources:
             requests:
-              memory: "12Gi"
+              memory: "10Gi"
               cpu: "2"
             limits:
-              memory: "12Gi"
+              memory: "10Gi"
               cpu: "2"    
           ports:
             - containerPort: 9200

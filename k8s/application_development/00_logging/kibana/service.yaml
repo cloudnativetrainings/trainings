@@ -6,9 +6,11 @@ metadata:
   labels:
     app: kibana
 spec:
+  type: NodePort
   ports:
   - name: kibana
     port: 5601
     targetPort: 5601
+    nodePort: 30004
   selector:
     app: kibana
