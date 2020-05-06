@@ -17,8 +17,8 @@
     * [ ] Secrets
     * [x] Environment Variables
     * [x] Downward API
-    * [ ] Liveness and Readiness
-    * [ ] Lifecycle
+    * [x] Liveness and Readiness
+    * [x] Lifecycle
 * Application Design
   * [ ] Graceful Shutdown
   * [ ] Init Containers
