@@ -38,6 +38,8 @@ spec:
           - name: varlibdockercontainers
             mountPath: /var/lib/docker/containers
             readOnly: true
+          - name: fluentd-config
+            mountPath: /fluentd/etc 
       volumes:
         - name: varlog
           hostPath:
@@ -45,3 +47,6 @@ spec:
         - name: varlibdockercontainers
           hostPath:
             path: /var/lib/docker/containers
+        - name: fluentd-config
+          configMap:
+            name: fluentd-config 
