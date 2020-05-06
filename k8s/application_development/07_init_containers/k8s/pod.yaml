@@ -2,48 +2,48 @@ apiVersion: v1
 kind: Pod
 metadata:
   namespace: default
-  name: my-app
+  name: my-pod
   labels:
-    app: my-app
+    app: my-pod
 spec:
   terminationGracePeriodSeconds: 30
   initContainers:
     - name: my-init-container-01
       image: busybox:1.31.1
-      command: [ "echo $(date +%H:%M:%S:%3N) my-init-container-01 >>/shared/file" ]
+      command: [ "echo $(date) my-init-container-01 >> /shared/file" ]
       volumeMounts: 
         - name: my-volume
           mountPath: /shared
     - name: my-init-container-02
       image: busybox:1.31.1
-      command: [ "echo $(date +%H:%M:%S:%3N) my-init-container-02 >>/shared/file" ]
+      command: [ "echo $(date) my-init-container-02 >> /shared/file" ]
       volumeMounts: 
         - name: my-volume
           mountPath: /shared
     - name: my-init-container-03
       image: busybox:1.31.1
-      command: [ "echo $(date +%H:%M:%S:%3N) my-init-container-03 >>/shared/file" ]
+      command: [ "echo $(date) my-init-container-03 >> /shared/file" ]
       volumeMounts: 
         - name: my-volume
           mountPath: /shared
   containers:
     - name: my-container-01
       image: busybox:1.31.1
-      command: [ "while true; do echo $(date +%H:%M:%S:%3N) my-container-01 >>/shared/file; sleep 10; done" ]
+      command: [ "while true; do echo $(date) my-container-01 >> /shared/file; sleep 10; done" ]
       imagePullPolicy: Always
       volumeMounts: 
         - name: my-volume
           mountPath: /shared
     - name: my-container-02
       image: busybox:1.31.1
-      command: [ "while true; do echo $(date +%H:%M:%S:%3N) my-container-02 >>/shared/file; sleep 10; done" ]
+      command: [ "while true; do echo $(date) my-container-02 >> /shared/file; sleep 10; done" ]
       imagePullPolicy: Always
       volumeMounts: 
         - name: my-volume
           mountPath: /shared
     - name: my-container-03
       image: busybox:1.31.1
-      command: [ "while true; do echo $(date +%H:%M:%S:%3N) my-container-03 >>/shared/file; sleep 10; done" ]
+      command: [ "while true; do echo $(date) my-container-03 >> /shared/file; sleep 10; done" ]
       imagePullPolicy: Always
       volumeMounts: 
         - name: my-volume
