@@ -29,7 +29,7 @@
   * [ ] GitOps with Weaveworks
   * [ ] KNative Build
 * Monitoring
-  * [ ] Monitoring with Prometheus
+  * [x] Monitoring with Prometheus
   * [ ] Writing own metrics
   * [ ] Prometheus Query Language
   * [ ] Visualization with Grafana
