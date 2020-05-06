@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export PROJECT_NAME=ps-workspace
+export PROJECT_NAME=loodse-training-playground
 export REGION=europe-west3
 export ZONE=europe-west3-a
 export CLUSTER_NAME=training-loodse
@@ -18,7 +18,7 @@ gcloud compute firewall-rules delete $FIREWALL_NAME --quiet
 gcloud compute networks delete $NETWORK_NAME  --quiet
 
 # TODO
-# gcloud container images list --repository eu.gcr.io/ps-workspace/loodse-training
-# for image in $(gcloud container images list --repository eu.gcr.io/ps-workspace/loodse-training --format='get(name)'); \
+# gcloud container images list --repository eu.gcr.io/loodse-training-playground/loodse-training
+# for image in $(gcloud container images list --repository eu.gcr.io/loodse-training-playground/loodse-training --format='get(name)'); \
 #   do gcloud container images delete -q --force-delete-tags ${image}; \
 # done;

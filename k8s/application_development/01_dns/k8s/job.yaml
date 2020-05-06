@@ -8,7 +8,7 @@ spec:
     spec:
       containers:
         - name: my-curl
-          image: eu.gcr.io/ps-workspace/loodse-training/curl:0.0.1
+          image: eu.gcr.io/loodse-training-playground/loodse-training/curl:0.0.1
           args: [ "my-app" ]
           imagePullPolicy: Always
       restartPolicy: Never

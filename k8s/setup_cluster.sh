@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # variables
-export PROJECT_NAME=ps-workspace
+export PROJECT_NAME=loodse-training-playground
 export REGION=europe-west3
 export ZONE=europe-west3-a
 export CLUSTER_NAME=training-loodse

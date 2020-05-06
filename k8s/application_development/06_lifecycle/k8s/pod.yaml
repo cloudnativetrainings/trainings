@@ -9,7 +9,7 @@ spec:
   terminationGracePeriodSeconds: 30
   containers:
     - name: my-app
-      image: eu.gcr.io/ps-workspace/loodse-training/app:0.0.1
+      image: eu.gcr.io/loodse-training-playground/loodse-training/app:0.0.1
       ports:
         - containerPort: 8081
       imagePullPolicy: Always
