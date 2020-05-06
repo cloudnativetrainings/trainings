@@ -22,13 +22,17 @@ data:
       </parse>      
     </source>
 
+    <match kubernetes.var.log.containers.**kube-system**.log>                                                                            
+        @type null
+    </match>
+
+    <match kubernetes.var.log.containers.**fluentd**.log>                                                                            
+        @type null
+    </match>
+
     # we use kubernetes metadata plugin to add metadatas to the log
     <filter kubernetes.**>
-        @type grep
-        <regexp>
-            key $.kubernetes.labels.fluentd
-            pattern true
-        </regexp>
+        @type kubernetes_metadata
     </filter>
 
     # we send the logs to Elasticsearch
