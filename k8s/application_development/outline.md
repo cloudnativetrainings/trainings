@@ -35,7 +35,7 @@
   * [x] Visualization with Grafana
   * [x] interceptor for timings
 * Logging
-  * [ ] Logging with the EFK stack
+  * [x] Logging with the EFK stack
 * Addons
   * [ ] KNative
   * [ ] Podman, Buildah
