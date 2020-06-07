@@ -27,7 +27,8 @@ gcloud beta container clusters create $CLUSTER_NAME \
     --enable-network-policy --enable-ip-alias --no-enable-autoupgrade --no-enable-stackdriver-kubernetes \
     --addons HorizontalPodAutoscaling,HttpLoadBalancing
 
-# add firewall rule
+### add firewall rule for node port range
+# A common way for access applications in Kubernetes is to use [Service - Type NodePort](https://kubernetes.io/docs/concepts/services-networking/service/#nodeport). This service type opens random ports on every node in the range `30000-32767`. On GKE clusters this port ranged is blocked by the [GCP VPC Firewall](https://console.cloud.google.com/networking/firewalls/list). To open the range in firewall we execute the following command:
 gcloud compute firewall-rules create $FIREWALL_NAME \
 --network $NETWORK_NAME \
 --direction=INGRESS \
