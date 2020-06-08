@@ -6,7 +6,7 @@ In this course we will create an application which will be reachable in the WWW.
 # Create the application
 kubectl run my-nginx --image nginx --port 80
 # Expose the application
-kubectl expose deployment my-nginx --type NodePort
+kubectl expose pod my-nginx --type NodePort
 ```
 2. Access the application
 ```bash
