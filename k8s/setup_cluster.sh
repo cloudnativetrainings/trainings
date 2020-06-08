@@ -1,7 +1,10 @@
 #!/bin/bash
 
+if [[ -z ${PROJECT_NAME} ]]
+then
+  echo "INPUT: Type PROJECT_NAME (student-XX-project):" && read PROJECT_NAME
+fi
 # variables
-export PROJECT_NAME=loodse-training-playground
 export REGION=europe-west3
 export ZONE=europe-west3-a
 export CLUSTER_NAME=training-loodse
@@ -29,16 +32,23 @@ gcloud beta container clusters create $CLUSTER_NAME \
 
 ### add firewall rule for node port range
 # A common way for access applications in Kubernetes is to use [Service - Type NodePort](https://kubernetes.io/docs/concepts/services-networking/service/#nodeport). This service type opens random ports on every node in the range `30000-32767`. On GKE clusters this port ranged is blocked by the [GCP VPC Firewall](https://console.cloud.google.com/networking/firewalls/list). To open the range in firewall we execute the following command:
-gcloud compute firewall-rules create $FIREWALL_NAME \
+gcloud compute firewall-rules create $FIREWALL_NAME-nodeport \
 --network $NETWORK_NAME \
 --direction=INGRESS \
 --action=ALLOW \
 --source-ranges=0.0.0.0/0 \
---rules=tcp:30000-32767 
+--rules=tcp:30000-32767
+### add ssh access for nodes
+gcloud compute firewall-rules create $FIREWALL_NAME-ssh \
+ --direction=INGRESS \
+ --network=$NETWORK_NAME \
+ --action=ALLOW \
+  --source-ranges=0.0.0.0/0 \
+  --rules=tcp:22
 
 # connect to cluster
 gcloud container clusters get-credentials $CLUSTER_NAME 
-source <(kubectl completion bash)
+echo 'source <(kubectl completion bash)' >> ~/.bashrc && source ~/.bashrc
 
 # verify
 # kubectl run my-pod --generator run-pod/v1 --image nginx --port 80 -l app=my-pod
