@@ -34,7 +34,7 @@ curl http://<EXTERNAL-IP>:<PORT>
 ```
 4. Cleanup the application
 ```bash
-kubectl delete deployment,svc my-nginx
+kubectl delete pod,svc my-nginx
 ```
 
 5. To speed up your CLI handling - enable `kubectl` auto completion
