@@ -2,14 +2,22 @@
 
 1. Create a Deployment via the following command
 ```bash
-kubectl run -it nginx --image nginx --port 80
+kubectl create deployment --image nginx --dry-run nginx -o yaml > deployment.yaml
+cat deployment.yaml
+
+kubectl apply -f deployment.yaml
+kubectl get deployment,pod
 ```
+
 2. Create the yaml configuration for the Service via the following command
 ```bash
-kubectl expose deployment nginx --type NodePort --dry-run -o yaml > service.yaml
+kubectl create service nodeport --tcp 80:80 --dry-run nginx -o yaml > svc.yaml
 ```
-3. Inspect the created file `service.yaml` and apply it.
+3. Inspect the created file `service.yaml`.
 ```bash
+kubectl explain service.spec
+
+## check a service label
 cat service.yaml
 kubectl apply -f service.yaml
 ```
