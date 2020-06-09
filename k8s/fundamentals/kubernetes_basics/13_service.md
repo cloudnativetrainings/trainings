@@ -2,7 +2,8 @@
 
 1. Create a Deployment via the following command
 ```bash
-kubectl run -it nginx --image nginx --port 80
+kubectl run nginx --image nginx --port 80 --generator=deployment/apps.v1beta1
+kubectl get deployment,pod
 ```
 2. Create the yaml configuration for the Service via the following command
 ```bash
