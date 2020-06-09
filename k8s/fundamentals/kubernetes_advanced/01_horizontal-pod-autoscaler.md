@@ -3,7 +3,7 @@
 1. Create and expose an application
 ```bash
 kubectl create deployment my-deployment --image nginx
-kubectl expose deployment my-deployment --type NodePort --port 80
+kubectl create service nodeport --tcp 80:80 my-deployment
 ```
 2. Create an Horizontal Pod Autoscaler and apply it to the cluster.
 ```yaml
