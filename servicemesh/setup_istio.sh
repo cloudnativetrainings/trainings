@@ -24,5 +24,9 @@ export PATH=~/istio-1.4.3/bin:$PATH
 
 # install istio into cluster
 istioctl manifest apply --set profile=demo
-istioctl manifest generate --set profile=demo > generated-manifest.yaml
-istioctl verify-install -f generated-manifest.yaml
+# istioctl manifest generate --set profile=demo > generated-manifest.yaml
+# istioctl verify-install -f generated-manifest.yaml
+
+# enable injection 
+kubectl label namespace default istio-injection=enabled
+kubectl get namespace -L istio-injection

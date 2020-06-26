@@ -2,23 +2,23 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: default
-  name: backend
+  name: frontend
   labels:
-    app: backend
+    app: frontend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: backend
+      app: frontend
   template:
     metadata:
       labels:
-        app: backend
+        app: frontend
     spec:
       terminationGracePeriodSeconds: 0
       containers:
-      - name: backend
-        image: eu.gcr.io/loodse-training-playground/loodse-training/backend:1.0.0
+      - name: frontend
+        image: eu.gcr.io/loodse-training-playground/loodse-training/frontend:1.0.0
         imagePullPolicy: Always
         ports:
         - name: http

@@ -1,0 +1,10 @@
+.gradle
+gradle
+gradlew
+build
+.vscode
+.project
+bin
+.gitignore
+build.sh
+Dockerfile

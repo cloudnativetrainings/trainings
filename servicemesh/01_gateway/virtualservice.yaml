@@ -2,15 +2,15 @@ apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   namespace: default  
-  name: backend
+  name: frontend
 spec:
   hosts:
-      - "34.107.14.93"
+      - "*"
   gateways:
     - gateway
   http:
     - route:
         - destination:
-            host: backend.default.svc.cluster.local
+            host: frontend.default.svc.cluster.local
             port:
                 number: 8080
