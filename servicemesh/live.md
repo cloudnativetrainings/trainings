@@ -38,3 +38,7 @@ cat api key: 317af59a-7011-4071-9130-8c4e5ec020f2
 
 
 istioctl dashboard kiali
+
+
+# good to knows
+relation between destinationrule and application is done via pod labels!!!!

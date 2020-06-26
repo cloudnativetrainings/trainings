@@ -1,10 +1,10 @@
-package com.loodse.servicemesh.backend;
+package com.loodse.servicemesh.frontend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class BackendApplicationTests {
+class ApplicationTests {
 
 	@Test
 	void contextLoads() {

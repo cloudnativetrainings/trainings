@@ -1,11 +1,15 @@
 1. [X] hellow world routing
 2. [X] routing per percent
-3. http header routing
-4. circuit breaking
-5. mutual tls
-6. fault injection
-7. TLS ingress
-8. Visualzation via Kiali
-9. Egress Traffic Management
-10. upgading K8s
-11. upgrading Istio
+3. [X] http header routing
+
+4. [X] timeouts
+5. retries
+6. circuit breaking
+
+7. mutual tls
+8. fault injection
+9. TLS ingress
+10. Visualzation via Kiali
+11. Egress Traffic Management
+12. upgading K8s
+13. upgrading Istio
