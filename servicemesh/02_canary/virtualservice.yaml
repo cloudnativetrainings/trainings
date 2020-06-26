@@ -1,7 +1,7 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  namespace: default  
+  namespace: training  
   name: frontend
 spec:
   hosts:
@@ -11,14 +11,14 @@ spec:
   http:
     - route:
       - destination:
-          host: frontend.default.svc.cluster.local
+          host: frontend.training.svc.cluster.local
           subset: v1
         port:
           number: 8080
-        weight: 90
+        weight: 10
       - destination:
-          host: frontend.default.svc.cluster.local
+          host: frontend.training.svc.cluster.local
           subset: v2          
         port:
             number: 8080
-        weight: 10
+        weight: 90

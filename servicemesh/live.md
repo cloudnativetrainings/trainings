@@ -15,7 +15,7 @@ the proxys are called the "data plane"
 telemetry, pilot,... is called the "control plane"
 
 # Routing
-1. hellow world %
+1. hellow world 
 2. http header routing
 3. circuit breaking
 4. fault injection
@@ -35,3 +35,6 @@ https://istiobyexample.dev/
 https://thecatapi.com/
 https://docs.thecatapi.com/api-reference/
 cat api key: 317af59a-7011-4071-9130-8c4e5ec020f2
+
+
+istioctl dashboard kiali
