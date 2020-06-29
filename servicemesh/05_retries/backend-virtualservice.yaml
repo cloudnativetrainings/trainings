@@ -5,7 +5,7 @@ metadata:
   name: backend
 spec:
   hosts:
-      - "backend.loodse.training"
+      - "*"
   gateways:
     - gateway
   http:
@@ -13,6 +13,13 @@ spec:
       - destination:
           host: backend.training.svc.cluster.local
           subset: v1
-        port:
-          number: 8080
-      timeout: 25s
+          port:
+            number: 8080
+      # timeout: 8s      
+      # retries:
+      #   attempts: 3
+      #   perTryTimeout: 2s
+      #   retryOn: 5xx
+
+
+# TODO fix port indent on other VS

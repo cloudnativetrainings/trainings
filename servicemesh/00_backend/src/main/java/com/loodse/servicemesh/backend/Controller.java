@@ -35,7 +35,7 @@ public class Controller {
         if (this.available) {
             return ResponseEntity.ok("api available");
         } else {
-            return new ResponseEntity<>("api is not available", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("api is not available", HttpStatus.SERVICE_UNAVAILABLE);
         }
     }
 

@@ -1,7 +1,9 @@
+# Traffic Routing
 1. [X] hellow world routing
 2. [X] routing per percent
 3. [X] http header routing
 
+# Traffic Management
 4. [X] timeouts
 5. retries
 6. circuit breaking

@@ -42,3 +42,5 @@ istioctl dashboard kiali
 
 # good to knows
 relation between destinationrule and application is done via pod labels!!!!
+
+retries expect 503 - SERVICE_UNAVAILABLE

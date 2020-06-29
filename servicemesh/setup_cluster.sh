@@ -21,11 +21,12 @@ gcloud beta container clusters create $CLUSTER_NAME \
     --network $NETWORK_NAME  --create-subnetwork=name=$NETWORK_NAME-subnet,range=10.0.0.0/24 \
     --services-ipv4-cidr=10.0.1.0/24 --default-max-pods-per-node=110 \
     --zone=$ZONE \
-    --cluster-version "1.14.10-gke.41" \
+    --cluster-version "1.16.9-gke.6" \
     --machine-type "n1-standard-4" --num-nodes "2" \
     --image-type "UBUNTU" --disk-type "pd-standard" --disk-size "50" \
     --enable-network-policy --enable-ip-alias --no-enable-autoupgrade --no-enable-stackdriver-kubernetes \
     --addons HorizontalPodAutoscaling,HttpLoadBalancing
+    # --cluster-version "1.14.10-gke.41" \
 
 ### add firewall rule for ingreess gateway
 gcloud compute firewall-rules create $FIREWALL_NAME-ingress-gateway \

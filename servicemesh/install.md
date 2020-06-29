@@ -16,3 +16,17 @@ istioctl dashboard prometheus
 
 # envoy injection
 kubectl label namespace default istio-injection=enabled
+
+-----
+
+# newest version
+
+GKE 1.16.9-gke.6
+istio 1.6.3
+
+istioctl install --set profile=demo
+istioctl verify-install
+
+
+
+
