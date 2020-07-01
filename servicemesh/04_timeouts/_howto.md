@@ -1,9 +1,9 @@
 1. apply the yaml files
 
-http://34.89.199.32/api
-http://34.89.199.32/set_delay/1
-http://34.89.199.32/api
+curl $INGRESS_HOST/api
+curl $INGRESS_HOST/set_delay/10
+curl $INGRESS_HOST/api
 
 uncomment the timeout in the virtualservice
 
-http://34.89.199.32/api
+curl $INGRESS_HOST/api

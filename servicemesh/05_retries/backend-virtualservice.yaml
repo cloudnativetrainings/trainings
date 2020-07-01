@@ -15,11 +15,16 @@ spec:
           subset: v1
           port:
             number: 8080
-      # timeout: 8s      
-      # retries:
-      #   attempts: 3
-      #   perTryTimeout: 2s
-      #   retryOn: 5xx
+      timeout: 8s      
+      retries:
+        attempts: 3
+        perTryTimeout: 2s
+        retryOn: 5xx
 
+# ATTENTION indent of timeout and retries - it is part of the first route element        
+
+# TODO do I need the port in here?
 
 # TODO fix port indent on other VS
+
+# TODO logging should be less verbose, only my logs are of interrest

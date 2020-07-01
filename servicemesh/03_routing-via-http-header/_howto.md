@@ -6,29 +6,15 @@
 
 4. curl the application
 ```bash
-while true; do curl http://34.89.199.32; sleep 1; done;
+curl -H "user: bob" $INGRESS_HOST
 ```
-
-5. Change the percentate in the VS
 
 6. curl the application
 ```bash
-while true; do curl http://34.89.199.32; sleep 1; done;
+curl -H $INGRESS_HOST
 ```
 
 7. Clean up
 ```bash
 kubectl delete -f .
 ```
-
-
-
-# good to know 
-
-## DestinationRule
-Labels apply a filter over the endpoints of a service in the service registry. See route rules for examples of usage.
-
-```bash
-kubectl get endpoints --show-labels
-```
-

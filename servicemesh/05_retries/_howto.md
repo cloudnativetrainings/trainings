@@ -1,11 +1,13 @@
 1. apply the yaml files
 
-curl http://34.89.180.88/api
-curl http://34.89.180.88/set_delay/10
+curl $INGRESS_HOST/api
+curl $INGRESS_HOST/set_delay/10
 
-uncomment the timeout in the virtualservice
+uncomment the timeout in the virtualservice and apply change
 
-http://34.89.199.32/api
+second terminal: kubectl logs -f backend-XXX backend
+
+curl $INGRESS_HOST/api
 
 check the logfiles
 

@@ -6,14 +6,14 @@
 
 4. curl the application
 ```bash
-while true; do curl http://34.89.199.32; sleep 1; done;
+while true; do curl $INGRESS_HOST; sleep 1; done;
 ```
 
 5. Change the percentate in the VS
 
 6. curl the application
 ```bash
-while true; do curl http://34.89.199.32; sleep 1; done;
+while true; do curl $INGRESS_HOST; sleep 1; done;
 ```
 
 7. Clean up

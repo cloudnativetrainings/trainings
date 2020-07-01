@@ -10,6 +10,13 @@ istioctl manifest generate --set profile=demo > generated-manifest.yaml
 istioctl verify-install -f generated-manifest.yaml
 kubectl get pod -n istio-system
 
+## bash
+export $INGRESS_IP=${kubectl -n istio-system  get service istio-ingressgateway -o jsonpath="{.status.loadBalancer.ingress[0].ip}"}
+
+## fish
+export INGRESS_HOST=(kubectl -n istio-system  get service istio-ingressgateway -o jsonpath="{.status.loadBalancer.ingress[0].ip}")
+
+
 # UI
 istioctl dashboard kiali - credentials admin/admin
 istioctl dashboard prometheus

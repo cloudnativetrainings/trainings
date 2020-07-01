@@ -33,9 +33,10 @@ public class Controller {
         LOG.info("Request to /api: timeout {} seconds, is available {}", this.delay, this.available);
         Thread.sleep(delay * 1000);
         if (this.available) {
-            return ResponseEntity.ok("api available");
+            return ResponseEntity.ok("api available (delay " + delay + " seconds)");
         } else {
-            return new ResponseEntity<>("api is not available", HttpStatus.SERVICE_UNAVAILABLE);
+            return new ResponseEntity<>("api is not available (delay " + delay + " seconds)",
+                    HttpStatus.SERVICE_UNAVAILABLE);
         }
     }
 
