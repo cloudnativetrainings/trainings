@@ -5,7 +5,7 @@ metadata:
   name: frontend
 spec:
   hosts:
-      - frontend.loodse.training
+      - frontend.training.svc.cluster.local
   gateways:
     - gateway
   http:
