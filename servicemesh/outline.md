@@ -9,7 +9,7 @@
 6. [X] circuit breaking
 
 7. [X] mutual tls
-8. fault injection
+8. [X] fault injection
 9. TLS ingress
 11. Egress Traffic Management
 10. Visualzation via Kiali

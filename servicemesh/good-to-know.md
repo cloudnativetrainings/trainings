@@ -16,3 +16,8 @@ MeshPolicy versus Policy
 
 policy and meshpolicy are removed since istio 1.6.0
 https://github.com/istio/istio/issues/24502
+
+
+# explain traffic
+north-south
+east-west
