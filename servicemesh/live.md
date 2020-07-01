@@ -14,6 +14,9 @@ simple app which returns v1 or v2
 the proxys are called the "data plane"
 telemetry, pilot,... is called the "control plane"
 
+
+# start with some slides which show the issue on communication doing microservices
+
 # Routing
 1. hellow world 
 2. http header routing

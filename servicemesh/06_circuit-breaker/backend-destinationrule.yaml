@@ -4,15 +4,22 @@ metadata:
   namespace: training
   name: backend
 spec:
-  host: "*"
+  host: "backend.training.svc.cluster.local"
   subsets:
     - name: v1
       labels:
         version: 1.0.0
   trafficPolicy:
+    connectionPool:
+      tcp:
+        maxConnections: 1
+      http:
+        http1MaxPendingRequests: 1
+        maxRequestsPerConnection: 1
     outlierDetection:
       consecutiveErrors: 3
-      interval: 1m
-      baseEjectionTime: 15m
+      interval: 3s
+      baseEjectionTime: 1m
 
-    # TODO  https://www.youtube.com/watch?v=iiRjCL4oa5E
+
+    # TODO fix PID - Starting Application on backend-1.0.0-77f5f7c45-qqd45 with PID 6 (/srv/app/backend-1.0.0.jar started by root in /srv/app)

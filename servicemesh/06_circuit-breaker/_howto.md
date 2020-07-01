@@ -1,14 +1,17 @@
 1. apply the yaml files
 
-curl http://34.89.180.88/api
-curl http://34.89.180.88/set_delay/10
+curl $INGRESS_HOST/api
+curl $INGRESS_HOST/set_available/false
 
-uncomment the timeout in the virtualservice
-
-http://34.89.199.32/api
+uncomment the cb section in destinationrule and apply
 
 check the logfiles
 
-first attempt
-3 retries afterwards
-timeout after 8 seconds
+curl $INGRESS_HOST/api
+
+
+--- 
+
+first attempt fails but got answer from app
+no respones afterwards - CB is in open state due to 3 failing requests (check logs)
+after 1 minute the CB goes into closed state again
