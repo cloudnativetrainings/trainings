@@ -1,0 +1,11 @@
+apiVersion: "security.istio.io/v1beta1"
+kind: "PeerAuthentication"
+metadata:
+  namespace: training
+  name: disable
+spec:
+  mtls:
+    mode: PERMISSIVE
+#    mode: DISABLE
+    
+# TODO install curl in application containers      

@@ -9,6 +9,7 @@ import org.springframework.boot.info.BuildProperties;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,6 +40,16 @@ public class Controller {
                     HttpStatus.SERVICE_UNAVAILABLE);
         }
     }
+
+    @RequestMapping("/mtls")
+    public ResponseEntity<String> mtls(@RequestHeader(name = "X-Forwarded-Client-Cert", required = false) String cert) {
+        if (cert == null) {
+            LOG.info("Request to /mtls - no client cert header");
+            return ResponseEntity.ok("mtls request - no client cert header");    
+        } 
+        LOG.info("Request to /mtls - client cert header {}", cert);
+        return ResponseEntity.ok("mtls request - client cert header " + cert );    
+}
 
     @RequestMapping("/set_available/{available}")
     public String setAvailable(@PathVariable("available") boolean available) {

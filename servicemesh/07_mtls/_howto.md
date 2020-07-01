@@ -1,19 +1,13 @@
 1. apply the yaml files
 
-curl -H "Host: backend.loodse.training" $URL
+curl -H "Host: backend.training.svc.cluster.local" $INGRESS_HOST/mtls
+kubectl exec -it <FRONTEND-POD> -c frontend -- curl backend:8080/mtls
+istioctl dashboard kiali - check security display settings
+istioctl x authz check <BACKEND-POD>.training
 
-curl $INGRESS_HOST/api
-curl $INGRESS_HOST/set_available/false
+change peerauthentication and apply
 
-uncomment the cb section in destinationrule and apply
-
-check the logfiles
-
-curl $INGRESS_HOST/api
-
-
---- 
-
-first attempt fails but got answer from app
-no respones afterwards - CB is in open state due to 3 failing requests (check logs)
-after 1 minute the CB goes into closed state again
+curl -H "Host: backend.training.svc.cluster.local" $INGRESS_HOST/mtls
+kubectl exec -it <FRONTEND-POD> -c frontend -- curl backend:8080/mtls
+istioctl dashboard kiali - check security display settings
+istioctl x authz check <BACKEND-POD>.training

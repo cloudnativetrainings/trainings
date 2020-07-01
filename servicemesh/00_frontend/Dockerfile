@@ -3,9 +3,9 @@ ARG BUILD_VERSION=0.0.0
 COPY --chown=gradle:gradle . /code
 WORKDIR /code
 RUN gradle build --no-daemon -Pversion=$BUILD_VERSION
-RUN ls -alh /code/build/libs/
 
 FROM openjdk:14-jdk-slim-buster
+RUN apt update && apt install curl -y
 ARG BUILD_VERSION=0.0.0
 ENV BUILD_VERSION=$BUILD_VERSION
 COPY --from=builder /code/build/libs/frontend-$BUILD_VERSION.jar /srv/app/frontend-$BUILD_VERSION.jar

@@ -8,10 +8,12 @@
 5. [X] retries
 6. [X] circuit breaking
 
-7. mutual tls
+7. [X] mutual tls
 8. fault injection
 9. TLS ingress
-10. Visualzation via Kiali
 11. Egress Traffic Management
+10. Visualzation via Kiali
+10. Visualzation via Jaeger
+10. Visualzation via Prometheus
 12. upgading K8s
 13. upgrading Istio
