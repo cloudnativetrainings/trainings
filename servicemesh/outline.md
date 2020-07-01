@@ -6,8 +6,7 @@
 # Traffic Management
 4. [X] timeouts
 5. [X] retries
-6. circuit breaking
-7. configure LB
+6. [X] circuit breaking
 
 7. mutual tls
 8. fault injection
