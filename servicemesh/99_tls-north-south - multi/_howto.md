@@ -1,8 +1,5 @@
 
 # gen certs
-
-create certs folder and go into it
-
 ```bash
 # create root certificate
 openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -subj '/O=kubermatic training/CN=kubermatic.training' -keyout kubermatic.training.key -out kubermatic.training.crt
@@ -19,17 +16,8 @@ kubectl create -n istio-system secret tls frontend.kubermatic.training --key=fro
 
 apply yaml files
 
-go into certs folder
-
 # works
 curl -v -H "Host: frontend.kubermatic.training" --resolve "frontend.kubermatic.training:443:$INGRESS_HOST"  --cacert kubermatic.training.crt "https://frontend.kubermatic.training:443/"
 
 # works too
 curl -v --resolve "frontend.kubermatic.training:443:$INGRESS_HOST"  --cacert kubermatic.training.crt "https://frontend.kubermatic.training:443/"
-
-
-verify in kiali
-graph display security
-
-# cleanup
-kubectl -n istio-system delete secret frontend.kubermatic.training
