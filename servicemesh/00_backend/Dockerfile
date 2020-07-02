@@ -12,9 +12,3 @@ COPY --from=builder /code/build/libs/backend-$BUILD_VERSION.jar /srv/app/backend
 WORKDIR /srv/app
 
 ENTRYPOINT java -server -XshowSettings:vm -XX:InitialRAMPercentage=50 -XX:MaxRAMPercentage=70 -jar /srv/app/backend-$BUILD_VERSION.jar
-#ENTRYPOINT [ "/bin/bash", "-c", "exec", "java", "-server", "-XshowSettings:vm", "-XX:InitialRAMPercentage=50", "-XX:MaxRAMPercentage=70", "-jar", "/srv/app/backend-$BUILD_VERSION.jar" ]
-
-# TODO entrypoint
-# TODO user
-# TODO java args
-# TODO pass in application name

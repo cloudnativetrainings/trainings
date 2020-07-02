@@ -13,7 +13,7 @@
 9. [X] TLS ingress
 11. [X] Egress Traffic Management
 10. [X] Visualzation via Kiali
-10. Visualzation via Jaeger
-10. Visualzation via Prometheus
+10. [X] Visualzation via Jaeger
+10. [X] Visualzation via Prometheus
 12. upgading K8s
 13. upgrading Istio

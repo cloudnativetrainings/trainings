@@ -47,13 +47,3 @@ gcloud compute firewall-rules create $FIREWALL_NAME-ssh \
 # connect to cluster
 gcloud container clusters get-credentials $CLUSTER_NAME 
 echo 'source <(kubectl completion bash)' >> ~/.bashrc && source ~/.bashrc
-
-# verify
-# kubectl run my-pod --generator run-pod/v1 --image nginx --port 80 -l app=my-pod
-# kubectl expose pod my-pod --type NodePort
-# export NODE=$(kubectl get nodes -o jsonpath="{.items[0].status.addresses[?(@.type=='ExternalIP')].address}")
-# export PORT=$(kubectl get svc my-pod -o jsonpath="{.spec.ports[0].nodePort}")
-# curl http://$NODE:$PORT
-# kubectl delete pod,svc my-pod
-
-# TODO setup automated DNS entries

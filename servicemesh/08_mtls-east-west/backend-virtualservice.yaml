@@ -12,6 +12,4 @@ spec:
     - route:
       - destination:
           host: backend.training.svc.cluster.local
-          subset: v1
-          port:
-            number: 8080
+          

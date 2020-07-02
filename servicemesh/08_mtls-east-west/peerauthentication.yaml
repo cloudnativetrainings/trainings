@@ -7,5 +7,3 @@ spec:
   mtls:
     mode: PERMISSIVE
 #    mode: DISABLE
-    
-# TODO install curl in application containers      

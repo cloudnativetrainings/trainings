@@ -12,7 +12,6 @@ spec:
     - route:
         - destination:
             host: backend.training.svc.cluster.local
-            subset: v1
       # fault:
       #   abort:
       #     httpStatus: 500
@@ -22,9 +21,3 @@ spec:
       #     fixedDelay: 3s
       #     percentage:
       #       value: 100
-
-            # TODO remove destinationrule when it is not needed
-
-            # TODO remove gateway everywhere - yes I need it it looks
-
-            # TODO do I need the port in here? everywhere? do not need at all as it looks

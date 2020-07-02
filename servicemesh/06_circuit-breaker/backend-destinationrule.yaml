@@ -4,7 +4,7 @@ metadata:
   namespace: training
   name: backend
 spec:
-  host: "backend.training.svc.cluster.local"
+  host: backend.training.svc.cluster.local
   subsets:
     - name: v1
       labels:
@@ -20,6 +20,3 @@ spec:
       consecutiveErrors: 3
       interval: 3s
       baseEjectionTime: 1m
-
-
-    # TODO fix PID - Starting Application on backend-1.0.0-77f5f7c45-qqd45 with PID 6 (/srv/app/backend-1.0.0.jar started by root in /srv/app)

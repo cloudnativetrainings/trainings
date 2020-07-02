@@ -12,5 +12,3 @@ spec:
     - route:
         - destination:
             host: frontend.training.svc.cluster.local
-            port:
-                number: 8080

@@ -20,7 +20,7 @@ curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.5.6 sh -
 mv istio-1.5.6 ~
 curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.6.3 sh -
 mv istio-1.6.3 ~
-export PATH=~/istio-1.4.3/bin:$PATH
+export PATH=~/istio-1.6.3/bin:$PATH
 
 # install istio into cluster
 istioctl manifest apply --set profile=demo

@@ -13,12 +13,8 @@ spec:
       - destination:
           host: frontend.training.svc.cluster.local
           subset: v1
-        port:
-          number: 8080
         weight: 10
       - destination:
           host: frontend.training.svc.cluster.local
           subset: v2          
-        port:
-            number: 8080
         weight: 90
