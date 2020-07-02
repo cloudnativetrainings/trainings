@@ -4,7 +4,7 @@
 
 Fix the errors.
 
-```yaml 
+```yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:

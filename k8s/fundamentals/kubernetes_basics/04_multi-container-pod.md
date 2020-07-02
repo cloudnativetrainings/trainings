@@ -2,7 +2,7 @@
 
 In this training we will work with a Pod containing 2 containers.
 
-## 1. Create a file called `multi-container-pod.yaml` with the following content
+## 1. Create the file multi-container-pod.yaml
 
 ```yaml
 apiVersion: v1

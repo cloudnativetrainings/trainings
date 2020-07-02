@@ -1,6 +1,6 @@
 # Persistence without StorageClass
 
-## 1. Create a PV and a PVC
+## 1. Create a PersistentVolume and a PersistentVolumeClaim
 
 ```yaml
 kind: PersistentVolume

@@ -23,11 +23,11 @@ kubectl create -f pod.yaml
 
 ## 3. Take a look at the Pods
 
-Why is the Pod not in state `RUNNING`?
-
 ```bash
 kubectl get pods
 ```
+
+Why is the Pod not in state `RUNNING`?
 
 ## 4. Get more info about the Pod
 
@@ -53,7 +53,7 @@ kubectl describe pod my-pod | grep -A4 "Last State:"
 kubectl delete pod my-pod
 kubectl create -f pod.yaml
 
-## alternative
+## alternatively
 kubectl replace --force -f pod.yaml
 ```
 

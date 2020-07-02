@@ -1,6 +1,6 @@
 # Deployment
 
-## 1. Create a the following `deployment.yaml` file
+## 1. Create the file deployment.yaml
 
 ```yaml
 apiVersion: apps/v1

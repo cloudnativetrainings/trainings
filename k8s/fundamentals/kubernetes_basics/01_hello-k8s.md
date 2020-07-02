@@ -2,7 +2,7 @@
 
 In this course we will create an application which will be reachable in the WWW.
 
-***NOTE:*** On GCP you may have to open the firewall with the default node-port range of Kubernetes - see [../../setup_cluster.sh # add firewall rule](../../setup_cluster.sh) - or use a Service type `LoadBalancer`.
+***NOTE:*** On GCP you may have to open the firewall with the default node-port range of Kubernetes - see [setup_cluster.sh to add firewall rule](../../setup_cluster.sh) or use the Service type `LoadBalancer`.
 
 ## 1. Create and expose an nginx application
 
@@ -52,7 +52,9 @@ curl http://<EXTERNAL-IP>:<PORT>
 kubectl delete pod,svc my-nginx
 ```
 
-## 5. To speed up your CLI handling enable `kubectl` auto completion
+## 5. Speed up CLI handling
+
+Enable `kubectl` auto completion.
 
 ```bash
 echo 'source <(kubectl completion bash)' >> ~/.bashrc && source ~/.bashrc

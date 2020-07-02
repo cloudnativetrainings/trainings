@@ -1,8 +1,8 @@
 # ReplicaSet
 
-***NOTE:*** On GCP you may have to open the firewall with the default node-port range of Kubernetes - see [../../setup_cluster.sh # add firewall rule](../../setup_cluster.sh) - or use a Service type `LoadBalancer`.
+***NOTE:*** On GCP you may have to open the firewall with the default node-port range of Kubernetes - see [setup_cluster.sh to add firewall rule](../../setup_cluster.sh) or use the Service type `LoadBalancer`.
 
-## 1. Create a the following ReplicaSet serving an `nginx` container
+## 1. Create the following ReplicaSet serving an nginx container
 
  Find and fix the two issues in there.
 
