@@ -1,13 +1,24 @@
-1. apply the yaml files
 
-curl -v -H "Host: backend.training.svc.cluster.local" $INGRESS_HOST
 
-uncomment the abort section
-curl -v -H "Host: backend.training.svc.cluster.local" $INGRESS_HOST
-=> check the 500 response codes
+apply yaml files
 
-comment the abort section and uncomment the delay section
-curl -v -H "Host: backend.training.svc.cluster.local" $INGRESS_HOST
-=> check the delays
+kubectl exec -it backend-1.0.0-847b5585b-2lqlb backend -- curl https://www.google.com
+check kiali
 
-fiddle around with the percentages
+kubectl -n istio-system  get cm istio -o yaml > 10_egress/istio-cm.yaml
+
+change configmap
+```yaml
+    outboundTrafficPolicy:
+      mode: REGISTRY_ONLY
+```
+# change takes some time
+kubectl exec -it backend-1.0.0-847b5585b-2lqlb backend -- curl https://www.google.com
+check kiali
+
+apply google-servicenetry
+
+kubectl exec -it backend-1.0.0-847b5585b-2lqlb backend -- curl https://www.google.com
+check kiali
+
+
