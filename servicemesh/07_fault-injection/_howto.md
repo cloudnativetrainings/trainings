@@ -1,13 +1,34 @@
-1. apply the yaml files
+1. Apply the yaml files
+```bash
+kubectl apply -f .
+```
 
-curl -v -H "Host: backend.training.svc.cluster.local" $INGRESS_HOST
+2. Curl the api 
+```bash
+curl $INGRESS_HOST/api
+```
 
-uncomment the abort section
-curl -v -H "Host: backend.training.svc.cluster.local" $INGRESS_HOST
-=> check the 500 response codes
+3. Uncomment the `fault` section of the VirtualService and apply the changes
+```bash
+kubectl apply -f .
+```
 
-comment the abort section and uncomment the delay section
-curl -v -H "Host: backend.training.svc.cluster.local" $INGRESS_HOST
-=> check the delays
+4. Curl the api, note that there are only unsuccessfull responses
+```bash
+curl $INGRESS_HOST/api
+```
 
-fiddle around with the percentages
+5. Play around with the fault percentages in the VirtualServices (eg set them to 50 %) and apply the changes 
+```bash
+kubectl apply -f .
+```
+
+6. Curl the api, note the behaviour is now rather random
+```bash
+curl $INGRESS_HOST/api
+```
+
+7. Clean up
+```bash
+kubectl delete -f .
+```

@@ -33,6 +33,10 @@ vi 02_setup_cluster.sh
 ```bash
 kubectl get nodes
 ```
+4. install bash completion
+```bash
+source <(kubectl completion bash)
+```
 
 ## install istioctl
 1. execute the shell script
@@ -53,12 +57,26 @@ istioctl install --set profile=demo
 ```bash
 istioctl verify-install
 ```
+3. set the $INGRESS_HOST
+```bash
+export INGRESS_HOST=${kubectl -n istio-system  get service istio-ingressgateway -o jsonpath="{.status.loadBalancer.ingress[0].ip}"}
+```
+4. verify the $INGRESS_HOST
+```bash
+echo $INGRESS_HOST
+```
 
 ## create the `training` namespace
+1. apply the yaml file
 ```bash
 cd ..
 kubectl apply -f 00_namespace
 ```
+2. switch to the `training` namespace
+```bash
+kubens training
+```
+
 
 ## create the application images
 1. build, dockerize and push the images

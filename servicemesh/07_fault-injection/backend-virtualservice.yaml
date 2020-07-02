@@ -5,7 +5,7 @@ metadata:
   name: backend
 spec:
   hosts:
-    - backend.training.svc.cluster.local
+    - "*"
   gateways:
     - gateway
   http:

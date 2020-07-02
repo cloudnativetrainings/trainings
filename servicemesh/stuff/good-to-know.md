@@ -21,3 +21,14 @@ https://github.com/istio/istio/issues/24502
 # explain traffic
 north-south
 east-west
+
+
+
+# good to know 
+
+## DestinationRule
+Labels apply a filter over the endpoints of a service in the service registry. See route rules for examples of usage.
+
+```bash
+kubectl get endpoints --show-labels
+```

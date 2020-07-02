@@ -18,3 +18,4 @@ spec:
           host: frontend.training.svc.cluster.local
           subset: v2          
         weight: 90
+        
