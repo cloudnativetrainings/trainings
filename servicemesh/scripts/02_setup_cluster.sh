@@ -26,7 +26,6 @@ gcloud beta container clusters create $CLUSTER_NAME \
     --image-type "UBUNTU" --disk-type "pd-standard" --disk-size "50" \
     --enable-network-policy --enable-ip-alias --no-enable-autoupgrade --no-enable-stackdriver-kubernetes \
     --addons HorizontalPodAutoscaling,HttpLoadBalancing
-    # --cluster-version "1.14.10-gke.41" \
 
 ### add firewall rule for ingreess gateway
 gcloud compute firewall-rules create $FIREWALL_NAME-ingress-gateway \
