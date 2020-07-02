@@ -1,7 +1,9 @@
 # Commands and Args
+
 In this training we will create a customized Pod
 
-1. Create a file called `pod.yaml` with the following content
+## 1. Create the file called pod.yaml
+
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -12,19 +14,31 @@ spec:
     - name: my-container
       image: busybox
 ```
-2. Create the Pod.
+
+## 2. Create the Pod
+
 ```bash
 kubectl create -f pod.yaml
 ```
-3. Take a look at the Pods. Why is the Pod not in state `RUNNING`?
+
+## 3. Take a look at the Pods
+
+Why is the Pod not in state `RUNNING`?
+
 ```bash
 kubectl get pods
 ```
-4. Get more info about the Pod. Pay attention to the structure  `Last State:`
+
+## 4. Get more info about the Pod
+
+Pay attention to the structure  `Last State:`.
+
 ```bash
 kubectl describe pod my-pod | grep -A4 "Last State:"
 ```
-5. Add the following `command` and `args` to the container
+
+## 5. Add the following command and arguments to the container
+
 ```yaml
 ...
 - name: my-container
@@ -32,15 +46,19 @@ kubectl describe pod my-pod | grep -A4 "Last State:"
   command: [ "sleep" ]
   args: [ "600" ]
 ```
-6. Delete and re create the Pod
+
+## 6. Delete and re create the Pod
+
 ```bash
 kubectl delete pod my-pod
 kubectl create -f pod.yaml
 
-#alternative
+## alternative
 kubectl replace --force -f pod.yaml
 ```
-7. Cleanup
+
+## 7. Cleanup
+
 ```bash
 kubectl delete pod my-pod
 ```

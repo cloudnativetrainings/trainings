@@ -1,6 +1,11 @@
 # ReplicaSet
 
-1. Create a the following ReplicaSet serving an `nginx` container. Find and fix the two issues in there.
+***NOTE:*** On GCP you may have to open the firewall with the default node-port range of Kubernetes - see [../../setup_cluster.sh # add firewall rule](../../setup_cluster.sh) - or use a Service type `LoadBalancer`.
+
+## 1. Create a the following ReplicaSet serving an `nginx` container
+
+ Find and fix the two issues in there.
+
 ```yaml
 apiVersion: apps/v1
 kind: ReplicaSet
@@ -18,39 +23,55 @@ spec:
     spec:
       containers:
       - name: my-container
-        image: my-image        
+        image: my-image
 ```
+
 ```bash
 kubectl create -f replicaset.yaml
 ```
-2. Take a look at the number of Pods
+
+## 2. Take a look at the number of Pods
+
 ```bash
 kubectl get pods
 ```
-3. Scale the number of replicas to 3
+
+## 3. Scale the number of replicas to 3
+
 ```bash
 kubectl scale replicaset my-replicaset --replicas 3
 ```
-4. Delete one of the Pods
+
+## 4. Delete one of the Pods
+
 ```bash
 kubectl delete pod <POD-NAME>
 ```
-5. Take a look at the number of Pods
+
+## 5. Take a look at the number of Pods
+
 ```bash
 kubectl get pods
 ```
-6. Expose the ReplicaSet
+
+## 6. Expose the ReplicaSet
+
 ```bash
 kubectl expose replicaset my-replicaset --type NodePort --port 80
 ```
-7. Take a look at the Endpoints and Pod IPs
+
+## 7. Take a look at the Endpoints and Pod IPs
+
 ```bash
 kubectl get svc,endpoints,pods -o wide
 ```
-8. Cleanup
+
+## 8. Cleanup
+
 ```bash
-# Delete the ReplicaSet
+## delete the ReplicaSet
 kubectl delete replicaset,service my-replicaset
-# Also the Pods and Endpoints will get deleted
+
+## also the Pods and Endpoints will get deleted
 kubectl get rs,po,svc,ep
 ```

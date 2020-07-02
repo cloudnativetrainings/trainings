@@ -1,7 +1,11 @@
 # Pods
+
 In this training we will create a Pod and access it via curl
 
-1. Create a file called `pod.yaml` with the following content
+***NOTE:*** On GCP you may have to open the firewall with the default node-port range of Kubernetes - see [../../setup_cluster.sh # add firewall rule](../../setup_cluster.sh) - or use a Service type `LoadBalancer`.
+
+## 1. Create a file called `pod.yaml` with the following content
+
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -17,29 +21,36 @@ spec:
         - containerPort: 80
           protocol: TCP
 ```
-2. Apply the Pod to your cluster
+
+## 2. Apply the Pod to your cluster
+
 ```bash
 kubectl create -f pod.yaml
 ```
-3. Expose the Pod
+
+## 3. Expose the Pod
+
 ```bash
 kubectl expose pod my-pod --type NodePort
 ```
-4. Access the application
+
+## 4. Access the application
+
 ```bash
-# Get the external IP address of the node
+## get the external IP address of the node
 kubectl get nodes -o wide
-# Get the port of the application
+
+## get the port of the application
 kubectl get services
-# Curl the application (or visit it in your Browser)
+
+## curl the application (or visit it in your Browser)
 curl http://<EXTERNAL-IP>:<PORT>
 ```
 
-***NOTE:*** On GCP you may have to open the firewall with the default node-port range of Kubernetes - see [../../setup_cluster.sh # add firewall rule](../../setup_cluster.sh) - or use a Service type `LoadBalancer`.
+## Extra: Learn kubectl
 
-# Learn kubectl
+### 1. Getting help
 
-1. Getting help
 ```bash
 # Getting info and examples for the 'get' command
 kubectl get --help
@@ -48,31 +59,44 @@ kubectl explain pod.metadata.name
 # Get short info about a specific yaml structure
 kubectl explain --recursive pod.spec.containers.ports
 ```
-2. Getting Pod Information
+
+### 2. Getting Pod Information
+
 ```bash
-# Show all Pods
+## show all Pods
 kubectl get pods
-# Show all Pods with labels
+
+## show all Pods with labels
 kubectl get pods --show-labels
-# Show all Pods with IP address
+
+## show all Pods with IP address
 kubectl get pods -o wide
-# Store a Pod's yaml definition into a file
+
+## store a Pod's yaml definition into a file
 kubectl get pod my-pod -o yaml > pod.yaml
 ```
-3. Describe a Pod
+
+### 3. Describe a Pod
+
 ```bash
 kubectl describe pod my-pod
 ```
-4. Debugging Pods
+
+### 4. Debugging Pods
+
 ```bash
-# Get Logs of a Container
+## get logs of a Container
 kubectl logs my-pod
-# Follow the logs of a Container
+
+## follow the logs of a Container
 kubectl logs -f my-pod
-# Exec into a Container
+
+## exec into a Container
 kubectl exec -it my-pod -- bash
 ```
-4. Delete Pods and Services
+
+### 4. Delete Pods and Services
+
 ```bash
 kubectl delete pod,service my-pod
 ```

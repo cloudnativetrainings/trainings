@@ -1,7 +1,10 @@
 # Using a Volume in a Pod
 
-1. Create the following Pod. 
-```yaml 
+***NOTE:*** On GCP you may have to open the firewall with the default node-port range of Kubernetes - see [../../setup_cluster.sh # add firewall rule](../../setup_cluster.sh) - or use a Service type `LoadBalancer`.
+
+## 1. Create the following Pod
+
+```yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -33,40 +36,60 @@ spec:
       persistentVolumeClaim:
         claimName: my-pvc
 ```
+
 ```bash
 kubectl create -f pod.yaml
 ```
-2. There is an issue with this structure. Try to fix the error and verify via `kubectl get po`. You are finished if you get a similar output like this:
+
+There is an issue with this structure. Try to fix the error and verify via `kubectl get po`. You are finished if you get a similar output like this:
+
 ```bash
 kubectl get po
 NAME             READY   STATUS    RESTARTS   AGE
 volume-example   2/2     Running   0          3m52s
 ```
-3. Expose the Pod. This command will fail.
+
+## 2. Expose the Pod
+
+This command will fail.
+
 ```bash
-kubectl expose pod volume-example --type NodePort
+$ kubectl expose pod volume-example --type NodePort
 error: couldn't retrieve selectors via --selector flag or introspection: the pod has no labels and cannot be exposed
 ```
-4. Label the Pod via the following command and expose the Pod afterwards
+
+## 3. Label the Pod via the following command and expose the Pod afterwards
+
 ```bash
 kubectl label pod volume-example app=volume-example
 kubectl expose pod volume-example --type NodePort
 ```
-5. Access the application
+
+## 4. Access the application
+
 ```bash
-# Get the external IP address of the node
+## get the external IP address of the node
 kubectl get nodes -o wide
-# Get the port of the application
+
+## get the port of the application
 kubectl get services
-# Curl the application (or visit it in your Browser)
+
+## curl the application (or visit it in your Browser)
 curl http://<EXTERNAL-IP>:<PORT>
 ```
-***NOTE:*** On GCP you may have to open the firewall with the default node-port range of Kubernetes - see [kubernetes_cluster/01_gke-create-cluster.md#allow-nodeport-range](../kubernetes_cluster/01_gke-create-cluster.md#allow-nodeport-range) - or use a Service type `LoadBalancer`.
 
-6. Delete the Pod via `kubectl delete pod volume-example`
-7. Re-create the Pod, take care about the proper labels. 
-8. Verify if the output contains the timestamps from step 7.
-9. Clean up
+## 5. Delete the Pod
+
+```bash
+kubectl delete pod volume-example
+```
+
+## 6. Re-create the Pod andtake care about the proper labels
+
+## 7. Verify if the output contains the timestamps from step 6
+
+## 8. Clean up
+
 ```bash
 kubectl delete po,svc volume-example
 kubectl delete pv,pvc --all
