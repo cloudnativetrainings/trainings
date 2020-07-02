@@ -29,14 +29,44 @@ vi 02_setup_cluster.sh
 ```bash
 ./02_setup_cluster.sh
 ```
+3. verify installation
+```bash
+kubectl get nodes
+```
 
-## install istio
-1. adapt the PROJECT_NAME in the file `02_setup_cluster.sh`
+## install istioctl
+1. execute the shell script
 ```bash
-vi 02_setup_cluster.sh
+./03_setup_istio.sh
 ```
-2. execute the shell script
+2. verify installation
 ```bash
-./02_setup_cluster.sh
+istioctl version
 ```
-03_setup_istio.sh
+
+## install istio to kubernetes cluster
+1. start the installer
+```bash
+istioctl install --set profile=demo 
+```
+2. verify installation
+```bash
+istioctl verify-install
+```
+
+## create the `training` namespace
+```bash
+cd ..
+kubectl apply -f 00_namespace
+```
+
+## create the application images
+1. build, dockerize and push the images
+```bash
+cd 00_backend
+./build.sh
+cd ../00_frontend
+./build.sh
+cd ..
+```
+2. verify the images exist in the container registry via the UI
