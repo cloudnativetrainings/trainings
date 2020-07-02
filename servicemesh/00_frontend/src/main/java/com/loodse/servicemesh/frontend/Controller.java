@@ -25,26 +25,12 @@ public class Controller {
         return buildProperties.getName() + " " + buildProperties.getVersion();
     }
 
-    @RequestMapping("/call_backend_api")
+    @RequestMapping("/cats")
     public ResponseEntity<String> callBackendApi() {
-        LOG.info("Request to /call_backend_api");
-        ResponseEntity<String> response = restTemplate.getForEntity("http://backend:8080/api", String.class);
-        LOG.info("Response received from backend {}: {}", response.getStatusCode(), response.getBody());
-        if (response.getStatusCode().equals(HttpStatus.OK)) {
-            return ResponseEntity.ok("Backend API available: " + response.getStatusCode() + " " + response.getBody());
-        } else {
-            return new ResponseEntity<>(
-                    "Backend API not available: " + response.getStatusCode() + " " + response.getBody(),
-                    HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @RequestMapping("/call_backend_timeout")
-    public ResponseEntity<String> callBackendTimeout() {
-        LOG.info("Request to /call_backend_timeout");
-        ResponseEntity<String> response = restTemplate.getForEntity("http://backend:8080/timeout", String.class);
-        LOG.info("Response received from backend {}: {}", response.getStatusCode(), response.getBody());
-        return ResponseEntity.ok("Backend Timeout available: " + response.getStatusCode() + " " + response.getBody());
+        LOG.info("Request to /cats");
+        ResponseEntity<String> response = restTemplate.getForEntity("http://backend:8080/cats",
+                String.class);
+        return ResponseEntity.ok(response.getBody());
     }
 
 }

@@ -31,8 +31,13 @@ kubectl label namespace default istio-injection=enabled
 GKE 1.16.9-gke.6
 istio 1.6.3
 
-istioctl install --set profile=demo
+istioctl install --set profile=demo 
 istioctl verify-install
+
+
+# uninstall
+istioctl manifest generate --set profile=demo | kubectl delete -f -
+
 
 
 

@@ -10,9 +10,9 @@
 
 7. [X] mutual tls
 8. [X] fault injection
-9. TLS ingress
-11. Egress Traffic Management
-10. Visualzation via Kiali
+9. [X] TLS ingress
+11. [X] Egress Traffic Management
+10. [X] Visualzation via Kiali
 10. Visualzation via Jaeger
 10. Visualzation via Prometheus
 12. upgading K8s

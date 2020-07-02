@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 @RestController
 public class Controller {
@@ -20,6 +21,7 @@ public class Controller {
     private BuildProperties buildProperties;
 
     private final static Logger LOG = LoggerFactory.getLogger(Controller.class);
+    private final RestTemplate restTemplate = new RestTemplate();
     private boolean available = true;
     private Integer delay = 0;
 
@@ -45,11 +47,19 @@ public class Controller {
     public ResponseEntity<String> mtls(@RequestHeader(name = "X-Forwarded-Client-Cert", required = false) String cert) {
         if (cert == null) {
             LOG.info("Request to /mtls - no client cert header");
-            return ResponseEntity.ok("mtls request - no client cert header");    
-        } 
+            return ResponseEntity.ok("mtls request - no client cert header");
+        }
         LOG.info("Request to /mtls - client cert header {}", cert);
-        return ResponseEntity.ok("mtls request - client cert header " + cert );    
-}
+        return ResponseEntity.ok("mtls request - client cert header " + cert);
+    }
+
+    @RequestMapping("/cats")
+    public ResponseEntity<String> callBackendApi() {
+        LOG.info("Request to /cats");
+        ResponseEntity<String> response = restTemplate.getForEntity("https://api.thecatapi.com/v1/images/search",
+                String.class);
+        return ResponseEntity.ok(response.getBody());
+    }
 
     @RequestMapping("/set_available/{available}")
     public String setAvailable(@PathVariable("available") boolean available) {
