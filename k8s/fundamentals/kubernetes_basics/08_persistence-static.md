@@ -1,7 +1,8 @@
 # Persistence without StorageClass
 
-1. Create a PV and a PVC. 
-```yaml 
+## 1. Create a PersistentVolume and a PersistentVolumeClaim
+
+```yaml
 kind: PersistentVolume
 apiVersion: v1
 metadata:
@@ -9,7 +10,7 @@ metadata:
   labels:
     type: host-pv
 spec:
-  #overwrite the to use NO storage class
+  # overwrite the to use NO storage class
   storageClassName: ""
   capacity:
     storage: 2Gi
@@ -25,7 +26,7 @@ apiVersion: v1
 metadata:
   name: pvc-selector-example
 spec:
-  #overwrite the to use NO storage class
+  # overwrite the to use NO storage class
   storageClassName: ""
   accessModes:
     - ReadWriteMany
@@ -36,10 +37,13 @@ spec:
     matchLabels:
       type: hostpath
 ```
+
 ```bash
 kubectl create -f persistence.yaml
 ```
-2. There are some issues with this structure. Try to fix these erros and verify via `kubectl get pv,pvc`. You are finished if you get a similar output like this:
+
+There are some issues with this structure. Try to fix these erros and verify via `kubectl get pv,pvc`. You are finished if you get a similar output like this:
+
 ```bash
 kubectl get pv,pvc
 NAME                                   CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM                          STORAGECLASS   REASON   AGE

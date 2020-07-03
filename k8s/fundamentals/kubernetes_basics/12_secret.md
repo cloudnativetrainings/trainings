@@ -1,6 +1,9 @@
 # Secret
 
-1. Create the following Secret and Pod. Fix the errors.
+## 1. Create the following Secret and Pod
+
+Fix the errors.
+
 ```yaml 
 apiVersion: v1
 kind: Secret
@@ -29,14 +32,19 @@ spec:
       secret:
         secretName: the-secret
 ```
+
 ```bash
 kubectl create -f pod.yaml
 ```
-2. Verify everything fine via
+
+## 2. Verify everything works fine
+
 ```bash
 kubectl exec -it my-pod -- cat /opt/my-volume/secret
 ```
-3. Cleanup
+
+## 3. Cleanup
+
 ```bash
 kubectl delete pod my-pod
 kubectl delete secret my-secret

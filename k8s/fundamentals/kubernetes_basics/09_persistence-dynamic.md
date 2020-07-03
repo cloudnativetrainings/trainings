@@ -1,8 +1,10 @@
 # Persistence with StorageClass
 
-1. Create a file `persistence.yaml` with a storage class and two claims. Take care that the zone of your StorageClass matches the zone of your Kubernetes Cluster.
+## 1. Create the file persistence.yaml with a storage class and two claims
 
-```yaml 
+Take care that the zone of your StorageClass matches the zone of your Kubernetes Cluster.
+
+```yaml
 kind: StorageClass
 apiVersion: storage.k8s.io/v1
 metadata:
@@ -39,10 +41,12 @@ spec:
 ```
 
 ```bash
-$ kubectl create -f persistence.yaml
+kubectl create -f persistence.yaml
 ```
 
-2. Run `kubectl get pv,pvc`. Take a look at the number and the names of the volumes:
+## 2. Get information about PersistentVolumes and PersistentVolumeClaims
+
+Run `kubectl get pv,pvc`. Take a look at the number and the names of the volumes.
 
 ```bash
 $ kubectl get pv,pvc
@@ -54,21 +58,23 @@ persistentvolumeclaim/pvc-10-myStorageclass   Bound    pvc-9f8b0df2-16f3-11ea-94
 persistentvolumeclaim/pvc-30-myStorageclass   Bound    pvc-719e1838-16f3-11ea-9419-42010a8e0162   30Gi       RWO            myStorageclass           22m
 ```
 
-3. Show the available storage classes. Possibly there are standard ones.
+## 3. Show the available storage classes
+
+Possibly there are standard ones.
 
 ```bash
-$ show available storage classes
+## show available storage classes
 kubectl get sc -o wide
 ```
 
-4. Delete the PVCs
+## 4. Delete the PVCs
+
 ```bash
 kubectl delete pvc --all
 ```
 
-5. Note that besides the PVCs also the PVs got deleted due to the `reclaimPolicy` of the StorageClass
+Note that besides the PVCs also the PVs got deleted due to the `reclaimPolicy` of the StorageClass.
+
 ```bash
 kubectl get pvc,pv
 ```
-
-

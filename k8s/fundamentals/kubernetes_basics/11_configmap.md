@@ -1,7 +1,10 @@
 # ConfigMap
 
-1. Create the following ConfigMap and Pod. Fix the errors.
-```yaml 
+## 1. Create the following ConfigMap and Pod
+
+Fix the errors.
+
+```yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -28,16 +31,21 @@ spec:
             key: a-key
             name: a-configmap
 ```
+
 ```bash
 kubectl create -f pod.yaml
 ```
-2. Verify everything is fine via
+
+## 2. Verify everything works fine
+
 ```bash
 kubectl get pods
 kubectl logs my-pod
 world
 ```
-3. Cleanup
+
+## 3. Cleanup
+
 ```bash
 kubectl delete po,cm --all
 ```
