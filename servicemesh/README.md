@@ -1,10 +1,5 @@
 # Setup instructions
 
-## Clone the git repo
-```bash
-git clone https://github.com/loodse/k8s-exercises.git
-```
-
 ## cd into the servicemesh folder
 ```bash
 cd /k8s-exercises/servicemesh/scripts
