@@ -1,6 +1,7 @@
 # DaemonSets
 
-1. Create the following DaemonSet
+## 1. Create the following DaemonSet
+
 ```yaml
 apiVersion: apps/v1
 kind: DaemonSet
@@ -33,10 +34,17 @@ spec:
                 fieldRef:
                   fieldPath: metadata.name
 ```
+
+Apply it to the cluster.
+
 ```bash
 kubectl create -f daemonset.yaml
 ```
-2. Take a look at your Pods and Nodes. You should get something similar like this:
+
+## 2. Take a look at your Pods and Nodes
+
+You should get something similar like this:
+
 ```bash
 kubectl get po,no
 NAME                     READY   STATUS    RESTARTS   AGE
@@ -49,11 +57,15 @@ node/gke-hubert-markdown-default-pool-068b6f1c-qvw8   Ready    <none>   7h52m   
 node/gke-hubert-markdown-default-pool-068b6f1c-t26g   Ready    <none>   7h52m   v1.14.8-gke.2
 node/gke-hubert-markdown-default-pool-068b6f1c-z0hc   Ready    <none>   7h52m   v1.14.8-gke.2
 ```
-3. Choose one pod and take a look at its logging
+
+## 3. Choose one pod and take a look at its logging
+
 ```bash
 kubectl logs <POD-NAME>
 ```
-4. Clean up
+
+## 4. Clean up
+
 ```bash
 kubectl delete ds --all
 ```
