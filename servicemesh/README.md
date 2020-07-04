@@ -54,7 +54,7 @@ istioctl verify-install
 ```
 3. set the $INGRESS_HOST
 ```bash
-export INGRESS_HOST=${kubectl -n istio-system  get service istio-ingressgateway -o jsonpath="{.status.loadBalancer.ingress[0].ip}"}
+export INGRESS_HOST=$(kubectl -n istio-system  get service istio-ingressgateway -o jsonpath="{.status.loadBalancer.ingress[0].ip}")
 ```
 4. verify the $INGRESS_HOST
 ```bash
@@ -77,8 +77,10 @@ kubens training
 1. build, dockerize and push the images
 ```bash
 cd 00_backend
+# adapt the PROJECT_NAME in the file `build.sh`
 ./build.sh
 cd ../00_frontend
+# adapt the PROJECT_NAME in the file `build.sh`
 ./build.sh
 cd ..
 ```

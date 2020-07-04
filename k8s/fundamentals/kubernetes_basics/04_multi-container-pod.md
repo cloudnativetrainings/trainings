@@ -1,7 +1,9 @@
 # Multi Container Pod
+
 In this training we will work with a Pod containing 2 containers.
 
-1. Create a file called `multi-container-pod.yaml` with the following content
+## 1. Create the file multi-container-pod.yaml
+
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -24,25 +26,35 @@ spec:
         - "-c"
         - "while true; do echo hello B; sleep 1; done;"
 ```
+
 ```bash
 kubectl create -f multi-container-pod.yaml
 ```
 
-2. Get the logs of the Pod. This will not work, please follow the instructions and consult --help.
+## 2. Get the logs of the Pod
+
+This will not work, please follow the instructions and consult `--help`.
+
 ```bash
-kubectl logs -f multi-container-pod 
+kubectl logs -f multi-container-pod
 ```
 
-3. Exec into the Pod. Pay attention to the output. 
+## 3. Exec into the Pod
+
+Pay attention to the output.
+
 ```bash
 kubectl exec -it multi-container-pod -- /bin/sh
 ```
+
 Defaulting container name to container-a.
+
 Use `kubectl describe pod/multi-container-pod -n default` to see all of the containers in this pod.
 
-4. Find out how to exec into Container-B of the Pod.
+## 4. Find out how to exec into container-b of the Pod
 
-5. Share a directory between 2 Containers in a Pod.
+## 5. Share a directory between 2 Containers in a Pod
+
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -74,11 +86,13 @@ spec:
     - name: buffer
       emptyDir: {}
 ```  
+
 ```bash
 kubectl create -f multi-container-pod.yaml
 ```
 
-6. Cleanup
+## 6. Cleanup
+
 ```bash
 kubectl delete pod multi-container-pod
 ```
