@@ -1,39 +1,61 @@
 # Ingress
+
 In this training we will setup an Ingress.
 
-1. Create the Application `red`
+## 1. Create the Application "red"
+
 ```bash
-# Create a Deployment
+## Create a Deployment
 kubectl run red --image nginx --port 80
-# Expose the Deployment
+
+## Expose the Deployment
 kubectl expose deployment red
 ```
-2. Change the content of the file `/usr/share/nginx/html/index.html` in the Pod `red` 
+
+## 2. Change the content of index.html
+
+Create the file `red.html` and copy it as `/usr/share/nginx/html/index.html` in your Pod.
+
 ```bash
 echo '<!DOCTYPE html><html><body style="background-color:red;"></body></html>' > red.html
 kubectl cp red.html <POD-NAME>:/usr/share/nginx/html/index.html
 ```
-3. Create the Application `blue`
+
+## 3. Create the Application "blue"
+
 ```bash
-# Create a Deployment
+## Create a Deployment
 kubectl run blue --image nginx --port 80
-# Expose the Deployment
+
+## Expose the Deployment
 kubectl expose deployment blue
 ```
-4. Change the content of the file `/usr/share/nginx/html/index.html` in the Pod `blue`.
+
+## 4. Change the content of index.html
+
+Create the file `blue.html` and copy it as `/usr/share/nginx/html/index.html` in your Pod.
+
 ```bash
 echo '<!DOCTYPE html><html><body style="background-color:blue;"></body></html>' > blue.html
 kubectl cp blue.html <POD-NAME>:/usr/share/nginx/html/index.html
 ```
-5. Verify your steps
+
+## 5. Verify your steps
+
 ```bash
 kubectl get deployments,pods,svc
 ```
-6. Create a Namespace for the Ingress resources
+
+## 6. Create a Namespace for the Ingress resources
+
 ```bash
 kubectl create ns ingress
 ```
-7. Create the RBAC resources and the ingress controller (copy of https://github.com/kubernetes/ingress-nginx/blob/master/docs/deploy/index.md)
+
+## 7. Create the RBAC resources and the Ingress controller
+
+Copy of https://github.com/kubernetes/ingress-nginx/blob/master/docs/deploy/index.md.
+
 ```yaml
 apiVersion: v1
 kind: ServiceAccount
@@ -106,14 +128,21 @@ spec:
             - --ingress-class=nginx
             - --v=2
 ```
+
+Apply it to your cluster.
+
 ```bash
 kubectl create -f controller.yaml
 ```
-9. Verify everything is running
+
+## 9. Verify everything is running
+
 ```bash
 kubectl -n ingress get ds,pods
 ```
-10. Create the LoadBalancer to enable external traffic to the ingress
+
+## 10. Create the LoadBalancer to enable external traffic to the Ingress
+
 ```yaml
 apiVersion: v1
 kind: Service
@@ -131,14 +160,21 @@ spec:
   selector:
     app: ingress-controller
 ```
+
+Apply it to your cluster.
+
 ```bash
 kubectl create -f loadbalancer.yaml
 ```
-11. Wait until you get an external IP Address
+
+## 11. Wait until you get an external IP address
+
 ```bash
 kubectl -n ingress get svc
 ```
-12. Create your Ingress route
+
+## 12. Create your Ingress route
+
 ```yaml
 apiVersion: extensions/v1beta1
 kind: Ingress
@@ -162,17 +198,26 @@ spec:
           serviceName: blue
           servicePort: 80
 ```
+
+Apply it to your cluster.
+
 ```bash
 kubectl create -f ingress.yaml
 ```
-13. Verify your steps
+
+## 13. Verify your steps
+
 ```bash
 kubectl describe ing ingress
 ```
-14. Visit the Applications A and B in your Browser via
+
+## 14. Visit the Applications "red" and "blue" in your browser via
+
 * `http://<EXTERNAL-IP>/red`
 * `http://<EXTERNAL-IP>/blue`
-15. Clean up
+
+## 15. Clean up
+
 ```bash
 kubectl delete ns ingress
 kubectl delete deployment,svc --all

@@ -1,7 +1,9 @@
 # Node Affinities
-In this course will show how the K8s Scheduler tries to keep things away from each other
 
-1. Create a Pod
+In this course will show how the Kubernetes Scheduler tries to keep things away from each other.
+
+## 1. Create a Pod
+
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -14,10 +16,15 @@ spec:
     - name: fire
       image: nginx
 ```
+
+Apply it to your cluster.
+
 ```bash
 kubectl create -f fire.yaml
 ```
-2. Create a Deployment which wants to keep distance to the first Pod.
+
+## 2. Create a Deployment which wants to keep distance to the first Pod
+
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -47,10 +54,15 @@ spec:
                       - fire
               topologyKey: "kubernetes.io/hostname"  
 ```
+
+Apply it to your cluster.
+
 ```bash
 kubectl create -f water.yaml
 ```
-3. Verify that the Pods `water` are not on the same node like the node `fire`
+
+## 3. Verify that the Pods `water` are not on the same node like the node `fire`
+
 ```bash
 kubectl get pods -o wide
 ```
