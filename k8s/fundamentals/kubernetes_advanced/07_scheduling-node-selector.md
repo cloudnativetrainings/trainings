@@ -1,14 +1,19 @@
 # Node Selector
 
-1. Show all nodes with its labels
+## 1. Show all Nodes with its Labels
+
 ```bash
 kubectl get nodes --show-labels
 ```
-2. Add a label to a node
+
+## 2. Add a Label to a Node
+
 ```bash
 kubectl label node <NODE-NAME> preferred=true
 ```
-3. Create the following Pod
+
+## 3. Create the following Pod
+
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -21,10 +26,15 @@ spec:
   nodeSelector:
     preferred: "true"
 ```
+
+Apply it to your cluster.
+
 ```bash
 kubectl create -f pod.yaml
 ```
-4. Verify that the pod is running on the labeled node
+
+## 4. Verify that the Pod is running on the labeled Node
+
 ```bash
 kubectl describe pod my-pod | grep Node:
 ```

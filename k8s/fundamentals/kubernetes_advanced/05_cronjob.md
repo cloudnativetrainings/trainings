@@ -1,7 +1,9 @@
 # CronJob
+
 In this course we will create a job which will run every minute.
 
-1. Create a CronJob like this
+## 1. Create a CronJob like this
+
 ```yaml
 apiVersion: batch/v1beta1
 kind: CronJob
@@ -20,14 +22,23 @@ spec:
               args: [ "-c", "date" ]
           restartPolicy: OnFailure
 ```
+
+Apply it to your cluster.
+
 ```bash
 kubectl create -f cronjob.yaml
 ```
-2. Take a look at running cronjobs and the pods. It can take a while that the job is completed
+
+## 2. Take a look at running CronJobs and the Pods
+
+It can take a while that the job is completed.
+
 ```bash
 kubectl get cronjobs,pods
 ```
-5. Clean up.
+
+## 5. Clean up
+
 ```bash
 kubectl delete cronjobs --all
 ```
