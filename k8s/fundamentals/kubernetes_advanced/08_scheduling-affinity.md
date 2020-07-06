@@ -61,7 +61,9 @@ Apply it to your cluster.
 kubectl create -f water.yaml
 ```
 
-## 3. Verify that the Pods `water` are not on the same node like the node `fire`
+## 3. Verify that the Pods location
+
+Pods `water` must not be on the same node as the pod `fire`.
 
 ```bash
 kubectl get pods -o wide

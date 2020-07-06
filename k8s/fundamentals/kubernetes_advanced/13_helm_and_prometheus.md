@@ -47,7 +47,7 @@ helm install my-prometheus --namespace monitoring stable/prometheus
 
 ```bash
 helm list -n monitoring
-kubectl -n monitoring get all 
+kubectl -n monitoring get all
 ```
 
 ### 4. Make Prometheus available from outside the cluster
@@ -93,7 +93,7 @@ Change the type of the Service to `NodePort`.
 kubectl -n monitoring edit svc my-grafana
 ```
 
-### 3. Get the IP and the Port for Grafana and use your browser to access it
+### 3. Get the IP and the Port for Grafana
 
 ```bash
 ## get the external IP address of the node
@@ -113,15 +113,18 @@ kubectl -n monitoring get secret my-grafana -o yaml
 echo <ADMIN-PASSWORD> | base64 -d
 ```
 
+## 5. Add Prometheus as data source to Grafana
+
+* Call `http://GRAFANA_IP:GRAFANA_PORT/` in your browser
 * Choose the option `Create your first data source`
 * Choose type `Prometheus`
 * Insert URL `http://my-prometheus-server` and click `Save & Test`
 * Choose the Option `Dashboards`/`Manage`/`Import`
-* Paste the number 1860 into the field `Grafana.com Dashboard` and click `Load` (Visit https://grafana.com/grafana/dashboards for other Dashboards)
-* Choose the Datasource Prometheus in the field `Prometheus` and `Import` afterwards.
-* Investigate the Dashboard. Take care to a proper time range via the button on the right above.
+* Paste the number 1860 into the field `Grafana.com Dashboard` and click `Load` (Visit [https://grafana.com/grafana/dashboards](https://grafana.com/grafana/dashboards) for other Dashboards)
+* Choose the Datasource Prometheus in the field `Prometheus` and `Import` afterwards
+* Investigate the Dashboard; take care to a proper time range via the button on the right above
 
-## Clean up
+## 6. Clean up
 
 ```bash
 ## list all installed helm charts
@@ -132,5 +135,5 @@ helm uninstall -n monitoring my-grafana
 helm uninstall -n monitoring my-prometheus
 
 ## check namespace
-kubectl -n monitoring get all 
+kubectl -n monitoring get all
 ```
