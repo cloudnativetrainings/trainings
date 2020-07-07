@@ -45,7 +45,7 @@ kubectl top pods
 kubectl get nodes,services -o wide
 ```
 
-## 5. Open a new Terminal and put on some load on your application
+## 5. Open a new terminal and put on some load on your application
 
 ```bash
 while true; do curl <EXTERNAL-IP>:<SERVICE-PORT>; done;

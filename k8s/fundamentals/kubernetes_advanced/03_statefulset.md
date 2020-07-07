@@ -35,9 +35,9 @@ spec:
       containers:
         - name: my-stateful-set
           image: busybox
-          command: 
+          command:
             - "/bin/sh"
-          args: 
+          args:
             - "-c"
             - "while true; do echo pod $MY_POD_NAME - $MY_POD_IP >> /tmp/state; sleep 10; done;"
           env:
@@ -106,19 +106,20 @@ pod my-stateful-set-2 - 10.24.0.36
 pod my-stateful-set-2 - 10.24.0.36
 pod my-stateful-set-2 - 10.24.0.37
 ```
+
 Note that the IP has changed, but we have still same hostname and FQN.
 
-## 6. Find out the FQN of your 3rd stateful pod
+## 6. Retrieve address from third stateful Pod via FQN
 
 ```bash
-kubectl exec -it my-stateful-set-0 -- nslookup TODO_FQN
+kubectl exec -it my-stateful-set-2 -- nslookup <FQN>
 
 ## potential output
-Server:		10.23.240.10
-Address:	10.23.240.10:53
+Server:  10.23.240.10
+Address: 10.23.240.10:53
 
 Non-authoritative answer:
-Name:	xxx.xxx.xxx.svc.cluster.local
+Name: xxx.xxx.xxx.svc.cluster.local
 Address: 10.24.0.37
 ```
 

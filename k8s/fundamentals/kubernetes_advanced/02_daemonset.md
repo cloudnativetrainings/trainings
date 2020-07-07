@@ -19,9 +19,9 @@ spec:
       containers:
         - name: who-am-i
           image: busybox
-          command: 
+          command:
             - "/bin/sh"
-          args: 
+          args:
             - "-c"
             - "while true; do echo $MY_NODE_NAME running pod $MY_POD_NAME; sleep 10; done;"
           env:
@@ -58,7 +58,7 @@ node/gke-hubert-markdown-default-pool-068b6f1c-t26g   Ready    <none>   7h52m   
 node/gke-hubert-markdown-default-pool-068b6f1c-z0hc   Ready    <none>   7h52m   v1.14.8-gke.2
 ```
 
-## 3. Choose one pod and take a look at its logging
+## 3. Choose one Pod and take a look at its logging
 
 ```bash
 kubectl logs <POD-NAME>

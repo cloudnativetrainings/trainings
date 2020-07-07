@@ -11,7 +11,7 @@ kubectl cluster-info
 It will not work due to permissions.
 
 ```bash
-curl -s <API-SERVER-URL>/api/v1/namespaces/default/pods 
+curl -s <API-SERVER-URL>/api/v1/namespaces/default/pods
 ```
 
 ## 3. Take a look at the existing ServiceAccounts
@@ -28,7 +28,7 @@ kubectl get clusterroles
 
 ## 5. Take a look at the existing ClusterRoleBindings
 
-```
+```bash
 kubectl get clusterrolebindings
 ```
 

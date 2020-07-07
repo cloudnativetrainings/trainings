@@ -55,7 +55,7 @@ kubectl -n monitoring get all
 Change the type of the Service to `NodePort`.
 
 ```bash
-kubectl -n monitoring edit svc my-prometheus-server 
+kubectl -n monitoring edit svc my-prometheus-server
 ```
 
 ### 5. Get the IP and the Port for Prometheus and use your browser to access it
@@ -75,7 +75,7 @@ Call `http://NODE_IP:NODE_PORT/graph` in your browser.
 * http requests: `http_requests_total`
 * API server requests count: `http_requests_total{handler="prometheus",job="kubernetes-apiservers"}`
 * per-second rate, messured over the last 5 min: `rate(http_requests_total[5m])`
-* more examples: https://prometheus.io/docs/prometheus/latest/querying/examples
+* more examples: [https://prometheus.io/docs/prometheus/latest/querying/examples](https://prometheus.io/docs/prometheus/latest/querying/examples)
 
 ## Grafana
 
