@@ -1,6 +1,6 @@
 # Draining Nodes
 
-## 1. Display all nodes and choose one to cordon
+## 1. Display all Nodes and choose one to cordon
 
 ```bash
 kubectl get nodes

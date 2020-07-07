@@ -9,7 +9,7 @@ kubectl run --generator run-pod/v1 bob --image nginx --port 80 --labels app=bob
 kubectl expose pod bob
 ```
 
-## 2. Create another Pod, install curl and make a request to the first pod
+## 2. Create another Pod, install curl and make a request to the first Pod
 
 ```bash
 ## run a Pod
@@ -41,7 +41,7 @@ Apply it to your cluster.
 kubectl create -f my-network-policy.yaml
 ```
 
-## 4. Switch back to the first Terminal and try to curl the first Pod again
+## 4. Switch back to the first terminal and try to curl the first Pod again
 
 You should not get any response due to the Network Policy.
 

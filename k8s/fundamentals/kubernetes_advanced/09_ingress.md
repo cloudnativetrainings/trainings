@@ -54,7 +54,7 @@ kubectl create ns ingress
 
 ## 7. Create the RBAC resources and the Ingress controller
 
-Copy of https://github.com/kubernetes/ingress-nginx/blob/master/docs/deploy/index.md.
+Copy of [https://github.com/kubernetes/ingress-nginx/blob/master/docs/deploy/index.md](https://github.com/kubernetes/ingress-nginx/blob/master/docs/deploy/index.md).
 
 ```yaml
 apiVersion: v1
@@ -121,7 +121,7 @@ spec:
             - name: POD_NAMESPACE
               valueFrom:
                 fieldRef:
-                  fieldPath: metadata.namespace    
+                  fieldPath: metadata.namespace
           args:
             - /nginx-ingress-controller
             - --default-backend-service=kube-system/default-http-backend
@@ -211,7 +211,7 @@ kubectl create -f ingress.yaml
 kubectl describe ing ingress
 ```
 
-## 14. Visit the Applications "red" and "blue" in your browser via
+## 14. Visit the applications "red" and "blue" in your browser via
 
 * `http://<EXTERNAL-IP>/red`
 * `http://<EXTERNAL-IP>/blue`

@@ -26,7 +26,7 @@ Apply it to your cluster.
 kubectl create -f job.yaml
 ```
 
-## 2. Take a look at running jobs and the pods
+## 2. Take a look at running Jobs and the Pods
 
 It can take a while that the job is completed.
 
