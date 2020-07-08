@@ -1,8 +1,10 @@
 # Helm and Prometheus
 
-## Helm
-
 In this course we will install Helm into our cluster and use it.
+
+***NOTE:*** On GCP you may have to open the firewall with the default node-port range of Kubernetes - see [setup_cluster.sh to add firewall rule](../../setup_cluster.sh) or use the Service type `LoadBalancer`.
+
+## Helm
 
 ### 1. Install Helm
 
