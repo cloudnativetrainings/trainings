@@ -6,10 +6,10 @@ In this training we will setup an Ingress.
 
 ```bash
 ## Create a Deployment
-kubectl run red --image nginx --port 80
+kubectl create deployment red --image nginx
 
 ## Expose the Deployment
-kubectl expose deployment red
+kubectl expose deployment red --port 80
 ```
 
 ## 2. Change the content of index.html
@@ -25,10 +25,10 @@ kubectl cp red.html <POD-NAME>:/usr/share/nginx/html/index.html
 
 ```bash
 ## Create a Deployment
-kubectl run blue --image nginx --port 80
+kubectl create deployment blue --image nginx
 
 ## Expose the Deployment
-kubectl expose deployment blue
+kubectl expose deployment blue --port 80
 ```
 
 ## 4. Change the content of index.html
