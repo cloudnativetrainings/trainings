@@ -50,4 +50,4 @@ redis-slave    ClusterIP      10.48.2.144    <none>         6379/TCP       37m
 
 Now the guestbook can be reached via the browser using the external IP address.
 
-[<< PREV](./02_deploy_redis_slave.md) / [TOP](./README.md) / [NEXT >>](./04_scale_guestbook.md)
+[<< PREV](./02_deploy_redis_slaves.md) / [TOP](./README.md) / [NEXT >>](./04_scale_guestbook.md)
