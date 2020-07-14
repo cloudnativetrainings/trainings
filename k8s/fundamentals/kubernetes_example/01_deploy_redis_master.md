@@ -72,4 +72,4 @@ redis-master   ClusterIP   10.48.13.16   <none>        6379/TCP   2m5s
 
 Now the Redis Master is up and running.
 
-[TOP](./README.md) / [NEXT >>](./02_deploy_redis_slaves.md)
+[TOP](./) / [NEXT >>](./02_deploy_redis_slaves.md)

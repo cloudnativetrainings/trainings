@@ -49,4 +49,4 @@ redis-slave    ClusterIP   10.48.2.144   <none>        6379/TCP   4s
 
 So now you've got a three node Redis database with one master and two slaves. Now let's continue with the guestbook.
 
-[<< PREV](./01_deploy_redis_master.md) / [TOP](./README.md) / [NEXT >>](./03_deploy_guestbook.md)
+[<< PREV](./01_deploy_redis_master.md) / [TOP](./) / [NEXT >>](./03_deploy_guestbook.md)

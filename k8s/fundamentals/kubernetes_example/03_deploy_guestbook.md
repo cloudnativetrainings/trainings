@@ -5,7 +5,7 @@
 The manifest file for the guestbook frontend can be found at [./guestbook/frontend-deployment.yaml](./guestbook/frontend-deployment.yaml). It will run the PHP Redis Guestbook on three nodes. Copy and upload the file and apply it.
 
 ```sh
-kubectl apply -f frontend-deplyoment.yaml
+kubectl apply -f frontend-deployment.yaml
 ```
 
 Check that these pods are running.
@@ -50,4 +50,4 @@ redis-slave    ClusterIP      10.48.2.144    <none>         6379/TCP       37m
 
 Now the guestbook can be reached via the browser using the external IP address.
 
-[<< PREV](./02_deploy_redis_slaves.md) / [TOP](./README.md) / [NEXT >>](./04_scale_guestbook.md)
+[<< PREV](./02_deploy_redis_slaves.md) / [TOP](./) / [NEXT >>](./04_scale_guestbook.md)

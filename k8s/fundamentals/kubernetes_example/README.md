@@ -17,3 +17,4 @@ Based on the Kubernetes tutorial this example will show how a multi-tier web app
 2. [Deploy the Redis Slaves](./02_deploy_redis_slaves.md)
 3. [Deploy the Guestbook Frontend](./03_deploy_guestbook.md)
 4. [Scale Guestbook Frontend up and down](04_scale_guestbook.md)
+5. [Add Redis volume](05_add_redis_volume.md)
