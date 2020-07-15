@@ -69,4 +69,4 @@ while true; do wget -q -O- http://35.242.219.5/; done
 
 Now you can check how the number of parallel frontend pods raises to five. When load is over the number of pods will scale down after some time. A manual downscaling is also possible.
 
-[<< PREV](./03_deploy_guestbook.md) / [TOP](./README.md)
+[<< PREV](./03_deploy_guestbook.md) / [TOP](./) / [NEXT >>](./05_add_redis_volume.md)
