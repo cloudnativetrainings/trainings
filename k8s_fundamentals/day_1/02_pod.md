@@ -34,7 +34,7 @@ kubectl create -f pod.yaml
 kubectl expose pod my-pod --type NodePort
 ```
 
-## 4. Access the application
+## 5. Access the application
 
 ```bash
 ## get the external IP address of the node

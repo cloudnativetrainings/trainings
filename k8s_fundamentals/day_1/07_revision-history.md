@@ -3,13 +3,13 @@
 ## 1. Create a Deployment
 
 ```bash
-kubectl run my-nginx --image nginx --port 80
+kubectl create deployment my-nginx --image nginx
 ```
 
 ## 2. Change the image of the deployment
 
 ```bash
-kubectl set image deployment my-nginx my-nginx=nginx:alpine --record
+kubectl set image deployment my-nginx nginx=nginx:alpine --record
 ```
 
 ## 3. Take a look at the rollout history
