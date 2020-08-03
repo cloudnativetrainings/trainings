@@ -2,7 +2,10 @@
 
 ## 1. Create the file persistence.yaml with a storage class and two claims
 
-Take care that the zone of your StorageClass matches the zone of your Kubernetes Cluster.
+Take care that the zone of your StorageClass matches the zone of your Kubernetes Cluster. You can get the zone of your nodes via:
+```bash
+kubectl describe node | grep zone
+```
 
 ```yaml
 kind: StorageClass
