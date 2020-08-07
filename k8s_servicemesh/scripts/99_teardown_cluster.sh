@@ -15,6 +15,6 @@ gcloud config set compute/region $REGION
 gcloud config set compute/zone $ZONE
 
 gcloud beta container clusters delete $CLUSTER_NAME --quiet
-gcloud compute firewall-rules $FIREWALL_NAME-ingress-gateway --quiet
-gcloud compute firewall-rules $FIREWALL_NAME-ssh --quiet
+gcloud compute firewall-rules delete $FIREWALL_NAME-ingress-gateway --quiet
+gcloud compute firewall-rules delete $FIREWALL_NAME-ssh --quiet
 gcloud compute networks delete $NETWORK_NAME  --quiet
