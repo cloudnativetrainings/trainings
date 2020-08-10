@@ -33,7 +33,7 @@ gcloud compute firewall-rules create $FIREWALL_NAME-ingress-gateway \
   --direction=INGRESS \
   --action=ALLOW \
   --source-ranges=0.0.0.0/0 \
-  --rules=tcp:80,443
+  --rules=tcp:80,tcp:443
 
 ### add ssh access for nodes
 gcloud compute firewall-rules create $FIREWALL_NAME-ssh \
