@@ -15,7 +15,7 @@ kubectl exec -it <BACKEND-POD> backend -- curl https://www.google.com
 kubectl -n istio-system  get cm istio -o yaml > 10_egress/istio-cm.yaml
 ```
 
-5. Change theconfigmap in the `mesh` section. Note that this change can take some time to take effect.
+5. Change the configmap in the `mesh` section. Note that this change can take some time to take effect.
 ```yaml
     outboundTrafficPolicy:
       mode: REGISTRY_ONLY
