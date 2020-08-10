@@ -12,7 +12,7 @@ while true; do curl -H "Host: frontend.training.svc.cluster.local" $INGRESS_HOST
 
 5. Make grafana available - change the type from ClusterIP to LoadBalancer and set the port to the same as the NodePort Port
 
-6. Make jaeger available - change the type from ClusterIP to LoadBalancer and set the port to the same as the NodePort Port
+6. Make jaeger available (the service is called tracing) - change the type from ClusterIP to LoadBalancer and set the port to the same as the NodePort Port
 
 7. Play around with those tools
 
