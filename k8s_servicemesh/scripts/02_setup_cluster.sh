@@ -43,6 +43,14 @@ gcloud compute firewall-rules create $FIREWALL_NAME-ssh \
   --source-ranges=0.0.0.0/0 \
   --rules=tcp:22
 
+### add access to NodePort services
+gcloud compute firewall-rules create $FIREWALL_NAME-nodeport \
+  --direction=INGRESS \
+  --network=$NETWORK_NAME \
+  --action=ALLOW \
+  --source-ranges=0.0.0.0/0 \
+  --rules=tcp:30000-32767
+
 # connect to cluster
 gcloud container clusters get-credentials $CLUSTER_NAME 
 echo 'source <(kubectl completion bash)' >> ~/.bashrc && source ~/.bashrc
