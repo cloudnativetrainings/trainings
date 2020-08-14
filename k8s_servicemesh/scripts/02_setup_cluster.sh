@@ -33,7 +33,7 @@ gcloud compute firewall-rules create $FIREWALL_NAME-ingress-gateway \
   --direction=INGRESS \
   --action=ALLOW \
   --source-ranges=0.0.0.0/0 \
-  --rules=tcp:80
+  --rules=tcp:80,tcp:443
 
 ### add ssh access for nodes
 gcloud compute firewall-rules create $FIREWALL_NAME-ssh \
@@ -42,6 +42,14 @@ gcloud compute firewall-rules create $FIREWALL_NAME-ssh \
   --action=ALLOW \
   --source-ranges=0.0.0.0/0 \
   --rules=tcp:22
+
+### add access to NodePort services
+gcloud compute firewall-rules create $FIREWALL_NAME-nodeport \
+  --direction=INGRESS \
+  --network=$NETWORK_NAME \
+  --action=ALLOW \
+  --source-ranges=0.0.0.0/0 \
+  --rules=tcp:30000-32767
 
 # connect to cluster
 gcloud container clusters get-credentials $CLUSTER_NAME 
