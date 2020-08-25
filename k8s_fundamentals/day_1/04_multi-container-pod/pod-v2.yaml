@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+spec:
+  containers:
+    - name: container-a
+      image: busybox:1.32.0
+      command:
+        - "/bin/sh"
+      args:
+        - "-c"
+        - "while true; do echo $(date) > /tmp/buffer; sleep 1; done;"
+      volumeMounts:
+        - name: buffer
+          mountPath: /tmp
+    - name: container-b
+      image: busybox:1.32.0
+      command:
+        - "/bin/sh"
+      args:
+        - "-c"
+        - "while true; do cat /tmp/buffer; sleep 1; done;"
+      volumeMounts:
+        - name: buffer
+          mountPath: /tmp
+  volumes:
+    - name: buffer
+      emptyDir: {}

@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+spec:
+  containers:
+    - name: container-a
+      image: busybox:1.32.0
+      command:
+        - "/bin/sh"
+      args:
+        - "-c"
+        - "while true; do echo hello A; sleep 1; done;"
+    - name: container-b
+      image: busybox:1.32.0
+      command:
+        - "/bin/sh"
+      args:
+        - "-c"
+        - "while true; do echo hello B; sleep 1; done;"
