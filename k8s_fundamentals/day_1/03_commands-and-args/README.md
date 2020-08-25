@@ -34,7 +34,7 @@ kubectl describe pod my-pod | grep -A4 "Last State:"
   args: [ "600" ]
 ```
 
-## Delete and re create the Pod
+## Re-create the Pod
 
 ```bash
 kubectl replace --force -f pod.yaml

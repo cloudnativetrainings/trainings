@@ -10,8 +10,8 @@ spec:
   template:
     metadata:
       labels:
-        app: my-app
+        app: another-app
     spec:
       containers:
-        - name: my-container
-          image: nginx:1.19.2
+      - name: nginx
+        image: my-image

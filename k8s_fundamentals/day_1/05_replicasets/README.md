@@ -1,6 +1,6 @@
 # ReplicaSet
 
-## Create the [replicaset yaml file](./replicaset.yaml) serving an nginx container
+## Create the [replicaset yaml file](./replicaset.yaml) 
 
 ```bash
 kubectl create -f replicaset.yaml
@@ -38,6 +38,6 @@ kubectl get pods
 ## delete the ReplicaSet
 kubectl delete replicaset my-replicaset
 
-## also the Pods and Endpoints will get deleted
+## also the Pods will get deleted
 kubectl get rs,po
 ```

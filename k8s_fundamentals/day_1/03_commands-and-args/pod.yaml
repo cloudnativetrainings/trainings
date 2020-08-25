@@ -4,5 +4,5 @@ metadata:
   name: my-pod
 spec:
   containers:
-    - name: my-container
+    - name: busybox
       image: busybox:1.32.0

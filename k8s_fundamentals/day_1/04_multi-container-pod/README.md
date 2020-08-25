@@ -28,7 +28,7 @@ kubectl exec -it multi-container-pod -- /bin/sh
 
 ## Share a directory between 2 Containers in a Pod
 
-### Inspect the [pod yaml file](./pod-v2.yaml) and create the pod
+### Inspect the [pod yaml file](./pod-v2.yaml) and re-create the pod
 
 ```bash
 kubectl replace --force -f pod-v2.yaml
