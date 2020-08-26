@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+spec:
+  containers:
+    - name: busybox
+      image: busybox:1.32.0
+      command:
+        - /bin/sh
+        - -c
+        - "echo $MY_ENV_VAR && sleep 99d"
+      env:
+        - name: MY_ENV_VAR
+          valueFrom:
+            configMapKeyRef:
+              key: foo
+              name: my-configmap

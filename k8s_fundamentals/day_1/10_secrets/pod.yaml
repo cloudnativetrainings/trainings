@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+spec:
+  containers:
+    - name: vol-printer
+      image: busybox:1.32.0
+      command:
+        - /bin/sh
+        - -c
+        - "sleep 99d"
+      volumeMounts:
+        - name: my-volume
+          mountPath: /opt/my-volume
+  volumes:
+    - name: my-volume
+      secret:
+        secretName: a-secret
