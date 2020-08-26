@@ -2,7 +2,7 @@
 
 Note that there are errors in the yaml files. Try to fix them.
 
-## Inspect the [configmap yaml file](./configmap.yaml) and create the pod
+## Inspect the [configmap yaml file](./configmap.yaml) and create the configmap
 
 ```bash
 kubectl create -f configmap.yaml
@@ -14,14 +14,14 @@ kubectl create -f configmap.yaml
 kubectl create -f pod.yaml
 ```
 
-## 2. Verify everything works fine
+## Verify everything works fine
 
 ```bash
 kubectl logs my-pod
 bar
 ```
 
-## 3. Cleanup
+## Cleanup
 
 ```bash
 kubectl delete po,cm --all

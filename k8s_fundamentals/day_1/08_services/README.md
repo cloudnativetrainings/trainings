@@ -14,7 +14,7 @@ kubectl create -f deployment.yaml
 kubectl create -f service-v1.yaml
 ```
 
-## Take a look at the created Endpoints and IPs of the Pods
+## Take a look at the created endpoints and IPs of the pods
 
 ```bash
 kubectl get po,ep -o wide
@@ -26,7 +26,7 @@ kubectl get po,ep -o wide
 kubectl scale deployment nginx --replicas 3
 ```
 
-## Take a look at the created Endpoints and IPs of the Pods
+## Take a look at the created Endpoints and IPs of the pods
 
 ```bash
 kubectl get pod,endpoints -o wide
@@ -79,7 +79,7 @@ kubectl get svc
 curl http://<EXTERNAL-IP>
 ```
 
-## Clean up
+## Cleanup
 
 ```bash
 kubectl delete deploy my-deployment

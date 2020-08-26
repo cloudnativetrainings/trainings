@@ -1,6 +1,6 @@
 # Revision History
 
-## Inspect and create the [deployment yaml file](./deployment.yaml) 
+## Inspect and create the [deployment yaml file](./deployment.yaml) and create the deployment
 
 ```bash
 kubectl create -f deployment.yaml

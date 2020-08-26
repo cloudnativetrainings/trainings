@@ -2,7 +2,7 @@
 
 Note that there are errors in the yaml files. Try to fix them.
 
-## Inspect the [secret yaml file](./secret.yaml) and create the pod
+## Inspect the [secret yaml file](./secret.yaml) and create the secret
 
 ```bash
 kubectl create -f secret.yaml
@@ -14,13 +14,13 @@ kubectl create -f secret.yaml
 kubectl create -f pod.yaml
 ```
 
-## 2. Verify everything works fine
+## Verify everything works fine
 
 ```bash
 kubectl exec -it my-pod -- cat /opt/my-volume/<FILENAME>
 ```
 
-## 3. Cleanup
+## Cleanup
 
 ```bash
 kubectl delete pod my-pod
