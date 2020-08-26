@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: water
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: water
+  template:
+    metadata:
+      labels:
+        app: water
+    spec:
+      containers:
+        - name: water
+          image: nginx:1.19.2
+          resources:
+            limits:
+              cpu: 25m
+            requests:
+              cpu: 25m
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - fire
+              topologyKey: "kubernetes.io/hostname"

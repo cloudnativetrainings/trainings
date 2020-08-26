@@ -6,8 +6,8 @@ spec:
   template:
     spec:
       containers:
-        - name: my-job
-          image: busybox
+        - name: busybox
+          image: busybox:1.32.0
           command: ["sleep"]
           args: ["10"]
       restartPolicy: Never
