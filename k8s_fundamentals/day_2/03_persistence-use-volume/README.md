@@ -1,7 +1,5 @@
 # Using a Volume in a Pod
 
-## 1. Create the following Pod
-
 ## Inspect the [pvc yaml file](./pvc.yaml) and create the pvc
 
 ```bash
@@ -44,6 +42,6 @@ kubectl exec -it my-pod -- cat /app/buffer
 ## Cleanup
 
 ```bash
-kubectl delete po,svc my-pod
+kubectl delete pod my-pod
 kubectl delete pv,pvc --all
 ```

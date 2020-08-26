@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: my-sts
+spec:
+  serviceName: my-service
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-sts
+  template:
+    metadata:
+      labels:
+        app: my-sts
+    spec:
+      containers:
+        - name: busybox
+          image: busybox:1.32.0
+          command:
+            - "/bin/sh"
+          args:
+            - "-c"
+            - "while true; do echo $(date) pod $MY_POD_NAME - $MY_POD_IP >> /app/state; sleep 10; done;"
+          env:
+            - name: MY_POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+            - name: MY_POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+          volumeMounts:
+            - name: state
+              mountPath: /app
+  volumeClaimTemplates:
+    - metadata:
+        name: state
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 1Gi

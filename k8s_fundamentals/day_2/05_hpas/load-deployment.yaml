@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: load-deployment
+  name: load-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: load-deployment
+  template:
+    metadata:
+      labels:
+        app: load-deployment
+    spec:
+      containers:
+        - name: curl
+          image: curlimages/curl:7.72.0
+          command:
+            - "/bin/sh"
+          args:
+            - "-c"
+            - "while true; do curl http://my-service; done;"
+          resources:
+            limits:
+              cpu: 50m
+            requests:
+              cpu: 50m

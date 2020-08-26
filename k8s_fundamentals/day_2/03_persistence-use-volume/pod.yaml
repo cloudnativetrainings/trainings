@@ -4,17 +4,16 @@ metadata:
   name: my-pod
 spec:
   containers:
-    - name: alpine
-      image: alpine:3.12.0
+    - name: busybox
+      image: busybox:1.32.0
+      command:
+        - "/bin/sh"
+      args:
+        - "-c"
+        - "while true; do echo $(date) >> /app/buffer; sleep 5; done;"
       volumeMounts:
         - name: a-volume
           mountPath: /app
-      command: ["/bin/sh", "-c"]
-      args:
-        - while true; do
-          echo $(date) >> /app/buffer;
-          sleep 5;
-          done
   volumes:
     - name: my-volume
       persistentVolumeClaim:
