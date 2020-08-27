@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: blue
+  labels:
+    app: blue
+spec:
+  containers:
+    - name: nginx
+      image: nginx:1.19.2
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: blue
+spec:
+  selector:
+    app: blue
+  ports:
+    - port: 80
