@@ -1,4 +1,4 @@
-# Draining Nodes
+# Draining nodes
 
 ## Create the deployment, pod and daemonset
 
@@ -27,7 +27,7 @@ kubectl get pods -o wide
 
 Note that the pod `my-pod` has gone forever. The pods for the deployment `my-deployment` got rescheduled to the other node and the pods for the daemonset `my-daemonset` are untouched.
 
-## Uncordon the Node
+## Uncordon the node
 
 ```bash
 kubectl uncordon <NODE-NAME>
