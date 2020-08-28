@@ -58,3 +58,8 @@ kubectl --kubeconfig my-config.yaml get pods
 kubectl auth can-i get pods
 kubectl auth can-i get pods --as bob
 ```
+
+## Cleanup
+```bash
+kubectl delete csr bob
+```

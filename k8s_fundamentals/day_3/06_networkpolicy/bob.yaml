@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: bob
+  labels:
+    app: bob
+spec:
+  containers:
+    - name: nginx
+      image: nginx:1.19.2
+      ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bob
+spec:
+  ports:
+    - port: 80
+  selector:
+    app: bob
