@@ -2,13 +2,13 @@
 
 ## Create and expose the application
 
-### Inspect the [deployment yaml file](./deployment.yaml) and create the pod
+### Inspect and create the pod
 
 ```bash
 kubectl create -f deployment.yaml
 ```
 
-### Inspect the [service yaml file](./service-v1.yaml) and create the service
+### Inspect and create the service
 
 ```bash
 kubectl create -f service-v1.yaml
@@ -45,7 +45,7 @@ curl http://127.0.0.1:8080
 
 ## Access a NodePort Service
 
-### Inspect the [service yaml file](./service-v2.yaml) and apply the changes to the service
+### Inspect and apply the changes to the service
 
 ```bash
 kubectl apply -f service-v2.yaml
@@ -63,7 +63,7 @@ curl http://<EXTERNAL-IP>:30000
 
 ## Access a LoadBalancer Service
 
-### Inspect the [service yaml file](./service-v3.yaml) and apply the changes to the service
+### Inspect and apply the changes to the service
 
 ```bash
 kubectl apply -f service-v3.yaml

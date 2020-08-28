@@ -1,12 +1,12 @@
 # Persistence without StorageClass
 
-## Inspect the [pv yaml file](./pv.yaml) and create the pv
+## Inspect and create the pv
 
 ```bash
 kubectl create -f pv.yaml
 ```
 
-## Inspect the [pvc yaml file](./pv.yaml) and create the pvc
+## Inspect and create the pvc
 
 ```bash
 kubectl create -f pvc.yaml

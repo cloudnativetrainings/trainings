@@ -2,7 +2,7 @@
 
 In this training we will setup an Ingress.
 
-## Inspect the [red yaml file](./red.yaml) and create the red pod and service
+## Inspect and create the red pod and service
 
 ```bash
 kubectl create -f red.yaml
@@ -11,7 +11,7 @@ kubectl create -f red.yaml
 kubectl cp red.html red:/usr/share/nginx/html/index.html
 ```
 
-## Inspect the [blue yaml file](./blue.yaml) and create the blue pod and service
+## Inspect and create the blue pod and service
 
 ```bash
 kubectl create -f blue.yaml
@@ -40,7 +40,7 @@ kubectl create -f ingress-controller-service.yaml
 kubectl get deployments,pods,services
 ```
 
-## Inspect and create your ingress routes
+## Inspect and create the ingress
 
 ```bash
 kubectl create -f ingress.yaml

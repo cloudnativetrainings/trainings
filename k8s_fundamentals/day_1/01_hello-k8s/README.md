@@ -4,13 +4,13 @@ In this course we will create an application which will be reachable in the WWW.
 
 ## Create and expose the application
 
-### Inspect the [pod yaml file](./pod.yaml) and create the pod
+### Inspect and create the pod
 
 ```bash
 kubectl create -f pod.yaml
 ```
 
-### Inspect the [service yaml file](./service.yaml) and create the service
+### Inspect and create the service
 
 ```bash
 kubectl create -f service.yaml

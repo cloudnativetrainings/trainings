@@ -1,12 +1,12 @@
 # StatefulSets
 
-## Inspect the [service yaml file](./service.yaml) and create the service
+## Inspect and create the service
 
 ```bash
 kubectl create -f service.yaml
 ```
 
-## Inspect the [sts yaml file](./sts.yaml) and create the sts
+## Inspect and create the sts
 
 ```bash
 kubectl create -f sts.yaml

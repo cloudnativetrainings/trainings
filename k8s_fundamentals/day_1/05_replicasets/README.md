@@ -1,6 +1,6 @@
 # ReplicaSet
 
-## Create the [replicaset yaml file](./replicaset.yaml) 
+## Create the replicaset
 
 ```bash
 kubectl create -f replicaset.yaml

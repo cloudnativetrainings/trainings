@@ -2,7 +2,7 @@
 
 In this training we will create a pod and learn how to interact with it.
 
-## Inspect the [pod yaml file](./pod.yaml) and create the pod
+## Inspect the and create the pod
 
 ```bash
 kubectl create -f pod.yaml

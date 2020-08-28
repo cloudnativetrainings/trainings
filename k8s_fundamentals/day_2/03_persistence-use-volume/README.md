@@ -1,12 +1,12 @@
 # Using a Volume in a Pod
 
-## Inspect the [pvc yaml file](./pvc.yaml) and create the pvc
+## Inspect and create the pvc
 
 ```bash
 kubectl create -f pvc.yaml
 ```
 
-## Inspect the [pod yaml file](./pod.yaml) and create the pod
+## Inspect and create the pod
 
 ```bash
 kubectl create -f pod.yaml
@@ -27,7 +27,7 @@ kubectl exec -it my-pod -- cat /app/buffer
 kubectl delete pod my-pod
 ```
 
-## Re-create the [pod yaml file](./pod.yaml) 
+## Re-create the pod
 
 ```bash
 kubectl create -f pod.yaml

@@ -2,7 +2,7 @@
 
 In this training we will create a customized Pod.
 
-## Inspect the [pod yaml file](./pod.yaml) and create the pod
+## Inspect and create the pod
 
 ```bash
 kubectl create -f pod.yaml

@@ -12,7 +12,7 @@ kubectl get nodes --show-labels
 kubectl label node <NODE-NAME> preferred=true
 ```
 
-## Inspect the [pod yaml file](./pod.yaml) and create the pod
+## Inspect and create the pod
 
 ```bash
 kubectl create -f pod.yaml

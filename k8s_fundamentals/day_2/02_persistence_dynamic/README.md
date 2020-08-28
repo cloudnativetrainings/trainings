@@ -1,6 +1,6 @@
 # Persistence with StorageClass
 
-## Inspect the [storageclass yaml file](./storageclass-v1.yaml) and create the storageclass
+## Inspect and create the storageclass
 
 ```bash
 kubectl create -f storageclass-v1.yaml
@@ -14,7 +14,7 @@ Possibly there are standard ones.
 kubectl get sc -o wide
 ```
 
-## Inspect the [pvc yaml file](./pvc.yaml) and create the pvc
+## Inspect and create the pvc
 
 ```bash
 kubectl create -f pvc.yaml
@@ -38,13 +38,13 @@ kubectl delete pvc my-pvc
 kubectl get pvc,pv
 ```
 
-## Inspect the [storageclass yaml file](./storageclass-v2.yaml) and re-create the storageclass
+## Inspect and re-create the storageclass
 
 ```bash
 kubectl replace -f storageclass-v2.yaml --force
 ```
 
-## Inspect the [pvc yaml file](./pvc.yaml) and re-create the pvc
+## Inspect and re-create the pvc
 
 ```bash
 kubectl create -f pvc.yaml

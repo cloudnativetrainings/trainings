@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: my-daemonset
+spec:
+  selector:
+    matchLabels:
+      name: my-daemonset
+  template:
+    metadata:
+      labels:
+        name: my-daemonset
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.19.2
+          resources:
+            limits:
+              cpu: 50m
+              memory: 50Mi
+            requests:
+              cpu: 50m
+              memory: 50Mi

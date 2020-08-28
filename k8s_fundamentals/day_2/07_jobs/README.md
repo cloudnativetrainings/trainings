@@ -2,7 +2,7 @@
 
 In this course we will create a job and parallelize its execution.
 
-## Inspect the [job yaml file](./job.yaml) and create the job
+## Inspect and create the job
 
 ```bash
 kubectl create -f job.yaml

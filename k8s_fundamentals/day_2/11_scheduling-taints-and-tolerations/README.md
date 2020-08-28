@@ -13,7 +13,7 @@ kubectl taint nodes <NODE-NAME> foo=bar:NoSchedule
 kubectl get nodes -o=custom-columns='NODE_NAME:metadata.name,TAINTS:spec.taints[*]'
 ```
 
-## Inspect the [deployment yaml file](./deployment.yaml) and create the deployment
+## Inspect and create the deployment
 
 ```bash
 kubectl create -f deployment.yaml
@@ -25,7 +25,7 @@ kubectl create -f deployment.yaml
 kubectl get pods -o=custom-columns='POD_NAME:metadata.name,NODE_NAME:spec.nodeName'
 ```
 
-## Inspect the [pod yaml file](./pod.yaml) and create the pod
+## Inspect and create the pod
 
 ```bash
 kubectl create -f pod.yaml

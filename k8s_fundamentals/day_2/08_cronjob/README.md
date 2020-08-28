@@ -2,7 +2,7 @@
 
 In this course we will create a job which will run every minute.
 
-## Inspect the [cronjob yaml file](./cronjob.yaml) and create the cronjob
+## Inspect and create the cronjob
 
 ```bash
 kubectl create -f cronjob.yaml

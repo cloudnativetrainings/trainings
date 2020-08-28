@@ -2,13 +2,13 @@
 
 In this course will show how the Kubernetes Scheduler tries to keep things away from each other.
 
-## Inspect the [fire yaml file](./fire-pod.yaml) and create the pod
+## Inspect and create the fire-pod
 
 ```bash
 kubectl create -f fire-pod.yaml
 ```
 
-## Inspect the [water yaml file](./water-deployment.yaml) and create the deployment
+## Inspect and create the water-deployment
 
 ```bash
 kubectl create -f water-deployment.yaml

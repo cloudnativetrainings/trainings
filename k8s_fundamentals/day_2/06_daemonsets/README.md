@@ -1,6 +1,6 @@
 # DaemonSets
 
-## Inspect the [daemonset yaml file](./daemonset.yaml) and create the daemonset
+## Inspect and create the daemonset
 
 ```bash
 kubectl create -f daemonset.yaml

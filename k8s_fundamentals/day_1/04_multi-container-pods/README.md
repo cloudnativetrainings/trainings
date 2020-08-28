@@ -2,7 +2,7 @@
 
 In this training we will work with a Pod containing 2 containers.
 
-## Inspect the [pod yaml file](./pod-v1.yaml) and create the pod
+## Inspect and create the pod
 
 ```bash
 kubectl create -f pod-v1.yaml
@@ -28,7 +28,7 @@ kubectl exec -it multi-container-pod -- /bin/sh
 
 ## Share a directory between 2 Containers in a Pod
 
-### Inspect the [pod yaml file](./pod-v2.yaml) and re-create the pod
+### Inspect and re-create the pod
 
 ```bash
 kubectl replace --force -f pod-v2.yaml

@@ -1,6 +1,6 @@
 # Deployment
 
-## Inspect and create the [deployment yaml file](./deployment-v1.yaml) and create the deployment
+## Inspect and create the deployment
 
 ```bash
 kubectl create -f deployment.yaml
@@ -24,7 +24,7 @@ kubectl scale deployment my-deployment --replicas 3
 kubectl set image deployment my-deployment nginx=nginx:1.19.1
 ```
 
-## Inspect and re-create the [deployment yaml file](./deployment-v2.yaml) and re-create the deployment
+## Inspect and re-create the deployment
 
 Pay attention to the deleted rollout strategy. Now Kubernetes defaults to the `rollingUpdate` rollout strategy.
 

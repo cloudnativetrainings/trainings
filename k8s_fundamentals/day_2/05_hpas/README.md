@@ -1,6 +1,6 @@
 # Horizontal Pod Autoscaler
 
-## Create the [service yaml file](./service.yaml) and the [deployment yaml file](./deployment.yaml)
+## Create the service and the deployment
 
 ```bash
 kubectl create -f service.yaml
@@ -14,7 +14,7 @@ kubectl top nodes
 kubectl top pods
 ```
 
-## Inspect the [hpa yaml file](./hpa.yaml) and create the hpa
+## Inspect and create the hpa
 
 ```bash
 kubectl create -f hpa.yaml
@@ -26,7 +26,7 @@ kubectl create -f hpa.yaml
 watch -n 1 kubectl top pods
 ```
 
-## Inspect the [load-deployment yaml file](./load-deployment.yaml) and create the deployment
+## Inspect the load-deployment and create the deployment
 
 ```bash
 kubectl create -f load-deployment.yaml

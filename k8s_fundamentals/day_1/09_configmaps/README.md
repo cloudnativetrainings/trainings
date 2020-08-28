@@ -2,13 +2,13 @@
 
 Note that there are errors in the yaml files. Try to fix them.
 
-## Inspect the [configmap yaml file](./configmap.yaml) and create the configmap
+## Inspect and create the configmap
 
 ```bash
 kubectl create -f configmap.yaml
 ```
 
-## Inspect the [pod yaml file](./pod.yaml) and create the pod
+## Inspect and create the pod
 
 ```bash
 kubectl create -f pod.yaml
