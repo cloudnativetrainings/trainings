@@ -5,7 +5,11 @@ In this training we will use Helm to create and customize an application.
 ## Verify if helm is installed
 
 ```bash
+## Check helm
 helm version
+
+## Ensure autocompletion is installed
+echo 'source <(helm completion bash)' >> ~/.bashrc && bash
 ```
 
 ## [Optional] Install helm
@@ -31,15 +35,15 @@ helm ls
 # Show kubernetes resources
 kubectl get all
 
-# Uninstall a release
-helm uninstall my-release-defaults
+# Delete a release
+helm delete my-release-defaults
 ```
 
 ## Do a customized release
 
 ```bash
 # Release with a custom values.yaml file
-helm install -f my-values.yaml my-release-custom ./my-chart 
+helm install my-release-custom ./my-chart -f my-values.yaml 
 
 # Show all installed charts
 helm ls
@@ -54,7 +58,7 @@ kubectl get all
 # Change the color in the file `my-values.yaml`
 
 # Re-release 
-helm upgrade -f my-values.yaml my-release-custom ./my-chart 
+helm upgrade my-release-custom ./my-chart -f my-values.yaml 
 
 # Show all releases
 helm ls
@@ -88,7 +92,7 @@ replicas: 3
 
 ```bash
 # Re-release 
-helm upgrade -f my-values.yaml my-release-custom ./my-chart 
+helm upgrade my-release-custom ./my-chart -f my-values.yaml 
 
 # Show all releases
 helm ls
@@ -110,5 +114,5 @@ helm lint ./my-chart
 ## Cleanup
 
 ```bash
-helm uninstall my-release-custom
+helm delete my-release-custom
 ```
