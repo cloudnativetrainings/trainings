@@ -1,23 +1,17 @@
 # Ingress
 
-In this training we will setup an Ingress.
+In this training we will setup an Ingress and expose an app showing a blue screen and an app showing a red screen.
 
-## Inspect and create the red pod and service
+## Create the red application
 
 ```bash
 kubectl create -f red.yaml
-
-# Patch the nginx container
-kubectl cp red.html red:/usr/share/nginx/html/index.html
 ```
 
-## Inspect and create the blue pod and service
+## Create the blue application
 
 ```bash
 kubectl create -f blue.yaml
-
-# Patch the nginx container
-kubectl cp blue.html blue:/usr/share/nginx/html/index.html
 ```
 
 ## Verify your steps
