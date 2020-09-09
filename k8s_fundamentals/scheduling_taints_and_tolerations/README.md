@@ -1,4 +1,4 @@
-# Node Affinities
+# Taints and Tolerations
 
 In this course we will use taints and tolerations to influence scheduling
 
