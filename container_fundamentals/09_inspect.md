@@ -38,3 +38,26 @@ command outputs lot of details in parsable json. You can get particular fields f
 docker inspect -f '{{json .Created}}' counter
 ```
 This way you can directly retrieve `Created` field from json output.
+
+
+
+
+
+## Create a container
+
+Now we have image downloaded and ready to use, we can create container using
+```bash
+docker run -d --name my-nginx nginx:1.19.2
+```
+
+The `-d` flag instructs docker to create container and run it in background.
+
+The `--name my-nginx` names the container.
+
+## Inspect a container
+
+```bash
+docker inspect my-nginx
+```
+
+It gives you whole lot of information about running container including IP, MacAddress, Hostname etc.
