@@ -5,5 +5,5 @@ import (
 )
 
 func main() {
-	fmt.Println("Hello K8s from Go")
+	fmt.Println("Hello Docker from Go")
 }

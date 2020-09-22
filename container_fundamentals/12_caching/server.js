@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const message = 'Hello K8s from JS'
+const message = 'Hello Docker from JS'
 
 app.get('/', (req, res) => {
   res.send(message)
