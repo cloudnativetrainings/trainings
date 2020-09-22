@@ -20,3 +20,9 @@ Verify the output with curl:
 ```bash
 curl localhost:8080
 ```
+
+## Cleanup
+
+```bash
+docker rm pf $(docker ps -qa)
+```

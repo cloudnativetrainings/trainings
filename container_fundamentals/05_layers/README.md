@@ -60,3 +60,9 @@ sudo apt install ./dive_0.9.2_linux_amd64.deb
 ```bash
 dive nginx:1.19.2
 ```
+
+## Cleanup
+
+```bash
+docker rm pf $(docker ps -qa)
+```

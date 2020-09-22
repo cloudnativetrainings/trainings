@@ -25,11 +25,7 @@ different destination.
 
 ### Syslog
 The Syslog log driver will write all the container logs to the central syslog on 
-the host. "syslog is a widely used standard for message logging. It permits
-separation of the software that generates messages, the system that stores them, 
-and the software that reports and analyses them." [Wikipedia](https://en.wikipedia.org/wiki/Syslog)
-
-This log-driver is designed to be used when syslog is being collected and 
+the host. This log-driver is designed to be used when syslog is being collected and 
 aggregated by an external system.
 
 ### Example

@@ -76,29 +76,7 @@ Take a look at the running processes in the container. There are additional proc
 ps aux
 ```
 
-Cleanup
-```bash
-docker rm -f my-busybox
-```
-
-## Check the container logs
-
-Create a new container with name `test` from `busybox` image.
-```bash
-docker run -d --name my-busybox busybox:1.32.0 sh -c "while true; do $(echo date); sleep 1; done"
-```
-
-Check logs using 
-```bash
-docker logs my-busybox
-```
-
-You can get follow the logs using 
-```bash
-docker logs my-busybox --follow
-```
-
-Cleanup
+## Cleanup
 ```bash
 docker rm -f my-busybox
 ```

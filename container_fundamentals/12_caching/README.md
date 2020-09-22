@@ -59,3 +59,9 @@ docker build -t node:1.0.0 .
 docker run -it --rm -p 80:80 node:1.0.0
 # Visit the site via the external IP of your node
 ```
+
+## Cleanup
+
+```bash
+docker rm pf $(docker ps -qa)
+```

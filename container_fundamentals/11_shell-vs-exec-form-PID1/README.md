@@ -37,3 +37,9 @@ docker run -it entrypoint-vs-cmd-pid1:2.0.0
 ```
 
 Note that the process within the container has not PID 1. So the started process will not receive lifecycle signals like SIGTERM or SIGKILL. This can lead to data loss of your application due to gracefull shutdown will not happen.
+
+## Cleanup
+
+```bash
+docker rm pf $(docker ps -qa)
+```

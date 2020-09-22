@@ -45,3 +45,9 @@ Try again to remove the image
 ```bash
 docker rmi nginx:1.19.2
 ```
+
+## Cleanup
+
+```bash
+docker rm pf $(docker ps -qa)
+```

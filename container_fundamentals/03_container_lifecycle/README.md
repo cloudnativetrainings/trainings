@@ -68,3 +68,9 @@ docker ps
 ```
 
 Note that the containers got some generated names. You can use those names or you can the first letters of the container id to define the container in the commands.
+
+## Cleanup
+
+```bash
+docker rm pf $(docker ps -qa)
+```

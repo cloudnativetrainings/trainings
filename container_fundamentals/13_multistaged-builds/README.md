@@ -44,3 +44,9 @@ docker run -it go:2.0.0
 ```bash
 docker image ls go
 ```
+
+# Cleanup
+
+```bash
+docker rm pf $(docker ps -qa)
+```

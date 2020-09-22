@@ -39,3 +39,9 @@ docker run -it ignore:2.0.0
 ```
 
 Notice the output of the container the files defined in the .dockerignore file are not included in the resulting image / container. Furthermore this speeds up the build process due to those files will not get sent to the docker engine.
+
+## Cleanup
+
+```bash
+docker rm pf $(docker ps -qa)
+```

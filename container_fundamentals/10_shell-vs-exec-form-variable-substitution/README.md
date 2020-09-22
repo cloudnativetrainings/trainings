@@ -37,3 +37,9 @@ docker run -it shell-vs-exec-form-vars:2.0.0
 ```
 
 Note that variable substitution happened this time.
+
+## Cleanup
+
+```bash
+docker rm pf $(docker ps -qa)
+```
