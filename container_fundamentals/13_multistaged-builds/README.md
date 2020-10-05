@@ -48,5 +48,5 @@ docker image ls go
 # Cleanup
 
 ```bash
-docker rm pf $(docker ps -qa)
+docker rm -f $(docker ps -qa)
 ```

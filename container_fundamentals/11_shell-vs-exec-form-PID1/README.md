@@ -41,5 +41,5 @@ Note that the process within the container has not PID 1. So the started process
 ## Cleanup
 
 ```bash
-docker rm pf $(docker ps -qa)
+docker rm -f $(docker ps -qa)
 ```

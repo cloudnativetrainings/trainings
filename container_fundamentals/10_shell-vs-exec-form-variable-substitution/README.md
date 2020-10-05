@@ -41,5 +41,5 @@ Note that variable substitution happened this time.
 ## Cleanup
 
 ```bash
-docker rm pf $(docker ps -qa)
+docker rm -f $(docker ps -qa)
 ```

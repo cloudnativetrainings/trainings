@@ -28,5 +28,5 @@ docker run -it my-image:1.0.0
 ## Cleanup
 
 ```bash
-docker rm pf $(docker ps -qa)
+docker rm -f $(docker ps -qa)
 ```

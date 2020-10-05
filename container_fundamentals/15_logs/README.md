@@ -67,5 +67,5 @@ docker inspect --format '{{ .HostConfig.LogConfig }}' redis
 ## Cleanup
 
 ```bash
-docker rm pf $(docker ps -qa)
+docker rm -f $(docker ps -qa)
 ```

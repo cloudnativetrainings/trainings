@@ -49,5 +49,5 @@ docker run -it --rm --name entrypoint-vs-cmd --entrypoint sleep entrypoint-vs-cm
 # Cleanup
 
 ```bash
-docker rm pf $(docker ps -qa)
+docker rm -f $(docker ps -qa)
 ```

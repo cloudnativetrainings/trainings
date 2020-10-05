@@ -24,5 +24,5 @@ curl localhost:8080
 ## Cleanup
 
 ```bash
-docker rm pf $(docker ps -qa)
+docker rm -f $(docker ps -qa)
 ```

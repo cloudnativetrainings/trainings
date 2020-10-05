@@ -18,5 +18,3 @@ gcloud beta compute --project=$PROJECT_NAME instances create $VM_NAME \
   --image=ubuntu-2004-focal-v20200907 --image-project=ubuntu-os-cloud \
   --boot-disk-size=200GB --boot-disk-type=pd-standard --boot-disk-device-name=container-training \
   --no-shielded-secure-boot --shielded-vtpm --shielded-integrity-monitoring --reservation-affinity=any
-
-

@@ -49,5 +49,5 @@ docker rmi nginx:1.19.2
 ## Cleanup
 
 ```bash
-docker rm pf $(docker ps -qa)
+docker rm -f $(docker ps -qa)
 ```

@@ -43,5 +43,5 @@ Notice the output of the container the files defined in the .dockerignore file a
 ## Cleanup
 
 ```bash
-docker rm pf $(docker ps -qa)
+docker rm -f $(docker ps -qa)
 ```

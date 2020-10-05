@@ -63,5 +63,5 @@ docker run -it --rm -p 80:80 node:1.0.0
 ## Cleanup
 
 ```bash
-docker rm pf $(docker ps -qa)
+docker rm -f $(docker ps -qa)
 ```

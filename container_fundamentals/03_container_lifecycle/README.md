@@ -72,5 +72,5 @@ Note that the containers got some generated names. You can use those names or yo
 ## Cleanup
 
 ```bash
-docker rm pf $(docker ps -qa)
+docker rm -f $(docker ps -qa)
 ```
