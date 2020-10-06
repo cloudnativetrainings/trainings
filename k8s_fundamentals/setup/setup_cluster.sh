@@ -24,7 +24,7 @@ gcloud beta container clusters create $CLUSTER_NAME \
     --network $NETWORK_NAME  --create-subnetwork=name=$NETWORK_NAME-subnet,range=10.0.0.0/24 \
     --services-ipv4-cidr=10.0.1.0/24 --default-max-pods-per-node=110 \
     --zone=$ZONE \
-    --cluster-version "1.16.13-gke.1" \
+    --cluster-version "1.17.9-gke.6300" \
     --machine-type "e2-standard-4" --num-nodes "2" \
     --image-type "UBUNTU" --disk-type "pd-standard" --disk-size "50" \
     --enable-network-policy --enable-ip-alias --no-enable-autoupgrade --no-enable-stackdriver-kubernetes \
