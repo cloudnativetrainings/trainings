@@ -2,7 +2,7 @@
 
 In this training you will learn how to interact wit a container.
 
-Note that we are overwriting the ARGS from the Dockerfile via `sh -c "while true; do $(echo date); sleep 1; done"`. This will be covered in a following training.
+Note that we are overwriting the CMD from the Dockerfile via `sh -c "while true; do $(echo date); sleep 1; done"`. This will be covered in a following training.
 
 ## Foreground Containers
 
