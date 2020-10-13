@@ -1,4 +1,4 @@
-# Network Policy
+# NetworkPolicies
 
 In this course we will firewall pod to pod Communication. Note that your cluster has to support Network Policies.
 
