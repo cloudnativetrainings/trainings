@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euxo pipefail
+
 # install istioctl 
 # curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.4.3 sh -
 # mv istio-1.4.3 ~

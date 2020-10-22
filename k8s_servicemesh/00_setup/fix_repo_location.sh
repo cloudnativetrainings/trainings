@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euxo pipefail
+
 # variables
 export PROJECT_NAME=loodse-training-playground
 
