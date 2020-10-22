@@ -1,4 +1,4 @@
-# ConfigMap
+# ConfigMaps
 
 Note that there are errors in the yaml files. Try to fix them.
 
