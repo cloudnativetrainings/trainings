@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -euxo pipefail
+#set -euxo pipefail
 
 # variables
 if [[ -z ${PROJECT_NAME} ]]
