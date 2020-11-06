@@ -18,7 +18,7 @@ Visit https://console.cloud.google.com/compute/instances and click the `Connect 
 ```bash
 sudo apt update
 sudo apt upgrade -y
-sudo apt install -y docker.io=19.03.8-0ubuntu1.20.04
+sudo apt install -y docker.io
 ```
 
 ## Add your user to the docker group
