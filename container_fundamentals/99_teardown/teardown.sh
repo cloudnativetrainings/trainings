@@ -13,8 +13,8 @@ export FIREWALL_NAME=$TRAINING_NAME
 
 set -euxo pipefail
 
-gcloud beta compute --project=$PROJECT_NAME instances delete $VM_NAME --zone=$ZONE --quiet
-gcloud compute firewall-rules delete $FIREWALL_NAME-allow-http --quiet
-gcloud compute firewall-rules delete $FIREWALL_NAME-allow-https --quiet
-gcloud compute networks subnets delete $NETWORK_NAME-subnet --quiet
-gcloud compute networks delete $NETWORK_NAME --quiet
+gcloud beta compute instances delete $VM_NAME --project=$PROJECT_NAME --zone=$ZONE --quiet
+gcloud compute firewall-rules delete $FIREWALL_NAME-allow-http --project=$PROJECT_NAME --quiet
+gcloud compute firewall-rules delete $FIREWALL_NAME-allow-https --project=$PROJECT_NAME --quiet
+gcloud compute networks subnets delete $NETWORK_NAME-subnet --project=$PROJECT_NAME --quiet
+gcloud compute networks delete $NETWORK_NAME --project=$PROJECT_NAME --quiet

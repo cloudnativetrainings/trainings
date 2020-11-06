@@ -37,3 +37,6 @@ gcloud compute --project=$PROJECT_NAME firewall-rules create $FIREWALL_NAME-allo
 gcloud compute --project=$PROJECT_NAME firewall-rules create $FIREWALL_NAME-allow-https \
   --direction=INGRESS --priority=1000 --network=$NETWORK_NAME --action=ALLOW \
   --rules=tcp:443 --source-ranges=0.0.0.0/0 --target-tags=https-server
+gcloud compute --project=$PROJECT_NAME firewall-rules create $FIREWALL_NAME-allow-ssh \
+  --direction=INGRESS --priority=1000 --network=$NETWORK_NAME --action=ALLOW \
+  --rules=tcp:22 --source-ranges=0.0.0.0/0
