@@ -11,6 +11,8 @@ export VM_NAME=$TRAINING_NAME
 export NETWORK_NAME=$TRAINING_NAME
 export FIREWALL_NAME=$TRAINING_NAME
 
+set -euxo pipefail
+
 gcloud beta compute --project=$PROJECT_NAME instances delete $VM_NAME --zone=$ZONE --quiet
 gcloud compute firewall-rules delete $FIREWALL_NAME-allow-http --quiet
 gcloud compute firewall-rules delete $FIREWALL_NAME-allow-https --quiet
