@@ -13,6 +13,11 @@ export FIREWALL_NAME=$TRAINING_NAME
 
 set -euxo pipefail
 
+# set gcloud params
+gcloud config set project $PROJECT_NAME
+gcloud config set compute/region $REGION
+gcloud config set compute/zone $ZONE
+
 # create networks
 gcloud compute networks create $NETWORK_NAME --project=$PROJECT_NAME \
   --subnet-mode=custom --mtu=1460 --bgp-routing-mode=regional

@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# set -euxo pipefail
-
 # variables
 if [[ -z ${PROJECT_NAME} ]]
 then
@@ -11,8 +9,9 @@ export REGION=europe-west3
 export ZONE=europe-west3-a
 export CLUSTER_NAME=training-loodse
 export NETWORK_NAME=$CLUSTER_NAME
-export SUB_NETWORK_NAME=$CLUSTER_NAME-subnet
 export FIREWALL_NAME=$CLUSTER_NAME
+
+set -euxo pipefail
 
 # set gcloud params
 gcloud config set project $PROJECT_NAME
@@ -20,8 +19,10 @@ gcloud config set compute/region $REGION
 gcloud config set compute/zone $ZONE
 
 # create networks
-gcloud compute networks create $NETWORK_NAME --subnet-mode=custom
-gcloud compute networks subnets create $SUB_NETWORK_NAME --network=$NETWORK_NAME --range=10.0.0.0/24
+gcloud compute networks create $NETWORK_NAME --project=$PROJECT_NAME \
+  --subnet-mode=custom --mtu=1460 --bgp-routing-mode=regional
+gcloud compute networks subnets create $NETWORK_NAME-subnet --project=$PROJECT_NAME \
+  --range=10.0.0.0/24 --network=$NETWORK_NAME --region=$REGION
 
 # create cluster
 gcloud beta container clusters create $CLUSTER_NAME \
