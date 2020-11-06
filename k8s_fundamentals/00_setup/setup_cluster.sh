@@ -7,7 +7,7 @@ then
 fi
 export REGION=europe-west3
 export ZONE=europe-west3-a
-export CLUSTER_NAME=training-loodse
+export CLUSTER_NAME=kubernetes-fundamentals
 export NETWORK_NAME=$CLUSTER_NAME
 export FIREWALL_NAME=$CLUSTER_NAME
 
@@ -26,7 +26,7 @@ gcloud compute networks subnets create $NETWORK_NAME-subnet --project=$PROJECT_N
 
 # create cluster
 gcloud beta container clusters create $CLUSTER_NAME \
-  --network "projects/$PROJECT_NAME/global/networks/$NETWORK_NAME" --subnetwork "projects/$PROJECT_NAME/regions/$REGION/subnetworks/$SUB_NETWORK_NAME" \
+  --network "projects/$PROJECT_NAME/global/networks/$NETWORK_NAME" --subnetwork "projects/$PROJECT_NAME/regions/$REGION/subnetworks/$NETWORK_NAME-subnet" \
   --services-ipv4-cidr=10.0.1.0/24 --default-max-pods-per-node=110 \
   --zone=$ZONE \
   --cluster-version "1.17.12-gke.2502" \

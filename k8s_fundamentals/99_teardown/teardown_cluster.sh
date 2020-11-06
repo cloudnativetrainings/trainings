@@ -7,10 +7,9 @@ then
 fi
 export REGION=europe-west3
 export ZONE=europe-west3-a
-export CLUSTER_NAME=training-loodse
+export CLUSTER_NAME=kubernetes-fundamentals
 export NETWORK_NAME=$CLUSTER_NAME
 export FIREWALL_NAME=$CLUSTER_NAME
-export CONTAINER_REGISTRY=eu.gcr.io/$PROJECT_NAME/$CLUSTER_NAME
 
 set -euxo pipefail
 
