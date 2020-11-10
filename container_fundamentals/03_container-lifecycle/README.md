@@ -48,7 +48,6 @@ docker rm -f my-nginx
 
 The container cannot be started anymore.
 
-The container is still startable
 ```bash
 docker restart my-nginx
 ```
