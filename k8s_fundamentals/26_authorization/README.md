@@ -5,7 +5,7 @@
 ```bash
 kubectl create -f serviceaccount.yaml
 kubectl create -f clusterrole.yaml
-kubectl create -f serviceaccount.yaml
+kubectl create -f clusterrolebinding.yaml
 ```
 
 ## Inspect and create the pod
