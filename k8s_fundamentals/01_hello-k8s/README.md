@@ -40,5 +40,6 @@ curl http://<EXTERNAL-IP>
 ## Cleanup
 
 ```bash
-kubectl delete pod,svc my-nginx
+kubectl delete pod my-pod
+kubectl delete service my-service
 ```

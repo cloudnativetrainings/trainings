@@ -2,21 +2,21 @@
 
 In this course will show how the Kubernetes Scheduler tries to keep things away from each other.
 
-## Inspect and create the fire-pod
+## Inspect and create the water-pod
 
 ```bash
-kubectl create -f fire-pod.yaml
+kubectl create -f water-pod.yaml
 ```
 
-## Inspect and create the water-deployment
+## Inspect and create the fire-deployment
 
 ```bash
-kubectl create -f water-deployment.yaml
+kubectl create -f fire-deployment.yaml
 ```
 
 ## Verify that the pods location
 
-Pods `water` must not be on the same node as the pod `fire`.
+Pods `fire` must not be on the same node as the pod `water`.
 
 ```bash
 kubectl get pods -o=custom-columns='POD_NAME:metadata.name,NODE_NAME:spec.nodeName'
@@ -25,6 +25,6 @@ kubectl get pods -o=custom-columns='POD_NAME:metadata.name,NODE_NAME:spec.nodeNa
 ## Cleanup
 
 ```bash
-kubectl delete pod fire
-kubectl delete deployment water
+kubectl delete pod water
+kubectl delete deployment fire
 ```

@@ -21,6 +21,6 @@ kubectl get pv,pvc
 ## Cleanup
 
 ```bash
-kubectl delete pv my-pv
 kubectl delete pvc my-pvc
+kubectl delete pv my-pv
 ```

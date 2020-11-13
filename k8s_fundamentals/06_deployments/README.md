@@ -29,7 +29,7 @@ kubectl set image deployment my-deployment nginx=nginx:1.19.1
 Pay attention to the deleted rollout strategy. Now Kubernetes defaults to the `rollingUpdate` rollout strategy.
 
 ```bash
-kubectl apply -f deployment-v2.yaml
+kubectl replace --force -f deployment-v2.yaml 
 ```
 
 ## Change the image of the deployment and take a look at the second terminal

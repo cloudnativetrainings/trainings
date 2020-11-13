@@ -105,7 +105,7 @@ kubectl get pods
 
 ```bash
 # Render yaml files without deploying them
-helm install my-chart ./my-chart --dry-run -o yaml > dry.run
+helm install my-chart ./my-chart --dry-run > dry.run
 
 # Lint your charts
 helm lint ./my-chart

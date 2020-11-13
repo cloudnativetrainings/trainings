@@ -23,7 +23,7 @@ kubectl get po,ep -o wide
 ## Scale up the deployment
 
 ```bash
-kubectl scale deployment nginx --replicas 3
+kubectl scale deployment my-deployment --replicas 3
 ```
 
 ## Take a look at the created Endpoints and IPs of the pods

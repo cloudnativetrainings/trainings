@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: water
+  name: fire
 spec:
   replicas: 10
   selector:
     matchLabels:
-      app: water
+      app: fire
   template:
     metadata:
       labels:
-        app: water
+        app: fire
     spec:
       containers:
-        - name: water
+        - name: fire
           image: nginx:1.19.2
           resources:
             limits:
@@ -28,5 +28,5 @@ spec:
                   - key: app
                     operator: In
                     values:
-                      - fire
+                      - water
               topologyKey: "kubernetes.io/hostname"
