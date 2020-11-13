@@ -1,6 +1,6 @@
 # Privileged Container
 
-In this course we will get full access to on the host.
+In this course we will get full access to the host.
 
 ## Check processes in a container
 

@@ -76,6 +76,11 @@ Take a look at the running processes in the container. There are additional proc
 ps aux
 ```
 
+Exit the container.
+```bash
+exit
+```
+
 ## Cleanup
 ```bash
 docker rm -f my-busybox

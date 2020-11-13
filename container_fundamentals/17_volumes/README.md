@@ -59,7 +59,7 @@ docker volume inspect <VOLUME-NAME>
 docker inspect docker-managed-volume | grep -A10 Mounts
 
 # Change the content of the file on the host
-echo "text from host" >> <HOST-VOLUME-PATH>/file.txt
+sudo bash -c 'echo text from host >>  <HOST-VOLUME-PATH>/file.txt'
 
 # Printout the content of the file
 # Note that your change is also in
@@ -92,6 +92,7 @@ docker run -it -d --name bind-mount-volume -v $PWD/data:/data volumes:1.0.0
 cat data/file.txt
 
 # Printout the volumes
+# Note that the volume is not managed by docker
 docker volume ls
 
 # Delete the container
@@ -103,10 +104,4 @@ docker volume prune
 # Check the content of the file `file.txt` again
 # Note that the file still exists 
 cat data/file.txt
-```
-
-## Cleanup
-
-```bash
-docker rm -f $(docker ps -qa)
 ```

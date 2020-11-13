@@ -26,5 +26,5 @@ sudo apt install -y docker.io
 This is done not having to sudo each docker command. Note to put this change into effect you have to re-open the cloud shell.
 
 ```bash
-sudo usermod -aG docker ${USER}
+sudo usermod -aG docker $USER
 ```

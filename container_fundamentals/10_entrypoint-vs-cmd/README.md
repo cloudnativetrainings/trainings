@@ -45,9 +45,3 @@ You can also overwrite the executable of the docker image. This comes in very ha
 ```bash
 docker run -it --rm --name entrypoint-vs-cmd --entrypoint sleep entrypoint-vs-cmd:2.0.0 5
 ```
-
-# Cleanup
-
-```bash
-docker rm -f $(docker ps -qa)
-```

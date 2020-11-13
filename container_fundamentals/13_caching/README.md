@@ -39,9 +39,9 @@ Note that all layers starting from the `RUN npm install` layer is not taken from
 ```docker
 FROM node:12
 WORKDIR /app
-COPY package.json ./
+COPY package.json .
 RUN npm install
-COPY server.js ./
+COPY server.js .
 CMD [ "npm", "start" ]
 ```
 
