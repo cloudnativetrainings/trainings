@@ -11,3 +11,9 @@ kubectl create -f ./namespace.yaml
 ```bash
 kubens training
 ```
+
+## Export the public ip of the istio-ingressgateway
+
+```bash
+export INGRESS_HOST=$(kubectl -n istio-system get svc istio-ingressgateway -o jsonpath="{.status.loadBalancer.ingress[0].ip}")
+```

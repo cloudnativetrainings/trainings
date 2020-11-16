@@ -16,7 +16,7 @@ spec:
       terminationGracePeriodSeconds: 0
       containers:
       - name: backend
-        image: eu.gcr.io/loodse-training-playground/loodse-training/backend:1.0.0
+        image: eu.gcr.io/loodse-training-playground/kubernetes-servicemesh/backend:1.0.0
         imagePullPolicy: Always
         ports:
         - name: http

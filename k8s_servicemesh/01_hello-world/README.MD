@@ -1,34 +1,43 @@
-1. Apply the yaml files
+# Expose an application via Istio
+
+# Inspect and create the resources
+
 ```bash
-kubectl apply -f .
+kubectl create -f .
 ```
 
-2. Verify everything is working (you can also visit the URL in a browser)
+# Verify everything is working (you can also visit the URL in a browser)
+
 ```bash
 curl $INGRESS_HOST
 ```
 
-3. Verify the sync state of the proxies
+# Verify the sync state of the proxies
+
 ```bash
 istioctl proxy-status
 ```
 
-4. Verify the curl request in the log files of the `ingressgateway` pod
+# Verify the curl request in the log files of the `ingressgateway` pod
+
 ```bash
 kubectl -n istio-system logs <ISTIO-INGRESS-GATEWAY-POD>
 ```
 
-5. Verify the curl request in the log files of the `istio-proxy` container
+# Verify the curl request in the log files of the `istio-proxy` container
+
 ```bash
 kubectl logs <FRONTEND-POD> -c istio-proxy
 ```
 
-6. Verify the curl request in the log files of the `frontend` container
+# Verify the curl request in the log files of the `frontend` container
+
 ```bash
 kubectl logs <FRONTEND-POD> -c frontend
 ```
 
-7. Clean up
+# Clean up
+
 ```bash
 kubectl delete -f .
 ```
