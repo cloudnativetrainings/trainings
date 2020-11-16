@@ -17,3 +17,8 @@
 ```bash
 install_istioctl.sh
 ```
+
+## Install istio into your cluster
+```bash
+istioctl install --set profile=demo
+```

@@ -1,9 +1,9 @@
 #!/bin/bash
 
-export APP=frontend
+export APP=backend
 export VERSION=1.0.0
 export PROJECT_NAME=loodse-training-playground
-export CONTAINER_REGISTRY=eu.gcr.io/$PROJECT_NAME/loodse-training
+export CONTAINER_REGISTRY=eu.gcr.io/$PROJECT_NAME/kubernetes-servicemesh
 export IMAGE=$CONTAINER_REGISTRY/$APP:$VERSION
 
 docker build -t $IMAGE . --build-arg BUILD_VERSION=$VERSION
