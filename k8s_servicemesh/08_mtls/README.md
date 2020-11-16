@@ -1,6 +1,7 @@
-1. Apply the yaml files
+## Inspect and create the resources
+
 ```bash
-kubectl apply -f .
+kubectl create -f .
 ```
 
 2. Curl the api and note the client cert header

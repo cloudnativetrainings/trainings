@@ -13,7 +13,7 @@ vi ./build_frontend.sh   # set the VERSION from 1.0.0 to 2.0.0
 
 ## Verify the images exist in the container registry via the UI
 
-## Apply the yaml files
+## Inspect and create the resources
 
 ```bash
 kubectl create -f .

@@ -1,46 +1,57 @@
-1. Apply the yaml files
+# Circuit Breaker
+
+In this lab you will configure a circuit breaker.
+
+## Inspect and create the resources
+
 ```bash
-kubectl apply -f .
+kubectl create -f .
 ```
 
-2. Curl the api 
+## Curl the api 
+
 ```bash
 curl $INGRESS_HOST/api
 ```
 
-3. Set the api unavailable
+## Set the api unavailable
+
 ```bash
 curl $INGRESS_HOST/set_available/false
+curl -i $INGRESS_HOST/api
 ```
 
-4. Curl the api 
-```bash
-curl $INGRESS_HOST/api
-```
+## Uncomment the `trafficPolicy` section in the DestinationRule and apply the changes
 
-5. Uncomment the `trafficPolicy` section in the DestinationRule and apply the changes
 ```bash
 kubectl apply -f .
 ```
 
-6. Curl the api 
+## Curl the api 
+
 ```bash
-curl $INGRESS_HOST/api
+curl -i $INGRESS_HOST/api
 ```
 
-7. Take a look at the log files of the `backend` container. Note that there are more than one requests to the api
+## Take a look at the log files of the `backend` container. 
 
-8. Curl the api  and note the different response
+Note that there are more than one requests to the api.
+
+## Curl the api and note the different response
+
 ```bash
-curl $INGRESS_HOST/api
+curl -i $INGRESS_HOST/api
 ```
 
-9. Wait a minute, until the CircuitBreaker is in closed state again and curl the api again
+## Wait a minute
+
+The CircuitBreaker is in closed state again and curl the api again
+
 ```bash
-curl $INGRESS_HOST/api
+curl -i $INGRESS_HOST/api
 ```
 
-10. Clean up
+## Clean up
 ```bash
 kubectl delete -f .
 ```

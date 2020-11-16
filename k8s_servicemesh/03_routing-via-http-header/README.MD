@@ -2,7 +2,7 @@
 
 In this training we will setup routing based on a HTTP header.
 
-## Apply the yaml files
+## Inspect and create the resources
 
 ```bash
 kubectl create -f .

@@ -1,6 +1,8 @@
 # Timeouts
 
-## Apply the yaml files
+In this lab you will configure a timeout.
+
+## Inspect and create the resources
 
 ```bash
 kubectl create -f .

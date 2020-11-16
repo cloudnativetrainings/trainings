@@ -15,9 +15,10 @@ openssl x509 -req -days 365 -CA kubermatic.training.crt -CAkey kubermatic.traini
 kubectl create -n istio-system secret tls frontend.kubermatic.training --key=frontend.kubermatic.training.key --cert=frontend.kubermatic.training.crt
 ```
 
-3. Apply the yaml files
+## Inspect and create the resources
+
 ```bash
-kubectl apply -f .
+kubectl create -f .
 ```
 
 4. Curl the backend service and verify the output

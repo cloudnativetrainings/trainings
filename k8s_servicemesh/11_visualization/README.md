@@ -1,6 +1,7 @@
-1. Apply the yaml files. 
+## Inspect and create the resources
+
 ```bash
-kubectl apply ...
+kubectl create -f .
 ```
 
 2. Make calls to the cat api. If you do not want to miss a cute cat click the link you get in the response.

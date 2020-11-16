@@ -3,6 +3,13 @@
 kubectl apply ...
 ```
 
+## Inspect and create the resources
+
+```bash
+kubectl create -f .
+```
+
+
 2. Curl via the `backend` container. Note that you get a vaild response.
 ```bash
 kubectl exec -it <BACKEND-POD> backend -- curl https://www.google.com

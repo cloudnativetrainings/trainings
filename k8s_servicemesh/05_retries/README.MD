@@ -2,7 +2,7 @@
 
 In this lab you will costumize the retries.
 
-## Apply the yaml files
+## Inspect and create the resources
 
 ```bash
 kubectl create -f .
