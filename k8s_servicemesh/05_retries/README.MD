@@ -1,36 +1,50 @@
-1. Apply the yaml files
+# Retries
+
+In this lab you will costumize the retries.
+
+## Apply the yaml files
+
 ```bash
-kubectl apply -f .
+kubectl create -f .
 ```
 
-2. Curl the api 
+## Curl the api 
+
 ```bash
 curl $INGRESS_HOST/api
 ```
 
-3. Set the delay of the api to 10 seconds
+## Set the delay of the api to 10 seconds
+
 ```bash
 curl $INGRESS_HOST/set_delay/10
 ```
 
-4. Uncomment the `timeout` and the `retries` section of the VirtualService and apply the change
+## Uncomment the `timeout` and the `retries` section of the VirtualService and apply the change
+
 ```bash
-kubectl apply -f .
+vi backend-virtualservice.yaml
+kubectl apply -f backend-virtualservice.yaml
 ```
 
-5. Open a second terminal and watch the logfiles of the backend container
+Open a second terminal and watch the logfiles of the backend container
+
 ```bash
 # Second terminal
-kubectl logs -f <BACKEND-POD> -c backend
+kubectl logs -f <BACKEND-POD> backend
 ```
 
-6. Curl the api and watch the logs in the second terminal 
+## Curl the api 
+
+Watch the logs in the second terminal 
+
 ```bash
 # First terminal
 curl $INGRESS_HOST/api
 ```
 
-7. Clean up
+## Clean up
+
 ```bash
 kubectl delete -f .
 ```

@@ -1,23 +1,31 @@
-1. Apply the yaml files
+# Routing via HTTP header
+
+In this training we will setup routing based on a HTTP header.
+
+## Apply the yaml files
+
 ```bash
-kubectl apply -f .
+kubectl create -f .
 ```
 
-2. Curl the application
+## Make a request for user bob
+
+Verify that the response comes from frontend in version 1.0.0
+
 ```bash
 curl -H "user: bob" $INGRESS_HOST
 ```
 
-3. Verify that the request got a response from Version 1.0.0
+## Make an anonymous request
 
-4. Curl the application
+Verify that the response comes from frontend in version 2.0.0
+
 ```bash
-curl -H $INGRESS_HOST
+curl -H "user: bob" $INGRESS_HOST
 ```
 
-5. Verify that the request got a response from Version 2.0.0
+## Clean up
 
-6. Clean up
 ```bash
 kubectl delete -f .
 ```

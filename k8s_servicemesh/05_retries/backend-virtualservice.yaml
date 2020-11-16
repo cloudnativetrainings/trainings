@@ -12,8 +12,8 @@ spec:
     - route:
         - destination:
             host: backend.training.svc.cluster.local
-      # timeout: 8s
-      # retries:
-      #   attempts: 3
-      #   perTryTimeout: 2s
-      #   retryOn: 5xx
+#      timeout: 8s
+#      retries:
+#        attempts: 3
+#        perTryTimeout: 2s
+#        retryOn: 5xx
