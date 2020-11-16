@@ -4,4 +4,3 @@ metadata:
   name: training
   labels:
     istio-injection: enabled
-

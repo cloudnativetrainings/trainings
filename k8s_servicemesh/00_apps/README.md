@@ -11,9 +11,3 @@
 ```bash
 ./build_frontend.sh
 ```
-
-## Create our training namespace in which istio injection is enabled
-
-```bash
-kubectl create -f ./namespace/namespace.yaml
-```

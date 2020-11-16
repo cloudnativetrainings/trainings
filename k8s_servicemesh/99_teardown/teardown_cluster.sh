@@ -7,7 +7,7 @@ then
 fi
 export REGION=europe-west3
 export ZONE=europe-west3-a
-export CLUSTER_NAME=kubernetes-servicemesh
+export CLUSTER_NAME=kubernetes-fundamentals
 export NETWORK_NAME=$CLUSTER_NAME
 export FIREWALL_NAME=$CLUSTER_NAME
 
