@@ -3,13 +3,13 @@
 ## Build and push the image for the app `backend`
 
 ```bash
-./backend/build.sh
+./build_backend.sh
 ```
 
 ## Build and push the image for the app `frontend`
 
 ```bash
-./frontend/build.sh
+./build_frontend.sh
 ```
 
 ## Create our training namespace in which istio injection is enabled

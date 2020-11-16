@@ -6,6 +6,6 @@ export PROJECT_NAME=loodse-training-playground
 export CONTAINER_REGISTRY=eu.gcr.io/$PROJECT_NAME/kubernetes-servicemesh
 export IMAGE=$CONTAINER_REGISTRY/$APP:$VERSION
 
-docker build -t $IMAGE . --build-arg BUILD_VERSION=$VERSION
+docker build -t $IMAGE ./backend/ --build-arg BUILD_VERSION=$VERSION
 docker push $IMAGE
 
