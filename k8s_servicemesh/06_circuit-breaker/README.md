@@ -11,25 +11,13 @@ kubectl create -f .
 ## Curl the api 
 
 ```bash
-curl $INGRESS_HOST/api
+curl -i $INGRESS_HOST/api
 ```
 
 ## Set the api unavailable
 
 ```bash
 curl $INGRESS_HOST/set_available/false
-curl -i $INGRESS_HOST/api
-```
-
-## Uncomment the `trafficPolicy` section in the DestinationRule and apply the changes
-
-```bash
-kubectl apply -f .
-```
-
-## Curl the api 
-
-```bash
 curl -i $INGRESS_HOST/api
 ```
 

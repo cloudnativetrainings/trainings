@@ -12,6 +12,8 @@ spec:
     metadata:
       labels:
         app: frontend
+      annotations:
+        sidecar.istio.io/rewriteAppHTTPProbers: "false"        
     spec:
       terminationGracePeriodSeconds: 0
       containers:
