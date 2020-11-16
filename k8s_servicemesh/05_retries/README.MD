@@ -1,6 +1,6 @@
 # Retries
 
-In this lab you will costumize the retries.
+In this task you will costumize the retries.
 
 ## Inspect and create the resources
 

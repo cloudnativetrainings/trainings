@@ -1,6 +1,6 @@
 # Timeouts
 
-In this lab you will configure a timeout.
+In this task you will configure a timeout.
 
 ## Inspect and create the resources
 

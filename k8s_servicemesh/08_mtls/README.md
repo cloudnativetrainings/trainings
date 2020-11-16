@@ -1,48 +1,87 @@
+# Mutual TLS
+
 ## Inspect and create the resources
 
 ```bash
 kubectl create -f .
 ```
 
-2. Curl the api and note the client cert header
+## Curl the api and note the client cert header
+
 ```bash
 curl -H "Host: backend.training.svc.cluster.local" $INGRESS_HOST/mtls
 ```
 
-3. Curl the api from the `frontend` container and note the client cert header
+Note an output like this verifies tls communication
+```
+mtls request - client cert header By=spiffe://cluster.local/ns/training/sa/default;Hash=7a27fff898812a54990ae99edd24346880a7c1614cf031077139f68ca571d0a9;Subject="";URI=spiffe://cluster.local/ns/istio-system/sa/istio-ingressgateway-service-account
+```
+
+## Curl the api from the `frontend` container and note the client cert header
+
 ```bash
 kubectl exec -it <FRONTEND-POD> -c frontend -- curl backend:8080/mtls
 ```
 
-4. Make kiali available - change the type from ClusterIP to LoadBalancer and set the port to the same as the NodePort Port
+Note an output like this verifies tls communication
+```
+mtls request - client cert header By=spiffe://cluster.local/ns/training/sa/default;Hash=7a27fff898812a54990ae99edd24346880a7c1614cf031077139f68ca571d0a9;Subject="";URI=spiffe://cluster.local/ns/istio-system/sa/istio-ingressgateway-service-account
+```
 
-5. Verify TLS with kiali. Use the External-IP of the kiali and the NodePort. Check the Graph and enable the Security Display Setting. Note that there has to be traffic on the backend service.
+## Install Kiali
 
-6. Verify TLS via istioctl
+
+
+kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.7/samples/addons/kiali.yaml
+kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.7/samples/addons/kiali.yaml
+
+TBD twice due to CRDs
+
+ change the type from ClusterIP to LoadBalancer and set the port to the same as the NodePort Port
+
+kubectl -n istio-system edit svc kiali 
+
+kubectl delete -f https://raw.githubusercontent.com/istio/istio/release-1.7/samples/addons/kiali.yaml
+
+
+## Verify TLS with kiali. Use the External-IP of the kiali and the NodePort. Check the Graph and enable the Security Display Setting. Note that there has to be traffic on the backend service.
+
+## Verify TLS via istioctl
+
+```bash
 istioctl x authz check <BACKEND-POD>.training
+```
 
-7. Change the mode of the PeerAuthentication to DISABLE and apply the changes
-change peerauthentication and apply
+## Change the mode of the PeerAuthentication to DISABLE and apply the changes
+
+Change peerauthentication and apply
+
 ```bash
 kubectl apply -f .
 ```
 
-8. Curl the api and note the client cert header
+## Curl the api and note the client cert header
+
 ```bash
 curl -H "Host: backend.training.svc.cluster.local" $INGRESS_HOST/mtls
 ```
 
-9. Curl the api from the `frontend` container and note the client cert header
+## Curl the api from the `frontend` container and note the client cert header
+
 ```bash
 kubectl exec -it <FRONTEND-POD> -c frontend -- curl backend:8080/mtls
 ```
 
-10. Verify TLS with kiali. Use the External-IP of the kiali and the NodePort. Check the Graph and enable the Security Display Setting. Note that there has to be traffic on the backend service.
+## Verify TLS with kiali. Use the External-IP of the kiali and the NodePort. Check the Graph and enable the Security Display Setting. Note that there has to be traffic on the backend service.
 
-11. Verify TLS via istioctl
+## Verify TLS via istioctl
+
+```bash
 istioctl x authz check <BACKEND-POD>.training
+```
 
-12. Clean up
+## Clean up
+
 ```bash
 kubectl delete -f .
 ```

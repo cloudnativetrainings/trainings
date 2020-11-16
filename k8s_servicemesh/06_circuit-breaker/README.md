@@ -1,6 +1,6 @@
 # Circuit Breaker
 
-In this lab you will configure a circuit breaker.
+In this task you will configure a circuit breaker.
 
 ## Inspect and create the resources
 
@@ -18,6 +18,15 @@ curl -i $INGRESS_HOST/api
 
 ```bash
 curl $INGRESS_HOST/set_available/false
+```
+
+## Curl the api twice
+
+Note that 
+* the first response is a 503 from the backend application
+* the second response is a 503 from the istio proxy (the circuit breaker is in open mode)
+
+```bash
 curl -i $INGRESS_HOST/api
 ```
 
@@ -25,15 +34,9 @@ curl -i $INGRESS_HOST/api
 
 Note that there are more than one requests to the api.
 
-## Curl the api and note the different response
-
-```bash
-curl -i $INGRESS_HOST/api
-```
-
 ## Wait a minute
 
-The CircuitBreaker is in closed state again and curl the api again
+After one minute the CircuitBreaker is in closed state again and curl the api. The first response will be a 503 from the backend application.
 
 ```bash
 curl -i $INGRESS_HOST/api
