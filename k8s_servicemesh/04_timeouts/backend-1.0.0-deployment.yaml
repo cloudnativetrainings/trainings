@@ -33,10 +33,12 @@ spec:
               cpu: 500m
               memory: 512Mi
           livenessProbe:
+            initialDelaySeconds: 10
             httpGet:
               path: /actuator/health/liveness
               port: 8080
           readinessProbe:
+            initialDelaySeconds: 10
             httpGet:
               path: /actuator/health/readiness
               port: 8080
