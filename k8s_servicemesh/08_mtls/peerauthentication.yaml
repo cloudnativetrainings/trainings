@@ -5,5 +5,4 @@ metadata:
   name: disable
 spec:
   mtls:
-    mode: PERMISSIVE
 #    mode: DISABLE

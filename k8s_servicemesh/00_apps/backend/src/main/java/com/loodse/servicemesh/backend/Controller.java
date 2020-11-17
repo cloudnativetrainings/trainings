@@ -1,7 +1,5 @@
 package com.loodse.servicemesh.backend;
 
-import java.security.DrbgParameters.Reseed;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +26,7 @@ public class Controller {
     @RequestMapping("/")
     public String root() {
         LOG.info("Request to /");
-        return buildProperties.getName() + " " + buildProperties.getVersion();
+        return buildProperties.getName() + " " + buildProperties.getVersion() + "\n";
     }
 
     @RequestMapping("/api")
@@ -36,9 +34,9 @@ public class Controller {
         LOG.info("Request to /api: timeout {} seconds, is available {}", this.delay, this.available);
         Thread.sleep(delay * 1000);
         if (this.available) {
-            return ResponseEntity.ok("api available (delay " + delay + " seconds)");
+            return ResponseEntity.ok("api available (delay " + delay + " seconds)" + "\n");
         } else {
-            return new ResponseEntity<>("api is not available (delay " + delay + " seconds)",
+            return new ResponseEntity<>("api is not available (delay " + delay + " seconds)" + "\n",
                     HttpStatus.SERVICE_UNAVAILABLE);
         }
     }
@@ -47,10 +45,10 @@ public class Controller {
     public ResponseEntity<String> mtls(@RequestHeader(name = "X-Forwarded-Client-Cert", required = false) String cert) {
         if (cert == null) {
             LOG.info("Request to /mtls - no client cert header");
-            return ResponseEntity.ok("mtls request - no client cert header");
+            return ResponseEntity.ok("mtls request - no client cert header" + "\n");
         }
         LOG.info("Request to /mtls - client cert header {}", cert);
-        return ResponseEntity.ok("mtls request - client cert header " + cert);
+        return ResponseEntity.ok("mtls request - client cert header " + cert + "\n");
     }
 
     @RequestMapping("/cats")
@@ -58,21 +56,21 @@ public class Controller {
         LOG.info("Request to /cats");
         ResponseEntity<String> response = restTemplate.getForEntity("https://api.thecatapi.com/v1/images/search",
                 String.class);
-        return ResponseEntity.ok(response.getBody());
+        return ResponseEntity.ok(response.getBody() + "\n");
     }
 
     @RequestMapping("/set_available/{available}")
     public String setAvailable(@PathVariable("available") boolean available) {
         LOG.info("Request to /set_available - {}", available);
         this.available = available;
-        return "set available: " + this.available;
+        return "set available: " + this.available  + "\n";
     }
 
     @RequestMapping("/set_delay/{delay}")
     public String setTimeout(@PathVariable("delay") Integer delay) {
         LOG.info("Request to /set_delay - {}", delay);
         this.delay = delay;
-        return "set delay: " + this.delay;
+        return "set delay: " + this.delay + "\n";
     }
 
 }

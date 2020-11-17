@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.info.BuildProperties;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,7 +21,7 @@ public class Controller {
     @RequestMapping("/")
     public String root() {
         LOG.info("Request to /");
-        return buildProperties.getName() + " " + buildProperties.getVersion();
+        return buildProperties.getName() + " " + buildProperties.getVersion() + "\n";
     }
 
     @RequestMapping("/cats")
@@ -30,7 +29,7 @@ public class Controller {
         LOG.info("Request to /cats");
         ResponseEntity<String> response = restTemplate.getForEntity("http://backend:8080/cats",
                 String.class);
-        return ResponseEntity.ok(response.getBody());
+        return ResponseEntity.ok(response.getBody() + "\n");
     }
 
 }
