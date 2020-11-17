@@ -1,23 +1,50 @@
+# Visualization
+
 ## Inspect and create the resources
 
 ```bash
 kubectl create -f .
 ```
 
-2. Make calls to the cat api. If you do not want to miss a cute cat click the link you get in the response.
+## Make calls to the cat api. If you do not want to miss a cute cat click the link you get in the response.
+
 ```bash
 while true; do curl -H "Host: frontend.training.svc.cluster.local" $INGRESS_HOST/cats; sleep 10; done;
 ```
 
-3. Make prometheus available - change the type from ClusterIP to LoadBalancer and set the port to the same as the NodePort Port
+## Make Prometheus available 
 
-5. Make grafana available - change the type from ClusterIP to LoadBalancer and set the port to the same as the NodePort Port
+By default the Prometheus is of type ClusterIP. Let's change this. Change the service type from `ClusterIP` to `LoadBalancer` and set the `port` and the `nodePort` in the http port both to 30001 like this:
 
-6. Make jaeger available (the service is called tracing) - change the type from ClusterIP to LoadBalancer and set the port to the same as the NodePort Port
+```bash
+kubectl -n istio-system edit svc prometheus 
+```
 
-7. Play around with those tools
+```yaml
+spec:
+  ...
+  ports:
+  - name: http
+    nodePort: 30001
+    port: 30001
+  ...
+  type: LoadBalancer
+```
 
-8. Clean up
+Get the LoadBalancer IP of Kiali and access it via the Browser via `http://<KIALI-EXTERNAL-IP>:30000`
+
+## Make grafana available 
+
+Change the type from ClusterIP to LoadBalancer and set the port to the same as the NodePort Port
+
+## Make jaeger available (the service is called tracing) 
+
+Change the type from ClusterIP to LoadBalancer and set the port to the same as the NodePort Port
+
+## Play around with those tools
+
+## Clean up
+
 ```bash
 kubectl delete -f .
 ```

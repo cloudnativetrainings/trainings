@@ -23,7 +23,7 @@ kubens training
 ## Create the Deployments and Services
 
 ```bash
-kubectl create -f .
+kubectl create -f ./k8s
 ```
 
 ## Export the public ip of the istio-ingressgateway

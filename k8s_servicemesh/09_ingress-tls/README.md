@@ -1,4 +1,9 @@
-1. Create the certs
+# Ingress TLS
+
+In this task you will setup a certificate to be used for inbound traffic.
+
+## Create the certs
+
 ```bash
 # create root certificate
 openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -subj '/O=kubermatic training/CN=kubermatic.training' -keyout kubermatic.training.key -out kubermatic.training.crt
@@ -10,7 +15,8 @@ openssl req -out frontend.kubermatic.training.csr -newkey rsa:2048 -nodes -keyou
 openssl x509 -req -days 365 -CA kubermatic.training.crt -CAkey kubermatic.training.key -set_serial 0 -in frontend.kubermatic.training.csr -out frontend.kubermatic.training.crt
 ```
 
-2. Create a Secret in the `istio-system` namespace
+## Create a Secret in the `istio-system` namespace
+
 ```bash
 kubectl create -n istio-system secret tls frontend.kubermatic.training --key=frontend.kubermatic.training.key --cert=frontend.kubermatic.training.crt
 ```
@@ -21,14 +27,26 @@ kubectl create -n istio-system secret tls frontend.kubermatic.training --key=fro
 kubectl create -f .
 ```
 
-4. Curl the backend service and verify the output
+## Verify inbound TLS
+
+### Verify via curl
+
+```bash
+while true; do curl -v --resolve "frontend.kubermatic.training:443:$INGRESS_HOST" --cacert kubermatic.training.crt "https://frontend.kubermatic.training:443/"; sleep 5; done
+```
+
+#### Verify TLS with Kiali
+
+Check the Graph and enable the Security Display Setting. There has to be a TLS symbol on the edges.
+
+## Curl the backend service and verify the output
+
 ```bash
 curl -v --resolve "frontend.kubermatic.training:443:$INGRESS_HOST"  --cacert kubermatic.training.crt "https://frontend.kubermatic.training:443/"
 ```
 
-5. Verify TLS with kiali. Use the External-IP of the kiali and the NodePort. Check the Graph and enable the Security Display Setting. Note that there has to be traffic on the backend service.
+## Clean up
 
-6. Clean up
 ```bash
 kubectl delete -f .
 kubectl -n istio-system delete secret frontend.kubermatic.training

@@ -1,7 +1,4 @@
-1. Apply the yaml files. Do not apply the google-serviceentry.yaml file yet.
-```bash
-kubectl apply ...
-```
+# Egress Traffic
 
 ## Inspect and create the resources
 
@@ -9,45 +6,84 @@ kubectl apply ...
 kubectl create -f .
 ```
 
+## Allow all outbound traffic 
 
-2. Curl via the `backend` container. Note that you get a vaild response.
+This is the default setting in Istio.
+
+### Curl via the `backend` container. 
+
+Note that you get a vaild response. You can reach servers outside your cluster.
+
 ```bash
 kubectl exec -it <BACKEND-POD> backend -- curl https://www.google.com
 ```
 
-3. Verify the call to the external service in Kiali
+### Verify the call to the external service in Kiali
 
-4. Get the Istio ConfigMap
+Note that the node called PassthroughCluster appears.
+
+## Permit all outbound traffic 
+
+Run istioctl with the following flag.
+
 ```bash
-kubectl -n istio-system  get cm istio -o yaml > 10_egress/istio-cm.yaml
+istioctl install --set meshConfig.outboundTrafficPolicy.mode=REGISTRY_ONLY
 ```
 
-5. Change the configmap in the `mesh` section. Note that this change can take some time to take effect.
+You can verify your setting via the following. Note that the field `outboundTrafficPolicy.mode` has to be `REGISTRY_ONLY`
+
+```bash
+kubectl -n istio-system  get cm istio -o jsonpath="{.data.mesh}"
+```
+
+### Curl via the `backend` container. 
+
+Note that you do not get a vaild response. You cannot reach servers outside your cluster.
+
+```bash
+kubectl exec -it <BACKEND-POD> backend -- curl https://www.google.com
+```
+
+### Verify the call to the external service in Kiali
+
+Note that the node called BlackHoleCluster appears.
+
+### Create the `google-serviceentry.yaml` file and apply it to the cluster
+
 ```yaml
-    outboundTrafficPolicy:
-      mode: REGISTRY_ONLY
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  name: google
+spec:
+  hosts:
+    - www.google.com
+  ports:
+    - number: 443
+      name: https
+      protocol: HTTPS
+  resolution: DNS
+  location: MESH_EXTERNAL
 ```
 
-6. Curl via the `backend` container. Note that you do not get a valid response.
+```bash
+kubectl create -f google-serviceentry.yaml
+```
+
+### Curl via the `backend` container
+
+Note that you get a valid response.
+
 ```bash
 kubectl exec -it <BACKEND-POD> backend -- curl https://www.google.com
 ```
 
-7. Verify the call to the external service in Kiali
+## Verify the call to the external service in Kiali
 
-8. Apply the google-serviceentry.yaml file
-```bash
-kubectl apply -f .
-```
+Note that the node called `google` appears.
 
-9. Curl via the `backend` container. Note that you get a response.
-```bash
-kubectl exec -it <BACKEND-POD> backend -- curl https://www.google.com
-```
+## Clean up
 
-10. Verify the call to the external service in Kiali
-
-11. Clean up
 ```bash
 kubectl delete -f .
 ```
