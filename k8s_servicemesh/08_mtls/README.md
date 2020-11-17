@@ -10,7 +10,7 @@ By default mtls is enabled in istio.
 kubectl create -f .
 ```
 
-## Verify encrypted communication
+## Encrypted communication
 
 ### Verify via the application
 
@@ -45,12 +45,15 @@ mtls request - client cert header By=spiffe://cluster.local/ns/training/sa/defau
 kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.7/samples/addons/prometheus.yaml
 # Install Kiali, not you have to apply the yaml twice due to CRDs
 kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.7/samples/addons/kiali.yaml
-kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.7/samples/addons/kiali.yaml
 ```
 
-#### Adapt the Kiali Service
+#### Make the Kiali Service accessible via browser
 
 By default the Kiali is of type ClusterIP. Let's change this. Change the service type from `ClusterIP` to `LoadBalancer` and set the `port` and the `nodePort` in the http port both to 30000 like this:
+
+```bash
+kubectl -n istio-system edit svc kiali 
+```
 
 ```yaml
 spec:
@@ -65,23 +68,29 @@ spec:
   type: LoadBalancer
 ```
 
+Get the LoadBalancer IP of Kiali and access it via the Browser via `http://<KIALI-EXTERNAL-IP>:30000`
+
+#### Put some traffic onto our services
+
+Do this in seperate cloud shells.
+
 ```bash
-kubectl -n istio-system edit svc kiali 
+while true; do curl -H "Host: backend.training.svc.cluster.local" $INGRESS_HOST/mtls; sleep 5; done
 ```
 
+```bash
+while true; do kubectl exec -it <FRONTENT-POD> -c frontend -- curl backend:8080/mtls; sleep 5; done
+```
 
------> do bin i...
+#### Verify TLS with Kiali
 
+Check the Graph and enable the Security Display Setting. There has to be a TLS symbol on the edges.
 
+## Unencrypted communication
 
-2 tabs
-while true; do curl -H "Host: backend.training.svc.cluster.local" $INGRESS_HOST/mtls; sleep 5; done
-while true; do kubectl exec -it frontend-1.0.0-7ffd58595c-w5q2d -c frontend -- curl backend:8080/mtls; sleep 5; done
+### Costumize the namespace `training`
 
-
-
-## Verify TLS with kiali. Use the External-IP of the kiali and the NodePort. Check the Graph and enable the Security Display Setting. Note that there has to be traffic on the backend service.
-
+Create the `disable-tls.yaml` file and create the PeerAuthentication.
 
 ```yaml
 apiVersion: "security.istio.io/v1beta1"
@@ -91,32 +100,37 @@ metadata:
   name: disable
 spec:
   mtls:
-#    mode: DISABLE
+    mode: DISABLE
 ```
-
-## Change the mode of the PeerAuthentication to DISABLE and apply the changes
-
-Change peerauthentication and apply
 
 ```bash
-kubectl apply -f .
+kubectl create -f disable-tls.yaml
+```
+### Verify via the application
+
+Verify your Cloud Shell curling the backend application directly.
+
+Note an output like this verifies tls communication
+```
+mtls request - no client cert header
 ```
 
-## Curl the api and note the client cert header
+Verify your Cloud Shell curling the backend application from the frontend container.
 
-```bash
-curl -H "Host: backend.training.svc.cluster.local" $INGRESS_HOST/mtls
+Note an output like this verifies tls communication
+```
+mtls request - no client cert header
 ```
 
-## Curl the api from the `frontend` container and note the client cert header
+### Verify via Kiali
 
-```bash
-kubectl exec -it <FRONTEND-POD> -c frontend -- curl backend:8080/mtls
-```
+#### Verify TLS with Kiali
 
-## Verify TLS with kiali. Use the External-IP of the kiali and the NodePort. Check the Graph and enable the Security Display Setting. Note that there has to be traffic on the backend service.
+Check the Graph and enable the Security Display Setting. There has to be no TLS symbol on the edges.
 
 ## Clean up
+
+Stop curl-while-loops in the Cloud Shells.
 
 ```bash
 kubectl delete -f .

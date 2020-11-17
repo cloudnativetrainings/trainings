@@ -27,13 +27,13 @@ kubectl -n istio-system logs <ISTIO-INGRESS-GATEWAY-POD>
 ## Verify the curl request in the log files of the `istio-proxy` container
 
 ```bash
-kubectl logs <FRONTEND-POD> istio-proxy
+kubectl logs <BACKEND-POD> istio-proxy
 ```
 
-## Verify the curl request in the log files of the `frontend` container
+## Verify the curl request in the log files of the `backend` container
 
 ```bash
-kubectl logs <FRONTEND-POD> frontend
+kubectl logs <BACKEND-POD> backend
 ```
 
 ## Clean up
