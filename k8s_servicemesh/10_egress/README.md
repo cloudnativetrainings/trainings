@@ -21,7 +21,7 @@ kubectl exec -it <BACKEND-POD> backend -- curl https://www.google.com
 ### Verify the call to the external service in Kiali
 
 ```bash
-istioctl dashbaord kiali
+istioctl dashboard kiali
 ```
 
 Use the feature `Web Preview` of Google Cloud Shell. You have to change the port.
@@ -53,7 +53,7 @@ kubectl exec -it <BACKEND-POD> backend -- curl https://www.google.com
 ### Verify the call to the external service in Kiali
 
 ```bash
-istioctl dashbaord kiali
+istioctl dashboard kiali
 ```
 
 Use the feature `Web Preview` of Google Cloud Shell. You have to change the port.
@@ -93,7 +93,7 @@ kubectl exec -it <BACKEND-POD> backend -- curl https://www.google.com
 ## Verify the call to the external service in Kiali
 
 ```bash
-istioctl dashbaord kiali
+istioctl dashboard kiali
 ```
 
 Use the feature `Web Preview` of Google Cloud Shell. You have to change the port.

@@ -12,24 +12,37 @@ kubectl create -f .
 while true; do curl -H "Host: frontend.training.svc.cluster.local" $INGRESS_HOST/cats; sleep 10; done;
 ```
 
-## Make Prometheus available 
+## Make Kiali available 
 
 ```bash
-istioctl dashbaord kiali
+istioctl dashboard kiali
 ```
 
 Use the feature `Web Preview` of Google Cloud Shell. You have to change the port.
 
+## Make Prometheus available 
+
+```bash
+istioctl dashboard prometheus
+```
+
+Use the feature `Web Preview` of Google Cloud Shell. You have to change the port.
 
 ## Make grafana available 
 
-Change the type from ClusterIP to LoadBalancer and set the port to the same as the NodePort Port
+```bash
+istioctl dashboard grafana
+```
 
-## Make jaeger available (the service is called tracing) 
+Use the feature `Web Preview` of Google Cloud Shell. You have to change the port.
 
-Change the type from ClusterIP to LoadBalancer and set the port to the same as the NodePort Port
+## Make jaeger available 
 
-## Play around with those tools
+```bash
+istioctl dashboard jaeger
+```
+
+Use the feature `Web Preview` of Google Cloud Shell. You have to change the port.
 
 ## Clean up
 

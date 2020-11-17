@@ -39,7 +39,7 @@ mtls request - client cert header By=spiffe://cluster.local/ns/training/sa/defau
 ### Verify via Kiali
 
 ```bash
-istioctl dashbaord kiali
+istioctl dashboard kiali
 ```
 
 Use the feature `Web Preview` of Google Cloud Shell. You have to change the port.
@@ -99,7 +99,7 @@ mtls request - no client cert header
 ### Verify via Kiali
 
 ```bash
-istioctl dashbaord kiali
+istioctl dashboard kiali
 ```
 
 Use the feature `Web Preview` of Google Cloud Shell. You have to change the port.
