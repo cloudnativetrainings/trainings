@@ -14,24 +14,12 @@ while true; do curl -H "Host: frontend.training.svc.cluster.local" $INGRESS_HOST
 
 ## Make Prometheus available 
 
-By default the Prometheus is of type ClusterIP. Let's change this. Change the service type from `ClusterIP` to `LoadBalancer` and set the `port` and the `nodePort` in the http port both to 30001 like this:
-
 ```bash
-kubectl -n istio-system edit svc prometheus 
+istioctl dashbaord kiali
 ```
 
-```yaml
-spec:
-  ...
-  ports:
-  - name: http
-    nodePort: 30001
-    port: 30001
-  ...
-  type: LoadBalancer
-```
+Use the feature `Web Preview` of Google Cloud Shell. You have to change the port.
 
-Get the LoadBalancer IP of Kiali and access it via the Browser via `http://<KIALI-EXTERNAL-IP>:30000`
 
 ## Make grafana available 
 

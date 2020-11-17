@@ -37,6 +37,12 @@ while true; do curl -v --resolve "frontend.kubermatic.training:443:$INGRESS_HOST
 
 #### Verify TLS with Kiali
 
+```bash
+istioctl dashbaord kiali
+```
+
+Use the feature `Web Preview` of Google Cloud Shell. You have to change the port.
+
 Check the Graph and enable the Security Display Setting. There has to be a TLS symbol on the edges.
 
 ## Curl the backend service and verify the output

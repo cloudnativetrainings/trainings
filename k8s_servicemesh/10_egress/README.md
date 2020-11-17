@@ -20,6 +20,12 @@ kubectl exec -it <BACKEND-POD> backend -- curl https://www.google.com
 
 ### Verify the call to the external service in Kiali
 
+```bash
+istioctl dashbaord kiali
+```
+
+Use the feature `Web Preview` of Google Cloud Shell. You have to change the port.
+
 Note that the node called PassthroughCluster appears.
 
 ## Permit all outbound traffic 
@@ -45,6 +51,12 @@ kubectl exec -it <BACKEND-POD> backend -- curl https://www.google.com
 ```
 
 ### Verify the call to the external service in Kiali
+
+```bash
+istioctl dashbaord kiali
+```
+
+Use the feature `Web Preview` of Google Cloud Shell. You have to change the port.
 
 Note that the node called BlackHoleCluster appears.
 
@@ -79,6 +91,12 @@ kubectl exec -it <BACKEND-POD> backend -- curl https://www.google.com
 ```
 
 ## Verify the call to the external service in Kiali
+
+```bash
+istioctl dashbaord kiali
+```
+
+Use the feature `Web Preview` of Google Cloud Shell. You have to change the port.
 
 Note that the node called `google` appears.
 

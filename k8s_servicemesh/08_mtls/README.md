@@ -38,37 +38,11 @@ mtls request - client cert header By=spiffe://cluster.local/ns/training/sa/defau
 
 ### Verify via Kiali
 
-#### Install Kiali
-
 ```bash
-# Kiali is depending on Prometheus, so you have to install Prometheus upfront
-kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.7/samples/addons/prometheus.yaml
-# Install Kiali, not you have to apply the yaml twice due to CRDs
-kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.7/samples/addons/kiali.yaml
+istioctl dashbaord kiali
 ```
 
-#### Make the Kiali Service accessible via browser
-
-By default the Kiali is of type ClusterIP. Let's change this. Change the service type from `ClusterIP` to `LoadBalancer` and set the `port` and the `nodePort` in the http port both to 30000 like this:
-
-```bash
-kubectl -n istio-system edit svc kiali 
-```
-
-```yaml
-spec:
-  ...
-  ports:
-  - name: http
-    nodePort: 30000
-    port: 30000
-    protocol: TCP
-    targetPort: 20001
-  ...
-  type: LoadBalancer
-```
-
-Get the LoadBalancer IP of Kiali and access it via the Browser via `http://<KIALI-EXTERNAL-IP>:30000`
+Use the feature `Web Preview` of Google Cloud Shell. You have to change the port.
 
 #### Put some traffic onto our services
 
@@ -123,6 +97,12 @@ mtls request - no client cert header
 ```
 
 ### Verify via Kiali
+
+```bash
+istioctl dashbaord kiali
+```
+
+Use the feature `Web Preview` of Google Cloud Shell. You have to change the port.
 
 #### Verify TLS with Kiali
 
