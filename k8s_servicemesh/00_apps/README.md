@@ -20,6 +20,12 @@ kubectl create -f ./namespace.yaml
 kubens training
 ```
 
+## Create the Deployments and Services
+
+```bash
+kubectl create -f .
+```
+
 ## Export the public ip of the istio-ingressgateway
 
 ```bash
