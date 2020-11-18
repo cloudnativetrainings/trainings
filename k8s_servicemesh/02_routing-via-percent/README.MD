@@ -3,16 +3,6 @@
 
 In this training you will learn how to route some traffic towards different versions of an application.
 
-## Build, dockerize and push frontend:2.0.0 image
-
-```bash
-cd 00_apps
-vi ./build_frontend.sh   # set the VERSION from 1.0.0 to 2.0.0
-./build_frontend.sh
-```
-
-## Verify the images exist in the container registry via the UI
-
 ## Inspect and create the resources
 
 ```bash
