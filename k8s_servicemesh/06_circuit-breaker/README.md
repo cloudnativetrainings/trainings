@@ -39,6 +39,7 @@ Note that there are more than one requests to the api.
 After one minute the CircuitBreaker is in closed state again and curl the api. The first response will be a 503 from the backend application.
 
 ```bash
+curl $INGRESS_HOST/set_available/true
 curl -i $INGRESS_HOST/api
 ```
 

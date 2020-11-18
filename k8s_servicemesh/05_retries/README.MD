@@ -46,5 +46,6 @@ curl $INGRESS_HOST/api
 ## Clean up
 
 ```bash
+curl $INGRESS_HOST/set_delay/0
 kubectl delete -f .
 ```

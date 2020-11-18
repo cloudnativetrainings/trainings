@@ -17,7 +17,7 @@ curl -i $INGRESS_HOST/api
 ## Uncomment the `fault` section of the VirtualService and apply the changes
 
 ```bash
-kubectl apply -f .
+kubectl apply -f backend-virtualservice.yaml
 ```
 
 ## Curl the api
