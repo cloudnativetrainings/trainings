@@ -10,12 +10,15 @@
 
 ```bash
 ./setup_cluster.sh
+. <(kubectl completion bash)
+kubectl get nodes
 ```
 
 ## Install istioctl
 
 ```bash
 ./install_istioctl.sh
+istioctl version
 ```
 
 ## Install istio into your cluster
