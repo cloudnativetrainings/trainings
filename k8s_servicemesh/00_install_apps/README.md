@@ -11,7 +11,7 @@
 ## Create our training namespace in which istio injection is enabled
 
 ```bash
-kubectl create -f ./namespace.yaml
+kubectl create -f k8s/namespace.yaml
 ```
 
 ## Switch to the namespace `training`
