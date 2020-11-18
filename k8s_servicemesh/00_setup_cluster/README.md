@@ -15,7 +15,7 @@
 ## Install istioctl
 
 ```bash
-install_istioctl.sh
+./install_istioctl.sh
 ```
 
 ## Install istio into your cluster
