@@ -28,7 +28,7 @@ Use the feature `Web Preview` of Google Cloud Shell. You have to change the port
 
 Note that the node called PassthroughCluster appears.
 
-## Permit all outbound traffic 
+## Disallow all outbound traffic 
 
 Run istioctl with the following flag.
 
