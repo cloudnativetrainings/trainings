@@ -21,7 +21,7 @@ curl -H "user: bob" $INGRESS_HOST
 Verify that the response comes from frontend in version 2.0.0
 
 ```bash
-curl -H "user: bob" $INGRESS_HOST
+curl $INGRESS_HOST
 ```
 
 ## Clean up
