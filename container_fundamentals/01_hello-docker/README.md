@@ -20,7 +20,11 @@ apache2ctl -DFOREGROUND
 
 ## Visit the welcome page in your browser 
 
-To get the external IP you can visit https://console.cloud.google.com/networking/addresses/.
+To get the external IP of the vm use
+```bash
+gcloud compute instances list --filter="name=(container-fundamentals)"
+```
+or visit https://console.cloud.google.com/networking/addresses/.
 
 ## Stop the process in the Docker container
 

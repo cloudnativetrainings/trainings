@@ -17,6 +17,11 @@ docker stop my-nginx
 
 Stop the started container. The main process inside the container will receive `SIGTERM`, and after a grace period, `SIGKILL`.
 
+Check the exit code
+```bash
+docker ps -a
+```
+
 ## Restart a stopped container
 
 ```bash
@@ -28,6 +33,11 @@ docker restart my-nginx
 If you have e.g. an hanging container, it's possible to send the `SIGKILL` signal directly. Try
 ```bash
 docker kill my-nginx
+```
+
+Check the exit code and compare it to the previous
+```bash
+docker ps -a
 ```
 
 The container is still startable

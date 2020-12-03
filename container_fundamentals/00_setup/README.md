@@ -10,7 +10,11 @@ You wil be asked about the project name.
 
 ## SSH into the new VM
 
-Visit https://console.cloud.google.com/compute/instances and click the `Connect SSH` button.
+```bash
+gcloud compute ssh container-fundamentals
+```
+
+or visit https://console.cloud.google.com/compute/instances and click the `Connect SSH` button.
 
 ## Install docker
 

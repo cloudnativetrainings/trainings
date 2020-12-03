@@ -58,3 +58,9 @@ Verify that your file still exists in the new container
 ```bash
 ls /
 ```
+
+## Cleanup
+
+```bash
+docker rm -f $(docker ps -qa)
+```
