@@ -11,6 +11,5 @@ fi
 
 set -euxo pipefail
 
-# fix paths
+# fix yaml files
 find ./.. -type f -name "*.yaml" -exec sed -i "s/loodse-training-playground/$PROJECT_NAME/g" {} +
-find ./.. -type f -name "build_*.sh" -exec sed -i "s/PROJECT_NAME=loodse-training-playground/PROJECT_NAME=$PROJECT_NAME/g" {} +

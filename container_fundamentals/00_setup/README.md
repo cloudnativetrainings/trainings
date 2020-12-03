@@ -5,7 +5,6 @@
 You wil be asked about the project name. 
 
 ```bash
-# Run 
 ./setup.sh
 ```
 

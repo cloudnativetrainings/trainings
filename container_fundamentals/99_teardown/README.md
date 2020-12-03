@@ -5,6 +5,5 @@
 You wil be asked about the project name. 
 
 ```bash
-# Run 
 ./teardown.sh
 ```
