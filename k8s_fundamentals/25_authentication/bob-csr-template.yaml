@@ -5,7 +5,7 @@ metadata:
 spec:
   groups:
     - system:authenticated
-  request: <CSR>
+  request: $CSR
   usages:
     - digital signature
     - key encipherment

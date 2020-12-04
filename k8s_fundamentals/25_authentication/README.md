@@ -9,8 +9,11 @@ openssl genrsa -out bob.key 2048
 # Create the CSR
 openssl req -new -key bob.key -out bob.csr -subj "/CN=bob/O=eng"\n
 
-# Copy the content of the CSR into the field request of the file bob.yaml
-cat bob.csr | base64 | tr -d '\n'
+# Copy the content of the CSR into an environment variable
+export CSR=$(cat bob.csr | base64 | tr -d '\n')
+
+# Use envsubst the set the CSR into the yaml file
+envsubst < bob-csr-template.yaml > bob-csr.yaml
 
 # Apply the CSR
 kubectl create -f bob-csr.yaml
