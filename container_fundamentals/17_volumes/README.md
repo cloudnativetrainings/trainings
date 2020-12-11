@@ -77,7 +77,7 @@ docker volume prune
 
 # Try to printout the content of the file
 # Note that the file does not exist anymore
-cat <HOST-VOLUME-PATH>/file.txt
+sudo cat <HOST-VOLUME-PATH>/file.txt
 ```
 
 ## Bind mount volumes
