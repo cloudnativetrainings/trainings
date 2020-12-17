@@ -20,6 +20,12 @@ kubectl get pods
 kubectl scale replicaset my-replicaset --replicas 3
 ```
 
+## Take a look at the number of Pods
+
+```bash
+kubectl get pods
+```
+
 ## Delete one of the Pods
 
 ```bash

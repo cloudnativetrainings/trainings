@@ -20,6 +20,15 @@ kubectl create -f pod.yaml
 kubectl exec -it my-pod -- cat /opt/my-volume/<FILENAME>
 ```
 
+## Output the secret value
+
+```bash
+kubectl get secret my-secret -o yaml
+
+# Convert the secret into human readable format
+kubectl get secret my-secret -o jsonpath='{.data.foo}' | base64 -d
+```
+
 ## Cleanup
 
 ```bash

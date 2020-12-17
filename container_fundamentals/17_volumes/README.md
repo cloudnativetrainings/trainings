@@ -25,7 +25,7 @@ docker stop rw-layer
 # Restart the container
 docker start rw-layer
 
-# Pritout the content of the file again
+# Printout the content of the file again
 # Note that the file contains the timestamps from the first run
 docker exec -it rw-layer cat /data/file.txt
 

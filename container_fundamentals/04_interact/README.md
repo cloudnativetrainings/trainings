@@ -37,7 +37,7 @@ docker attach my-busybox
 
 Cleanup
 ```bash
-docker rm my-busybox
+docker rm -f my-busybox
 ```
 
 ## Detached Containers
@@ -56,7 +56,7 @@ docker attach my-busybox
 
 Cleanup
 ```bash
-docker rm my-busybox
+docker rm -f my-busybox
 ```
 
 ## Starting an additional process in a container

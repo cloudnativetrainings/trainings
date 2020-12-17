@@ -13,7 +13,7 @@ kubectl create -f pod-v1.yaml
 This will not work, please follow the instructions and consult `--help`.
 
 ```bash
-kubectl logs -f multi-container-pod
+kubectl logs -f my-pod
 ```
 
 ## Exec into the Pod
@@ -21,7 +21,7 @@ kubectl logs -f multi-container-pod
 Pay attention to the output.
 
 ```bash
-kubectl exec -it multi-container-pod -- /bin/sh
+kubectl exec -it my-pod -- /bin/sh
 ```
 
 ## Find out how to exec into container-b of the Pod

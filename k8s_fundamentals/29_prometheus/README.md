@@ -6,10 +6,10 @@
 kubectl create -f pod.yaml
 ```
 
-## Add the stable kubernetes repo
+## Add the prometheus-community helm repo
 
 ```bash
-helm repo add stable https://kubernetes-charts.storage.googleapis.com/
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm repo update
 ```
 
@@ -24,7 +24,7 @@ helm search repo prometheus
 ### Install prometheus
 
 ```bash
-helm install my-prometheus stable/prometheus -f prometheus-values.yaml 
+helm install my-prometheus prometheus-community/prometheus -f prometheus-values.yaml 
 ```
 
 ### Take a look at the installed resources
@@ -38,23 +38,30 @@ kubectl get all
 
 ```bash
 # Get the External IP of the service
-kubectl get svc
+kubectl get svc my-prometheus-server
 ```
 
 ### Execute some query over the "graph" page in your browser
 
 * http requests: `container_memory_usage_bytes`
 * API server requests count: `container_memory_usage_bytes{pod="my-pod",container="nginx"}`
-* per-second rate, messured over the last 5 min: `rate(container_memory_usage_bytes{pod="my-pod",container="nginx"}[5m])`
+* per-second rate of increase, messured over the last 5 min: `rate(container_memory_usage_bytes{pod="my-pod",container="nginx"}[5m])`
 * predict memory usage in 24 hours based on the rate of the last 5 minutes: `predict_linear((container_memory_usage_bytes{pod="my-pod",container="nginx"}[5m]),24*3600)`
 * more examples: [https://prometheus.io/docs/prometheus/latest/querying/examples](https://prometheus.io/docs/prometheus/latest/querying/examples)
 
 ## Grafana
 
+## Add the grafana helm repo
+
+```bash
+helm repo add grafana https://grafana.github.io/helm-charts
+helm repo update
+```
+
 ### Install grafana
 
 ```bash
-helm install my-grafana stable/grafana -f grafana-values.yaml
+helm install my-grafana grafana/grafana -f grafana-values.yaml
 ```
 
 ### Visit the grafana UI in the browser
@@ -66,7 +73,7 @@ kubectl get svc
 
 ## Add Prometheus as data source to Grafana
 
-* Choose the option `Create your first data source`
+* Choose the Option `Configuration`/`Data Sources`
 * Choose type `Prometheus`
 * Insert URL `http://my-prometheus-server` and click `Save & Test`
 * Choose the Option `Dashboards`/`Manage`/`Import`

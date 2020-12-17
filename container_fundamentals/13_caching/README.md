@@ -48,18 +48,20 @@ CMD [ "npm", "start" ]
 ### Do the initial build
 
 ```bash
-docker build -t node:1.0.0 .
+docker build -t node:2.0.0 .
 ```
 
 ### Re-build the docker image
 
-Change the message to something different in the file `server.js`
+Change the message to something different in the file `server.js`.
 
 ```bash
-docker build -t node:1.0.0 .
-docker run -it --rm -p 80:80 node:1.0.0
+docker build -t node:2.0.0 .
+docker run -it --rm -p 80:80 node:2.0.0
 # Visit the site via the external IP of your node
 ```
+
+Note the layers which are taken from the cache.
 
 ## Cleanup
 

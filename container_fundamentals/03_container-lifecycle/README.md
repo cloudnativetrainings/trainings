@@ -35,6 +35,11 @@ If you have e.g. an hanging container, it's possible to send the `SIGKILL` signa
 docker kill my-nginx
 ```
 
+Install the tool jq
+```bash
+sudo apt install -y jq
+```
+
 Inspect the ExitCode
 ```bash
 docker inspect my-nginx | jq '.[].State'
