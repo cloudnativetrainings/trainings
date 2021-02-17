@@ -14,15 +14,15 @@ mkkubecfg() {
     --certificate-authority=secrets/ca.pem --embed-certs=true \
     --server=https://$public:6443 \
 
-    kubectl config set-credentials $user --kubeconfig=secrets/$kc \
+  kubectl config set-credentials $user --kubeconfig=secrets/$kc \
     --client-certificate=secrets/$keyfile.pem \
     --client-key=secrets/$keyfile-key.pem \
     --embed-certs=true
 
-    kubectl config set-context default --kubeconfig=secrets/$kc \
-      --cluster=magicless-cluster --user=$user
+  kubectl config set-context default --kubeconfig=secrets/$kc \
+    --cluster=magicless-cluster --user=$user
 
-    kubectl config use-context default --kubeconfig=secrets/$kc
+  kubectl config use-context default --kubeconfig=secrets/$kc
 }
 
 # worker kubeconfs:
