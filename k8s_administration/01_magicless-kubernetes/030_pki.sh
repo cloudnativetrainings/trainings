@@ -46,7 +46,7 @@ mkcert system:node:worker-0 worker-0 system:nodes $( node_sans worker-0 )
 mkcert system:node:worker-1 worker-1 system:nodes $( node_sans worker-1 )
 mkcert system:node:worker-2 worker-2 system:nodes $( node_sans worker-2 )
 
-# controller components
+# master components
 mkcert system:kube-controller-manager kube-controller-manager system:kube-controller-manager ""
 mkcert system:kube-proxy kube-proxy system:node-proxier ""
 mkcert system:kube-scheduler kube-scheduler system:kube-scheduler ""

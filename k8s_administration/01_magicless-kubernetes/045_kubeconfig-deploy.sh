@@ -8,7 +8,7 @@ for node in worker-{0..2}; do
                      $node:
 done
 
-for node in controller-{0..2}; do
+for node in master-{0..2}; do
   gcloud compute scp secrets/{admin,kube-controller-manager,kube-scheduler}.kubeconfig \
                      ${node}:
 done

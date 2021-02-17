@@ -4,7 +4,7 @@ set -euxo pipefail
 
 # machines
 gcloud -q compute instances delete \
-  controller-0 controller-1 controller-2 \
+  master-0 master-1 master-2 \
   worker-0 worker-1 worker-2
 
 # networking

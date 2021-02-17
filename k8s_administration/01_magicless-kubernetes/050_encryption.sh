@@ -17,6 +17,6 @@ resources:
       - identity: {}
 EOF
 
-for instance in controller-{0..2}; do
+for instance in master-{0..2}; do
   gcloud compute scp secrets/encryption-config.yaml ${instance}:
 done
