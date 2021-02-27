@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: red
+spec:
+  selector:
+    app: red
+  ports:
+    - port: 80

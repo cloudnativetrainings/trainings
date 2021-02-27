@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .Values.name }}-test-fail
+  annotations:
+    "helm.sh/hook": test
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: test
+          image: nicolaka/netshoot
+          args: 
+            - curl
+            - http://{{ .Values.name }}:80
