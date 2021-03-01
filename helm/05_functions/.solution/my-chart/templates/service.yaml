@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "id" . }}
+spec:
+  selector:
+    app: {{ template "id" . }}
+  ports:
+    - port: 80

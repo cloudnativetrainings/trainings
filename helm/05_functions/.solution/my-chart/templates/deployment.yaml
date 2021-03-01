@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "id" . }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ template "id" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "id" . }}
+    spec:
+      containers:
+        - name: my-nginx
+          image: nginx:1.19.2
+          volumeMounts:
+            - name: html
+              mountPath: /usr/share/nginx/html
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+            limits:
+              cpu: 100m
+              memory: 100Mi
+      volumes:
+        - name: html
+          configMap:
+            name: {{ template "id" . }}
+            items:
+              - key: body
+                path: index.html

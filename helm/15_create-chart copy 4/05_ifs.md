@@ -1,0 +1,30 @@
+# ifs
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "id" . }}
+data:
+  body: |
+    {{- if not .Values.meta }}
+    Hello Helm
+    {{- else }}
+    Chart: {{ .Chart.Name }}
+    Description: {{ .Chart.Description }}
+    Version: {{ .Chart.Version }}
+    AppVersion: {{ .Chart.AppVersion }}
+    Release: {{ .Release.Name }}
+    Release.Namespace : {{ .Release.Namespace }}
+    Release.IsUpgrade : {{ .Release.IsUpgrade }}
+    Release.IsInstall : {{ .Release.IsInstall }}
+    Release.Revision : {{ .Release.Revision }}
+    Release.Service : {{ .Release.Service }}
+    {{- end }}
+    
+
+note to {{- otherwise empty lines
+
+helm install ifs ./my-chart --set meta=true
+
+curl $ENDPOINT
+
+helm uninstall ifs

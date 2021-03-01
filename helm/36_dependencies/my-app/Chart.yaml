@@ -1,0 +1,8 @@
+apiVersion: v2
+name: my-app
+version: 0.1.0
+dependencies:
+  - name: my-dependency
+    version: "0.1.0"
+    condition: my-dependency.enabled
+    repository: "file://../my-dependency"
