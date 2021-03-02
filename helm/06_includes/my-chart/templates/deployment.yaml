@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Chart.Name }}-{{ .Release.Name }}
+  name: {{ template "id" . }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ .Chart.Name }}-{{ .Release.Name }}
+      app: {{ template "id" . }}
   template:
     metadata:
       labels:
-        app: {{ .Chart.Name }}-{{ .Release.Name }}
+        app: {{ template "id" . }}
     spec:
       containers:
         - name: my-nginx
@@ -28,7 +28,7 @@ spec:
       volumes:
         - name: html
           configMap:
-            name: {{ .Chart.Name }}-{{ .Release.Name }}
+            name: {{ template "id" . }}
             items:
               - key: body
                 path: index.html

@@ -1,4 +1,3 @@
-# ifs
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -19,12 +18,3 @@ data:
     Release.Revision : {{ .Release.Revision }}
     Release.Service : {{ .Release.Service }}
     {{- end }}
-    
-
-note to {{- otherwise empty lines
-
-helm install ifs ./my-chart --set meta=true
-
-curl $ENDPOINT
-
-helm uninstall ifs

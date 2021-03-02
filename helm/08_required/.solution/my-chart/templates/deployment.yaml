@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: my-nginx
-          image: nginx:1.19.2
+          image: nginx:{{ required "A nginx version is required!" .Values.tag }}
           volumeMounts:
             - name: html
               mountPath: /usr/share/nginx/html
