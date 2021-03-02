@@ -1,24 +1,78 @@
+# Dependencies
 
-check charts
+In this task you will learn about Dependencies.
 
+## Inspect the Charts
+
+Take a look athe `Chart.yaml` file. There is a dependency defined for the Chart called `my-dependency`.
+
+You can also inspect the dependencies via the following command.
+```bash
 helm dependency list ./my-app 
+```
 
+## Update the dependencies
+
+```bash
 helm dependency update ./my-app
+```
 
-check charts directory and Chart.lock file
+Note that the `Charts.lock` file and the `charts` directory got created in the Chart `my-app`.
 
-take a look at the condition of the dependency and the values.yaml
+## Install a chart with its dependencies
 
-helm install app my-app 
+### Not installing the dependency
+
+Inspect the dependency in the file `Chart.yaml`. It is enabled depending on a Value. Take a look at the file `values.yaml` on how to set this Value.
+
+Install the app with its default values.
+```bash
+helm install app my-app
+```
+
+Verify that the dependency was not installed
+```bash
 kubectl exec -it my-app -- /bin/sh
 curl my-dependency
+```
 
+Uninstall the app again
+```bash
 helm uninstall app
+```
+
+### Installing the dependency
+
+Install the app with the dependency enabled.
+```bash
 helm install app my-app --set my-dependency.enabled=true
-kubectl exec -it my-app -- /bin/sh
-curl my-dependency
+```
 
-helm uninstall app
-helm install app my-app --set my-dependency.enabled=true --set my-dependency.content="Bonjour Helm"
+Verify that the dependency was installed
+```bash
 kubectl exec -it my-app -- /bin/sh
 curl my-dependency
+```
+
+Uninstall the app again
+```bash
+helm uninstall app
+```
+
+### Override values of the SubChart
+
+Install the app with the dependency enabled.
+```bash
+helm install app my-app --set my-dependency.enabled=true --set my-dependency.content="Bonjour Helm"
+```
+
+Verify that the dependency was installed
+```bash
+kubectl exec -it my-app -- /bin/sh
+curl my-dependency
+```
+
+Uninstall the app again
+```bash
+helm uninstall app
+```
