@@ -1,50 +1,78 @@
+# Writing Hooks
 
-check application
+In this task you will learn how to write Hooks.
 
-check hooks
+## Inspect the Chart
 
+Take a look at the Hooks.
+
+## Running Hooks
+
+To see what is happening it is recommended to open an additional Shell and watch resources:
+```bash
+watch -n 1 kubectl get job,pod
+```
+
+```bash
 helm install hooks ./my-app 
+```
 
-check hookds
+Verify the first Hook was run.
 
-helm uninstall my-app
+```bash
+helm uninstall hooks
+```
 
-check hooks
+Verify the second Hook was run.
 
+Delete the jobs
+```bash
 kubectl delete job --all
+```
 
----
+## Running weighted Hooks
 
-# weight
+Add an additional pre-install Hook by copying the hook-pre-install-yaml file.
 
-add additional pre-install hook
+Add weights to the pre-install Hooks via the annotation `"helm.sh/hook-weight": "1"`.
 
-add annotations properly
-    "helm.sh/hook-weight": "2"
-
+```bash
 helm install hooks ./my-app 
+```
 
-helm uninstall my-app
+Verify the order of the two pre-install hooks.
 
+```bash
+helm uninstall hooks
+```
+
+Delete the jobs
+```bash
 kubectl delete job --all
+```
 
----
+## Automatically delete Hook jobs
 
-# kill hooks
+Add the hook-delete-policy to the Hooks via the `"helm.sh/hook-delete-policy": "hook-succeeded"` annotation.
 
-add annotation
-    "helm.sh/hook-delete-policy": hook-succeeded
-
+```bash
 helm install hooks ./my-app 
+```
 
-helm uninstall my-app
+Note that the Jobs for the Hooks will get deleted after they are completed successfully.
 
-kubectl get pods,jobs
+```bash
+helm uninstall hooks
+```
 
+## Disabling Hooks
 
+Hooks can block the install/uninstall process if they eg are in state `CrashLoopBackOff`. You can disable via the following.
 
----
+```bash
+helm install hooks ./my-app --no-hooks
+```
 
-# Notes
+```bash
 helm uninstall hooks --no-hooks
-
+```

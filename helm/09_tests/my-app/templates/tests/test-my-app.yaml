@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ .Values.name }}-test-fail
+  name: {{ .Values.name }}-test
   annotations:
     "helm.sh/hook": test
 spec:

@@ -1,20 +1,43 @@
+# Testing
 
-check application
+In this task you will learn how to test your Chart.
 
-check tests
+## Inspect the application
 
+## Run the test
+
+```bash
 helm install my-app ./my-app 
+```
 
+```bash
 helm test my-app
+```
 
-change the url in the test
-
+```bash
 helm uninstall my-app
+```
 
+## Verify failing test
+
+Adapt the url in the test to something faulty.
+
+```bash
 helm install my-app ./my-app 
+```
 
+```bash
 helm test my-app
+```
 
+Check the logfile of the test
+```bash
+kubectl logs my-app-test-<TAB>
+```
+
+## Cleanup
+
+```bash
 helm uninstall my-app
-
 kubectl delete job my-app-test
+```

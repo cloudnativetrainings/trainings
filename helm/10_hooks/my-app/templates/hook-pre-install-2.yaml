@@ -1,9 +1,10 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ .Values.name }}-pre-delete
+  name: {{ .Values.name }}-pre-install-2
   annotations:
-    "helm.sh/hook": "pre-delete"
+    "helm.sh/hook": "pre-install"
+    "helm.sh/hook-weight": "2"
     "helm.sh/hook-delete-policy": "hook-succeeded"
 spec:
   backoffLimit: 0
@@ -11,9 +12,9 @@ spec:
     spec:
       restartPolicy: Never
       containers:
-        - name: pre-delete-hook
+        - name: pre-install-hook
           image: ubuntu:20.04
           command:
             - echo
           args: 
-            - pre-delete-hook
+            - pre-install-hook-2
