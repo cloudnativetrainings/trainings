@@ -4,6 +4,7 @@ metadata:
   name: {{ .Values.name }}-pre-delete
   annotations:
     "helm.sh/hook": "pre-delete"
+    "helm.sh/hook-delete-policy": "hook-succeeded"
 spec:
   backoffLimit: 0
   template:
