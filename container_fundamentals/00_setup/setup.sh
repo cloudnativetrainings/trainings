@@ -10,7 +10,7 @@ if [[ -z $PROJECT_NAME ]]; then
 fi
 export REGION=europe-west3
 export ZONE=europe-west3-a
-export TRAINING_NAME=container-fundamentals
+export TRAINING_NAME=training-cf
 export VM_NAME=$TRAINING_NAME
 export NETWORK_NAME=$TRAINING_NAME
 export FIREWALL_NAME=$TRAINING_NAME

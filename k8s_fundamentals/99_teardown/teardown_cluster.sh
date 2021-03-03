@@ -10,7 +10,7 @@ if [[ -z $PROJECT_NAME ]]; then
 fi
 export REGION=europe-west3
 export ZONE=europe-west3-a
-export CLUSTER_NAME=kubernetes-fundamentals
+export CLUSTER_NAME=training-kf
 export NETWORK_NAME=$CLUSTER_NAME
 export FIREWALL_NAME=$CLUSTER_NAME
 

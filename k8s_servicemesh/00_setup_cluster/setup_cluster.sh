@@ -10,7 +10,7 @@ if [[ -z $PROJECT_NAME ]]; then
 fi
 export REGION=europe-west3
 export ZONE=europe-west3-a
-export CLUSTER_NAME=kubernetes-servicemesh
+export CLUSTER_NAME=training-ksm
 export NETWORK_NAME=$CLUSTER_NAME
 export FIREWALL_NAME=$CLUSTER_NAME
 
@@ -33,7 +33,7 @@ else
       echo "Network $response_network already exists, skip creation"
 fi
 
-#create subnet
+# create subnet
 response_subnet=`gcloud compute networks subnets list --filter="name=$NETWORK_NAME-subnet" --format="value(name)" --project=$PROJECT_NAME`
 
 if [ -z "$response_subnet" ]
@@ -55,7 +55,7 @@ then
     --zone=$ZONE \
     --cluster-version "1.18" \
     --machine-type "n1-standard-4" --num-nodes "2" \
-    --image-type "UBUNTU" --disk-type "pd-standard" --disk-size "100" --default-max-pods-per-node "110" \
+    --image-type "UBUNTU" --disk-type "pd-standard" --disk-size "100" \
     --enable-network-policy --enable-ip-alias \
     --no-enable-autoupgrade --enable-autorepair --max-surge-upgrade 1 --max-unavailable-upgrade 0 \
     --no-enable-basic-auth --metadata disable-legacy-endpoints=true \
@@ -66,7 +66,7 @@ else
       echo "Cluster $response_cluster already exists, skip creation"
 fi
 
-### add firewall rule for ingress gateway
+# add firewall rule for ingress gateway
 response_firewall_ingress=`gcloud compute firewall-rules list --filter="$FIREWALL_NAME-ingress-gateway" --format="value(name)" --project=$PROJECT_NAME`
 
 if [ -z "$response_firewall_ingress" ]
@@ -76,12 +76,12 @@ then
     --direction=INGRESS \
     --action=ALLOW \
     --source-ranges=0.0.0.0/0 \
-    --rules=tcp:80,tcp:443
+    --rules=tcp:80,tcp:8080,tcp:443
 else
       echo "Firewall $response_firewall_ingress already exists, skip creation"
 fi
 
-### add ssh access for nodes
+# add ssh access for nodes
 response_firewall_ssh=`gcloud compute firewall-rules list --filter="$FIREWALL_NAME-ssh" --format="value(name)" --project=$PROJECT_NAME`
 
 if [ -z "$response_firewall_ssh" ]
@@ -96,7 +96,7 @@ else
       echo "Firewall $response_firewall_ssh already exists, skip creation"
 fi
 
-### add access to NodePort services
+# add access to NodePort services
 response_firewall_nodeport=`gcloud compute firewall-rules list --filter="$FIREWALL_NAME-nodeport" --format="value(name)" --project=$PROJECT_NAME`
 
 if [ -z "$response_firewall_nodeport" ]
