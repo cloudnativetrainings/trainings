@@ -2,7 +2,7 @@
 
 In this task we will add a variable to our Helm Chart.
 
-## Add templating for the deployment in the file ./my-chart/templates/deployment.yaml
+## Add templating for the deployment in the file ./color-viewer/templates/deployment.yaml
 
 ```yaml
 ...
@@ -10,6 +10,13 @@ spec:
   replicas: {{ .Values.replicas }}
   selector:
 ...  
+```
+
+## Add the default value for the variable `replicas`
+
+Add the following line in the file ./color-viewer/values.yaml
+```yaml
+replicas: 1
 ```
 
 ## Make use of your new variable
@@ -26,5 +33,5 @@ kubectl get pods
 ## Cleanup
 
 ```bash
-helm delete my-app
+helm uninstall my-app
 ```

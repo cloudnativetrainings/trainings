@@ -1,6 +1,7 @@
 apiVersion: v1
 kind: ServiceAccount
 metadata:
+  namespace: ingress-controller
   name: traefik-ingress-controller
 ---
 kind: ClusterRole
