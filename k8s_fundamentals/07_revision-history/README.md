@@ -44,6 +44,12 @@ Can you explain why there is a diff between the revision and the generation?
 kubectl get deployment my-deployment -o yaml | grep "revision:\|generation:\|resourceVersion:"
 ```
 
+## Restart all the Pods of the Deployment
+
+```bash
+kubectl rollout restart deployment my-deployment
+```
+
 ## Cleanup
 
 ```bash

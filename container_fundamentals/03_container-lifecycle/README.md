@@ -17,6 +17,11 @@ docker stop my-nginx
 
 Stop the started container. The main process inside the container will receive `SIGTERM`, and after a grace period, `SIGKILL`.
 
+Install the tool jq
+```bash
+sudo apt install -y jq
+```
+
 Inspect the ExitCode
 ```bash
 docker inspect my-nginx | jq '.[].State'
@@ -33,11 +38,6 @@ docker restart my-nginx
 If you have e.g. an hanging container, it's possible to send the `SIGKILL` signal directly. Try
 ```bash
 docker kill my-nginx
-```
-
-Install the tool jq
-```bash
-sudo apt install -y jq
 ```
 
 Inspect the ExitCode

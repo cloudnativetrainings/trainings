@@ -1,8 +1,8 @@
 # Images Interactive
 
-In this training you will create a new image via interactive commands. Note that this approach is not recommended for production usecases. Use Dockerfiles instead.
+In this task you will create a new image via interactive commands. Note that this approach is not recommended for production usecases. Use Dockerfiles instead.
 
-## Make a change in a containere
+## Make a change in a container
 
 Start an Debian container:
 ```bash
