@@ -1,7 +1,12 @@
 version: "3.4"
 services:
+  grafana:
+    image: grafana/grafana:7.4.3
+    container_name: grafana
+    ports:
+      - "80:3000"
   prometheus:
-    image: prom/prometheus:v2.21.0
+    image: prom/prometheus:v2.25.0
     container_name: prometheus
     volumes:
       - ./prometheus.yaml:/etc/prometheus/prometheus.yaml
@@ -20,8 +25,3 @@ services:
       - /dev/disk:/dev/disk/:ro
     ports:
       - "8080:8080"
-  grafana:
-    image: grafana/grafana:7.1.5
-    container_name: grafana
-    ports:
-      - "80:3000"
