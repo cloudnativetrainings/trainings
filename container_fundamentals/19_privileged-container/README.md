@@ -26,8 +26,3 @@ docker run -it --rm --privileged -v /:/host ubuntu:20.10 ls -alh /host
 
 Note that you see the filesystem of the host.
 
-## Cleanup
-
-```bash
-docker rm -f $(docker ps -qa)
-```
