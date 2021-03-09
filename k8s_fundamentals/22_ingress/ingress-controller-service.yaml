@@ -8,4 +8,6 @@ spec:
   ports:
     - name: web
       port: 80
+    - name: admin
+      port: 8080
   type: LoadBalancer
