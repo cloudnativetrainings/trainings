@@ -1,49 +1,49 @@
-# Volumes
+# Persistence
 
 In this training you will learn how to make data persistent in your container.
 
 ## Inspect the Dockerfile and build the Docker image
 
 ```bash
-docker build -t volumes:1.0.0 .
+docker build -t persistence:1.0.0 .
 ```
 
-## RW layer
+## Container layer
 
-The RW-layer only makes changes persistent until the container gets removed.
+The container layer only makes changes persistent until the container gets removed.
 
 ```bash
 # Create the container
-docker run -it -d --name rw-layer volumes:1.0.0
+docker run -it -d --name container-layer persistence:1.0.0
 
 # Printout the content of the file
-docker exec -it rw-layer cat /data/file.txt
+docker exec -it container-layer cat /data/file.txt
 
 # Stop the container
-docker stop rw-layer
+docker stop container-layer
 
 # Restart the container
-docker start rw-layer
+docker start container-layer
 
 # Printout the content of the file again
 # Note that the file contains the timestamps from the first run
-docker exec -it rw-layer cat /data/file.txt
+docker exec -it container-layer cat /data/file.txt
 
 # Remove the container
 # Note that all changes get lost
-docker rm -f rw-layer
+docker rm -f container-layer
 ```
 
-## Docker-managed volumes
+## Volumes
 
-Docker-managed volumes are managed by docker.
+Volumes are managed by docker.
 
 ```bash
 # Create the container
-docker run -it -d --name docker-managed-volume -v /data volumes:1.0.0
+docker run -it -d --name volumes -v /data persistence:1.0.0
 
 # Printout the content of the file
-docker exec -it docker-managed-volume cat /data/file.txt
+docker exec -it volumes cat /data/file.txt
 
 # Cleanup all pre-existing volumes
 # Note that Docker will not delete volumes of running containers
@@ -56,17 +56,17 @@ docker volume ls
 docker volume inspect <VOLUME-NAME>
 
 # Show the details of the volume via `inspect`
-docker inspect docker-managed-volume | grep -A10 Mounts
+docker inspect volumes | grep -A10 Mounts
 
 # Change the content of the file on the host
 sudo bash -c 'echo text from host >>  <HOST-VOLUME-PATH>/file.txt'
 
 # Printout the content of the file
 # Note that your change is also in
-docker exec -it docker-managed-volume cat /data/file.txt
+docker exec -it volumes cat /data/file.txt
 
 # Delete the container
-docker rm -f docker-managed-volume 
+docker rm -f volumes 
 
 # List the volumes
 # Note that the volume is not deleted yet
@@ -80,13 +80,13 @@ docker volume prune
 sudo cat <HOST-VOLUME-PATH>/file.txt
 ```
 
-## Bind mount volumes
+## Bind Mounts
 
 Bind mount volumes let you manage the lifecycle of your data youself.
 
 ```bash
 # Create the container
-docker run -it -d --name bind-mount-volume -v $PWD/data:/data volumes:1.0.0
+docker run -it -d --name bind-mounts -v $PWD/data:/data persistence:1.0.0
 
 # Check the content of the file `file.txt` in the folder `data` in your current directory
 cat data/file.txt
@@ -96,7 +96,7 @@ cat data/file.txt
 docker volume ls
 
 # Delete the container
-docker rm -f bind-mount-volume
+docker rm -f bind-mounts
 
 # Cleanup all volumes
 docker volume prune

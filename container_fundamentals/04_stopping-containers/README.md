@@ -67,22 +67,6 @@ The container cannot be started anymore.
 docker restart my-nginx
 ```
 
-## Using the container id
-
-Start some containers
-```bash
-docker run -d nginx:1.19.2
-docker run -d nginx:1.19.2
-docker run -d nginx:1.19.2
-```
-
-List all running containers
-```
-docker ps
-```
-
-Note that the containers got some generated names. You can use those names or you can the first letters of the container id to define the container in the commands.
-
 ## Cleanup
 
 ```bash
