@@ -24,7 +24,6 @@ variable "worker_os" {
   # valid choices are:
   # * ubuntu
   # * centos
-  # * coreos
   default = "ubuntu"
 }
 
@@ -65,7 +64,7 @@ variable "region" {
 }
 
 variable "control_plane_target_pool_members_count" {
-  description = "Listeners of the Loadbalancer. Set to 1 toensure the bootstraping works -> after bootstraping increase to e.g. 3"
+  description = "Listeners of the Loadbalancer. Set to 1 to ensure the bootstraping works -> after bootstraping increase to e.g. 3"
   default = 1
 }
 
