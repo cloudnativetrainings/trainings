@@ -29,6 +29,8 @@ gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member serviceAccount:$
 gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member serviceAccount:$GCP_SERVICE_ACCOUNT_ID --role='roles/viewer'
 
 # create a new json key for your service account
+cd [training-repo]
+mkdir -p ./.secrects && cd ./.secrects 
 gcloud iam service-accounts keys create --iam-account $GCP_SERVICE_ACCOUNT_ID k8c-cluster-provisioner-sa-key.json
 ``` 
 Verify at [GCP Cloud Console - Service Accounts](https://console.cloud.google.com/iam-admin/serviceaccounts) that the service account have been created. Now export your GCP `credentials.json` content with **`cat`**:
@@ -40,4 +42,6 @@ Test if your environment variable contains the json key
 ```bash
 echo $GOOGLE_CREDENTIALS 
 { "type": "service_account", "project_id": "YUOUR PROJECT", "private_key_id": "..." }
+# jump back to [training-repo]
+cd -
 ```

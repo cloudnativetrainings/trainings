@@ -1,0 +1,10 @@
+apiVersion: kubeone.io/v1beta1
+kind: KubeOneCluster
+name: k1
+versions:
+  kubernetes: '1.19.9'
+cloudProvider:
+  gce: {}
+  cloudConfig: |-
+    [global]
+    regional = true
