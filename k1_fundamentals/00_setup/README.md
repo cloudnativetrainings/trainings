@@ -37,7 +37,7 @@ After you entered the container, verify the setup:
 ```bash
 ### executed inside the tooling container
 
-cd cd mnt/trainings/k1_fundamentals
+cd mnt/trainings/k1_fundamentals
 pwd 
 #### /home/kubermatic/mnt/trainings/k1_fundamentals
 ls -la
@@ -54,6 +54,17 @@ gcloud version
 
 kubectl version --short
 #### a recent kubectl version (>= v.1.20.0)
+```
+## Authenticate your GCP account
+
+Execute the setup script:
+```
+./00_setup/setup.sh
+
+### should list your training projects
+gcloud projects list
+PROJECT_ID       NAME            PROJECT_NUMBER
+student-00-xxx  student-00-xxx   999999999999
 ```
 
 ## Other helpful content
