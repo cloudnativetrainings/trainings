@@ -18,11 +18,18 @@ If you have docker, git and a common IDE installed locally, you can quickly star
 
 ```bash
 git clone https://github.com/kubermatic-labs/trainings.git
-docker run  --name  kubeone-tool-container -v $(pwd):/home/kubermatic/mnt -t -d quay.io/kubermatic-labs/kubeone-tooling:1.2.1
+docker run --name  kubeone-tool-container -v $(pwd):/home/kubermatic/mnt -t -d quay.io/kubermatic-labs/kubeone-tooling:1.2.1
 ```
 Connect into the running container and ensures that you can reattach if you get kicked out of the container:
 ```bash
 docker exec -it kubeone-tool-container bash
+```
+If you prefer a temporary container only execute:
+```bash
+# remove old container
+docker rm -f kubeone-tool-container
+
+docker run --rm --name  kubeone-tool-container -v $(pwd):/home/kubermatic/mnt -it quay.io/kubermatic-labs/kubeone-tooling:1.2.1
 ```
 
 ### (Alternative) Use google cloud shell
