@@ -1,4 +1,4 @@
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
   name: letsencrypt-issuer
@@ -8,7 +8,7 @@ spec:
     # The ACME server URL
     server: https://acme-v02.api.letsencrypt.org/directory
     # Email address used for ACME registration
-    email: "tobi@loodse.com"
+    email: "your-email@example.com"
     # Name of a secret used to store the ACME account private key
     privateKeySecretRef:
       name: letsencrypt-staging-dns
