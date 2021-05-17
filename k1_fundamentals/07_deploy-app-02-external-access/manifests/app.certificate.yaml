@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: loodse.training
+spec:
+  secretName: loodse-dev-tls
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt-issuer
+  commonName: "app-ext.TODO-YOUR-DNS-ZONE.loodse.training"
+  dnsNames:
+    - "app-ext.TODO-YOUR-DNS-ZONE.loodse.training"
