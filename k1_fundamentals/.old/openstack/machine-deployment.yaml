@@ -1,0 +1,64 @@
+apiVersion: "cluster.k8s.io/v1alpha1"
+kind: MachineDeployment
+metadata:
+  name: openstack-machinedeployment
+  namespace: kube-system
+spec:
+  paused: false
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  minReadySeconds: 0
+  selector:
+    matchLabels:
+      foo: bar
+  template:
+    metadata:
+      labels:
+        foo: bar
+    spec:
+      providerSpec:
+        value:
+          sshPublicKeys:
+            - "ssh-rsa AAAAB3NzaC1yc2EAAnkEPIgSNQG749UAJ9Hg6H81VWJBD+6eI7pwc2WHrbHB/w14KzivV4EXSyCjEAgL80mwPzFjFP9vO6Vd5dPLPqjP7g9og+XTbnYxB06T+c/005QcycM4jISsYDID3vj19YxZN1fih+K1zetrzONBlAYn+6acm1R2pItIEWV2cMYxDUYHhsFHhqSV/QNxjhMK1vd9S6GGLKsU93zZ6vreZ3A7bDXpQ+jHPoO/3cnPGUvfXj7iP3cupIfLP+BCF3naLa3o/w3/bsuZYwijIsVy92jG7HpFw6qjdwjOOCg8f\n"
+          cloudProvider: "openstack"
+          cloudProviderSpec:
+          # If empty, can be set via OS_AUTH_URL env var
+            identityEndpoint: "https://keystone.xxxx:5000/v3"
+          # If empty, can be set via OS_USER_NAME env var
+            username: "loodse-admin"
+          # If empty, can be set via OS_PASSWORD env var
+            password: "xxxxxxxx"
+          # If empty, can be set via OS_DOMAIN_NAME env var
+            domainName: "Default"
+          # If empty, can be set via OS_TENANT_NAME env var
+            tenantName: "loodse-loodse-k8s"
+            # Only required if there is more than one region to choose from
+            region: "dbl"
+            image: "Ubuntu Bionic 18.04 (2019-08-02)"
+            flavor: "m1.small"
+            securityGroups:
+              - "kubeone-demo-cluster"
+            # The machine won't get a floating ip if you leave this empty
+            floatingIpPool: "ext-net"
+            # Only required if there is more than one AZ to choose from
+            availabilityZone: ""
+            # Only required if there is more than one network available
+            network: "kubeone-demo-cluster"
+            # Only required if the network has more than one subnet
+            subnet: "kubeone-demo-cluster"
+            # Optional, if set, the rootDisk will be a volume. If not, the rootDisk
+            # will be on ephemeral storage and its size will be derived from the flavor
+            rootDiskSizeGB: 50
+            # the list of metadata you would like to attach to the instance
+            tags:
+              "kubeone-demo-workers": "pool1"
+          # Can be 'ubuntu', 'coreos' or 'centos'
+          operatingSystem: "ubuntu"
+          operatingSystemSpec:
+            distUpgradeOnBoot: true
+      versions:
+        kubelet: 1.14.2

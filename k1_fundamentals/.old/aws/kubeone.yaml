@@ -1,0 +1,7 @@
+apiVersion: kubeone.io/v1alpha1
+kind: KubeOneCluster
+name: tobi-k1
+versions:
+  kubernetes: '1.19.9'
+cloudProvider:
+  name: 'aws'
