@@ -100,7 +100,7 @@ k1-pool-az-c-5d5cfcc5bf-gpjpg   Ready    <none>   85s     v1.19.9   europe-west4
 # change back to the default namespace
 kubectl config set-context --current --namespace=default
 # or
-kcns kube-system
+kcns default
 ```
 
 6. Due to the dynamic management of the machine deployments, we could optionally remove the default `machinedeployment` config of the terraform `output.tf` file. In a disaster recovery situation, this would ensure that you will not misconfigure your machine configs. To do this, just remove everything of the `output "kubeone_workers"` section in the `output.tf` file:
