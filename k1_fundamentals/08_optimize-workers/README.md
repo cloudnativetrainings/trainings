@@ -87,7 +87,7 @@ kubectl -n kube-system apply -f machines/md-zone-a.yaml
 ```
 You should now see that a new `machine`object has been created:
 ```bash
-kubectl -n get get md,ma,node
+kubectl -n kube-system get md,ma,node
 ```
 ```
 NAMESPACE     NAME                                            REPLICAS   AVAILABLE-REPLICAS   PROVIDER   OS       KUBELET   AGE

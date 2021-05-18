@@ -53,7 +53,7 @@ Open a file using `vim first.yaml`:
 
 Now the yaml file should look similar to this example:
 ```
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
