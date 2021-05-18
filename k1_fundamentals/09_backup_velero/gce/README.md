@@ -40,7 +40,7 @@ cd -
 ```
 
 ### Setup Velero
-Due to them small nodes we need decrease a little the defaul resource CPU limits, otherwise we could use quickly the velero util to create a backup
+Due to them small nodes we need decrease a little the default resource CPU limits, otherwise we could use quickly the velero util to create a backup
 ```bash
 velero install \
   --provider gcp \
