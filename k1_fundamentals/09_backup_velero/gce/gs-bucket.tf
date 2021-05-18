@@ -1,6 +1,6 @@
 ### S3 bucket for tf-state
-resource "google_storage_bucket" "s3-storage" {
-  name = "k1-backup-bucket"
+resource "google_storage_bucket" "gs-storage" {
+  name = "k1-backup-bucket-${var.project}"
   storage_class = "STANDARD"
   location = var.region
 }
@@ -10,14 +10,14 @@ resource "google_storage_bucket" "s3-storage" {
 
 ### PUBLIC read/write not recommended for production
 //resource "google_storage_bucket_access_control" "public_rule" {
-//  bucket = google_storage_bucket.s3-storage.name
+//  bucket = google_storage_bucket.gs-storage.name
 //  role   = "WRITER"
 //  entity = "allUsers"
 //}
 
-output "s3" {
+output "gs" {
   value = {
-    name = google_storage_bucket.s3-storage.name
-    url = google_storage_bucket.s3-storage.url
+    name = google_storage_bucket.gs-storage.name
+    url = google_storage_bucket.gs-storage.url
   }
 }
