@@ -6,10 +6,10 @@ To avoid the usage of your recent private SSH key, you can freshly create one fo
 # SSH Key creation if no ssh key is present
 
 cd [training-repo]
-ssh-keygen -f .secrects/id_rsa
+ssh-keygen -f .secrets/id_rsa
 ### for now no password is needed, but for prodution would be recommended
 
-ls -la .secrects/id*
+ls -la .secrets/id*
 cd -
 ```
 
@@ -39,7 +39,7 @@ control_plane_count = 1
 control_plane_target_pool_members_count = 1
 
 ### update to your location if needed
-ssh_public_key_file = "../../../.secrects/id_rsa.pub"
+ssh_public_key_file = "../../../.secrets/id_rsa.pub"
 ```
 For the GCP project id, execute `gcloud projects list`.
 
@@ -49,7 +49,7 @@ SSH](https://github.com/kubermatic/kubeone/blob/master/docs/ssh.md) before you c
 ```bash
 # Start SSH agent and add key
 eval `ssh-agent`
-ssh-add ../../../.secrects/id_rsa
+ssh-add ../../../.secrets/id_rsa
 ```
 
 ***Kindly take note of the following:***

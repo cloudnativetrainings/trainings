@@ -3,6 +3,6 @@ terraform.tfstate.backup
 terraform.tfstate
 .terraform.*
 .keys
-.secrects
+.secrets
 *.tar.gz
 *-kubeconfig
