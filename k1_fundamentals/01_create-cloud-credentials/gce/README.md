@@ -43,7 +43,7 @@ export GOOGLE_CREDENTIALS=$(cat ./k8c-cluster-provisioner-sa-key.json)
 Test if your environment variable contains the json key
 ```bash
 echo $GOOGLE_CREDENTIALS 
-{ "type": "service_account", "project_id": "YUOUR PROJECT", "private_key_id": "..." }
+{ "type": "service_account", "project_id": "YOUR PROJECT", "private_key_id": "..." }
 # jump back to [training-repo]
 cd -
 ```
