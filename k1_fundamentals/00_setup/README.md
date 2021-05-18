@@ -24,12 +24,14 @@ Connect into the running container and ensures that you can reattach if you get 
 ```bash
 docker exec -it kubeone-tool-container bash
 ```
-If you prefer a temporary container only execute:
+
+**Alternative** - If you prefer a temporary container only (get removed after you leave it) execute:
 ```bash
 # remove old container
 docker rm -f kubeone-tool-container
 
-docker run --rm --name  kubeone-tool-container -v $(pwd):/home/kubermatic/mnt -it quay.io/kubermatic-labs/kubeone-tooling:1.2.1
+docker run --rm --name  kubeone-tool-container -v $(pwd):/home/kubermatic/mnt -it quay.io/kubermatic-labs/kubeone-tooling:1.2.1 bash
+
 ```
 
 ### (Alternative) Use google cloud shell
