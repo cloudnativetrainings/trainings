@@ -34,20 +34,20 @@ gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member serviceAccount:$
 
 # create a new json key for your service account
 cd -
-cd ./.secrects 
+cd ./.secrets
 gcloud iam service-accounts keys create --iam-account $GCP_VELERO_SERVICE_ACCOUNT_ID credentials-velero.json
 cd -
 ```
 
 ### Setup Velero
-Due to them small nodes we need decrease a little the defaul resource CPU limits, otherwise we could use quickly the velero util to create a backup
+Due to them small nodes we need decrease a little the default resource CPU limits, otherwise we could use quickly the velero util to create a backup
 ```bash
 velero install \
   --provider gcp \
   --plugins velero/velero-plugin-for-gcp:v1.2.0 \
   --bucket k1-backup-bucket \
   --velero-pod-cpu-request 250m \
-  --secret-file .secrects/credentials-velero.json
+  --secret-file .secrets/credentials-velero.json
 ```
 To see if everything is OK you **HAVE TO** check the logs of the velero pod:
 ```
