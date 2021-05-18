@@ -10,11 +10,11 @@ The tool we are going to use for this purpose is [Velero](https://github.com/hep
 
 ```
 cd [training-repo]
-cp ./09_backup_velero/gce/s3-bucket.tf ./src/gce/tf-infra/
+cp ./09_backup_velero/gce/gs-bucket.tf ./src/gce/tf-infra/
 cd ./src/gce/tf-infra
 
 # verify creation
-cat s3-bucket.tf
+cat gs-bucket.tf
 # create bucket
 terraform apply
 ```
@@ -45,7 +45,7 @@ Due to them small nodes we need decrease a little the default resource CPU limit
 velero install \
   --provider gcp \
   --plugins velero/velero-plugin-for-gcp:v1.2.0 \
-  --bucket k1-backup-bucket \
+  --bucket k1-backup-bucket-$GCP_PROJECT_ID \
   --velero-pod-cpu-request 250m \
   --secret-file .secrets/credentials-velero.json
 ```
@@ -73,7 +73,7 @@ metadata:
 spec:
   default: true
   objectStorage:
-    bucket: k1-backup-bucket
+    bucket: k1-backup-bucket-student-XX-xxxx
   provider: gcp
 ```
 
@@ -125,7 +125,7 @@ Expiration:  2019-08-18 11:19:10 +0200 CEST
 
 To verify if backup files have been created
 ```bash
-gsutil ls -r gs://k1-backup-bucket
+gsutil ls -r gs://k1-backup-bucket-$GCP_PROJECT_ID
 ```
 
 Delete the ingress namespace and try to do a restore to test the backup that was created:
