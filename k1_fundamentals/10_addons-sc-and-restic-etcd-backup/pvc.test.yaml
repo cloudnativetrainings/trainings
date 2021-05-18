@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: my-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+spec:
+  containers:
+    - name: busybox
+      image: busybox:1.32.0
+      command:
+        - "/bin/sh"
+      args:
+        - "-c"
+        - "while true; do echo $(date) >> /app/buffer; cat /app/buffer; sleep 5; done;"
+      volumeMounts:
+        - name: my-volume
+          mountPath: /app
+  volumes:
+    - name: my-volume
+      persistentVolumeClaim:
+        claimName: my-pvc

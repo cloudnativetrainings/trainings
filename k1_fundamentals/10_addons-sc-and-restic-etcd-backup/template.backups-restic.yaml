@@ -1,0 +1,126 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: gs-credentials
+  namespace: kube-system
+type: Opaque
+data:
+  key: {{ .Credentials.GOOGLE_CREDENTIALS | b64enc }}
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: restic-config
+  namespace: kube-system
+type: Opaque
+data:
+  password: {{ "<<TODO_RESTIC_PASSWORD>>" | b64enc }}
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: etcd-s3-backup
+  namespace: kube-system
+spec:
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 1
+  schedule: '@every 30m'
+  successfulJobsHistoryLimit: 0
+  suspend: false
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          hostNetwork: true
+          dnsPolicy: ClusterFirstWithHostNet
+          nodeSelector:
+            node-role.kubernetes.io/master: ""
+          tolerations:
+          - key: node-role.kubernetes.io/master
+            effect: NoSchedule
+            operator: Exists
+          restartPolicy: OnFailure
+          volumes:
+          - name: etcd-backup
+            emptyDir: {}
+          - name: host-pki
+            hostPath:
+              path: /etc/kubernetes/pki
+          - name: gs-credentials
+            secret:
+              secretName: gs-credentials
+          initContainers:
+          - name: snapshoter
+            image: {{ Registry "gcr.io" }}/etcd-development/etcd:v3.4.3
+            imagePullPolicy: IfNotPresent
+            command:
+            - /bin/sh
+            - -c
+            - |-
+              set -euf
+              mkdir -p /backup/pki/kubernetes
+              mkdir -p /backup/pki/etcd
+              cp -a /etc/kubernetes/pki/etcd/ca.crt /backup/pki/etcd/
+              cp -a /etc/kubernetes/pki/etcd/ca.key /backup/pki/etcd/
+              cp -a /etc/kubernetes/pki/ca.crt /backup/pki/kubernetes
+              cp -a /etc/kubernetes/pki/ca.key /backup/pki/kubernetes
+              cp -a /etc/kubernetes/pki/front-proxy-ca.crt /backup/pki/kubernetes
+              cp -a /etc/kubernetes/pki/front-proxy-ca.key /backup/pki/kubernetes
+              cp -a /etc/kubernetes/pki/sa.key /backup/pki/kubernetes
+              cp -a /etc/kubernetes/pki/sa.pub /backup/pki/kubernetes
+              etcdctl snapshot save /backup/etcd-snapshot.db
+            env:
+            - name: ETCDCTL_API
+              value: "3"
+            - name: ETCDCTL_DIAL_TIMEOUT
+              value: 3s
+            - name: ETCDCTL_CACERT
+              value: /etc/kubernetes/pki/etcd/ca.crt
+            - name: ETCDCTL_CERT
+              value: /etc/kubernetes/pki/etcd/healthcheck-client.crt
+            - name: ETCDCTL_KEY
+              value: /etc/kubernetes/pki/etcd/healthcheck-client.key
+            - name: ETCD_HOSTNAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            volumeMounts:
+            - mountPath: /backup
+              name: etcd-backup
+            - mountPath: /etc/kubernetes/pki
+              name: host-pki
+              readOnly: true
+          containers:
+          - name: uploader
+            image: {{ Registry "docker.io" }}/restic/restic:0.9.6
+            imagePullPolicy: IfNotPresent
+            command:
+            - /bin/sh
+            - -c
+            - |-
+              set -euf
+              restic snapshots -q || restic init -q
+              restic backup --tag=etcd --host=${ETCD_HOSTNAME} /backup
+              restic forget --prune --keep-last 48
+            env:
+            - name: ETCD_HOSTNAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            - name: RESTIC_REPOSITORY
+              value: "gs:<<TODO_GS_BUCKET_NAME>>:/<<TODO_BACKUP_FOLDER_NAME>>"
+            - name: RESTIC_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: restic-config
+                  key: password
+            - name: GOOGLE_PROJECT_ID
+              value: <<TODO_GOOGLE_PROJECT_ID>>
+            - name: GOOGLE_APPLICATION_CREDENTIALS
+              value: /gs/key
+            volumeMounts:
+            - mountPath: /backup
+              name: etcd-backup
+            - mountPath: /gs
+              name: gs-credentials
+
