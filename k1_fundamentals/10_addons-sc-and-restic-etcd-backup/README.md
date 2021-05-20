@@ -179,7 +179,7 @@ persistentvolume/pvc-c3979b78-4898-4576-be9b-047c31abc11c   1Gi        RWO      
 
 # 2. Restic Backup for etcd Snapshots
 
-Next we want to creat a dedicated backup for our etcd database in an automated way. So as reference Kubeone already have a default addon for storing the etcd snapshots at a S3 Location, see [Restic backup addon](https://docs.kubermatic.com/kubeone/master/examples/addons_backup). Now we want to adjust it to use our GCP Storage Bucket.
+Next we want to create a dedicated backup for our etcd database in an automated way. So as reference Kubeone already have a default addon for storing the etcd snapshots at a S3 Location, see [Restic backup addon](https://docs.kubermatic.com/kubeone/master/examples/addons_backup). Now we want to adjust it to use our GCP Storage Bucket.
 
 The chapter folder already contains and template what have been adjusted to use GS bucket. If you compare the both files [`template.backups-restic.yaml`](./template.backups-restic.yaml) and [`backups-restic.yaml`](https://github.com/kubermatic/kubeone/raw/master/addons/backups-restic/backups-restic.yaml) you see that only minor adjustment has been needed. For more details how to configure Restic, see the [Restic Documentation - Preparing a new repository - Google Cloud Storage](https://restic.readthedocs.io/en/stable/030_preparing_a_new_repo.html#google-cloud-storage).
 ![restic_yaml_diff_s3_vs_gs](../.images/restic_yaml_diff_s3_vs_gs.png)
@@ -212,14 +212,14 @@ You see the adjustments of the backup location, isn't hard and could be done a f
 ```
 kubectl get cronjobs -n kube-system
 NAME             SCHEDULE     SUSPEND   ACTIVE   LAST SCHEDULE   AGE
-etcd-s3-backup   @every 30m   False     0        <none>          9s
+etcd-gs-backup   @every 30m   False     0        <none>          9s
 ```
 As you see every `30m` will now automatic backup job scheduled.
 To test now the backup create we create a manual test job:
 ```
 kcns kube-system
 # create a job from the cronjob
-kubectl create job --from cronjob/etcd-s3-backup test-etcd-backup
+kubectl create job --from cronjob/etcd-gs-backup test-etcd-backup
 
 # check if job got created and pod is running
 kubectl get job,pod | grep test
@@ -229,8 +229,8 @@ pod/test-etcd-backup-gg8gw                        0/1     Completed   0         
 # check the logs of the backup pod
 kubectl logs test-etcd-backup-gg8gw
 
-# see if the bucket contains restirct data
-gsutil ls -r gs://k1-backup-bucket/etcd-snapshot-backup
+# see if the bucket contains restic data
+gsutil ls -r gs://k1-backup-bucket-student-XX/etcd-snapshot-backup
 ```
 
-Alright, seams everything looks fine and our cluster as automatic backup configured.
+Alright, seems everything looks fine and our cluster has automatic backup configured.
