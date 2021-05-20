@@ -1,6 +1,6 @@
 # KubeOne and Kubernetes Upgrade
 
-KubeOne Version and Kubernetes supported upgrade version, are quite in a close relationship as both follow a so called **Skew Policy**. To ensure that you get the latest fixes, run your latest kubeone version for your target Kubernetes version, as a reference take a look to [KubeOne Docu > Architecture > Compatibility: Supported Kubernetes Versions](https://docs.kubermatic.com/kubeone/master/architecture/compatibility/) 
+KubeOne Version and Kubernetes supported upgrade version, are quite in a close relationship as both follow a so called **Skew Policy**. To ensure that you get the latest fixes, run your latest kubeone version for your target Kubernetes version, as a reference take a look to [KubeOne Docs > Architecture > Compatibility: Supported Kubernetes Versions](https://docs.kubermatic.com/kubeone/master/architecture/compatibility/).
 
 As KubeOne will upgrade the Kubernetes cluster as a glance, it starts first by upgrading the control plane nodes (i.e. masters),Machine Controller, the MachineDeployments  (optional: will update worker nodes) and at the last point with the features/addons.
 
@@ -19,7 +19,7 @@ Before running an upgrade please ensure that your KubeOne version supports upgra
 
 **NOTE:** In Kubernetes it is recommended to only update one minor version every time. So if you want to update from `1.15.x` to `1.17.x`, please upgrade first to `1.16.x`! The latest release version can be found at [Github Kubernetes Releases](https://github.com/kubernetes/kubernetes/tags).
 
-The upgrade process can be started by running the ```kubeone apply``` command or optionally if you want to also upgrade the worker nodes at the same time ```kubeone apply  --upgrade-machine-deployments```. More Details will follow.
+The upgrade process can be started by running the ```kubeone apply``` command or optionally if you want to also upgrade the worker nodes at the same time ```kubeone apply --upgrade-machine-deployments```. More Details will follow.
 
 To start with the upgrade please follow the steps below:
 
@@ -27,7 +27,7 @@ To start with the upgrade please follow the steps below:
 
 In this section, we are going to upgrade the KubeOne cluster from version `1.19.9` to latest `1.20.7`
 
-## Update Cluster Config 
+## Update Cluster Config
 Update the `kubeone.yaml` file by changing the value of kubernetes to `1.20.7`:
 
 ```yaml
@@ -78,7 +78,7 @@ kubectl version --short
 Client Version: v1.21.1
 Server Version: v1.19.9
 ```
-If the `Client Version`is LOWER as your target version, please update your `kubectl` to the latest version:
+If the `Client Version`is LOWER then your target version, please update your `kubectl` to the latest version:
 ```bash
 curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
 sudo mv kubectl /usr/bin/kubectl
@@ -86,9 +86,9 @@ sudo chmod +x /usr/bin/kubectl
 ```
 *N.B - This step is recommended at local system because sometimes operational commands might give some errors when you use a separate kubectl client version that is lower as the installed kubernetes cluster version. 
 
-*At the tooling container you potential need exec into as root, e.g.:`docker exec -it -u 0 kubeone-tool-container bash`*
+*At the tooling container you potentially need exec into as root, e.g.:`docker exec -it -u 0 kubeone-tool-container bash`*
 
-## Execute the upgrade trough `kubeone apply`
+## Execute the upgrade through `kubeone apply`
 
 As mentioned previously there are two ways to implement the upgrade:
 To watch the upgrade process, open a **SECOND shell**:
