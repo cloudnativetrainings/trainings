@@ -46,7 +46,7 @@ Perform the check-list before proceeding:
 
 1. Export the GCP authentication token with **`cat`**: 
 ```bash
-echo echo $GOOGLE_CREDENTIALS 
+echo $GOOGLE_CREDENTIALS 
 { "type": "service_account", "project_id": "YOUR PROJECT", "private_key_id": "..." }
 
 # if empty see 00_setup chapter and execute
@@ -171,7 +171,7 @@ Client Version: v1.21.1
 Server Version: v1.20.7
 ```
 ```bash
-kubeone status -t .
+kubeone status -t . -m ../kubeone.yaml
 ```
 ```bash
 kubectl get nodes
