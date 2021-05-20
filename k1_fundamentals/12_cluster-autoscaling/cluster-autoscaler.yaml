@@ -206,7 +206,7 @@ spec:
         #- --scale-down-unneeded-time=1m
         #- --scale-down-delay-after-add=1m
         # More robust downscaling
-        - --scale-down-unneeded-time=60m
+        - --scale-down-unneeded-time=30m
         - --scale-down-delay-after-add=10m
         env:
         - name: CAPI_GROUP
