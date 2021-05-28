@@ -245,10 +245,10 @@ INFO[00:10:54]
 INFO[00:10:54]         Service             : nginx-ingress-controller / nginx-ingress-controller 
 INFO[00:10:54]         Ingress via IP      : 34.141.244.62  
 INFO[00:10:54]                                              
-INFO[00:10:54]       Please ensure your DNS settings for "kubermatic.test-01-int-05.loodse.training" include the following records: 
+INFO[00:10:54]       Please ensure your DNS settings for "kubermatic.student-00.loodse.training" include the following records: 
 INFO[00:10:54]                                              
-INFO[00:10:54]          kubermatic.test-01-int-05.loodse.training.    IN  A  34.141.244.62 
-INFO[00:10:54]          *.kubermatic.test-01-int-05.loodse.training.  IN  A  34.141.244.62 
+INFO[00:10:54]          kubermatic.student-00.loodse.training.    IN  A  34.141.244.62 
+INFO[00:10:54]          *.kubermatic.student-00.loodse.training.  IN  A  34.141.244.62 
 INFO[00:10:54]                                              
 INFO[00:10:54] 🛬 Installation completed successfully. Time for a break, maybe? ☺ 
 ```
@@ -321,3 +321,48 @@ kubectl -n oauth get ingresses
 NAME                        HOSTS                                   ADDRESS   PORTS     AGE
 dex                         kubermatic.student-00.loodse.training             80, 443   52s
 ```
+
+## Test the applied KKP config
+
+With the `kubermatic.yaml` we trigger the deployment of the Kubermatic components by the so-called "Kubermatic Operator", see the logs:
+``bash
+k logs -n kubermatic kubermatic-operator-xxxx-xxxx
+``
+The operator will ensure, based on the `kubermatic.yaml` specified `KubermaticConfiguration` is applied. For more information read:[Kubermatic Docs > Configuration](https://docs.kubermatic.com/kubermatic/master/tutorials_howtos/kkp_configuration/).
+For any later change you can just apply the modified'`kubermatic.yaml`
+```bash
+kubectl apply -f kubermatic.yaml
+```
+
+This will cause the operator to ensure provisioning of all KKP setup components. You can observe the progress:
+
+```bash
+watch kubectl -n kubermatic get deployments,pods
+```
+```
+NAME                                                   READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/kubermatic-api                         0/2     2            0           19m
+deployment.apps/kubermatic-dashboard                   2/2     2            2           19m
+deployment.apps/kubermatic-master-controller-manager   1/1     1            1           19m
+deployment.apps/kubermatic-operator                    1/1     1            1           20m
+
+NAME                                                        READY   STATUS             RESTARTS   AGE
+pod/kubermatic-api-7dccb7ff7f-77k94                         0/1     CrashLoopBackOff   8          19m
+pod/kubermatic-api-7dccb7ff7f-lf244                         0/1     CrashLoopBackOff   8          19m
+pod/kubermatic-dashboard-5cc96f5b67-r9bwh                   1/1     Running            0          19m
+pod/kubermatic-dashboard-5cc96f5b67-t65sw                   1/1     Running            0          19m
+pod/kubermatic-master-controller-manager-84cccb664f-krfdv   1/1     Running            0          19m
+pod/kubermatic-operator-5b8db958b6-fxvkf                    1/1     Running            0          20m
+```
+
+**NOTE:** Every change in configuration can be executed by `kubectl apply -f kubermatic.yaml`. The Operator will update the Kubermatic installation accordingly.
+**NOTE:** If you delete the `KubermaticConfiguration`, e.g. with `kubectl delete -f kubermatic.yaml`, the operator will also **DELETE** all Kubermatic components!
+
+As we see on the `CrashLoopBackOff` pods, something is missing, check:
+```bash
+kubectl logs -n kubermatic kubermatic-api-7dccb7ff7f-77k94 
+{"level":"info","time":"2021-05-28T00:27:35.242Z","caller":"cli/hello.go:36","msg":"Starting Kubermatic API (Enterprise Edition)...","version":"v2.17.0"}
+I0528 00:27:36.343760       1 request.go:645] Throttling request took 1.020000542s, request: GET:https://10.96.0.1:443/apis/coordination.k8s.io/v1?timeout=32s
+{"level":"fatal","time":"2021-05-28T00:27:36.606Z","caller":"kubermatic-api/main.go:126","msg":"failed to create an openid authenticator","issuer":"https://kubermatic.student-00.loodse.training/dex","oidcClientID":"kubermatic","error":"Get \"https://kubermatic.student-00.loodse.training/dex/.well-known/openid-configuration\": dial tcp: lookup kubermatic.student-00.loodse.training on 169.254.20.10:53: no such host"
+```
+As our installer told us, we need now to set correct DNS entries. 
