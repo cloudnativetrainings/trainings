@@ -1,4 +1,4 @@
-# KubeOne Master setup
+v# KubeOne Master setup
 
 Setup a Kubeone HA cluster, similar as described in [../../../k1_fundamentals](../../../k1_fundamentals):
 
@@ -14,7 +14,7 @@ pwd
 ### copy the secrets
 cp -r ../k1_fundamentals/.secrets ./
 ```
-If not already happened ensure, that you destroyed the former KubeOne Cluster with [](../../../k1_fundamentals/99_cluster-cleanup-or-pause)!
+**If not already happened ensure, that you destroyed the former KubeOne Cluster with [../../../k1_fundamentals/99_cluster-cleanup-or-pause](../../../k1_fundamentals/99_cluster-cleanup-or-pause)!**
 
 ## Option 2: Create fresh credentials
 ```bash
@@ -36,7 +36,7 @@ ls -la .secrets
 
 ## Create Master Cluster
 
-Check the predefined manifests [`../../src/gce/kubeone`](../../src/gce/kkp-master), and note:
+Check the predefined manifests [`./kkp-master.template`](./kkp-master.template), and note:
 - Master Control Plan count ``  is `1`, for production **HA control plan** at least 3 master are recommend! *For the training we reduce some costs and only hold 1 master VM*
 - Worker Nodes are using Autoscaler settings what are more reactive as it should used in production.
 - Worker Node OS doesn't get updated on the startup (speed up at scaling)
