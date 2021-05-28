@@ -1,0 +1,48 @@
+datacenters:
+  #==================================
+  #============== Seeds =============
+  #==================================
+
+  # The name needs to match the a context in the kubeconfig given to the API
+  k1:
+    # Defines this datacenter as a seed
+    is_seed: true
+    # Though not used, you must configured a provider spec even for seeds.
+    # The bringyourown provider is a good placeholder, as it requires no
+    # further configuration.
+    spec:
+      bringyourown: ~
+
+  #seed-2:
+  #  is_seed: true
+  #  spec:
+  #    bringyourown: ~
+
+  #==================================
+  #======= Node Datacenters =========
+  #==================================
+
+  #==================================
+  #============= GCP ================
+  #==================================
+  gcp-westeurope:
+    location: "Europe West (Netherlands)"
+    seed: k1
+    country: DE
+    spec:
+      gcp:
+        region: europe-west4
+        zone_suffixes:
+          - a
+#
+#  #==================================
+#  #============== AWS ===============
+#  #==================================
+#  aws-eu-central-1a:
+#    location: EU Central (Frankfurt)
+#    country: DE
+#    seed: k1
+#    spec:
+#      aws:
+#        # Region to use for node VMs
+#        region: eu-central-1
