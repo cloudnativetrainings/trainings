@@ -12,7 +12,7 @@ pwd
 # /home/kubermatic/mnt/kkp_fundamentals
 
 ### copy the secrets
-cp -r ../k1_fundamentals/.secrets/ ./
+cp -r ../k1_fundamentals/.secrets ./
 ```
 If not already happened ensure, that you destroyed the former KubeOne Cluster with [](../../../k1_fundamentals/99_cluster-cleanup-or-pause)!
 
