@@ -39,13 +39,13 @@ spec:
             diskSize: 20
             diskType: pd-ssd
             labels:
-              k1-workers: pool-az-a
+              kkp-master-workers: pool-az-a
             machineType: n1-standard-2
             multizone: true
-            network: https://www.googleapis.com/compute/v1/projects/TODO-YOUR-GCP-PROJECT-ID/global/networks/k1
+            network: https://www.googleapis.com/compute/v1/projects/TODO-YOUR-GCP-PROJECT-ID/global/networks/kkp-master
             preemptible: false
             regional: false
-            subnetwork: https://www.googleapis.com/compute/v1/projects/TODO-YOUR-GCP-PROJECT-ID/regions/europe-west4/subnetworks/k1-subnet
+            subnetwork: https://www.googleapis.com/compute/v1/projects/TODO-YOUR-GCP-PROJECT-ID/regions/europe-west4/subnetworks/kkp-master-subnet
             tags:
             - firewall
             - targets

@@ -12,4 +12,4 @@ control_plane_target_pool_members_count = 1
   
 ### update to your location if needed
 //ssh_public_key_file = "~/.ssh/id_rsa.pub"
-ssh_public_key_file = "../../../../.secrets/id_rsa.pub"
+ssh_public_key_file = "../../../.secrets/id_rsa.pub"

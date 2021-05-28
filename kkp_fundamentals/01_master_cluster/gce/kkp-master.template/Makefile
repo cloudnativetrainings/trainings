@@ -12,7 +12,7 @@ K1_SSH_KEY="./../../../.secrets/id_rsa"
 #CLOUD_CREDENTIALS_ENV_FILE="./secret/cloud_env.sh"
 #include ${CLOUD_CREDENTIALS_ENV_FILE}
 #export
-export GOOGLE_CREDENTIALS := $(shell cat ../../../.secrets/k8c-cluster-provisioner-sa-key.json)
+export GOOGLE_CREDENTIALS := $(shell cat ../../.secrets/k8c-cluster-provisioner-sa-key.json)
 
 ######### KubeOne
 k1-load-env:

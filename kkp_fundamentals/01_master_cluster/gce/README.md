@@ -52,12 +52,15 @@ We will now look into the following steps to provision the basic cluster:
 # set now your project ID
 export GCP_PROJECT_ID=student-xx-XXX
 
-# replace TODO-YOUR-GCP-PROJECT-ID with your project id
-cd src/gce/kkp-master
+# copy the template to your source folder
+mkdir src
+cp -r 01_master_cluster/gce/kkp-master.template src/kkp-master
+# replace TODO-YOUR-GCP-PROJECT-ID with your project id 
+cd src/kkp-master
 sed -i 's/TODO-YOUR-GCP-PROJECT-ID/'"$GCP_PROJECT_ID"'/g' **/*
 
 # start SSH agent and add id-rsa
-source ../../../helper-scripts/source-ssh-agent.sh
+source ../../helper-scripts/source-ssh-agent.sh
 
 # deploy K1 cluster
 make k1-tf-apply k1-apply
