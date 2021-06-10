@@ -20,7 +20,7 @@ This document explains how to use addons in your workflow. If you want to learn 
 If you take a look in your current cluster, currently no storage class is applied. So if you create a new Persistent Volume Claim no storage get applied.
 
 ```bash
-cd [training-repo]
+cd [training-repo] #training-repo => folder 'k1_fundamentals'
 kubectl get sc
 
 No resources found
@@ -28,6 +28,8 @@ No resources found
 Let's now deploy a pod with some PVC:
 ```
 kubectl create ns sc-test
+kubectl config set-context --current --namespace=sc-test
+# or
 kcns sc-test
 kubectl apply -f 10_addons-sc-and-restic-etcd-backup/pvc.test.yaml
 
@@ -217,6 +219,8 @@ etcd-gs-backup   @every 30m   False     0        <none>          9s
 As you see every `30m` will now automatic backup job scheduled.
 To test now the backup create we create a manual test job:
 ```
+kubectl config set-context --current --namespace=kube-system
+# or
 kcns kube-system
 # create a job from the cronjob
 kubectl create job --from cronjob/etcd-gs-backup test-etcd-backup
