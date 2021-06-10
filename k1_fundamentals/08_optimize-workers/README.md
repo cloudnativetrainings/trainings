@@ -25,7 +25,8 @@ Due to this we want to:
 As we already created our machinedeployment yaml definitions, we can now easily update them and apply the change. For a full list of options of the machine deployment spec, see [github.com/kubermatic/machine-controller - examples/gce-machinedeployment.yaml](https://github.com/kubermatic/machine-controller/blob/master/examples/gce-machinedeployment.yaml).
 
 ```bash
-cd [training-repo]
+cd [training-repo] #training-repo => folder 'k1_fundamentals'
+
 cd ./src/gce
 ls -la machines/
 ```
@@ -165,7 +166,7 @@ node/k1-pool-az-c-7bdfbcd567-cb5kb   Ready    <none>   2m15s   v1.19.9   10.240.
 ```
 Finally verify that your app is still running and reachable:
 ```bash
-curl https://app-ext.YOUR_DNS_ZONE.loodse.training 
+curl https://app-ext.$DNS_ZONE.loodse.training 
 ```
 See also the resource usage:
 ```bash
@@ -208,7 +209,7 @@ node/k1-pool-az-c-7bdfbcd567-cb5kb   Ready,SchedulingDisabled   <none>   3m9s   
 ```
 After a few minutes, verify that your app is still running and reachable:
 ```bash
-curl https://app-ext.YOUR_DNS_ZONE.loodse.training 
+curl https://app-ext.$DNS_ZONE.loodse.training 
 ```
 Now you see the app is not reachable anymore, as now compute worker nodes are available:
 ```
