@@ -74,22 +74,22 @@ gcloud config set project student-XX-xxxx
 # set DNS_ZONE
 gcloud dns managed-zones list
 NAME                DNS_NAME                             DESCRIPTION  VISIBILITY
-student-XX-training student-XX-training.loodse.training. k8c          public
+student-XX-XXXX     student-XX-XXXX.loodse.training.     k8c          public
 
 ## adjust to your zone name
-export DNS_ZONE=student-XX-training
+export DNS_ZONE=student-XX-XXXX
 gcloud dns record-sets transaction start --zone=$DNS_ZONE
 ```
 
 Then proceed to add the A records:
 
-`*.student-00.loodse.training`  ---->  LoadBalancer IP address of the Nginx Service
+`*.student-XX-XXXX.loodse.training`  ---->  LoadBalancer IP address of the Nginx Service
 
 ```bash
 kubectl get svc -n ingress-nginx
 ### use your external service ip
-export SERVICE_NGINX_EXT_IP=xx.xx.xx.xx  
-gcloud dns record-sets transaction add --zone=$DNS_ZONE --name="*.TODO-DNS_NAME." --ttl 300 --type A $SERVICE_NGINX_EXT_IP
+export SERVICE_NGINX_EXT_IP=xx.xx.xx.xx 
+gcloud dns record-sets transaction add --zone=$DNS_ZONE --name="*.$DNS_ZONE.loodse.training" --ttl 300 --type A $SERVICE_NGINX_EXT_IP
 ```
 
 Finally execute those changes.
@@ -108,7 +108,7 @@ Confirm the DNS records:
 gcloud dns record-sets list --zone=$DNS_ZONE
 
 NAME                                           TYPE   TTL    DATA
-*.student-XX.loodse.training.                  A      300    35.241.157.248
+*.student-XX.loodse.XXXX.                      A      300    35.241.157.248
 ```
 ### Create a Cluster Issuer:
 ***ATTENTION: view and edit the .yaml files before you apply !!!**
@@ -144,7 +144,7 @@ kubectl apply -f manifests/app.deployment.yaml
 # Service manifest:
 kubectl apply -f manifests/app.service.yaml    
 ```
-Now let's configure a valid SSL certificate for you app. `sed` will replace `TODO-YOUR-DNS-ZONE` with your DNS ZONE, e.g.:`student-00.loodse.training`. Please ensure you will use **YOUR STUDENT ID**:
+Now let's configure a valid SSL certificate for you app. `sed` will replace `TODO-YOUR-DNS-ZONE` with your DNS ZONE, e.g.:`student-XX-XXXX.loodse.training`. Please ensure you will use **YOUR STUDENT ID**:
 ```bash
 # check no certificate is present
 kubectl get certificates
@@ -189,8 +189,8 @@ Events:            <none>
 kubectl get ingresses.networking.k8s.io
 ```
 ```
-NAME       HOSTS                                ADDRESS          PORTS     AGE
-helloweb   app-ext.student-00.loodse.training   34.76.142.126    80, 443    98s
+NAME       HOSTS                                     ADDRESS          PORTS      AGE
+helloweb   app-ext.student-XX-XXXX.loodse.training   34.76.142.126    80, 443    98s
 ```
 
 Ensure that there are endpoints available for the service.
