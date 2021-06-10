@@ -144,8 +144,9 @@ endpoints/nginx   10.244.3.4:80   58s
 Our nginx server is now reachable through the service IP and the endpoint IP. We can test access to the Cluster IP by using a troubleshooting container to trigger a request from the inside of the cluster:
 ```
 kubectl run --image=nicolaka/netshoot --rm -it -- bash
-curl <cluster-ip>
-curl <endpoint-ip>
+curl http://<cluster-ip>
+curl http://<endpoint-ip>
+exit
 ```
 
 ## Scale up the deployment 

@@ -5,20 +5,19 @@ To avoid the usage of your recent private SSH key, you can freshly create one fo
 ```
 # SSH Key creation if no ssh key is present
 
-cd [training-repo]
+cd [training-repo] #training-repo => folder 'k1_fundamentals'
 ssh-keygen -f .secrets/id_rsa
 ### for now no password is needed, but for prodution would be recommended
 
 ls -la .secrets/id*
-cd -
 ```
 
 ## Initial Cluster Setup on GCE
 
-Change your folder to the GCE terraform folder [`../../src/gce/tf-infra`](../../src/gce/tf-infra) for our terraform GCE code (You will find more terraform examples in the KubeOne repo: [`./examples/terraform/`](https://github.com/kubermatic/kubeone/tree/master/examples/terraform). 
+Change your folder to the GCE terraform folder [`src/gce/tf-infra`](src/gce/tf-infra) for our terraform GCE code (You will find more terraform examples in the KubeOne repo: [`./examples/terraform/`](https://github.com/kubermatic/kubeone/tree/master/examples/terraform)). 
 
 ```bash
-cd [training-repo]/src/gce/tf-infra
+cd src/gce/tf-infra
 terraform init
 ```
 ### Configure terraform setup
@@ -28,7 +27,7 @@ Update the `terraform.tfvars` file in the folder. The file will contain specific
 ```hcl-terraform
 cluster_name = "k1"
 
-project = "student-xx-project-name"
+project = "student-xx-project-name"  #echo $GCP_PROJECT_ID
 
 region = "europe-west4"
 
@@ -41,7 +40,6 @@ control_plane_target_pool_members_count = 1
 ### update to your location if needed
 ssh_public_key_file = "../../../.secrets/id_rsa.pub"
 ```
-For the GCP project id, execute `gcloud projects list`.
 
 
 If you are **NOT** using an ssh-agent for the upcoming tasks, please take a look at [How KubeOne uses

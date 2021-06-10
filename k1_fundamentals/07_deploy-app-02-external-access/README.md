@@ -45,6 +45,8 @@ Let's deploy the CertManager:
 ```bash
 # Create a namespace to run cert-manager in
 kubectl create namespace cert-manager
+kubectl config set-context --current --namespace=cert-manager
+# or
 kcns cert-manager
 
 # Install the CustomResourceDefinitions and cert-manager itself
@@ -111,8 +113,10 @@ NAME                                           TYPE   TTL    DATA
 ### Create a Cluster Issuer:
 ***ATTENTION: view and edit the .yaml files before you apply !!!**
 ```bash
-cd [training-repo]
+cd [training-repo] #training-repo => folder 'k1_fundamentals'
 cd 07_deploy-app-02-external-access
+export TRAINING_EMAIL=student-XX.XXXX@loodse.training #Use email provided by trainer for training
+sed -i "s/your-email@example.com/$TRAINING_EMAIL/g" manifests/lb.cluster-issuer.yaml
 kubectl apply -f manifests/lb.cluster-issuer.yaml
 ## check the status
 kubectl describe clusterissuers.cert-manager.io letsencrypt-issuer
@@ -130,6 +134,8 @@ Let's deploy a sample application. This will entail creating a deployment, a ser
 ```bash
 ## create a new app-ext namespace
 kubectl create ns app-ext
+kubectl config set-context --current --namespace=app-ext
+# or
 kcns app-ext
 
 # Deployment manifest:

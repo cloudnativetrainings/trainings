@@ -31,7 +31,7 @@ kubectl config set-context --current --namespace=kube-system
 kcns kube-system
 
 # export current machine deployment
-cd [training-repo]
+cd [training-repo] #training-repo => folder 'k1_fundamentals'
 cd ./src/gce
 mkdir machines     
 kubectl get machinedeployment k1-pool-az-a -o yaml | kexp > machines/md-zone-a.yaml
@@ -118,7 +118,7 @@ terraform apply
 
 ### (Alternative) HA by default in the Terraform output definition
 
-Another option ist to add the needed machine pools already in the beginning to the setup. To do this take a look into the `output.tf` and uncomment the complete section of `"${var.cluster_name}-pool-az-b"` and `"${var.cluster_name}-pool-az-c"`. If you would now create a new cluster, we would automatically get 3 `machinedeployments` for every zone.
+Another option is to add the needed machine pools already in the beginning to the setup. To do this take a look into the `output.tf` and uncomment the complete section of `"${var.cluster_name}-pool-az-b"` and `"${var.cluster_name}-pool-az-c"`. If you would now create a new cluster, we would automatically get 3 `machinedeployments` for every zone.
 
 ```bash                                         
 terraform apply

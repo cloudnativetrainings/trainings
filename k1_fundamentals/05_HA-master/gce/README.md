@@ -22,7 +22,7 @@ control_plane_target_pool_members_count = 1
 Save and execute the change:
 ```bash
 ### create the missing infrastructure
-cd [training-repo]
+cd [training-repo] #training-repo => folder 'k1_fundamentals'
 cd ./src/gce/tf-infra
 terraform apply
 ### install the missing master nodes
