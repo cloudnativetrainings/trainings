@@ -21,7 +21,7 @@ gcloud projects list
 
 # configure your IDs
 export GCP_PROJECT_ID=__YOUR_GCP_PROJECT_ID__                  #student-XX-project
-export GCP_SERVICE_ACCOUNT_ID=__YOUR_GCP_SERVICE_ACCOUNT_ID__  # k1-service-account@student-XX.iam.gserviceaccount.com 
+export GCP_SERVICE_ACCOUNT_ID=__YOUR_GCP_SERVICE_ACCOUNT_ID__  # k1-service-account@student-XX-project.iam.gserviceaccount.com 
 
 # create policy binding
 gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member serviceAccount:$GCP_SERVICE_ACCOUNT_ID --role='roles/compute.admin'

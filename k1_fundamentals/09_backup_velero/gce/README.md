@@ -9,7 +9,7 @@ The tool we are going to use for this purpose is [Velero](https://github.com/hep
 ### Create a Bucket
 
 ```
-cd [training-repo]
+cd [training-repo] #training-repo => folder 'k1_fundamentals'
 cp ./09_backup_velero/gce/gs-bucket.tf ./src/gce/tf-infra/
 cd ./src/gce/tf-infra
 
@@ -61,7 +61,7 @@ ksec
 ```
 For later management of Velero, the backup storage location object is also worth to take a look:
 ```bash
-kubectl get backupstoragelocations.velero.io -o yaml default | kexp
+kubectl get backupstoragelocations.velero.io -o yaml default -n velero | kexp
 
 apiVersion: velero.io/v1
 kind: BackupStorageLocation
