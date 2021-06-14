@@ -98,7 +98,7 @@ Address: 34.91.40.238
 Test if the ingress server is reachable:
 ```bash
 ## curl the http endpoind
-curl https://kubermatic.$DNS_ZONE.loodse.training
+curl http://kubermatic.$DNS_ZONE.loodse.training
 ```
 ```
 <html>
