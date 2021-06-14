@@ -107,7 +107,7 @@ cat /dev/urandom | tr -dc A-Za-z0-9 | head -c32
     issuerCookieKey: TODO-A-RANDOM-KEY
     serviceAccountKey: TODO-A-RANDOM-KEY
 ```
-Now as KKP and [DEX](https://github.com/dexidp/dex) can talk to each other, we need to configure a so called [DEX Connector](https://github.com/dexidp/dex#connectors) for the user authentication at the DEX authentication proxy. For now, we will just configure one static user. For this you need to replace `TODO-STUDENT-EMAIL@loodse.training` with your `student-XX-xxx@loodse.training` email. The default password is `password`
+Now as KKP and [DEX](https://github.com/dexidp/dex) can talk to each other, we need to configure a so called [DEX Connector](https://github.com/dexidp/dex#connectors) for the user authentication at the DEX authentication proxy. For now, we will just configure one static user. For this you need to replace `TODO-STUDENT-EMAIL@loodse.training` with your `student-XX-xxx@loodse.training` email. The default password is `password`. You can replace it by running command `htpasswd -bnBC 10 "" PASSWORD_HERE | tr -d ':\n' | sed 's/$2y/$2a/'` by replacing `PASSWORD_HERE` with your desired password. 
 
 ```yaml
   # For testing purposes, we configure a single static user/password combination.
