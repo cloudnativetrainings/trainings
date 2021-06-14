@@ -19,7 +19,7 @@ kubectl explain pod.metadata.name
 kubectl explain --recursive pod.spec.containers.ports
 ```
 
-## Gett infos of a pod
+## Get infos of a pod
 
 ```bash
 ## show all Pods
