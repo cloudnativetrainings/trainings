@@ -57,7 +57,7 @@ mkdir src
 cp -r 01_master_cluster/gce/kkp-master.template src/kkp-master
 # replace TODO-YOUR-GCP-PROJECT-ID with your project id 
 cd src/kkp-master
-sed -i 's/TODO-YOUR-GCP-PROJECT-ID/'"$GCP_PROJECT_ID"'/g' **/*
+sed -i 's/TODO-YOUR-GCP-PROJECT-ID/'"$GCP_PROJECT_ID"'/g' */**
 
 # start SSH agent and add id-rsa
 source ../../helper-scripts/source-ssh-agent.sh
