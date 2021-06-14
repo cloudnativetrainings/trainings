@@ -14,7 +14,7 @@ kubectl create -f pod.yaml
 kubectl get pods
 ```
 
-Why is the Pod not in state `RUNNING`?
+Why is the Pod not in `RUNNING` state?
 
 ## Get more info about the Pod
 
