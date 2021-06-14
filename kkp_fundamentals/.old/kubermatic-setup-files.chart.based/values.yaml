@@ -135,7 +135,7 @@ alertmanager:
   host: "alertmanager.kubermatic.TODO-STUDENT-DNS.loodse.training"
   config:
     global:
-      slack_api_url: https://hooks.slack.com/services/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
+      slack_api_url: https://hooks.slack.com/services/xxxx/xxxxxx
     route:
       receiver: 'default-receiver'
       group_by: ['alertname', 'cluster', 'seed_cluster']
@@ -160,9 +160,6 @@ alertmanager:
         text: '{{ template "slack.kubermatic.text" . }}'
     templates:
     - '*.tmpl'
-  # becomes relevant when migrating to Kubermatic 2.11
-  migration:
-    enabled: false
 
 dex:
   ingress:
