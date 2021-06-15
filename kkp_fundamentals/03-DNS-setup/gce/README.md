@@ -154,7 +154,7 @@ ingress.extensions/kubermatic   kubermatic.student-00.loodse.training      34.91
 NAME                                     READY   SECRET           AGE
 certificate.cert-manager.io/kubermatic   True    kubermatic-tls   15m
 ```
-### Login to Kubermatic Dashboard
+## Login to Kubermatic Dashboard
 
 Youd should now be able to open the Dashboard in browser at `https://kubermatic.$DNS_ZONE.loodse.training` and login with your configured e-mail ID of user at your `values.yaml`, for example: `student-XX-xxx@loodse.training` and default password is `password`. You can check your password with below steps.
 ```bash
