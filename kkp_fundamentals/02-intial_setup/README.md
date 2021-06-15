@@ -333,7 +333,7 @@ dex                         kubermatic.student-00.loodse.training             80
 
 With the `kubermatic.yaml` we trigger the deployment of the Kubermatic components by the so-called "Kubermatic Operator", see the logs:
 ``bash
-k logs -n kubermatic kubermatic-operator-xxxx-xxxx
+kubectl logs -n kubermatic kubermatic-operator-xxxx-xxxx
 ``
 The operator will ensure, based on the `kubermatic.yaml` specified `KubermaticConfiguration` is applied. For more information read:[Kubermatic Docs > Configuration](https://docs.kubermatic.com/kubermatic/master/tutorials_howtos/kkp_configuration/).
 For any later change you can just apply the modified'`kubermatic.yaml`
