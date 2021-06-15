@@ -18,7 +18,7 @@ cp -r ../k1_fundamentals/.secrets ./
 
 ## Option 2: Create fresh credentials
 ```bash
-cd [training-repo]
+cd [training-repo]  #kkp_fundamentals
 mkdir .secrets
 ```
 To be able to create a new kubeone based master cluster, we need at least the following secrets under the  `.secrets` folder:
