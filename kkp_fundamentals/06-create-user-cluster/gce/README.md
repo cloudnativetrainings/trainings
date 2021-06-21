@@ -31,7 +31,7 @@ kubectl get pods -n cluster-[cluster-id]
 After a few minutes you should see the newly created user cluster. Download the kubeconfig from the UI and connect to it!
 
 Check also the created [GCE - VM instances](https://console.cloud.google.com/compute/instances):
-![gce vm instances managed by Kubermatic](../.pics/gce-instances-k8c.png)
+![gce vm instances managed by Kubermatic](../../.pics/gce-instances-k8c.png)
 
 ## Create HA setup
 Per default every Kubermatic user cluster control plane is deployed as an HA setup, so for this you have notating to do :-)
@@ -42,8 +42,8 @@ To provide the option of small and big clusters, we think it's best to create th
 3. Done! Check [GCE - VM instances](https://console.cloud.google.com/compute/instances) and there you should see `3` VMs spread across 3 zones.  
 
 **NOTE:** To identify the different node pools, you should always set meaningful names, like using the zone name in this example:
-![GCE Multizone Setup - Kubermatic](../.pics/gce.k8c.multizone.worker.png)
-![GCE Multizone Setup - GCE Console](../.pics/gce.console.multizone.worker.png)
+![GCE Multizone Setup - Kubermatic](../../.pics/gce.k8c.multizone.worker.png)
+![GCE Multizone Setup - GCE Console](../../.pics/gce.console.multizone.worker.png)
 
 **NOTE:** To manage the nodes by CRD's you can do exactly the same as you learned in [KubeOne Training > gce/30_setup_ha_worker.md](../../kubeone/gce/30_setup_ha_worker.md)
 
