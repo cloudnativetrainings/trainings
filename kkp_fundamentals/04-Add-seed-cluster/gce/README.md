@@ -182,7 +182,7 @@ Refer to the [Seed CRD documentation](https://docs.kubermatic.com/kubermatic/mas
 
 Let's apply the manifest above in the master cluster. Kubermatic will pick up the new Seed and begin to reconcile it by installing the required Kubermatic components (for a nested seed in our case):
 
-**ATTENTION:** If you are using KKP CE version, seed must be named as `Kubermatic` instead of `europe-west`.
+**ATTENTION:** If you are using KKP CE version, seed must be named as `kubermatic` instead of `europe-west`.
 
 ```bash
 # create copy of seed template

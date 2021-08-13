@@ -34,7 +34,7 @@ Check also the created [GCE - VM instances](https://console.cloud.google.com/com
 ![gce vm instances managed by Kubermatic](../../.pics/gce-instances-k8c.png)
 
 ## Create HA setup
-Per default every Kubermatic user cluster control plane is deployed as an HA setup, so for this you have notating to do :-)
+By default every Kubermatic user cluster control plane is deployed as an HA setup, so for this you have nothing to do :-)
 
 To provide the option of small and big clusters, we think it's best to create the worker nodes based on your needs on compute power and networking. So e.g. to create an HA worker pool spread over 3 availability zones, follow these steps:
 1. Open your cluster overview dashboard

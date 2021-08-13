@@ -31,7 +31,7 @@ gcloud dns record-sets transaction start --zone=$DNS_ZONE
 ## NodePort Proxy DNS record
 Now let's place the DNS record for the seed node-port service. In this example we named our seed cluster `europe-west` which results in a URL `USER_CLUSTER_ID.europe-west.$DNS_ZONE.loodse.training`:
 
-**ATTENTION:** If you are using KKP CE version, seed name will be `Kubermatic` instead of `europe-west`. Which results in a URL `USER_CLUSTER_ID.kubermatic.$DNS_ZONE.loodse.training`:
+**ATTENTION:** If you are using KKP CE version, seed name will be `kubermatic` instead of `europe-west`. Which results in a URL `USER_CLUSTER_ID.kubermatic.$DNS_ZONE.loodse.training`:
 
 ```bash
 kubectl -n kubermatic get svc nodeport-proxy
