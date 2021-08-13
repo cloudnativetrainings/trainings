@@ -17,7 +17,7 @@ endif
 ################## Helpers
 download-kkp-ee-release:
 	mkdir -p ${KKP_RELEASE_ROOT_FOLDER}/${KKP_VERSION}
-	wget https://github.com/kubermatic/kubermatic/releases/download/${KKP_VERSION}/kubermatic-ce-${KKP_VERSION}-linux-amd64.tar.gz -O- | tar -xz --directory ${KKP_RELEASE_ROOT_FOLDER}/${KKP_VERSION}/
+	wget https://github.com/kubermatic/kubermatic/releases/download/${KKP_VERSION}/kubermatic-ee-${KKP_VERSION}-linux-amd64.tar.gz -O- | tar -xz --directory ${KKP_RELEASE_ROOT_FOLDER}/${KKP_VERSION}/
 	rm -rf ${KKP_RELEASE_ROOT_FOLDER}/{KKP_VERSION}/.kube
 
 download-kkp-ce-release:
