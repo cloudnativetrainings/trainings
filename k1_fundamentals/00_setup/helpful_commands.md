@@ -66,7 +66,7 @@ source ~/.bashrc
 
 ## How to write the right spec?
 
-* Take a look at the [Kubernets reference docs](https://kubernetes.io/docs/reference/)
+* Take a look at the [Kubernetes reference docs](https://kubernetes.io/docs/reference/)
 * Use `kubectl explain pod.spec.containers` 
 
 ## Clean up the namespace

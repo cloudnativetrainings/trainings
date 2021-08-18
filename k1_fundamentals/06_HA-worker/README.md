@@ -8,20 +8,20 @@ kubectl -n kube-system get machinedeployments
 ```
 ```
 NAME           REPLICAS   AVAILABLE-REPLICAS   PROVIDER   OS       KUBELET   AGE
-k1-pool-az-a   1          1                    gce        ubuntu   1.19.9    34m
+k1-pool-az-a   1          1                    gce        ubuntu   1.20.9    34m
 ```
 ```bash
 kubectl get nodes --label-columns failure-domain.beta.kubernetes.io/zone
 ```
 ```
 NAME                            STATUS                        ROLES    AGE     VERSION   ZONE
-k1-control-plane-1              Ready                         master   117m    v1.19.9   europe-west4-a
-k1-control-plane-2              Ready                         master   41m     v1.19.9   europe-west4-b
-k1-control-plane-3              Ready                         master   40m     v1.19.9   europe-west4-c
-k1-pool-az-a-84dff9464c-g59bv   Ready                         <none>   2m30s   v1.19.9   europe-west4-a
+k1-control-plane-1              Ready                         master   117m    v1.20.9   europe-west4-a
+k1-control-plane-2              Ready                         master   41m     v1.20.9   europe-west4-b
+k1-control-plane-3              Ready                         master   40m     v1.20.9   europe-west4-c
+k1-pool-az-a-84dff9464c-g59bv   Ready                         <none>   2m30s   v1.20.9   europe-west4-a
 ```   
 
-To reach an HA cluster, we would need worker nodes also in zones `europe-west4-b` and `europe-west4-c`. To accomplish this, we could reuse the current machinedeployment `k1-pool-az-a` and duplicate the object for AZ `b` and `c`.
+To reach an HA cluster, we would need worker nodes also in zones `europe-west4-b` and `europe-west4-c`. To accomplish this, we could reuse the current MachineDeployment `k1-pool-az-a` and duplicate the object for AZ `b` and `c`.
 
 1. Extract the current `machinedeployment` `k1-pool-az-a`:
 ```bash
@@ -64,22 +64,22 @@ watch kubectl get machinedeployments,machine,nodes -A
 After a few minutes you should see, 3 nodes in total.
 ```
 NAMESPACE     NAME                                            REPLICAS   AVAILABLE-REPLICAS   PROVIDER   OS       KUBELET   AGE
-kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-a   1          1                    gce        ubuntu   1.19.9    3h33m
-kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-b   1          1                    gce        ubuntu   1.19.9    3m30s
-kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-c   1          1                    gce        ubuntu   1.19.9    3m30s
+kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-a   1          1                    gce        ubuntu   1.20.9    3h33m
+kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-b   1          1                    gce        ubuntu   1.20.9    3m30s
+kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-c   1          1                    gce        ubuntu   1.20.9    3m30s
 
 NAMESPACE     NAME                                                   PROVIDER   OS       ADDRESS       KUBELET   AGE
-kube-system   machine.cluster.k8s.io/k1-pool-az-a-75cddb6cd9-slgqk   gce        ubuntu   10.240.0.13   1.19.9    3m30s
-kube-system   machine.cluster.k8s.io/k1-pool-az-b-777d7cc84b-g76zf   gce        ubuntu   10.240.0.15   1.19.9    3m29s
-kube-system   machine.cluster.k8s.io/k1-pool-az-c-5d5cfcc5bf-gpjpg   gce        ubuntu   10.240.0.14   1.19.9    3m29s
+kube-system   machine.cluster.k8s.io/k1-pool-az-a-75cddb6cd9-slgqk   gce        ubuntu   10.240.0.13   1.20.9    3m30s
+kube-system   machine.cluster.k8s.io/k1-pool-az-b-777d7cc84b-g76zf   gce        ubuntu   10.240.0.15   1.20.9    3m29s
+kube-system   machine.cluster.k8s.io/k1-pool-az-c-5d5cfcc5bf-gpjpg   gce        ubuntu   10.240.0.14   1.20.9    3m29s
 
 NAMESPACE   NAME                                 STATUS   ROLES    AGE     VERSION
-            node/k1-control-plane-1              Ready    master   4h11m   v1.19.9
-            node/k1-control-plane-2              Ready    master   3h34m   v1.19.9
-            node/k1-control-plane-3              Ready    master   3h33m   v1.19.9
-            node/k1-pool-az-a-75cddb6cd9-slgqk   Ready    <none>   81s     v1.19.9
-            node/k1-pool-az-b-777d7cc84b-g76zf   Ready    <none>   77s     v1.19.9
-            node/k1-pool-az-c-5d5cfcc5bf-gpjpg   Ready    <none>   67s     v1.19.9
+            node/k1-control-plane-1              Ready    master   4h11m   v1.20.9
+            node/k1-control-plane-2              Ready    master   3h34m   v1.20.9
+            node/k1-control-plane-3              Ready    master   3h33m   v1.20.9
+            node/k1-pool-az-a-75cddb6cd9-slgqk   Ready    <none>   81s     v1.20.9
+            node/k1-pool-az-b-777d7cc84b-g76zf   Ready    <none>   77s     v1.20.9
+            node/k1-pool-az-c-5d5cfcc5bf-gpjpg   Ready    <none>   67s     v1.20.9
 ```
 Now check again the availability zones
 ```bash
@@ -87,12 +87,12 @@ kubectl get nodes --label-columns failure-domain.beta.kubernetes.io/zone
 ```
 ```
 NAME                            STATUS   ROLES    AGE     VERSION   ZONE
-k1-control-plane-1              Ready    master   4h11m   v1.19.9   europe-west4-a
-k1-control-plane-2              Ready    master   3h35m   v1.19.9   europe-west4-b
-k1-control-plane-3              Ready    master   3h34m   v1.19.9   europe-west4-c
-k1-pool-az-a-75cddb6cd9-slgqk   Ready    <none>   99s     v1.19.9   europe-west4-a
-k1-pool-az-b-777d7cc84b-g76zf   Ready    <none>   95s     v1.19.9   europe-west4-b
-k1-pool-az-c-5d5cfcc5bf-gpjpg   Ready    <none>   85s     v1.19.9   europe-west4-c
+k1-control-plane-1              Ready    master   4h11m   v1.20.9   europe-west4-a
+k1-control-plane-2              Ready    master   3h35m   v1.20.9   europe-west4-b
+k1-control-plane-3              Ready    master   3h34m   v1.20.9   europe-west4-c
+k1-pool-az-a-75cddb6cd9-slgqk   Ready    <none>   99s     v1.20.9   europe-west4-a
+k1-pool-az-b-777d7cc84b-g76zf   Ready    <none>   95s     v1.20.9   europe-west4-b
+k1-pool-az-c-5d5cfcc5bf-gpjpg   Ready    <none>   85s     v1.20.9   europe-west4-c
 ```
 
 5. Change back to the default namespace
@@ -103,7 +103,7 @@ kubectl config set-context --current --namespace=default
 kcns default
 ```
 
-6. Due to the dynamic management of the machine deployments, we could optionally remove the default `machinedeployment` config of the terraform `output.tf` file. In a disaster recovery situation, this would ensure that you will not misconfigure your machine configs. To do this, just remove everything of the `output "kubeone_workers"` section in the `output.tf` file:
+6. Due to the dynamic management of the machine deployments, we could optionally remove the default `machinedeployment` config of the terraform `output.tf` file. In a disaster recovery situation, this would ensure that you will not mis-configure your machine configs. To do this, just remove everything of the `output "kubeone_workers"` section in the `output.tf` file:
 ```hcl-terraform
 ### remove everything of
 output "kubeone_workers" {
@@ -124,4 +124,4 @@ Another option is to add the needed machine pools already in the beginning to th
 terraform apply
 kubeone apply -t . -m ../kubeone.yaml --verbose
 ```
-***NOTE:*** The management of the worker nodes is way more flexible than that of the control plane nodes, so it's **NOT**  recommended using the `output.tf` for the long term maintenance of the machine deployment objects. We recommend the usage of `md-XXX.yaml` files together with git to manage the cluster sizing. If no initial machinedeployment should be created, remove all `"${var.cluster_name}-pool-az-X"` sections. 
+***NOTE:*** The management of the worker nodes is way more flexible than that of the control plane nodes, so it's **NOT** recommended using the `output.tf` for the long term maintenance of the machine deployment objects. We recommend the usage of `md-XXX.yaml` files together with git to manage the cluster sizing. If no initial MachineDeployment should be created, remove all `"${var.cluster_name}-pool-az-X"` sections. 

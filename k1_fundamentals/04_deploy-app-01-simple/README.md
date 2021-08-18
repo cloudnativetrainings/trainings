@@ -31,8 +31,8 @@ If it is created successfully, we get an output like the one mentioned below.
 kubectl get deployments
 ```
 ```
-NAME      DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
-nginx     1         1         1            1           10s
+NAME    READY   UP-TO-DATE   AVAILABLE   AGE
+nginx   1/1     1            1           20s
 ```
 
 #### View the details of deployment
@@ -95,7 +95,7 @@ Now delete the existing deployment using the command `kubectl delete deployment 
 
 Create a new deployment from the file we just modified using `kubectl apply -f first.yaml`. We can now use the `first.yaml` to check if the cluster behaves like expected. 
 
-**HINT:** `kubectl get OBJECT -o yaml | kexp` removes already `status` and `metadata` fields for you. `kexp` is a command of [fubectl](https://github.com/kubermatic/fubectl)
+**HINT:** `kubectl get OBJECT -o yaml | kexp` removes `status` and `metadata` fields for you. `kexp` is a command of [fubectl](https://github.com/kubermatic/fubectl).
 
 ## Expose deployment using a service
 
@@ -112,7 +112,7 @@ See 'kubectl expose -h' for help and examples.
 
 This is because we haven't added port for container to listen on. To do this open `first.yaml` in a `vim` using `vim first.yaml`.
 
-Fine the container name in a file and add the port information as mentioned below.
+Find the container name in a file and add the port information as mentioned below.
 
 ```yaml
 spec:
@@ -160,7 +160,7 @@ NAME    READY   UP-TO-DATE   AVAILABLE   AGE
 nginx   1/1     1            1           12
 ```
 
-It shows that the deployment created a one replica only and it is ready to serve.
+It shows that the deployment created a one replica, and it is ready to serve.
 
 Now we want to scale our deployment to have 3 replicas. It can be done using command `kubectl scale deployment nginx --replicas=3`. It will show message `deployment.extensions/nginx scaled` indicating that scaling done successfully.
 

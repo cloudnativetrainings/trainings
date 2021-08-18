@@ -1,14 +1,14 @@
 
 # GCE Service Account
 
-To communicate with the target cloud, in this case the Google Compute Engine (GCE`), we need a service account at your training project.
+To communicate with the target cloud, in this case the Google Compute Engine (GCE), we need a service account at your training project.
 
 Create a service account `k1-service-account` for your Google Cloud resources, with your local [`gcloud`](https://cloud.google.com/sdk/install) CLI.
 
 ```bash
 ##### Ensure that you execute your commands inside of the tooling container
 
-# ensure your connected
+# ensure you are connected and get your Project ID
 gcloud projects list
 
 # create new service account
@@ -16,8 +16,6 @@ gcloud iam service-accounts create k1-service-account
 
 # get your service account id
 gcloud iam service-accounts list
-# get your project id
-gcloud projects list
 
 # configure your IDs
 export GCP_PROJECT_ID=__YOUR_GCP_PROJECT_ID__                  #student-XX-project
@@ -35,7 +33,7 @@ cd [training-repo]
 mkdir -p ./.secrets && cd ./.secrets
 gcloud iam service-accounts keys create --iam-account $GCP_SERVICE_ACCOUNT_ID k8c-cluster-provisioner-sa-key.json
 ``` 
-Verify at [GCP Cloud Console - Service Accounts](https://console.cloud.google.com/iam-admin/serviceaccounts) that the service account have been created. Now export your GCP `credentials.json` content with **`cat`**:
+Verify at [GCP Cloud Console - Service Accounts](https://console.cloud.google.com/iam-admin/serviceaccounts) that the service account have been created. Now export your GCP `credentials.json` content with `cat`:
 ```bash
 ls -la *.json
 export GOOGLE_CREDENTIALS=$(cat ./k8c-cluster-provisioner-sa-key.json)

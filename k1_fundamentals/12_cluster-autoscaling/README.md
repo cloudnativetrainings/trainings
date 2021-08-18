@@ -1,31 +1,33 @@
-
 # Apply Cluster Auto Scaler
-
-**NOTE:** This lab is still WIP
 
 First we need to deploy the cluster autoscaler controller. As reference take a look at cluster autoscaler addon: [kubeone - addons/cluster-autoscaler](https://github.com/kubermatic/kubeone/tree/master/addons/cluster-autoscaler).
 
-For this lab, current version is added here: [`./cluster-autoscaler.yaml`](./cluster-autoscaler.yaml), so first copy this to the kubeone folder:
+For this lab, current version is added here: [`./cluster-autoscaler.yaml`](./cluster-autoscaler.yaml), so first copy this to the KubeOne folder:
 
 ```bash
-cd [training-repo]
+cd [training-repo] #training-repo => folder 'k1_fundamentals'
 cd src/gce
 cp ../../12_cluster-autoscaling/cluster-autoscaler.yaml ./addons/
 
-### Deploy the auto scaler addon
+### Deploy the autoscaler addon
 kubeone apply -t ./tf-infra/
 ```
 
 ## Upscale
 
 Now deploy our test application with quite high CPU reservation of `1000m` => 1 core * 5 pods. This should lead to pending pods. If not, just scale up your application replica.
-```
+```bash
+kubectl create ns app-ext
+kubectl config set-context --current --namespace=app-ext
+# or
+kcns app-ext
+
 kubectl apply -f ../../12_cluster-autoscaling/deploy.scale.yaml
 
 #check the pods in the namespace
-kcns app-ext
-k get pods
-
+kubectl get pods
+```
+```
 NAME                        READY   STATUS    RESTARTS   AGE
 helloweb-699c8747f8-9ljdb   1/1     Running   0          53m
 helloweb-699c8747f8-gd6pm   1/1     Running   0          54m
@@ -34,19 +36,25 @@ helloweb-6b9678d59f-ctbl2   1/1     Running   0          11s
 helloweb-6b9678d59f-djxgl   0/1     Pending   0          11s
 helloweb-6b9678d59f-wc4s9   1/1     Running   0          11s
 helloweb-6b9678d59f-xqqd8   0/1     Pending   0          9s
-
-### check the reason for pending
-k describe pod helloweb-6b9678d59f-5p8c5
+```
+```bash
+# check the reason for pending
+kubectl describe pod helloweb-6b9678d59f-5p8c5
+```
+```
 ...
 Events:
   Type     Reason            Age                From                Message
   ----     ------            ----               ----                -------
   Warning  FailedScheduling  28s (x4 over 35s)  default-scheduler   0/6 nodes are available: 3 Insufficient cpu, 3 node(s) had taint {node-role.kubernetes.io/master: }, that the pod didn't tolerate.
 ```
-Ok, so why no autoscaling happend? Check the logs of `cluster-autoscaler` pod in the `kube-system` namespace:
-```
+Ok, so why no autoscaling happened? Check the logs of `cluster-autoscaler` pod in the `kube-system` namespace:
+```bash
+kubectl logs -n kube-system -f cluster-autoscaler-xx-xx
+# or
 klog -f   # select cluster-autoscaler-xx-xx pod
-
+```
+```
 I0520 14:30:21.735182       1 scale_up.go:453] No expansion options
 I0520 14:30:31.754110       1 klogx.go:86] Pod app-ext/helloweb-6b9678d59f-fwbdj is unschedulable
 I0520 14:30:31.754170       1 klogx.go:86] Pod app-ext/helloweb-6b9678d59f-f8h4n is unschedulable
@@ -54,7 +62,7 @@ I0520 14:30:31.754179       1 klogx.go:86] Pod app-ext/helloweb-6b9678d59f-frjhv
 I0520 14:30:31.755596       1 scale_up.go:453] No expansion options
 ```
 It seems there is no option for scale right now. To fix this we need to set the following annotations to the machine deployments:
-```
+```yaml
 kind: MachineDeployment
 metadata:
   annotations:
@@ -62,18 +70,20 @@ metadata:
     cluster.k8s.io/cluster-api-autoscaler-node-group-max-size: "5"
 ```
 So update each of your machine deployment yaml and add the above annotations:
-```
+```bash
 vim machines/md-zone-a.yaml
 vim machines/md-zone-b.yaml
 vim machines/md-zone-c.yaml
 ```
 Now apply the change and see if it works:
+```bash
+kubectl apply -f machines
 ```
-k apply -f machines
+Check now the cluster autoscaler logs, the change get notified, and a scale up get triggered from `Final scale-up plan: [{MachineDeployment/kube-system/k1-pool-az-c 1->4 (max: 5)}]`
+```bash
+kubectl logs -n kube-system cluster-autoscaler-xx-xx
 ```
-Check now the cluster autoscaler logs, the change get notified and a scale up get triggered from `Final scale-up plan: [{MachineDeployment/kube-system/k1-pool-az-c 1->4 (max: 5)}]`
 ```
-k logs -n kube-system cluster-autoscaler-xx-xx
 I0520 14:35:33.624269       1 scale_up.go:453] No expansion options
 W0520 14:35:44.708220       1 clusterstate.go:432] AcceptableRanges have not been populated yet. Skip checking
 W0520 14:35:44.708247       1 clusterstate.go:432] AcceptableRanges have not been populated yet. Skip checking
@@ -106,43 +116,47 @@ I0520 14:36:12.130623       1 pre_filtering_processor.go:66] Skipping k1-pool-az
 I0520 14:36:12.130973       1 pre_filtering_processor.go:66] Skipping k1-pool-az-a-86b6dcbfb4-vg8q8 - node group min size reached
 ```
 Now the `MachineDeployment` replica count get updated to e.g. `4` and new nodes will join the cluster after some minutes. Then the pods should be also get scheduled as running:
+```bash
+kubectl get md,ms,ma,node -A
 ```
-kw md,ms,ma,node -A
-
+```
 NAMESPACE     NAME                                            REPLICAS   AVAILABLE-REPLICAS   PROVIDER   OS       KUBELET   AGE
-kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-a   1          1                    gce        ubuntu   1.21.1    2d4h
-kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-b   1          1                    gce        ubuntu   1.21.1    29h
-kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-c   4          4                    gce        ubuntu   1.21.1    29h
+kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-a   1          1                    gce        ubuntu   1.21.4    2d4h
+kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-b   1          1                    gce        ubuntu   1.21.4    29h
+kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-c   4          4                    gce        ubuntu   1.21.4    29h
 
 NAMESPACE     NAME                                                REPLICAS   AVAILABLE-REPLICAS   PROVIDER   OS       KUBELET   AGE
-kube-system   machineset.cluster.k8s.io/k1-pool-az-a-86b6dcbfb4   1          1                    gce        ubuntu   1.21.1    5h17m
-kube-system   machineset.cluster.k8s.io/k1-pool-az-a-c777b778b    0                               gce        ubuntu   1.21.1    5h20m
-kube-system   machineset.cluster.k8s.io/k1-pool-az-b-7cb4fc847    0                               gce        ubuntu   1.21.1    5h20m
-kube-system   machineset.cluster.k8s.io/k1-pool-az-b-864f98574f   1          1                    gce        ubuntu   1.21.1    5h17m
-kube-system   machineset.cluster.k8s.io/k1-pool-az-c-576dff79fd   4          4                    gce        ubuntu   1.21.1    5h17m
-kube-system   machineset.cluster.k8s.io/k1-pool-az-c-7b6dcc885    0                               gce        ubuntu   1.19.9    5h17m
+kube-system   machineset.cluster.k8s.io/k1-pool-az-a-86b6dcbfb4   1          1                    gce        ubuntu   1.21.4    5h17m
+kube-system   machineset.cluster.k8s.io/k1-pool-az-a-c777b778b    0                               gce        ubuntu   1.21.4    5h20m
+kube-system   machineset.cluster.k8s.io/k1-pool-az-b-7cb4fc847    0                               gce        ubuntu   1.21.4    5h20m
+kube-system   machineset.cluster.k8s.io/k1-pool-az-b-864f98574f   1          1                    gce        ubuntu   1.21.4    5h17m
+kube-system   machineset.cluster.k8s.io/k1-pool-az-c-576dff79fd   4          4                    gce        ubuntu   1.21.4    5h17m
+kube-system   machineset.cluster.k8s.io/k1-pool-az-c-7b6dcc885    0                               gce        ubuntu   1.20.9    5h17m
 
 NAMESPACE     NAME                                                   PROVIDER   OS       ADDRESS         KUBELET   AGE
-kube-system   machine.cluster.k8s.io/k1-pool-az-a-86b6dcbfb4-vg8q8   gce        ubuntu   10.240.0.24     1.21.1    5h17m
-kube-system   machine.cluster.k8s.io/k1-pool-az-b-864f98574f-mb97d   gce        ubuntu   10.240.0.52     1.21.1    24m
-kube-system   machine.cluster.k8s.io/k1-pool-az-c-576dff79fd-l8lkb   gce        ubuntu   10.240.0.55     1.21.1    6m6s
-kube-system   machine.cluster.k8s.io/k1-pool-az-c-576dff79fd-mgnnc   gce        ubuntu   10.240.0.57     1.21.1    6m6s
-kube-system   machine.cluster.k8s.io/k1-pool-az-c-576dff79fd-sssq2   gce        ubuntu   10.240.0.56     1.21.1    6m6s
-kube-system   machine.cluster.k8s.io/k1-pool-az-c-576dff79fd-v4hx4   gce        ubuntu   35.204.47.135   1.21.1    79m
+kube-system   machine.cluster.k8s.io/k1-pool-az-a-86b6dcbfb4-vg8q8   gce        ubuntu   10.240.0.24     1.21.4    5h17m
+kube-system   machine.cluster.k8s.io/k1-pool-az-b-864f98574f-mb97d   gce        ubuntu   10.240.0.52     1.21.4    24m
+kube-system   machine.cluster.k8s.io/k1-pool-az-c-576dff79fd-l8lkb   gce        ubuntu   10.240.0.55     1.21.4    6m6s
+kube-system   machine.cluster.k8s.io/k1-pool-az-c-576dff79fd-mgnnc   gce        ubuntu   10.240.0.57     1.21.4    6m6s
+kube-system   machine.cluster.k8s.io/k1-pool-az-c-576dff79fd-sssq2   gce        ubuntu   10.240.0.56     1.21.4    6m6s
+kube-system   machine.cluster.k8s.io/k1-pool-az-c-576dff79fd-v4hx4   gce        ubuntu   35.204.47.135   1.21.4    79m
 
 NAMESPACE   NAME                                 STATUS   ROLES                  AGE     VERSION
-            node/k1-control-plane-1              Ready    control-plane,master   2d4h    v1.21.1
-            node/k1-control-plane-2              Ready    control-plane,master   30h     v1.21.1
-            node/k1-control-plane-3              Ready    control-plane,master   29h     v1.21.1
-            node/k1-pool-az-a-86b6dcbfb4-vg8q8   Ready    <none>                 5h15m   v1.21.1
-            node/k1-pool-az-b-864f98574f-mb97d   Ready    <none>                 21m     v1.21.1
-            node/k1-pool-az-c-576dff79fd-l8lkb   Ready    <none>                 3m52s   v1.21.1
-            node/k1-pool-az-c-576dff79fd-mgnnc   Ready    <none>                 3m50s   v1.21.1
-            node/k1-pool-az-c-576dff79fd-sssq2   Ready    <none>                 3m36s   v1.21.1
-            node/k1-pool-az-c-576dff79fd-v4hx4   Ready    <none>                 77m     v1.21.1
+            node/k1-control-plane-1              Ready    control-plane,master   2d4h    v1.21.4
+            node/k1-control-plane-2              Ready    control-plane,master   30h     v1.21.4
+            node/k1-control-plane-3              Ready    control-plane,master   29h     v1.21.4
+            node/k1-pool-az-a-86b6dcbfb4-vg8q8   Ready    <none>                 5h15m   v1.21.4
+            node/k1-pool-az-b-864f98574f-mb97d   Ready    <none>                 21m     v1.21.4
+            node/k1-pool-az-c-576dff79fd-l8lkb   Ready    <none>                 3m52s   v1.21.4
+            node/k1-pool-az-c-576dff79fd-mgnnc   Ready    <none>                 3m50s   v1.21.4
+            node/k1-pool-az-c-576dff79fd-sssq2   Ready    <none>                 3m36s   v1.21.4
+            node/k1-pool-az-c-576dff79fd-v4hx4   Ready    <none>                 77m     v1.21.4
+```
+You can also check that all application pods are Running.
+```bash
+kubectl get pod -n app-ext
 ```
 ```
-k get pod -n app-ext 
 NAME                        READY   STATUS    RESTARTS   AGE
 helloweb-6b9678d59f-f8h4n   1/1     Running   0          12m
 helloweb-6b9678d59f-frjhv   1/1     Running   0          12m
@@ -150,5 +164,3 @@ helloweb-6b9678d59f-fwbdj   1/1     Running   0          12m
 helloweb-6b9678d59f-fxjc8   1/1     Running   0          12m
 helloweb-6b9678d59f-lk57z   1/1     Running   0          12m
 ```
-
-
