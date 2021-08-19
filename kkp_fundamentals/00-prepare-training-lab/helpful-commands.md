@@ -18,7 +18,7 @@ Start using Kubernets with `kubectl`.
 
 Launch containers with `kubectl run my-nginx --image=nginx`. 
 
-Expose the deployment inside of the cluster `kubectl expose deployment my-nginx --port 80`.
+Expose the deployment inside the cluster `kubectl expose deployment my-nginx --port 80`.
 
 Now you have one type `deployment` (created by `kubectl run ...`) and one type `service` created. This maps in Kubernetes to the following components:
 
@@ -34,7 +34,7 @@ sudo chmod +x /google/google-cloud-sdk/bin/kubectl
 
 ## Enable auto completion
 
-add the following lines to your `~/.bashrc` file:
+Add the following lines to your `~/.bashrc` file.
 
 ```bash
 # kubectl, k

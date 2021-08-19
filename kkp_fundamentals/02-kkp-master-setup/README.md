@@ -2,7 +2,7 @@
 
 This chapter explains the installation procedure of KKP into a pre-existing Kubernetes cluster using installer.
 
-**Note** - To begin the installation, make sure you are using right kubeconfig.
+**Note** - To begin the installation, make sure you are using right KUBECONFIG.
 
 Again for simplicity of training we have the predefined manifests at [`./kkp-setup.template`](./kkp-setup.template). Copy it to `src` directory using below commands.
 
@@ -21,9 +21,10 @@ The installation and configuration for a KKP system consists of two important fi
 Let's start with `values.yaml`. Find out values which need to be replaced.
 
 ```bash
-cd ~/mnt/kkp_fundamentals/src/kkp-setup
 grep --line-number TODO values.yaml
-# Output
+```
+
+```text
 values.yaml:5:    host: "kubermatic.TODO-STUDENT-DNS.loodse.training"
 values.yaml:12:    secret: "TODO-A-RANDOM-KEY"
 values.yaml:14:    - https://kubermatic.TODO-STUDENT-DNS.loodse.training
@@ -34,7 +35,7 @@ values.yaml:23:      username: "TODO-STUDENT-EMAIL@loodse.training"
   
 ### Replace TODO-STUDENT-DNS
 
-We need to set the necessary domain names in the `values.yaml`. Cert-manager will use these domains to request the necessary certificates from Let's encrypt later on:
+We need to set the necessary domain names in the `values.yaml`. Cert-manager will use these domains to request the necessary certificates from Let's encrypt later on.
 
 ```bash
 ### replace every entry of: TODO-STUDENT-DNS
@@ -42,9 +43,14 @@ grep --line-number TODO-STUDENT-DNS ./*.yaml
 
 # get gcloud DNS_ZONE
 gcloud dns managed-zones list
+```
+
+```text
 NAME                DNS_NAME                             DESCRIPTION  VISIBILITY
 student-XX-xxxx     student-XX-xxxx.loodse.training.     k8c          public
+```
 
+```bash
 ## export your zone name
 export DNS_ZONE=student-XX-xxxx   #WITHOUT loodse.training!
 # Replace TODO-STUDENT-DNS with your DNS.
@@ -55,9 +61,11 @@ sed -i 's/TODO-STUDENT-DNS/'"$DNS_ZONE"'/g' ./*.yaml
 grep --line-number TODO-STUDENT-DNS ./*.yaml
 #Check if everything is correct and is matching your configured target DNS Zone!
 grep --line-number $DNS_ZONE ./*.yaml
-## Output
+```
+
+```text
 ./kubermatic.globalsetting.yaml:14:    url: https://kubermatic.student-00.loodse.training/rest-api
-./kubermatic.yaml:33:    domain: kubermatic.student-00.loodse.training
+./kubermatic.yaml:24:    domain: kubermatic.student-00.loodse.training
 ./values.yaml:5:    host: "kubermatic.student-00.loodse.training"
 ./values.yaml:14:    - https://kubermatic.student-00.loodse.training
 ./values.yaml:15:    - https://kubermatic.student-00.loodse.training/projects
@@ -127,7 +135,7 @@ Next step is to configure a so called [DEX Connector](https://github.com/dexidp/
 
 For simplicity of training, we will just configure one static user. For that you need to replace `TODO-STUDENT-EMAIL@loodse.training` with your `student-XX-xxxx@loodse.training` email in `values.yaml`.
 
-Also The default password for this  training is `password`. You can replace it by running command `htpasswd -bnBC 10 "" PASSWORD_HERE | tr -d ':\n' | sed 's/$2y/$2a/'` by replacing `PASSWORD_HERE` with your desired password and replace it in `values.yaml`.
+The default password for this  training is `password`. You can replace it by running command `htpasswd -bnBC 10 "" PASSWORD_HERE | tr -d ':\n' | sed 's/$2y/$2a/'` by replacing `PASSWORD_HERE` with your desired password and replace it in `values.yaml`.
 
 ```bash
 vim values.yaml
@@ -147,41 +155,40 @@ vim values.yaml
 
 **NOTE:** As an alternative of Dex, existing Keycloak installation could also be configured. Have a look in the [Kubermatic Docs](https://docs.kubermatic.com/kubermatic/master/tutorials_howtos/oidc_provider_configuration/) for more information.
 
-### Validate  all variables are set
+### Validate all variables are set
 
 ```bash
 # Output should be blank
 grep --line-number TODO ./*.yaml
 ```
 
----
-
 ## Download the KKP Installer
 
-Run below command to download latest kubermatic installer.
+Run below command to download latest Kubermatic installer.
 
 ```bash
-make download-kkp-release
+make download-kkp-ce-release
 ls -la ./releases/
-total 12
-drwxr-xr-x 3 kubermatic root 4096 May 27 22:52 .
-drwxr-xr-x 3 kubermatic root 4096 May 27 22:52 ..
-drwxr-xr-x 4 kubermatic root 4096 May 27 22:52 v2.17.1
- ```
+```
 
----
+```text
+total 12
+drwxr-xr-x 3 kubermatic root 4096 Aug 19 12:55 .
+drwxr-xr-x 3 kubermatic root 4096 Aug 19 12:55 ..
+drwxr-xr-x 4 kubermatic root 4096 Aug 19 12:55 v2.17.3
+ ```
 
 ## Install KKP
 
 With the prepared configuration, it's now time to install the required Helm charts into the master cluster. Run below command to install KKP.
 
 ```bash
-./releases/v2.17.1/kubermatic-installer --verbose --charts-directory ./releases/v2.17.1/charts deploy --config kubermatic.yaml --helm-values values.yaml --storageclass gce
+./releases/v2.17.3/kubermatic-installer --verbose --charts-directory ./releases/v2.17.3/charts deploy --config kubermatic.yaml --helm-values values.yaml --storageclass gce
 ```
 
 After a few moments the installer should have been everything created, and you will see:
 
-```bash
+```text
 INFO[00:10:54]    📡 Determining DNS settings…               
 DEBU[00:10:54]       Waiting for "nginx-ingress-controller/nginx-ingress-controller" to be ready… 
 INFO[00:10:54]       The main LoadBalancer is ready.        
@@ -199,14 +206,13 @@ INFO[00:10:54] 🛬 Installation completed successfully. Time for a break, maybe
 
 ### Validate Ingress `nginx-ingress-controller`
 
-Now validate if everything is running in `nginx-ingress-controller` namespace, and you have an active service:
+Now validate if everything is running in `nginx-ingress-controller` namespace, and you have an active service.
 
 ```bash
-kubectl get pod,svc,ep -n nginx-ingress-controller 
+kubectl get pod,svc,ep -n nginx-ingress-controller
 ```
 
-```bash
-### Output ###
+```text
 NAME                                           READY   STATUS    RESTARTS   AGE
 pod/nginx-ingress-controller-75f566958-2txkg   1/1     Running   0          7m18s
 pod/nginx-ingress-controller-75f566958-wr4j4   1/1     Running   0          7m18s
@@ -223,7 +229,7 @@ endpoints/nginx-ingress-controller   10.244.3.2:80,10.244.4.9:80,10.244.5.2:80 +
 
 Next validate the installation of the cert-manager to get valid SSL certificates from [Let's Encrypt](https://letsencrypt.org/) by using the Kubernetes project [Cert Manager](https://cert-manager.io/docs/):
 
-Check if everything is running and you have an active service:
+Check if everything is running, and you have an active service:
 
 ```bash
 kubectl get pod,svc,ep -n cert-manager
@@ -245,7 +251,7 @@ With the `kubermatic.yaml` we triggered the deployment of the Kubermatic compone
 kubectl -n kubermatic get deployments,pods
 ```
 
-```bash
+```text
 NAME                                                   READY   UP-TO-DATE   AVAILABLE   AGE
 deployment.apps/kubermatic-api                         0/2     2            0           19m
 deployment.apps/kubermatic-dashboard                   2/2     2            2           19m
@@ -264,8 +270,11 @@ pod/kubermatic-operator-5b8db958b6-fxvkf                    1/1     Running     
 As we can see `kubermatic-api` pods are in the `CrashLoopBackOff` status, something is missing, check logs:
 
 ```bash
-kubectl logs -n kubermatic kubermatic-api-xxxxxxxxx-xxxxx 
-{"level":"info","time":"2021-05-28T00:27:35.242Z","caller":"cli/hello.go:36","msg":"Starting Kubermatic API (Enterprise Edition)...","version":"v2.17.0"}
+kubectl logs -n kubermatic kubermatic-api-xxxxxxxxx-xxxxx
+```
+
+```json
+{"level":"info","time":"2021-05-28T00:27:35.242Z","caller":"cli/hello.go:36","msg":"Starting Kubermatic API (Enterprise Edition)...","version":"v2.17.3"}
 I0528 00:27:36.343760       1 request.go:645] Throttling request took 1.020000542s, request: GET:https://10.96.0.1:443/apis/coordination.k8s.io/v1?timeout=32s
 {"level":"fatal","time":"2021-05-28T00:27:36.606Z","caller":"kubermatic-api/main.go:126","msg":"failed to create an openid authenticator","issuer":"https://kubermatic.student-00.loodse.training/dex","oidcClientID":"kubermatic","error":"Get \"https://kubermatic.student-00.loodse.training/dex/.well-known/openid-configuration\": dial tcp: lookup kubermatic.student-00.loodse.training on 169.254.20.10:53: no such host"
 ```
