@@ -1,4 +1,3 @@
-
 # GCE Service Account
 
 To communicate with the target cloud, in this case the Google Compute Engine (GCE), we need a service account at your training project.
