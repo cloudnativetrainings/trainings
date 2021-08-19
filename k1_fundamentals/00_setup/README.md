@@ -12,13 +12,13 @@ Prerequisites what need to be fulfilled by the attendees of the trainings:
 
 ## Setup Tooling Container
 
-To speed up, the setup we will use the []() container, where every need tool is already setup. 
+To speed up, the setup we will use the container, where every need tool is already setup.
 
 If you have docker, git and a common IDE installed locally, you can quickly start with:
 
 ```bash
 git clone https://github.com/kubermatic-labs/trainings.git
-docker run --name  kubeone-tool-container -v $(pwd):/home/kubermatic/mnt -t -d quay.io/kubermatic-labs/kubeone-tooling:1.2.1
+docker run --name  kubeone-tool-container -v $(pwd):/home/kubermatic/mnt -t -d quay.io/kubermatic-labs/kubeone-tooling:1.2.3
 ```
 Connect into the running container and ensures that you can reattach if you get kicked out of the container:
 ```bash
@@ -30,13 +30,12 @@ docker exec -it kubeone-tool-container bash
 # remove old container
 docker rm -f kubeone-tool-container
 
-docker run --rm --name  kubeone-tool-container -v $(pwd):/home/kubermatic/mnt -it quay.io/kubermatic-labs/kubeone-tooling:1.2.1 bash
-
+docker run --rm --name  kubeone-tool-container -v $(pwd):/home/kubermatic/mnt -it quay.io/kubermatic-labs/kubeone-tooling:1.2.3 bash
 ```
 
-### (Alternative) Use google cloud shell
+### (Alternative) Use Google Cloud Shell
 
-Open the [Google Cloud Shell](https://shell.cloud.google.com) in a separate window: `https://shell.cloud.google.com`
+Open the [Google Cloud Shell](https://shell.cloud.google.com) in a separate window.
 
 Now execute the above commands.
 
@@ -53,10 +52,10 @@ ls -la
 #### list of training folders 
 
 kubeone version
-#### version json with kubeone v1.2.1 should be shown
+#### version json with kubeone v1.2.3 should be shown
 
 terraform version
-#### a recent terraform version (>= 0.14) should be shown
+#### a recent terraform version (>= 0.15.x) should be shown
 
 gcloud version
 #### a recent gcloud SDK (>= 340.0.0)
@@ -78,9 +77,9 @@ student-00-xxx  student-00-xxx   999999999999
 
 ## Other helpful content
 
-The most needed shortcuts and tooling helper are already installed in the tooling container, anyway you could look over the [helpful_commands.md](helpful_commands.md) section, to read how e.g. install auto-completion and [fubectl](https://github.com/kubermatic/fubectl) for fast Kubernetes Navigation
+The most needed shortcuts and tooling helper are already installed in the tooling container, anyway you could look over the [helpful_commands.md](helpful_commands.md) section, to read how e.g. install auto-completion and [fubectl](https://github.com/kubermatic/fubectl) for fast Kubernetes navigation.
 
-If you don't like to use the kubeone tooling container and install all tools directly locally, you can take a look at:
+If you don't like to use the KubeOne tooling container and install all tools directly locally, you can take a look at:
 - [local_install_needed_tools.md](local_install_needed_tools.md)
 - [KubeOne Tooling Container - Dockerfile](https://github.com/kubermatic/community-components/blob/master/helper/kubeone-tool-container/Dockerfile)
 

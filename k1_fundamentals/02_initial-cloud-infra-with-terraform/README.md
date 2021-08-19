@@ -1,6 +1,6 @@
 # Cloud Infrastructure Setup at GCE
 
-## Create a SSH keypair
+## Create an SSH key-pair
 To avoid the usage of your recent private SSH key, you can freshly create one for our training:
 ```
 # SSH Key creation if no ssh key is present
@@ -34,16 +34,15 @@ region = "europe-west4"
 # instance to create of the control plane
 control_plane_count = 1
 
-# listeners of the Loadbalancer. Default is NOT HA, but ensure the bootstraping works -> after bootstraping we will increase it to e.g. 3
+# listeners of the LoadBalancer. Default is NOT HA, but ensure the bootstrapping works -> after bootstrapping we will increase it to e.g. 3
 control_plane_target_pool_members_count = 1
 
-### update to your location if needed
+# update to your location if needed
 ssh_public_key_file = "../../../.secrets/id_rsa.pub"
 ```
 
-
-If you are **NOT** using an ssh-agent for the upcoming tasks, please take a look at [How KubeOne uses
-SSH](https://github.com/kubermatic/kubeone/blob/master/docs/ssh.md) before you continue. Ensure your `ssh-agent` is stared:
+If you are **NOT** using a ssh-agent for the upcoming tasks, please take a look at [How KubeOne uses
+SSH](https://github.com/kubermatic/kubeone/blob/master/docs/ssh.md) before you continue. Ensure your `ssh-agent` is started:
 ```bash
 # Start SSH agent and add key
 eval `ssh-agent`
@@ -52,13 +51,13 @@ ssh-add ../../../.secrets/id_rsa
 
 ***Kindly take note of the following:***
 
-1.) Please check the variables.tf file to see other parameters with their default values. The default instance type (n1-standard-2) will be used in this case since we did not specify one.
+1. Please check the `variables.tf` file to see other parameters with their default values. The default instance type (`n1-standard-2`) will be used in this case since we did not specify one.
 
-2.) Depending on the GCP region, you may need to update the **output.tf** file with the correct zone detail. For instance not all regions have zone "a", a good example of this is shown below:
+2. Depending on the GCP region, you may need to update the `output.tf` file with the correct zone detail. For instance not all regions have a zone `a`, a good example of this is shown below:
 
-   Available zones in europe-west1 are : ***b, c, d***
+   Available zones in europe-west1 are : `b, c, d`
 
-   Available zones in europe-west3 are:  ***a, b, c***
+   Available zones in europe-west3 are:  `a, b, c`
 
    So as an example if you are deploying KubeOne in europe-west1, you will have to update the output.tf as shown below:
 
@@ -66,7 +65,7 @@ ssh-add ../../../.secrets/id_rsa
    zone = "${var.region}-b"
    ```
 
-   Default is "${var.region}-a" which is okay for almost all the regions. If the zone information is not correct, the worker nodes will not be created. The *machinedeployment POD* will also generate an error that the specified zone does not exist in that region.
+   Default is `${var.region}-a` which is fine for almost all the regions. If the zone information is not correct, the worker nodes will not be created. The *machinedeployment POD* will also generate an error that the specified zone does not exist in that region.
 
 ## Execute terraform changes
 
@@ -75,6 +74,7 @@ You can see the changes to the Google Cloud infrastructure when you use the foll
 terraform plan
 terraform apply
 ```
+
 ## Verify Output
 After everything went well `terraform output` should give you nearly similar content like the following. This output values, will be rendered into your `kubeone.yaml` manifest in the later step. You could also explore the created resources at your cloud provider:
 - [Compute Instances](https://console.cloud.google.com/compute/instances)
@@ -144,7 +144,7 @@ kubeone_workers = {
   }
 }
 ```
-Change now back the core training repo
+Now change back the root of a training repo
 ```bash
 cd -
 ```

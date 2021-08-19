@@ -1,10 +1,11 @@
 # KubeOne Cluster cleanup
-To cleanup your cloud resource, kubeone will support you.
+To cleanup your cloud resource, KubeOne tool will support you.
 
 ## KubeOne reset
 
-In the first step kubeone will remove the worker nodes and reset the control plane nodes to the state before you installed Kubernetes. The command is also helpfull if during the installation something breaks and you don't want to reprovision all machines:
+In the first step KubeOne will remove the worker nodes and reset the control plane nodes to the state before you installed Kubernetes. The command is also helpful if during the installation something breaks, and you don't want to re-provision all machines:
 ```bash
+cd [training-repo] #training-repo => folder 'k1_fundamentals'
 cd src/gce
 kubeone reset -t ./tf-infra
 ```
@@ -25,7 +26,7 @@ Error: Error waiting for Deleting Network: The network resource 'projects/studen
 d by 'projects/student-00/global/routes/k1-127d2a55-58f2-4955-8666-3aaa030902b
 
 ```
-Delete the leftover routes manually (Terraform doesn't clean them up in a proper way and CCM doesn't delete the routes either)
+Delete the leftover routes manually (Terraform doesn't clean them up in a proper way and CCM doesn't delete the routes either).
 ```bash
 gcloud compute routes list
 gcloud compute routes delete k1-127d2a55-58f2-4955-8666-3aaa030902b4
@@ -36,7 +37,7 @@ Alternatively you can store the state of your cluster for later usage. For this 
 
 After you **unpause** all machines, the machine controller will start again and detect the machines.
 
-**HINT:** You can also scale down the worker nodes **before** to `0` like it's described in [gce/40_optimize_workers.md](./gce/40_optimize_workers.md). After the machines are gone, **pause** only the master nodes. This will ensure that your etcd state is still secured, and the stateless worker node config is stored.
+**HINT:** You can also scale down the worker nodes **before** to `0` like it's described in [08_optimize-workers/README.md](../08_optimize-workers/README.md). After the machines are gone, **pause** only the master nodes. This will ensure that your etcd state is still secured, and the stateless worker node config is stored.
 ```bash
 kubectl scale md -n kube-system --replicas=0 --all
 #.... wait until the machines are deleted -> then pause master
@@ -44,4 +45,4 @@ kubectl scale md -n kube-system --replicas=0 --all
 After the masters are **unpaused**, scale up again:
 ```bash
 kubectl scale md -n kube-system --replicas=1 --all
-  ```
+```

@@ -9,7 +9,7 @@ apiVersion: kubeone.io/v1beta1
 kind: KubeOneCluster
 name: k1
 versions:
-  kubernetes: '1.19.9'
+  kubernetes: '1.20.9'
 cloudProvider:
   gce: {}
   cloudConfig: |-
@@ -21,14 +21,14 @@ Start the KubeOne installation:
 
 ```bash
 cd [training-repo]/src/gce #training-repo => folder 'k1_fundamentals'
-kubeone install -t ./tf-infra --verbose
+kubeone install -t ./tf-infra -m kubeone.yaml --verbose
 ```
 
-Kubeone is combining the `kubeone.yaml` and terraform state `./tf-infra/terraform.tfstate` files together. The initial infrastructure created by Terraform is used for the control plane. Afterwards KubeOne uses the Kubermatic machine-controller to manage the life-cycle of the worker nodes. The machine-controller requires several bits of information that must be provided by the user. Some of the information that is needed is the following:
+KubeOne is combining the `kubeone.yaml` and Terraform state `./tf-infra/terraform.tfstate` files together. The initial infrastructure created by Terraform is used for the control plane. Afterwards KubeOne uses the Kubermatic machine-controller to manage the life-cycle of the worker nodes. The machine-controller requires several bits of information that must be provided by the user. Information that is needed is the following:
 
 *zone, machineType, diskSize, network, subnetwork, sshPublicKeys, cloudProviderSpec*
 
-As to not having to input these values manually to create the machine-controller spec (MachineDeployment ) for the cluster, KubeOne will merge the contents of the terraform state (see `terraform output`) with the `kubeone.yaml` to provide:
+As to not having to input these values manually to create the machine-controller spec (MachineDeployment ) for the cluster, KubeOne will merge the contents of the Terraform state (see `terraform output`) with the `kubeone.yaml` to provide:
 - Cloud Controller Manager configuration `cloud-config`
 - Full MachineDeployment yaml and apply it to the Kubernetes cluster automatically.
 
@@ -99,12 +99,14 @@ INFO[23:48:20 CEST] Verifying that nodes in the cluster match nodes defined in t
 INFO[23:48:20 CEST] Verifying that all nodes in the cluster are ready…
 INFO[23:48:20 CEST] Verifying that there is no upgrade in the progress…
 NODE                 VERSION   APISERVER   ETCD
-k1-control-plane-1   v1.19.9   healthy     healthy  
-
+k1-control-plane-1   v1.20.9   healthy     healthy
+```
+```bash
 kubectl get nodes
-
-NAME                                                 STATUS   ROLES    AGE   VERSION
-k1-control.1.test-00-kubermatic   Ready    master   15m   v1.19.9
+```
+```
+NAME                           STATUS   ROLES                  AGE     VERSION
+k1-control-plane-1             Ready    control-plane,master   13m     v1.20.9
 ```
 Why is the worker node missing? -> Check the Machine Controller objects
 ```bash
@@ -112,13 +114,13 @@ kubectl -n kube-system get machinedeployment,machineset,machine
 ```
 ```
 NAME                                            REPLICAS   AVAILABLE-REPLICAS   PROVIDER   OS       KUBELET   AGE
-machinedeployment.cluster.k8s.io/k1-pool-az-a   1          0                    gce        ubuntu   1.19.9    1m19s
+machinedeployment.cluster.k8s.io/k1-pool-az-a   1          0                    gce        ubuntu   1.20.9    1m19s
 
 NAME                                               REPLICAS   AVAILABLE-REPLICAS   PROVIDER   OS       KUBELET   AGE
-machineset.cluster.k8s.io/k1-pool-az-a-ff4979f74   1          0                    gce        ubuntu   1.19.9    1m19s
+machineset.cluster.k8s.io/k1-pool-az-a-ff4979f74   1          0                    gce        ubuntu   1.20.9    1m19s
 
 NAME                                                  PROVIDER   OS       ADDRESS      KUBELET   AGE
-machine.cluster.k8s.io/k1-pool-az-a-ff4979f74-4vg7c   gce        ubuntu   10.240.0.6   1.19.9    1m19s
+machine.cluster.k8s.io/k1-pool-az-a-ff4979f74-4vg7c   gce        ubuntu   10.240.0.6   1.20.9    1m19s
 ```
 The created `machine` object gives you more information
 ```bash
@@ -126,7 +128,7 @@ kubectl -n kube-system describe machine
 ```
 ```
 Versions:
-  Kubelet:  1.19.9
+  Kubelet:  1.20.9
 Status:
 Addresses:
   Address:  10.240.0.7
@@ -157,7 +159,7 @@ Node Ref:
   Resource Version:  1884
   UID:               da325955-841f-4538-bfe0-6f46518cbcc8
 Versions:
-  Kubelet:  v1.19.9
+  Kubelet:  v1.20.9
 Events:
 Type    Reason                          Age                    From                Message
 ----    ------                          ----                   ----                -------

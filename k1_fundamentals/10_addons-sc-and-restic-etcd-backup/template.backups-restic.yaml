@@ -19,7 +19,7 @@ data:
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: etcd-s3-backup
+  name: etcd-gs-backup
   namespace: kube-system
 spec:
   concurrencyPolicy: Forbid
