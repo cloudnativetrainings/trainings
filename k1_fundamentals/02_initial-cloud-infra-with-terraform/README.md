@@ -1,8 +1,10 @@
 # Cloud Infrastructure Setup at GCE
 
 ## Create an SSH key-pair
+
 To avoid the usage of your recent private SSH key, you can freshly create one for our training:
-```
+
+```bash
 # SSH Key creation if no ssh key is present
 
 cd [training-repo] #training-repo => folder 'k1_fundamentals'
@@ -20,6 +22,7 @@ Change your folder to the GCE terraform folder [`src/gce/tf-infra`](src/gce/tf-i
 cd src/gce/tf-infra
 terraform init
 ```
+
 ### Configure terraform setup
 
 Update the `terraform.tfvars` file in the folder. The file will contain specific information about the cluster you are about to create:
@@ -43,6 +46,7 @@ ssh_public_key_file = "../../../.secrets/id_rsa.pub"
 
 If you are **NOT** using a ssh-agent for the upcoming tasks, please take a look at [How KubeOne uses
 SSH](https://github.com/kubermatic/kubeone/blob/master/docs/ssh.md) before you continue. Ensure your `ssh-agent` is started:
+
 ```bash
 # Start SSH agent and add key
 eval `ssh-agent`
@@ -144,7 +148,9 @@ kubeone_workers = {
   }
 }
 ```
+
 Now change back the root of a training repo
+
 ```bash
 cd -
 ```

@@ -33,6 +33,7 @@ As to not having to input these values manually to create the machine-controller
 - Full MachineDeployment yaml and apply it to the Kubernetes cluster automatically.
 
 **Alternative** You could also export the Terraform output into a tf.json file and use this one (not recommended, but makes the used content more visible):
+
 ```bash
 cd tf-infra
 terraform output -json > tf.json
@@ -41,13 +42,14 @@ kubeone install --tfjson tf.json --verbose
 ```
 
 To Adjust defaults for the upcoming Machine Deployment, take a look at the `output.tf` file. The rendered output of this file gets parsed by the `kubeone -t` command.
+
 ```bash
 vim tf-infra/output.tf
 ```
 
 You should get a similar output as shown below:
 
-```
+```text
 INFO[23:07:06 CEST] Determine hostname…
 INFO[23:07:06 CEST] Determine operating system…
 INFO[23:07:07 CEST] Installing prerequisites…
@@ -86,11 +88,14 @@ A kubeconfig file will be generated after the KubeOne installation. Export it an
 ```bash
 export KUBECONFIG=$PWD/k1-kubeconfig 
 ```
+
 Check if you get one master and one worker node:
+
 ```bash
 kubeone status -t ./tf-infra/
 ```
-```
+
+```text
 INFO[23:48:18 CEST] Determine hostname…
 INFO[23:48:19 CEST] Determine operating system…
 INFO[23:48:20 CEST] Building Kubernetes clientset…
@@ -101,18 +106,23 @@ INFO[23:48:20 CEST] Verifying that there is no upgrade in the progress…
 NODE                 VERSION   APISERVER   ETCD
 k1-control-plane-1   v1.20.9   healthy     healthy
 ```
+
 ```bash
 kubectl get nodes
 ```
-```
+
+```text
 NAME                           STATUS   ROLES                  AGE     VERSION
 k1-control-plane-1             Ready    control-plane,master   13m     v1.20.9
 ```
+
 Why is the worker node missing? -> Check the Machine Controller objects
+
 ```bash
 kubectl -n kube-system get machinedeployment,machineset,machine
 ```
-```
+
+```text
 NAME                                            REPLICAS   AVAILABLE-REPLICAS   PROVIDER   OS       KUBELET   AGE
 machinedeployment.cluster.k8s.io/k1-pool-az-a   1          0                    gce        ubuntu   1.20.9    1m19s
 
@@ -122,11 +132,14 @@ machineset.cluster.k8s.io/k1-pool-az-a-ff4979f74   1          0                 
 NAME                                                  PROVIDER   OS       ADDRESS      KUBELET   AGE
 machine.cluster.k8s.io/k1-pool-az-a-ff4979f74-4vg7c   gce        ubuntu   10.240.0.6   1.20.9    1m19s
 ```
+
 The created `machine` object gives you more information
+
 ```bash
 kubectl -n kube-system describe machine
 ```
-```
+
+```text
 Versions:
   Kubelet:  1.20.9
 Status:
@@ -139,11 +152,15 @@ Type    Reason         Age                From                Message
 Normal  Created        24s                machine_controller  Successfully created instance
 Normal  InstanceFound  24s (x2 over 24s)  machine_controller  Found instance at cloud provider, addresses: map[10.240.0.7:InternalIP]
 ```
+
 The `Status` and `Events` fields show you that the machine is created, but not yet joined the cluster. Check after a few minutes again, and you will see:
+
 ```bash
 kubectl -n kube-system describe machine
 ```
-```Status:
+
+```text
+Status:
 Addresses:
   Address:  10.240.0.7
   Type:     InternalIP
@@ -167,7 +184,9 @@ Normal  Created                         4m38s                  machine_controlle
 Normal  InstanceFound                   2m40s (x5 over 4m38s)  machine_controller  Found instance at cloud provider, addresses: map[10.240.0.7:InternalIP]
 Normal  LabelsAnnotationsTaintsUpdated  2m20s (x2 over 2m20s)  machine_controller  Successfully updated labels/annotations/taints]
 ```
+
 Now we should see, one master and one worker node with the corresponding machine objects:
+
 ```bash
 kubectl -n kube-system get machinedeployment,machineset,machine,node
 ```

@@ -17,6 +17,7 @@ kcns app
 ```
 
 ## Create a deployment
+
 In this step we will create a new deployment. We will use the `nginx` web server image for that.
 
 Execute `kubectl create deployment nginx --image=nginx`.
@@ -30,7 +31,8 @@ If it is created successfully, we get an output like the one mentioned below.
 ```bash
 kubectl get deployments
 ```
-```
+
+```text
 NAME    READY   UP-TO-DATE   AVAILABLE   AGE
 nginx   1/1     1            1           20s
 ```
@@ -52,7 +54,8 @@ Save the output yaml to a file using `kubectl get deployment nginx -o yaml | kex
 Open a file using `vim first.yaml`:
 
 Now the yaml file should look similar to this example:
-```
+
+```yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -105,7 +108,7 @@ Now to expose a deployment we need to execute `kubectl expose deployment/nginx`.
 
 As we have not declared port to use we will get following error.
 
-```
+```text
 error: couldn't find port via --port flag or introspection
 See 'kubectl expose -h' for help and examples.
 ```
@@ -134,15 +137,17 @@ Try to expose a resource again using `kubectl expose deployment/nginx`.
 
 Verify the service configuration using `kubectl get svc,ep nginx`. It should show an output similar to the one given below.
 
-```
+```text
 NAME            TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
 service/nginx   ClusterIP   10.110.86.101   <none>        80/TCP    58s
 
 NAME              ENDPOINTS       AGE
 endpoints/nginx   10.244.3.4:80   58s
 ```
+
 Our nginx server is now reachable through the service IP and the endpoint IP. We can test access to the Cluster IP by using a troubleshooting container to trigger a request from the inside of the cluster:
-```
+
+```bash
 kubectl run --image=nicolaka/netshoot --rm -it -- bash
 curl http://<cluster-ip>
 curl http://<endpoint-ip>
@@ -152,10 +157,13 @@ exit
 ## Scale up the deployment 
 
 In this step we will scale deployment up to three replicas. Use following command to check existing deployment.
-`kubectl get deployment nginx`.
+```bash
+kubectl get deployment nginx
+```
 
 You can output similar to following.
-```
+
+```text
 NAME    READY   UP-TO-DATE   AVAILABLE   AGE
 nginx   1/1     1            1           12
 ```
@@ -167,7 +175,8 @@ Now we want to scale our deployment to have 3 replicas. It can be done using com
 We can recheck the scaled deployment using `kubectl get deployment,service,endpoints nginx`.
 
 You can see output similar to following.
-```
+
+```text
 NAME                          READY   UP-TO-DATE   AVAILABLE   AGE
 deployment.extensions/nginx   3/3     3            3           6m30s
 
@@ -183,6 +192,7 @@ Notice the number `3` in the output in various columns. It shows that our deploy
 ## Cleanup the App namespace
 
 After we tested the app deployment we can delete the namespace to clean up:
+
 ```bash
 kubectl delete ns app
 ```
