@@ -1,10 +1,10 @@
-﻿# Kubermatic Introduction Guide
+﻿# Kubermatic Kubernetes Platform Introduction Guide
 
 **Introduction:** The purpose of this write-up is to document the process of setting up a Kubermatic cluster.
 
 Kubermatic is a cluster-as-a-service solution that provides managed Kubernetes for your infrastructure.
 
-##### Terminology
+## Terminology
 
 - **User/Customer cluster** – A Kubernetes cluster created and managed by Kubermatic
 - **Seed cluster** – A Kubernetes cluster which is responsible for hosting the master components of a customer cluster
@@ -12,13 +12,12 @@ Kubermatic is a cluster-as-a-service solution that provides managed Kubernetes f
 - **Seed datacenter** – A definition/reference to a seed cluster
 - **Node datacenter** – A definition/reference of a datacenter/region/zone at a cloud provider (aws=zone, digitalocean=region, openstack=zone)
 
+**N.B -- For further references, kindly check the official documentation** https://docs.kubermatic.com/
 
-**N.B -- For further references, kindly check the official documentation** https://docs.kubermatic.io/
-
-**Pre-requisite:** 
+## Prerequisites 
 - Founded Kubernetes knowledge and tooling usage
 
-**Deliverables:**
+## Deliverables
 
 * Kubermatic Installation
   * Combined Master/Seed setup
@@ -29,19 +28,15 @@ Kubermatic is a cluster-as-a-service solution that provides managed Kubernetes f
   * AWS
 * Introduction into main operational tasks and concepts
 
-## REQUIREMENTS
+## Requirements
 
 * It is assumed that the reader is fairly familiar with how Kubernetes and Linux works and the usage of some common tooling
-  * kubectl
-  * vim or other CLI editor
-  * helm3
+  * `kubectl`
+  * `vim` or other CLI editor
+  * `helm` (version 3+)
 
-* You finished KubeOne Training: [../kubeone](../kubeone) and already have a KubeOne Kubernetes cluster (GCP will be used for this exercise). 
+* You finished KubeOne Training: [../k1_fundamentals](../k1_fundamentals) and already have a KubeOne Kubernetes cluster (GCP will be used for this exercise). 
 
 * To understand the general prerequisites take a look at [Cluster Requirements](https://docs.kubermatic.com/kubermatic/master/requirements/cluster_requirements/)
 
-**Now Start with [00_setup](./00_setup).**
-
-----
-
-**WIP: training material is in development and will be updated soon**
+Now Start with [00-prepare-training-lab](./00-prepare-training-lab).

@@ -1,5 +1,5 @@
 ######### Define deployed version
-KKP_VERSION = v2.17.1
+KKP_VERSION = v2.17.3
 KKP_RELEASE_ROOT_FOLDER="./releases"
 
 ######### Kubermatic KKP

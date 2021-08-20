@@ -16,6 +16,7 @@ kubeone apply -t ./tf-infra/
 ## Upscale
 
 Now deploy our test application with quite high CPU reservation of `1000m` => 1 core * 5 pods. This should lead to pending pods. If not, just scale up your application replica.
+
 ```bash
 kubectl create ns app-ext
 kubectl config set-context --current --namespace=app-ext
@@ -27,7 +28,8 @@ kubectl apply -f ../../12_cluster-autoscaling/deploy.scale.yaml
 #check the pods in the namespace
 kubectl get pods
 ```
-```
+
+```text
 NAME                        READY   STATUS    RESTARTS   AGE
 helloweb-699c8747f8-9ljdb   1/1     Running   0          53m
 helloweb-699c8747f8-gd6pm   1/1     Running   0          54m
@@ -37,31 +39,38 @@ helloweb-6b9678d59f-djxgl   0/1     Pending   0          11s
 helloweb-6b9678d59f-wc4s9   1/1     Running   0          11s
 helloweb-6b9678d59f-xqqd8   0/1     Pending   0          9s
 ```
+
 ```bash
 # check the reason for pending
 kubectl describe pod helloweb-6b9678d59f-5p8c5
 ```
-```
+
+```text
 ...
 Events:
   Type     Reason            Age                From                Message
   ----     ------            ----               ----                -------
   Warning  FailedScheduling  28s (x4 over 35s)  default-scheduler   0/6 nodes are available: 3 Insufficient cpu, 3 node(s) had taint {node-role.kubernetes.io/master: }, that the pod didn't tolerate.
 ```
+
 Ok, so why no autoscaling happened? Check the logs of `cluster-autoscaler` pod in the `kube-system` namespace:
+
 ```bash
 kubectl logs -n kube-system -f cluster-autoscaler-xx-xx
 # or
 klog -f   # select cluster-autoscaler-xx-xx pod
 ```
-```
+
+```text
 I0520 14:30:21.735182       1 scale_up.go:453] No expansion options
 I0520 14:30:31.754110       1 klogx.go:86] Pod app-ext/helloweb-6b9678d59f-fwbdj is unschedulable
 I0520 14:30:31.754170       1 klogx.go:86] Pod app-ext/helloweb-6b9678d59f-f8h4n is unschedulable
 I0520 14:30:31.754179       1 klogx.go:86] Pod app-ext/helloweb-6b9678d59f-frjhv is unschedulable
 I0520 14:30:31.755596       1 scale_up.go:453] No expansion options
 ```
+
 It seems there is no option for scale right now. To fix this we need to set the following annotations to the machine deployments:
+
 ```yaml
 kind: MachineDeployment
 metadata:
@@ -69,21 +78,28 @@ metadata:
     cluster.k8s.io/cluster-api-autoscaler-node-group-min-size: "1"
     cluster.k8s.io/cluster-api-autoscaler-node-group-max-size: "5"
 ```
+
 So update each of your machine deployment yaml and add the above annotations:
+
 ```bash
 vim machines/md-zone-a.yaml
 vim machines/md-zone-b.yaml
 vim machines/md-zone-c.yaml
 ```
+
 Now apply the change and see if it works:
+
 ```bash
 kubectl apply -f machines
 ```
+
 Check now the cluster autoscaler logs, the change get notified, and a scale up get triggered from `Final scale-up plan: [{MachineDeployment/kube-system/k1-pool-az-c 1->4 (max: 5)}]`
+
 ```bash
 kubectl logs -n kube-system cluster-autoscaler-xx-xx
 ```
-```
+
+```text
 I0520 14:35:33.624269       1 scale_up.go:453] No expansion options
 W0520 14:35:44.708220       1 clusterstate.go:432] AcceptableRanges have not been populated yet. Skip checking
 W0520 14:35:44.708247       1 clusterstate.go:432] AcceptableRanges have not been populated yet. Skip checking
@@ -115,11 +131,14 @@ I0520 14:36:10.930549       1 static_autoscaler.go:401] No unschedulable pods
 I0520 14:36:12.130623       1 pre_filtering_processor.go:66] Skipping k1-pool-az-b-864f98574f-mb97d - node group min size reached
 I0520 14:36:12.130973       1 pre_filtering_processor.go:66] Skipping k1-pool-az-a-86b6dcbfb4-vg8q8 - node group min size reached
 ```
+
 Now the `MachineDeployment` replica count get updated to e.g. `4` and new nodes will join the cluster after some minutes. Then the pods should be also get scheduled as running:
+
 ```bash
 kubectl get md,ms,ma,node -A
 ```
-```
+
+```text
 NAMESPACE     NAME                                            REPLICAS   AVAILABLE-REPLICAS   PROVIDER   OS       KUBELET   AGE
 kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-a   1          1                    gce        ubuntu   1.21.4    2d4h
 kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-b   1          1                    gce        ubuntu   1.21.4    29h
@@ -152,11 +171,14 @@ NAMESPACE   NAME                                 STATUS   ROLES                 
             node/k1-pool-az-c-576dff79fd-sssq2   Ready    <none>                 3m36s   v1.21.4
             node/k1-pool-az-c-576dff79fd-v4hx4   Ready    <none>                 77m     v1.21.4
 ```
+
 You can also check that all application pods are Running.
+
 ```bash
 kubectl get pod -n app-ext
 ```
-```
+
+```text
 NAME                        READY   STATUS    RESTARTS   AGE
 helloweb-6b9678d59f-f8h4n   1/1     Running   0          12m
 helloweb-6b9678d59f-frjhv   1/1     Running   0          12m

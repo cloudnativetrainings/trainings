@@ -1,4 +1,3 @@
-
 # GCE Service Account
 
 To communicate with the target cloud, in this case the Google Compute Engine (GCE), we need a service account at your training project.
@@ -33,12 +32,16 @@ cd [training-repo]
 mkdir -p ./.secrets && cd ./.secrets
 gcloud iam service-accounts keys create --iam-account $GCP_SERVICE_ACCOUNT_ID k8c-cluster-provisioner-sa-key.json
 ``` 
+
 Verify at [GCP Cloud Console - Service Accounts](https://console.cloud.google.com/iam-admin/serviceaccounts) that the service account have been created. Now export your GCP `credentials.json` content with `cat`:
+
 ```bash
 ls -la *.json
 export GOOGLE_CREDENTIALS=$(cat ./k8c-cluster-provisioner-sa-key.json)
 ```
+
 Test if your environment variable contains the json key
+
 ```bash
 echo $GOOGLE_CREDENTIALS 
 { "type": "service_account", "project_id": "YOUR PROJECT", "private_key_id": "..." }

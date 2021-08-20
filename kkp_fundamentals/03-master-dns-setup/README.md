@@ -17,8 +17,7 @@ cd ~/mnt/kkp_fundamentals/src/kkp-setup
 gcloud dns managed-zones list
 ```
 
-```bash
-# Output
+```
 NAME                DNS_NAME                             DESCRIPTION  VISIBILITY
 student-XX-xxxx     student-XX-xxxx.loodse.training.     k8c          public
 ```
@@ -29,23 +28,20 @@ export DNS_ZONE=student-XX-xxxx  #WITHOUT loodse.training!
 gcloud dns record-sets transaction start --zone=$DNS_ZONE
 ```
 
----
-
 ## Prepare DNS records
 
 Get the LoadBalancer External IP by following command.
 
 ```bash
-kubectl get svc -n nginx-ingress-controller 
+kubectl get svc -n nginx-ingress-controller
 ```
 
-```bash
-# Output
+```
 NAME                       TYPE           CLUSTER-IP    EXTERNAL-IP   PORT(S)                      AGE
 nginx-ingress-controller   LoadBalancer   10.103.3.87   X.X.X.X       80:31542/TCP,443:31806/TCP   16m
 ```
 
-**Replace  X.X.X.X with the `nginx-ingress-controller` external IP**:
+**Replace X.X.X.X with the `nginx-ingress-controller` external IP**:
 
 ```bash
 export INGRESS_DNS_IP=X.X.X.X
@@ -67,11 +63,9 @@ gcloud dns record-sets transaction add --zone=$DNS_ZONE --name="kubermatic.$DNS_
 gcloud dns record-sets transaction add --zone=$DNS_ZONE --name="*.kubermatic.$DNS_ZONE.loodse.training" --ttl 300 --type A $INGRESS_DNS_IP
 ```
 
----
-
 ## Execute DNS changes
 
-Finally check and execute those changes.
+Finally, check and execute those changes.
 
 ```bash
 cat transaction.yaml
@@ -84,15 +78,13 @@ Confirm the executed DNS records:
 gcloud dns record-sets list --zone=$DNS_ZONE
 ```
 
-```bash
+```
 NAME                                            TYPE   TTL    DATA
 student-XX.xxx.loodse.training.                 NS     21600  ns-cloud-e1.googledomains.com.,ns-cloud-e2.googledomains.com.,ns-cloud-e3.googledomains.com.,ns-cloud-e4.googledomains.com.
 student-XX.xxxx.loodse.training.                SOA    21600  ns-cloud-e1.googledomains.com. cloud-dns-hostmaster.google.com. 5 21600 3600 259200 300
 kubermatic.student-XX.xxxx.loodse.training.     A      300    x.x.x.x
 *.kubermatic.student-XX.xxxx.loodse.training.   A      300    x.x.x.x
 ```
-
----
 
 ## Verify DNS propagation
 
@@ -104,8 +96,7 @@ nslookup kubermatic.$DNS_ZONE.loodse.training
 nslookup test.kubermatic.$DNS_ZONE.loodse.training
 ```
 
-```bash
-# Output
+```
 Server: 10.0.100.1
 Address: 10.0.100.1#53
 
@@ -113,8 +104,6 @@ Non-authoritative answer:
 Name: kubermatic.student-XX.xxxx.loodse.training
 Address: x.x.x.x
 ```
-
----
 
 ## Verify SSL Certificate
 
@@ -125,8 +114,7 @@ curl https://kubermatic.$DNS_ZONE.loodse.training
 ```
 
 Output should be something like below:
-
-```bash
+```html
 <!doctype html>
 <html>
 
@@ -136,9 +124,9 @@ Output should be something like below:
 ...
 ```
 
-But if you see such an error:
+If you see such an error:
 
-```bash
+```
 curl: (60) SSL certificate problem: unable to get local issuer certificate
 More details here: https://curl.haxx.se/docs/sslcerts.html
 
@@ -155,8 +143,7 @@ To check the status of the SSL certificate (ensure that the status is True and r
 watch kubectl get certificates -A -o wide
 ```
 
-first you will see
-
+First you will see.
 ```bash
 NAMESPACE   NAME            READY   SECRET          ISSUER            STATUS                                                              AGE
 kubermatic  kubermatic-tls  False   kubermatic-tls  letsencrypt-prod  Waiting for CertificateRequest "kubermatic-tls-ltbkp" to complete   69s
@@ -173,14 +160,11 @@ oauth        dex-tls          True    dex-tls          letsencrypt-prod   Certif
 
 **Note:** If after a while still certificates are not `Ready` you can delete them by command `kubectl delete certificate -n kubermatic kubermatic-tls` and wait for new certificate to be validated.
 
----
-
 ## Login to KKP Dashboard
 
 You should now be able to open the KKP Dashboard and login with your configured e-mail ID of user at your `values.yaml`, for example: `student-XX-xxxx@loodse.training` and password `password`. You can check configured values by following command.
 
 ```bash
-cd [training-repo]
 cd ~/mnt/kkp_fundamentals/src/kkp-setup
 grep -A 5 static values.yaml
 ```
@@ -197,13 +181,11 @@ Validate thought command line.
 kubectl get project
 ```
 
-```bash
+```
 NAME         AGE    HUMANREADABLENAME   STATUS
 vkhbtrph6s   2m1s   student-XX          Active
 ```
 
----
-
 ## Check Cluster Creation
 
-If you will click on `create cluster` button at Kubermatic UI, you will see the blank screen. Which is due to we have not added seed yet. Once we will add seed cluster, you will see Provider option enabled.
+If you click on `Create Cluster` button at Kubermatic UI, you will see the blank screen. Which is due to we have not added Seed yet. Once we will add Seed cluster, you will see Provider option enabled.

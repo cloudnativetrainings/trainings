@@ -21,11 +21,13 @@ git clone https://github.com/kubermatic-labs/trainings.git
 docker run --name  kubeone-tool-container -v $(pwd):/home/kubermatic/mnt -t -d quay.io/kubermatic-labs/kubeone-tooling:1.2.3
 ```
 Connect into the running container and ensures that you can reattach if you get kicked out of the container:
+
 ```bash
 docker exec -it kubeone-tool-container bash
 ```
 
 **Alternative** - If you prefer a temporary container only (get removed after you leave it) execute:
+
 ```bash
 # remove old container
 docker rm -f kubeone-tool-container
@@ -42,6 +44,7 @@ Now execute the above commands.
 ## Verify setup
 
 After you entered the container, verify the setup:
+
 ```bash
 ### executed inside the tooling container
 
@@ -63,14 +66,19 @@ gcloud version
 kubectl version --short
 #### a recent kubectl version (>= v.1.20.0)
 ```
+
 ## Authenticate your GCP account
 
-Execute the setup script:
+Execute the setup script.
+
 ```
 ./00_setup/setup.sh
 
 ### should list your training projects
 gcloud projects list
+```
+
+```text
 PROJECT_ID       NAME            PROJECT_NUMBER
 student-00-xxx  student-00-xxx   999999999999
 ```

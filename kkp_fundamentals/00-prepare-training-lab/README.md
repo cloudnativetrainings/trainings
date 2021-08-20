@@ -25,9 +25,9 @@ docker run --name  kubeone-tool-container -v $(pwd)/trainings:/home/kubermatic/m
 docker exec -it kubeone-tool-container bash
 ```
 
-**Option-2** - Use google cloud shell to setup Tooling container
+**Option-2** - Use Google Cloud Shell to setup Tooling container
 
-Open the [Google Cloud Shell](https://shell.cloud.google.com) in a separate window: `https://shell.cloud.google.com`
+Open the [Google Cloud Shell](https://shell.cloud.google.com) in a separate window.
 
 You have to execute same above command to continue LAB.
 
@@ -64,15 +64,18 @@ Execute the setup script:
 
 ### should list your training projects
 gcloud projects list
+```
+
+```text
 PROJECT_ID        NAME              PROJECT_NUMBER
 student-XX-xxxx   student-XX-xxxx   999999999999
 ```
 
 ## Other helpful content
 
-The most needed shortcuts and tooling helper are already installed in the tooling container, anyway you could look over the [helpful-commands.md](helpful-commands.md) section, to read how e.g. install auto-completion and [fubectl](https://github.com/kubermatic/fubectl) for fast Kubernetes Navigation
+The most needed shortcuts and tooling helper are already installed in the tooling container, anyway you could look over the [helpful-commands.md](helpful-commands.md) section, to read how e.g. install auto-completion and [fubectl](https://github.com/kubermatic/fubectl) for fast Kubernetes navigation.
 
-If you don't like to use the kubeone tooling container and install all tools directly locally, you can take a look at:
+If you don't like to use the KubeOne tooling container and install all tools directly locally, you can take a look at:
 
 - [KubeOne Tooling Container - Dockerfile](https://github.com/kubermatic/community-components/blob/master/helper/kubeone-tool-container/Dockerfile)
 

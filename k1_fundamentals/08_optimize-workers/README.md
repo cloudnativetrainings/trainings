@@ -4,10 +4,12 @@ As you may have already expected, some resources of the worker node are currentl
 ## Optimize GCE Worker nodes
 
 If we take a look at the current resource consumption of the nodes, we see that we only use a minimal amount of resources.
+
 ```bash
 kubectl top node
 ```
-```
+
+```text
 NAME                            CPU(cores)   CPU%   MEMORY(bytes)   MEMORY%   
 k1-control-plane-1              197m         9%     1696Mi          23%       
 k1-control-plane-2              171m         8%     1469Mi          19%       
@@ -30,21 +32,25 @@ cd [training-repo] #training-repo => folder 'k1_fundamentals'
 cd ./src/gce
 ls -l machines/
 ```
-```
+
+```text
 total 12
 -rw-r--r-- 1 kubermatic root 2173 Aug 18 10:43 md-zone-a.yaml
 -rw-r--r-- 1 kubermatic root 2173 Aug 18 10:44 md-zone-b.yaml
 -rw-r--r-- 1 kubermatic root 2173 Aug 18 10:44 md-zone-c.yaml
 ```
+
 Take a close look at the definitions and change the following fields:
 - `spec.template.spec.providerSpec.value.cloudProviderSpec.diskSize`
 - `spec.template.spec.providerSpec.value.cloudProviderSpec.machineType`
 
 First change the `machines/md-zone-a.yaml` and see the diff:
+
 ```bash
 diff machines/md-zone-a.yaml machines/md-zone-b.yaml 
 ```
-```
+
+```text
 9,10c9,10
 <   name: k1-pool-az-a
 <   selfLink: /apis/cluster.k8s.io/v1alpha1/namespaces/kube-system/machinedeployments/k1-pool-az-a
@@ -80,15 +86,20 @@ diff machines/md-zone-a.yaml machines/md-zone-b.yaml
 >             - k1-pool-az-b
 >             zone: europe-west4-b
 ```
+
 We should see changed fields. Now apply the change of the first `machinedeployment`:
+
 ```bash
 kubectl -n kube-system apply -f machines/md-zone-a.yaml
 ```
+
 You should now see that a new `machine`object has been created:
+
 ```bash
 kubectl -n kube-system get md,ma,node
 ```
-```
+
+```text
 NAMESPACE     NAME                                            REPLICAS   AVAILABLE-REPLICAS   PROVIDER   OS       KUBELET   AGE
 kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-a   1          1                    gce        coreos   1.20.9    4h47m
 kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-b   1          1                    gce        ubuntu   1.20.9    78m
@@ -108,10 +119,13 @@ NAMESPACE   NAME                                 STATUS   ROLES    AGE     VERSI
             node/k1-pool-az-b-777d7cc84b-g76zf   Ready    <none>   75m     v1.20.9
             node/k1-pool-az-c-5d5cfcc5bf-gpjpg   Ready    <none>   75m     v1.20.9
 ```
+
 Now update the files `machines/md-zone-b.yaml` and `machines/md-zone-c.yaml` in the same way and apply the final config of all MachineDeployments:
+
 ```bash
 kubectl -n kube-system apply -f machines/
 ```
+
 Watch what happens in your cluster. The machine-controller will manage the changes for you:
 - for every change a new `machine` object will be created 
 - the machine-controller will wait until the node is healthy and then drain and delete the old node
@@ -120,7 +134,8 @@ Watch what happens in your cluster. The machine-controller will manage the chang
 ```bash
 watch kubectl -n kube-system get md,ma,node -o wide
 ```
-```
+
+```text
 NAME                                            REPLICAS   AVAILABLE-REPLICAS   PROVIDER   OS       KUBELET   AGE   DELETED
 machinedeployment.cluster.k8s.io/k1-pool-az-a   1          1                    gce        ubuntu   1.20.9    11h   
 machinedeployment.cluster.k8s.io/k1-pool-az-b   1          1                    gce        ubuntu   1.20.9    66m   
@@ -143,8 +158,10 @@ node/k1-pool-az-a-bd95f5c65-pmzfb    Ready                      <none>   26s   v
 node/k1-pool-az-b-6b7fcd6985-wd6fm   Ready                      <none>   63m   v1.20.9   10.240.0.8    34.91.8.207      Ubuntu 18.04.5 LTS   5.4.0-1043-gcp   docker://19.3.13
 node/k1-pool-az-c-66f96d6b66-nvjfk   Ready                      <none>   64m   v1.20.9   10.240.0.9    34.141.205.68    Ubuntu 18.04.5 LTS   5.4.0-1043-gcp   docker://19.3.13
 ```
+
 After a few minutes we will see that all new nodes are ready:
-```
+
+```text
 machinedeployment.cluster.k8s.io/k1-pool-az-a   1          1                    gce        ubuntu   1.20.9    11h   
 machinedeployment.cluster.k8s.io/k1-pool-az-b   1          1                    gce        ubuntu   1.20.9    68m   
 machinedeployment.cluster.k8s.io/k1-pool-az-c   1          1                    gce        ubuntu   1.20.9    68m   
@@ -162,31 +179,40 @@ node/k1-pool-az-a-bd95f5c65-pmzfb    Ready    <none>   2m47s   v1.20.9   10.240.
 node/k1-pool-az-b-6996d8f668-2wfp4   Ready    <none>   2m7s    v1.20.9   10.240.0.11   34.91.242.55     Ubuntu 18.04.5 LTS   5.4.0-1043-gcp   docker://19.3.13
 node/k1-pool-az-c-7bdfbcd567-cb5kb   Ready    <none>   2m15s   v1.20.9   10.240.0.12   34.141.216.253   Ubuntu 18.04.5 LTS   5.4.0-1043-gcp   docker://19.3.13
 ```
+
 Finally, verify that your app is still running and reachable:
+
 ```bash
 curl https://app-ext.$DNS_ZONE.loodse.training 
 ```
+
 See also the resource usage:
+
 ```bash
 kubectl top node
 ```
 
 ## Scale down to zero
+
 For some use cases where you may not have production workload running, you can also scale down your worker nodes to `0`. This can save cost and can be automated e.g. by a cronjob as well.
 
 ```bash
 kubectl -n kube-system scale machinedeployment --all --replicas=0
 ```
-```
+
+```text
 machinedeployment.cluster.k8s.io/k1-pool-az-a scaled
 machinedeployment.cluster.k8s.io/k1-pool-az-b scaled
 machinedeployment.cluster.k8s.io/k1-pool-az-c scaled
 ```
+
 Verify that your nodes were removed. After a while all the `machine` objects and the corresponding`node` objects should be gone:
+
 ```bash
 watch kubectl -n kube-system get md,ma,node
 ``` 
-```
+
+```text
 NAME                                            REPLICAS   AVAILABLE-REPLICAS   PROVIDER   OS       KUBELET   AGE
 machinedeployment.cluster.k8s.io/k1-pool-az-a   0                               gce        ubuntu   1.20.9    11h
 machinedeployment.cluster.k8s.io/k1-pool-az-b   0                               gce        ubuntu   1.20.9    69m
@@ -205,18 +231,24 @@ node/k1-pool-az-a-bd95f5c65-pmzfb    Ready,SchedulingDisabled   <none>   3m41s  
 node/k1-pool-az-b-6996d8f668-2wfp4   Ready,SchedulingDisabled   <none>   3m1s    v1.20.9
 node/k1-pool-az-c-7bdfbcd567-cb5kb   Ready,SchedulingDisabled   <none>   3m9s    v1.20.9
 ```
+
 After a few minutes, verify that your app is still running and reachable:
+
 ```bash
 curl https://app-ext.$DNS_ZONE.loodse.training
 ```
+
 Now you see the app is not reachable anymore, as now compute worker nodes are available:
-```
+
+```text
 curl: (7) Failed to connect to app-ext.YOUR_DNS_ZONE.loodse.training port 443: Connection refused
 ```
+
 ```bash
 kubectl get nodes
 ```
-```
+
+```text
 NAME                 STATUS   ROLES    AGE   VERSION
 k1-control-plane-1   Ready    master   11h   v1.20.9
 k1-control-plane-2   Ready    master   90m   v1.20.9
@@ -224,11 +256,13 @@ k1-control-plane-3   Ready    master   88m   v1.20.9
 ```
 
 ## Scale MachineDeployments back to one
+
 ```bash
 kubectl -n kube-system scale machinedeployment --all --replicas=1
 ```
 
 ## Cleanup test application Kubernetes Resources
+
 We won't use the `app-ext` anymore, so you can safely clean the related resources.
 
 ```bash
@@ -242,6 +276,7 @@ kubectl delete ns app-ext
 ```
 
 You can optionally delete the cert-manager at this moment.
+
 ```bash
 kubectl delete -f https://github.com/jetstack/cert-manager/releases/download/v1.5.1/cert-manager.yaml
 ```

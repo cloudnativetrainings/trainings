@@ -25,10 +25,13 @@ If you take a look in your current cluster, currently no storage class is applie
 cd [training-repo] #training-repo => folder 'k1_fundamentals'
 kubectl get sc
 ```
-```
+
+```text
 No resources found
 ```
+
 Let's now deploy a pod with some PVC:
+
 ```bash
 kubectl create ns sc-test
 kubectl config set-context --current --namespace=sc-test
@@ -41,15 +44,18 @@ kubectl apply -f 10_addons-sc-and-restic-etcd-backup/pvc.test.yaml
 # check the pending pod,pvc,pv state
 kubectl get pod,pvc,pv
 ```
-```
+
+```text
 NAME         READY   STATUS    RESTARTS   AGE
 pod/my-pod   0/1     Pending   0          29s
 
 NAME                           STATUS    VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE
 persistentvolumeclaim/my-pvc   Pending                                                     29s
 ```
+
 If you now describe the PVC `my-pvc` you will see the error:
-```bash
+
+```text
 kubectl describe pvc my-pvc 
 Name:          my-pvc
 Namespace:     sc-test
@@ -68,9 +74,11 @@ Events:
   ----    ------         ----                ----                         -------
   Normal  FailedBinding  14s (x8 over 104s)  persistentvolume-controller  no persistent volumes available for this claim and no storage class is set
 ```
+
 As the error tells you `no storage class is set`, we need to configure a storage class. To get familiar with the storage class concept, take a look at the official [Kubernetes Documentation - Storage Classes](https://kubernetes.io/docs/concepts/storage/storage-classes/).
 
 As a reference we could take a look into the [KKP Addon > Default Storage Class](https://github.com/kubermatic/kubermatic/blob/master/addons/default-storage-class/storage-class.yaml) and search GCP one.
+
 ```yaml
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -84,6 +92,7 @@ provisioner: kubernetes.io/gce-pd
 parameters:
   type: pd-ssd
 ```
+
 This config seams to look fine for our KubeOne cluster as well. As the cloud controller manager is taking care about the communication to GCE, we can directly use this storage class. For more information see [Storage Class - GCE PD](https://kubernetes.io/docs/concepts/storage/storage-classes/#gce-pd). At this documentation page you also find quite a good starting point for every other supported Kubernetes Storage Class.
 
 Now let's create a new addon for our setup with the above Storage Class.
@@ -100,7 +109,9 @@ vim addons/sc.yaml
 #now configure kubeone.yaml
 vim kubeone.yaml
 ```
+
 As we don't use the templating functions, we can enable the addon mechanism directly:
+
 ```yaml
 apiVersion: kubeone.io/v1beta1
 kind: KubeOneCluster
@@ -120,12 +131,16 @@ addons:
   # to the KubeOne configuration file.
   path: "./addons"
 ```
+
 Save the change and basically you're done. The last missing step is to apply the change by kubeone:
+
 ```bash
 kubeone apply -t ./tf-infra --verbose
 ```
+
 You see now that the action output contains `~ ensure addons`:
-```
+
+```text
 The following actions will be taken: 
 Run with --verbose flag for more information.
 
@@ -137,10 +152,13 @@ Run with --verbose flag for more information.
 
 Do you want to proceed (yes/no): yes
 ```
+
 If you now inspect your cluster you see the storage class has been applied and is ready to use. To ensure KubeOne is "aware" of the addon a label `kubeone.io/addon: ""` is added:
+
 ```bash
 kubectl get sc standard -o yaml
 ```
+
 ```yaml
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -163,26 +181,32 @@ provisioner: kubernetes.io/gce-pd
 reclaimPolicy: Delete
 volumeBindingMode: Immediate
 ```
+
 Now let's see what happens with our example pod:
+
 ```bash
 kubectl get pod,pvc,pv
 ```
-```
+
+```text
 NAME         READY   STATUS    RESTARTS   AGE
 pod/my-pod   0/1     Pending   0          21m
 
 NAME                           STATUS    VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE
 persistentvolumeclaim/my-pvc   Pending                                                     21m
 ```
+
 So the PVC is still pending! Why? The default storage class has not been set due to the time when we created the PVC, so that's why we need to do one of the two options:
  - Define the storage class `standard` in the PVC `kubectl edit pvc my-pvc`
  - (or) Recreate the PVC `kubectl replace --force -f ../../10_addons-sc-and-restic-etcd-backup/pvc.test.yaml`
 
-Afterwards you see, that we now have a running pod and a bound PVC 
+Afterwards you see, that we now have a running pod and a bound PVC
+
 ```bash
 kubectl get pod,pvc,pv
 ```
-```
+
+```text
 NAME         READY   STATUS    RESTARTS   AGE
 pod/my-pod   0/1     Running   0          6s
 
@@ -211,6 +235,7 @@ cd src/gce
 cp ../../10_addons-sc-and-restic-etcd-backup/template.backups-restic.yaml addons/gs.backups-restic.yaml
 vim addons/gs.backups-restic.yaml
 ```
+
 Adjust now the `<<TODO_xxxx>>` parameter:
 - `<<TODO_RESTIC_PASSWORD>>`: some random string value, e.g. create a random string by: `cat /dev/urandom | tr -dc A-Za-z0-9 | head -c24`
 - `<<TODO_GS_BUCKET_NAME>>`: you present gs bucket, check `gsutil ls`
@@ -218,6 +243,7 @@ Adjust now the `<<TODO_xxxx>>` parameter:
 - `<<TODO_GOOGLE_PROJECT_ID>>`: your google project id, check `gcloud projects list`
 
 Afterwards ensure no `TODO` is left and apply the new addon:
+
 ```bash
 grep TODO addons/gs.backups-restic.yaml
 
@@ -225,15 +251,19 @@ kubeone apply -t ./tf-infra --verbose
 ```
 
 You see the adjustments of the backup location, isn't hard and could be done a few changes of the restic environment variables. So let's now test if we could see a cronjob and execute a test backup.
+
 ```bash
 kubectl get cronjobs -n kube-system
 ```
-```
+
+```text
 NAME             SCHEDULE     SUSPEND   ACTIVE   LAST SCHEDULE   AGE
 etcd-gs-backup   @every 30m   False     0        <none>          9s
 ```
+
 As you see every `30m` will now automatic backup job scheduled.
 To test now the backup create we create a manual test job:
+
 ```bash
 kubectl config set-context --current --namespace=kube-system
 # or
@@ -245,10 +275,12 @@ kubectl create job --from cronjob/etcd-gs-backup test-etcd-backup
 # check if job got created and pod is running
 kubectl get job,pod | grep test
 ```
-```
+
+```text
 job.batch/test-etcd-backup   1/1           18s        79s
 pod/test-etcd-backup-gg8gw                        0/1     Completed   0          79s
 ```
+
 ```bash
 # check the logs of the backup pod
 kubectl logs test-etcd-backup-gg8gw

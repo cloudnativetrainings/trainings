@@ -28,6 +28,7 @@ To start with the upgrade please follow the steps below.
 In this section, we are going to upgrade the KubeOne cluster from version `1.20.9` to latest `1.21.4`
 
 ## Update Cluster Config
+
 Update the `kubeone.yaml` file by changing the value of kubernetes to `1.21.4`:
 
 ```yaml
@@ -45,9 +46,10 @@ cloudProvider:
 Perform the check-list before proceeding:
 
 1. Export the GCP authentication token with **`cat`**: 
+
 ```bash
 echo $GOOGLE_CREDENTIALS 
-{ "type": "service_account", "project_id": "YOUR PROJECT", "private_key_id": "..." }
+# should output the credentials, if not continue with below step
 
 # if empty see 00_setup chapter and execute
 cd [training-repo] #training-repo => folder 'k1_fundamentals'
@@ -55,36 +57,46 @@ export GOOGLE_CREDENTIALS=$(cat ./.secrets/k8c-cluster-provisioner-sa-key.json)
 ```
 
 2. SSH keys should be part of your key list (see also [How KubeOne uses SSH](https://github.com/kubermatic/kubeone/blob/master/docs/ssh.md)):
+
 ```bash
 ssh-add -l
 ```
-```
+
+```text
 2048 SHA256:gAE3vgEERDISmtIwShe2CZtQZHam70sx4JznaLg3iEM kubermatic@7e54c85f5e39 (RSA)
 ```
+
 *Hint: If empty or your ssh-agent is not running, add your SSH identity file:*
+
 ```bash
 cd [training-repo] #training-repo => folder 'k1_fundamentals'
 eval `ssh-agent`
 ssh-add .secrets/id_rsa
 ```
-```
+
+```text
 Identity added: .secrets/id_rsa (kubermatic@7e54c85f5e39
 ```
 
 3. For the upgrade to a newer Kubernetes version, it is recommended that you download the respective kubectl client that matches (at least) the upgraded kubernetes version (check before `kubectl version`):
+
 ```bash
 kubectl version --short
 ```
-```
+
+```text
 Client Version: v1.21.1
 Server Version: v1.20.9
 ```
+
 If the `Client Version` is LOWER then your target version, please update your `kubectl` to the latest version:
+
 ```bash
 curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
 sudo mv kubectl /usr/bin/kubectl
 sudo chmod +x /usr/bin/kubectl
 ```
+
 *N.B - This step is recommended at local system because sometimes operational commands might give some errors when you use a separate kubectl client version that is lower as the installed kubernetes cluster version.* 
 
 *At the tooling container you potentially need exec into as root, e.g.:`docker exec -it -u 0 kubeone-tool-container bash`*
@@ -93,7 +105,8 @@ sudo chmod +x /usr/bin/kubectl
 
 As mentioned previously there are two ways to implement the upgrade:
 To watch the upgrade process, open a **SECOND shell**:
-```
+
+```bash
 ### if you use the tooling conainer, open a new shell, do again
 docker exec -it kubeone-tool-container bash
 
@@ -101,6 +114,7 @@ cd [training-repo] #training-repo => folder 'k1_fundamentals'
 export KUBECONFIG=`pwd`/src/gce/k1-kubeconfig
 watch kubectl get md,ms,ma,nodes -A
 ```
+
 ### 1. Option: Update Master + Worker in one action
 
 The first approach to upgrade the cluster is to combine the upgrade of both the master and worker nodes together in a single command. KubeOne will first of all upgrade the master nodes then proceed to upgrade the worker nodes using the machine-controller (via the MachineDeployment) that is installed within the cluster. This is the approach we are going to use to upgrade the cluster in this write-up, below is the command syntax and sample output that should be printed out.
@@ -118,27 +132,33 @@ kubeone apply -t . -m ../kubeone.yaml --upgrade-machine-deployments --verbose
 You can also check the full documentation for the upgrade process: [KubeOne Upgrade Process](https://docs.kubermatic.com/kubeone/master/using_kubeone/upgrading_cluster/)
 
 During the upgrade process you can watch the state in a **SECOND** shell by:
+
 ```bash
 watch kubectl -n kube-system get md,ma,node
 ```
 
-#### Check/confirm status of the new upgrade version:
+#### Check/confirm status of the new upgrade version
+
 After the upgrade process is finished check
 
 ```bash
 kubectl version --short
 ```
-```
+
+```text
 Client Version: v1.21.1
 Server Version: v1.21.4
 ```
+
 ```bash
 kubeone status -t . -m ../kubeone.yaml
 ```
+
 ```bash
 kubectl get nodes
 ```
-```
+
+```text
 NAME                                STATUS   ROLES    AGE     VERSION
 k1-control.1.test-00-kubermatic     Ready    master   24h     v1.21.4
 k1-control.2.test-00-kubermatic     Ready    master   24h     v1.21.4
@@ -161,10 +181,12 @@ kubeone apply -t . -m ../kubeone.yaml --verbose
 
 If you take this route then you will have to upgrade the worker nodes manually by editing all the MachineDeployment objects after upgrading the master nodes. Therefore, you need change the **`spec.template.spec.providerSpec.versions.kubelet`** section to `1.21.4`
 
-```
+```bash
 vim ../machines/md-zonne-a.yaml
 ```
+
 Modify the yaml:
+
 ```yaml
     spec:
       metadata:
@@ -200,8 +222,10 @@ Modify the yaml:
       versions:
         kubelet: 1.20.9  << UPDATE to 1.21.4
 ```
+
 Or use `sed`:
-```
+
+```bash
 sed -i 's/1.20.9/1.21.4/g' ../machines/*.yaml
 kubectl apply -f ../machines
 ```
@@ -210,9 +234,12 @@ When you save and exit the editor or applied the modified manifests, the machine
 The upgrade uses a rolling-update style (just like the normal Kubernetes deployment controller) i.e. old worker nodes will not be deleted until the status of the newly provisioned node with the new Kubernetes version becomes ready, then it will proceed to upgrade the remaining worker nodes in a similar fashion (depending on the number of replicas) until all of them are upgraded to the desired Kubernetes version.
 
 After a while check your updated cluster nodes:
+
 ```bash
 kubectl get md,ms,ma,nodes -A
+```
 
+```text
 NAMESPACE     NAME                                            REPLICAS   AVAILABLE-REPLICAS   PROVIDER   OS       KUBELET   AGE
 kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-a   1          1                    gce        ubuntu   1.21.4    2d
 kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-b   1          1                    gce        ubuntu   1.21.4    38h
@@ -245,9 +272,11 @@ NAMESPACE   NAME                                 STATUS   ROLES                 
             node/k1-pool-az-b-6996d8f668-kx96z   Ready    <none>                 6h47m   v1.20.9
             node/k1-pool-az-c-7bdfbcd567-kdfn2   Ready    <none>                 6h48m   v1.20.9
 ```
+
 After a few more minutes, the worker nodes also will be there in a new version. 
 
 If you have e.g. a machine deployment with a higher replica count, you potentially can speed up the upgrade by setting a higher count of `maxSurge`:
+
 ```
 spec:
   strategy:
@@ -267,6 +296,7 @@ The property `maxUnavailable: 0` ensures, that every time during the update the 
 ### OS Upgrades
 
 At Ubuntu it's recommended to set the flag `distUpgradeOnBoot: true` in the `MachineDeployment:
+
 ```yaml
 apiVersion: cluster.k8s.io/v1alpha1
 kind: MachineDeployment
@@ -280,9 +310,11 @@ spec:
           operatingSystemSpec:
             distUpgradeOnBoot: true
 ```
+
 This ensures that during the bootstrapping of new nodes, all needed OS updated get installed.
 
 For Flatcar Linux, KubeOne installs automatically the Flatcar OS update operator [kinvolk/flatcar-linux-update-operator](https://github.com/kinvolk/flatcar-linux-update-operator) what manage the upgrades if your spec is:
+
 ```yaml
 apiVersion: cluster.k8s.io/v1alpha1
 kind: MachineDeployment

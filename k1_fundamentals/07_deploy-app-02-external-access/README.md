@@ -9,6 +9,7 @@ The application stack with external access will be created with the following st
 ## Deploy [Nginx Ingress](https://github.com/kubernetes/ingress-nginx)
 
 First we install the ingress controller (Nginx):
+
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/cloud/deploy.yaml
 ```
@@ -16,6 +17,7 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/mast
 ### Verify the Ingress load balancer
 
 Check the LoadBalancer service type for the Nginx ingress controller:
+
 ```bash
 # change to the new ingress-nginx namespace
 kubectl config set-context --current --namespace=ingress-nginx
@@ -24,7 +26,8 @@ kcns ingress-nginx
 
 kubectl get pod,svc,ep
 ```
-```
+
+```text
 NAME                                            READY   STATUS      RESTARTS   AGE
 pod/ingress-nginx-admission-create-ddqn2        0/1     Completed   0          3m11s
 pod/ingress-nginx-admission-patch-5kg9d         0/1     Completed   0          3m11s
@@ -40,6 +43,7 @@ endpoints/ingress-nginx-controller-admission   10.244.7.3:8443                3m
 ```
 
 ## Deploy the [Cert Manager](https://cert-manager.io/docs/)
+
 Let's deploy the CertManager:
 
 ```bash
@@ -94,6 +98,7 @@ cat transaction.yaml
 
 gcloud dns record-sets transaction execute --zone $DNS_ZONE
 ```
+
 *Hint*: On Errors you can also modify the created `transaction.yaml` or fix the error over google console [Cloud DNS](https://console.cloud.google.com/net-services/dns/zones).
 
 Confirm the DNS records:
@@ -104,8 +109,11 @@ gcloud dns record-sets list --zone=$DNS_ZONE
 NAME                                           TYPE   TTL    DATA
 *.student-XX.loodse.XXXX.                      A      300    34.90.218.24
 ```
+
 ### Create a Cluster Issuer
+
 **ATTENTION: view and edit the .yaml files before you apply !!!**
+
 ```bash
 cd [training-repo] #training-repo => folder 'k1_fundamentals'
 cd 07_deploy-app-02-external-access
@@ -137,7 +145,9 @@ kubectl apply -f manifests/app.deployment.yaml
 # Service manifest
 kubectl apply -f manifests/app.service.yaml
 ```
+
 Now let's configure a valid SSL certificate for you app. `sed` will replace `TODO-YOUR-DNS-ZONE` with your DNS ZONE, e.g.:`student-XX-XXXX.loodse.training`. Please ensure you will use **YOUR STUDENT ID**:
+
 ```bash
 # check no certificate is present
 kubectl get certificates
@@ -156,14 +166,17 @@ kubectl get certificates -o yaml
 ```bash
 kubectl get pods
 ```
-```
+
+```text
 NAME                        READY   STATUS    RESTARTS   AGE
 helloweb-7f7f7474fc-rgwl6   1/1     Running   0          11s
 ```
+
 ```bash
 kubectl describe svc helloweb
 ```
-```
+
+```text
 Name:              helloweb
 Namespace:         default
 Labels:            app=hello
@@ -176,10 +189,12 @@ Endpoints:         10.244.3.8:8080
 Session Affinity:  None
 Events:            <none>
 ```
+
 ```bash
 kubectl get ingresses.networking.k8s.io
 ```
-```
+
+```text
 NAME       HOSTS                                     ADDRESS          PORTS      AGE
 helloweb   app-ext.student-XX-XXXX.loodse.training   34.90.218.24     80, 443    98s
 ```
@@ -194,7 +209,9 @@ echo https://app-ext.$DNS_ZONE.loodse.training
 # https://app-ext.YOUR-DNS-ZONE.loodse.training
 
 curl https://app-ext.$DNS_ZONE.loodse.training
+```
 
+```text
 Hello, world!
 Version: 1.0.0
 Hostname: helloweb-7f7f7474fc-rgwl6
@@ -208,7 +225,8 @@ kubectl logs -n ingress-nginx ingress-nginx-controller-XXXXX-xxxx
 klog -f
 # type ingress, select the ingress controller pod
 ```
-```
+
+```text
 I0717 11:06:04.032365       6 status.go:296] updating Ingress default/helloweb status from [] to [{34.90.218.24 }]
 I0717 11:06:04.039261       6 event.go:258] Event(v1.ObjectReference{Kind:"Ingress", Namespace:"default", Name:"helloweb", UID:"c3748923-a882-11e9-aac8-42010af00003", APIVersion:"networking.k8s.io/v1beta1", ResourceVersion:"18930", FieldPath:""}): type: 'Normal' reason: 'UPDATE' Ingress default/helloweb
 
