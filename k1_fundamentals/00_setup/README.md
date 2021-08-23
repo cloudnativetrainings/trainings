@@ -47,10 +47,9 @@ After you entered the container, verify the setup:
 
 ```bash
 ### executed inside the tooling container
+export TRAINING_DIR=`pwd`/mnt/trainings/k1_fundamentals
+cd $TRAINING_DIR
 
-cd mnt/k1_fundamentals
-pwd 
-#### /home/kubermatic/mnt/k1_fundamentals
 ls -la
 #### list of training folders 
 

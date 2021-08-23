@@ -52,7 +52,7 @@ echo $GOOGLE_CREDENTIALS
 # should output the credentials, if not continue with below step
 
 # if empty see 00_setup chapter and execute
-cd [training-repo] #training-repo => folder 'k1_fundamentals'
+cd $TRAINING_DIR # folder 'k1_fundamentals'
 export GOOGLE_CREDENTIALS=$(cat ./.secrets/k8c-cluster-provisioner-sa-key.json)
 ```
 
@@ -69,7 +69,7 @@ ssh-add -l
 *Hint: If empty or your ssh-agent is not running, add your SSH identity file:*
 
 ```bash
-cd [training-repo] #training-repo => folder 'k1_fundamentals'
+cd $TRAINING_DIR # folder 'k1_fundamentals'
 eval `ssh-agent`
 ssh-add .secrets/id_rsa
 ```
@@ -110,7 +110,7 @@ To watch the upgrade process, open a **SECOND shell**:
 ### if you use the tooling conainer, open a new shell, do again
 docker exec -it kubeone-tool-container bash
 
-cd [training-repo] #training-repo => folder 'k1_fundamentals'
+cd $TRAINING_DIR # folder 'k1_fundamentals'
 export KUBECONFIG=`pwd`/src/gce/k1-kubeconfig
 watch kubectl get md,ms,ma,nodes -A
 ```
@@ -123,7 +123,7 @@ The first approach to upgrade the cluster is to combine the upgrade of both the 
 
 ```bash
 # ensure latest terraform information are loaded
-cd src/gce/tf-infra
+cd $TRAINING_DIR/src/gce/tf-infra
 terraform refresh
 
 kubeone apply -t . -m ../kubeone.yaml --upgrade-machine-deployments --verbose

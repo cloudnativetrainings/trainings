@@ -27,9 +27,7 @@ Due to this we want to:
 As we already created our MachineDeployment yaml definitions, we can now easily update them and apply the change. For a full list of options of the machine deployment spec, see [github.com/kubermatic/machine-controller - examples/gce-machinedeployment.yaml](https://github.com/kubermatic/machine-controller/blob/master/examples/gce-machinedeployment.yaml).
 
 ```bash
-cd [training-repo] #training-repo => folder 'k1_fundamentals'
-
-cd ./src/gce
+cd $TRAINING_DIR/src/gce
 ls -l machines/
 ```
 
@@ -266,8 +264,7 @@ kubectl -n kube-system scale machinedeployment --all --replicas=1
 We won't use the `app-ext` anymore, so you can safely clean the related resources.
 
 ```bash
-cd [training-repo] #training-repo => folder 'k1_fundamentals'
-cd 07_deploy-app-02-external-access
+cd $TRAINING_DIR/07_deploy-app-02-external-access
 # delete application manifests
 kubectl delete -f manifests/
 # delete namespace

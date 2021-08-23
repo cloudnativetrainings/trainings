@@ -36,8 +36,7 @@ kubectl config set-context --current --namespace=kube-system
 kcns kube-system
 
 # export current machine deployment
-cd [training-repo] #training-repo => folder 'k1_fundamentals'
-cd ./src/gce
+cd $TRAINING_DIR/src/gce
 mkdir machines     
 kubectl get machinedeployment k1-pool-az-a -o yaml | kexp > machines/md-zone-a.yaml
 
@@ -130,7 +129,7 @@ output "kubeone_workers" {
 ```
 
 ```bash
-cd tf-infra
+cd $TRAINING_DIR/src/gce/tf-infra
 vim output.tf
 terraform apply
 ```

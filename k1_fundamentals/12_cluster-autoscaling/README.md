@@ -5,8 +5,7 @@ First we need to deploy the cluster autoscaler controller. As reference take a l
 For this lab, current version is added here: [`./cluster-autoscaler.yaml`](./cluster-autoscaler.yaml), so first copy this to the KubeOne folder:
 
 ```bash
-cd [training-repo] #training-repo => folder 'k1_fundamentals'
-cd src/gce
+cd $TRAINING_DIR/src/gce
 cp ../../12_cluster-autoscaling/cluster-autoscaler.yaml ./addons/
 
 ### Deploy the autoscaler addon
