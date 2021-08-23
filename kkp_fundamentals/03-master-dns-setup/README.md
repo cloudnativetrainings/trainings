@@ -12,7 +12,7 @@ For reference see the Docs: [Kubermatic Docs - Install Kubermatic - Create DNS R
 First of all start a DNS zone editing transaction.:
 
 ```bash
-cd ~/mnt/kkp_fundamentals/src/kkp-setup
+cd $TRAINING_DIR/src/kkp-setup
 # get your gcloud DNS_ZONE
 gcloud dns managed-zones list
 ```
@@ -165,7 +165,7 @@ oauth        dex-tls          True    dex-tls          letsencrypt-prod   Certif
 You should now be able to open the KKP Dashboard and login with your configured e-mail ID of user at your `values.yaml`, for example: `student-XX-xxxx@loodse.training` and password `password`. You can check configured values by following command.
 
 ```bash
-cd ~/mnt/kkp_fundamentals/src/kkp-setup
+cd $TRAINING_DIR/src/kkp-setup
 grep -A 5 static values.yaml
 ```
 

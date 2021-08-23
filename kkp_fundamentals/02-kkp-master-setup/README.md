@@ -7,8 +7,8 @@ This chapter explains the installation procedure of KKP into a pre-existing Kube
 Again for simplicity of training we have the predefined manifests at [`./kkp-setup.template`](./kkp-setup.template). Copy it to `src` directory using below commands.
 
 ```bash
-cp -r ~/mnt/kkp_fundamentals/02-kkp-master-setup/kkp-setup.template ~/mnt/kkp_fundamentals/src/kkp-setup
-cd ~/mnt/kkp_fundamentals/src/kkp-setup
+cp -r $TRAINING_DIR/02-kkp-master-setup/kkp-setup.template $TRAINING_DIR/src/kkp-setup
+cd $TRAINING_DIR/src/kkp-setup
 ```
 
 ## Prepare KKP Configuration

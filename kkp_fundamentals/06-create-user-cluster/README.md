@@ -11,7 +11,7 @@ For the authentication with Google use your already created service account from
 To add the credentials in the Kubermatic UI, encode it as base64 and copy it:
 
 ```bash
-cd ~/mnt/kkp_fundamentals
+cd $TRAINING_DIR # folder 'kkp_fundamentals'
 base64 -w 0 ./.secrets/k8c-cluster-provisioner-sa-key.json
 ```
 

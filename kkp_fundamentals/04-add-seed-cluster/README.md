@@ -16,21 +16,21 @@ To add seed cluster to the Kubermatic master, you need to
 To connect the seed cluster with the master, you need to create a kubeconfig Secret.
 
 ```bash
-cd ~/mnt/kkp_fundamentals/
+cd $TRAINING_DIR # folder 'kkp_fundamentals'
 # create copy of current kubeconfig
-cp $KUBECONFIG ~/mnt/kkp_fundamentals/src/kkp-setup/temp-seed-kubeconfig
+cp $KUBECONFIG $TRAINING_DIR/src/kkp-setup/temp-seed-kubeconfig
 ```
 
 We need to convert the `temp-seed-kubeconfig` file to a Kubernetes Secret `seed-kubeconfig`.
 
 ```bash
-kubectl create secret generic seed-kubeconfig -n kubermatic --from-file kubeconfig=~/mnt/kkp_fundamentals/src/kkp-setup/temp-seed-kubeconfig --dry-run=client -o yaml > ~/mnt/kkp_fundamentals/src/kkp-setup/seed.kubeconfig.secret.yaml
+kubectl create secret generic seed-kubeconfig -n kubermatic --from-file kubeconfig=$TRAINING_DIR/src/kkp-setup/temp-seed-kubeconfig --dry-run=client -o yaml > $TRAINING_DIR/src/kkp-setup/seed.kubeconfig.secret.yaml
 ```
 
 Verify that the secret `seed-kubeconfig` has been created correctly by executing the following command and making sure the output looks similar to the example output afterwards.
 
 ```bash
-cat ~/mnt/kkp_fundamentals/src/kkp-setup/seed.kubeconfig.secret.yaml
+cat $TRAINING_DIR/src/kkp-setup/seed.kubeconfig.secret.yaml
 ```
 
 ```yaml
@@ -47,9 +47,9 @@ metadata:
 If everything looks fine, apply the secret and delete the temp file.
 
 ```bash
-kubectl apply -n kubermatic -f ~/mnt/kkp_fundamentals/src/kkp-setup/seed.kubeconfig.secret.yaml
+kubectl apply -n kubermatic -f $TRAINING_DIR/src/kkp-setup/seed.kubeconfig.secret.yaml
 ## cleanup
-rm ~/mnt/kkp_fundamentals/src/kkp-setup/temp-seed-kubeconfig
+rm $TRAINING_DIR/src/kkp-setup/temp-seed-kubeconfig
 ```
 
 ## Create seed resource
@@ -57,7 +57,7 @@ rm ~/mnt/kkp_fundamentals/src/kkp-setup/temp-seed-kubeconfig
 Take a look at the seed configuration file.
 
 ```bash
-cat ~/mnt/kkp_fundamentals/04-add-seed-cluster/seed.europe-west.yaml
+cat $TRAINING_DIR/04-add-seed-cluster/seed.europe-west.yaml
 ```
 
 ```yaml
@@ -109,9 +109,9 @@ Let's apply the manifest above in the master cluster. Kubermatic will pick up th
 
 ```bash
 # create copy of seed template
-cp ~/mnt/kkp_fundamentals/04-add-seed-cluster/seed.europe-west.yaml ~/mnt/kkp_fundamentals/src/kkp-setup/
+cp $TRAINING_DIR/04-add-seed-cluster/seed.europe-west.yaml $TRAINING_DIR/src/kkp-setup/
 # apply the config change
-kubectl apply -n kubermatic -f ~/mnt/kkp_fundamentals/src/kkp-setup/seed.europe-west.yaml
+kubectl apply -n kubermatic -f $TRAINING_DIR/src/kkp-setup/seed.europe-west.yaml
 ```
 
 ## Verify Seed deployment
@@ -207,19 +207,19 @@ kubermatic-fast   kubernetes.io/gce-pd   Delete          Immediate           fal
 So we want to set up a dedicated `kubermatic-backup` storage class. See [`./gce.sc.kubermatic.backup.yaml`](./gce.sc.kubermatic.backup.yaml) and create a copy in your `kkp-setup` folder.
 
 ```bash
-cp ~/mnt/kkp_fundamentals/04-add-seed-cluster/gce.sc.kubermatic.backup.yaml ~/mnt/kkp_fundamentals/src/kkp-setup
+cp $TRAINING_DIR/04-add-seed-cluster/gce.sc.kubermatic.backup.yaml $TRAINING_DIR/src/kkp-setup
 ```
 
 Check the configuration. For more details about the storage class parameters of the Google CCM, see [Kubernetes Storage Class - GCE PD](https://kubernetes.io/docs/concepts/storage/storage-classes/#gce-pd).
 
 ```bash
-cat ~/mnt/kkp_fundamentals/src/kkp-setup/gce.sc.kubermatic.backup.yaml
+cat $TRAINING_DIR/src/kkp-setup/gce.sc.kubermatic.backup.yaml
 ```
 
 When everything looks fine, apply the new storage class.
 
 ```bash
-kubectl apply -f ~/mnt/kkp_fundamentals/src/kkp-setup/gce.sc.kubermatic.backup.yaml
+kubectl apply -f $TRAINING_DIR/src/kkp-setup/gce.sc.kubermatic.backup.yaml
 ```
 
 Check that you now have a new storage class installed:
@@ -255,7 +255,7 @@ It's also advisable to install the  [S3 Backup Exporter](https://github.com/kube
 Now install the charts.
 
 ```bash
-cd ~/mnt/kkp_fundamentals/
+cd $TRAINING_DIR # folder 'kkp_fundamentals'
 helm upgrade --install --create-namespace --wait --values ./src/kkp-setup/values.yaml --namespace minio minio ./src/kkp-setup/releases/v2.17.3/charts/minio
 helm upgrade --install --wait --values ./src/kkp-setup/values.yaml --namespace kube-system s3-exporter ./src/kkp-setup/releases/v2.17.3/charts/s3-exporter/
 ```

@@ -12,7 +12,7 @@ If you did the k1 fundamentals labs, feel free to copy the needed secrets to you
 
 ``` bash
 ### copy the secrets
-cp -r ~/mnt/k1_fundamentals/.secrets ~/mnt/kkp_fundamentals/
+cp -r $TRAINING_DIR/../k1_fundamentals/.secrets $TRAINING_DIR
 ```
 
 **Note - If you did the K1 fundamentals labs, please ensure that you destroyed the former KubeOne Cluster and DNS records with [../../k1_fundamentals/99_cluster-cleanup-or-pause](../../k1_fundamentals/99_cluster-cleanup-or-pause)!**
@@ -21,7 +21,7 @@ cp -r ~/mnt/k1_fundamentals/.secrets ~/mnt/kkp_fundamentals/
 
 ```bash
 ##### Ensure that you execute below commands inside of the tooling container
-cd ~/mnt/kkp_fundamentals/
+cd $TRAINING_DIR # folder 'kkp_fundamentals'
 mkdir ./.secrets && cd ./.secrets
 
 # ensure you are connected and get your Project ID
@@ -71,13 +71,13 @@ Run the following to provision the KubeOne cluster:
 
 ```bash
 # copy the template to your source folder
-cd ~/mnt/kkp_fundamentals/
+cd $TRAINING_DIR # folder 'kkp_fundamentals'
 cp -r 01-kubeone-cluster-setup/kkp-master.template src/kkp-master
 
 export GCP_PROJECT_ID=__YOUR_GCP_PROJECT_ID__                  # student-XX-xxxx
 
 # replace TODO-YOUR-GCP-PROJECT-ID with your project id 
-cd ~/mnt/kkp_fundamentals/src/kkp-master
+cd $TRAINING_DIR/src/kkp-master
 find . -type f -exec sed -i 's/TODO-YOUR-GCP-PROJECT-ID/'"$GCP_PROJECT_ID"'/g' {} +
 
 # start SSH agent and add id_rsa
