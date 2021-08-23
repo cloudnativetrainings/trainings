@@ -191,4 +191,10 @@ Now we should see, one master and one worker node with the corresponding machine
 kubectl -n kube-system get machinedeployment,machineset,machine,node
 ```
 
-You can check the official KubeOne installation documentation for further reference: https://docs.kubermatic.com/kubeone/master/tutorials/
+Check the Cloud Controller Manager credentials (used for provisioning worker nodes).
+
+```bash
+kubectl get secret -n kube-system cloud-provider-credentials -o jsonpath='{.data.GOOGLE_SERVICE_ACCOUNT}' | base64 -d | base64 -d
+```
+
+This Secret is created by KubeOne and used when creating MachineDeployment by `machine-controller`.
