@@ -21,7 +21,7 @@ If you have docker, git and a common IDE installed locally, you can quickly star
 
 ```bash
 git clone https://github.com/kubermatic-labs/trainings.git
-docker run --name  kubeone-tool-container -v $(pwd)/trainings:/home/kubermatic/mnt -t -d quay.io/kubermatic-labs/kubeone-tooling:1.2.3
+docker run --name kubeone-tool-container -v $(pwd):/home/kubermatic/mnt -t -d quay.io/kubermatic-labs/kubeone-tooling:1.2.3
 docker exec -it kubeone-tool-container bash
 ```
 
@@ -37,10 +37,11 @@ After you entered the container, verify the setup:
 
 ```bash
 ### executed inside the tooling container
+export TRAINING_DIR=`pwd`/mnt/trainings/kkp_fundamentals
+cd $TRAINING_DIR
 
-#### list of training folders
-cd ~/mnt/kkp_fundamentals/
 ls -la
+#### list of training folders
 
 #### version json with kubeone v1.2.3 should be shown
 kubeone version

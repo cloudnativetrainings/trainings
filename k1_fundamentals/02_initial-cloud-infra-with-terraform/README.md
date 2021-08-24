@@ -6,8 +6,7 @@ To avoid the usage of your recent private SSH key, you can freshly create one fo
 
 ```bash
 # SSH Key creation if no ssh key is present
-
-cd [training-repo] #training-repo => folder 'k1_fundamentals'
+cd $TRAINING_DIR # folder 'k1_fundamentals'
 ssh-keygen -f .secrets/id_rsa
 ### for now no password is needed, but for prodution would be recommended
 
@@ -19,7 +18,7 @@ ls -la .secrets/id*
 Change your folder to the GCE terraform folder [`src/gce/tf-infra`](src/gce/tf-infra) for our terraform GCE code (You will find more terraform examples in the KubeOne repo: [`./examples/terraform/`](https://github.com/kubermatic/kubeone/tree/master/examples/terraform)). 
 
 ```bash
-cd src/gce/tf-infra
+cd $TRAINING_DIR/src/gce/tf-infra
 terraform init
 ```
 

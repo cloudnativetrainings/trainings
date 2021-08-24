@@ -115,8 +115,7 @@ NAME                                           TYPE   TTL    DATA
 **ATTENTION: view and edit the .yaml files before you apply !!!**
 
 ```bash
-cd [training-repo] #training-repo => folder 'k1_fundamentals'
-cd 07_deploy-app-02-external-access
+cd $TRAINING_DIR/07_deploy-app-02-external-access
 export TRAINING_EMAIL=student-XX.XXXX@loodse.training       #Use email provided by trainer for training
 sed -i "s/your-email@example.com/$TRAINING_EMAIL/g" manifests/lb.cluster-issuer.yaml
 kubectl apply -f manifests/lb.cluster-issuer.yaml

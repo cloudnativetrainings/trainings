@@ -27,8 +27,7 @@ gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member serviceAccount:$
 gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member serviceAccount:$GCP_SERVICE_ACCOUNT_ID --role='roles/storage.admin'
 
 # create a new json key for your service account
-# training-repo => folder 'k1_fundamentals'
-cd [training-repo]
+cd $TRAINING_DIR # folder 'k1_fundamentals'
 mkdir -p ./.secrets && cd ./.secrets
 gcloud iam service-accounts keys create --iam-account $GCP_SERVICE_ACCOUNT_ID k8c-cluster-provisioner-sa-key.json
 ``` 
@@ -45,6 +44,6 @@ Test if your environment variable contains the json key
 ```bash
 echo $GOOGLE_CREDENTIALS 
 { "type": "service_account", "project_id": "YOUR PROJECT", "private_key_id": "..." }
-# jump back to [training-repo]
+# jump back to k1_fundamentals dir
 cd -
 ```

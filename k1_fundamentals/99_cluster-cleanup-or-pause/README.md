@@ -7,8 +7,7 @@ To cleanup your cloud resource, KubeOne tool will support you.
 In the first step KubeOne will remove the worker nodes and reset the control plane nodes to the state before you installed Kubernetes. The command is also helpful if during the installation something breaks, and you don't want to re-provision all machines:
 
 ```bash
-cd [training-repo] #training-repo => folder 'k1_fundamentals'
-cd src/gce
+cd $TRAINING_DIR/src/gce
 kubeone reset -t ./tf-infra
 ```
 
@@ -20,7 +19,7 @@ As a last step, you should destroy your Terraform infrastructure. The next comma
 - The Kubernetes API Load Balancer
 
 ```bash
-cd tf-infra
+cd $TRAINING_DIR/src/gce/tf-infra
 terraform destroy
 ```
 

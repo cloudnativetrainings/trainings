@@ -10,7 +10,7 @@ We will now create a backup into a GCP bucket, for more details see the Velero G
 ### Create a Bucket
 
 ```bash
-cd [training-repo] #training-repo => folder 'k1_fundamentals'
+cd $TRAINING_DIR # folder 'k1_fundamentals'
 cp ./09_backup_velero/gs-bucket.tf ./src/gce/tf-infra/
 cd ./src/gce/tf-infra
 

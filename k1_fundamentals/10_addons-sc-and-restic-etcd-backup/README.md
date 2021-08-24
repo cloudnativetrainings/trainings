@@ -22,7 +22,7 @@ Some "raw" Addons can be found here:
 If you take a look in your current cluster, currently no storage class is applied. If you create a new Persistent Volume Claim, no storage get applied.
 
 ```bash
-cd [training-repo] #training-repo => folder 'k1_fundamentals'
+cd $TRAINING_DIR # folder 'k1_fundamentals'
 kubectl get sc
 ```
 
@@ -98,8 +98,7 @@ This config seams to look fine for our KubeOne cluster as well. As the cloud con
 Now let's create a new addon for our setup with the above Storage Class.
 
 ```bash
-cd [training-repo] #training-repo => folder 'k1_fundamentals'
-cd src/gce
+cd $TRAINING_DIR/src/gce
 
 #first create the storage class manifest fest file
 mkdir "addons"
@@ -229,8 +228,7 @@ To prevent to manage Google Service Account credential secret, we can use the [K
 Now let's copy the template and adjust the needed `<<TODO_xxxx>>` parameters to our lab environment:
 
 ```bash
-cd [training-repo] #training-repo => folder 'k1_fundamentals'
-cd src/gce
+cd $TRAINING_DIR/src/gce
 
 cp ../../10_addons-sc-and-restic-etcd-backup/template.backups-restic.yaml addons/gs.backups-restic.yaml
 vim addons/gs.backups-restic.yaml

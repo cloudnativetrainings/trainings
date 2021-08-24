@@ -25,8 +25,7 @@ Save and execute the change:
 
 ```bash
 ### create the missing infrastructure
-cd [training-repo] #training-repo => folder 'k1_fundamentals'
-cd ./src/gce/tf-infra
+cd $TRAINING_DIR/src/gce/tf-infra
 terraform apply
 ### install the missing master nodes with KubeOne
 kubeone apply -t . --manifest ../kubeone.yaml --verbose

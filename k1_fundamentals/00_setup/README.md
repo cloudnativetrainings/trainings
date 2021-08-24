@@ -18,7 +18,7 @@ If you have docker, git and a common IDE installed locally, you can quickly star
 
 ```bash
 git clone https://github.com/kubermatic-labs/trainings.git
-docker run --name  kubeone-tool-container -v $(pwd):/home/kubermatic/mnt -t -d quay.io/kubermatic-labs/kubeone-tooling:1.2.3
+docker run --name kubeone-tool-container -v $(pwd):/home/kubermatic/mnt -t -d quay.io/kubermatic-labs/kubeone-tooling:1.2.3
 ```
 Connect into the running container and ensures that you can reattach if you get kicked out of the container:
 
@@ -32,7 +32,7 @@ docker exec -it kubeone-tool-container bash
 # remove old container
 docker rm -f kubeone-tool-container
 
-docker run --rm --name  kubeone-tool-container -v $(pwd):/home/kubermatic/mnt -it quay.io/kubermatic-labs/kubeone-tooling:1.2.3 bash
+docker run --rm --name kubeone-tool-container -v $(pwd):/home/kubermatic/mnt -it quay.io/kubermatic-labs/kubeone-tooling:1.2.3 bash
 ```
 
 ### (Alternative) Use Google Cloud Shell
@@ -47,12 +47,11 @@ After you entered the container, verify the setup:
 
 ```bash
 ### executed inside the tooling container
+export TRAINING_DIR=`pwd`/mnt/trainings/k1_fundamentals
+cd $TRAINING_DIR
 
-cd mnt/k1_fundamentals
-pwd 
-#### /home/kubermatic/mnt/k1_fundamentals
 ls -la
-#### list of training folders 
+#### list of training folders
 
 kubeone version
 #### version json with kubeone v1.2.3 should be shown
