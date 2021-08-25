@@ -1,0 +1,7 @@
+apiVersion: kubermatic.k8s.io/v1
+kind: Preset
+metadata:
+  name: demo
+spec:
+  gcp:
+    serviceAccount: "<INSERT-SERVICE-ACCOUNT-VALUE>"
