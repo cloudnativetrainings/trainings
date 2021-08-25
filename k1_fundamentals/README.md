@@ -27,3 +27,7 @@ To discover more details about KubeOne, take a look at our latest [KubeOne - Doc
 Through the journey of the training, we are now starting with the following step: [00_setup](./00_setup/README.md)
 
 For more commercial information see [Kubermatic KubeOne](https://www.kubermatic.com/products/kubeone/).
+
+## Resume Lab Environment
+If you are getting back to Google Cloud Shell and you want to resume access to your cluster,
+check the [00_setup/resume_lab.md](00_setup/resume_lab.md).
