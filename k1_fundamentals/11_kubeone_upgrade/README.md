@@ -129,7 +129,7 @@ terraform refresh
 kubeone apply -t . -m ../kubeone.yaml --upgrade-machine-deployments --verbose
 ```
 
-You can also check the full documentation for the upgrade process: [KubeOne Upgrade Process](https://docs.kubermatic.com/kubeone/master/using_kubeone/upgrading_cluster/)
+You can also check the full documentation for the upgrade process: [KubeOne Upgrade Process](https://docs.kubermatic.com/kubeone/master/tutorials/upgrading_clusters/)
 
 During the upgrade process you can watch the state in a **SECOND** shell by:
 
