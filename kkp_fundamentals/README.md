@@ -40,3 +40,7 @@ Kubermatic is a cluster-as-a-service solution that provides managed Kubernetes f
 * To understand the general prerequisites take a look at [Cluster Requirements](https://docs.kubermatic.com/kubermatic/master/requirements/cluster_requirements/)
 
 Now Start with [00-prepare-training-lab](./00-prepare-training-lab).
+
+## Resume Lab Environment
+If you are getting back to Google Cloud Shell and you want to resume access to your cluster,
+check the [00-prepare-training-lab/resume_lab.md](00-prepare-training-lab/resume_lab.md).
