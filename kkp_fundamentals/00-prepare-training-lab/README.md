@@ -1,81 +1,83 @@
-# Prepare Training LAB
+# Prepare training lab
 
 ## Prerequisites
 
-Prerequisites what need to be fulfilled by the attendees of the trainings:
+To complete this lab successfully, you are expected to have:
 
-- Common understanding of Kubernetes architecture, API objects and principles.
-- Basic compute infrastructure knowledge about networking, DNS and resource provisioning.
-- Internet Access to GitHub, GoogleCloud, terraform provider, quay.io.
-- Latest Docker Installed.
-- git client- IDE / Editor
-  (preferred with Kubernetes support e.g. [VSCode](https://code.visualstudio.com/) or [Intellij Plugin](https://plugins.jetbrains.com/plugin/10485-kubernetes/versions)).
+- Basic understanding of Kubernetes architecture, API objects, and essential commands.
+- Basic infrastructure knowledge on networking, DNS, and resources provisioning.
+- Internet Access to GitHub, Google Cloud, Terraform registry, and Quay.io.
+- Latest Docker installed.
+- Git client
+- Text editor (preferably one with Kubernetes support e.g. [VSCode](https://code.visualstudio.com/) or [Intellij Plugin](https://plugins.jetbrains.com/plugin/10485-kubernetes/versions)).
 
-## Setup Tooling Container
+## Environment setup
 
-> 💡 Tip: Use [Google Cloud Shell](https://shell.cloud.google.com/) for a clean and fast environment.
+> 💡 Tip: Use [Google Cloud Shell](https://shell.cloud.google.com/) for a ready-to-use and fast environment.
 
-To speed up, the setup we will use the [KubeOne Tooling Container](https://github.com/kubermatic/community-components/tree/master/helper/kubeone-tool-container) container, where every needed tool is already setup.
-
-If you have docker, git, and a text editor, you can quickly start with:
+For a quick start, we will use the [KubeOne Tooling container](https://github.com/kubermatic/community-components/tree/master/helper/kubeone-tool-container) container, which has the necessary tools already installed.
 
 ```bash
 git clone https://github.com/kubermatic-labs/trainings.git
-docker run --name kubeone-tool-container -v $(pwd):/home/kubermatic/mnt -t -d quay.io/kubermatic-labs/kubeone-tooling:1.2.3
+docker run --name kubeone-tool-container -v $(pwd)/trainings:/home/kubermatic/trainings -t -d quay.io/kubermatic-labs/kubeone-tooling:1.2.3
 docker exec -it kubeone-tool-container bash
 ```
-You have to execute same above command to continue LAB.
+The lab runs in the container's shell.
 
-## Verify setup
+## Verifying setup
 
-After you entered the container, verify the setup:
+Verify that you have all the tools necessary running correctly by executing the following **in the container's shell**:
 
 ```bash
-### executed inside the tooling container
-export TRAINING_DIR=`pwd`/mnt/trainings/kkp_fundamentals
+export TRAINING_DIR=`pwd`/trainings/kkp_fundamentals
 cd $TRAINING_DIR
 
+#### List training folders
 ls -la
-#### list of training folders
 
-#### version json with kubeone v1.2.3 should be shown
+#### KubeOne version v1.2.3
 kubeone version
 
-#### a recent terraform version (>= 0.15) should be shown
+#### Terraform version (>= 0.15)
 terraform version
 
-#### a recent gcloud SDK (>= 340.0.0)
+#### Google Cloud SDK (>= 340.0.0)
 gcloud version
 
-#### a recent kubectl version (>= v.1.21.1)
-kubectl version --short
+#### kubectl version (>= v.1.21.1)
+kubectl version --short --client
 ```
 
-## Authenticate your GCP account
+## Authorize Google Cloud SDK tools
 
 Execute the setup script:
 
 ```bash
 ./00-prepare-training-lab/setup.sh
-
-### should list your training projects
-gcloud projects list
 ```
 
+Which grants access to Cloud SDK to access Google Cloud resources.
+
+Verify the authorization is successful by listing your projects:
+
+```bash
+gcloud projects list
+```
+Output:
 ```text
 PROJECT_ID        NAME              PROJECT_NUMBER
 student-XX-xxxx   student-XX-xxxx   999999999999
 ```
 
-## Other helpful content
+## Useful links
 
-The most needed shortcuts and tooling helper are already installed in the tooling container, anyway you could look over the [helpful-commands.md](helpful-commands.md) section, to read how e.g. install auto-completion and [fubectl](https://github.com/kubermatic/fubectl) for fast Kubernetes navigation.
+The most needed shortcuts and tooling helper are already installed in the tooling container, however, you can take a loot at the [helpful-commands.md](helpful-commands.md) section to know how to configure auto-completion for example or install [fubectl](https://github.com/kubermatic/fubectl) for fast Kubernetes navigation.
 
-If you don't like to use the KubeOne tooling container and install all tools directly locally, you can take a look at:
+If you don't like to use the KubeOne tooling container and install all tools directly locally, you can take a look at the [KubeOne tooling container dockerfile](https://github.com/kubermatic/community-components/blob/master/helper/kubeone-tool-container/Dockerfile).
 
-- [KubeOne Tooling Container - Dockerfile](https://github.com/kubermatic/community-components/blob/master/helper/kubeone-tool-container/Dockerfile)
+## Help and support
 
-As an opensource driven company, Kubermatic tries to contribute also a lot of helpful components, helper or information to the community, so feel free to take a look at the recent resources:
+As an opensource driven company, Kubermatic contributes a lot of helpful components or information to the community, so feel free to take a look at these resources:
 
 - [Official Documentation](https://docs.kubermatic.com/)
 - [Kubermatic Community Components](https://github.com/kubermatic/community-components)
