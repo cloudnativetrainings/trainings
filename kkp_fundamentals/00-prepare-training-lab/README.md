@@ -13,22 +13,17 @@ Prerequisites what need to be fulfilled by the attendees of the trainings:
 
 ## Setup Tooling Container
 
-**Option-1** - Setup Tooling container on your local workstation
+> 💡 Tip: Use [Google Cloud Shell](https://shell.cloud.google.com/) for a clean and fast environment.
 
 To speed up, the setup we will use the [KubeOne Tooling Container](https://github.com/kubermatic/community-components/tree/master/helper/kubeone-tool-container) container, where every needed tool is already setup.
 
-If you have docker, git and a common IDE installed locally, you can quickly start with:
+If you have docker, git, and a text editor, you can quickly start with:
 
 ```bash
 git clone https://github.com/kubermatic-labs/trainings.git
 docker run --name kubeone-tool-container -v $(pwd):/home/kubermatic/mnt -t -d quay.io/kubermatic-labs/kubeone-tooling:1.2.3
 docker exec -it kubeone-tool-container bash
 ```
-
-**Option-2** - Use Google Cloud Shell to setup Tooling container
-
-Open the [Google Cloud Shell](https://shell.cloud.google.com) in a separate window.
-
 You have to execute same above command to continue LAB.
 
 ## Verify setup
