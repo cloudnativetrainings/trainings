@@ -3,7 +3,7 @@
 set -euxo pipefail
 
 # variables
-export ISTIO_VERSION=1.7.4
+export ISTIO_VERSION=1.11.2
 
 # install istioctl 
 curl -L https://istio.io/downloadIstio | ISTIO_VERSION=$ISTIO_VERSION sh -

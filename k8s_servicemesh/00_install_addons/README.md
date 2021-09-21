@@ -3,13 +3,13 @@
 ## Prometheus
 
 ```bash
-kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.7/samples/addons/prometheus.yaml
+kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.11/samples/addons/prometheus.yaml
 ```
 
 ## Grafana
 
 ```bash
-kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.7/samples/addons/grafana.yaml
+kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.11/samples/addons/grafana.yaml
 ```
 
 ## Kiali
@@ -17,11 +17,11 @@ kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.7/sampl
 Note, due to CRDs, you have to apply this yaml file twice.
 
 ```bash
-kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.7/samples/addons/kiali.yaml
+kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.11/samples/addons/kiali.yaml
 ```
 
 ## Jaeger
 
 ```bash
-kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.7/samples/addons/jaeger.yaml
+kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.11/samples/addons/jaeger.yaml
 ```
