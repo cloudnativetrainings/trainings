@@ -1,8 +1,8 @@
 # Hello Docker
 
-In this training you will start a container and install a web server into it.
+In this training, you will start a Linux OS container and install a web server into it.
 
-## Run an ubuntu container
+## Run an Ubuntu container
 ```bash
 docker run -it -p 80:80 ubuntu:20.10
 ```
@@ -38,7 +38,7 @@ exit
 docker ps
 ```
 
-## The Container is already in state `EXITED`. To see the Container do the following
+## The Container is already in state `EXITED`. To see the Container, do the following
 
 ```bash
 docker ps -a
