@@ -14,7 +14,7 @@
     cd trainings/container_fundamentals/
     ```
 
-4. [Setup](00_setup/README.md) the training playground
+4. [Setup](00_setup/README.md) - the training playground
 
 **Hands-On:**
 
@@ -39,7 +39,7 @@
 19. [Privileged Container](19_privileged-container/README.md)
 
 
-[TearDown Setup](99_teardown/README.md) the training playground
+[TearDown Setup](99_teardown/README.md) - the training playground
 
 
 

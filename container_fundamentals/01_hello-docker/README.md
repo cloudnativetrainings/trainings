@@ -47,5 +47,7 @@ docker ps -a
 ## Cleanup
 
 ```bash
-docker rm <TAB>
+docker rm <Container-ID>
 ```
+
+[Jump to Home](../README.md) | [Next Training](../02_images/README.md)
