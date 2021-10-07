@@ -1,11 +1,14 @@
-# Shell vs exec form - PID1
+# Exec vs Sell form - PID1
 
-In this training, you will learn the difference between shell and exec form concerning PID1.
+In this training, you will learn the difference between exec and shell form concerning PID1.
+
+>Navigate to the folder `12_shell-vs-exec-form-PID1` from CLI, before you get started. 
 
 ## Inspect the Dockerfile 
 ```bash
 cat Dockerfile
 ```
+> You can see the exec form of `ENTRYPOINT`
 
 ## Build the image
 ```bash
@@ -16,12 +19,13 @@ docker build -t shell-vs-exec-form-pid1:1.0.0 .
 ```bash
 docker run -it shell-vs-exec-form-pid1:1.0.0
 ```
->Note that the process within the container has PID 1.
+>Note that the process `ps aux` within the container is PID 1.
 
 ## Change the entrypoint to the following in the Dockerfile
 ```
 ENTRYPOINT ps aux
 ```
+> This is shell form of `ENTRYPOINT`
 
 ## Build the image
 ```bash
@@ -32,12 +36,16 @@ docker build -t shell-vs-exec-form-pid1:2.0.0 .
 ```bash
 docker run -it shell-vs-exec-form-pid1:2.0.0
 ```
->Note that the process within the container has not PID 1. So the started process will not receive lifecycle signals like SIGTERM or SIGKILL. This can lead to data loss of your application due to gracefull shutdown will not happen.
+>Note that the process `ps aux` within the container is not PID 1. Hence, the started process will not receive lifecycle signals like SIGTERM or SIGKILL. This can lead to data loss of your application since  the container will not exit cleanly.
 
 ## Cleanup
-Remove all the containers
-```bash
-docker rm -f $(docker ps -qa)
-```
+* Remove all the containers
+  ```bash
+  docker rm -f $(docker ps -qa)
+  ```
+* Remove all the images
+  ```bash
+  docker rmi -f $(docker images -qa)
+  ```
 
 [Jump to Home](../README.md) | [Previous Training](../11_shell-vs-exec-form-variable-substitution/README.md) | [Next Training](../13_caching/README.md)

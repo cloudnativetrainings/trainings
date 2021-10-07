@@ -1,6 +1,8 @@
 # Multistaged builds
 
-In this training you will learn how to build your applications.
+In this training, you will learn how to build your applications.
+
+>Navigate to the folder `14_multistaged-builds` from CLI, before you get started. 
 
 ## Inspect the Dockerfile and the main.go file
 ```bash
@@ -46,9 +48,13 @@ docker image ls go
 ```
 
 ## Cleanup
-Remove all the containers
-```bash
-docker rm -f $(docker ps -qa)
-```
+* Remove all the containers
+  ```bash
+  docker rm -f $(docker ps -qa)
+  ```
+* Remove all the images
+  ```bash
+  docker rmi -f $(docker images -qa)
+  ```
 
 [Jump to Home](../README.md) | [Previous Training](../13_caching/README.md) | [Next Training](../15_logs/README.md)

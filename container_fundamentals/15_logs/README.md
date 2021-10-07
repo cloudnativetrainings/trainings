@@ -16,6 +16,7 @@
   ```bash
   docker logs -f redis
   ```
+  >To exit from watch mode, simply use Ctrl+c.
 
 ## Globally customize the log-driver 
 You can costumize the log-driver in the file `/etc/docker/daemon.json` via these options:
@@ -28,7 +29,7 @@ You can costumize the log-driver in the file `/etc/docker/daemon.json` via these
   }
 }
 ```
->This sets the log-driver to `json-file` which is the default. Furthermore you can define log file rotation via the flags `max-size` and `max-file`.
+>This sets the log-driver to `json-file` which is the default. Furthermore, you can define log file rotation by setting the log-opts properties `max-size` and `max-file` .
 
 ## Run a container with a specific log-driver
 * Syslog log-driver
@@ -53,9 +54,13 @@ docker inspect --format '{{ .HostConfig.LogConfig }}' redis
 ```
 
 ## Cleanup
-Remove all the containers
-```bash
-docker rm -f $(docker ps -qa)
-```
+* Remove all the containers
+  ```bash
+  docker rm -f $(docker ps -qa)
+  ```
+* Remove all the images
+  ```bash
+  docker rmi -f $(docker images -qa)
+  ```
 
 [Jump to Home](../README.md) | [Previous Training](../14_multistaged-builds/README.md) | [Next Training](../16_networking/README.md)

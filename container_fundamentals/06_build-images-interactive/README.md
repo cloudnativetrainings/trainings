@@ -1,4 +1,4 @@
-# Images Interactive
+# Build Images Interactive
 
 In this task, you will create a new image via interactive commands. 
 >Note that this approach is not recommended for production usecases, use Dockerfiles instead.
@@ -24,8 +24,7 @@ In this task, you will create a new image via interactive commands.
   ```
   >This show the list of added, changed or deleted with capital `A`, `C` or `D` respectively prefixed with each file. 
 
-## Step Create image using `docker commit`
-
+## Create an image using `docker commit`
 * You can create a new image from changes using following command.
   ```bash
   docker commit my-debian
@@ -36,14 +35,18 @@ In this task, you will create a new image via interactive commands.
   docker run -it <newImageId>
   ```
 
-* Verify that your file still exists in the new container
+* Verify whether the newly added file still exists in the new container or not?
   ```bash
-  ls /
+  ls /my.file
+  ```
+  To Exit from the container.
+  ```bash
+  exit
   ```
 
-## Tag your image
 
-* You can tag your newly created image using 
+## Tag an image
+* You can tag the newly created image using 
   ```bash
   docker tag <newImageId> my-image
   ```
@@ -55,13 +58,22 @@ In this task, you will create a new image via interactive commands.
 
 * Verify that your file still exists in the new container
   ```bash
-  ls /
+  ls /my.file
+  ```
+  To Exit from the container.
+  ```bash
+  exit
   ```
 
 ## Cleanup
-Remove all the containers
-```bash
-docker rm -f $(docker ps -qa)
-```
+* Remove all the containers
+  ```bash
+  docker rm -f $(docker ps -qa)
+  ```
+
+* Remove all the images
+  ```bash
+  docker rmi -f $(docker images -qa)
+  ```
 
 [Jump to Home](../README.md) | [Previous Training](../05_layers/README.md) | [Next Training](../07_dockerfile/README.md)

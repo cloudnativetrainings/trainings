@@ -44,9 +44,14 @@ Layers are stacked on top of each other to form a base for a container's root fi
   docker run -it <VALUE-OF-SHA-ID>
   ```
 
-* Cleanup - Remove all the containers
+* Cleanup: 
+  Remove all the containers
   ```bash
   docker rm -f $(docker ps -qa)
+  ```
+  Remove all the images
+  ```bash
+  docker rmi -f $(docker images -qa)
   ```
 
 ## Inspect via dive

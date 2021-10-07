@@ -20,4 +20,10 @@ docker run -it --rm --privileged -v /:/host ubuntu:20.10 ls -alh /host
 ```
 >Note that you see the filesystem of the host.
 
+## Cleanup
+* Remove all the images
+  ```bash
+  docker rmi -f $(docker images -qa)
+  ```
+
 [Jump to Home](../README.md) | [Previous Training](../18_docker-compose/README.md) | [Final](../99_teardown/README.md)
