@@ -1,6 +1,6 @@
 # Volumes
 
-In this training you will learn how to make data persistent in your container.
+In this training, you will learn how to make data persistent in your container.
 
 ## Inspect the Dockerfile and build the Docker image
 
@@ -105,3 +105,5 @@ docker volume prune
 # Note that the file still exists 
 cat data/file.txt
 ```
+
+[Jump to Home](../README.md) | [Previous Training](../16_networking/README.md) | [Next Training](../18_docker-compose/README.md)

@@ -1,12 +1,11 @@
 
 # Networking
 
-In this training you will learn how to make use of docker networks
+In this training, you will learn how to make use of docker networks
 
 ## List all networks
 
 Docker has pre-installed networks.
-
 ```bash
 docker network ls
 ```
@@ -14,7 +13,6 @@ docker network ls
 ## Expose via bridge network
 
 The bridge network will be used by default.
-
 ```bash
 docker run -it -d -p 8080:80 --name bridge-network nginx:1.19.2
 curl localhost:8080
@@ -23,7 +21,6 @@ curl localhost:8080
 ## Expose via host network
 
 You can use the network of your host. You can only use a port once. 
-
 ```bash
 docker run -it -d --net host --name host-network nginx:1.19.2
 curl localhost
@@ -56,7 +53,9 @@ docker run -it --rm --net my-network curlimages/curl:7.72.0 my-nginx
 ```
 
 ## Cleanup
-
+Remove all the containers
 ```bash
 docker rm -f $(docker ps -qa)
 ```
+
+[Jump to Home](../README.md) | [Previous Training](../15_logs/README.md) | [Next Training](../17_volumes/README.md)

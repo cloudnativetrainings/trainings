@@ -89,8 +89,10 @@ docker ps
 
 >Note that the containers got some randomly generated names. You can either use these names or you can the first letters of the container id to define the container in the commands.
 
-## Cleanup all the containers
-
+## Cleanup
+Remove all the containers
 ```bash
 docker rm -f $(docker ps -qa)
 ```
+
+[Jump to Home](../README.md) | [Previous Training](../02_images/README.md) | [Next Training](../04_interact/README.md)

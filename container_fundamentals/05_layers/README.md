@@ -44,7 +44,7 @@ Layers are stacked on top of each other to form a base for a container's root fi
   docker run -it <VALUE-OF-SHA-ID>
   ```
 
-* Cleanup
+* Cleanup - Remove all the containers
   ```bash
   docker rm -f $(docker ps -qa)
   ```
@@ -64,4 +64,4 @@ Dive (https://github.com/wagoodman/dive) is a CLI tool to inspect the layers of 
   dive nginx:1.19.2
   ```
 
-
+[Jump to Home](../README.md) | [Previous Training](../04_interact/README.md) | [Next Training](../06_build-images-interactive/README.md)
