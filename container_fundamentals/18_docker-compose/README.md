@@ -1,44 +1,66 @@
 # Docker Compose
 
-In this course we will install a minimal Prometheus stack via Docker Compose. 
+In this training, we will install a minimal Prometheus stack via Docker Compose. 
+
+>Navigate to the folder `18_docker-compose` from CLI, before you get started. 
 
 ## Install Docker Compose
 
+* Get Docker Compose
+  ```bash
+  sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+  ```
+* Make Docker Compose executable
+  ```bash
+  sudo chmod +x /usr/local/bin/docker-compose
+  ```
+* Verify the installation
+  ```bash
+  docker-compose version
+  ```
+
+## Inspect the file `prometheus.yaml`
 ```bash
-# Get Docker Compose
-sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-# Make Docker Compose executable
-sudo chmod +x /usr/local/bin/docker-compose
-# Verify the installation
-docker-compose version
+cat prometheus.yaml
 ```
 
-## Inspect the file `prometheus.yml`
-
-## Inspect the Docker Compose file called `docker-compose.yml`
+## Inspect the Docker Compose file called `docker-compose.yaml`
+```bash
+cat docker-compose.yaml
+```
 
 ## Start all containers
-
-```bash
-docker-compose up -d
-# Verify everything is working
-docker ps
-# Check the exposed metrics of CAdvisor
-curl localhost:8080/metrics
-# Visit Grafana in your Browser (User admin, Password admin)
-http://<EXTERNAL-IP>
-```
+* Using docker-compose, start all the containers as follows.
+  ```bash
+  docker-compose up -d
+  ```
+* Verify everything is working
+  ```bash
+  docker ps
+  ```
+* Verify the exposed metrics of CAdvisor
+  ```bash
+  curl localhost:8080/metrics
+  ```
+* Visit Grafana in your Browser (User admin, Password admin)
+  ```bash
+  http://<EXTERNAL-IP>
+  ```
 
 ## Create a Datasource
-
 Create a Datasource of type `Prometheus` and the URL `http://prometheus:9090`
 
 ## Import a Dashboard
-
 Import the Dashboard with id `193`. Set the Datasource to the previously generated.
 
 ## Cleanup
+* Remove all the containers
+  ```bash
+  docker-compose down
+  ```
+* Remove all the images
+  ```bash
+  docker rmi -f $(docker images -qa)
+  ```
 
-```bash
-docker-compose down
-```
+[Jump to Home](../README.md) | [Previous Training](../17_volumes/README.md) | [Next Training](../19_privileged-container/README.md)

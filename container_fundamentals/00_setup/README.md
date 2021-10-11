@@ -1,12 +1,10 @@
-# Provision VM and install docker
+# Provision VM with docker installation
 
 ## Run the setup.sh bash script
-
-You wil be asked about the project name. 
-
-```bash
-./setup.sh
-```
+* You will be asked to enter the project name. 
+  ```bash
+  00_setup/setup.sh
+  ```
 
 ## SSH into the new VM
 
@@ -22,8 +20,10 @@ sudo apt install -y docker.io
 
 ## Add your user to the docker group
 
-This is done not having to sudo each docker command. Note to put this change into effect you have to re-open the cloud shell.
+Do this to avoid use of `sudo` for each docker command. Note to put this change into effect, if you have to re-open the cloud shell.
 
 ```bash
 sudo usermod -aG docker $USER
 ```
+
+[Jump to Home](../README.md) 
