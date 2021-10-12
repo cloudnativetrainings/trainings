@@ -1,4 +1,4 @@
-# Container Fundamentals Training using Docker
+# Container Fundamentals (ConF) Training using Docker
 
 **Pre-requisites:**
 

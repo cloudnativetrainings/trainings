@@ -66,3 +66,5 @@ kubectl auth can-i get pods --as bob
 ```bash
 kubectl delete csr bob
 ```
+
+[Jump to Home](../README.md) | [Previous Training](../24_drain/README.md) | [Next Training](../26_authorization/README.md)

@@ -41,3 +41,5 @@ Note that the pod `my-pod` really has gone forever. The uncordon operation does 
 kubectl delete deployment my-deployment
 kubectl delete daemonset my-daemonset
 ```
+
+[Jump to Home](../README.md) | [Previous Training](../23_cordon/README.md) | [Next Training](../25_authentication/README.md)

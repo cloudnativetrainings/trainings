@@ -61,3 +61,5 @@ kubectl get svc traefik-ingress-service
 ```bash
 kubectl delete -f .
 ```
+
+[Jump to Home](../README.md) | [Previous Training](../21_scheduling-taints-and-tolerations/README.md) | [Next Training](../23_cordon/README.md)

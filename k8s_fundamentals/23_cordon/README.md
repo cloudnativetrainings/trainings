@@ -47,3 +47,5 @@ Note that no pods get re-scheduled due to doing uncordoning.
 ```bash
 kubectl delete deployment my-deployment
 ```
+
+[Jump to Home](../README.md) | [Previous Training](../22_ingress/README.md) | [Next Training](../24_drain/README.md)

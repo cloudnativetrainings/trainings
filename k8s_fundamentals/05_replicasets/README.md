@@ -1,12 +1,16 @@
 # ReplicaSet
 
-## Create the replicaset
+In this training, we will learn about Replicasets.
+
+>Navigate to the folder `05_replicasets` from CLI, before you get started. 
+
+## Inspect the replicaset.yaml definition file and create the replicaset
 
 ```bash
+cat replicaset.yaml
 kubectl create -f replicaset.yaml
 ```
-
-Find and fix the two issues in there.
+>Find and fix the two issues in there.
 
 ## Take a look at the number of Pods
 
@@ -20,10 +24,13 @@ kubectl get pods
 kubectl scale replicaset my-replicaset --replicas 3
 ```
 
-## Take a look at the number of Pods
-
+Open second terminal to watch the Pods
 ```bash
-kubectl get pods
+watch -n 1 kubectl get pods
+```
+or
+```bash
+kubectl get pods -w
 ```
 
 ## Delete one of the Pods
@@ -32,18 +39,23 @@ kubectl get pods
 kubectl delete pod <POD-NAME>
 ```
 
-## Take a look at the number of Pods
-
+Open second terminal to watch the Pods
 ```bash
-kubectl get pods
+watch -n 1 kubectl get pods
+```
+or
+```bash
+kubectl get pods -w
 ```
 
 ## Cleanup
-
+Delete the ReplicaSet
 ```bash
-## delete the ReplicaSet
 kubectl delete replicaset my-replicaset
-
-## also the Pods will get deleted
+```
+Verify if replicaset is delete including all the associated pods 
+```bash
 kubectl get rs,po
 ```
+
+[Jump to Home](../README.md) | [Previous Training](../04_multi-container-pods/README.md) | [Next Training](../06_deployments/README.md)

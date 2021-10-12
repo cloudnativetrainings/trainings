@@ -1,16 +1,19 @@
 # Helm
 
-In this training we will use Helm to create and customize an application.
+In this training, we will use Helm to create and customize an application.
+
+>Navigate to the folder `28_helm` from CLI, before you get started. 
 
 ## Verify if helm is installed
+* Check helm
+  ```bash
+  helm version
+  ```
 
-```bash
-## Check helm
-helm version
-
-## Ensure autocompletion is installed
-echo 'source <(helm completion bash)' >> ~/.bashrc && bash
-```
+* Ensure autocompletion is installed
+  ```bash
+  echo 'source <(helm completion bash)' >> ~/.bashrc && bash
+  ```
 
 ## [Optional] Install helm
 
@@ -22,97 +25,117 @@ chmod 700 get_helm.sh
 
 ## Do a release
 
-```bash
-# Show all releases
-helm ls
+* Show all releases
+  ```bash
+  helm ls
+  ```
 
-# Release with its default values
-helm install my-release-defaults ./my-chart
+* Release with its default values
+  ```bash
+  helm install my-release-defaults ./my-chart
+  ```
 
-# Show all releases
-helm ls
+* Show all releases
+  ```bash
+  helm ls
+  ```
 
-# Show kubernetes resources
-kubectl get all
+* Show kubernetes resources
+  ```bash
+  kubectl get all
+  ```
 
-# Delete a release
-helm delete my-release-defaults
-```
+* Delete a release
+  ```bash
+  helm delete my-release-defaults
+  ```
 
 ## Do a customized release
 
-```bash
-# Release with a custom values.yaml file
-helm install my-release-custom ./my-chart -f my-values.yaml 
+* Release with a custom values.yaml file
+  ```bash
+  helm install my-release-custom ./my-chart -f my-values.yaml 
+  ```
 
-# Show all installed charts
-helm ls
+* Show all installed charts
+  ```bash
+  helm ls
+  ```
 
-# Show kubernetes resources
-kubectl get all
-```
+* Show kubernetes resources
+  ```bash
+  kubectl get all
+  ```
 
 ## Upgrade a release
 
-```bash
-# Change the color in the file `my-values.yaml`
+* Change the color in the file `my-values.yaml` to re-release
+  ```bash
+  helm upgrade my-release-custom ./my-chart -f my-values.yaml
+  ```
 
-# Re-release 
-helm upgrade my-release-custom ./my-chart -f my-values.yaml 
+* Show all releases
+  ```bash
+  helm ls
+  ```
 
-# Show all releases
-helm ls
-
-# Show kubernetes resources
-kubectl get all
-```
+* Show kubernetes resources
+  ```bash
+  kubectl get all
+  ```
 
 ## Templating
 
-### Add templating for the deployment in the file ./my-chart/templates/deployment.yaml
-
-```yaml
-...
-spec:
+* Add templating for the deployment in the file ./my-chart/templates/deployment.yaml
+  ```yaml
+  ...
+  spec:
   replicas: {{ .Values.replicas }}
   selector:
-...  
-```
+  ...
+  ```
 
-### Customize your new release
+## Customize your new release
 
-Add the replicas to the file my-values.yaml.
+* Add the replicas to the file my-values.yaml.
+  ```yaml
+  color: magenta
+  replicas: 3
+  ```
 
-```yaml
-color: magenta
-replicas: 3
-```
+## Release
 
-### Release
+* Re-release 
+  ```bash
+  helm upgrade my-release-custom ./my-chart -f my-values.yaml
+  ```
 
-```bash
-# Re-release 
-helm upgrade my-release-custom ./my-chart -f my-values.yaml 
+* Show all releases
+  ```bash
+  helm ls
+  ```
 
-# Show all releases
-helm ls
-
-# Show kubernetes resources
-kubectl get pods
-```
+* Show kubernetes resources
+  ```bash
+  kubectl get pods
+  ```
 
 ## Tips & Tricks
 
-```bash
-# Render yaml files without deploying them
-helm install my-chart ./my-chart --dry-run > dry.run
+* Render yaml files without deploying them
+  ```bash
+  helm install my-chart ./my-chart --dry-run > dry.run
+  ```
 
-# Lint your charts
-helm lint ./my-chart
-```
+* Lint your charts
+  ```bash
+  helm lint ./my-chart
+  ```
 
 ## Cleanup
 
 ```bash
 helm delete my-release-custom
 ```
+
+[Jump to Home](../README.md) | [Previous Training](../27_networkpolicies/README.md) | [Next Training](../29_prometheus/README.md)

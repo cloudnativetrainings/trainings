@@ -44,3 +44,5 @@ kubectl delete pod my-pod
 kubectl delete deployment my-deployment
 kubectl taint nodes <NODE-NAME> foo=bar:NoSchedule-
 ```
+
+[Jump to Home](../README.md) | [Previous Training](../20_scheduling-affinity/README.md) | [Next Training](../22_ingress/README.md)
