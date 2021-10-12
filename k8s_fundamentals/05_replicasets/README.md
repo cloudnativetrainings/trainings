@@ -47,3 +47,5 @@ kubectl delete replicaset my-replicaset
 ## also the Pods will get deleted
 kubectl get rs,po
 ```
+
+[Jump to Home](../README.md) | [Previous Training](../04_multi-container-pods/README.md) | [Next Training](../06_deployments/README.md)

@@ -48,3 +48,5 @@ curl -s https://kubernetes/api/v1/namespaces/default/services/ --header "Authori
 ```bash
 kubectl delete -f .
 ```
+
+[Jump to Home](../README.md) | [Previous Training](../25_authentication/README.md) | [Next Training](../27_networkpolicies/README.md)

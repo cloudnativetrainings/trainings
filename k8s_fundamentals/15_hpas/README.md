@@ -49,3 +49,5 @@ kubectl delete deployment --all
 kubectl delete svc my-service
 kubectl delete hpa my-autoscaler
 ```
+
+[Jump to Home](../README.md) | [Previous Training](../14_statefulsets/README.md) | [Next Training](../16_daemonsets/README.md)

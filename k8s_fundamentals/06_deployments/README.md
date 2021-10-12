@@ -52,3 +52,5 @@ kubectl get replicasets
 ```bash
 kubectl delete deployment my-deployment
 ```
+
+[Jump to Home](../README.md) | [Previous Training](../05_replicasets/README.md) | [Next Training](../07_revision-history/README.md)

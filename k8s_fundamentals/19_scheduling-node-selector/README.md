@@ -30,3 +30,5 @@ kubectl create -f pod.yaml
 kubectl label node <NODE-NAME> preferred-
 kubectl delete pods my-pod
 ```
+
+[Jump to Home](../README.md) | [Previous Training](../18_cronjobs/README.md) | [Next Training](../20_scheduling-affinity/README.md)

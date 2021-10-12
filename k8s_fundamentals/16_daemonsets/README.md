@@ -24,3 +24,5 @@ kubectl logs <POD-NAME>
 ```bash
 kubectl delete ds --all
 ```
+
+[Jump to Home](../README.md) | [Previous Training](../15_hpas/README.md) | [Next Training](../17_jobs/README.md)

@@ -59,3 +59,5 @@ kubectl exec -it my-pod -- bash
 ```bash
 kubectl delete pod my-pod
 ```
+
+[Jump to Home](../README.md) | [Previous Training](../01_hello-k8s/README.md) | [Next Training](../03_commands-and-args/README.md)

@@ -43,3 +43,5 @@ curl http://<EXTERNAL-IP>
 kubectl delete pod my-pod
 kubectl delete service my-service
 ```
+
+[Jump to Home](../README.md) | [Next Training](../02_pods/README.md)

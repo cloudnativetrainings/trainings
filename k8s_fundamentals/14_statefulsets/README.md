@@ -73,3 +73,5 @@ kubectl run -it nslookup --image nicolaka/netshoot --restart=Never --rm -- nsloo
 ```bash
 kubectl delete svc,sts,pv,pvc --all
 ```
+
+[Jump to Home](../README.md) | [Previous Training](../13_persistence-use-volume/README.md) | [Next Training](../15_hpas/README.md)

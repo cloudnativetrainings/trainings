@@ -45,3 +45,5 @@ kubectl logs -f my-pod -c container-b
 ```bash
 kubectl delete pod my-pod
 ```
+
+[Jump to Home](../README.md) | [Previous Training](../03_commands-and-args/README.md) | [Next Training](../05_replicasets/README.md)

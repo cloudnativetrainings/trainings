@@ -26,3 +26,5 @@ bar
 ```bash
 kubectl delete po,cm --all
 ```
+
+[Jump to Home](../README.md) | [Previous Training](../08_services/README.md) | [Next Training](../10_secrets/README.md)

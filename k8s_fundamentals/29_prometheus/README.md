@@ -88,3 +88,5 @@ helm delete my-grafana
 helm delete my-prometheus
 kubectl delete pod my-pod
 ```
+
+[Jump to Home](../README.md) | [Previous Training](../28_helm/README.md) 

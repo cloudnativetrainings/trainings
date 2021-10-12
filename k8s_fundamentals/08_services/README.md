@@ -85,3 +85,5 @@ curl http://<EXTERNAL-IP>
 kubectl delete deploy my-deployment
 kubectl delete svc my-service
 ```
+
+[Jump to Home](../README.md) | [Previous Training](../07_revision-history/README.md) | [Next Training](../09_configmaps/README.md)
