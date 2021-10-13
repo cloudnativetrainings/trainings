@@ -11,7 +11,7 @@
 
 * Connect using below command
   ```bash
-  gcloud container clusters get-credentials training-kf --zone europe-west3-a --project ps-workspace
+  gcloud container clusters get-credentials training-kf --zone europe-west3-a
   ```
 
 * Let's do quick verification
