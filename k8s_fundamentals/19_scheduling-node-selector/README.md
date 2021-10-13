@@ -1,5 +1,9 @@
 # Node Selector
 
+In this training course, we will learn about Node Selector.
+
+>Navigate to the folder `19_scheduling-node-selector` from CLI, before you get started. 
+
 ## Show all Nodes with its Labels
 
 ```bash
@@ -12,9 +16,10 @@ kubectl get nodes --show-labels
 kubectl label node <NODE-NAME> preferred=true
 ```
 
-## Inspect and create the pod
+## Inspect pod.yaml definition file and create the pod
 
 ```bash
+cat pod.yaml
 kubectl create -f pod.yaml
 ```
 

@@ -52,9 +52,4 @@
 
 [TearDown Setup](99_teardown/README.md) - Optional, for the GKE training cluster cleanup. 
 
-
-
-
-
-
-
+[Back to Main](../README.md)
