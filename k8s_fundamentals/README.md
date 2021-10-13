@@ -46,7 +46,7 @@
 24. [Drain](24_drain/README.md)
 25. [Authentication](25_authentication/README.md)
 26. [Authorization](26_authorization/README.md)
-27. [Network Policy](27_networkpolicies/README.md)
+27. [Network Policies](27_networkpolicies/README.md)
 28. [Helm](28_helm/README.md)
 29. [Prometheus](29_prometheus/README.md)
 
