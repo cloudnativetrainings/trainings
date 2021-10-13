@@ -1,5 +1,9 @@
 # Horizontal Pod Autoscaler
 
+In the training, we will learn about Horizontal Pod Autoscaler.
+
+>Navigate to the folder `15_hpas` from CLI, before you get started. 
+
 ## Create the service and the deployment
 
 ```bash
@@ -31,16 +35,14 @@ watch -n 1 kubectl top pods
 ```bash
 kubectl create -f load-deployment.yaml
 ```
-
-Take a look at the second terminal. Has the number of pods for my-deployment increased?
+>Take a look at the second terminal. Has the number of pods for my-deployment increased?
 
 ## Put more pressure on my-deployment
 
 ```bash
 kubectl scale deployment load-deployment --replicas 5
 ```
-
-After a few seconds additional pods for my-deployment will appear.
+>After a few seconds additional pods for my-deployment will appear.
 
 ## Cleanup
 

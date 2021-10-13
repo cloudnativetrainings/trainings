@@ -1,5 +1,9 @@
 # StatefulSets
 
+In the training, we will learn about Statefulsets.
+
+>Navigate to the folder `14_statefulsets` from CLI, before you get started. 
+
 ## Scaling
 
 ### Create service and statefulset
