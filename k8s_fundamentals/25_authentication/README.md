@@ -1,4 +1,4 @@
-# CertificateSigningRequests
+# Authentication
 
 In the training, we will learn about create authentication configuration using CSR, certificate and kubeconfig for a user to grant access over specific k8s cluster.
 
