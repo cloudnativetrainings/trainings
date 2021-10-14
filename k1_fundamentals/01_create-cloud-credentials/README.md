@@ -62,4 +62,4 @@ Create a service account `k1-service-account` for your Google Cloud resources, w
   cd -
   ```
 
-Jump > [**Home**](../README.md) | Previous > [**Setup**](../00_setup/README.md) | Next > [**Cloud Infra Setup with Terraform**](../02_initial-cloud-infra-with-terraform/README.md)
+Jump > [**Home**](../README.md) | Previous > [**Setup**](../00_setup/README.md) | Next > [**Cloud Infra Setup using Terraform**](../02_initial-cloud-infra-with-terraform/README.md)

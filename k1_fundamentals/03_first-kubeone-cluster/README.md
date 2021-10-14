@@ -9,7 +9,7 @@ apiVersion: kubeone.io/v1beta1
 kind: KubeOneCluster
 name: k1
 versions:
-  kubernetes: '1.20.9'
+  kubernetes: '1.21.5'
 cloudProvider:
   gce: {}
   cloudConfig: |-
@@ -199,4 +199,4 @@ kubectl get secret -n kube-system cloud-provider-credentials -o jsonpath='{.data
 
 This Secret is created by KubeOne and used when creating MachineDeployment by `machine-controller`.
 
-Jump > [**Home**](../README.md) | Previous > [**Cloud Infra Setup with Terraform**](../02_initial-cloud-infra-with-terraform/README.md) | Next > [**Deploy a Simple Application**](../04_deploy-app-01-simple/README.md)
+Jump > [**Home**](../README.md) | Previous > [**Cloud Infra Setup using Terraform**](../02_initial-cloud-infra-with-terraform/README.md) | Next > [**Deploy a Simple Application**](../04_deploy-app-01-simple/README.md)

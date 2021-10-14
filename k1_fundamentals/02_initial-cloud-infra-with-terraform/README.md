@@ -1,4 +1,4 @@
-# Cloud Infrastructure Setup at GCE
+# Cloud Infrastructure Setup using Terraform at GCE
 
 ## Create an SSH key-pair
 
@@ -17,13 +17,14 @@ To avoid the usage of your recent private SSH key, you can freshly create one fo
 
 ## Initial Cluster Setup on GCE
 
-* Change your folder to the GCE terraform folder [`src/gce/tf-infra`](src/gce/tf-infra) for our terraform GCE code (You will find more terraform examples in the KubeOne repo: [`./examples/terraform/`](https://github.com/kubermatic/kubeone/tree/master/examples/terraform)). 
+* Change your folder to the GCE terraform folder [`src/gce/tf-infra`](../src/gce/tf-infra) for our terraform GCE code and initialize terraform (You will find more terraform examples in the KubeOne repo under [`examples/terraform`](https://github.com/kubermatic/kubeone/tree/master/examples/terraform) folder. 
   ```bash
   cd $TRAINING_DIR/src/gce/tf-infra
   terraform init
   ```
 
 * Configure terraform setup
+
   Update the `terraform.tfvars` file in the folder. The file will contain specific information about the cluster you are about to create:
   ```hcl-terraform
   cluster_name = "k1"
@@ -43,9 +44,8 @@ To avoid the usage of your recent private SSH key, you can freshly create one fo
   ```
 
 * If you are **NOT** using a ssh-agent for the upcoming tasks, please take a look at [How KubeOne uses
-SSH](https://github.com/kubermatic/kubeone/blob/master/docs/ssh.md) before you continue. Ensure your `ssh-agent` is started:
+SSH](https://github.com/kubermatic/kubeone/blob/master/docs/ssh.md) before you continue. Ensure your `ssh-agent` is started and key is added:
   ```bash
-  # Start SSH agent and add key
   eval `ssh-agent`
   ssh-add ../../../.secrets/id_rsa
   ```
@@ -84,7 +84,9 @@ SSH](https://github.com/kubermatic/kubeone/blob/master/docs/ssh.md) before you c
 
   ```bash
   terraform output
-  
+  ```
+
+  ```json
   kubeone_api = {
     "endpoint" = "34.141.176.241"
   }
