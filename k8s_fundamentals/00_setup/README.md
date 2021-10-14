@@ -1,13 +1,14 @@
 # Setup Cluster
 
 * Run the script to initialize GKE cluster.
-  >Before executing the script, run `gcloud container get-server-config` to find latest Stable release.
+  
   ```bash
   00_setup/setup_cluster.sh
   ```
   >Provide project details against  `INPUT: Type PROJECT_NAME (student-XX-project):`
 
-  >Provide GKE cluster version details against  `INPUT: Type CLUSTER_VERSION (1.xx.yy-gke.zzzz):`
+  >If execution error related to GKE cluster version is encountered, then run `gcloud container get-server-config` to find latest Stable release to adjust the value of `--cluster-version` parameter in the `setup.sh` script
+ 
 
 * Connect using below command
   ```bash
