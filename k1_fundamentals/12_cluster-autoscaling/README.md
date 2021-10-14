@@ -185,3 +185,5 @@ helloweb-6b9678d59f-fwbdj   1/1     Running   0          12m
 helloweb-6b9678d59f-fxjc8   1/1     Running   0          12m
 helloweb-6b9678d59f-lk57z   1/1     Running   0          12m
 ```
+
+Jump > [**Home**](../README.md) | Previous > [**KubeOne and Kubernetes Upgrade**](../11_kubeone_upgrade/README.md) | Next > [**Bonus**](../90_bonus/README.md)

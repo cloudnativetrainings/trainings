@@ -328,3 +328,5 @@ spec:
           operatingSystemSpec:
             disableAutoUpdate: false
 ```
+
+Jump > [**Home**](../README.md) | Previous > [**KubeOne AddOns**](../10_addons-sc-and-restic-etcd-backup/README.md) | Next > [**Cluster AutoScaling**](../12_cluster-autoscaling/README.md)

@@ -54,3 +54,5 @@ After the masters are **unpaused**, scale up again:
 ```bash
 kubectl scale md -n kube-system --replicas=1 --all
 ```
+
+Jump > [**Home**](../README.md) | Previous > [**Bonus**](../90_bonus/README.md)

@@ -144,3 +144,5 @@ kubeone apply -t . -m ../kubeone.yaml --verbose
 ```
 
 ***NOTE:*** The management of the worker nodes is way more flexible than that of the control plane nodes, so it's **NOT** recommended using the `output.tf` for the long term maintenance of the machine deployment objects. We recommend the usage of `md-XXX.yaml` files together with git to manage the cluster sizing. If no initial MachineDeployment should be created, remove all `"${var.cluster_name}-pool-az-X"` sections. 
+
+Jump > [**Home**](../README.md) | Previous > [**HA Cluster Setup**](../05_HA-master/README.md) | Next > [**Application with External Access**](../07_deploy-app-02-external-access/README.md)

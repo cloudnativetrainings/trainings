@@ -239,3 +239,5 @@ For a production system a regular based scheduled backup is recommended. The bac
 - Replicas
 - Permissions
 - Location(s) and redundancy
+
+Jump > [**Home**](../README.md) | Previous > [**Optimization of Workers**](../08_optimize-workers/README.md) | Next > [**KubeOne AddOns**](../10_addons-sc-and-restic-etcd-backup/README.md)

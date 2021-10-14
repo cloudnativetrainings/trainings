@@ -277,3 +277,5 @@ You can optionally delete the cert-manager at this moment.
 ```bash
 kubectl delete -f https://github.com/jetstack/cert-manager/releases/download/v1.5.1/cert-manager.yaml
 ```
+
+Jump > [**Home**](../README.md) | Previous > [**Application with External Access**](../07_deploy-app-02-external-access/README.md) | Next > [**Velero Backup Process**](../09_backup_velero/README.md)

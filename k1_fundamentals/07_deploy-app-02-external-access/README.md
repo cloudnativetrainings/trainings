@@ -243,3 +243,6 @@ I0717 11:06:36.212252       6 controller.go:149] Backend successfully reloaded.
 ```
 
 You can keep the application deployed for now as we will use that in upcoming step.
+
+
+Jump > [**Home**](../README.md) | Previous > [**HA Worker Pool**](../06_HA-worker/README.md) | Next > [**Optimization of Workers**](../08_optimize-workers/README.md)

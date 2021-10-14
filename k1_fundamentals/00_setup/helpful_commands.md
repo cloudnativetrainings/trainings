@@ -2,9 +2,9 @@
 
 # git
 
-## personal access token
+## Personal access token
 
-To clone a private repository in the cloud shell you can generate a separate personal access token to ensure secure secrets:
+To clone a private repository in the cloud shell, you can generate a separate personal access token to ensure secure secrets:
 1. Visit https://github.com/settings/tokens and click `Generate new token`   
 2. Give a `Note` e.g. `Kubermatic Training`
 3. Select the scope `repo (all)`
@@ -34,7 +34,7 @@ sudo chmod +x /google/google-cloud-sdk/bin/kubectl
 
 ## Enable auto completion
 
-add the following lines to your `~/.bashrc` file:
+Add the following lines to your `~/.bashrc` file:
 
 ```bash
 # kubectl, k

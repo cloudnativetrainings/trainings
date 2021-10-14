@@ -288,3 +288,5 @@ gsutil ls -r gs://k1-backup-bucket-student-XX/etcd-snapshot-backup
 ```
 
 Alright, seems everything looks fine, and our cluster has automatic backup configured.
+
+Jump > [**Home**](../README.md) | Previous > [**Velero Backup Process**](../09_backup_velero/README.md) | Next > [**KubeOne and Kubernetes Upgrade**](../11_kubeone_upgrade/README.md)

@@ -171,3 +171,6 @@ watch kubectl get md,ms,ma,node -A
 Verify that the machine-controller also deleted the machines on GCE. For this you can check the [Compute Engine Instance](https://console.cloud.google.com/compute/instances) page.
 
 ![gce instances](../../.images/gce_k1_instances.png)
+
+
+Jump > [**Home**](../README.md) | Previous > [**Deploy a Simple Application**](../04_deploy-app-01-simple/README.md) | Next > [**HA Worker Pool**](../06_HA-worker/README.md)

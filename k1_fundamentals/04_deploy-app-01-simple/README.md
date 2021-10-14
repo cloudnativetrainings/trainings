@@ -196,3 +196,5 @@ After we tested the app deployment we can delete the namespace to clean up:
 ```bash
 kubectl delete ns app
 ```
+
+Jump > [**Home**](../README.md) | Previous > [**First KubeOne Cluster Setup**](../03_first-kubeone-cluster/README.md) | Next > [**HA Cluster Setup**](../05_HA-master/README.md)
