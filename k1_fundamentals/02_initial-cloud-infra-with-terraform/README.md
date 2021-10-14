@@ -36,19 +36,20 @@ To avoid the usage of your recent private SSH key, you can freshly create one fo
   # Instance to create of the control plane
   control_plane_count = 1  
 
-  # listeners of the LoadBalancer. Default is NOT HA, but ensure the bootstrapping works -> after bootstrapping we will increase it to e.g. 3
+  # Listeners of the LoadBalancer. Default is NOT HA, but ensure the bootstrapping works -> after bootstrapping we will increase it to e.g. 3
   control_plane_target_pool_members_count = 1
   
-  # update to your location if needed
-  ssh_public_key_file = "../../../.secrets/id_rsa.pub"
+  # Update to your SSH public key location
+  ssh_public_key_file = "/path/to/.secrets/id_rsa.pub"
   ```
 
 * If you are **NOT** using a ssh-agent for the upcoming tasks, please take a look at [How KubeOne uses
-SSH](https://github.com/kubermatic/kubeone/blob/master/docs/ssh.md) before you continue. Ensure your `ssh-agent` is started and key is added:
+SSH](https://github.com/kubermatic/kubeone/blob/master/docs/ssh.md) before you continue. Ensure your `ssh-agent` is started and SSH private key is added:
   ```bash
   eval `ssh-agent`
-  ssh-add ../../../.secrets/id_rsa
+  ssh-add /path/to/.secrets/id_rsa
   ```
+  >Update as per your SSH private key location `/path/to/.secrets/id_rsa`
 
 ***Kindly take note of the following:***
 
@@ -86,7 +87,7 @@ SSH](https://github.com/kubermatic/kubeone/blob/master/docs/ssh.md) before you c
   terraform output
   ```
 
-  ```json
+  ```bash
   kubeone_api = {
     "endpoint" = "34.141.176.241"
   }
