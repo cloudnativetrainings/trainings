@@ -84,9 +84,9 @@ INFO[23:08:36 CEST] Creating worker machines…
 ```
 
 A kubeconfig file will be generated after the KubeOne installation. Export it and use it to check the status of the Kubernetes cluster that was created:
-
+>Replace the cluster_name as set in `terraform.tfvars`
 ```bash
-export KUBECONFIG=$PWD/k1-kubeconfig 
+export KUBECONFIG=$PWD/<cluster_name>-kubeconfig 
 ```
 
 Check if you get one master and one worker node:
