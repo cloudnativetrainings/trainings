@@ -6,7 +6,7 @@ To avoid the usage of your recent private SSH key, you can freshly create one fo
 
 * Create SSH Key, if no ssh key is present
   ```bash
-  cd $TRAINING_DIR # folder 'k1_fundamentals'
+  cd $TRAINING_DIR
   ssh-keygen -f .secrets/id_rsa
   ```
   >For now no password is needed, but for prodution would be recommended
@@ -27,9 +27,11 @@ To avoid the usage of your recent private SSH key, you can freshly create one fo
 
   Update the `terraform.tfvars` file in the folder. The file will contain specific information about the cluster you are about to create:
   ```hcl-terraform
+  # Update the cluster name 
   cluster_name = "k1"
 
-  project = "student-xx-project-name"  #echo $GCP_PROJECT_ID
+  # Echo $GCP_PROJECT_ID and update the project id
+  project = "student-xx-project-name"  
   
   region = "europe-west4"
   
@@ -41,6 +43,9 @@ To avoid the usage of your recent private SSH key, you can freshly create one fo
   
   # Update to your SSH public key location
   ssh_public_key_file = "/path/to/.secrets/id_rsa.pub"
+
+  # Update to your SSH private key location
+  ssh_private_key_file = "/path/to/.secrets/id_rsa"
   ```
 
 * If you are **NOT** using a ssh-agent for the upcoming tasks, please take a look at [How KubeOne uses

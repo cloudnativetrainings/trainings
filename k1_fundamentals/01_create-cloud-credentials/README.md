@@ -37,7 +37,7 @@ Create a service account `k1-service-account` for your Google Cloud resources, w
 
 * Create a new json key for your service account
   ```bash
-  cd $TRAINING_DIR # folder 'k1_fundamentals'
+  cd $TRAINING_DIR
   mkdir -p ./.secrets && cd ./.secrets
   gcloud iam service-accounts keys create --iam-account $GCP_SERVICE_ACCOUNT_ID k8c-cluster-provisioner-sa-key.json
   ``` 
