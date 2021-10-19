@@ -1,6 +1,6 @@
 # Deploy a simple application
 
-To verify that the Kubernetes cluster is running as expected, please follow this guide.
+Please follow this guide to verify that the Kubernetes cluster is running as expected.
 
 In this scenario, we will deploy a simple application to our existing Kubernetes cluster using a Kubernetes object called `Deployment`.
 

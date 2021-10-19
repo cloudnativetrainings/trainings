@@ -149,7 +149,7 @@ kube-system   machineset.cluster.k8s.io/k1-pool-az-a-c777b778b    0             
 kube-system   machineset.cluster.k8s.io/k1-pool-az-b-7cb4fc847    0                               gce        ubuntu   1.21.4    5h20m
 kube-system   machineset.cluster.k8s.io/k1-pool-az-b-864f98574f   1          1                    gce        ubuntu   1.21.4    5h17m
 kube-system   machineset.cluster.k8s.io/k1-pool-az-c-576dff79fd   4          4                    gce        ubuntu   1.21.4    5h17m
-kube-system   machineset.cluster.k8s.io/k1-pool-az-c-7b6dcc885    0                               gce        ubuntu   1.20.9    5h17m
+kube-system   machineset.cluster.k8s.io/k1-pool-az-c-7b6dcc885    0                               gce        ubuntu   1.21.5    5h17m
 
 NAMESPACE     NAME                                                   PROVIDER   OS       ADDRESS         KUBELET   AGE
 kube-system   machine.cluster.k8s.io/k1-pool-az-a-86b6dcbfb4-vg8q8   gce        ubuntu   10.240.0.24     1.21.4    5h17m
