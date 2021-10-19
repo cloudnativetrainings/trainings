@@ -8,120 +8,129 @@ The application stack with external access will be created with the following st
 
 ## Deploy [Nginx Ingress](https://github.com/kubernetes/ingress-nginx)
 
-First we install the ingress controller (Nginx):
+* First, we install the ingress controller (Nginx):
+  ```bash
+  kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/cloud/deploy.yaml
+  ```
 
-```bash
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/cloud/deploy.yaml
-```
+* Verify the Ingress load balancer
+  
+  Switch the context to `ingress-nginx`
+  ```bash
+  kubectl config set-context --current --namespace=ingress-nginx
+  ```
+  or
+  ```bash
+  kcns ingress-nginx
+  ```
 
-### Verify the Ingress load balancer
+  Check the LoadBalancer service type for the Nginx ingress controller:
+  ```bash
+  kubectl get pod,svc,ep
+  ```
 
-Check the LoadBalancer service type for the Nginx ingress controller:
+  ```text
+  NAME                                            READY   STATUS      RESTARTS   AGE
+  pod/ingress-nginx-admission-create-ddqn2        0/1     Completed   0          3m11s
+  pod/ingress-nginx-admission-patch-5kg9d         0/1     Completed   0          3m11s
+  pod/ingress-nginx-controller-86cbd65cf7-4s4jh   1/1     Running     0          3m21s
 
-```bash
-# change to the new ingress-nginx namespace
-kubectl config set-context --current --namespace=ingress-nginx
-# or
-kcns ingress-nginx
+  NAME                                         TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                      AGE
+  service/ingress-nginx-controller             LoadBalancer   10.109.207.66    34.90.218.24   80:30075/TCP,443:32404/TCP   3m21s
+  service/ingress-nginx-controller-admission   ClusterIP      10.104.253.212   <none>         443/TCP                      3m21s
 
-kubectl get pod,svc,ep
-```
-
-```text
-NAME                                            READY   STATUS      RESTARTS   AGE
-pod/ingress-nginx-admission-create-ddqn2        0/1     Completed   0          3m11s
-pod/ingress-nginx-admission-patch-5kg9d         0/1     Completed   0          3m11s
-pod/ingress-nginx-controller-86cbd65cf7-4s4jh   1/1     Running     0          3m21s
-
-NAME                                         TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                      AGE
-service/ingress-nginx-controller             LoadBalancer   10.109.207.66    34.90.218.24   80:30075/TCP,443:32404/TCP   3m21s
-service/ingress-nginx-controller-admission   ClusterIP      10.104.253.212   <none>         443/TCP                      3m21s
-
-NAME                                           ENDPOINTS                      AGE
-endpoints/ingress-nginx-controller             10.244.7.3:80,10.244.7.3:443   3m21s
-endpoints/ingress-nginx-controller-admission   10.244.7.3:8443                3m21s
-```
+  NAME                                           ENDPOINTS                      AGE
+  endpoints/ingress-nginx-controller             10.244.7.3:80,10.244.7.3:443   3m21s
+  endpoints/ingress-nginx-controller-admission   10.244.7.3:8443                3m21s
+  ```
 
 ## Deploy the [Cert Manager](https://cert-manager.io/docs/)
 
 Let's deploy the CertManager:
+* Install the CustomResourceDefinitions and cert-manager itself
+  ```bash
+  kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.5.1/cert-manager.yaml
+  ```
 
-```bash
-# Install the CustomResourceDefinitions and cert-manager itself
-kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.5.1/cert-manager.yaml
-
-### check the pods
-kubectl get pods -n cert-manager
-NAME                                       READY   STATUS    RESTARTS   AGE
-cert-manager-57f89dbdf6-448w8              1/1     Running   0          44m
-cert-manager-cainjector-6c78fb8b77-jksrl   1/1     Running   0          44m
-cert-manager-webhook-5567d8d596-k7szh      1/1     Running   0          44m
-```
+* Check the pods
+  ```bash
+  kubectl get pods -n cert-manager
+  ```
+  ```text
+  NAME                                       READY   STATUS    RESTARTS   AGE
+  cert-manager-57f89dbdf6-448w8              1/1     Running   0          44m
+  cert-manager-cainjector-6c78fb8b77-jksrl   1/1     Running   0          44m
+  cert-manager-webhook-5567d8d596-k7szh      1/1     Running   0          44m
+  ```
 
 ### Create the necessary DNS A records just like below
 
-**HINT: some of the IP's can only be determined after the ingress controller's service is deployed**
+>HINT: some of the IP's can only be determined after the ingress controller's service is deployed
 
-First, start a DNS zone editing transaction.:
+* First, start a DNS zone editing transaction.
+  Ensure gcloud use the correct project
+  ```bash
+  gcloud projects list
+  gcloud config set project student-XX-xxxx
+  ```
+  Set DNS_ZONE
+  ```bash
+  gcloud dns managed-zones list
+  ```
+  ```text
+  NAME                DNS_NAME                             DESCRIPTION                VISIBILITY
+  student-XX-XXXX     student-XX-XXXX.loodse.training.     zone for student-XX-XXXX  public
+  ```
+  Adjust to your zone name
+  ```bash
+  export DNS_ZONE=student-XX-XXXX
+  gcloud dns record-sets transaction start --zone=$DNS_ZONE
+  ```
 
-```bash
-# ensure gcloud use the correct project
-gcloud projects list
-gcloud config set project student-XX-xxxx
+* Then proceed to add the A records:
+  `*.student-XX-XXXX.loodse.training`  ---->  LoadBalancer IP address of the Nginx Service
+  ```bash
+  kubectl get svc -n ingress-nginx
+  ```
+  Use your external service ip
+  ```bash
+  export SERVICE_NGINX_EXT_IP=xx.xx.xx.xx
+  gcloud dns record-sets transaction add --zone=$DNS_ZONE --name="*.$DNS_ZONE.loodse.training" --ttl 300 --type A $SERVICE_NGINX_EXT_IP
+  ```
 
-# set DNS_ZONE
-gcloud dns managed-zones list
-NAME                DNS_NAME                             DESCRIPTION                VISIBILITY
-student-XX-XXXX     student-XX-XXXX.loodse.training.     zone for student-XX-XXXX  public
+* Finally, verify DNS transaction yaml and execute those changes.
+  ```bash
+  cat transaction.yaml
+  gcloud dns record-sets transaction execute --zone $DNS_ZONE
+  ```
+  >*Hint*: On Errors you can also modify the created `transaction.yaml` or fix the error over google console [Cloud DNS](https://console.cloud.google.com/net-services/dns/zones).
 
-## adjust to your zone name
-export DNS_ZONE=student-XX-XXXX
-gcloud dns record-sets transaction start --zone=$DNS_ZONE
-```
+* Confirm the DNS records:
+  ```bash
+  gcloud dns record-sets list --zone=$DNS_ZONE
+  ```
 
-Then proceed to add the A records:
-
-`*.student-XX-XXXX.loodse.training`  ---->  LoadBalancer IP address of the Nginx Service
-
-```bash
-kubectl get svc -n ingress-nginx
-### use your external service ip
-export SERVICE_NGINX_EXT_IP=xx.xx.xx.xx 
-gcloud dns record-sets transaction add --zone=$DNS_ZONE --name="*.$DNS_ZONE.loodse.training" --ttl 300 --type A $SERVICE_NGINX_EXT_IP
-```
-
-Finally, execute those changes.
-
-```bash
-#check the DNS transaction yaml
-cat transaction.yaml
-
-gcloud dns record-sets transaction execute --zone $DNS_ZONE
-```
-
-*Hint*: On Errors you can also modify the created `transaction.yaml` or fix the error over google console [Cloud DNS](https://console.cloud.google.com/net-services/dns/zones).
-
-Confirm the DNS records:
-
-```bash
-gcloud dns record-sets list --zone=$DNS_ZONE
-
-NAME                                           TYPE   TTL    DATA
-*.student-XX.loodse.XXXX.                      A      300    34.90.218.24
-```
+  ```text
+  NAME                                           TYPE   TTL    DATA
+  *.student-XX.loodse.XXXX.                      A      300    34.90.218.24
+  ```
 
 ### Create a Cluster Issuer
 
-**ATTENTION: view and edit the .yaml files before you apply !!!**
+* Apply the cluster issuer yaml 
+  >ATTENTION: View and edit the .yaml files before you apply !!!
 
-```bash
-cd $TRAINING_DIR/07_deploy-app-02-external-access
-export TRAINING_EMAIL=student-XX.XXXX@loodse.training       #Use email provided by trainer for training
-sed -i "s/your-email@example.com/$TRAINING_EMAIL/g" manifests/lb.cluster-issuer.yaml
-kubectl apply -f manifests/lb.cluster-issuer.yaml
-## check the status
-kubectl describe clusterissuers.cert-manager.io letsencrypt-issuer
-```
+  >Use email provided by trainer for `TRAINING_EMAIL`
+  ```bash
+  cd $TRAINING_DIR/07_deploy-app-02-external-access
+  export TRAINING_EMAIL=student-XX.XXXX@loodse.training       
+  sed -i "s/your-email@example.com/$TRAINING_EMAIL/g" manifests/lb.cluster-issuer.yaml
+  kubectl apply -f manifests/lb.cluster-issuer.yaml
+  ```
+* Check the status
+  ```bash
+  kubectl describe clusterissuers.cert-manager.io letsencrypt-issuer
+  ```
 
 ***N.B - Since http01 is used to issue the certificate, ensure that you create a DNS A record for the domain, this A record should point to the IP address of the Nginx Ingress controller load balancer service.***
 
@@ -131,34 +140,43 @@ kubectl describe clusterissuers.cert-manager.io letsencrypt-issuer
 
 Let's deploy a sample application. This will entail creating a deployment, a service, an ingress and a certificate.
 
-```bash
-## create a new app-ext namespace
-kubectl create ns app-ext
-kubectl config set-context --current --namespace=app-ext
-# or
-kcns app-ext
+* Create a new app-ext namespace
+  ```bash
+  kubectl create ns app-ext
+  kubectl config set-context --current --namespace=app-ext
+  ```
+  or
+  ```bash
+  kcns app-ext
+  ```
 
-# Deployment manifest
-kubectl apply -f manifests/app.deployment.yaml
+* Apply the deployment manifest
+  ```bash
+  kubectl apply -f manifests/app.deployment.yaml
+  ```
 
-# Service manifest
-kubectl apply -f manifests/app.service.yaml
-```
+* Apply the service manifest
+  ```bash
+  kubectl apply -f manifests/app.service.yaml
+  ```
 
 Now let's configure a valid SSL certificate for you app. `sed` will replace `TODO-YOUR-DNS-ZONE` with your DNS ZONE, e.g.:`student-XX-XXXX.loodse.training`. Please ensure you will use **YOUR STUDENT ID**:
 
-```bash
-# check no certificate is present
-kubectl get certificates
+* Check no certificate is present
+  ```bash
+  kubectl get certificates
+  ```
 
-#Ingress manifest:
-## update the DNS_ZONE to your dedicated student DNS zone
-sed -i 's/TODO-YOUR-DNS-ZONE/'"$DNS_ZONE"'/g' manifests/app.ingress.yaml
-kubectl apply -f manifests/app.ingress.yaml    
+* Ingress manifest: Update the DNS_ZONE to your dedicated student DNS zone
+  ```bash
+  sed -i 's/TODO-YOUR-DNS-ZONE/'"$DNS_ZONE"'/g' manifests/app.ingress.yaml
+  kubectl apply -f manifests/app.ingress.yaml
+  ```
 
-## Check the status of the SSL certificate (ensure that the status is True and Ready):
-kubectl get certificates -o yaml
-```
+* Check the status of the SSL certificate (ensure that the status is True and Ready):
+  ```bash
+  kubectl get certificates -o yaml
+  ```
 
 **Check the status of the application components**
 
@@ -204,9 +222,9 @@ Test the application (this is being served via the ingress controller with the L
 
 ```bash
 echo https://app-ext.$DNS_ZONE.loodse.training
-# your DNS zone should be displayed
-# https://app-ext.YOUR-DNS-ZONE.loodse.training
-
+```
+Your DNS zone should be displayed. Similar to https://app-ext.YOUR-DNS-ZONE.loodse.training
+```bash
 curl https://app-ext.$DNS_ZONE.loodse.training
 ```
 
@@ -220,7 +238,9 @@ Hostname: helloweb-7f7f7474fc-rgwl6
 
 ```bash
 kubectl logs -n ingress-nginx ingress-nginx-controller-XXXXX-xxxx
-# or use the fuzzy way to follow the logs
+```
+or use the fuzzy way to follow the logs
+```bash
 klog -f
 # type ingress, select the ingress controller pod
 ```

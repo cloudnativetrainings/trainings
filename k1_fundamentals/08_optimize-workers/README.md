@@ -24,7 +24,7 @@ Due to this we want to:
 - change the disk size to `20`
 - start a rolling update without any downtime
 
-As we already created our MachineDeployment yaml definitions, we can now easily update them and apply the change. For a full list of options of the machine deployment spec, see [github.com/kubermatic/machine-controller - examples/gce-machinedeployment.yaml](https://github.com/kubermatic/machine-controller/blob/master/examples/gce-machinedeployment.yaml).
+As we already created our MachineDeployment yaml definitions, we can now easily update them and apply the change. For a full list of options of the machine deployment spec, see [github.com/kubermatic/machine-controller -> examples/gce-machinedeployment.yaml](https://github.com/kubermatic/machine-controller/blob/master/examples/gce-machinedeployment.yaml).
 
 ```bash
 cd $TRAINING_DIR/src/gce
@@ -42,7 +42,7 @@ Take a close look at the definitions and change the following fields:
 - `spec.template.spec.providerSpec.value.cloudProviderSpec.diskSize`
 - `spec.template.spec.providerSpec.value.cloudProviderSpec.machineType`
 
-First change the `machines/md-zone-a.yaml` and see the diff:
+First change these fields value in `machines/md-zone-a.yaml` and see the diff:
 
 ```bash
 diff machines/md-zone-a.yaml machines/md-zone-b.yaml 

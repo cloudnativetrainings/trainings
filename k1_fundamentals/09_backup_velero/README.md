@@ -9,41 +9,51 @@ We will now create a backup into a GCP bucket, for more details see the Velero G
 
 ### Create a Bucket
 
-```bash
-cd $TRAINING_DIR # folder 'k1_fundamentals'
-cp ./09_backup_velero/gs-bucket.tf ./src/gce/tf-infra/
-cd ./src/gce/tf-infra
-
-# verify terraform definition
-cat gs-bucket.tf
-# create bucket
-terraform apply
-```
+* Copy the bucket definiton
+  ```bash
+  cd $TRAINING_DIR
+  cp ./09_backup_velero/gs-bucket.tf ./src/gce/tf-infra/
+  cd ./src/gce/tf-infra
+  ```
+* Verify terraform definition
+  ```bash
+  cat gs-bucket.tf
+  ```
+* Create bucket
+  ```bash
+  terraform apply
+  ```
 
 A new bucket should be created! Now let's create a dedicated service account for it:
 
-```bash
-# create new service account
-gcloud iam service-accounts create velero-service-account
-# get your service account id
-gcloud iam service-accounts list
-# configure your IDs
-export GCP_PROJECT_ID=__YOUR_GCP_PROJECT_ID__                  #student-XX-project
-export GCP_VELERO_SERVICE_ACCOUNT_ID=__YOUR_GCP_SERVICE_ACCOUNT_ID__  # velero-service-account@student-XX.iam.gserviceaccount.com 
-
-# create policy binding
-gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member serviceAccount:$GCP_VELERO_SERVICE_ACCOUNT_ID --role='roles/storage.admin'
-
-# create a new json key for your service account
-cd -
-cd ./.secrets
-gcloud iam service-accounts keys create --iam-account $GCP_VELERO_SERVICE_ACCOUNT_ID credentials-velero.json
-cd -
-```
+* Create new service account
+  ```bash
+  gcloud iam service-accounts create velero-service-account
+  ```
+* Get your service account id
+  ```bash
+  gcloud iam service-accounts list
+  ```
+* Configure your IDs
+  ```bash
+  export GCP_PROJECT_ID=__YOUR_GCP_PROJECT_ID__                  #student-XX-project
+  export GCP_VELERO_SERVICE_ACCOUNT_ID=__YOUR_GCP_SERVICE_ACCOUNT_ID__  # velero-service-account@student-XX.iam.gserviceaccount.com 
+  ```
+* Create policy binding
+  ```bash
+  gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member serviceAccount:$GCP_VELERO_SERVICE_ACCOUNT_ID --role='roles/storage.admin'
+  ```
+* Create a new json key for your service account
+  ```
+  cd -
+  cd ./.secrets
+  gcloud iam service-accounts keys create --iam-account $GCP_VELERO_SERVICE_ACCOUNT_ID credentials-velero.json
+  cd -
+  ```
 
 ### Setup Velero
 
-Due to them small nodes we need decrease a little the default resource CPU limits.
+Due to the small nodes, we need decrease a little the default resource CPU limits.
 
 ```bash
 velero install \
@@ -54,11 +64,13 @@ velero install \
   --secret-file .secrets/credentials-velero.json
 ```
 
-To see if everything is OK you **HAVE TO** check the logs of the velero pod:
+To see if everything is OK, you **HAVE TO** check the logs of the velero pod:
 
 ```bash
 kubectl logs -n velero velero-xxxxxxxxxxx-xxxxx -f
-# or
+```
+or
+```bash
 klog -f
 # select velero pod
 ```
@@ -67,7 +79,9 @@ If you wonder where the GCP bucket credentials have been stored, take a look in 
 
 ```bash
 kubectl get secret -n velero cloud-credentials -o jsonpath='{.data.cloud}' | base64 --decode
-# or
+```
+or
+```bash
 ksec
 # select cloud-credentials in velero namespace
 ```
@@ -105,7 +119,9 @@ Check the status of the backup process:
 
 ```bash
 velero backup describe kubeone-demo-backup
-# or
+```
+or
+```bash
 kubectl describe -n velero backups
 ```
 

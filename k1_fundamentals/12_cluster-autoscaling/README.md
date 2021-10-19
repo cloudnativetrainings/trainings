@@ -3,12 +3,12 @@
 First we need to deploy the cluster autoscaler controller. As reference take a look at cluster autoscaler addon: [kubeone - addons/cluster-autoscaler](https://github.com/kubermatic/kubeone/tree/master/addons/cluster-autoscaler).
 
 For this lab, current version is added here: [`./cluster-autoscaler.yaml`](./cluster-autoscaler.yaml), so first copy this to the KubeOne folder:
-
 ```bash
 cd $TRAINING_DIR/src/gce
 cp ../../12_cluster-autoscaling/cluster-autoscaler.yaml ./addons/
-
-### Deploy the autoscaler addon
+```
+Deploy the autoscaler addon
+```bash
 kubeone apply -t ./tf-infra/
 ```
 
@@ -19,12 +19,17 @@ Now deploy our test application with quite high CPU reservation of `1000m` => 1 
 ```bash
 kubectl create ns app-ext
 kubectl config set-context --current --namespace=app-ext
-# or
+```
+or
+```bash
 kcns app-ext
+```
 
+```bash
 kubectl apply -f ../../12_cluster-autoscaling/deploy.scale.yaml
-
-#check the pods in the namespace
+```
+Check the pods in the namespace
+```bash
 kubectl get pods
 ```
 
@@ -39,8 +44,8 @@ helloweb-6b9678d59f-wc4s9   1/1     Running   0          11s
 helloweb-6b9678d59f-xqqd8   0/1     Pending   0          9s
 ```
 
-```bash
-# check the reason for pending
+Check the reason for pending
+```bash 
 kubectl describe pod helloweb-6b9678d59f-5p8c5
 ```
 
@@ -56,7 +61,9 @@ Ok, so why no autoscaling happened? Check the logs of `cluster-autoscaler` pod i
 
 ```bash
 kubectl logs -n kube-system -f cluster-autoscaler-xx-xx
-# or
+```
+or
+```bash
 klog -f   # select cluster-autoscaler-xx-xx pod
 ```
 

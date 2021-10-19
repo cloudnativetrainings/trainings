@@ -85,7 +85,12 @@
      kube-system   machine.cluster.k8s.io/k1-pool-az-c-5d5cfcc5bf-gpjpg   gce        ubuntu   10.240.0.14   1.21.5    3m29s
 
      NAMESPACE   NAME                                         STATUS   ROLES    AGE     VERSION
-                 node/k1-control-plane-1                       Ready    master   4h11m   v1.21.5     node/k1-control-plane-2                       Ready    master   3h34m   v1.21.5     node/k1-control-plane-3                       Ready    master   3h33m   v1.21.5     node/k1-pool-az-a-75cddb6cd9-slgqk            Ready    <none>   81s     v1.21.5     node/k1-pool-az-b-777d7cc84b-g76zf            Ready    <none>   77s     v1.21.5     node/k1-pool-az-c-5d5cfcc5bf-gpjpg            Ready    <none>   67s     v1.21.5
+                 node/k1-control-plane-1                       Ready    master   4h11m   v1.21.5
+                 node/k1-control-plane-2                       Ready    master   3h34m   v1.21.5
+                 node/k1-control-plane-3                       Ready    master   3h33m   v1.21.5
+                 node/k1-pool-az-a-75cddb6cd9-slgqk            Ready    <none>   81s     v1.21.5
+                 node/k1-pool-az-b-777d7cc84b-g76zf            Ready    <none>   77s     v1.21.5
+                 node/k1-pool-az-c-5d5cfcc5bf-gpjpg            Ready    <none>   67s     v1.21.5
      ```
      
      Now check again the availability zones
@@ -134,6 +139,6 @@ terraform apply
 kubeone apply -t . -m ../kubeone.yaml --verbose
 ```
 
-***NOTE:*** The management of the worker nodes is way more flexible than that of the control plane nodes, so it's **NOT** recommended using the `output.tf` for the long term maintenance of the machine deployment objects. We recommend the usage of `md-XXX.yaml` files together with git to manage the cluster sizing. If no initial MachineDeployment should be created, remove all `"${var.cluster_name}-pool-az-X"` sections. 
+> ***NOTE:*** The management of the worker nodes is way more flexible than that of the control plane nodes, so it's **NOT** recommended using the `output.tf` for the long term maintenance of the machine deployment objects. We recommend the usage of `md-XXX.yaml` files together with git to manage the cluster sizing. If no initial MachineDeployment should be created, remove all `"${var.cluster_name}-pool-az-X"` sections. 
 
 Jump > [**Home**](../README.md) | Previous > [**HA Cluster Setup**](../05_HA-master/README.md) | Next > [**Application with External Access**](../07_deploy-app-02-external-access/README.md)

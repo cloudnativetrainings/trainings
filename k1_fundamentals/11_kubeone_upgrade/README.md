@@ -69,7 +69,7 @@ ssh-add -l
 *Hint: If empty or your ssh-agent is not running, add your SSH identity file:*
 
 ```bash
-cd $TRAINING_DIR # folder 'k1_fundamentals'
+cd $TRAINING_DIR
 eval `ssh-agent`
 ssh-add .secrets/id_rsa
 ```
@@ -110,7 +110,7 @@ To watch the upgrade process, open a **SECOND shell**:
 ### if you use the tooling conainer, open a new shell, do again
 docker exec -it kubeone-tool-container bash
 
-cd $TRAINING_DIR # folder 'k1_fundamentals'
+cd $TRAINING_DIR
 export KUBECONFIG=`pwd`/src/gce/k1-kubeconfig
 watch kubectl get md,ms,ma,nodes -A
 ```

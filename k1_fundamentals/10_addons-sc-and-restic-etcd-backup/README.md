@@ -1,6 +1,6 @@
 # KubeOne Addons
 
-In this chapter we will create a [KubeOne addon](https://docs.kubermatic.com/kubeone/master/guides/addons/) on the creation of:
+In this chapter, we will create a [KubeOne addon](https://docs.kubermatic.com/kubeone/master/guides/addons/) on the creation of:
  1. Storage Class
  2. [Restic backup addon](https://docs.kubermatic.com/kubeone/master/examples/addons_backup) adjusted for GCP 
 
