@@ -16,10 +16,6 @@ In the training, we will learn about Deployment.
   ```bash
   watch -n 1 kubectl get pods
   ```
-  or
-  ```bash
-  kubectl get pods -w
-  ```
 
 * Scale the number of replicas to 1 and take a look at the second terminal
   ```bash

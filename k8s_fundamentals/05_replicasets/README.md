@@ -28,10 +28,6 @@ Open second terminal to watch the Pods
 ```bash
 watch -n 1 kubectl get pods
 ```
-or
-```bash
-kubectl get pods -w
-```
 
 ## Delete one of the Pods
 
@@ -42,10 +38,6 @@ kubectl delete pod <POD-NAME>
 Open second terminal to watch the Pods
 ```bash
 watch -n 1 kubectl get pods
-```
-or
-```bash
-kubectl get pods -w
 ```
 
 ## Cleanup

@@ -9,12 +9,6 @@
 
   >If execution error related to GKE cluster version is encountered, then run `gcloud container get-server-config` to find latest Stable release to adjust the value of `--cluster-version` parameter in the `setup.sh` script
  
-
-* Connect using below command
-  ```bash
-  gcloud container clusters get-credentials training-kf --zone europe-west3-a
-  ```
-
 * Let's do quick verification
   ```bash
   kubectl cluster-info

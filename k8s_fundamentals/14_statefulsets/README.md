@@ -23,10 +23,6 @@ In the training, we will learn about Statefulsets.
   ```bash
   watch -n 1 kubectl get sts,pv,pvc,pods
   ```
-  or
-  ```bash
-  kubectl get sts,pv,pvc,pods -w
-  ```
 
 * Print the content of the state file of the last built pod
   ```bash
@@ -43,10 +39,6 @@ In the training, we will learn about Statefulsets.
   >Note that the pv and the pvc will not get deleted.
   ```bash
   watch -n 1 kubectl get sts,pv,pvc,pods
-  ```
-  or
-  ``bash
-  kubectl get sts,pv,pvc,pods -w
   ```
 
 ### Scale up the statefulset
