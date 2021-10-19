@@ -146,36 +146,36 @@ kubectl get md,ms,ma,node -A
 
 ```text
 NAMESPACE     NAME                                            REPLICAS   AVAILABLE-REPLICAS   PROVIDER   OS       KUBELET   AGE
-kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-a   1          1                    gce        ubuntu   1.21.4    2d4h
-kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-b   1          1                    gce        ubuntu   1.21.4    29h
-kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-c   4          4                    gce        ubuntu   1.21.4    29h
+kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-a   1          1                    gce        ubuntu   1.22.2    2d4h
+kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-b   1          1                    gce        ubuntu   1.22.2    29h
+kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-c   4          4                    gce        ubuntu   1.22.2    29h
 
 NAMESPACE     NAME                                                REPLICAS   AVAILABLE-REPLICAS   PROVIDER   OS       KUBELET   AGE
-kube-system   machineset.cluster.k8s.io/k1-pool-az-a-86b6dcbfb4   1          1                    gce        ubuntu   1.21.4    5h17m
-kube-system   machineset.cluster.k8s.io/k1-pool-az-a-c777b778b    0                               gce        ubuntu   1.21.4    5h20m
-kube-system   machineset.cluster.k8s.io/k1-pool-az-b-7cb4fc847    0                               gce        ubuntu   1.21.4    5h20m
-kube-system   machineset.cluster.k8s.io/k1-pool-az-b-864f98574f   1          1                    gce        ubuntu   1.21.4    5h17m
-kube-system   machineset.cluster.k8s.io/k1-pool-az-c-576dff79fd   4          4                    gce        ubuntu   1.21.4    5h17m
+kube-system   machineset.cluster.k8s.io/k1-pool-az-a-86b6dcbfb4   1          1                    gce        ubuntu   1.22.2    5h17m
+kube-system   machineset.cluster.k8s.io/k1-pool-az-a-c777b778b    0                               gce        ubuntu   1.22.2    5h20m
+kube-system   machineset.cluster.k8s.io/k1-pool-az-b-7cb4fc847    0                               gce        ubuntu   1.22.2    5h20m
+kube-system   machineset.cluster.k8s.io/k1-pool-az-b-864f98574f   1          1                    gce        ubuntu   1.22.2    5h17m
+kube-system   machineset.cluster.k8s.io/k1-pool-az-c-576dff79fd   4          4                    gce        ubuntu   1.22.2    5h17m
 kube-system   machineset.cluster.k8s.io/k1-pool-az-c-7b6dcc885    0                               gce        ubuntu   1.21.5    5h17m
 
 NAMESPACE     NAME                                                   PROVIDER   OS       ADDRESS         KUBELET   AGE
-kube-system   machine.cluster.k8s.io/k1-pool-az-a-86b6dcbfb4-vg8q8   gce        ubuntu   10.240.0.24     1.21.4    5h17m
-kube-system   machine.cluster.k8s.io/k1-pool-az-b-864f98574f-mb97d   gce        ubuntu   10.240.0.52     1.21.4    24m
-kube-system   machine.cluster.k8s.io/k1-pool-az-c-576dff79fd-l8lkb   gce        ubuntu   10.240.0.55     1.21.4    6m6s
-kube-system   machine.cluster.k8s.io/k1-pool-az-c-576dff79fd-mgnnc   gce        ubuntu   10.240.0.57     1.21.4    6m6s
-kube-system   machine.cluster.k8s.io/k1-pool-az-c-576dff79fd-sssq2   gce        ubuntu   10.240.0.56     1.21.4    6m6s
-kube-system   machine.cluster.k8s.io/k1-pool-az-c-576dff79fd-v4hx4   gce        ubuntu   35.204.47.135   1.21.4    79m
+kube-system   machine.cluster.k8s.io/k1-pool-az-a-86b6dcbfb4-vg8q8   gce        ubuntu   10.240.0.24     1.22.2    5h17m
+kube-system   machine.cluster.k8s.io/k1-pool-az-b-864f98574f-mb97d   gce        ubuntu   10.240.0.52     1.22.2    24m
+kube-system   machine.cluster.k8s.io/k1-pool-az-c-576dff79fd-l8lkb   gce        ubuntu   10.240.0.55     1.22.2    6m6s
+kube-system   machine.cluster.k8s.io/k1-pool-az-c-576dff79fd-mgnnc   gce        ubuntu   10.240.0.57     1.22.2    6m6s
+kube-system   machine.cluster.k8s.io/k1-pool-az-c-576dff79fd-sssq2   gce        ubuntu   10.240.0.56     1.22.2    6m6s
+kube-system   machine.cluster.k8s.io/k1-pool-az-c-576dff79fd-v4hx4   gce        ubuntu   35.204.47.135   1.22.2    79m
 
 NAMESPACE   NAME                                 STATUS   ROLES                  AGE     VERSION
-            node/k1-control-plane-1              Ready    control-plane,master   2d4h    v1.21.4
-            node/k1-control-plane-2              Ready    control-plane,master   30h     v1.21.4
-            node/k1-control-plane-3              Ready    control-plane,master   29h     v1.21.4
-            node/k1-pool-az-a-86b6dcbfb4-vg8q8   Ready    <none>                 5h15m   v1.21.4
-            node/k1-pool-az-b-864f98574f-mb97d   Ready    <none>                 21m     v1.21.4
-            node/k1-pool-az-c-576dff79fd-l8lkb   Ready    <none>                 3m52s   v1.21.4
-            node/k1-pool-az-c-576dff79fd-mgnnc   Ready    <none>                 3m50s   v1.21.4
-            node/k1-pool-az-c-576dff79fd-sssq2   Ready    <none>                 3m36s   v1.21.4
-            node/k1-pool-az-c-576dff79fd-v4hx4   Ready    <none>                 77m     v1.21.4
+            node/k1-control-plane-1              Ready    control-plane,master   2d4h    v1.22.2
+            node/k1-control-plane-2              Ready    control-plane,master   30h     v1.22.2
+            node/k1-control-plane-3              Ready    control-plane,master   29h     v1.22.2
+            node/k1-pool-az-a-86b6dcbfb4-vg8q8   Ready    <none>                 5h15m   v1.22.2
+            node/k1-pool-az-b-864f98574f-mb97d   Ready    <none>                 21m     v1.22.2
+            node/k1-pool-az-c-576dff79fd-l8lkb   Ready    <none>                 3m52s   v1.22.2
+            node/k1-pool-az-c-576dff79fd-mgnnc   Ready    <none>                 3m50s   v1.22.2
+            node/k1-pool-az-c-576dff79fd-sssq2   Ready    <none>                 3m36s   v1.22.2
+            node/k1-pool-az-c-576dff79fd-v4hx4   Ready    <none>                 77m     v1.22.2
 ```
 
 You can also check that all application pods are Running.
