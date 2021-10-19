@@ -8,11 +8,13 @@ fi
 if [[ -z $PROJECT_NAME ]]; then
   echo "INPUT: Type PROJECT_NAME (student-XX-project):" && read PROJECT_NAME
 fi
+
 export REGION=europe-west3
 export ZONE=europe-west3-a
 export CLUSTER_NAME=training-kf
 export NETWORK_NAME=$CLUSTER_NAME
 export FIREWALL_NAME=$CLUSTER_NAME
+export CLUSTER_VERSION=1.20
 
 set -euxo pipefail
 
@@ -52,7 +54,7 @@ then
     --network "projects/$PROJECT_NAME/global/networks/$NETWORK_NAME" --subnetwork "projects/$PROJECT_NAME/regions/$REGION/subnetworks/$NETWORK_NAME-subnet" \
     --services-ipv4-cidr=10.0.1.0/24 --default-max-pods-per-node=110 \
     --zone=$ZONE \
-    --cluster-version "1.18" \
+    --cluster-version 1.20.10-gke.301 \
     --machine-type "n1-standard-4" --num-nodes "2" \
     --image-type "UBUNTU" --disk-type "pd-standard" --disk-size "100" \
     --enable-network-policy --enable-ip-alias \

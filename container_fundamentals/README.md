@@ -1,4 +1,4 @@
-# Container Fundamentals Training using Docker
+# Container Fundamentals (ConF) Training using Docker
 
 **Pre-requisites:**
 
@@ -43,9 +43,4 @@
 
 [TearDown Setup](99_teardown/README.md) - Optional, for the training playground cleanup only. 
 
-
-
-
-
-
-
+[Back to Main](../README.md)

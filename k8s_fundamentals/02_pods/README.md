@@ -1,61 +1,83 @@
 # Pods
 
-In this training we will create a pod and learn how to interact with it.
+In this training, we will create a pod and learn how to interact with it.
 
-## Inspect the and create the pod
+>Navigate to the folder `02_pods` from CLI, before you get started. 
 
-```bash
-kubectl create -f pod.yaml
-```
+## Create Pod
+* Inspect pod.yaml definition file and create the pod
+  ```bash
+  cat pod.yaml
+  kubectl create -f pod.yaml
+  ```
 
 ## Getting help
 
-```bash
-# Getting info and examples for the 'get' command
-kubectl get --help
-# Get info about a specific yaml structure
-kubectl explain pod.metadata.name
-# Get short info about a specific yaml structure
-kubectl explain --recursive pod.spec.containers.ports
-```
+* Getting info and examples for the 'get' command
+  ```bash
+  kubectl get --help
+  ```
+
+* Get info about a specific yaml structure
+  ```bash
+  kubectl explain pod.metadata.name
+  ```
+
+* Get short info about a specific yaml structure
+  ```bash
+  kubectl explain --recursive pod.spec.containers.ports
+  ```
 
 ## Get infos of a pod
 
-```bash
-## show all Pods
-kubectl get pods
+* Show all Pods
+  ```bash
+  kubectl get pods
+  ```
 
-## show all Pods with labels
-kubectl get pods --show-labels
+* Show all Pods with labels
+  ```bash
+  kubectl get pods --show-labels
+  ```
 
-## show all Pods with IP address
-kubectl get pods -o wide
+* Show all Pods with IP address and node information
+  ```bash
+  kubectl get pods -o wide
+  ```
 
-## store a Pod's yaml definition into a file
-kubectl get pod my-pod -o yaml > pod.yaml
-```
+* Store a Pod's yaml definition into a file
+  ```bash
+  kubectl get pod my-pod -o yaml > pod-output.yaml
+  ```
+  >You can check the definition using `cat pod-output.yaml`
 
 ## Describe a pod
-
-```bash
-kubectl describe pod my-pod
-```
+* Show details of the pod including events
+  ```bash
+  kubectl describe pod my-pod
+  ```
 
 ## Debug a Pod
 
-```bash
-## get logs of a Container
-kubectl logs my-pod
+* Get logs of a Container
+  ```bash
+  kubectl logs my-pod
+  ```
 
-## follow the logs of a Container
-kubectl logs -f my-pod
+* Follow the logs of a Container
+  ```bash
+  kubectl logs -f my-pod
+  ```
 
-## exec into a Container
-kubectl exec -it my-pod -- bash
-```
+* Exec into a Container
+  ```bash
+  kubectl exec -it my-pod -- bash
+  ```
 
 ## Cleanup
+* Delete the created resource - pod.
+  ```bash
+  kubectl delete pod my-pod
+  ```
 
-```bash
-kubectl delete pod my-pod
-```
+[Jump to Home](../README.md) | [Previous Training](../01_hello-k8s/README.md) | [Next Training](../03_commands-and-args/README.md)

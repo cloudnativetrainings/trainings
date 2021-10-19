@@ -1,6 +1,8 @@
 # Ingress
 
-In this training we will setup an Ingress and expose an app showing a blue screen and an app showing a red screen.
+In this training, we will setup an Ingress and expose an app showing a blue screen and an app showing a red screen.
+
+>Navigate to the folder `22_ingress` from CLI, before you get started. 
 
 ## Create the red application
 
@@ -49,10 +51,9 @@ kubectl describe ing my-ingress
 ## Visit the applications "red" and "blue" in your browser via
 
 ```bash
-# Get the external IP of your LoadBalancer
 kubectl get svc traefik-ingress-service
 ```
-
+Get the external IP of your LoadBalancer and vist via web browser as follows
 * `http://<EXTERNAL-IP>/red`
 * `http://<EXTERNAL-IP>/blue`
 
@@ -61,3 +62,5 @@ kubectl get svc traefik-ingress-service
 ```bash
 kubectl delete -f .
 ```
+
+[Jump to Home](../README.md) | [Previous Training](../21_scheduling-taints-and-tolerations/README.md) | [Next Training](../23_cordon/README.md)

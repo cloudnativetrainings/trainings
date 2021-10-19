@@ -1,22 +1,27 @@
 # Persistence with StorageClass
 
-## Inspect and create the storageclass
+In the training, we will learn about Dynamic Persistence.
+
+>Navigate to the folder `12_persistence-dynamic` from CLI, before you get started. 
+
+## Inspect storageclass-v1.yaml definition file and create the storageclass
 
 ```bash
+cat storageclass-v1.yaml
 kubectl create -f storageclass-v1.yaml
 ```
 
 ## Show the available storage classes
 
-Possibly there are standard ones.
-
+>Possibly there are standard ones.
 ```bash
 kubectl get sc -o wide
 ```
 
-## Inspect and create the pvc
+## Inspect pvc.yaml definition file and create the pvc
 
 ```bash
+cat pvc.yaml
 kubectl create -f pvc.yaml
 ```
 
@@ -38,15 +43,17 @@ kubectl delete pvc my-pvc
 kubectl get pvc,pv
 ```
 
-## Inspect and re-create the storageclass
+## Inspect storageclass-v2.yaml definition file and re-create the storageclass
 
 ```bash
+cat storageclass-v2.yaml
 kubectl replace -f storageclass-v2.yaml --force
 ```
 
-## Inspect and re-create the pvc
+## Inspect pvc.yaml definition file and re-create the pvc
 
 ```bash
+cat pvc.yaml
 kubectl create -f pvc.yaml
 ```
 
@@ -74,3 +81,5 @@ kubectl get pvc,pv
 kubectl delete pv --all
 kubectl delete sc my-storageclass
 ```
+
+[Jump to Home](../README.md) | [Previous Training](../11_persistence-static/README.md) | [Next Training](../13_persistence-use-volume/README.md)
