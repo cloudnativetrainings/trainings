@@ -16,8 +16,7 @@ helm dependency list ./my-app
 ```bash
 helm dependency update ./my-app
 ```
-
-Note that the `Charts.lock` file and the `charts` directory got created in the Chart `my-app`.
+> Note that the `Charts.lock` file and the `charts` directory got created in the Chart `my-app`.
 
 ## Install a chart with its dependencies
 
@@ -72,9 +71,14 @@ kubectl exec -it my-app -- /bin/sh
 curl my-dependency
 ```
 
-Uninstall the app again
-```bash
-helm uninstall app
-```
+## Cleanup 
+* Delete the release
+  ```bash
+  helm uninstall app
+  ```
+* Jump back to home directory `k8s_helm`:
+  ```bash
+  cd -
+  ```
 
 Jump > [Home](../README.md) | Previous > [Hooks](../10_hooks/README.md) | Next > [Teardown](../99_teardown/README.md)

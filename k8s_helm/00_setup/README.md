@@ -2,9 +2,11 @@
 
 In this task, we will setup the needed components for the training.
 
+
 ## Create Kubernetes Cluster
 
 ```bash
+cd 00_setup
 ./setup_cluster.sh
 ```
 ## Install Ingress
@@ -34,6 +36,15 @@ export ENDPOINT=$(kubectl -n ingress-controller get svc traefik-ingress-service 
 
 ## Verify Ingress is running
 
-Visit the Ingress Admin Port in your browser on `http://<ENDPOINT>:8080`
+Visit the Ingress Admin Port using below curl command or in your browser on `http://$ENDPOINT:8080`
+```bash
+curl http://$ENDPOINT:8080
+```
+
+## Cleanup 
+* Jump back to home directory `k8s_helm`:
+  ```bash
+  cd -
+  ```
 
 Jump > [Home](../README.md) | Next > [Install Apps without Helm](../01_apps-without-helm/README.md)

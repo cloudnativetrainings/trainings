@@ -2,6 +2,8 @@
 
 In this task, you will make use of an if statement.
 
+> Navigate to the directory `07_ifs`, before getting started.
+
 ## Adapt the Configmap to the following
 
 ```yaml
@@ -39,9 +41,13 @@ curl $ENDPOINT
 ```
 
 ## Cleanup
-
-```bash
-helm uninstall ifs
-```
+* Delete the release
+  ```bash
+  helm uninstall ifs
+  ```
+* Jump back to home directory `k8s_helm`:
+  ```bash
+  cd -
+  ```
 
 Jump > [Home](../README.md) | Previous > [Includes](../06_includes/README.md) | Next > [Required](../08_required/README.md)

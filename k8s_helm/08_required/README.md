@@ -14,7 +14,7 @@ containers:
 
 ## Release the application
 
-Note that you will get an error message.
+> Note that you will get an error message.
 ```bash
 helm install required ./my-chart 
 ```
@@ -30,9 +30,13 @@ curl $ENDPOINT
 ```
 
 ## Cleanup
-
-```bash
-helm uninstall required
-```
+* Delete the release
+  ```bash
+  helm uninstall required
+  ```
+* Jump back to home directory `k8s_helm`:
+  ```bash
+  cd -
+  ```
 
 Jump > [Home](../README.md) | Previous > [If Statement](../07_ifs/README.md) | Next > [Testing](../09_tests/README.md)

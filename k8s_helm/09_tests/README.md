@@ -20,7 +20,7 @@ helm uninstall my-app
 
 ## Verify failing test
 
-Adapt the url in the test to something faulty.
+Adapt the URL in the test to something faulty.
 
 ```bash
 helm install my-app ./my-app 
@@ -36,10 +36,14 @@ kubectl logs my-app-test-<TAB>
 ```
 
 ## Cleanup
-
-```bash
-helm uninstall my-app
-kubectl delete job my-app-test
-```
+* Delete the release and resources
+  ```bash
+  helm uninstall my-app
+  kubectl delete job my-app-test
+  ```
+* Jump back to home directory `k8s_helm`:
+  ```bash
+  cd -
+  ```
 
 Jump > [Home](../README.md) | Previous > [Required](../08_required/README.md) | Next > [Hooks](../10_hooks/README.md)

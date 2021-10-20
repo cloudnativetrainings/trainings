@@ -7,10 +7,11 @@ In this task, we will rollback a release.
 ## Release the red app
 
 ```bash
+cd 03_rollback
 helm install my-app ./color-viewer
 ```
 
-You can visit the red application on `http://<ENDPOINT>/red`
+You can visit the red application on `http://$ENDPOINT/red`
 
 ## Upgrade the red app
 
@@ -18,7 +19,7 @@ You can visit the red application on `http://<ENDPOINT>/red`
 helm upgrade my-app --set color=blue ./color-viewer
 ```
 
-You can visit the app on `http://<ENDPOINT>/blue`
+You can visit the app on `http://$ENDPOINT/blue`
 
 Take a look at the Helm releases
 ```bash
@@ -36,12 +37,16 @@ helm history my-app
 helm rollback my-app 1
 ```
 
-You can visit the app on `http://<ENDPOINT>/red`
+You can visit the app on `http://$ENDPOINT/red`
 
 ## Cleanup
-
-```bash
-helm uninstall my-app
-```
+* Delete the resources
+  ```bash
+  helm uninstall my-app
+  ```
+* Jump back to home directory `k8s_helm`:
+  ```bash
+  cd -
+  ```
 
 Jump > [Home](../README.md) | Previous > [Install Apps with Helm](../02_apps-with-helm/README.md) | Next > [Variables](../04_variables/README.md)
