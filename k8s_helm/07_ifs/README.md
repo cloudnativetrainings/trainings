@@ -1,6 +1,6 @@
 # Ifs
 
-In this task you will make use of an if statement.
+In this task, you will make use of an if statement.
 
 ## Adapt the Configmap to the following
 
@@ -43,3 +43,5 @@ curl $ENDPOINT
 ```bash
 helm uninstall ifs
 ```
+
+Jump > [Home](../README.md) | Previous > [Includes](../06_includes/README.md) | Next > [Required](../08_required/README.md)

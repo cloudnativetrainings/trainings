@@ -1,6 +1,6 @@
 # Variables
 
-In this task we will add a variable to our Helm Chart.
+In this task, we will add a variable to our Helm Chart.
 
 ## Add templating for the deployment in the file ./color-viewer/templates/deployment.yaml
 
@@ -35,3 +35,5 @@ kubectl get pods
 ```bash
 helm uninstall my-app
 ```
+
+Jump > [Home](../README.md) | Previous [Rollback](../03_rollback/README.md) | Next > [Functions](../05_functions/README.md)

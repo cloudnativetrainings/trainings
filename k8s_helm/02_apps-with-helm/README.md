@@ -1,6 +1,6 @@
 # Apps with Helm
 
-In this task we will use Helm for installing the app.
+In this task, we will use Helm for installing the app.
 
 ## Using a Helm Chart without customization
 
@@ -57,3 +57,5 @@ kubectl get all
 ```bash
 helm uninstall red green magenta
 ```
+
+Jump > [Home](../README.md) | Previous > [Install Apps without Helm](../01_apps-without-helm/README.md) | Next > [Rollback](../03_rollback/README.md)

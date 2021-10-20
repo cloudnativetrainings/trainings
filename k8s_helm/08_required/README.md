@@ -1,6 +1,6 @@
 # Required
 
-In this task you will learn how to use the required flag.
+In this task, you will learn how to use the required flag.
 
 ## Adapt the Deployment to the following
 
@@ -34,3 +34,5 @@ curl $ENDPOINT
 ```bash
 helm uninstall required
 ```
+
+Jump > [Home](../README.md) | Previous > [If Statement](../07_ifs/README.md) | Next > [Testing](../09_tests/README.md)

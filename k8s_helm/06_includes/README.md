@@ -1,6 +1,6 @@
 # Using includes
 
-In this task you will make use of includes.
+In this task, you will make use of includes.
 
 ## Implement the labels function
 
@@ -36,3 +36,5 @@ curl $ENDPOINT
 ```bash
 helm uninstall includes
 ```
+
+Jump > [Home](../README.md) | Previous > [Functions](../05_functions/README.md) | Next > [If Statement](../07_ifs/README.md)

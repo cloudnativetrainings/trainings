@@ -1,6 +1,6 @@
 # Dependencies
 
-In this task you will learn about Dependencies.
+In this task, you will learn about Dependencies.
 
 ## Inspect the Charts
 
@@ -76,3 +76,5 @@ Uninstall the app again
 ```bash
 helm uninstall app
 ```
+
+Jump > [Home](../README.md) | Previous > [Hooks](../10_hooks/README.md) | Next > [Teardown](../99_teardown/README.md)

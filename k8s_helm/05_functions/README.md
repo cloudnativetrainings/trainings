@@ -1,6 +1,6 @@
 # Functions
 
-In this task you will learn how to implement helper functions.
+In this task, you will learn how to implement helper functions.
 
 ## Run the Helm Chart
 
@@ -82,3 +82,4 @@ curl $ENDPOINT
 helm uninstall default-values
 ```
 
+Jump > [Home](../README.md) | Previous > [Variables](../04_variables/README.md) | Next > [Includes](../06_includes/README.md)

@@ -1,6 +1,6 @@
 # Rolling back a release
 
-In this task we will rollback a release.
+In this task, we will rollback a release.
 
 ### Inspect the Helm Chart
 
@@ -43,3 +43,5 @@ You can visit the app on `http://<ENDPOINT>/red`
 ```bash
 helm uninstall my-app
 ```
+
+Jump > [Home](../README.md) | Previous > [Install Apps with Helm](../02_apps-with-helm/README.md) | Next > [Variables](../04_variables/README.md)

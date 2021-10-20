@@ -1,6 +1,6 @@
 # Apps without Helm
 
-In this task we will take a look at working without Helm.
+In this task, we will take a look at working without Helm.
 
 ## Inspect the yaml files in the blue and red directorys.
 
@@ -9,7 +9,6 @@ In this task we will take a look at working without Helm.
 ```bash
 kubectl create -f blue
 ```
-
 Afterwards you can visit the app via the browser on `http://<ENDPOINT>/blue`
 
 ## Create the red app
@@ -17,7 +16,6 @@ Afterwards you can visit the app via the browser on `http://<ENDPOINT>/blue`
 ```bash
 kubectl create -f red
 ```
-
 Afterwards you can visit the app via the browser on `http://<ENDPOINT>/red`
 
 ## How long will it take to make a green app?
@@ -27,3 +25,5 @@ Afterwards you can visit the app via the browser on `http://<ENDPOINT>/red`
 ```bash
 kubectl delete -f blue,red
 ```
+
+Jump > [Home](../README.md) | Previous > [Cluster Setup](../00_setup/README.md) | Next > [Install Apps with Helm](../02_apps-with-helm/README.md)

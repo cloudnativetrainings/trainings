@@ -1,6 +1,6 @@
 # Writing Hooks
 
-In this task you will learn how to write Hooks.
+In this task, you will learn how to write Hooks.
 
 ## Inspect the Chart
 
@@ -76,3 +76,5 @@ helm install hooks ./my-app --no-hooks
 ```bash
 helm uninstall hooks --no-hooks
 ```
+
+Jump > [Home](../README.md) | Previous > [Testing](../09_tests/README.md) | Next > [Dependencies](../11_dependencies/README.md)

@@ -1,6 +1,6 @@
 # Testing
 
-In this task you will learn how to test your Chart.
+In this task, you will learn how to test your Chart.
 
 ## Inspect the application
 
@@ -41,3 +41,5 @@ kubectl logs my-app-test-<TAB>
 helm uninstall my-app
 kubectl delete job my-app-test
 ```
+
+Jump > [Home](../README.md) | Previous > [Required](../08_required/README.md) | Next > [Hooks](../10_hooks/README.md)
