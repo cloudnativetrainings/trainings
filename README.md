@@ -1,13 +1,13 @@
 # Kubermatic Training
 
-In this repo you will find Kubermatic training materials. 
+In this repo, you will find Kubermatic training materials. 
 
 ## Overview
 
-### Container Fundamentals (ConF)
+### [Container Fundamentals (ConF)](container_fundamentals/README.md)
 Learn the basics on how to work with Containers.
 
-### Kubernetes Fundamentals (K8sF)
+### [Kubernetes Fundamentals (K8sF)](k8s_fundamentals/README.md)
 Learn the basics about Kubernetes.
 
 ### Kubernetes Administration (K8sA)

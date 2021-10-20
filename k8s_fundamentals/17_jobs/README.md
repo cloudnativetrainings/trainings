@@ -1,17 +1,19 @@
 # Job
 
-In this course we will create a job and parallelize its execution.
+In this training, we will create a job and parallelize its execution.
 
-## Inspect and create the job
+>Navigate to the folder `17_jobs` from CLI, before you get started. 
+
+## Inspect  job.yaml definition file and create the job
 
 ```bash
+cat job.yaml
 kubectl create -f job.yaml
 ```
 
 ## Take a look at running Jobs and the Pods
 
-It can take a while that the job is completed.
-
+>It can take a while that the job is completed.
 ```bash
 kubectl get pods,jobs
 ```
@@ -44,3 +46,5 @@ watch -n 1 kubectl get pods,jobs
 ```bash
 kubectl delete jobs --all
 ```
+
+[Jump to Home](../README.md) | [Previous Training](../16_daemonsets/README.md) | [Next Training](../18_cronjobs/README.md)
