@@ -1,6 +1,8 @@
-# Required
+# Using the 'required' Function
 
-In this task, you will learn how to use the required flag.
+In this task, you will learn how to use the 'required' function.
+
+> Navigate to the directory `08_required`, before getting started.
 
 ## Adapt the Deployment to the following
 
@@ -39,4 +41,4 @@ curl $ENDPOINT
   cd -
   ```
 
-Jump > [Home](../README.md) | Previous > [If Statement](../07_ifs/README.md) | Next > [Testing](../09_tests/README.md)
+Jump > [Home](../README.md) | Previous > [If Statement](../07_ifs/README.md) | Next > [Helm Test](../09_tests/README.md)

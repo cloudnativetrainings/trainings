@@ -89,4 +89,4 @@ curl $ENDPOINT
   cd -
   ```
 
-Jump > [Home](../README.md) | Previous > [Variables](../04_variables/README.md) | Next > [Includes](../06_includes/README.md)
+Jump > [Home](../README.md) | Previous > [Variables](../04_variables/README.md) | Next > ['include' Function](../06_includes/README.md)

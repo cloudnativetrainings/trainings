@@ -1,6 +1,8 @@
-# Testing
+# Helm Test
 
 In this task, you will learn how to test your Chart.
+
+> Navigate to the directory `09_tests`, before getting started.
 
 ## Inspect the application
 
@@ -46,4 +48,4 @@ kubectl logs my-app-test-<TAB>
   cd -
   ```
 
-Jump > [Home](../README.md) | Previous > [Required](../08_required/README.md) | Next > [Hooks](../10_hooks/README.md)
+Jump > [Home](../README.md) | Previous > ['required' Function](../08_required/README.md) | Next > [Hooks](../10_hooks/README.md)

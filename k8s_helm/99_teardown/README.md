@@ -1,6 +1,7 @@
 # Teardown Cluster
 
 ```bash
+cd 99_teardown
 ./teardown_cluster.sh
 ```
 

@@ -1,4 +1,4 @@
-# Kubernetes Helm Training
+# Kubernetes with Helm (K8sH)
 
 **Pre-requisites:**
 
@@ -25,10 +25,10 @@
 3. [Rollback](03_rollback/README.md)
 4. [Variables](04_variables/README.md)
 5. [Functions](05_functions/README.md)
-6. [Includes](06_includes/README.md)
+6. ['include' function](06_includes/README.md)
 7. [If Statement](07_ifs/README.md)
-8. [Required](08_required/README.md)
-9. [Testing](09_tests/README.md)
+8. ['required' function](08_required/README.md)
+9. [Helm Test](09_tests/README.md)
 10. [Hooks](10_hooks/README.md)
 11. [Dependencies](11_dependencies/README.md)
 

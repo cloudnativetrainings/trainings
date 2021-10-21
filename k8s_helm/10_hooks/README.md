@@ -2,6 +2,8 @@
 
 In this task, you will learn how to write Hooks.
 
+> Navigate to the directory `10_hooks`, before getting started.
+
 ## Inspect the Chart
 
 Take a look at the Hooks.
@@ -84,4 +86,4 @@ helm install hooks ./my-app --no-hooks
   cd -
   ```
 
-Jump > [Home](../README.md) | Previous > [Testing](../09_tests/README.md) | Next > [Dependencies](../11_dependencies/README.md)
+Jump > [Home](../README.md) | Previous > [Helm Test](../09_tests/README.md) | Next > [Dependencies](../11_dependencies/README.md)

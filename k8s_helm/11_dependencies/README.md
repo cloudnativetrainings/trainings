@@ -2,6 +2,8 @@
 
 In this task, you will learn about Dependencies.
 
+> Navigate to the directory `11_dependencies`, before getting started.
+
 ## Inspect the Charts
 
 Take a look athe `Chart.yaml` file. There is a dependency defined for the Chart called `my-dependency`.

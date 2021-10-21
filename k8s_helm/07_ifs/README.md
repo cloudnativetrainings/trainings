@@ -50,4 +50,4 @@ curl $ENDPOINT
   cd -
   ```
 
-Jump > [Home](../README.md) | Previous > [Includes](../06_includes/README.md) | Next > [Required](../08_required/README.md)
+Jump > [Home](../README.md) | Previous > ['include' Function](../06_includes/README.md) | Next > ['required' Function](../08_required/README.md)

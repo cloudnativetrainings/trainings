@@ -1,6 +1,6 @@
-# Using includes
+# Using the 'include' Function
 
-In this task, you will make use of includes.
+In this task, you will make use of include' function.
 
 > Navigate to the directory `06_includes`, before getting started
 
