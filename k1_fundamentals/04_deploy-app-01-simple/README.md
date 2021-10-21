@@ -211,7 +211,7 @@ Now we want to scale our deployment to have 3 replicas. It can be done using com
 ```bash
 kubectl scale deployment nginx --replicas=3
 ```
->It will show message `deployment.extensions/nginx scaled` indicating that scaling done successfully.
+>It will show message `deployment.apps/nginx scaled` indicating that scaling done successfully.
 
 We can re-check the scaled deployment using 
 ```bash
@@ -222,7 +222,7 @@ You can see output similar to the following.
 
 ```text
 NAME                          READY   UP-TO-DATE   AVAILABLE   AGE
-deployment.extensions/nginx   3/3     3            3           6m30s
+deployment.apps/nginx   3/3     3            3           6m30s
 
 NAME            TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
 service/nginx   ClusterIP   10.110.86.101   <none>        80/TCP    5m43s
