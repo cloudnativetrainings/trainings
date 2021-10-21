@@ -20,17 +20,17 @@
    
 **Hands-On:**
 
-1. [Install Apps without Helm](../01_apps-without-helm/README.md)
-2. [Install Apps with Helm](../02_apps-with-helm/README.md)
-3. [Rollback](../03_rollback/README.md)
-4. [Variables](../04_variables/README.md)
-5. [Functions](../05_functions/README.md)
-6. [Includes](../06_includes/README.md)
-7. [If Statement](../07_ifs/README.md)
-8. [Required](../08_required/README.md)
-9. [Testing](../09_tests/README.md)
-10. [Hooks](../10_hooks/README.md)
-11. [Dependencies](../11_dependencies/README.md)
+1. [Install Apps without Helm](01_apps-without-helm/README.md)
+2. [Install Apps with Helm](02_apps-with-helm/README.md)
+3. [Rollback](03_rollback/README.md)
+4. [Variables](04_variables/README.md)
+5. [Functions](05_functions/README.md)
+6. [Includes](06_includes/README.md)
+7. [If Statement](07_ifs/README.md)
+8. [Required](08_required/README.md)
+9. [Testing](09_tests/README.md)
+10. [Hooks](10_hooks/README.md)
+11. [Dependencies](11_dependencies/README.md)
 
 [TearDown Setup](99_teardown/README.md) - Optional, for the GKE training cluster cleanup. 
 
