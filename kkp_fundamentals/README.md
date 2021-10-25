@@ -12,10 +12,10 @@ Kubermatic is a cluster-as-a-service solution that provides managed Kubernetes f
 - **Seed datacenter** – A definition/reference to a seed cluster
 - **Node datacenter** – A definition/reference of a datacenter/region/zone at a cloud provider (aws=zone, digitalocean=region, openstack=zone)
 
-**N.B -- For further references, kindly check the official documentation** https://docs.kubermatic.com/
+**N.B -- For further references, kindly check the [official documentation](https://docs.kubermatic.com/)**
 
 ## Prerequisites 
-- Founded Kubernetes knowledge and tooling usage
+- Founded knowledge on kubernetes and tooling usage
 
 ## Deliverables
 
@@ -35,12 +35,12 @@ Kubermatic is a cluster-as-a-service solution that provides managed Kubernetes f
   * `vim` or other CLI editor
   * `helm` (version 3+)
 
-* You finished KubeOne Training: [../k1_fundamentals](../k1_fundamentals) and already have a KubeOne Kubernetes cluster (GCP will be used for this exercise). 
+* You finished [KubeOne Fundamentals Training](../k1_fundamentals) and already have a KubeOne Kubernetes cluster (GCP will be used for this exercise). 
 
-* To understand the general prerequisites take a look at [Cluster Requirements](https://docs.kubermatic.com/kubermatic/master/requirements/cluster_requirements/)
+* To understand the general prerequisites take a look at [Cluster Requirements](https://docs.kubermatic.com/kubermatic/master/architecture/requirements/cluster_requirements/)
 
-Now Start with [00-prepare-training-lab](./00-prepare-training-lab).
+Now Start with [Prepare Training lab](./00-prepare-training-lab/README.md).
 
 ## Resume Lab Environment
 If you are getting back to Google Cloud Shell and you want to resume access to your cluster,
-check the [00-prepare-training-lab/resume_lab.md](00-prepare-training-lab/resume_lab.md).
+check the [Resume lab](00-prepare-training-lab/resume_lab.md).

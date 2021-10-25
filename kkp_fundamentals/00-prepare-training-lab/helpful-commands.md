@@ -47,7 +47,7 @@ source <(kubeone completion bash)
 ```
 
 ## Install `kubens`, `kubetcx`, `fubectl`
-***NOTE:*** on google cloud check if it is already installed first.
+>NOTE: On Google Cloud, check if it is already installed first.
 
 ```bash
 mkdir -p ~/bin && cd ~/bin
@@ -78,4 +78,4 @@ Now use `kubectl delete all -l run=my-nginx` to stop and remove the running cont
 
 ## More?
 
-Take a look at [github.com/loodse/kubectl-hacking](https://github.com/loodse/kubectl-hacking)
+Take a look at [kubectl hacking](https://github.com/loodse/kubectl-hacking)
