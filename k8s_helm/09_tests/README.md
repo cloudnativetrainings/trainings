@@ -1,6 +1,8 @@
-# Testing
+# Helm Test
 
-In this task you will learn how to test your Chart.
+In this task, you will learn how to test your Chart.
+
+> Navigate to the directory `09_tests`, before getting started.
 
 ## Inspect the application
 
@@ -20,7 +22,7 @@ helm uninstall my-app
 
 ## Verify failing test
 
-Adapt the url in the test to something faulty.
+Adapt the URL in the test to something faulty.
 
 ```bash
 helm install my-app ./my-app 
@@ -36,8 +38,14 @@ kubectl logs my-app-test-<TAB>
 ```
 
 ## Cleanup
+* Delete the release and resources
+  ```bash
+  helm uninstall my-app
+  kubectl delete job my-app-test
+  ```
+* Jump back to home directory `k8s_helm`:
+  ```bash
+  cd -
+  ```
 
-```bash
-helm uninstall my-app
-kubectl delete job my-app-test
-```
+Jump > [Home](../README.md) | Previous > ['required' Function](../08_required/README.md) | Next > [Hooks](../10_hooks/README.md)

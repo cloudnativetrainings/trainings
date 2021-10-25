@@ -1,6 +1,8 @@
 # Ifs
 
-In this task you will make use of an if statement.
+In this task, you will make use of an if statement.
+
+> Navigate to the directory `07_ifs`, before getting started.
 
 ## Adapt the Configmap to the following
 
@@ -39,7 +41,13 @@ curl $ENDPOINT
 ```
 
 ## Cleanup
+* Delete the release
+  ```bash
+  helm uninstall ifs
+  ```
+* Jump back to home directory `k8s_helm`:
+  ```bash
+  cd -
+  ```
 
-```bash
-helm uninstall ifs
-```
+Jump > [Home](../README.md) | Previous > ['include' Function](../06_includes/README.md) | Next > ['required' Function](../08_required/README.md)

@@ -10,6 +10,9 @@ Learn the basics on how to work with Containers.
 ### [Kubernetes Fundamentals (K8sF)](k8s_fundamentals/README.md)
 Learn the basics about Kubernetes.
 
+### [Kubernetes with Helm (K8sH)](k8s_helm/README.md)
+Learn the basics about Helm to manage your Kubernetes applications. 
+
 ### Kubernetes Administration (K8sA)
 Learn how to manage Kubernetes clusters. Make use of kubeadm and kubeone to install and upgrade your clusters.
 

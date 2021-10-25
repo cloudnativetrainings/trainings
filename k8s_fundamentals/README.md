@@ -11,7 +11,7 @@
     git clone https://github.com/kubermatic-labs/trainings.git
     ```
 
-3. Navigate to Container Fundamentals training folder to get started
+3. Navigate to Kubernetes Fundamentals training folder to get started
     ```bash  
     cd trainings/k8s_fundamentals/
     ```
