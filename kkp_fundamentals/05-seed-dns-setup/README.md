@@ -101,4 +101,7 @@ Name:	test.kubermatic.kubermatic.student-XX-xxxx.loodse.training
 Address: 34.91.40.238
 ```
 
-In the next step we will create a user cluster into our newly set up Seed.
+In the next step, we will create a user cluster into our newly set up Seed.
+
+
+Jump > [Home](../README.md) | Previous > [Seed Cluster Setup](../04-add-seed-cluster/README.md) | Next > [User Cluster Setup](.../06-create-user-cluster/README.md)

@@ -159,3 +159,5 @@ Forwarding from [::1]:3000 -> 3000
 Now you will be able to access grafana on [localhost:3000](http://localhost:3000/).
 
 Same for any other available service, just use the right name and port.
+
+Jump > [Home](../README.md) | Previous > [Preset](../07-create-preset/README.md)

@@ -14,7 +14,7 @@ If you did the k1 fundamentals labs, feel free to copy the needed secrets to you
 cp -r $TRAINING_DIR/../k1_fundamentals/.secrets $TRAINING_DIR
 ```
 
->**Note - If you did the K1 fundamentals labs, please ensure that you destroyed the former KubeOne Cluster and DNS records with [../../k1_fundamentals/99_cluster-cleanup-or-pause](../../k1_fundamentals/99_cluster-cleanup-or-pause)!**
+>Note - If you did the K1 fundamentals labs, please ensure that you destroyed the former KubeOne Cluster and DNS records with the help of [cluster cleanup](../../k1_fundamentals/99_cluster-cleanup-or-pause)!
 
 ### Option-2 Create fresh credentials
 
@@ -113,3 +113,5 @@ After everything is provisioned, check if nodes will get healthy:
 export KUBECONFIG=`pwd`/kkp-master-kubeconfig
 watch kubectl get machinedeployments.cluster.k8s.io,machinesets,machine,nodes -A
 ```
+
+Jump > [Home](../README.md) | Previous > [Prepare Training Lab](../00-prepare-training-lab/README.md) | Next > [KKP Master Setup](.../02-kkp-master-setup/README.md)

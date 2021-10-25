@@ -95,3 +95,5 @@ As an opensource driven company, Kubermatic tries to contribute also a lot of he
 - [Official Documentation](https://docs.kubermatic.com/)
 - [Kubermatic Community Components](https://github.com/kubermatic/community-components)
 - [Kubermatic Forum](https://forum.kubermatic.com/)
+
+Jump > [Home](../README.md) | Next > [KubeOne Cluster Setup](../01-kubeone-cluster-setup/README.md) 

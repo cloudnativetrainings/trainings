@@ -88,3 +88,5 @@ After deletion, you will see that:
 - All created worker nodes in your [GCE - VM instances](https://console.cloud.google.com/compute/instances) page should be removed.
 - Network rules get deleted.
 - User Cluster namespace has been deleted `kubectl get ns`.
+
+Jump > [Home](../README.md) | Previous > [Seed DNS Setup](../05-seed-dns-setup/README.md) | Next > [Preset](.../07-create-preset/README.md)

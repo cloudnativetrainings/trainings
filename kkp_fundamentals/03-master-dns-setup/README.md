@@ -189,3 +189,5 @@ vkhbtrph6s   2m1s   student-XX          Active
 ## Check Cluster Creation
 
 If you click on `Create Cluster` button at Kubermatic UI, you will see the blank screen. Which is due to we have not added Seed yet. Once we will add Seed cluster, you will see Provider option enabled.
+
+Jump > [Home](../README.md) | Previous > [KKP Master Setup](../02-kkp-master-setup/README.md) | Next > [Seed Cluster Setup](.../04-add-seed-cluster/README.md)

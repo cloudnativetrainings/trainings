@@ -283,3 +283,5 @@ NAME                           READY   STATUS    RESTARTS   AGE
 s3-exporter-7d8f75d6d5-jfzsv   1/1     Running   0          21m
 s3-exporter-7d8f75d6d5-shngw   1/1     Running   0          21m
 ```
+
+Jump > [Home](../README.md) | Previous > [Master DNS Setup](../03-master-dns-setup/README.md) | Next > [Seed DNS Setup](.../05-seed-dns-setup/README.md)
