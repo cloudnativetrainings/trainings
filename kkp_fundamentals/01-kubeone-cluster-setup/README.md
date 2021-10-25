@@ -91,15 +91,17 @@ cp -r 01-kubeone-cluster-setup/kkp-master.template src/kkp-master
 export GCP_PROJECT_ID=__YOUR_GCP_PROJECT_ID__                  # student-XX-xxxx
 ```
 
-Replace TODO-YOUR-GCP-PROJECT-ID with your project id 
+Replace TODO-YOUR-GCP-PROJECT-ID with your project id. 
 ```bash
 cd $TRAINING_DIR/src/kkp-master
 find . -type f -exec sed -i 's/TODO-YOUR-GCP-PROJECT-ID/'"$GCP_PROJECT_ID"'/g' {} +
 ```
 
 Start SSH agent and add id_rsa
+>Update the SSH private `ssh_private_key_file` and public key `ssh_public_key_file` absolute path in `tf-infra/terraform.tfvars`. 
 ```bash
-source ../../helper-scripts/source-ssh-agent.sh
+eval `ssh-agent`
+ssh-add $TRAINING_DIR/.secrets/id_rsa
 ```
 
 Deploy K1 cluster
@@ -114,4 +116,4 @@ export KUBECONFIG=`pwd`/kkp-master-kubeconfig
 watch kubectl get machinedeployments.cluster.k8s.io,machinesets,machine,nodes -A
 ```
 
-Jump > [Home](../README.md) | Previous > [Prepare Training Lab](../00-prepare-training-lab/README.md) | Next > [KKP Master Setup](.../02-kkp-master-setup/README.md)
+Jump > [Home](../README.md) | Previous > [Prepare Training Lab](../00-prepare-training-lab/README.md) | Next > [KKP Master Setup](../02-kkp-master-setup/README.md)

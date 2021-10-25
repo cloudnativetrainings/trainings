@@ -89,4 +89,4 @@ After deletion, you will see that:
 - Network rules get deleted.
 - User Cluster namespace has been deleted `kubectl get ns`.
 
-Jump > [Home](../README.md) | Previous > [Seed DNS Setup](../05-seed-dns-setup/README.md) | Next > [Preset](.../07-create-preset/README.md)
+Jump > [Home](../README.md) | Previous > [Seed DNS Setup](../05-seed-dns-setup/README.md) | Next > [Preset](../07-create-preset/README.md)
