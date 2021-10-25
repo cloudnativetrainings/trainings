@@ -1,12 +1,11 @@
 # Resume Lab environment
 
-If you were using a Cloud Shell Environment of refreshed your local environment, these are the steps to be performed
-to start quickly.
+If you were using a Cloud Shell Environment of refreshed your local environment, these are the steps to be performed to start quickly.
 
 Make sure that these steps are executed inside the Tooling Container (if you are using it).
 
 ```bash
-docker run --name kubeone-tool-container -v $(pwd):/home/kubermatic/mnt -t -d quay.io/kubermatic-labs/kubeone-tooling:1.2.3
+docker run --name kubeone-tool-container -v $(pwd):/home/kubermatic/mnt -t -d quay.io/kubermatic-labs/kubeone-tooling:1.3.0
 docker exec -it kubeone-tool-container bash
 ```
 

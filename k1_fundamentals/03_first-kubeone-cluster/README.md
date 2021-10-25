@@ -9,7 +9,7 @@ apiVersion: kubeone.io/v1beta1
 kind: KubeOneCluster
 name: k1
 versions:
-  kubernetes: '1.20.9'
+  kubernetes: '1.21.5'
 cloudProvider:
   gce: {}
   cloudConfig: |-
@@ -84,9 +84,9 @@ INFO[23:08:36 CEST] Creating worker machines…
 ```
 
 A kubeconfig file will be generated after the KubeOne installation. Export it and use it to check the status of the Kubernetes cluster that was created:
-
+>Replace the cluster_name as set in `terraform.tfvars`
 ```bash
-export KUBECONFIG=$PWD/k1-kubeconfig 
+export KUBECONFIG=$PWD/<cluster_name>-kubeconfig 
 ```
 
 Check if you get one master and one worker node:
@@ -104,7 +104,7 @@ INFO[23:48:20 CEST] Verifying that nodes in the cluster match nodes defined in t
 INFO[23:48:20 CEST] Verifying that all nodes in the cluster are ready…
 INFO[23:48:20 CEST] Verifying that there is no upgrade in the progress…
 NODE                 VERSION   APISERVER   ETCD
-k1-control-plane-1   v1.20.9   healthy     healthy
+k1-control-plane-1   v1.21.5   healthy     healthy
 ```
 
 ```bash
@@ -113,7 +113,7 @@ kubectl get nodes
 
 ```text
 NAME                           STATUS   ROLES                  AGE     VERSION
-k1-control-plane-1             Ready    control-plane,master   13m     v1.20.9
+k1-control-plane-1             Ready    control-plane,master   13m     v1.21.5
 ```
 
 Why is the worker node missing? -> Check the Machine Controller objects
@@ -124,13 +124,13 @@ kubectl -n kube-system get machinedeployment,machineset,machine
 
 ```text
 NAME                                            REPLICAS   AVAILABLE-REPLICAS   PROVIDER   OS       KUBELET   AGE
-machinedeployment.cluster.k8s.io/k1-pool-az-a   1          0                    gce        ubuntu   1.20.9    1m19s
+machinedeployment.cluster.k8s.io/k1-pool-az-a   1          0                    gce        ubuntu   1.21.5    1m19s
 
 NAME                                               REPLICAS   AVAILABLE-REPLICAS   PROVIDER   OS       KUBELET   AGE
-machineset.cluster.k8s.io/k1-pool-az-a-ff4979f74   1          0                    gce        ubuntu   1.20.9    1m19s
+machineset.cluster.k8s.io/k1-pool-az-a-ff4979f74   1          0                    gce        ubuntu   1.21.5    1m19s
 
 NAME                                                  PROVIDER   OS       ADDRESS      KUBELET   AGE
-machine.cluster.k8s.io/k1-pool-az-a-ff4979f74-4vg7c   gce        ubuntu   10.240.0.6   1.20.9    1m19s
+machine.cluster.k8s.io/k1-pool-az-a-ff4979f74-4vg7c   gce        ubuntu   10.240.0.6   1.21.5    1m19s
 ```
 
 The created `machine` object gives you more information
@@ -141,7 +141,7 @@ kubectl -n kube-system describe machine
 
 ```text
 Versions:
-  Kubelet:  1.20.9
+  Kubelet:  1.21.5
 Status:
 Addresses:
   Address:  10.240.0.7
@@ -176,7 +176,7 @@ Node Ref:
   Resource Version:  1884
   UID:               da325955-841f-4538-bfe0-6f46518cbcc8
 Versions:
-  Kubelet:  v1.20.9
+  Kubelet:  v1.21.5
 Events:
 Type    Reason                          Age                    From                Message
 ----    ------                          ----                   ----                -------
@@ -198,3 +198,5 @@ kubectl get secret -n kube-system cloud-provider-credentials -o jsonpath='{.data
 ```
 
 This Secret is created by KubeOne and used when creating MachineDeployment by `machine-controller`.
+
+Jump > [**Home**](../README.md) | Previous > [**Cloud Infra Setup using Terraform**](../02_initial-cloud-infra-with-terraform/README.md) | Next > [**Deploy a Simple Application**](../04_deploy-app-01-simple/README.md)

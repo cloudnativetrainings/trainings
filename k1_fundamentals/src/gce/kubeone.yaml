@@ -2,7 +2,7 @@ apiVersion: kubeone.io/v1beta1
 kind: KubeOneCluster
 name: k1
 versions:
-  kubernetes: '1.20.9'
+  kubernetes: '1.21.5'
 cloudProvider:
   gce: {}
   cloudConfig: |-

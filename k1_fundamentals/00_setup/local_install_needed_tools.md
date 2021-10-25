@@ -6,7 +6,7 @@
 Install the latest version of KubeOne (go needs to be installed or visit and download the binaries here: [KubeOne/releases](https://github.com/kubermatic/kubeone/releases))
 
 ```bash
-mkdir /tmp/k1 && cd /tmp/k1 && wget https://github.com/kubermatic/kubeone/releases/download/v1.2.3/kubeone_1.2.3_linux_amd64.zip
+mkdir /tmp/k1 && cd /tmp/k1 && wget https://github.com/kubermatic/kubeone/releases/download/v1.3.0/kubeone_1.3.0_linux_amd64.zip
 unzip kubeone*.zip
 cp kubeone ~/bin/kubeone
 cd ~
