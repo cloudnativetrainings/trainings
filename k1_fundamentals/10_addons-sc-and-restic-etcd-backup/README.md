@@ -11,7 +11,7 @@ Addons are a mechanism used to deploy Kubernetes resources after provisioning th
 
 This document explains how to use addons in your workflow. If you want to learn more about how addons are implemented, you can check the [documentation](https://docs.kubermatic.com/kubeone/master/guides/addons/) for more details.
 
-**HINT:** Some Kubermatic KKP Addons will potentially work as well for KubeOne, you only need to ensure that executed Templating matches, see [KubeOne Addon Templating](https://docs.kubermatic.com/kubeone/master/guides/addons/#templating) vs. [KKP Addon - Manifest Templating](https://docs.kubermatic.com/kubermatic/master/guides/addons/#manifest-templating).
+>**HINT:** Some Kubermatic KKP Addons will potentially work as well for KubeOne, you only need to ensure that executed Templating matches, see [KubeOne Addon Templating](https://docs.kubermatic.com/kubeone/master/guides/addons/#templating) vs. [KKP Addon - Manifest Templating](https://docs.kubermatic.com/kubermatic/master/guides/addons/#manifest-templating).
 
 Some "raw" Addons can be found here:
 - [KKP Default Addons](https://github.com/kubermatic/kubermatic/tree/master/addons)
@@ -22,7 +22,7 @@ Some "raw" Addons can be found here:
 If you take a look in your current cluster, currently no storage class is applied. If you create a new Persistent Volume Claim, no storage get applied.
 
 ```bash
-cd $TRAINING_DIR # folder 'k1_fundamentals'
+cd $TRAINING_DIR
 kubectl get sc
 ```
 
@@ -35,13 +35,19 @@ Let's now deploy a pod with some PVC:
 ```bash
 kubectl create ns sc-test
 kubectl config set-context --current --namespace=sc-test
-# or
+```
+or
+```bash
 kcns sc-test
+```
 
-# create a PVC
+Create a PVC
+```bash
 kubectl apply -f 10_addons-sc-and-restic-etcd-backup/pvc.test.yaml
+```
 
-# check the pending pod,pvc,pv state
+Check the pending pod,pvc,pv state
+```bash
 kubectl get pod,pvc,pv
 ```
 
@@ -55,8 +61,11 @@ persistentvolumeclaim/my-pvc   Pending                                          
 
 If you now describe the PVC `my-pvc` you will see the error:
 
-```text
+```bash
 kubectl describe pvc my-pvc 
+```
+
+```text
 Name:          my-pvc
 Namespace:     sc-test
 StorageClass:  
@@ -77,7 +86,7 @@ Events:
 
 As the error tells you `no storage class is set`, we need to configure a storage class. To get familiar with the storage class concept, take a look at the official [Kubernetes Documentation - Storage Classes](https://kubernetes.io/docs/concepts/storage/storage-classes/).
 
-As a reference we could take a look into the [KKP Addon > Default Storage Class](https://github.com/kubermatic/kubermatic/blob/master/addons/default-storage-class/storage-class.yaml) and search GCP one.
+As a reference, we could take a look into the [KKP Addon > Default Storage Class](https://github.com/kubermatic/kubermatic/blob/master/addons/default-storage-class/storage-class.yaml) and search GCP one.
 
 ```yaml
 apiVersion: storage.k8s.io/v1
@@ -93,24 +102,26 @@ parameters:
   type: pd-ssd
 ```
 
-This config seams to look fine for our KubeOne cluster as well. As the cloud controller manager is taking care about the communication to GCE, we can directly use this storage class. For more information see [Storage Class - GCE PD](https://kubernetes.io/docs/concepts/storage/storage-classes/#gce-pd). At this documentation page you also find quite a good starting point for every other supported Kubernetes Storage Class.
+This config seems to look fine for our KubeOne cluster as well. As the cloud controller manager is taking care about the communication to GCE, we can directly use this storage class. For more information see [Storage Class - GCE PD](https://kubernetes.io/docs/concepts/storage/storage-classes/#gce-pd). At this documentation page, you also find quite a good starting point for every other supported Kubernetes Storage Class.
 
 Now let's create a new addon for our setup with the above Storage Class.
 
 ```bash
 cd $TRAINING_DIR/src/gce
-
-#first create the storage class manifest fest file
-mkdir "addons"
-vim addons/sc.yaml
-### <<< paste here the storage class object from above
-
-#now configure kubeone.yaml
-vim kubeone.yaml
 ```
 
-As we don't use the templating functions, we can enable the addon mechanism directly:
+First create the storage class manifest fest file
+```bash
+mkdir -p "addons"
+vim addons/sc.yaml
+```
+>Paste here the storage class object from above
 
+Now configure kubeone.yaml
+```bash
+vim kubeone.yaml
+```
+As we don't use the templating functions, we can enable the addon mechanism directly:
 ```yaml
 apiVersion: kubeone.io/v1beta1
 kind: KubeOneCluster
@@ -152,7 +163,7 @@ Run with --verbose flag for more information.
 Do you want to proceed (yes/no): yes
 ```
 
-If you now inspect your cluster you see the storage class has been applied and is ready to use. To ensure KubeOne is "aware" of the addon a label `kubeone.io/addon: ""` is added:
+If you now inspect your cluster, you see the storage class has been applied and is ready to use. To ensure KubeOne is "aware" of the addon, a label `kubeone.io/addon: ""` is added:
 
 ```bash
 kubectl get sc standard -o yaml
@@ -218,12 +229,12 @@ persistentvolume/pvc-c3979b78-4898-4576-be9b-047c31abc11c   1Gi        RWO      
 
 # 2. Restic Backup for etcd Snapshots
 
-Next we want to create a dedicated backup for our etcd database in an automated way. So as reference KubeOne already have a default addon for storing the etcd snapshots at a S3 Location, see [Restic backup addon](https://docs.kubermatic.com/kubeone/master/examples/addons_backup). Now we want to adjust it to use our GCP Storage Bucket.
+Next we want to create a dedicated backup for our etcd database in an automated way. So as reference, KubeOne already have a default addon for storing the etcd snapshots at a S3 Location, see [Restic backup addon](https://docs.kubermatic.com/kubeone/master/examples/addons_backup). Now we want to adjust it to use our GCP Storage Bucket.
 
-The chapter folder already contains and template what have been adjusted to use GS bucket. If you compare the both files [`template.backups-restic.yaml`](./template.backups-restic.yaml) and [`backups-restic.yaml`](https://github.com/kubermatic/kubeone/raw/master/addons/backups-restic/backups-restic.yaml) you see that only minor adjustment has been needed. For more details how to configure Restic, see the [Restic Documentation - Preparing a new repository - Google Cloud Storage](https://restic.readthedocs.io/en/stable/030_preparing_a_new_repo.html#google-cloud-storage).
+The chapter folder already contains and template what have been adjusted to use GS bucket. If you compare the both files [`template.backups-restic.yaml`](./template.backups-restic.yaml) and [`backups-restic.yaml`](https://github.com/kubermatic/kubeone/raw/master/addons/backups-restic/backups-restic.yaml), you see that only minor adjustment has been needed. For more details how to configure Restic, see the [Restic Documentation - Preparing a new repository - Google Cloud Storage](https://restic.readthedocs.io/en/stable/030_preparing_a_new_repo.html#google-cloud-storage).
 ![restic_yaml_diff_s3_vs_gs](../.images/restic_yaml_diff_s3_vs_gs.png)
 
-To prevent to manage Google Service Account credential secret, we can use the [KubeOne Addon Templating](https://docs.kubermatic.com/kubeone/master/guides/addons/#templating) and render the `.Credentials object` into a base64 encoded secret. At the KubeOne Go code we can see the data constant what get used for credential rendering [`pkg/credentials/credentials.go`](https://github.com/kubermatic/kubeone/blob/c824810769d4ce55b3cfdc560b46b6563c8c509e/pkg/credentials/credentials.go), in our case we use the `.Credentials.GOOGLE_CREDENTIALS` what is wrapped into the [`b64enc` sprig function](http://masterminds.github.io/sprig/encoding.html).
+To prevent to manage Google Service Account credential secret, we can use the [KubeOne Addon Templating](https://docs.kubermatic.com/kubeone/master/guides/addons/#templating) and render the `.Credentials object` into a base64 encoded secret. At the KubeOne Go code, we can see the data constant what get used for credential rendering [`pkg/credentials/credentials.go`](https://github.com/kubermatic/kubeone/blob/c824810769d4ce55b3cfdc560b46b6563c8c509e/pkg/credentials/credentials.go). In our case, we use the `.Credentials.GOOGLE_CREDENTIALS` what is wrapped into the [`b64enc` sprig function](http://masterminds.github.io/sprig/encoding.html).
 
 Now let's copy the template and adjust the needed `<<TODO_xxxx>>` parameters to our lab environment:
 
@@ -248,7 +259,7 @@ grep TODO addons/gs.backups-restic.yaml
 kubeone apply -t ./tf-infra --verbose
 ```
 
-You see the adjustments of the backup location, isn't hard and could be done a few changes of the restic environment variables. So let's now test if we could see a cronjob and execute a test backup.
+You see the adjustments of the backup location, isn't hard and could be done a few changes of the restic environment variables. So let's now test, if we could see a cronjob and execute a test backup.
 
 ```bash
 kubectl get cronjobs -n kube-system
@@ -258,19 +269,24 @@ kubectl get cronjobs -n kube-system
 NAME             SCHEDULE     SUSPEND   ACTIVE   LAST SCHEDULE   AGE
 etcd-gs-backup   @every 30m   False     0        <none>          9s
 ```
+>As you see, every `30m` will automatic backup job be scheduled now.
 
-As you see every `30m` will now automatic backup job scheduled.
-To test now the backup create we create a manual test job:
-
+To test now the backup create, we create a manual test job:
 ```bash
 kubectl config set-context --current --namespace=kube-system
-# or
+```
+or
+```bash
 kcns kube-system
+```
 
-# create a job from the cronjob
+Create a job from the cronjob
+```bash
 kubectl create job --from cronjob/etcd-gs-backup test-etcd-backup
+```
 
-# check if job got created and pod is running
+Check, if job got created and pod is running
+```bash
 kubectl get job,pod | grep test
 ```
 
@@ -279,14 +295,15 @@ job.batch/test-etcd-backup   1/1           18s        79s
 pod/test-etcd-backup-gg8gw                        0/1     Completed   0          79s
 ```
 
+Check the logs of the backup pod
 ```bash
-# check the logs of the backup pod
 kubectl logs test-etcd-backup-gg8gw
-
-# see if the bucket contains restic data
-gsutil ls -r gs://k1-backup-bucket-student-XX/etcd-snapshot-backup
 ```
 
+See, if the bucket contains restic data
+```
+gsutil ls -r gs://k1-backup-bucket-student-XX/etcd-snapshot-backup
+```
 Alright, seems everything looks fine, and our cluster has automatic backup configured.
 
 Jump > [**Home**](../README.md) | Previous > [**Velero Backup Process**](../09_backup_velero/README.md) | Next > [**KubeOne and Kubernetes Upgrade**](../11_kubeone_upgrade/README.md)

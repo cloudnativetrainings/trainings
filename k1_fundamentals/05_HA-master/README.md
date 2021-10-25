@@ -58,7 +58,7 @@ In the next step, we will setup a real HA cluster over 3 availability zones to m
   ```
   or 
   ```bash
-  kubeone apply -t tf.json --manifest kubeone.yaml --force-upgrade
+  kubeone apply -t tf.json --manifest ../kubeone.yaml --force-upgrade
   ```
   Alternatively, the `kubeone upgrade` command can be used as well:
   ```bash

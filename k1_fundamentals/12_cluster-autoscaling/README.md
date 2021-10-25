@@ -1,13 +1,13 @@
-# Apply Cluster Auto Scaler
+# Cluster AutoScaling
 
-First we need to deploy the cluster autoscaler controller. As reference take a look at cluster autoscaler addon: [kubeone - addons/cluster-autoscaler](https://github.com/kubermatic/kubeone/tree/master/addons/cluster-autoscaler).
+First we need to deploy the cluster autoscaler controller. As reference take a look at [Cluster Autoscaler](https://github.com/kubermatic/kubeone/tree/master/addons/cluster-autoscaler) addon.
 
-For this lab, current version is added here: [`./cluster-autoscaler.yaml`](./cluster-autoscaler.yaml), so first copy this to the KubeOne folder:
+For this lab, current version is copied to the KubeOne `addons` folder:
 ```bash
 cd $TRAINING_DIR/src/gce
 cp ../../12_cluster-autoscaling/cluster-autoscaler.yaml ./addons/
 ```
-Deploy the autoscaler addon
+Deploy the Cluster Autoscaler addon:
 ```bash
 kubeone apply -t ./tf-infra/
 ```
@@ -75,7 +75,7 @@ I0520 14:30:31.754179       1 klogx.go:86] Pod app-ext/helloweb-6b9678d59f-frjhv
 I0520 14:30:31.755596       1 scale_up.go:453] No expansion options
 ```
 
-It seems there is no option for scale right now. To fix this we need to set the following annotations to the machine deployments:
+It seems, there is no option for scale right now. To fix this we need to set the following annotations to the machine deployments:
 
 ```yaml
 kind: MachineDeployment
