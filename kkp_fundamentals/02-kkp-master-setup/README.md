@@ -85,57 +85,31 @@ grep --line-number $DNS_ZONE ./*.yaml
 For proper authentication, shared secrets must be configured between Dex and KKP.
 
 Generate first a new secret:
+```bash
+export RANDOM_SECRET=$(cat /dev/urandom | tr -dc A-Za-z0-9 | head -c32)
+```
+
+Replace the placeholder `TODO-A-RANDOM-SECRET` with newly generated secret value:
 
 ```bash
-cat /dev/urandom | tr -dc A-Za-z0-9 | head -c32
+sed -i 's/TODO-A-RANDOM-SECRET/'"$RANDOM_SECRET"'/g' ./values.yaml
 ```
+
+Also set the same newly generated secret value for client - the KKP UI - at the `kubermatic.yaml` config:
+```bash
+sed -i 's/TODO-KUBERMATIC-OAUTH-SECRET-FROM-VALUES.YAML/'"$RANDOM_SECRET"'/g' ./kubermatic.yaml
+```
+
+For some service communication and cookie key, we should now also replace the following `TODO-A-RANDOM-ISSUERCOOKIEKEY` and `TODO-A-RANDOM-SERVICEACCOUNTKEY` in the `kubermatic.yaml` with some random values. Again generate two random values using below command.
 
 ```bash
-vim values.yaml
-```
-
-```yaml
-
-  clients:
-  # The "kubermatic" client is used for logging into the Kubermatic dashboard. It always needs to be configured.
-  - id: kubermatic
-    name: Kubermatic
-    # generate a secure secret key with:
-    # cat /dev/urandom | tr -dc A-Za-z0-9 | head -c32
-    secret: "TODO-A-RANDOM-KEY"   <<< CHANGE
-    RedirectURIs:
-```
-
-Also set the **SAME** secret for client - the KKP UI - at the `kubermatic.yaml` config:
-
-```bash
-vim kubermatic.yaml
-```
-
-```yaml
-
-    # this must match the secret configured for the kubermatic client from
-    # the values.yaml.
-    issuerClientSecret: TODO-KUBERMATIC-OAUTH-SECRET-FROM-VALUES.YAML  <<< CHANGE 
-```
-
-For some service communication and cookie key, we should now also replace the following `TODO-A-RANDOM-KEY` in the `kubermatic.yaml` with some random values. Again generate two random values using below command.
-
-```bash
-cat /dev/urandom | tr -dc A-Za-z0-9 | head -c32
-cat /dev/urandom | tr -dc A-Za-z0-9 | head -c32
+export ISSUERCOOKIEKEY=$(cat /dev/urandom | tr -dc A-Za-z0-9 | head -c32)
+export SERVICEACCOUNTKEY=$(cat /dev/urandom | tr -dc A-Za-z0-9 | head -c32)
 ```
 
 ```bash
-vim kubermatic.yaml
-```
-
-```yaml
-    # these need to be randomly generated. Those can be generated on the
-    # shell using:
-    # cat /dev/urandom | tr -dc A-Za-z0-9 | head -c32
-    issuerCookieKey: TODO-A-RANDOM-KEY      <<< CHANGE
-    serviceAccountKey: TODO-A-RANDOM-KEY    <<< CHANGE
+sed -i 's/TODO-A-RANDOM-ISSUERCOOKIEKEY/'"$ISSUERCOOKIEKEY"'/g' ./kubermatic.yaml
+sed -i 's/TODO-A-RANDOM-SERVICEACCOUNTKEY/'"$SERVICEACCOUNTKEY"'/g' ./kubermatic.yaml
 ```
 
 Next step is to configure a so called [DEX Connector](https://github.com/dexidp/dex#connectors) for the user authentication.
@@ -160,14 +134,14 @@ vim values.yaml
       userID: "08a8684b-db88-4b73-90a9-3cd1661f5466"
 ```
 
-**NOTE:** As an alternative of Dex, existing Keycloak installation could also be configured. Have a look in the [Kubermatic Docs](https://docs.kubermatic.com/kubermatic/master/tutorials_howtos/oidc_provider_configuration/) for more information.
+>NOTE: As an alternative of Dex, existing Keycloak installation could also be configured. Have a look in the [Kubermatic Docs](https://docs.kubermatic.com/kubermatic/master/tutorials_howtos/oidc_provider_configuration/) for more information.
 
 ### Validate all variables are set
 
 ```bash
-# Output should be blank
 grep --line-number TODO ./*.yaml
 ```
+>Output should be blank
 
 ## Download the KKP Installer
 

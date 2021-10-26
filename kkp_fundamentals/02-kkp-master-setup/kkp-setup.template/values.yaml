@@ -9,7 +9,7 @@ dex:
     name: Kubermatic
     # generate a secure secret key with:
     # cat /dev/urandom | tr -dc A-Za-z0-9 | head -c32
-    secret: "TODO-A-RANDOM-KEY"
+    secret: "TODO-A-RANDOM-SECRET"
     RedirectURIs:
     - https://kubermatic.TODO-STUDENT-DNS.loodse.training
     - https://kubermatic.TODO-STUDENT-DNS.loodse.training/projects
