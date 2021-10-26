@@ -12,31 +12,31 @@ KubeOne is doing a set of preflight checks to ensure all prerequisites are satis
 
 Once the upgrade process starts for a node, KubeOne applies the `kubeone.io/upgrade-in-progress` label on the node object. This label is used as a lock mechanism, so if the upgrade fails or it's already in progress, you can't start it again.
 
-**NOTE:** For production environments it's recommended to backup your cluster before running the upgrade process. You can do it by the [restic backup addon](https://docs.kubermatic.com/kubeone/master/examples/addons_backup), using [Velero](https://github.com/vmware-tanzu/velero) or any other tool of your choice.
+**NOTE:** For production environments, it's recommended to backup your cluster before running the upgrade process. You can do it by the [restic backup addon](https://docs.kubermatic.com/kubeone/master/examples/addons_backup), using [Velero](https://github.com/vmware-tanzu/velero) or any other tool of your choice.
 
-Before running an upgrade please ensure that your KubeOne version supports upgrading to the desired Kubernetes version. Check the [Kubernetes Versions Compatibility](https://docs.kubermatic.com/kubeone/master/architecture/compatibility/) part of the KubeOne's README for more details on supported Kubernetes versions for each KubeOne release. You can check what KubeOne version you're running using the `kubeone version` command.
+Before running an upgrade, please ensure that your KubeOne version supports upgrading to the desired Kubernetes version. Check the [Kubernetes Versions Compatibility](https://docs.kubermatic.com/kubeone/master/architecture/compatibility/) part of the KubeOne's README for more details on supported Kubernetes versions for each KubeOne release. You can check what KubeOne version you're running using the `kubeone version` command.
 
 **NOTE:** In Kubernetes it is recommended to only update one minor version every time. So if you want to update from `1.15.x` to `1.17.x`, please upgrade first to `1.16.x`! The latest release version can be found at [Github Kubernetes Releases](https://github.com/kubernetes/kubernetes/tags).
 
 The upgrade process can be started by running the `kubeone apply` command or optionally if you want to also upgrade the worker nodes at the same time `kubeone apply --upgrade-machine-deployments`.
 More Details will follow.
 
-To start with the upgrade please follow the steps below.
+To start with the upgrade, please follow the below steps.
 
 # KubeOne Cluster Upgrade Process
 
-In this section, we are going to upgrade the KubeOne cluster from version `1.20.9` to latest `1.21.4`
+In this section, we are going to upgrade the KubeOne cluster from version `1.21.5` to latest `1.22.2`
 
 ## Update Cluster Config
 
-Update the `kubeone.yaml` file by changing the value of kubernetes to `1.21.4`:
+Update the `kubeone.yaml` file by changing the value of kubernetes to `1.22.2`:
 
 ```yaml
 apiVersion: kubeone.io/v1beta1
 kind: KubeOneCluster
 name: k1
 versions:
-  kubernetes: '1.21.4' <<< UPDATE
+  kubernetes: '1.22.2' <<< UPDATE
 cloudProvider:
 #....
 ```
@@ -48,15 +48,17 @@ Perform the check-list before proceeding:
 1. Export the GCP authentication token with **`cat`**: 
 
 ```bash
-echo $GOOGLE_CREDENTIALS 
-# should output the credentials, if not continue with below step
+echo $GOOGLE_CREDENTIALS
+```
+> Should output the credentials, if not continue with below step
 
-# if empty see 00_setup chapter and execute
-cd $TRAINING_DIR # folder 'k1_fundamentals'
+If empty, see Setup chapter and execute
+```bash
+cd $TRAINING_DIR 
 export GOOGLE_CREDENTIALS=$(cat ./.secrets/k8c-cluster-provisioner-sa-key.json)
 ```
 
-2. SSH keys should be part of your key list (see also [How KubeOne uses SSH](https://github.com/kubermatic/kubeone/blob/master/docs/ssh.md)):
+2. SSH keys should be part of your key list (see also [How KubeOne uses SSH](https://docs.kubermatic.com/kubeone/master/guides/ssh/)):
 
 ```bash
 ssh-add -l
@@ -66,10 +68,9 @@ ssh-add -l
 2048 SHA256:gAE3vgEERDISmtIwShe2CZtQZHam70sx4JznaLg3iEM kubermatic@7e54c85f5e39 (RSA)
 ```
 
-*Hint: If empty or your ssh-agent is not running, add your SSH identity file:*
-
+If empty or your ssh-agent is not running, add your SSH identity file:
 ```bash
-cd $TRAINING_DIR # folder 'k1_fundamentals'
+cd $TRAINING_DIR
 eval `ssh-agent`
 ssh-add .secrets/id_rsa
 ```
@@ -85,11 +86,11 @@ kubectl version --short
 ```
 
 ```text
-Client Version: v1.21.1
-Server Version: v1.20.9
+Client Version: v1.22.2
+Server Version: v1.21.5
 ```
 
-If the `Client Version` is LOWER then your target version, please update your `kubectl` to the latest version:
+If the `Client Version` < your target kubernetes version, please update your `kubectl` to the latest version:
 
 ```bash
 curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
@@ -97,45 +98,38 @@ sudo mv kubectl /usr/bin/kubectl
 sudo chmod +x /usr/bin/kubectl
 ```
 
-*N.B - This step is recommended at local system because sometimes operational commands might give some errors when you use a separate kubectl client version that is lower as the installed kubernetes cluster version.* 
+>This step is recommended to be performed at local system because sometimes operational commands might give some errors, when you use a separate kubectl client version that is lower as the installed kubernetes cluster version.
 
-*At the tooling container you potentially need exec into as root, e.g.:`docker exec -it -u 0 kubeone-tool-container bash`*
+>At the tooling container, you potentially need exec into as root, e.g.:`docker exec -it -u 0 kubeone-tool-container bash`
 
 ## Execute the upgrade through `kubeone apply`
 
 As mentioned previously there are two ways to implement the upgrade:
-To watch the upgrade process, open a **SECOND shell**:
 
+If you use the tooling conainer, open a new shell, do again
 ```bash
-### if you use the tooling conainer, open a new shell, do again
 docker exec -it kubeone-tool-container bash
+```
 
-cd $TRAINING_DIR # folder 'k1_fundamentals'
+To watch the upgrade process, open a **SECOND shell**:
+```bash
+cd $TRAINING_DIR
 export KUBECONFIG=`pwd`/src/gce/k1-kubeconfig
 watch kubectl get md,ms,ma,nodes -A
 ```
 
-### 1. Option: Update Master + Worker in one action
+### Option 1: Update Master + Worker in one action
 
-The first approach to upgrade the cluster is to combine the upgrade of both the master and worker nodes together in a single command. KubeOne will first of all upgrade the master nodes then proceed to upgrade the worker nodes using the machine-controller (via the MachineDeployment) that is installed within the cluster. This is the approach we are going to use to upgrade the cluster in this write-up, below is the command syntax and sample output that should be printed out.
+The first approach to upgrade the cluster is to combine the upgrade of both the master and worker nodes together in a single command. KubeOne will first of all upgrade the master nodes then proceed to upgrade the worker nodes using the machine-controller (via the MachineDeployment) that is installed within the cluster. We are going to use this approach to upgrade the cluster in this write-up, below is the command syntax and sample output that should be printed out.
 
-***Please ensure your terraform state is up to date***.
-
+>Please ensure your latest terraform state is up to date.
 ```bash
-# ensure latest terraform information are loaded
 cd $TRAINING_DIR/src/gce/tf-infra
 terraform refresh
-
 kubeone apply -t . -m ../kubeone.yaml --upgrade-machine-deployments --verbose
 ```
 
 You can also check the full documentation for the upgrade process: [KubeOne Upgrade Process](https://docs.kubermatic.com/kubeone/master/tutorials/upgrading_clusters/)
-
-During the upgrade process you can watch the state in a **SECOND** shell by:
-
-```bash
-watch kubectl -n kube-system get md,ma,node
-```
 
 #### Check/confirm status of the new upgrade version
 
@@ -146,8 +140,8 @@ kubectl version --short
 ```
 
 ```text
-Client Version: v1.21.1
-Server Version: v1.21.4
+Client Version: v1.21.2
+Server Version: v1.22.2
 ```
 
 ```bash
@@ -160,29 +154,28 @@ kubectl get nodes
 
 ```text
 NAME                                STATUS   ROLES    AGE     VERSION
-k1-control.1.test-00-kubermatic     Ready    master   24h     v1.21.4
-k1-control.2.test-00-kubermatic     Ready    master   24h     v1.21.4
-k1-control.3.test-00-kubermatic     Ready    master   24h     v1.21.4
-k1-pool-az-a-75dfcdb6cb-4ms69       Ready    <none>   5m54s   v1.21.4
-k1-pool-az-a-75dfcdb6cb-bfxk2       Ready    <none>   8m5s    v1.21.4
-k1-pool-az-a-75dfcdb6cb-pn2n5       Ready    <none>   3m53s   v1.21.4
+k1-control.1.test-00-kubermatic     Ready    master   24h     v1.22.2
+k1-control.2.test-00-kubermatic     Ready    master   24h     v1.22.2
+k1-control.3.test-00-kubermatic     Ready    master   24h     v1.22.2
+k1-pool-az-a-75dfcdb6cb-4ms69       Ready    <none>   5m54s   v1.22.2
+k1-pool-az-a-75dfcdb6cb-bfxk2       Ready    <none>   8m5s    v1.22.2
+k1-pool-az-a-75dfcdb6cb-pn2n5       Ready    <none>   3m53s   v1.22.2
 ```
 
-### 2. Option: Upgrade first master nodes and then the workers
+### Option 2: Upgrade first master nodes and then the workers
 
 The second option would be to use KubeOne `kubeone apply` command only to upgrade only the master nodes and later the MachineDeployments or static workers.
 
-***Please ensure your terraform state is up to date***.
-
+>Please ensure your latest terraform state is up to date.
 ```bash
 terraform refresh
 kubeone apply -t . -m ../kubeone.yaml --verbose
 ```
 
-If you take this route then you will have to upgrade the worker nodes manually by editing all the MachineDeployment objects after upgrading the master nodes. Therefore, you need change the **`spec.template.spec.providerSpec.versions.kubelet`** section to `1.21.4`
+If you take this route, then you will have to upgrade the worker nodes manually by editing all the MachineDeployment objects after upgrading the master nodes. Therefore, you need change the **`spec.template.spec.providerSpec.versions.kubelet`** section to `1.22.2`
 
 ```bash
-vim ../machines/md-zonne-a.yaml
+vim ../machines/md-zone-a.yaml
 ```
 
 Modify the yaml:
@@ -220,13 +213,13 @@ Modify the yaml:
           - |
             ssh-rsa ...
       versions:
-        kubelet: 1.20.9  << UPDATE to 1.21.4
+        kubelet: 1.21.5  << UPDATE to 1.22.2
 ```
 
 Or use `sed`:
 
 ```bash
-sed -i 's/1.20.9/1.21.4/g' ../machines/*.yaml
+sed -i 's/1.21.5/1.22.2/g' ../machines/*.yaml
 kubectl apply -f ../machines
 ```
 
@@ -241,36 +234,36 @@ kubectl get md,ms,ma,nodes -A
 
 ```text
 NAMESPACE     NAME                                            REPLICAS   AVAILABLE-REPLICAS   PROVIDER   OS       KUBELET   AGE
-kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-a   1          1                    gce        ubuntu   1.21.4    2d
-kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-b   1          1                    gce        ubuntu   1.21.4    38h
-kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-c   1          1                    gce        ubuntu   1.21.4    38h
+kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-a   1          1                    gce        ubuntu   1.22.2    2d
+kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-b   1          1                    gce        ubuntu   1.22.2    38h
+kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-c   1          1                    gce        ubuntu   1.22.2    38h
 
 NAMESPACE     NAME                                                REPLICAS   AVAILABLE-REPLICAS   PROVIDER   OS       KUBELET   AGE
-kube-system   machineset.cluster.k8s.io/k1-pool-az-a-584d589c8c   1                               gce        ubuntu   1.21.4    108s
-kube-system   machineset.cluster.k8s.io/k1-pool-az-a-7f976c98dd   0                               gce        ubuntu   1.20.9    2d
-kube-system   machineset.cluster.k8s.io/k1-pool-az-a-bd95f5c65    1          1                    gce        ubuntu   1.20.9    37h
-kube-system   machineset.cluster.k8s.io/k1-pool-az-b-6996d8f668   1          1                    gce        ubuntu   1.20.9    37h
-kube-system   machineset.cluster.k8s.io/k1-pool-az-b-6b7fcd6985   0                               gce        ubuntu   1.20.9    38h
-kube-system   machineset.cluster.k8s.io/k1-pool-az-b-7c455dc654   1                               gce        ubuntu   1.21.4    108s
-kube-system   machineset.cluster.k8s.io/k1-pool-az-c-66f96d6b66   0                               gce        ubuntu   1.20.9    38h
-kube-system   machineset.cluster.k8s.io/k1-pool-az-c-77478767d5   1                               gce        ubuntu   1.21.4    108s
-kube-system   machineset.cluster.k8s.io/k1-pool-az-c-7bdfbcd567   1          1                    gce        ubuntu   1.20.9    37h
+kube-system   machineset.cluster.k8s.io/k1-pool-az-a-584d589c8c   1                               gce        ubuntu   1.22.2    108s
+kube-system   machineset.cluster.k8s.io/k1-pool-az-a-7f976c98dd   0                               gce        ubuntu   1.21.5    2d
+kube-system   machineset.cluster.k8s.io/k1-pool-az-a-bd95f5c65    1          1                    gce        ubuntu   1.21.5    37h
+kube-system   machineset.cluster.k8s.io/k1-pool-az-b-6996d8f668   1          1                    gce        ubuntu   1.21.5    37h
+kube-system   machineset.cluster.k8s.io/k1-pool-az-b-6b7fcd6985   0                               gce        ubuntu   1.21.5    38h
+kube-system   machineset.cluster.k8s.io/k1-pool-az-b-7c455dc654   1                               gce        ubuntu   1.22.2    108s
+kube-system   machineset.cluster.k8s.io/k1-pool-az-c-66f96d6b66   0                               gce        ubuntu   1.21.5    38h
+kube-system   machineset.cluster.k8s.io/k1-pool-az-c-77478767d5   1                               gce        ubuntu   1.22.2    108s
+kube-system   machineset.cluster.k8s.io/k1-pool-az-c-7bdfbcd567   1          1                    gce        ubuntu   1.21.5    37h
 
 NAMESPACE     NAME                                                   PROVIDER   OS       ADDRESS                         KUBELET   AGE
-kube-system   machine.cluster.k8s.io/k1-pool-az-a-584d589c8c-7f9gb   gce        ubuntu   10.240.0.23                     1.21.4    108s
-kube-system   machine.cluster.k8s.io/k1-pool-az-a-bd95f5c65-lm4fj    gce        ubuntu   10.240.0.19                     1.20.9    6h50m
-kube-system   machine.cluster.k8s.io/k1-pool-az-b-6996d8f668-kx96z   gce        ubuntu   10.240.0.20                     1.20.9    6h50m
-kube-system   machine.cluster.k8s.io/k1-pool-az-b-7c455dc654-j2ggk   gce        ubuntu   k1-pool-az-b-7c455dc654-j2ggk   1.21.4    108s
-kube-system   machine.cluster.k8s.io/k1-pool-az-c-77478767d5-vffmd   gce        ubuntu   10.240.0.25                     1.21.4    108s
-kube-system   machine.cluster.k8s.io/k1-pool-az-c-7bdfbcd567-kdfn2   gce        ubuntu   10.240.0.22                     1.20.9    6h50m
+kube-system   machine.cluster.k8s.io/k1-pool-az-a-584d589c8c-7f9gb   gce        ubuntu   10.240.0.23                     1.22.2    108s
+kube-system   machine.cluster.k8s.io/k1-pool-az-a-bd95f5c65-lm4fj    gce        ubuntu   10.240.0.19                     1.21.5    6h50m
+kube-system   machine.cluster.k8s.io/k1-pool-az-b-6996d8f668-kx96z   gce        ubuntu   10.240.0.20                     1.21.5    6h50m
+kube-system   machine.cluster.k8s.io/k1-pool-az-b-7c455dc654-j2ggk   gce        ubuntu   k1-pool-az-b-7c455dc654-j2ggk   1.22.2    108s
+kube-system   machine.cluster.k8s.io/k1-pool-az-c-77478767d5-vffmd   gce        ubuntu   10.240.0.25                     1.22.2    108s
+kube-system   machine.cluster.k8s.io/k1-pool-az-c-7bdfbcd567-kdfn2   gce        ubuntu   10.240.0.22                     1.21.5    6h50m
 
 NAMESPACE   NAME                                 STATUS   ROLES                  AGE     VERSION
-            node/k1-control-plane-1              Ready    control-plane,master   2d      v1.21.4
-            node/k1-control-plane-2              Ready    control-plane,master   38h     v1.21.4
-            node/k1-control-plane-3              Ready    control-plane,master   38h     v1.21.4
-            node/k1-pool-az-a-bd95f5c65-lm4fj    Ready    <none>                 6h48m   v1.20.9
-            node/k1-pool-az-b-6996d8f668-kx96z   Ready    <none>                 6h47m   v1.20.9
-            node/k1-pool-az-c-7bdfbcd567-kdfn2   Ready    <none>                 6h48m   v1.20.9
+            node/k1-control-plane-1              Ready    control-plane,master   2d      v1.22.2
+            node/k1-control-plane-2              Ready    control-plane,master   38h     v1.22.2
+            node/k1-control-plane-3              Ready    control-plane,master   38h     v1.22.2
+            node/k1-pool-az-a-bd95f5c65-lm4fj    Ready    <none>                 6h48m   v1.21.5
+            node/k1-pool-az-b-6996d8f668-kx96z   Ready    <none>                 6h47m   v1.21.5
+            node/k1-pool-az-c-7bdfbcd567-kdfn2   Ready    <none>                 6h48m   v1.21.5
 ```
 
 After a few more minutes, the worker nodes also will be there in a new version. 
@@ -286,7 +279,7 @@ spec:
     type: RollingUpdate
 ```
 
-The property `maxUnavailable: 0` ensures, that every time during the update the capacity of the cluster will be stable. Anyway nodes get rescheduled by draining, what could influence your Application. To ensure rolling update of Nodes don't have an impact to your workload, check if your Application:
+The property `maxUnavailable: 0` ensures, that every time during the update the capacity of the cluster will be stable. Anyway nodes get rescheduled by draining, what could influence your application. To ensure rolling update of Nodes don't have an impact to your workload, check if your application:
 - Is managed by a higher object controller like `Deployment`
 - Replica count is higher as `1`. If only `1` replica is there, a short downtime during rescheduling is for sure present
 - Clients talking through a service to your set of pods
@@ -295,7 +288,7 @@ The property `maxUnavailable: 0` ensures, that every time during the update the 
 
 ### OS Upgrades
 
-At Ubuntu it's recommended to set the flag `distUpgradeOnBoot: true` in the `MachineDeployment:
+At Ubuntu, it's recommended to set the flag `distUpgradeOnBoot: true` in the `MachineDeployment:
 
 ```yaml
 apiVersion: cluster.k8s.io/v1alpha1
@@ -328,3 +321,5 @@ spec:
           operatingSystemSpec:
             disableAutoUpdate: false
 ```
+
+Jump > [**Home**](../README.md) | Previous > [**KubeOne AddOns**](../10_addons-sc-and-restic-etcd-backup/README.md) | Next > [**Cluster AutoScaling**](../12_cluster-autoscaling/README.md)

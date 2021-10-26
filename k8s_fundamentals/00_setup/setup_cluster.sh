@@ -54,7 +54,7 @@ then
     --network "projects/$PROJECT_NAME/global/networks/$NETWORK_NAME" --subnetwork "projects/$PROJECT_NAME/regions/$REGION/subnetworks/$NETWORK_NAME-subnet" \
     --services-ipv4-cidr=10.0.1.0/24 --default-max-pods-per-node=110 \
     --zone=$ZONE \
-    --cluster-version 1.20.10-gke.301 \
+    --cluster-version $CLUSTER_VERSION \
     --machine-type "n1-standard-4" --num-nodes "2" \
     --image-type "UBUNTU" --disk-type "pd-standard" --disk-size "100" \
     --enable-network-policy --enable-ip-alias \

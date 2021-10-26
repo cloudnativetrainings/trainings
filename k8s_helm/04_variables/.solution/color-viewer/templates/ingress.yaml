@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: my-{{ .Values.color }}-ingress
@@ -11,6 +11,9 @@ spec:
     - http:
         paths:
           - path: /{{ .Values.color }}
+            pathType: Exact
             backend:
-              serviceName: my-{{ .Values.color }}-service
-              servicePort: 80
+              service:
+                name: my-{{ .Values.color }}-service
+                port: 
+                  number: 80

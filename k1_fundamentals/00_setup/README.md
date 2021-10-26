@@ -18,7 +18,7 @@ If you have docker, git and a common IDE installed locally, you can quickly star
 
 ```bash
 git clone https://github.com/kubermatic-labs/trainings.git
-docker run --name kubeone-tool-container -v $(pwd):/home/kubermatic/mnt -t -d quay.io/kubermatic-labs/kubeone-tooling:1.2.3
+docker run --name kubeone-tool-container -v $(pwd):/home/kubermatic/mnt -t -d quay.io/kubermatic-labs/kubeone-tooling:1.3.0
 ```
 Connect into the running container and ensures that you can reattach if you get kicked out of the container:
 
@@ -32,7 +32,7 @@ docker exec -it kubeone-tool-container bash
 # remove old container
 docker rm -f kubeone-tool-container
 
-docker run --rm --name kubeone-tool-container -v $(pwd):/home/kubermatic/mnt -it quay.io/kubermatic-labs/kubeone-tooling:1.2.3 bash
+docker run --rm --name kubeone-tool-container -v $(pwd):/home/kubermatic/mnt -it quay.io/kubermatic-labs/kubeone-tooling:1.3.0 bash
 ```
 
 ### (Alternative) Use Google Cloud Shell
@@ -45,35 +45,46 @@ Now execute the above commands.
 
 After you entered the container, verify the setup:
 
-```bash
-### executed inside the tooling container
-export TRAINING_DIR=`pwd`/mnt/trainings/k1_fundamentals
-cd $TRAINING_DIR
+* Set the training directory path inside the container.
+  ```bash
+  export TRAINING_DIR=`pwd`/mnt/trainings/k1_fundamentals
+  cd $TRAINING_DIR
+  ```
 
-ls -la
-#### list of training folders
+* List the training folders
+  ```bash
+  ls -la
+  ```
 
-kubeone version
-#### version json with kubeone v1.2.3 should be shown
+* Verify the kubeone version, a json with kubeone v1.3.0 should be shown
+  ```bash
+  kubeone version
+  ```
 
-terraform version
-#### a recent terraform version (>= 0.15.x) should be shown
+* Verify terraform version, a recent version (>= 1.0.x) should be shown
+  ```bash
+  terraform version
+  ```
 
-gcloud version
-#### a recent gcloud SDK (>= 340.0.0)
+* Verify teh Google Cloud SDK version, a recent gcloud SDK (>= 359.0.0)
+  ```bash
+  gcloud version
+  ```
 
-kubectl version --short
-#### a recent kubectl version (>= v.1.20.0)
-```
+* Verify kubectl version, a recent kubectl version (>= v.1.22.0)
+  ```bash
+  kubectl version --short
+  ```
 
 ## Authenticate your GCP account
 
 Execute the setup script.
-
-```
+```bash
 ./00_setup/setup.sh
+```
 
-### should list your training projects
+List your training projects
+```bash
 gcloud projects list
 ```
 
@@ -84,7 +95,7 @@ student-00-xxx  student-00-xxx   999999999999
 
 ## Other helpful content
 
-The most needed shortcuts and tooling helper are already installed in the tooling container, anyway you could look over the [helpful_commands.md](helpful_commands.md) section, to read how e.g. install auto-completion and [fubectl](https://github.com/kubermatic/fubectl) for fast Kubernetes navigation.
+The most needed shortcuts and tooling helper are already installed in the tooling container, anyway you could look over the [helpful commands](helpful_commands.md) section, to read how e.g. install auto-completion and [fubectl](https://github.com/kubermatic/fubectl) for fast Kubernetes navigation.
 
 If you don't like to use the KubeOne tooling container and install all tools directly locally, you can take a look at:
 - [local_install_needed_tools.md](local_install_needed_tools.md)
@@ -94,3 +105,5 @@ As an opensource driven company, Kubermatic tries to contribute also a lot of he
 - [Official Documentation](https://docs.kubermatic.com/)
 - [Kubermatic Community Components](https://github.com/kubermatic/community-components)
 - [Kubermatic Forum](https://forum.kubermatic.com/)
+
+Jump > [**Home**](../README.md) | Next > [**GCE Service Account Setup**](../01_create-cloud-credentials/README.md)
