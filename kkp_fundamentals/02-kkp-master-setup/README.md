@@ -262,6 +262,6 @@ I0528 00:27:36.343760       1 request.go:645] Throttling request took 1.02000054
 
 It's complaining about `dial tcp: lookup kubermatic.student-00.loodse.training on 169.254.20.10:53: no such host`. As our installer told us, now we need to set correct DNS entries after installation completes.
 
-**NOTE:** Every change in configuration file can be executed by `kubectl apply -f kubermatic.yaml`. The Operator will update the Kubermatic installation accordingly. If you delete the `KubermaticConfiguration`, e.g. with `kubectl delete -f kubermatic.yaml`, the operator will also **DELETE** all Kubermatic components!
+>NOTE: Every change in configuration file can be executed by `kubectl apply -f kubermatic.yaml`. The Operator will update the Kubermatic installation accordingly. If you delete the `KubermaticConfiguration`, e.g. with `kubectl delete -f kubermatic.yaml`, the operator will also **DELETE** all Kubermatic components!
 
 Jump > [Home](../README.md) | Previous > [KubeOne Cluster Setup](../01-kubone-cluster-setup/README.md) | Next > [Master DNS Setup](../03-master-dns-setup/README.md)
