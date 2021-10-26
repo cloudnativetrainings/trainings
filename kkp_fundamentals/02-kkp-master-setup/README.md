@@ -2,9 +2,9 @@
 
 This chapter explains the installation procedure of KKP into a pre-existing Kubernetes cluster using installer.
 
-**Note** - To begin the installation, make sure you are using right KUBECONFIG.
+>Note - To begin the installation, make sure you are using right KUBECONFIG.
 
-Again for simplicity of training we have the predefined manifests at [`./kkp-setup.template`](./kkp-setup.template). Copy it to `src` directory using below commands.
+Again for simplicity of training, we have the predefined manifests at [`./kkp-setup.template`](./kkp-setup.template). Copy it to `src` directory using below commands.
 
 ```bash
 cp -r $TRAINING_DIR/02-kkp-master-setup/kkp-setup.template $TRAINING_DIR/src/kkp-setup
@@ -37,11 +37,13 @@ values.yaml:23:      username: "TODO-STUDENT-EMAIL@loodse.training"
 
 We need to set the necessary domain names in the `values.yaml`. Cert-manager will use these domains to request the necessary certificates from Let's encrypt later on.
 
-```bash
-### replace every entry of: TODO-STUDENT-DNS
+Find every entry of: TODO-STUDENT-DNS
+```bash 
 grep --line-number TODO-STUDENT-DNS ./*.yaml
+```
 
-# get gcloud DNS_ZONE
+Get gcloud DNS_ZONE
+```bash
 gcloud dns managed-zones list
 ```
 
@@ -50,16 +52,21 @@ NAME                DNS_NAME                             DESCRIPTION  VISIBILITY
 student-XX-xxxx     student-XX-xxxx.loodse.training.     k8c          public
 ```
 
+Export your zone name
 ```bash
-## export your zone name
 export DNS_ZONE=student-XX-xxxx   #WITHOUT loodse.training!
-# Replace TODO-STUDENT-DNS with your DNS.
+```
+Replace TODO-STUDENT-DNS with your DNS.
+```bash
 sed -i 's/TODO-STUDENT-DNS/'"$DNS_ZONE"'/g' ./*.yaml
+```
 
-## check results
-# Output will be blank if everything is correct.
+Verify - Output will be blank if everything is correct.
+```bash
 grep --line-number TODO-STUDENT-DNS ./*.yaml
-#Check if everything is correct and is matching your configured target DNS Zone!
+```
+Check if everything is correct and is matching your configured target DNS Zone!
+```bash
 grep --line-number $DNS_ZONE ./*.yaml
 ```
 
@@ -273,7 +280,7 @@ As we can see `kubermatic-api` pods are in the `CrashLoopBackOff` status, someth
 kubectl logs -n kubermatic kubermatic-api-xxxxxxxxx-xxxxx
 ```
 
-```json
+```text
 {"level":"info","time":"2021-05-28T00:27:35.242Z","caller":"cli/hello.go:36","msg":"Starting Kubermatic API (Enterprise Edition)...","version":"v2.17.3"}
 I0528 00:27:36.343760       1 request.go:645] Throttling request took 1.020000542s, request: GET:https://10.96.0.1:443/apis/coordination.k8s.io/v1?timeout=32s
 {"level":"fatal","time":"2021-05-28T00:27:36.606Z","caller":"kubermatic-api/main.go:126","msg":"failed to create an openid authenticator","issuer":"https://kubermatic.student-00.loodse.training/dex","oidcClientID":"kubermatic","error":"Get \"https://kubermatic.student-00.loodse.training/dex/.well-known/openid-configuration\": dial tcp: lookup kubermatic.student-00.loodse.training on 169.254.20.10:53: no such host"
