@@ -31,22 +31,26 @@ grafana:
       disable_login_form: false
 ```
 
+Edit `values.yaml` and paste the content above.
 ```bash
 cd $TRAINING_DIR/src/kkp-setup/
 vim values.yaml
-# paste the content above
+```
 
-# get gcloud DNS_ZONE
+Get gcloud DNS_ZONE and set the value of `DNS_ZONE`.
+```bash
 gcloud dns managed-zones list
 export DNS_ZONE=student-XX-xxxx   #WITHOUT loodse.training!
-# Replace TODO-STUDENT-DNS with your DNS.
+```
+
+Replace TODO-STUDENT-DNS with your DNS.
+```bash
 sed -i 's/TODO-STUDENT-DNS/'"$DNS_ZONE"'/g' values.yaml
 ```
 
 ## Deploy Monitoring / Alerting Services
-
+Create monitoring namespace
 ```bash
-# Create monitoring namespace
 cd $TRAINING_DIR/src/kkp-setup/
 kubectl create ns monitoring
 helm --namespace monitoring upgrade --install --wait --values values.yaml prometheus releases/v2.17.3/charts/monitoring/prometheus/
