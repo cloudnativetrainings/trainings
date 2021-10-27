@@ -101,7 +101,7 @@ Address: x.x.x.x
 
 ## Verify SSL Certificate
 
-Test if server is reachable by `https://`, which will validate that cert-manager created a valid SSL certificate:
+Test, if server is reachable by `https://` which will validate that cert-manager created a valid SSL certificate:
 ```bash
 curl https://kubermatic.$DNS_ZONE.loodse.training
 ```
@@ -148,7 +148,7 @@ kubermatic   kubermatic-tls   True    kubermatic-tls   letsencrypt-prod   Certif
 oauth        dex-tls          True    dex-tls          letsencrypt-prod   Certificate is up to date and has not expired   8m
 ```
 
->Note: If after a while still certificates are not `Ready`, you can delete them by command `kubectl delete certificate -n kubermatic kubermatic-tls` and wait for new certificate to be validated.
+>Note: Even after a while the certificates are not `Ready`, then you can delete them by command `kubectl delete certificate -n kubermatic kubermatic-tls` and wait for new certificate to be validated.
 
 ## Login to KKP Dashboard
 
@@ -161,7 +161,7 @@ grep -A 5 static values.yaml
 
 ![Kubermatic Login](../.pics/k8c_login.png)
 
-Now try to create a project `student-XX`. Before we can create cluster, we need to setup a `Seed` object for the Kubermatic seed cluster, which we will do in a next chapter.
+Now try to create a project `student-XX`. Before we can create cluster, we need to setup a `Seed` object for the Kubermatic seed cluster which we will do in a next chapter.
 
 ![Kubermatic Project](../.pics/k8c_project.png)
 

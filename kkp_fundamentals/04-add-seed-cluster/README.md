@@ -4,20 +4,22 @@ As we defined in the beginning of the lab, we want to use the current Master clu
 
 ![Combined Master/Seed Cluster Setup](https://docs.kubermatic.com/img/kubermatic/master/concepts/architecture/combined-master-seed.png)
 
-To read more about this, take a look into our docs: [Kubermatic Docs > Concepts > Architecture](https://docs.kubermatic.com/kubermatic/master/architecture/)
+To read more about this, take a look into our [KKP Architecture](https://docs.kubermatic.com/kubermatic/master/architecture/) documentation.
 
 To add seed cluster to the Kubermatic master, you need to
 
-1. create **seed-kubeconfig** Secret,
+1. Create **seed-kubeconfig** secret
 2. Create **seed** resource.
 
 ## Create `seed-kubeconfig` secret
 
-To connect the seed cluster with the master, you need to create a kubeconfig Secret.
+To connect the seed cluster with the master, you need to create a kubeconfig secret.
 
 ```bash
-cd $TRAINING_DIR # folder 'kkp_fundamentals'
-# create copy of current kubeconfig
+cd $TRAINING_DIR
+```
+Create copy of current kubeconfig
+```bash
 cp $KUBECONFIG $TRAINING_DIR/src/kkp-setup/temp-seed-kubeconfig
 ```
 
@@ -48,7 +50,7 @@ If everything looks fine, apply the secret and delete the temp file.
 
 ```bash
 kubectl apply -n kubermatic -f $TRAINING_DIR/src/kkp-setup/seed.kubeconfig.secret.yaml
-## cleanup
+
 rm $TRAINING_DIR/src/kkp-setup/temp-seed-kubeconfig
 ```
 
@@ -105,12 +107,15 @@ Refer to the [Seed CRD documentation](https://docs.kubermatic.com/kubermatic/mas
 
 Let's apply the manifest above in the master cluster. Kubermatic will pick up the new Seed and begin to reconcile it by installing the required Kubermatic components (for a nested seed in our case):
 
-**ATTENTION:** If you are using KKP CE version, seed must be named as `kubermatic`! With KKP EE, see resource may be named e.g.`europe-west`.
+>**ATTENTION:** If you are using KKP CE version, seed must be named as `kubermatic`! With KKP EE, see resource may be named e.g.`europe-west`.
 
+
+Create copy of seed template
 ```bash
-# create copy of seed template
 cp $TRAINING_DIR/04-add-seed-cluster/seed.europe-west.yaml $TRAINING_DIR/src/kkp-setup/
-# apply the config change
+```
+Apply the config change
+```bash
 kubectl apply -n kubermatic -f $TRAINING_DIR/src/kkp-setup/seed.europe-west.yaml
 ```
 
@@ -165,14 +170,14 @@ seed-proxy-kubermatic    ClusterIP      10.101.137.118   <none>          8001/TC
 seed-webhook             ClusterIP      10.97.36.255     <none>          443/TCP                                          5d23h
 ```
 
-**NOTE:** If you encounter errors, take a look at the logs of the deployment `kubermatic-seed-controller-manager`. On success, it should look like this:
+>**NOTE:** If you encounter errors, take a look at the logs of the deployment `kubermatic-seed-controller-manager`. On success, it should look like this:
 
+Take a look at both pods of the deployment
 ```bash
-# take a look at both pods of the deployment
 kubectl -n kubermatic logs kubermatic-seed-controller-manager-xxxx-xxxx
 ```
 
-```json
+```text
 {"level":"info","time":"2021-07-06T09:23:08.710Z","caller":"cli/hello.go:36","msg":"Starting Kubermatic Seed Controller-Manager (Community Edition)...","worker-name":"","version":"v2.17.3"}
 I0706 09:23:08.710529       1 request.go:645] Throttling request took 1.032290619s, request: GET:https://10.96.0.1:443/apis/autoscaling.k8s.io/v1beta2?timeout=32s
 {"level":"info","time":"2020-07-08T09:23:30.902Z","caller":"seed-controller-manager/main.go:212","msg":"starting the seed-controller-manager...","worker-name":""}
@@ -180,7 +185,7 @@ I0706 09:23:08.745574       1 leaderelection.go:241] attempting to acquire leade
 I0706 09:23:30.902394       1 leaderelection.go:251] successfully acquired lease kube-system/seed-controller-manager
 ```
 
-**Note:** Since Kubermatic `2.14` the seed cluster automatically creates the so called [NodePort Proxy]. The NodePort Proxy will expose the containerized control plane components of every user cluster. So please be aware that the endpoint of the service `nodeport-proxy` is reachable for your end users.
+>**Note:** Since Kubermatic `2.14` the seed cluster automatically creates the so called [NodePort Proxy]. The NodePort Proxy will expose the containerized control plane components of every user cluster. So please be aware that the endpoint of the service `nodeport-proxy` is reachable for your end users.
 
 To make the user cluster control plane API endpoint(s) workable, the IP address **MUST** match your seed cluster DNS entry `*.SEED_CLUSTER_NAME.kubermatic.YOUR-DNS-ZONE.loodse.training`. Let's set this up in the next chapter:
 
@@ -202,7 +207,7 @@ NAME              PROVISIONER            RECLAIMPOLICY   VOLUMEBINDINGMODE   ALL
 kubermatic-fast   kubernetes.io/gce-pd   Delete          Immediate           false                  34m
 ```
 
-**NOTE:** Minio does not need `kubermatic-fast` because it does not require SSD speeds. A larger HDD is preferred.
+>**NOTE:** Minio does not need `kubermatic-fast` because it does not require SSD speeds. A larger HDD is preferred.
 
 So we want to set up a dedicated `kubermatic-backup` storage class. See [`./gce.sc.kubermatic.backup.yaml`](./gce.sc.kubermatic.backup.yaml) and create a copy in your `kkp-setup` folder.
 
@@ -255,7 +260,7 @@ It's also advisable to install the  [S3 Backup Exporter](https://github.com/kube
 Now install the charts.
 
 ```bash
-cd $TRAINING_DIR # folder 'kkp_fundamentals'
+cd $TRAINING_DIR
 helm upgrade --install --create-namespace --wait --values ./src/kkp-setup/values.yaml --namespace minio minio ./src/kkp-setup/releases/v2.17.3/charts/minio
 helm upgrade --install --wait --values ./src/kkp-setup/values.yaml --namespace kube-system s3-exporter ./src/kkp-setup/releases/v2.17.3/charts/s3-exporter/
 ```
