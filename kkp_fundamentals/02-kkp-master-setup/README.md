@@ -167,7 +167,7 @@ With the prepared configuration, it's now time to install the required Helm char
 ./releases/v2.17.3/kubermatic-installer --verbose --charts-directory ./releases/v2.17.3/charts deploy --config kubermatic.yaml --helm-values values.yaml --storageclass gce
 ```
 
-After a few moments, the installer should have been everything created and you will see:
+After a few minutes, the installer should have been everything created and you will see:
 
 ```text
 INFO[00:10:54]    📡 Determining DNS settings…               

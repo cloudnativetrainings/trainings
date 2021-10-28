@@ -104,15 +104,17 @@ eval `ssh-agent`
 ssh-add $TRAINING_DIR/.secrets/id_rsa
 ```
 
+>If you have updated the `cluster_name` value in `tf-infra/terraform.tfvars`. Make sure you adapt to `cluster_name` change across machinedeployment yaml definitions and Makefile. Simply use `sed -i 's/kkp-master/kkp-xxx-master/g' machines/*.yaml` and `sed -i 's/kkp-master/kkp-xxx-master/g' Makefile`, if for example consider that `cluster_name` is set to `kkp-xxx-master` in `tf-infra/terraform.tfvars`. 
+
 Deploy K1 cluster
 ```bash
 make k1-tf-apply k1-apply
 ```
 
 After everything is provisioned, check if nodes will get healthy:
-
+>Adjust the <cluster_name> value, before setting KUBECONFIG. 
 ```bash
-export KUBECONFIG=`pwd`/kkp-master-kubeconfig
+export KUBECONFIG=$TRAINING_DIR/src/kkp-master/<cluster_name>-kubeconfig
 watch kubectl get machinedeployments.cluster.k8s.io,machinesets,machine,nodes -A
 ```
 
