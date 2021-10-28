@@ -1,4 +1,4 @@
-﻿# Kubermatic Kubernetes Platform Introduction Guide
+﻿# Kubermatic Kubernetes Platform Fundamentals
 
 **Introduction:** The purpose of this write-up is to document the process of setting up a Kubermatic cluster.
 
