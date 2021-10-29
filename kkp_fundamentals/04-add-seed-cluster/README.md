@@ -178,7 +178,7 @@ kubectl -n kubermatic logs kubermatic-seed-controller-manager-xxxx-xxxx
 ```
 
 ```text
-{"level":"info","time":"2021-07-06T09:23:08.710Z","caller":"cli/hello.go:36","msg":"Starting Kubermatic Seed Controller-Manager (Community Edition)...","worker-name":"","version":"v2.18.0"}
+{"level":"info","time":"2021-07-06T09:23:08.710Z","caller":"cli/hello.go:36","msg":"Starting Kubermatic Seed Controller-Manager (Community Edition)...","worker-name":"","version":"v2.18.2"}
 I0706 09:23:08.710529       1 request.go:645] Throttling request took 1.032290619s, request: GET:https://10.96.0.1:443/apis/autoscaling.k8s.io/v1beta2?timeout=32s
 {"level":"info","time":"2020-07-08T09:23:30.902Z","caller":"seed-controller-manager/main.go:212","msg":"starting the seed-controller-manager...","worker-name":""}
 I0706 09:23:08.745574       1 leaderelection.go:241] attempting to acquire leader lease  kube-system/seed-controller-manager...
@@ -261,8 +261,8 @@ Now install the charts.
 
 ```bash
 cd $TRAINING_DIR
-helm upgrade --install --create-namespace --wait --values ./src/kkp-setup/values.yaml --namespace minio minio ./src/kkp-setup/releases/v2.18.0/charts/minio
-helm upgrade --install --wait --values ./src/kkp-setup/values.yaml --namespace kube-system s3-exporter ./src/kkp-setup/releases/v2.18.0/charts/s3-exporter/
+helm upgrade --install --create-namespace --wait --values ./src/kkp-setup/values.yaml --namespace minio minio ./src/kkp-setup/releases/v2.18.2/charts/minio
+helm upgrade --install --wait --values ./src/kkp-setup/values.yaml --namespace kube-system s3-exporter ./src/kkp-setup/releases/v2.18.2/charts/s3-exporter/
 ```
 
 After that, verify that all components are installed:

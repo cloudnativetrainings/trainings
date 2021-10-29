@@ -22,4 +22,21 @@ dex:
       # these are used within Kubermatic to identify the user
       username: "TODO-STUDENT-EMAIL@loodse.training"
       userID: "08a8684b-db88-4b73-90a9-3cd1661f5466"
+  certIssuer:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+
+telemetry:
+  # uuid is the unique identifier of the client where the agent is running.
+  # This field is required and will print an error message when that entry is missing.
+  # You can generate uuid using command uuidgen on your linux machine
+  uuid: "TODO-RANDOM-UUID"
+
+certManager:
+  clusterIssuers:
+    letsencrypt-prod:
+      email: "TODO-STUDENT-EMAIL@loodse.training"
+    letsencrypt-staging:
+      email: "TODO-STUDENT-EMAIL@loodse.training"
+
 

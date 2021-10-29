@@ -87,7 +87,9 @@ Run the following steps to provision the KubeOne cluster:
 ```bash
 cd $TRAINING_DIR
 cp -r 01-kubeone-cluster-setup/kkp-master.template src/kkp-master
+```
 
+```bash
 export GCP_PROJECT_ID=__YOUR_GCP_PROJECT_ID__                  # student-XX-xxxx
 ```
 
@@ -111,10 +113,12 @@ Deploy K1 cluster
 make k1-tf-apply k1-apply
 ```
 
-After everything is provisioned, check if nodes will get healthy:
->Adjust the <cluster_name> value, before setting KUBECONFIG. 
+After everything is provisioned, set the KUBECONFIG path by adjusting the <cluster_name> value.
 ```bash
 export KUBECONFIG=$TRAINING_DIR/src/kkp-master/<cluster_name>-kubeconfig
+```
+Check if nodes will get healthy:
+```bash
 watch kubectl get machinedeployments.cluster.k8s.io,machinesets,machine,nodes -A
 ```
 

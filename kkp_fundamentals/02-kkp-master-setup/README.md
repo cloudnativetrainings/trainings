@@ -136,6 +136,19 @@ vim values.yaml
 
 >NOTE: As an alternative of Dex, existing Keycloak installation could also be configured. Have a look in the [Kubermatic Docs](https://docs.kubermatic.com/kubermatic/master/tutorials_howtos/oidc_provider_configuration/) for more information.
 
+
+## Configure Telemetry
+Generate first a new UUID:
+```bash
+export RANDOM_UUID=$(uuidgen -r)
+```
+
+Replace the placeholder `TODO-RANDOM-UUID` with newly generated secret value:
+
+```bash
+sed -i 's/TODO-RANDOM-UUID/'"$RANDOM_UUID"'/g' ./values.yaml
+```
+
 ### Validate all variables are set
 
 ```bash
@@ -156,7 +169,7 @@ ls -la ./releases/
 total 12
 drwxr-xr-x 3 kubermatic root 4096 Aug 19 12:55 .
 drwxr-xr-x 3 kubermatic root 4096 Aug 19 12:55 ..
-drwxr-xr-x 4 kubermatic root 4096 Aug 19 12:55 v2.18.0
+drwxr-xr-x 4 kubermatic root 4096 Aug 19 12:55 v2.18.2
  ```
 
 ## Install KKP
@@ -164,7 +177,7 @@ drwxr-xr-x 4 kubermatic root 4096 Aug 19 12:55 v2.18.0
 With the prepared configuration, it's now time to install the required Helm charts into the master cluster. Run below command to install KKP.
 
 ```bash
-./releases/v2.18.0/kubermatic-installer --verbose --charts-directory ./releases/v2.18.0/charts deploy --config kubermatic.yaml --helm-values values.yaml --storageclass gce
+./releases/v2.18.2/kubermatic-installer --verbose --charts-directory ./releases/v2.18.2/charts deploy --config kubermatic.yaml --helm-values values.yaml --storageclass gce
 ```
 
 After a few minutes, the installer should have been everything created and you will see:
@@ -255,7 +268,7 @@ kubectl logs -n kubermatic kubermatic-api-xxxxxxxxx-xxxxx
 ```
 
 ```text
-{"level":"info","time":"2021-05-28T00:27:35.242Z","caller":"cli/hello.go:36","msg":"Starting Kubermatic API (Enterprise Edition)...","version":"v2.18.0"}
+{"level":"info","time":"2021-05-28T00:27:35.242Z","caller":"cli/hello.go:36","msg":"Starting Kubermatic API (Enterprise Edition)...","version":"v2.18.2"}
 I0528 00:27:36.343760       1 request.go:645] Throttling request took 1.020000542s, request: GET:https://10.96.0.1:443/apis/coordination.k8s.io/v1?timeout=32s
 {"level":"fatal","time":"2021-05-28T00:27:36.606Z","caller":"kubermatic-api/main.go:126","msg":"failed to create an openid authenticator","issuer":"https://kubermatic.student-00.loodse.training/dex","oidcClientID":"kubermatic","error":"Get \"https://kubermatic.student-00.loodse.training/dex/.well-known/openid-configuration\": dial tcp: lookup kubermatic.student-00.loodse.training on 169.254.20.10:53: no such host"
 ```
