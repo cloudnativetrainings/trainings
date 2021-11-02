@@ -32,7 +32,7 @@ dex:
     name: user-mla-grafana
     # Replace the `TODO-RAMDOM-USER-GRAFANA-SECRET` with random secret generated using `cat /dev/urandom | tr -dc A-Za-z0-9 | head -c32`
     secret: TODO-RAMDOM-USER-GRAFANA-SECRET
-	RedirectURIs:
+    RedirectURIs:
     - https://grafana.kubermatic.kubermatic.TODO-STUDENT-DNS.loodse.training/oauth/callback    
   - id: user-mla-alertmanager  
     name: user-mla-alertmanager
