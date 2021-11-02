@@ -77,7 +77,7 @@ iap:
       encryption_key: TODO-RAMDOM-USER-GRAFANA-KEY
       config:
         scope: "groups openid email"
-		email_domains:
+        email_domains:
           - '*'
         ## do not route health endpoint through the proxy
         skip_auth_regex:
@@ -100,7 +100,7 @@ iap:
       encryption_key: TODO-RAMDOM-USER-AM-KEY
       config:
         scope: "groups openid email"
-		email_domains:
+        email_domains:
           - '*'
         ## do not route health endpoint through the proxy
         skip_auth_regex:
@@ -168,9 +168,11 @@ Enabling MLA Stack in a Seed
   ```
 
 Admin Panel Configuration
+
 Follow step as documented [here](https://docs.kubermatic.com/kubermatic/master/guides/monitoring_logging_alerting/user_cluster/admin_guide/#admin-panel-configuration)
 
 Addons Configuration
+
 Follow step as documented [here](https://docs.kubermatic.com/kubermatic/master/guides/monitoring_logging_alerting/user_cluster/admin_guide/#addons-configuration)
 
 Create DNS Records 
