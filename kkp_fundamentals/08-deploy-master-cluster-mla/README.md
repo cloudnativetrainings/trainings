@@ -1,4 +1,4 @@
-# Deploy Monitoring / Logging / Alerting Stack on Master/Seed Cluster
+# Monitoring, Logging & Alerting (MLA) Stack setup on Master/Seed Cluster
 
 At this step, you will install set of Helm charts to enable MLA stack on the combined Master / Seed cluster.
 
@@ -162,4 +162,4 @@ Now you will be able to access grafana on [localhost:3000](http://localhost:3000
 
 Same for any other available service, just use the right name and port.
 
-Jump > [Home](../README.md) | Previous > [Preset](../07-create-preset/README.md)
+Jump > [Home](../README.md) | Previous > [Preset](../07-create-preset/README.md) | Next > [User Cluster MLA Stack Setup](../09-user-cluster-mla/README.md)
