@@ -30,13 +30,13 @@ dex:
   clients:
   - id: user-mla-grafana
     name: user-mla-grafana
-	# Replace the `TODO-RAMDOM-USER-GRAFANA-SECRET` with random secret generated using `cat /dev/urandom | tr -dc A-Za-z0-9 | head -c32`
+    # Replace the `TODO-RAMDOM-USER-GRAFANA-SECRET` with random secret generated using `cat /dev/urandom | tr -dc A-Za-z0-9 | head -c32`
     secret: TODO-RAMDOM-USER-GRAFANA-SECRET
 	RedirectURIs:
     - https://grafana.kubermatic.kubermatic.TODO-STUDENT-DNS.loodse.training/oauth/callback    
   - id: user-mla-alertmanager  
     name: user-mla-alertmanager
-	# Replace the `TODO-RAMDOM-USER-AM-SECRET` with random secret generated using `cat /dev/urandom | tr -dc A-Za-z0-9 | head -c32`
+    # Replace the `TODO-RAMDOM-USER-AM-SECRET` with random secret generated using `cat /dev/urandom | tr -dc A-Za-z0-9 | head -c32`
     secret: TODO-RAMDOM-USER-AM-SECRET
     RedirectURIs:
     - https://alertmanager.kubermatic.kubermatic.TODO-STUDENT-DNS.loodse.training/oauth/callback
@@ -64,16 +64,16 @@ iap:
   deployments:
     user-mla-grafana:
       name: user-mla-grafana
-	  replicas: 1
+      replicas: 1
       ingress:
         host: grafana.kubermatic.kubermatic.TODO-STUDENT-DNS.loodse.training
       upstream_service: grafana.mla.svc.cluster.local
       upstream_port: 80
-	  #Should match to the `id` value from DEX configuration
+      #Should match to the `id` value from DEX configuration
       client_id: user-mla-grafana
-	  # Replace the `TODO-RAMDOM-USER-GRAFANA-SECRET-FROM-DEX` with `secret` value from DEX configuration
+      # Replace the `TODO-RAMDOM-USER-GRAFANA-SECRET-FROM-DEX` with `secret` value from DEX configuration
       client_secret: TODO-RAMDOM-USER-GRAFANA-SECRET-FROM-DEX
-	  # Replace the `TODO-RAMDOM-USER-GRAFANA-KEY` with random key generated using `cat /dev/urandom | tr -dc A-Za-z0-9 | head -c32`
+      # Replace the `TODO-RAMDOM-USER-GRAFANA-KEY` with random key generated using `cat /dev/urandom | tr -dc A-Za-z0-9 | head -c32`
       encryption_key: TODO-RAMDOM-USER-GRAFANA-KEY
       config:
         scope: "groups openid email"
@@ -87,16 +87,16 @@ iap:
         pass_user_headers: true
     user-mla-alertmanager:
       name: user-mla-alertmanager
-	  replicas: 1
+      replicas: 1
       ingress:
         host: alertmanager.kubermatic.kubermatic.TODO-STUDENT-DNS.loodse.training
       upstream_service: alertmanager-proxy.mla.svc.cluster.local
       upstream_port: 8080
-	  #Should match to the `id` value from DEX configuration
+      #Should match to the `id` value from DEX configuration
       client_id: user-mla-alertmanager
-	  # Replace the `TODO-RAMDOM-USER-AM-SECRET-FROM-DEX` with `secret` value from DEX configuration
+      # Replace the `TODO-RAMDOM-USER-AM-SECRET-FROM-DEX` with `secret` value from DEX configuration
       client_secret: TODO-RAMDOM-USER-AM-SECRET-FROM-DEX
-	  # Replace the `TODO-RAMDOM-USER-GRAFANA-KEY` with random key generated using `cat /dev/urandom | tr -dc A-Za-z0-9 | head -c32`
+      # Replace the `TODO-RAMDOM-USER-GRAFANA-KEY` with random key generated using `cat /dev/urandom | tr -dc A-Za-z0-9 | head -c32`
       encryption_key: TODO-RAMDOM-USER-AM-KEY
       config:
         scope: "groups openid email"
