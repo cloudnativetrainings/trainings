@@ -1,6 +1,6 @@
 # Create User Cluster
 
-Log in to the Kubermatic UI with your training users, same as we did on [../03-master-dns-setup/README.md](../03-master-dns-setup#login-to-kkp-dashboard)
+Log in to the Kubermatic UI with your training users, same as we did on [Login to KKP Dashboard](../03-master-dns-setup#login-to-kkp-dashboard)
 
 Follow these tutorials to create a user cluster:
 

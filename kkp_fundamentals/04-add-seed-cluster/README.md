@@ -209,7 +209,7 @@ kubermatic-fast   kubernetes.io/gce-pd   Delete          Immediate           fal
 
 >**NOTE:** Minio does not need `kubermatic-fast` because it does not require SSD speeds. A larger HDD is preferred.
 
-So we want to set up a dedicated `kubermatic-backup` storage class. See [`./gce.sc.kubermatic.backup.yaml`](./gce.sc.kubermatic.backup.yaml) and create a copy in your `kkp-setup` folder.
+So we want to set up a dedicated `kubermatic-backup` storage class. See [`gce.sc.kubermatic.backup.yaml`](./gce.sc.kubermatic.backup.yaml) and create a copy in your `kkp-setup` folder.
 
 ```bash
 cp $TRAINING_DIR/04-add-seed-cluster/gce.sc.kubermatic.backup.yaml $TRAINING_DIR/src/kkp-setup

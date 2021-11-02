@@ -1,6 +1,6 @@
 # Seed DNS Setup
 
-The Kubernetes API servers of all user cluster control planes running in the Seed cluster are exposed by the NodePort Proxy. By default, each user cluster gets a virtual domain name like `[cluster-id].[seed-name].[kubermatic-domain]`, e.g. `hdu328tr.kubermatic.kubermatic.YOUR-DNS-ZONE.loodse.training`. For the Seed from the previous step `kubermatic.YOUR-DNS-ZONE.loodse.training` is the main domain where the Kubermatic dashboard and API are available.
+The Kubernetes API servers of all user cluster control planes running in the Seed cluster are exposed by the NodePort Proxy. By default, each user cluster gets a virtual domain name like `[cluster-id].[seed-name].[kubermatic-domain]`, e.g. `hdu328tr.kubermatic.kubermatic.YOUR-DNS-ZONE.loodse.training`. For the Seed cluster from the previous step, `kubermatic.YOUR-DNS-ZONE.loodse.training` is the main domain where the Kubermatic dashboard and API are available.
 
 To facilitate this, a wildcard DNS record `*.[seed-name].[kubermatic-domain]` must be created. As with the other DNS records the exact target depends on whether or not `LoadBalancer` services are supported on the Seed Kubernetes cluster. For more information, see [Kubermatic Docs - Add Seed Cluster - Update DNS](https://docs.kubermatic.com/kubermatic/master/guides/installation/add_seed_cluster_ce/#:~:text=Update,Depending). In our example the seed cluster is also the master, but this might not be the case for every setup, see [Kubermatic Docs - Concepts - Architecture Large-Scale Deployments](https://docs.kubermatic.com/kubermatic/master/architecture/) for more info.
 
@@ -102,7 +102,7 @@ Name:	test.kubermatic.kubermatic.student-XX-xxxx.loodse.training
 Address: 34.91.40.238
 ```
 
-In the next step, we will create a user cluster into our newly set up Seed.
+In the next step, we will create a user cluster into our newly Seed setup.
 
 
 Jump > [Home](../README.md) | Previous > [Seed Cluster Setup](../04-add-seed-cluster/README.md) | Next > [User Cluster Setup](../06-create-user-cluster/README.md)
