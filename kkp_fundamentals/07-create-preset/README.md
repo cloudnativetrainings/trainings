@@ -16,4 +16,4 @@ kubectl apply -f gce.preset.yaml
 
 Now go back to the Kubermatic Dashboard and try to create User cluster again, at the **Settings** step, you will be able to select created Preset and with that you don't have to provide credentials in the UI.
 
-Jump > [Home](../README.md) | Previous > [User Cluster Setup](../06-create-user-cluster/README.md) | Next > [Master/Seed Cluster MLA Setup](../08-deploy-master-cluster-mla/README.md)
+Jump > [Home](../README.md) | Previous > [User Cluster Setup](../06-create-user-cluster/README.md) | Next > [Master/Seed Cluster MLA Stack Setup](../08-deploy-master-cluster-mla/README.md)
