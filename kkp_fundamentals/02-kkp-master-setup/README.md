@@ -2,9 +2,9 @@
 
 This chapter explains the installation procedure of KKP into a pre-existing Kubernetes cluster using installer.
 
-**Note** - To begin the installation, make sure you are using right KUBECONFIG.
+>Note - To begin the installation, make sure you are using right KUBECONFIG.
 
-Again for simplicity of training we have the predefined manifests at [`./kkp-setup.template`](./kkp-setup.template). Copy it to `src` directory using below commands.
+Again for simplicity of training, we have the predefined manifests at [`./kkp-setup.template`](./kkp-setup.template). Copy it to `src` directory using below commands.
 
 ```bash
 cp -r $TRAINING_DIR/02-kkp-master-setup/kkp-setup.template $TRAINING_DIR/src/kkp-setup
@@ -37,11 +37,13 @@ values.yaml:23:      username: "TODO-STUDENT-EMAIL@loodse.training"
 
 We need to set the necessary domain names in the `values.yaml`. Cert-manager will use these domains to request the necessary certificates from Let's encrypt later on.
 
-```bash
-### replace every entry of: TODO-STUDENT-DNS
+Find every entry of: TODO-STUDENT-DNS
+```bash 
 grep --line-number TODO-STUDENT-DNS ./*.yaml
+```
 
-# get gcloud DNS_ZONE
+Get gcloud DNS_ZONE
+```bash
 gcloud dns managed-zones list
 ```
 
@@ -50,16 +52,21 @@ NAME                DNS_NAME                             DESCRIPTION  VISIBILITY
 student-XX-xxxx     student-XX-xxxx.loodse.training.     k8c          public
 ```
 
+Export your zone name
 ```bash
-## export your zone name
 export DNS_ZONE=student-XX-xxxx   #WITHOUT loodse.training!
-# Replace TODO-STUDENT-DNS with your DNS.
+```
+Replace TODO-STUDENT-DNS with your DNS.
+```bash
 sed -i 's/TODO-STUDENT-DNS/'"$DNS_ZONE"'/g' ./*.yaml
+```
 
-## check results
-# Output will be blank if everything is correct.
+Verify - Output will be blank if everything is correct.
+```bash
 grep --line-number TODO-STUDENT-DNS ./*.yaml
-#Check if everything is correct and is matching your configured target DNS Zone!
+```
+Check if everything is correct and is matching your configured target DNS Zone!
+```bash
 grep --line-number $DNS_ZONE ./*.yaml
 ```
 
@@ -78,57 +85,31 @@ grep --line-number $DNS_ZONE ./*.yaml
 For proper authentication, shared secrets must be configured between Dex and KKP.
 
 Generate first a new secret:
+```bash
+export RANDOM_SECRET=$(cat /dev/urandom | tr -dc A-Za-z0-9 | head -c32)
+```
+
+Replace the placeholder `TODO-A-RANDOM-SECRET` with newly generated secret value:
 
 ```bash
-cat /dev/urandom | tr -dc A-Za-z0-9 | head -c32
+sed -i 's/TODO-A-RANDOM-SECRET/'"$RANDOM_SECRET"'/g' ./values.yaml
 ```
+
+Also set the same newly generated secret value for client - the KKP UI - at the `kubermatic.yaml` config:
+```bash
+sed -i 's/TODO-KUBERMATIC-OAUTH-SECRET-FROM-VALUES.YAML/'"$RANDOM_SECRET"'/g' ./kubermatic.yaml
+```
+
+For some service communication and cookie key, we should now also replace the following `TODO-A-RANDOM-ISSUERCOOKIEKEY` and `TODO-A-RANDOM-SERVICEACCOUNTKEY` in the `kubermatic.yaml` with some random values. Again generate two random values using below command.
 
 ```bash
-vim values.yaml
-```
-
-```yaml
-
-  clients:
-  # The "kubermatic" client is used for logging into the Kubermatic dashboard. It always needs to be configured.
-  - id: kubermatic
-    name: Kubermatic
-    # generate a secure secret key with:
-    # cat /dev/urandom | tr -dc A-Za-z0-9 | head -c32
-    secret: "TODO-A-RANDOM-KEY"   <<< CHANGE
-    RedirectURIs:
-```
-
-Also set the **SAME** secret for client - the KKP UI - at the `kubermatic.yaml` config:
-
-```bash
-vim kubermatic.yaml
-```
-
-```yaml
-
-    # this must match the secret configured for the kubermatic client from
-    # the values.yaml.
-    issuerClientSecret: TODO-KUBERMATIC-OAUTH-SECRET-FROM-VALUES.YAML  <<< CHANGE 
-```
-
-For some service communication and cookie key, we should now also replace the following `TODO-A-RANDOM-KEY` in the `kubermatic.yaml` with some random values. Again generate two random values using below command.
-
-```bash
-cat /dev/urandom | tr -dc A-Za-z0-9 | head -c32
-cat /dev/urandom | tr -dc A-Za-z0-9 | head -c32
+export ISSUERCOOKIEKEY=$(cat /dev/urandom | tr -dc A-Za-z0-9 | head -c32)
+export SERVICEACCOUNTKEY=$(cat /dev/urandom | tr -dc A-Za-z0-9 | head -c32)
 ```
 
 ```bash
-vim kubermatic.yaml
-```
-
-```yaml
-    # these need to be randomly generated. Those can be generated on the
-    # shell using:
-    # cat /dev/urandom | tr -dc A-Za-z0-9 | head -c32
-    issuerCookieKey: TODO-A-RANDOM-KEY      <<< CHANGE
-    serviceAccountKey: TODO-A-RANDOM-KEY    <<< CHANGE
+sed -i 's/TODO-A-RANDOM-ISSUERCOOKIEKEY/'"$ISSUERCOOKIEKEY"'/g' ./kubermatic.yaml
+sed -i 's/TODO-A-RANDOM-SERVICEACCOUNTKEY/'"$SERVICEACCOUNTKEY"'/g' ./kubermatic.yaml
 ```
 
 Next step is to configure a so called [DEX Connector](https://github.com/dexidp/dex#connectors) for the user authentication.
@@ -153,14 +134,27 @@ vim values.yaml
       userID: "08a8684b-db88-4b73-90a9-3cd1661f5466"
 ```
 
-**NOTE:** As an alternative of Dex, existing Keycloak installation could also be configured. Have a look in the [Kubermatic Docs](https://docs.kubermatic.com/kubermatic/master/tutorials_howtos/oidc_provider_configuration/) for more information.
+>NOTE: As an alternative of Dex, existing Keycloak installation could also be configured. Have a look in the [Kubermatic Docs](https://docs.kubermatic.com/kubermatic/master/tutorials_howtos/oidc_provider_configuration/) for more information.
+
+
+## Configure Telemetry
+Generate first a new UUID:
+```bash
+export RANDOM_UUID=$(uuidgen -r)
+```
+
+Replace the placeholder `TODO-RANDOM-UUID` with newly generated secret value:
+
+```bash
+sed -i 's/TODO-RANDOM-UUID/'"$RANDOM_UUID"'/g' ./values.yaml
+```
 
 ### Validate all variables are set
 
 ```bash
-# Output should be blank
 grep --line-number TODO ./*.yaml
 ```
+>Output should be blank.
 
 ## Download the KKP Installer
 
@@ -175,7 +169,7 @@ ls -la ./releases/
 total 12
 drwxr-xr-x 3 kubermatic root 4096 Aug 19 12:55 .
 drwxr-xr-x 3 kubermatic root 4096 Aug 19 12:55 ..
-drwxr-xr-x 4 kubermatic root 4096 Aug 19 12:55 v2.17.3
+drwxr-xr-x 4 kubermatic root 4096 Aug 19 12:55 v2.18.2
  ```
 
 ## Install KKP
@@ -183,10 +177,10 @@ drwxr-xr-x 4 kubermatic root 4096 Aug 19 12:55 v2.17.3
 With the prepared configuration, it's now time to install the required Helm charts into the master cluster. Run below command to install KKP.
 
 ```bash
-./releases/v2.17.3/kubermatic-installer --verbose --charts-directory ./releases/v2.17.3/charts deploy --config kubermatic.yaml --helm-values values.yaml --storageclass gce
+./releases/v2.18.2/kubermatic-installer --verbose --charts-directory ./releases/v2.18.2/charts deploy --config kubermatic.yaml --helm-values values.yaml --storageclass gce
 ```
 
-After a few moments the installer should have been everything created, and you will see:
+After a few minutes, the installer should have been everything created and you will see:
 
 ```text
 INFO[00:10:54]    📡 Determining DNS settings…               
@@ -273,12 +267,14 @@ As we can see `kubermatic-api` pods are in the `CrashLoopBackOff` status, someth
 kubectl logs -n kubermatic kubermatic-api-xxxxxxxxx-xxxxx
 ```
 
-```json
-{"level":"info","time":"2021-05-28T00:27:35.242Z","caller":"cli/hello.go:36","msg":"Starting Kubermatic API (Enterprise Edition)...","version":"v2.17.3"}
+```text
+{"level":"info","time":"2021-05-28T00:27:35.242Z","caller":"cli/hello.go:36","msg":"Starting Kubermatic API (Enterprise Edition)...","version":"v2.18.2"}
 I0528 00:27:36.343760       1 request.go:645] Throttling request took 1.020000542s, request: GET:https://10.96.0.1:443/apis/coordination.k8s.io/v1?timeout=32s
 {"level":"fatal","time":"2021-05-28T00:27:36.606Z","caller":"kubermatic-api/main.go:126","msg":"failed to create an openid authenticator","issuer":"https://kubermatic.student-00.loodse.training/dex","oidcClientID":"kubermatic","error":"Get \"https://kubermatic.student-00.loodse.training/dex/.well-known/openid-configuration\": dial tcp: lookup kubermatic.student-00.loodse.training on 169.254.20.10:53: no such host"
 ```
 
 It's complaining about `dial tcp: lookup kubermatic.student-00.loodse.training on 169.254.20.10:53: no such host`. As our installer told us, now we need to set correct DNS entries after installation completes.
 
-**NOTE:** Every change in configuration file can be executed by `kubectl apply -f kubermatic.yaml`. The Operator will update the Kubermatic installation accordingly. If you delete the `KubermaticConfiguration`, e.g. with `kubectl delete -f kubermatic.yaml`, the operator will also **DELETE** all Kubermatic components!
+>NOTE: Every change in configuration file can be executed by `kubectl apply -f kubermatic.yaml`. The Operator will update the Kubermatic installation accordingly. If you delete the `KubermaticConfiguration`, e.g. with `kubectl delete -f kubermatic.yaml`, the operator will also **DELETE** all Kubermatic components!
+
+Jump > [Home](../README.md) | Previous > [KubeOne Cluster Setup](../01-kubeone-cluster-setup/README.md) | Next > [Master DNS Setup](../03-master-dns-setup/README.md)

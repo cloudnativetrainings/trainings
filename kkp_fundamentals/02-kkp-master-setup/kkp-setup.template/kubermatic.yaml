@@ -16,8 +16,8 @@ spec:
     # these need to be randomly generated. Those can be generated on the
     # shell using:
     # cat /dev/urandom | tr -dc A-Za-z0-9 | head -c32
-    issuerCookieKey: TODO-A-RANDOM-KEY
-    serviceAccountKey: TODO-A-RANDOM-KEY
+    issuerCookieKey: TODO-A-RANDOM-ISSUERCOOKIEKEY
+    serviceAccountKey: TODO-A-RANDOM-SERVICEACCOUNTKEY
   ingress:
     # this domain must match what you configured as dex.ingress.host
     # in the values.yaml

@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-Prerequisites what need to be fulfilled by the attendees of the trainings:
+To be fulfilled by the attendees of the trainings:
 
 - Common understanding of Kubernetes architecture, API objects and principles.
 - Basic compute infrastructure knowledge about networking, DNS and resource provisioning.
@@ -21,7 +21,7 @@ If you have docker, git and a common IDE installed locally, you can quickly star
 
 ```bash
 git clone https://github.com/kubermatic-labs/trainings.git
-docker run --name kubeone-tool-container -v $(pwd):/home/kubermatic/mnt -t -d quay.io/kubermatic-labs/kubeone-tooling:1.2.3
+docker run --name kubeone-tool-container -v $(pwd):/home/kubermatic/mnt -t -d quay.io/kubermatic-labs/kubeone-tooling:1.3.0
 docker exec -it kubeone-tool-container bash
 ```
 
@@ -35,26 +35,36 @@ You have to execute same above command to continue LAB.
 
 After you entered the container, verify the setup:
 
-```bash
-### executed inside the tooling container
-export TRAINING_DIR=`pwd`/mnt/trainings/kkp_fundamentals
-cd $TRAINING_DIR
+* Set the training directory path inside the container.
+  ```bash
+  export TRAINING_DIR=`pwd`/mnt/trainings/kkp_fundamentals
+  cd $TRAINING_DIR
+  ```
 
-ls -la
-#### list of training folders
+* List the training folders
+  ```bash
+  ls -la
+  ```
 
-#### version json with kubeone v1.2.3 should be shown
-kubeone version
+* Verify the kubeone version, a json with kubeone v1.3.0 should be shown
+  ```bash
+  kubeone version
+  ```
 
-#### a recent terraform version (>= 0.15) should be shown
-terraform version
+* Verify terraform version, a recent version (>= 1.0.x) should be shown
+  ```bash
+  terraform version
+  ```
 
-#### a recent gcloud SDK (>= 340.0.0)
-gcloud version
+* Verify teh Google Cloud SDK version, a recent gcloud SDK (>= 359.0.0)
+  ```bash
+  gcloud version
+  ```
 
-#### a recent kubectl version (>= v.1.21.1)
-kubectl version --short
-```
+* Verify kubectl version, a recent kubectl version (>= v.1.22.0)
+  ```bash
+  kubectl version --short
+  ```
 
 ## Authenticate your GCP account
 
@@ -74,7 +84,7 @@ student-XX-xxxx   student-XX-xxxx   999999999999
 
 ## Other helpful content
 
-The most needed shortcuts and tooling helper are already installed in the tooling container, anyway you could look over the [helpful-commands.md](helpful-commands.md) section, to read how e.g. install auto-completion and [fubectl](https://github.com/kubermatic/fubectl) for fast Kubernetes navigation.
+The most needed shortcuts and tooling helper are already installed in the tooling container, anyway you could look over the [helpful commands](helpful-commands.md) section, to read how e.g. install auto-completion and [fubectl](https://github.com/kubermatic/fubectl) for fast Kubernetes navigation.
 
 If you don't like to use the KubeOne tooling container and install all tools directly locally, you can take a look at:
 
@@ -85,3 +95,5 @@ As an opensource driven company, Kubermatic tries to contribute also a lot of he
 - [Official Documentation](https://docs.kubermatic.com/)
 - [Kubermatic Community Components](https://github.com/kubermatic/community-components)
 - [Kubermatic Forum](https://forum.kubermatic.com/)
+
+Jump > [Home](../README.md) | Next > [KubeOne Cluster Setup](../01-kubeone-cluster-setup/README.md) 

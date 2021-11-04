@@ -1,4 +1,4 @@
-# KubeOne Training Lab
+# KubeOne Fundamentals
 
 **Introduction:** The purpose of this write-up is to document the process of setting up a KubeOne Kubernetes cluster, this cluster will eventually be used to install a Kubermatic Kubernetes Platform later.
 
