@@ -1,6 +1,8 @@
 # Writing Hooks
 
-In this task you will learn how to write Hooks.
+In this task, you will learn how to write Hooks.
+
+> Navigate to the directory `10_hooks`, before getting started.
 
 ## Inspect the Chart
 
@@ -8,7 +10,7 @@ Take a look at the Hooks.
 
 ## Running Hooks
 
-To see what is happening it is recommended to open an additional Shell and watch resources:
+To see what is happening, it is recommended to open an additional Shell and watch resources:
 ```bash
 watch -n 1 kubectl get job,pod
 ```
@@ -59,20 +61,29 @@ Add the hook-delete-policy to the Hooks via the `"helm.sh/hook-delete-policy": "
 helm install hooks ./my-app 
 ```
 
-Note that the Jobs for the Hooks will get deleted after they are completed successfully.
+> Note that the Jobs for the Hooks will get deleted, after they are completed successfully.
 
-```bash
-helm uninstall hooks
-```
+* Delete the release
+  ```bash
+  helm uninstall hooks
+  ```
 
 ## Disabling Hooks
 
-Hooks can block the install/uninstall process if they eg are in state `CrashLoopBackOff`. You can disable via the following.
+Hooks can block the install/uninstall process, if they eg are in state `CrashLoopBackOff`. You can disable via the following.
 
 ```bash
 helm install hooks ./my-app --no-hooks
 ```
 
-```bash
-helm uninstall hooks --no-hooks
-```
+## Cleanup
+* Delete the release
+  ```bash
+  helm uninstall hooks --no-hooks
+  ```
+* Jump back to home directory `k8s_helm`:
+  ```bash
+  cd -
+  ```
+
+Jump > [Home](../README.md) | Previous > [Helm Test](../09_tests/README.md) | Next > [Dependencies](../11_dependencies/README.md)

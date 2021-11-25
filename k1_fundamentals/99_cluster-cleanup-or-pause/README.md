@@ -4,7 +4,7 @@ To cleanup your cloud resource, KubeOne tool will support you.
 
 ## KubeOne reset
 
-In the first step KubeOne will remove the worker nodes and reset the control plane nodes to the state before you installed Kubernetes. The command is also helpful if during the installation something breaks, and you don't want to re-provision all machines:
+In the first step, KubeOne will remove the worker nodes and reset the control plane nodes to the state before you installed Kubernetes. The command is also helpful if during the installation something breaks, and you don't want to re-provision all machines:
 
 ```bash
 cd $TRAINING_DIR/src/gce
@@ -54,3 +54,5 @@ After the masters are **unpaused**, scale up again:
 ```bash
 kubectl scale md -n kube-system --replicas=1 --all
 ```
+
+Jump > [**Home**](../README.md) | Previous > [**Bonus**](../90_bonus/README.md)

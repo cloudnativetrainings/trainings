@@ -1,10 +1,11 @@
 # Functions
 
-In this task you will learn how to implement helper functions.
+In this task, you will learn how to implement helper functions.
 
 ## Run the Helm Chart
 
 ```bash
+cd 05_functions
 helm install my-app ./my-chart
 ```
 
@@ -14,11 +15,10 @@ curl $ENDPOINT
 ```
 
 ## Cleanup
-
-Remove the release
-```bash
-helm uninstall my-app 
-```
+* Delete the release
+  ```bash
+  helm uninstall my-app
+  ```
 
 ## Add the function called `id`
 
@@ -47,11 +47,14 @@ curl $ENDPOINT
 ```
 
 ### Cleanup
-
-Remove the release
-```bash
-helm uninstall helper-functions
-```
+* Delete the release
+  ```bash
+  helm uninstall helper-functions
+  ```
+* Jump back to home directory `k8s_helm`:
+  ```bash
+  cd -
+  ```
 
 ## Using default values
 
@@ -77,8 +80,13 @@ curl $ENDPOINT
 ```
 
 ### Cleanup
+* Delete the release
+  ```bash
+  helm uninstall default-values
+  ```
+* Jump back to home directory `k8s_helm`:
+  ```bash
+  cd -
+  ```
 
-```bash
-helm uninstall default-values
-```
-
+Jump > [Home](../README.md) | Previous > [Variables](../04_variables/README.md) | Next > ['include' Function](../06_includes/README.md)

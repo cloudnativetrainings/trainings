@@ -10,11 +10,20 @@ Learn the basics on how to work with Containers.
 ### [Kubernetes Fundamentals (K8sF)](k8s_fundamentals/README.md)
 Learn the basics about Kubernetes.
 
+### [Kubernetes with Helm (K8sH)](k8s_helm/README.md)
+Learn the basics about Helm to manage your Kubernetes applications. 
+
 ### Kubernetes Administration (K8sA)
 Learn how to manage Kubernetes clusters. Make use of kubeadm and kubeone to install and upgrade your clusters.
 
 ### Kubermatic (K8sC)
 Learn how to manage Kubernetes clusters with kubermatic.
+
+### [KubeOne Fundamentals](k1_fundamentals/README.md)
+Learn about KubeOne - the open source Kubernetes cluster lifecycle management tool for a single cluster on any infrastructure.
+
+### [Kubermatic Kubernetes Platform Fundamentals](kkp_fundamentals/README.md)
+Learn about KKP(CE) - centrally manage the global automation of thousands of Kubernetes clusters across multi-cloud, on-prem and edge with unparalleled density and resilience.
 
 ### Kubernetes Application Development (K8sAD)
 Learn how to implement cloud native applications to be run on Kubernetes.

@@ -1,15 +1,15 @@
 # Seed DNS Setup
 
-The Kubernetes API servers of all user cluster control planes running in the Seed cluster are exposed by the NodePort Proxy. By default, each user cluster gets a virtual domain name like `[cluster-id].[seed-name].[kubermatic-domain]`, e.g. `hdu328tr.kubermatic.kubermatic.YOUR-DNS-ZONE.loodse.training`. For the Seed from the previous step `kubermatic.YOUR-DNS-ZONE.loodse.training` is the main domain where the Kubermatic dashboard and API are available.
+The Kubernetes API servers of all user cluster control planes running in the Seed cluster are exposed by the NodePort Proxy. By default, each user cluster gets a virtual domain name like `[cluster-id].[seed-name].[kubermatic-domain]`, e.g. `hdu328tr.kubermatic.kubermatic.YOUR-DNS-ZONE.loodse.training`. For the Seed cluster from the previous step, `kubermatic.YOUR-DNS-ZONE.loodse.training` is the main domain where the Kubermatic dashboard and API are available.
 
-To facilitate this, a wildcard DNS record `*.[seed-name].[kubermatic-domain]` must be created. As with the other DNS records the exact target depends on whether or not `LoadBalancer` services are supported on the Seed Kubernetes cluster. For more Information see [Kubermatic Docs - Add Seed Cluster - Update DNS](https://docs.kubermatic.com/kubermatic/master/guides/installation/add_seed_cluster_ce/#:~:text=Update,Depending). In our example the seed cluster is also the master, but this might not be the case for every setup, see [Kubermatic Docs - Concepts - Architecture Large-Scale Deployments](https://docs.kubermatic.com/kubermatic/master/architecture/) for more info.
+To facilitate this, a wildcard DNS record `*.[seed-name].[kubermatic-domain]` must be created. As with the other DNS records the exact target depends on whether or not `LoadBalancer` services are supported on the Seed Kubernetes cluster. For more information, see [Kubermatic Docs - Add Seed Cluster - Update DNS](https://docs.kubermatic.com/kubermatic/master/guides/installation/add_seed_cluster_ce/#:~:text=Update,Depending). In our example the seed cluster is also the master, but this might not be the case for every setup, see [Kubermatic Docs - Concepts - Architecture Large-Scale Deployments](https://docs.kubermatic.com/kubermatic/master/architecture/) for more info.
 
 ## Start DNS transaction
 
 Start a DNS zone editing transaction.
 
+Get gcloud DNS_ZONE
 ```bash
-# get gcloud DNS_ZONE
 gcloud dns managed-zones list
 ```
 
@@ -18,25 +18,28 @@ NAME                DNS_NAME                             DESCRIPTION  VISIBILITY
 student-XX-xxxx     student-XX-xxxx.loodse.training.     k8c          public
 ```
 
+Adjust to your zone NAME 
 ```bash
-## adjust to your zone NAME 
 export DNS_ZONE=student-XX-xxxx   ## WITHOUT loodse.training!
-
-# Check existing record sets.
+```
+Check existing record sets.
+```bash
 gcloud dns record-sets list --zone=$DNS_ZONE
+```
 
-# Start DNS transactions
+Start DNS transactions
+```bash
 gcloud config set project $DNS_ZONE
 gcloud dns record-sets transaction start --zone=$DNS_ZONE
 ```
 
 ## Prepare DNS records
-**ATTENTION:** If you are using KKP CE version, seed name will be `kubermatic`!
+>**ATTENTION:** If you are using KKP CE version, seed name will be `kubermatic`!
 
 Now let's place the DNS record for the seed node-port service. In this example we named our seed cluster `kubermatic` which results in a URL `USER_CLUSTER_ID.kubermatic.kubermatic.$DNS_ZONE.loodse.training`.
 
+Get the LoadBalancer service External IP
 ```bash
-# Get the LoadBalancer service External IP
 kubectl -n kubermatic get svc nodeport-proxy
 ```
 
@@ -45,17 +48,14 @@ NAME             TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)        
 nodeport-proxy   LoadBalancer   10.103.188.232   X.X.X.X         8002:31232/TCP   36m
 ```
 
-**Replace  X.X.X.X with the `nodeport-proxy` external IP**
-
+Replace  X.X.X.X with the `nodeport-proxy` external IP and set the value of `NODEPORT_DNS_IP`
 ```bash
-# define external IP as environment var for the later commands
 export NODEPORT_DNS_IP=XX.XX.XX.XX
 ```
 
 ### Wildcard entry for node-port
 
 `*.kubermatic.kubermatic.$DNS_ZONE.loodse.training` ----> node-port proxy IP
-
 ```bash
 gcloud dns record-sets transaction add --zone=$DNS_ZONE --name="*.kubermatic.kubermatic.$DNS_ZONE.loodse.training" --ttl 300 --type A  $NODEPORT_DNS_IP
 ```
@@ -63,14 +63,17 @@ gcloud dns record-sets transaction add --zone=$DNS_ZONE --name="*.kubermatic.kub
 ## Execute DNS changes
 
 Finally, validate transaction file before executing changes.
-
 ```bash
 cat transaction.yaml
+```
 
-#Execute changes
+Execute changes
+```bash
 gcloud dns record-sets transaction execute --zone $DNS_ZONE
+```
 
-#Confirm Changes
+Confirm Changes
+```bash
 gcloud dns record-sets list --zone=$DNS_ZONE
 ```
 
@@ -85,10 +88,8 @@ kubermatic.student-XX-xxxx.loodse.training.                A     300    34.91.40
 
 ## Verify DNS propagation
 
-Wait for the DNS to propagate and then verify it.
-
+Wait for the DNS to propagate and then verify whether the DNS records are propagated.
 ```bash
-## check if the DNS record are propagated
 nslookup test.kubermatic.kubermatic.$DNS_ZONE.loodse.training
 ```
 
@@ -101,4 +102,7 @@ Name:	test.kubermatic.kubermatic.student-XX-xxxx.loodse.training
 Address: 34.91.40.238
 ```
 
-In the next step we will create a user cluster into our newly set up Seed.
+In the next step, we will create a user cluster into our newly Seed setup.
+
+
+Jump > [Home](../README.md) | Previous > [Seed Cluster Setup](../04-add-seed-cluster/README.md) | Next > [User Cluster Setup](../06-create-user-cluster/README.md)

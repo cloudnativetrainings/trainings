@@ -5,7 +5,7 @@ In the previous step, you have created a User Cluster by providing Service Accou
 You can create "Preset" for each provider by following these steps.
 
 ```bash
-cd $TRAINING_DIR # folder 'kkp_fundamentals'
+cd $TRAINING_DIR
 cp $TRAINING_DIR/07-create-preset/gce.preset.yaml $TRAINING_DIR/src/kkp-setup/
 SA_KEY_ENCODED=`base64 -w 0 ./.secrets/k8c-cluster-provisioner-sa-key.json`
 cd $TRAINING_DIR/src/kkp-setup/
@@ -14,5 +14,6 @@ cat gce.preset.yaml
 kubectl apply -f gce.preset.yaml
 ```
 
-Now go back to the Kubermatic Dashboard and try to create User cluster again, at the **Settings** step, you will be
-able to select created Preset and with that you don't have to provide credentials in the UI.
+Now go back to the Kubermatic Dashboard and try to create User cluster again, at the **Settings** step, you will be able to select created Preset and with that you don't have to provide credentials in the UI.
+
+Jump > [Home](../README.md) | Previous > [User Cluster Setup](../06-create-user-cluster/README.md) | Next > [Master/Seed Cluster MLA Stack Setup](../08-deploy-master-cluster-mla/README.md)
