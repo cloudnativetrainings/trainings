@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+        - name: my-app
+          image: quay.io/kubermatic-labs/trainings-app:0.0.1
+          ports:
+            - name: http
+              containerPort: 8080
+          env:
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+          livenessProbe:
+            initialDelaySeconds: 2
+            periodSeconds: 2
+            successThreshold: 1
+            failureThreshold: 3
+            httpGet:
+              path: /liveness
+              port: 8080
+          readinessProbe:
+            initialDelaySeconds: 2
+            periodSeconds: 2
+            successThreshold: 1
+            failureThreshold: 3
+            httpGet:
+              path: /readiness
+              port: 8080

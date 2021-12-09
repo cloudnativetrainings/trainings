@@ -37,13 +37,17 @@ func handleStdin() {
 }
 
 func handleCommand(command string) {
-	if command == "set ready" {
+	if command == "ready" {
+		log.Info("Set application to ready")
 		ready = true
-	} else if command == "set unready" {
+	} else if command == "unready" {
+		log.Info("Set application to unready")
 		ready = false
-	} else if command == "set alive" {
+	} else if command == "alive" {
+		log.Info("Set application to alive")
 		alive = true
-	} else if command == "set dead" {
+	} else if command == "dead" {
+		log.Info("Set application to dead")
 		alive = false
 	} else {
 		log.Info("unknown command")
@@ -52,6 +56,8 @@ func handleCommand(command string) {
 
 func handleRoot(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "<h1>")
+	fmt.Fprintf(w, "Pod Name: %s<br>", os.Getenv("POD_NAME"))
+	fmt.Fprintf(w, "Pod IP: %s<br>", os.Getenv("POD_IP"))
 	fmt.Fprintf(w, "Live: %t<br>", alive)
 	fmt.Fprintf(w, "Ready: %t<br>", ready)
 	fmt.Fprintf(w, "</h1>")

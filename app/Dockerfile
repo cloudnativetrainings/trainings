@@ -3,9 +3,9 @@ WORKDIR /src
 COPY go.mod go.sum ./
 RUN go mod download
 COPY *.go ./
-RUN go build -o application
+RUN go build -o training-application
 
 FROM alpine:3.15
 WORKDIR /app
-COPY --from=builder /src/application /app/application
-ENTRYPOINT [ "./application" ]
+COPY --from=builder /src/training-application /app/training-application
+ENTRYPOINT [ "./training-application" ]
