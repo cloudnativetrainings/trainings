@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: my-app
-          image: quay.io/kubermatic-labs/trainings-app:0.0.1
+          image: quay.io/kubermatic-labs/training-application:0.0.2
           ports:
             - name: http
               containerPort: 8080

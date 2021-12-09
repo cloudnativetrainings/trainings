@@ -50,7 +50,7 @@ func handleCommand(command string) {
 		log.Info("Set application to dead")
 		alive = false
 	} else {
-		log.Info("unknown command")
+		log.Infof("unknown command '%s'", command)
 	}
 }
 
