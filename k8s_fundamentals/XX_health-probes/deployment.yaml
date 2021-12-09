@@ -14,7 +14,10 @@ spec:
     spec:
       containers:
         - name: my-app
-          image: quay.io/kubermatic-labs/training-application:0.0.2
+          image: quay.io/kubermatic-labs/training-application:0.0.8
+          imagePullPolicy: Always
+          tty: true
+          stdin: true
           ports:
             - name: http
               containerPort: 8080
