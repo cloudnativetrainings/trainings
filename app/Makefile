@@ -1,6 +1,6 @@
 IMAGE_REPOSITORY = quay.io/kubermatic-labs
 APPLICATION_NAME = training-application
-BUILD_VERSION = 1.0.0
+BUILD_VERSION = 1.0.1
 
 .PHONY: build
 build: 
