@@ -30,11 +30,10 @@ func main() {
 func handleStdin() {
 	reader := bufio.NewReader(os.Stdin)
 	for {
+		fmt.Print("> ")
 		text, _ := reader.ReadString('\n')
 		text = strings.Replace(text, "\n", "", -1)
-		if text != "" {
-			handleCommand(text)
-		}
+		handleCommand(text)
 	}
 }
 

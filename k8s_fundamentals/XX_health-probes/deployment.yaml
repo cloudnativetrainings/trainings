@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: my-app
-          image: quay.io/kubermatic-labs/training-application:0.0.8
+          image: quay.io/kubermatic-labs/training-application:1.0.0
           imagePullPolicy: Always
           tty: true
           stdin: true
