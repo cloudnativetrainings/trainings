@@ -1,83 +1,55 @@
 # Pods
 
-In this training, we will create a pod and learn how to interact with it.
+In this training, we will create a pod and learn how to ensure a graceful shutdown of the application.
 
+The application implements a shutdown hook and needs 10 seconds for a proper shutdown.
+
+# TODO
 >Navigate to the folder `02_pods` from CLI, before you get started. 
 
-## Create Pod
-* Inspect pod.yaml definition file and create the pod
-  ```bash
-  cat pod.yaml
-  kubectl create -f pod.yaml
-  ```
+## Create the Pod
+Inspect pod.yaml definition file and create the pod
+```bash
+cat pod.yaml
+kubectl create -f pod.yaml
+```
 
-## Getting help
+## Follow the logs of the pod
+Do this in a seperate terminal.
+```bash
+kubectl logs -f my-app
+```
 
-* Getting info and examples for the 'get' command
-  ```bash
-  kubectl get --help
-  ```
+## Stop the Pod
+```bash
+kubectl delete pod my-app
+```
+>Note that the graceful shutdown has not finished successfully.
 
-* Get info about a specific yaml structure
-  ```bash
-  kubectl explain pod.metadata.name
-  ```
+## Adapt the graceful shutdown period
 
-* Get short info about a specific yaml structure
-  ```bash
-  kubectl explain --recursive pod.spec.containers.ports
-  ```
+```yaml
+...
+spec:
+  terminationGracePeriodSeconds: 12
+...
+```
+## Re-Create the Pod
+```bash
+kubectl create -f pod.yaml
+```
 
-## Get infos of a pod
+## Follow the logs of the pod
+Do this in a seperate terminal.
+```bash
+kubectl logs -f my-app
+```
 
-* Show all Pods
-  ```bash
-  kubectl get pods
-  ```
+## Stop the Pod again
+```bash
+kubectl delete pod my-app
+```
+>Note that the application now has enough time to do a graceful shutdown
 
-* Show all Pods with labels
-  ```bash
-  kubectl get pods --show-labels
-  ```
-
-* Show all Pods with IP address and node information
-  ```bash
-  kubectl get pods -o wide
-  ```
-
-* Store a Pod's yaml definition into a file
-  ```bash
-  kubectl get pod my-pod -o yaml > pod-output.yaml
-  ```
-  >You can check the definition using `cat pod-output.yaml`
-
-## Describe a pod
-* Show details of the pod including events
-  ```bash
-  kubectl describe pod my-pod
-  ```
-
-## Debug a Pod
-
-* Get logs of a Container
-  ```bash
-  kubectl logs my-pod
-  ```
-
-* Follow the logs of a Container
-  ```bash
-  kubectl logs -f my-pod
-  ```
-
-* Exec into a Container
-  ```bash
-  kubectl exec -it my-pod -- bash
-  ```
-
-## Cleanup
-* Delete the created resource - pod.
-  ```bash
-  kubectl delete pod my-pod
-  ```
-
+# TODO
 [Jump to Home](../README.md) | [Previous Training](../01_hello-k8s/README.md) | [Next Training](../03_commands-and-args/README.md)

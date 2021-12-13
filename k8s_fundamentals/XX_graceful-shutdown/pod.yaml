@@ -3,8 +3,8 @@ kind: Pod
 metadata:
   name: my-app
 spec:
-  terminationGracePeriodSeconds: 15
+  terminationGracePeriodSeconds: 5
   containers:
     - name: my-app
-      image: quay.io/kubermatic-labs/training-application:1.0.0
+      image: quay.io/kubermatic-labs/training-application:1.0.1
       
