@@ -1,4 +1,4 @@
-# Pods
+# Health Probes
 
 In this training, you will learn about health probes.
 
@@ -6,8 +6,7 @@ The application implements the following health probes:
 * liveness: http://SERVICE_IP:8080/liveness
 * readiness: http://SERVICE_IP:8080/readiness
 
-# TODO
->Navigate to the folder `02_pods` from CLI, before you get started. 
+>Navigate to the folder `41_probing` from CLI, before you get started. 
 
 ## Create the Pod
 Inspect pod.yaml and service.yaml definition file and create the pod and the service
@@ -62,7 +61,3 @@ Delete the created resources.
 ```bash
 kubectl delete -f pod.yaml,service.yaml
 ```
-
-# TODO
-[Jump to Home](../README.md) | [Previous Training](../01_hello-k8s/README.md) | [Next Training](../03_commands-and-args/README.md)
-
