@@ -82,8 +82,6 @@ grep --line-number $DNS_ZONE ./*.yaml
 
 [Dex](https://dexidp.io/) is an identity service that uses [OpenID Connect](https://openid.net/connect/) to drive authentication. To place Kubermatic behind a single-sign-on (SSO) provider, we deployed [Dex](https://dexidp.io/docs/kubernetes/).
 
-For proper authentication, shared secrets must be configured between Dex and KKP.
-
 Generate first a new secret:
 ```bash
 export RANDOM_SECRET=$(cat /dev/urandom | tr -dc A-Za-z0-9 | head -c32)
@@ -95,10 +93,9 @@ Replace the placeholder `TODO-A-RANDOM-SECRET` with newly generated secret value
 sed -i 's/TODO-A-RANDOM-SECRET/'"$RANDOM_SECRET"'/g' ./values.yaml
 ```
 
-Also set the same newly generated secret value for client - the KKP UI - at the `kubermatic.yaml` config:
-```bash
-sed -i 's/TODO-KUBERMATIC-OAUTH-SECRET-FROM-VALUES.YAML/'"$RANDOM_SECRET"'/g' ./kubermatic.yaml
-```
+> NOTE: There is also a functionality available to enable OIDC authentication for accessing user clusters managed by KKP, in this example this option is turned off,
+> but if you want to configure this, additional Dex client `kubermaticIssuer` is needed and secret needs to be shared in KubermaticConfiguration using `spec.auth.issuerClientSecret` field.
+> See [KKP documentation](https://docs.kubermatic.com/kubermatic/master/tutorials_howtos/oidc_provider_configuration/share-_clusters_via_delegated_oidc_authentication) for more details.
 
 For some service communication and cookie key, we should now also replace the following `TODO-A-RANDOM-ISSUERCOOKIEKEY` and `TODO-A-RANDOM-SERVICEACCOUNTKEY` in the `kubermatic.yaml` with some random values. Again generate two random values using below command.
 

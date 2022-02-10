@@ -7,14 +7,7 @@ spec:
   # These secret keys configure the way components commmunicate with Dex.
   auth:
     clientID: kubermatic
-    issuerClientID: kubermaticIssuer
-
-    # this must match the secret configured for the kubermatic client from
-    # the values.yaml.
-    issuerClientSecret: TODO-KUBERMATIC-OAUTH-SECRET-FROM-VALUES.YAML
-
-    # these need to be randomly generated. Those can be generated on the
-    # shell using:
+    # these need to be randomly generated. Those can be generated on the shell using:
     # cat /dev/urandom | tr -dc A-Za-z0-9 | head -c32
     issuerCookieKey: TODO-A-RANDOM-ISSUERCOOKIEKEY
     serviceAccountKey: TODO-A-RANDOM-SERVICEACCOUNTKEY
