@@ -1,6 +1,6 @@
 # Caching
 
-In this training, you will learn how to write Dockerfiles which will increase build time due to using caches.
+In this training, you will learn how to write Dockerfiles which will decrease build time due to using caches.
 
 >Navigate to the folder `13_caching` from CLI, before you get started. 
 
