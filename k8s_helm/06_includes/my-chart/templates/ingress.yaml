@@ -13,6 +13,7 @@ spec:
           - path: /
             pathType: Prefix
             backend:
-              name: {{ template "id" . }}
-              port: 
-                number: 80
+              service:
+                name: {{ template "id" . }}
+                port:
+                  number: 80
