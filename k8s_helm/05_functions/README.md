@@ -51,10 +51,6 @@ curl $ENDPOINT
   ```bash
   helm uninstall helper-functions
   ```
-* Jump back to home directory `k8s_helm`:
-  ```bash
-  cd -
-  ```
 
 ## Using default values
 
@@ -64,14 +60,14 @@ Override the `id` function the file `_helpers.tpl` in the folder `my-chart/templ
 ```tpl
 {{- define "id" }}
 {{- $name := printf "%s-%s" .Chart.Name .Release.Name }}
-{{- default $name .Values.id | trunc 63 }}
+{{- default $name .Values.id | trunc 6 }}
 {{- end }}
 ```
 
 ### Release the application
 
 ```bash
-helm install default-values --set id=foo ./my-chart 
+helm install default-values --set id=foo-123456 ./my-chart 
 ```
 
 Access the endpoint via 
