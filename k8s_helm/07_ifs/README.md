@@ -40,6 +40,17 @@ Access the endpoint via
 curl $ENDPOINT
 ```
 
+## Upgrade the application
+
+```bash
+helm upgrade ifs ./my-chart --set meta=false
+```
+
+Watch the endpoint via
+```bash
+watch curl $ENDPOINT
+```
+
 ## Cleanup
 * Delete the release
   ```bash
