@@ -1,8 +1,9 @@
 # Setup Cluster
 
-* Run the script to initialize GKE cluster.
+* Change into k8s_fundamental directory and run the script to initialize GKE cluster.
   
   ```bash
+  $ cd k8s_fundamentals
   00_setup/setup_cluster.sh
   ```
   >Provide project details against  `INPUT: Type PROJECT_NAME (student-XX-project):`
@@ -15,4 +16,4 @@
   kubectl get nodes
   ```
 
-[Jump to Home](../README.md)
+[Jump to Home](../README.md) | [Next Training](../01_hello-k8s/README.md)

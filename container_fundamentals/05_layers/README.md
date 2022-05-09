@@ -34,7 +34,7 @@ Layers are stacked on top of each other to form a base for a container's root fi
   docker inspect debian:10.5 | grep User --before-context=5
   ```
 
-  What's about the sha of the image. 
+  What about the sha of the image. 
   ```bash
   docker inspect debian:10.5 | grep Id
   ```

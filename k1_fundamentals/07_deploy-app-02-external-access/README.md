@@ -115,6 +115,8 @@ Let's deploy the CertManager:
   *.student-XX.loodse.XXXX.                      A      300    34.90.218.24
   ```
 
+**Alternative:** You could create an AWS Route 53 record on a hosted domain and link the `$EXTERNAL IP` accordingly to create DNS for `student-XX-XXXX.domain.name` and `*.student-XX-XXXX.domain.name`
+
 ### Create a Cluster Issuer
 
 * Apply the cluster issuer yaml 

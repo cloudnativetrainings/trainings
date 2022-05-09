@@ -1,5 +1,10 @@
 # Setup training environment
 
+## Navigate to project folder to create cluster first
+```bash
+cd 00_setup_cluster
+```
+
 ## Fix the repo url in the yaml files
 
 ```bash

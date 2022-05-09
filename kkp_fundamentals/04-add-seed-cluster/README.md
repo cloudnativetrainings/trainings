@@ -226,6 +226,7 @@ When everything looks fine, apply the new storage class.
 ```bash
 kubectl apply -f $TRAINING_DIR/src/kkp-setup/gce.sc.kubermatic.backup.yaml
 ```
+>NOTE: For AWS block storage : [Kubermatic Docs - Install Kubermatic - Configure Cluster Backups](https://docs.kubermatic.com/kubermatic/v2.20/installation/install_kkp_ce/add_seed_cluster_ce//#:~:text=configure%20cluster%20backups)
 
 Check that you now have a new storage class installed:
 
