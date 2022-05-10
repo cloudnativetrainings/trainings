@@ -6,7 +6,7 @@ In this task, we will setup the needed components for the training.
 ## Create Kubernetes Cluster
 
 ```bash
-cd 00_setup
+cd k8s_helm/00_setup
 ./setup_cluster.sh
 ```
 ## Install Ingress
@@ -18,8 +18,8 @@ cd 00_setup
 
 * Create the ingress-controller
   > Before you start, create role binding 
-  > - With user account -> using `gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member user:$GCP_USER_ACCOUNT --role='roles/container.admin'` where set the values of parameters `GCP_PROJECT_ID` to your project and `GCP_USER_ACCOUNT` to your user account.
-  > - With serviceaccount -> using `gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member serviceAccount:$GCP_SERVICE_ACCOUNT_ID --role='roles/container.admin'` where set the values of parameters `GCP_PROJECT_ID` to your project and `GCP_SERVICE_ACCOUNT_ID` to your service account.
+  > - With user account -> using `gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member user:$GCP_USER_ACCOUNT --role='roles/container.admin'` where you set the values of the parameters `GCP_PROJECT_ID` to your project id and `GCP_USER_ACCOUNT` to your user account.
+  > - With serviceaccount -> using `gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member serviceAccount:$GCP_SERVICE_ACCOUNT_ID --role='roles/container.admin'` where you set the values of the parameters `GCP_PROJECT_ID` to your project id and `GCP_SERVICE_ACCOUNT_ID` to your service account id.
   ```bash
   kubectl create -f ingress-controller
   ```

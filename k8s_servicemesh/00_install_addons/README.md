@@ -1,5 +1,10 @@
 # Setup addons
 
+## Navigate to project folder to insatll addons
+```bash
+cd 00_install_addons
+```
+
 ## Prometheus
 
 ```bash
