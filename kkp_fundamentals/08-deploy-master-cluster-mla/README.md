@@ -144,7 +144,7 @@ promtail-ck8k6   1/1     Running   0          11m
 ## Accessing MLA services
 
 At this point, all of the above services are only accessible inside the cluster. If you want to expose them, take a look DEX and IAP configuration details
-at [Security System Services](https://docs.kubermatic.com/kubermatic/v2.20/architecture/concept/kkp-concepts/kkp_security/securing_system_services/) documentation to do it a secure way - integrated with Dex authentication.
+at [Security System Services](https://docs.kubermatic.com/kubermatic/master/architecture/concept/kkp-concepts/kkp_security/securing_system_services/) documentation to do it a secure way - integrated with Dex authentication.
 
 If you want to access some services locally, grab the kubeconfig to your local machine (so that you can perform the port-forwarding).
 

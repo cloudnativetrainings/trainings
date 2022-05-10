@@ -228,6 +228,6 @@ Removing the User Cluster MLA Components
 
 In order to uninstall the user cluster MLA stack components from a Seed cluster, first disable it in the Seed Custom Resource / API object as described in the previous section. After that, you can safely remove the resources in the mla namespace of the Seed Cluster.
 
-To Deep Dive, look into official [User Cluster MLA Stack](https://docs.kubermatic.com/kubermatic/v2.20/tutorials_howtos/monitoring_logging_alerting/user_cluster/user_guide/) documentation
+To Deep Dive, look into official [User Cluster MLA Stack](https://docs.kubermatic.com/kubermatic/master/tutorials_howtos/monitoring_logging_alerting/user_cluster/user_guide/) documentation
 
 Jump > [Home](../README.md) | Previous > [Master/Seed CLuster MLA Stack Setup](../08-deploy-master-cluster-mla/README.md)
