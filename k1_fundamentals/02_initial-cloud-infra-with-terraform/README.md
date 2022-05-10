@@ -9,7 +9,7 @@ To avoid the usage of your recent private SSH key, you can freshly create one fo
   cd $TRAINING_DIR
   ssh-keygen -f .secrets/id_rsa
   ```
-  >For now no password is needed, but for prodution would be recommended
+  >HINT: For now no password is needed, but for prodution would be recommended
   
   ```bash
   ls -la .secrets/id*
@@ -41,10 +41,10 @@ To avoid the usage of your recent private SSH key, you can freshly create one fo
   # Listeners of the LoadBalancer. Default is NOT HA, but ensure the bootstrapping works -> after bootstrapping we will increase it to e.g. 3
   control_plane_target_pool_members_count = 1
   
-  # Update to your SSH public key location
+  # Update to your SSH public key location, navigate to the .secrets dir and $PWD to get full path
   ssh_public_key_file = "/path/to/.secrets/id_rsa.pub"
 
-  # Update to your SSH private key location
+  # Update to your SSH private key location, navigate to the .secrets dir and $PWD to get full path
   ssh_private_key_file = "/path/to/.secrets/id_rsa"
   ```
 

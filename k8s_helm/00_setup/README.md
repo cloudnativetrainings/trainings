@@ -6,7 +6,7 @@ In this task, we will setup the needed components for the training.
 ## Create Kubernetes Cluster
 
 ```bash
-cd 00_setup
+cd k8s_helm/00_setup
 ./setup_cluster.sh
 ```
 ## Install Ingress

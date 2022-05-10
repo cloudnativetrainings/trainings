@@ -56,6 +56,8 @@ Export your zone name
 ```bash
 export DNS_ZONE=student-XX-xxxx   #WITHOUT loodse.training!
 ```
+**Alternative:** You could create an empty dns zone without the External IP linked to it, like student.hosted.domain.name until when KKP has been installed on our cluster, we can now link the External IP to an AWS Route 53 record created just like the empty dns record we put in our yaml file. Example: `export DNS_ZONE=student.xxx.xxxx.x`
+
 Replace TODO-STUDENT-DNS with your DNS.
 ```bash
 sed -i 's/TODO-STUDENT-DNS/'"$DNS_ZONE"'/g' ./*.yaml

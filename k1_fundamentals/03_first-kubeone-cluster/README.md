@@ -32,7 +32,7 @@ As to not having to input these values manually to create the machine-controller
 - Cloud Controller Manager configuration `cloud-config`
 - Full MachineDeployment yaml and apply it to the Kubernetes cluster automatically.
 
-**Alternative** You could also export the Terraform output into a tf.json file and use this one (not recommended, but makes the used content more visible):
+**Alternative:** You could also export the Terraform output into a tf.json file and use this one (not recommended, but makes the used content more visible):
 
 ```bash
 cd $TRAINING_DIR/src/gce/tf-infra

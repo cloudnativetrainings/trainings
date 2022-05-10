@@ -4,6 +4,11 @@ In this training, you will learn how to exclude files from the resulting image.
 
 >Navigate to the folder `09_build-ignore` from CLI, before you get started. 
 
+## Inspect the Dockerfile
+```bash
+cat Dockerfile
+```
+
 ## Build the image
 ```bash
 docker build -t ignore:1.0.0 .
