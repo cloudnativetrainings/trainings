@@ -23,4 +23,7 @@ spec:
     # in the values.yaml
     domain: kubermatic.TODO-STUDENT-DNS.loodse.training
     certificateIssuer:
+      apiGroup: cert-manager.io/v1
+      kind: ClusterIssuer
       name: letsencrypt-prod
+    className: nginx

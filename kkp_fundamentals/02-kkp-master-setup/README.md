@@ -88,7 +88,7 @@ For proper authentication, shared secrets must be configured between Dex and KKP
 
 Generate first a new secret:
 ```bash
-export RANDOM_SECRET=$(cat /dev/urandom | tr -dc A-Za-z0-9 | head -c32)
+export RANDOM_SECRET=$(base64 < /dev/urandom | tr -dc '[:alnum:]' | head -c32)
 ```
 
 Replace the placeholder `TODO-A-RANDOM-SECRET` with newly generated secret value:
@@ -105,8 +105,8 @@ sed -i 's/TODO-KUBERMATIC-OAUTH-SECRET-FROM-VALUES.YAML/'"$RANDOM_SECRET"'/g' ./
 For some service communication and cookie key, we should now also replace the following `TODO-A-RANDOM-ISSUERCOOKIEKEY` and `TODO-A-RANDOM-SERVICEACCOUNTKEY` in the `kubermatic.yaml` with some random values. Again generate two random values using below command.
 
 ```bash
-export ISSUERCOOKIEKEY=$(cat /dev/urandom | tr -dc A-Za-z0-9 | head -c32)
-export SERVICEACCOUNTKEY=$(cat /dev/urandom | tr -dc A-Za-z0-9 | head -c32)
+export ISSUERCOOKIEKEY=$(base64 < /dev/urandom | tr -dc '[:alnum:]' | head -c32)
+export SERVICEACCOUNTKEY=$(base64 < /dev/urandom | tr -dc '[:alnum:]' | head -c32)
 ```
 
 ```bash

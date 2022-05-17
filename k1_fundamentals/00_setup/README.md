@@ -61,12 +61,12 @@ After you entered the container, verify the setup:
   kubeone version
   ```
 
-* Verify terraform version, a recent version (>= 1.0.x) should be shown
+* Verify terraform version, a recent version (>= 1.1.x) should be shown
   ```bash
   terraform version
   ```
 
-* Verify teh Google Cloud SDK version, a recent gcloud SDK (>= 359.0.0)
+* Verify teh Google Cloud SDK version, a recent gcloud SDK (>= 384.0.0)
   ```bash
   gcloud version
   ```
