@@ -53,13 +53,13 @@ Create monitoring namespace
 ```bash
 cd $TRAINING_DIR/src/kkp-setup/
 kubectl create ns monitoring
-helm --namespace monitoring upgrade --install --wait --values values.yaml prometheus releases/v2.18.2/charts/monitoring/prometheus/
-helm --namespace monitoring upgrade --install --wait --values values.yaml alertmanager releases/v2.18.2/charts/monitoring/alertmanager/
-helm --namespace monitoring upgrade --install --wait --values values.yaml node-exporter releases/v2.18.2/charts/monitoring/node-exporter/
-helm --namespace monitoring upgrade --install --wait --values values.yaml kube-state-metrics releases/v2.18.2/charts/monitoring/kube-state-metrics/
-helm --namespace monitoring upgrade --install --wait --values values.yaml grafana releases/v2.18.2/charts/monitoring/grafana/
-helm --namespace monitoring upgrade --install --wait --values values.yaml karma releases/v2.18.2/charts/monitoring/karma/
-helm --namespace monitoring upgrade --install --wait --values values.yaml blackbox-exporter releases/v2.18.2/charts/monitoring/blackbox-exporter/
+helm --namespace monitoring upgrade --install --wait --values values.yaml prometheus releases/v2.20.2/charts/monitoring/prometheus/
+helm --namespace monitoring upgrade --install --wait --values values.yaml alertmanager releases/v2.20.2/charts/monitoring/alertmanager/
+helm --namespace monitoring upgrade --install --wait --values values.yaml node-exporter releases/v2.20.2/charts/monitoring/node-exporter/
+helm --namespace monitoring upgrade --install --wait --values values.yaml kube-state-metrics releases/v2.20.2/charts/monitoring/kube-state-metrics/
+helm --namespace monitoring upgrade --install --wait --values values.yaml grafana releases/v2.20.2/charts/monitoring/grafana/
+helm --namespace monitoring upgrade --install --wait --values values.yaml karma releases/v2.20.2/charts/monitoring/karma/
+helm --namespace monitoring upgrade --install --wait --values values.yaml blackbox-exporter releases/v2.20.2/charts/monitoring/blackbox-exporter/
 ```
 
 >**Note**: If any of the helm chart installation step fails, check the specific pods for details. It may also happen that autoscaling will be involved in case that there is not enough capacity on the current nodes (that may take a few minutes).
@@ -106,13 +106,13 @@ prometheus-1                         3/3     Running   0          28m
 
 We can keep the default values for these charts and install them on cluster.
 
-If you want to see default values of all charts, find the `values.yaml` files under `./releases/v2.18.2/charts`.
+If you want to see default values of all charts, find the `values.yaml` files under `./releases/v2.20.2/charts`.
 
 ```bash
 cd $TRAINING_DIR/src/kkp-setup/
 kubectl create ns logging
-helm --namespace logging upgrade --install --wait --values values.yaml promtail releases/v2.18.2/charts/logging/promtail/
-helm --namespace logging upgrade --install --wait --values values.yaml loki releases/v2.18.2/charts/logging/loki/
+helm --namespace logging upgrade --install --wait --values values.yaml promtail releases/v2.20.2/charts/logging/promtail/
+helm --namespace logging upgrade --install --wait --values values.yaml loki releases/v2.20.2/charts/logging/loki/
 ```
 
 You can check if all helm charts were installed properly.

@@ -18,7 +18,7 @@ If you have docker, git and a common IDE installed locally, you can quickly star
 
 ```bash
 git clone https://github.com/kubermatic-labs/trainings.git
-docker run --name kubeone-tool-container -v $(pwd):/home/kubermatic/mnt -t -d quay.io/kubermatic-labs/kubeone-tooling:1.3.0
+docker run --name kubeone-tool-container -v $(pwd):/home/kubermatic/mnt -t -d quay.io/kubermatic-labs/kubeone-tooling:1.4.2
 ```
 Connect into the running container and ensures that you can reattach if you get kicked out of the container:
 
@@ -32,7 +32,7 @@ docker exec -it kubeone-tool-container bash
 # remove old container
 docker rm -f kubeone-tool-container
 
-docker run --rm --name kubeone-tool-container -v $(pwd):/home/kubermatic/mnt -it quay.io/kubermatic-labs/kubeone-tooling:1.3.0 bash
+docker run --rm --name kubeone-tool-container -v $(pwd):/home/kubermatic/mnt -it quay.io/kubermatic-labs/kubeone-tooling:1.4.2 bash
 ```
 
 ### (Alternative) Use Google Cloud Shell
@@ -56,7 +56,7 @@ After you entered the container, verify the setup:
   ls -la
   ```
 
-* Verify the kubeone version, a json with kubeone v1.3.0 should be shown
+* Verify the kubeone version, a json with kubeone v1.4.2 should be shown
   ```bash
   kubeone version
   ```

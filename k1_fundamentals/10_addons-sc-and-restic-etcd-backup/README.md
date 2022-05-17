@@ -123,11 +123,11 @@ vim kubeone.yaml
 ```
 As we don't use the templating functions, we can enable the addon mechanism directly:
 ```yaml
-apiVersion: kubeone.io/v1beta1
+apiVersion: kubeone.k8c.io/v1beta2
 kind: KubeOneCluster
 name: k1
 versions:
-  kubernetes: '1.21.5'
+  kubernetes: '1.22.5'
 cloudProvider:
   gce: {}
   cloudConfig: |-

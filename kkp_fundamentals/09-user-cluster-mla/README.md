@@ -54,7 +54,7 @@ sed -i 's/TODO-RAMDOM-USER-AM-SECRET/'"$RAMDOM-USER-AM-SECRET"'/g' ./values.yaml
 
 Install/upgrade the `oauth` Helm chart. 
 ```bash
-helm --namespace oauth upgrade --install --create-namespace --wait --values values.yaml oauth ./releases/v2.18.2/charts/oauth/
+helm --namespace oauth upgrade --install --create-namespace --wait --values values.yaml oauth ./releases/v2.20.2/charts/oauth/
 ```
 
 Add config/iap/values.yaml inside MLA repository
@@ -124,7 +124,7 @@ sed -i 's/TODO-RAMDOM-USER-AM-KEY/'"$RAMDOM-USER-AM-KEY"'/g' ./values.yaml
 Install/upgrade the `iap` Helm chart. 
 ```bash
 cd -
-helm --namespace mla upgrade --atomic --create-namespace --install iap $TRAINING_DIR/src/kkp-setup/releases/v2.18.2/charts/iap --values config/iap/values.yaml
+helm --namespace mla upgrade --atomic --create-namespace --install iap $TRAINING_DIR/src/kkp-setup/releases/v2.20.2/charts/iap --values config/iap/values.yaml
 ```
 
 Enabling MLA Feature in KKP Configuration
