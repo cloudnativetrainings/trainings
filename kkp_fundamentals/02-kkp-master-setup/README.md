@@ -200,6 +200,14 @@ INFO[00:10:54]
 INFO[00:10:54] 🛬 Installation completed successfully. Time for a break, maybe? ☺ 
 ```
 
+
+### Apply the ClusterIssuer defintion
+
+> Before applying, replace the `TODO-STUDENT-EMAIL@loodse.training` with your `student-XX-xxxx@loodse.training` email in the `clusterissuer.yaml`. 
+```bash
+kubectl apply -f clusterissuer.yaml
+```
+
 ### Validate Ingress `nginx-ingress-controller`
 
 Now validate if everything is running in `nginx-ingress-controller` namespace, and you have an active service.
