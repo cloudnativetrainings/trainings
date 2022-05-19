@@ -46,15 +46,15 @@ dex:
 REPLACE the `TODO` placeholders related the DEX configuration in the values.yaml
 ```bash
 sed -i 's/TODO-STUDENT-DNS/$DNS_ZONE/g' ./values.yaml
-export RAMDOM-USER-GRAFANA-SECRET=$(cat /dev/urandom | tr -dc A-Za-z0-9 | head -c32)
+export RAMDOM-USER-GRAFANA-SECRET=$(base64 < /dev/urandom | tr -dc '[:alnum:]' | head -c32)
 sed -i 's/TODO-RAMDOM-USER-GRAFANA-SECRET/'"$RAMDOM-USER-GRAFANA-SECRET"'/g' ./values.yaml
-export RAMDOM-USER-AM-SECRET=$(cat /dev/urandom | tr -dc A-Za-z0-9 | head -c32)
+export RAMDOM-USER-AM-SECRET=$(base64 < /dev/urandom | tr -dc '[:alnum:]' | head -c32)
 sed -i 's/TODO-RAMDOM-USER-AM-SECRET/'"$RAMDOM-USER-AM-SECRET"'/g' ./values.yaml
 ```
 
 Install/upgrade the `oauth` Helm chart. 
 ```bash
-helm --namespace oauth upgrade --install --create-namespace --wait --values values.yaml oauth ./releases/v2.18.2/charts/oauth/
+helm --namespace oauth upgrade --install --create-namespace --wait --values values.yaml oauth ./releases/v2.20.2/charts/oauth/
 ```
 
 Add config/iap/values.yaml inside MLA repository
@@ -115,16 +115,16 @@ REPLACE the `TODO` placeholders related the IAP configuration in the config/iap/
 sed -i 's/TODO-STUDENT-DNS/$DNS_ZONE/g' ./values.yaml
 sed -i 's/TODO-RAMDOM-USER-GRAFANA-SECRET-FROM-DEX/'"$RAMDOM-USER-GRAFANA-SECRET"'/g' ./values.yaml
 sed -i 's/TODO-RAMDOM-USER-AM-SECRET-FROM-DEX/'"$RAMDOM-USER-AM-SECRET"'/g' ./values.yaml
-export RAMDOM-USER-GRAFANA-KEY=$(cat /dev/urandom | tr -dc A-Za-z0-9 | head -c32)
+export RAMDOM-USER-GRAFANA-KEY=$(base64 < /dev/urandom | tr -dc '[:alnum:]' | head -c32)
 sed -i 's/TODO-RAMDOM-USER-GRAFANA-KEY/'"$RAMDOM-USER-GRAFANA-KEY"'/g' ./values.yaml
-export RAMDOM-USER-AM-KEY=$(cat /dev/urandom | tr -dc A-Za-z0-9 | head -c32)
+export RAMDOM-USER-AM-KEY=$(base64 < /dev/urandom | tr -dc '[:alnum:]' | head -c32)
 sed -i 's/TODO-RAMDOM-USER-AM-KEY/'"$RAMDOM-USER-AM-KEY"'/g' ./values.yaml
 ```
 
 Install/upgrade the `iap` Helm chart. 
 ```bash
 cd -
-helm --namespace mla upgrade --atomic --create-namespace --install iap $TRAINING_DIR/src/kkp-setup/releases/v2.18.2/charts/iap --values config/iap/values.yaml
+helm --namespace mla upgrade --atomic --create-namespace --install iap $TRAINING_DIR/src/kkp-setup/releases/v2.20.2/charts/iap --values config/iap/values.yaml
 ```
 
 Enabling MLA Feature in KKP Configuration

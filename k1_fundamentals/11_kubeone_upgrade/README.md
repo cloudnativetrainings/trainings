@@ -25,18 +25,18 @@ To start with the upgrade, please follow the below steps.
 
 # KubeOne Cluster Upgrade Process
 
-In this section, we are going to upgrade the KubeOne cluster from version `1.21.5` to latest `1.22.2`
+In this section, we are going to upgrade the KubeOne cluster from version `1.22.5` to latest `1.23.6`
 
 ## Update Cluster Config
 
-Update the `kubeone.yaml` file by changing the value of kubernetes to `1.22.2`:
+Update the `kubeone.yaml` file by changing the value of kubernetes to `1.23.6`:
 
 ```yaml
-apiVersion: kubeone.io/v1beta1
+apiVersion: kubeone.k8c.io/v1beta2
 kind: KubeOneCluster
 name: k1
 versions:
-  kubernetes: '1.22.2' <<< UPDATE
+  kubernetes: '1.23.6' <<< UPDATE
 cloudProvider:
 #....
 ```
@@ -86,8 +86,8 @@ kubectl version --short
 ```
 
 ```text
-Client Version: v1.22.2
-Server Version: v1.21.5
+Client Version: v1.23.6
+Server Version: v1.22.5
 ```
 
 If the `Client Version` < your target kubernetes version, please update your `kubectl` to the latest version:
@@ -140,8 +140,8 @@ kubectl version --short
 ```
 
 ```text
-Client Version: v1.21.2
-Server Version: v1.22.2
+Client Version: v1.23.6
+Server Version: v1.23.6
 ```
 
 ```bash
@@ -154,12 +154,12 @@ kubectl get nodes
 
 ```text
 NAME                                STATUS   ROLES    AGE     VERSION
-k1-control.1.test-00-kubermatic     Ready    master   24h     v1.22.2
-k1-control.2.test-00-kubermatic     Ready    master   24h     v1.22.2
-k1-control.3.test-00-kubermatic     Ready    master   24h     v1.22.2
-k1-pool-az-a-75dfcdb6cb-4ms69       Ready    <none>   5m54s   v1.22.2
-k1-pool-az-a-75dfcdb6cb-bfxk2       Ready    <none>   8m5s    v1.22.2
-k1-pool-az-a-75dfcdb6cb-pn2n5       Ready    <none>   3m53s   v1.22.2
+k1-control.1.test-00-kubermatic     Ready    master   24h     v1.23.6
+k1-control.2.test-00-kubermatic     Ready    master   24h     v1.23.6
+k1-control.3.test-00-kubermatic     Ready    master   24h     v1.23.6
+k1-pool-az-a-75dfcdb6cb-4ms69       Ready    <none>   5m54s   v1.23.6
+k1-pool-az-a-75dfcdb6cb-bfxk2       Ready    <none>   8m5s    v1.23.6
+k1-pool-az-a-75dfcdb6cb-pn2n5       Ready    <none>   3m53s   v1.23.6
 ```
 
 ### Option 2: Upgrade first master nodes and then the workers
@@ -172,7 +172,7 @@ terraform refresh
 kubeone apply -t . -m ../kubeone.yaml --verbose
 ```
 
-If you take this route, then you will have to upgrade the worker nodes manually by editing all the MachineDeployment objects after upgrading the master nodes. Therefore, you need change the **`spec.template.spec.providerSpec.versions.kubelet`** section to `1.22.2`
+If you take this route, then you will have to upgrade the worker nodes manually by editing all the MachineDeployment objects after upgrading the master nodes. Therefore, you need change the **`spec.template.spec.providerSpec.versions.kubelet`** section to `1.23.6`
 
 ```bash
 vim ../machines/md-zone-a.yaml
@@ -213,13 +213,13 @@ Modify the yaml:
           - |
             ssh-rsa ...
       versions:
-        kubelet: 1.21.5  << UPDATE to 1.22.2
+        kubelet: 1.22.5  << UPDATE to 1.23.6
 ```
 
 Or use `sed`:
 
 ```bash
-sed -i 's/1.21.5/1.22.2/g' ../machines/*.yaml
+sed -i 's/1.22.5/1.23.6/g' ../machines/*.yaml
 kubectl apply -f ../machines
 ```
 
@@ -234,36 +234,36 @@ kubectl get md,ms,ma,nodes -A
 
 ```text
 NAMESPACE     NAME                                            REPLICAS   AVAILABLE-REPLICAS   PROVIDER   OS       KUBELET   AGE
-kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-a   1          1                    gce        ubuntu   1.22.2    2d
-kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-b   1          1                    gce        ubuntu   1.22.2    38h
-kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-c   1          1                    gce        ubuntu   1.22.2    38h
+kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-a   1          1                    gce        ubuntu   1.23.6    2d
+kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-b   1          1                    gce        ubuntu   1.23.6    38h
+kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-c   1          1                    gce        ubuntu   1.23.6    38h
 
 NAMESPACE     NAME                                                REPLICAS   AVAILABLE-REPLICAS   PROVIDER   OS       KUBELET   AGE
-kube-system   machineset.cluster.k8s.io/k1-pool-az-a-584d589c8c   1                               gce        ubuntu   1.22.2    108s
-kube-system   machineset.cluster.k8s.io/k1-pool-az-a-7f976c98dd   0                               gce        ubuntu   1.21.5    2d
-kube-system   machineset.cluster.k8s.io/k1-pool-az-a-bd95f5c65    1          1                    gce        ubuntu   1.21.5    37h
-kube-system   machineset.cluster.k8s.io/k1-pool-az-b-6996d8f668   1          1                    gce        ubuntu   1.21.5    37h
-kube-system   machineset.cluster.k8s.io/k1-pool-az-b-6b7fcd6985   0                               gce        ubuntu   1.21.5    38h
-kube-system   machineset.cluster.k8s.io/k1-pool-az-b-7c455dc654   1                               gce        ubuntu   1.22.2    108s
-kube-system   machineset.cluster.k8s.io/k1-pool-az-c-66f96d6b66   0                               gce        ubuntu   1.21.5    38h
-kube-system   machineset.cluster.k8s.io/k1-pool-az-c-77478767d5   1                               gce        ubuntu   1.22.2    108s
-kube-system   machineset.cluster.k8s.io/k1-pool-az-c-7bdfbcd567   1          1                    gce        ubuntu   1.21.5    37h
+kube-system   machineset.cluster.k8s.io/k1-pool-az-a-584d589c8c   1                               gce        ubuntu   1.23.6    108s
+kube-system   machineset.cluster.k8s.io/k1-pool-az-a-7f976c98dd   0                               gce        ubuntu   1.22.5    2d
+kube-system   machineset.cluster.k8s.io/k1-pool-az-a-bd95f5c65    1          1                    gce        ubuntu   1.22.5    37h
+kube-system   machineset.cluster.k8s.io/k1-pool-az-b-6996d8f668   1          1                    gce        ubuntu   1.22.5    37h
+kube-system   machineset.cluster.k8s.io/k1-pool-az-b-6b7fcd6985   0                               gce        ubuntu   1.22.5    38h
+kube-system   machineset.cluster.k8s.io/k1-pool-az-b-7c455dc654   1                               gce        ubuntu   1.23.6    108s
+kube-system   machineset.cluster.k8s.io/k1-pool-az-c-66f96d6b66   0                               gce        ubuntu   1.22.5    38h
+kube-system   machineset.cluster.k8s.io/k1-pool-az-c-77478767d5   1                               gce        ubuntu   1.23.6    108s
+kube-system   machineset.cluster.k8s.io/k1-pool-az-c-7bdfbcd567   1          1                    gce        ubuntu   1.22.5    37h
 
 NAMESPACE     NAME                                                   PROVIDER   OS       ADDRESS                         KUBELET   AGE
-kube-system   machine.cluster.k8s.io/k1-pool-az-a-584d589c8c-7f9gb   gce        ubuntu   10.240.0.23                     1.22.2    108s
-kube-system   machine.cluster.k8s.io/k1-pool-az-a-bd95f5c65-lm4fj    gce        ubuntu   10.240.0.19                     1.21.5    6h50m
-kube-system   machine.cluster.k8s.io/k1-pool-az-b-6996d8f668-kx96z   gce        ubuntu   10.240.0.20                     1.21.5    6h50m
-kube-system   machine.cluster.k8s.io/k1-pool-az-b-7c455dc654-j2ggk   gce        ubuntu   k1-pool-az-b-7c455dc654-j2ggk   1.22.2    108s
-kube-system   machine.cluster.k8s.io/k1-pool-az-c-77478767d5-vffmd   gce        ubuntu   10.240.0.25                     1.22.2    108s
-kube-system   machine.cluster.k8s.io/k1-pool-az-c-7bdfbcd567-kdfn2   gce        ubuntu   10.240.0.22                     1.21.5    6h50m
+kube-system   machine.cluster.k8s.io/k1-pool-az-a-584d589c8c-7f9gb   gce        ubuntu   10.240.0.23                     1.23.6    108s
+kube-system   machine.cluster.k8s.io/k1-pool-az-a-bd95f5c65-lm4fj    gce        ubuntu   10.240.0.19                     1.22.5    6h50m
+kube-system   machine.cluster.k8s.io/k1-pool-az-b-6996d8f668-kx96z   gce        ubuntu   10.240.0.20                     1.22.5    6h50m
+kube-system   machine.cluster.k8s.io/k1-pool-az-b-7c455dc654-j2ggk   gce        ubuntu   k1-pool-az-b-7c455dc654-j2ggk   1.23.6    108s
+kube-system   machine.cluster.k8s.io/k1-pool-az-c-77478767d5-vffmd   gce        ubuntu   10.240.0.25                     1.23.6    108s
+kube-system   machine.cluster.k8s.io/k1-pool-az-c-7bdfbcd567-kdfn2   gce        ubuntu   10.240.0.22                     1.22.5    6h50m
 
 NAMESPACE   NAME                                 STATUS   ROLES                  AGE     VERSION
-            node/k1-control-plane-1              Ready    control-plane,master   2d      v1.22.2
-            node/k1-control-plane-2              Ready    control-plane,master   38h     v1.22.2
-            node/k1-control-plane-3              Ready    control-plane,master   38h     v1.22.2
-            node/k1-pool-az-a-bd95f5c65-lm4fj    Ready    <none>                 6h48m   v1.21.5
-            node/k1-pool-az-b-6996d8f668-kx96z   Ready    <none>                 6h47m   v1.21.5
-            node/k1-pool-az-c-7bdfbcd567-kdfn2   Ready    <none>                 6h48m   v1.21.5
+            node/k1-control-plane-1              Ready    control-plane,master   2d      v1.23.6
+            node/k1-control-plane-2              Ready    control-plane,master   38h     v1.23.6
+            node/k1-control-plane-3              Ready    control-plane,master   38h     v1.23.6
+            node/k1-pool-az-a-bd95f5c65-lm4fj    Ready    <none>                 6h48m   v1.22.5
+            node/k1-pool-az-b-6996d8f668-kx96z   Ready    <none>                 6h47m   v1.22.5
+            node/k1-pool-az-c-7bdfbcd567-kdfn2   Ready    <none>                 6h48m   v1.23.6
 ```
 
 After a few more minutes, the worker nodes also will be there in a new version. 

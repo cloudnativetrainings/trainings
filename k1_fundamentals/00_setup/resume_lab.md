@@ -5,7 +5,7 @@ If you were using a Cloud Shell Environment of refreshed your local environment,
 Make sure that these steps are executed inside the Tooling Container (if you are using it).
 
 ```bash
-docker run --name kubeone-tool-container -v $(pwd):/home/kubermatic/mnt -t -d quay.io/kubermatic-labs/kubeone-tooling:1.3.0
+docker run --name kubeone-tool-container -v $(pwd):/home/kubermatic/mnt -t -d quay.io/kubermatic-labs/kubeone-tooling:1.4.2
 docker exec -it kubeone-tool-container bash
 ```
 

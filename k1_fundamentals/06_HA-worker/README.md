@@ -9,7 +9,7 @@
 
   ```text
   NAME           REPLICAS   AVAILABLE-REPLICAS   PROVIDER   OS       KUBELET   AGE
-  k1-pool-az-a   1          1                    gce        ubuntu   1.21.5    34m
+  k1-pool-az-a   1          1                    gce        ubuntu   1.22.5    34m
   ```
   
   ```bash
@@ -18,10 +18,10 @@
 
   ```text
   NAME                            STATUS                        ROLES    AGE     VERSION   ZONE
-  k1-control-plane-1              Ready                         master   117m    v1.21.5   europe-west4-a
-  k1-control-plane-2              Ready                         master   41m     v1.21.5   europe-west4-b
-  k1-control-plane-3              Ready                         master   40m     v1.21.5   europe-west4-c
-  k1-pool-az-a-84dff9464c-g59bv   Ready                         <none>   2m30s   v1.21.5   europe-west4-a
+  k1-control-plane-1              Ready                         master   117m    v1.22.5   europe-west4-a
+  k1-control-plane-2              Ready                         master   41m     v1.22.5   europe-west4-b
+  k1-control-plane-3              Ready                         master   40m     v1.22.5   europe-west4-c
+  k1-pool-az-a-84dff9464c-g59bv   Ready                         <none>   2m30s   v1.22.5   europe-west4-a
   ```   
 
 * To reach an HA cluster, we would need worker nodes also in zones `europe-west4-b` and `europe-west4-c`. To accomplish this, we could reuse the current MachineDeployment `k1-pool-az-a` and duplicate the object for AZ `b` and `c`.
@@ -75,22 +75,22 @@
      After a few minutes you should see, 3 nodes in total.
      ```text
      NAMESPACE     NAME                                            REPLICAS   AVAILABLE-REPLICAS   PROVIDER   OS       KUBELET   AGE
-     kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-a   1          1                    gce        ubuntu   1.21.5    3h33m
-     kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-b   1          1                    gce        ubuntu   1.21.5    3m30s
-     kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-c   1          1                    gce        ubuntu   1.21.5    3m30s
+     kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-a   1          1                    gce        ubuntu   1.22.5    3h33m
+     kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-b   1          1                    gce        ubuntu   1.22.5    3m30s
+     kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-c   1          1                    gce        ubuntu   1.22.5    3m30s
 
      NAMESPACE     NAME                                                   PROVIDER   OS       ADDRESS       KUBELET   AGE
-     kube-system   machine.cluster.k8s.io/k1-pool-az-a-75cddb6cd9-slgqk   gce        ubuntu   10.240.0.13   1.21.5    3m30s
-     kube-system   machine.cluster.k8s.io/k1-pool-az-b-777d7cc84b-g76zf   gce        ubuntu   10.240.0.15   1.21.5    3m29s
-     kube-system   machine.cluster.k8s.io/k1-pool-az-c-5d5cfcc5bf-gpjpg   gce        ubuntu   10.240.0.14   1.21.5    3m29s
+     kube-system   machine.cluster.k8s.io/k1-pool-az-a-75cddb6cd9-slgqk   gce        ubuntu   10.240.0.13   1.22.5    3m30s
+     kube-system   machine.cluster.k8s.io/k1-pool-az-b-777d7cc84b-g76zf   gce        ubuntu   10.240.0.15   1.22.5    3m29s
+     kube-system   machine.cluster.k8s.io/k1-pool-az-c-5d5cfcc5bf-gpjpg   gce        ubuntu   10.240.0.14   1.22.5    3m29s
 
      NAMESPACE   NAME                                         STATUS   ROLES    AGE     VERSION
-                 node/k1-control-plane-1                       Ready    master   4h11m   v1.21.5
-                 node/k1-control-plane-2                       Ready    master   3h34m   v1.21.5
-                 node/k1-control-plane-3                       Ready    master   3h33m   v1.21.5
-                 node/k1-pool-az-a-75cddb6cd9-slgqk            Ready    <none>   81s     v1.21.5
-                 node/k1-pool-az-b-777d7cc84b-g76zf            Ready    <none>   77s     v1.21.5
-                 node/k1-pool-az-c-5d5cfcc5bf-gpjpg            Ready    <none>   67s     v1.21.5
+                 node/k1-control-plane-1                       Ready    master   4h11m   v1.22.5
+                 node/k1-control-plane-2                       Ready    master   3h34m   v1.22.5
+                 node/k1-control-plane-3                       Ready    master   3h33m   v1.22.5
+                 node/k1-pool-az-a-75cddb6cd9-slgqk            Ready    <none>   81s     v1.22.5
+                 node/k1-pool-az-b-777d7cc84b-g76zf            Ready    <none>   77s     v1.22.5
+                 node/k1-pool-az-c-5d5cfcc5bf-gpjpg            Ready    <none>   67s     v1.22.5
      ```
      
      Now check again the availability zones
@@ -99,12 +99,12 @@
      ```
      ```text
      NAME                            STATUS   ROLES    AGE     VERSION   ZONE
-     k1-control-plane-1              Ready    master   4h11m   v1.21.5   europe-west4-a
-     k1-control-plane-2              Ready    master   3h35m   v1.21.5   europe-west4-b
-     k1-control-plane-3              Ready    master   3h34m   v1.21.5   europe-west4-c
-     k1-pool-az-a-75cddb6cd9-slgqk   Ready    <none>   99s     v1.21.5   europe-west4-a
-     k1-pool-az-b-777d7cc84b-g76zf   Ready    <none>   95s     v1.21.5   europe-west4-b
-     k1-pool-az-c-5d5cfcc5bf-gpjpg   Ready    <none>   85s     v1.21.5   europe-west4-c
+     k1-control-plane-1              Ready    master   4h11m   v1.22.5   europe-west4-a
+     k1-control-plane-2              Ready    master   3h35m   v1.22.5   europe-west4-b
+     k1-control-plane-3              Ready    master   3h34m   v1.22.5   europe-west4-c
+     k1-pool-az-a-75cddb6cd9-slgqk   Ready    <none>   99s     v1.22.5   europe-west4-a
+     k1-pool-az-b-777d7cc84b-g76zf   Ready    <none>   95s     v1.22.5   europe-west4-b
+     k1-pool-az-c-5d5cfcc5bf-gpjpg   Ready    <none>   85s     v1.22.5   europe-west4-c
      ```
 
   5. Change back to the default namespace

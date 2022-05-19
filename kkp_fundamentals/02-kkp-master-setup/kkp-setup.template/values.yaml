@@ -32,11 +32,5 @@ telemetry:
   # You can generate uuid using command uuidgen on your linux machine
   uuid: "TODO-RANDOM-UUID"
 
-certManager:
-  clusterIssuers:
-    letsencrypt-prod:
-      email: "TODO-STUDENT-EMAIL@loodse.training"
-    letsencrypt-staging:
-      email: "TODO-STUDENT-EMAIL@loodse.training"
 
 

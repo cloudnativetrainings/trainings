@@ -1,4 +1,4 @@
-apiVersion: operator.kubermatic.io/v1alpha1
+apiVersion: kubermatic.k8c.io/v1
 kind: KubermaticConfiguration
 metadata:
   name: kubermatic
@@ -23,4 +23,7 @@ spec:
     # in the values.yaml
     domain: kubermatic.TODO-STUDENT-DNS.loodse.training
     certificateIssuer:
+      apiGroup: cert-manager.io/v1
+      kind: ClusterIssuer
       name: letsencrypt-prod
+    className: nginx

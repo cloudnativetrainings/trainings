@@ -21,7 +21,7 @@ If you have docker, git and a common IDE installed locally, you can quickly star
 
 ```bash
 git clone https://github.com/kubermatic-labs/trainings.git
-docker run --name kubeone-tool-container -v $(pwd):/home/kubermatic/mnt -t -d quay.io/kubermatic-labs/kubeone-tooling:1.3.0
+docker run --name kubeone-tool-container -v $(pwd):/home/kubermatic/mnt -t -d quay.io/kubermatic-labs/kubeone-tooling:1.4.2
 docker exec -it kubeone-tool-container bash
 ```
 

@@ -5,11 +5,11 @@ Create a cluster `kubeone.yaml` file ([supported versions](https://docs.kubermat
 ```yaml
 # src/gce/kubeone.yaml
 
-apiVersion: kubeone.io/v1beta1
+apiVersion: kubeone.k8c.io/v1beta2
 kind: KubeOneCluster
 name: k1
 versions:
-  kubernetes: '1.21.5'
+  kubernetes: '1.22.5'
 cloudProvider:
   gce: {}
   cloudConfig: |-
@@ -104,7 +104,7 @@ INFO[23:48:20 CEST] Verifying that nodes in the cluster match nodes defined in t
 INFO[23:48:20 CEST] Verifying that all nodes in the cluster are ready…
 INFO[23:48:20 CEST] Verifying that there is no upgrade in the progress…
 NODE                 VERSION   APISERVER   ETCD
-k1-control-plane-1   v1.21.5   healthy     healthy
+k1-control-plane-1   v1.22.5   healthy     healthy
 ```
 
 ```bash
@@ -113,7 +113,7 @@ kubectl get nodes
 
 ```text
 NAME                           STATUS   ROLES                  AGE     VERSION
-k1-control-plane-1             Ready    control-plane,master   13m     v1.21.5
+k1-control-plane-1             Ready    control-plane,master   13m     v1.22.5
 ```
 
 Why is the worker node missing? -> Check the Machine Controller objects
@@ -124,13 +124,13 @@ kubectl -n kube-system get machinedeployment,machineset,machine
 
 ```text
 NAME                                            REPLICAS   AVAILABLE-REPLICAS   PROVIDER   OS       KUBELET   AGE
-machinedeployment.cluster.k8s.io/k1-pool-az-a   1          0                    gce        ubuntu   1.21.5    1m19s
+machinedeployment.cluster.k8s.io/k1-pool-az-a   1          0                    gce        ubuntu   1.22.5    1m19s
 
 NAME                                               REPLICAS   AVAILABLE-REPLICAS   PROVIDER   OS       KUBELET   AGE
-machineset.cluster.k8s.io/k1-pool-az-a-ff4979f74   1          0                    gce        ubuntu   1.21.5    1m19s
+machineset.cluster.k8s.io/k1-pool-az-a-ff4979f74   1          0                    gce        ubuntu   1.22.5    1m19s
 
 NAME                                                  PROVIDER   OS       ADDRESS      KUBELET   AGE
-machine.cluster.k8s.io/k1-pool-az-a-ff4979f74-4vg7c   gce        ubuntu   10.240.0.6   1.21.5    1m19s
+machine.cluster.k8s.io/k1-pool-az-a-ff4979f74-4vg7c   gce        ubuntu   10.240.0.6   1.22.5    1m19s
 ```
 
 The created `machine` object gives you more information
@@ -141,7 +141,7 @@ kubectl -n kube-system describe machine
 
 ```text
 Versions:
-  Kubelet:  1.21.5
+  Kubelet:  1.22.5
 Status:
 Addresses:
   Address:  10.240.0.7
@@ -176,7 +176,7 @@ Node Ref:
   Resource Version:  1884
   UID:               da325955-841f-4538-bfe0-6f46518cbcc8
 Versions:
-  Kubelet:  v1.21.5
+  Kubelet:  v1.22.5
 Events:
 Type    Reason                          Age                    From                Message
 ----    ------                          ----                   ----                -------

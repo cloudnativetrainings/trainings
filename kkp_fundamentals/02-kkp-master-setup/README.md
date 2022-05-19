@@ -88,7 +88,7 @@ For proper authentication, shared secrets must be configured between Dex and KKP
 
 Generate first a new secret:
 ```bash
-export RANDOM_SECRET=$(cat /dev/urandom | tr -dc A-Za-z0-9 | head -c32)
+export RANDOM_SECRET=$(base64 < /dev/urandom | tr -dc '[:alnum:]' | head -c32)
 ```
 
 Replace the placeholder `TODO-A-RANDOM-SECRET` with newly generated secret value:
@@ -105,8 +105,8 @@ sed -i 's/TODO-KUBERMATIC-OAUTH-SECRET-FROM-VALUES.YAML/'"$RANDOM_SECRET"'/g' ./
 For some service communication and cookie key, we should now also replace the following `TODO-A-RANDOM-ISSUERCOOKIEKEY` and `TODO-A-RANDOM-SERVICEACCOUNTKEY` in the `kubermatic.yaml` with some random values. Again generate two random values using below command.
 
 ```bash
-export ISSUERCOOKIEKEY=$(cat /dev/urandom | tr -dc A-Za-z0-9 | head -c32)
-export SERVICEACCOUNTKEY=$(cat /dev/urandom | tr -dc A-Za-z0-9 | head -c32)
+export ISSUERCOOKIEKEY=$(base64 < /dev/urandom | tr -dc '[:alnum:]' | head -c32)
+export SERVICEACCOUNTKEY=$(base64 < /dev/urandom | tr -dc '[:alnum:]' | head -c32)
 ```
 
 ```bash
@@ -171,7 +171,7 @@ ls -la ./releases/
 total 12
 drwxr-xr-x 3 kubermatic root 4096 Aug 19 12:55 .
 drwxr-xr-x 3 kubermatic root 4096 Aug 19 12:55 ..
-drwxr-xr-x 4 kubermatic root 4096 Aug 19 12:55 v2.18.2
+drwxr-xr-x 4 kubermatic root 4096 Aug 19 12:55 v2.20.2
  ```
 
 ## Install KKP
@@ -179,7 +179,7 @@ drwxr-xr-x 4 kubermatic root 4096 Aug 19 12:55 v2.18.2
 With the prepared configuration, it's now time to install the required Helm charts into the master cluster. Run below command to install KKP.
 
 ```bash
-./releases/v2.18.2/kubermatic-installer --verbose --charts-directory ./releases/v2.18.2/charts deploy --config kubermatic.yaml --helm-values values.yaml --storageclass gce
+./releases/v2.20.2/kubermatic-installer --verbose --charts-directory ./releases/v2.20.2/charts deploy --config kubermatic.yaml --helm-values values.yaml --storageclass gce
 ```
 
 After a few minutes, the installer should have been everything created and you will see:
@@ -198,6 +198,14 @@ INFO[00:10:54]          kubermatic.student-00.loodse.training.    IN  A  34.141.
 INFO[00:10:54]          *.kubermatic.student-00.loodse.training.  IN  A  34.141.244.62 
 INFO[00:10:54]                                              
 INFO[00:10:54] 🛬 Installation completed successfully. Time for a break, maybe? ☺ 
+```
+
+
+### Apply the ClusterIssuer defintion
+
+> Before applying, replace the `TODO-STUDENT-EMAIL@loodse.training` with your `student-XX-xxxx@loodse.training` email in the `clusterissuer.yaml`. 
+```bash
+kubectl apply -f clusterissuer.yaml
 ```
 
 ### Validate Ingress `nginx-ingress-controller`
@@ -270,7 +278,7 @@ kubectl logs -n kubermatic kubermatic-api-xxxxxxxxx-xxxxx
 ```
 
 ```text
-{"level":"info","time":"2021-05-28T00:27:35.242Z","caller":"cli/hello.go:36","msg":"Starting Kubermatic API (Enterprise Edition)...","version":"v2.18.2"}
+{"level":"info","time":"2021-05-28T00:27:35.242Z","caller":"cli/hello.go:36","msg":"Starting Kubermatic API (Enterprise Edition)...","version":"v2.20.2"}
 I0528 00:27:36.343760       1 request.go:645] Throttling request took 1.020000542s, request: GET:https://10.96.0.1:443/apis/coordination.k8s.io/v1?timeout=32s
 {"level":"fatal","time":"2021-05-28T00:27:36.606Z","caller":"kubermatic-api/main.go:126","msg":"failed to create an openid authenticator","issuer":"https://kubermatic.student-00.loodse.training/dex","oidcClientID":"kubermatic","error":"Get \"https://kubermatic.student-00.loodse.training/dex/.well-known/openid-configuration\": dial tcp: lookup kubermatic.student-00.loodse.training on 169.254.20.10:53: no such host"
 ```
