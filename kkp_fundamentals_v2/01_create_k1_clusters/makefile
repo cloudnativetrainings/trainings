@@ -1,5 +1,6 @@
 KUBEONE_VERSION=1.4.4
-KKP_VERSION=2.20.3
+KKP_VERSION=2.20.2
+# KKP_VERSION=2.20.3
 PROJECT_ID=$(shell gcloud projects list --format json | jq .[].name | tr -d \")
 
 .PHONY:
@@ -34,8 +35,11 @@ setup_seed_folder: setup_master_folder
 	cp /tmp/kkp/examples/seed.example.yaml ~/seed/kkp/seed.yaml
 
 .PHONY: chreate_ssh_key_pair
-chreate_ssh_key_pair: setup_master_folder
+chreate_ssh_key_pair: setup_seed_folder
 	ssh-keygen -N '' -f ~/.ssh/kkp_admin_training
+	eval `ssh-agent`
+	ssh-add ~/.ssh/kkp_admin_training
+
 
 .PHONY: copy_kubeone_yaml_files
 copy_kubeone_yaml_files: chreate_ssh_key_pair
@@ -47,6 +51,27 @@ copy_terraform_tfvars_files: copy_kubeone_yaml_files
 	sed s/\<GCP_PROJECT\>/$(PROJECT_ID)/g ./terraform.tfvars | sed s/\<CLUSTER_NAME\>/master/g > ~/master/kubeone/terraform.tfvars
 	sed s/\<GCP_PROJECT\>/$(PROJECT_ID)/g ./terraform.tfvars | sed s/\<CLUSTER_NAME\>/seed/g > ~/seed/kubeone/terraform.tfvars
 
-.PHONY: install
-install: copy_terraform_tfvars_files
+.PHONY: prepare
+prepare: copy_terraform_tfvars_files
 
+.PHONY: terraform_master
+terraform_master:
+	cd ~/master/kubeone; terraform init
+	cd ~/master/kubeone; terraform apply -var=control_plane_target_pool_members_count=1 -auto-approve
+	cd ~/master/kubeone; terraform output -json > tf.json
+
+.PHONY: create_master
+create_master: terraform_master
+	cd ~/master/kubeone; kubeone apply -m kubeone.yaml -t tf.json -y
+	cd ~/master/kubeone; terraform apply 
+
+.PHONY: terraform_seed
+terraform_seed:
+	cd ~/seed/kubeone; terraform init
+	cd ~/seed/kubeone; terraform apply -var=control_plane_target_pool_members_count=1 -auto-approve
+	cd ~/seed/kubeone; terraform output -json > tf.json
+
+.PHONY: create_seed
+create_seed: terraform_seed
+	cd ~/seed/kubeone; kubeone apply -m kubeone.yaml -t tf.json -y
+	cd ~/seed/kubeone; terraform apply 

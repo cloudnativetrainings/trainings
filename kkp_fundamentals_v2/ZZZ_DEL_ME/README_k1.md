@@ -1,9 +1,3 @@
-# Credential stuff
-do the stuff with the google key
-
-# ssh
-
-# fix 
 
 # Infra stuff
 terraform init
