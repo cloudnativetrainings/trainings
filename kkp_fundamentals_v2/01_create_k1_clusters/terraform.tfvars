@@ -9,10 +9,10 @@ control_plane_image_family = "ubuntu-2004-lts"
 # TODO does not work for whatever reason => gets 3
 # TODO
 # control_plane_target_pool_members_count = "1"
-control_plane_type = "n1-standard-4"
+control_plane_type = "n1-standard-2"
 
 worker_os = "ubuntu"
 # TODO
 # TODO The root module does not declare a variable named "workers_replicas" but a value was found in file "terraform.tfvars". If you meant to use this value, add a "variable" block to the configuration.
 # workers_replicas = "1"
-workers_type = "n1-standard-4"
+workers_type = "n1-standard-2"
