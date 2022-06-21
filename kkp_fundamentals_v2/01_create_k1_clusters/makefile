@@ -40,7 +40,6 @@ chreate_ssh_key_pair: setup_seed_folder
 	eval `ssh-agent`
 	ssh-add ~/.ssh/kkp_admin_training
 
-
 .PHONY: copy_kubeone_yaml_files
 copy_kubeone_yaml_files: chreate_ssh_key_pair
 	cp ./kubeone.yaml ~/master/kubeone
@@ -63,7 +62,7 @@ terraform_master:
 .PHONY: create_master
 create_master: terraform_master
 	cd ~/master/kubeone; kubeone apply -m kubeone.yaml -t tf.json -y
-	cd ~/master/kubeone; terraform apply 
+	cd ~/master/kubeone; terraform apply -auto-approve
 
 .PHONY: terraform_seed
 terraform_seed:
@@ -74,4 +73,4 @@ terraform_seed:
 .PHONY: create_seed
 create_seed: terraform_seed
 	cd ~/seed/kubeone; kubeone apply -m kubeone.yaml -t tf.json -y
-	cd ~/seed/kubeone; terraform apply 
+	cd ~/seed/kubeone; terraform apply -auto-approve

@@ -13,5 +13,6 @@ control_plane_type = "n1-standard-4"
 
 worker_os = "ubuntu"
 # TODO
-workers_replicas = "1"
+# TODO The root module does not declare a variable named "workers_replicas" but a value was found in file "terraform.tfvars". If you meant to use this value, add a "variable" block to the configuration.
+# workers_replicas = "1"
 workers_type = "n1-standard-4"
