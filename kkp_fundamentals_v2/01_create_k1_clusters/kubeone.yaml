@@ -1,13 +1,9 @@
 apiVersion: kubeone.io/v1beta1
 kind: KubeOneCluster
 versions:
-  kubernetes: '1.22.4'
+  kubernetes: '1.23.7'
 cloudProvider:
   gce: {}
   cloudConfig: |
     [global]
     regional = true
-
-addons:
-  enable: true
-  path: "./addons"    

@@ -1,6 +1,10 @@
 # Credential stuff
 do the stuff with the google key
 
+# ssh
+
+# fix 
+
 # Infra stuff
 terraform init
 terraform plan -var=control_plane_target_pool_members_count=1
