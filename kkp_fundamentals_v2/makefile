@@ -6,3 +6,4 @@ clean_up:
 	rm -rf ~/seed
 	rm -rf ~/key.json
 	rm -rf ~/trainings
+	rm -rf ~/.ssh
