@@ -15,4 +15,6 @@ worker_os = "ubuntu"
 # TODO
 # TODO The root module does not declare a variable named "workers_replicas" but a value was found in file "terraform.tfvars". If you meant to use this value, add a "variable" block to the configuration.
 # workers_replicas = "1"
+# TODO if this works (without s) create a bug!!!!
+worker_replicas = 3
 workers_type = "n1-standard-2"

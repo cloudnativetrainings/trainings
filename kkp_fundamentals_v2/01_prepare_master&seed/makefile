@@ -3,8 +3,12 @@ KKP_VERSION=2.20.2
 # KKP_VERSION=2.20.3
 PROJECT_ID=$(shell gcloud projects list --format json | jq .[].name | tr -d \")
 
-.PHONY:
-install_k1:
+.PHONY: install_tools
+install_tools:
+	sudo apt-get install -y uuid-runtime apache2-utils 
+
+.PHONY: install_k1
+install_k1: install_tools
 	curl -L https://github.com/kubermatic/kubeone/releases/download/v$(KUBEONE_VERSION)/kubeone_$(KUBEONE_VERSION)_linux_amd64.zip --output /tmp/kubeone.zip
 	mkdir -p /tmp/kubeone
 	rm -rf /tmp/kubeone/*
@@ -29,6 +33,7 @@ setup_master_folder: install_kkp
 	cp -r /tmp/kkp/charts ~/master/kkp
 	cp /tmp/kkp/examples/kubermatic.example.yaml ~/master/kkp/kubermatic.yaml
 	cp /tmp/kkp/examples/values.example.yaml ~/master/kkp/values.yaml
+	cp /tmp/kkp/examples/clusterissuer.yaml ~/master/kkp/clusterissuer.yaml
 
 .PHONY: setup_seed_folder
 setup_seed_folder: setup_master_folder

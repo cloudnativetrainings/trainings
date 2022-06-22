@@ -4,6 +4,7 @@ versions:
   kubernetes: 1.23.7
 cloudProvider:
   gce: {}
+  external: true
   cloudConfig: |
     [global]
     regional = true
