@@ -6,6 +6,8 @@ PROJECT_ID=$(shell gcloud projects list --format json | jq .[].name | tr -d \")
 .PHONY:
 install_k1:
 	curl -L https://github.com/kubermatic/kubeone/releases/download/v$(KUBEONE_VERSION)/kubeone_$(KUBEONE_VERSION)_linux_amd64.zip --output /tmp/kubeone.zip
+	mkdir -p /tmp/kubeone
+	rm -rf /tmp/kubeone/*
 	unzip /tmp/kubeone.zip -d /tmp/kubeone
 	chmod +x /tmp/kubeone/kubeone
 	sudo cp /tmp/kubeone/kubeone /usr/local/bin
@@ -14,6 +16,7 @@ install_k1:
 install_kkp: install_k1
 	curl -L https://github.com/kubermatic/kubermatic/releases/download/v$(KKP_VERSION)/kubermatic-ce-v$(KKP_VERSION)-linux-amd64.tar.gz --output /tmp/kubermatic-ce.tar.gz
 	mkdir -p /tmp/kkp
+	rm -rf /tmp/kkp/*
 	tar -xvf /tmp/kubermatic-ce.tar.gz -C /tmp/kkp	
 	chmod +x /tmp/kkp/kubermatic-installer
 	sudo cp /tmp/kkp/kubermatic-installer /usr/local/bin
@@ -36,7 +39,10 @@ setup_seed_folder: setup_master_folder
 
 .PHONY: chreate_ssh_key_pair
 chreate_ssh_key_pair: setup_seed_folder
+	rm -f ~/.ssh/kkp_admin_training
+	rm -f ~/.ssh/kkp_admin_training.pub
 	ssh-keygen -N '' -f ~/.ssh/kkp_admin_training
+	# TODO does not work in makefile
 	eval `ssh-agent`
 	ssh-add ~/.ssh/kkp_admin_training
 

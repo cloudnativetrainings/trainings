@@ -5,6 +5,7 @@ choose project in google cloud shell
 
 <!-- TODO remove v2 -->
 cd ~/trainings/kkp_fundamentals_v2/00_cloud_credentials
+<!-- TODO maybe clone only subdir -->
 
 # set gcp credentials
 make get_gcp_sa_key

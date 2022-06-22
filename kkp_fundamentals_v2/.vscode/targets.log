@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Tue Jun 21 09:39:23 2022
+# Make data base, printed on Wed Jun 22 09:10:48 2022
 
 # Variables
 
@@ -25,7 +25,7 @@ GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
 SSH_AGENT_LAUNCHER = gnome-keyring
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-67e6c1b5-7ffc-4746-b287-642e8ad0747a.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-1a91e03e-cd60-42f6-893b-1390f7ad9416.sock
 # environment
 LC_NAME = de_AT.UTF-8
 # environment
@@ -77,7 +77,7 @@ XAUTHORITY = /run/user/1000/gdm/Xauthority
 # makefile
 MAKEFLAGS = pqrR
 # environment
-DBUS_STARTER_ADDRESS = unix:path=/run/user/1000/bus,guid=73567cbb3d07954e9ad0450262ad5fb2
+DBUS_STARTER_ADDRESS = unix:path=/run/user/1000/bus,guid=c579efd6fe96d29f54cdb3c862b20f70
 # makefile
 CURDIR := /home/hubert/git/trainings/kkp_fundamentals_v2
 # environment
@@ -100,8 +100,8 @@ XDG_CONFIG_DIRS = /etc/xdg/xdg-ubuntu:/etc/xdg
 P9K_SSH = 0
 # environment
 XDG_SESSION_DESKTOP = ubuntu
-# makefile
-MAKEFILE_LIST := 
+# makefile (from 'makefile', line 1)
+MAKEFILE_LIST := makefile
 # automatic
 @F = $(notdir $@)
 # environment
@@ -109,19 +109,19 @@ ZSH = /home/hubert/.oh-my-zsh
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 151164
+VSCODE_PID = 14008
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
-SESSION_MANAGER = local/ueberbiber:@/tmp/.ICE-unix/1909,unix/ueberbiber:/tmp/.ICE-unix/1909
+SESSION_MANAGER = local/ueberbiber:@/tmp/.ICE-unix/1950,unix/ueberbiber:/tmp/.ICE-unix/1950
 # automatic
 *F = $(notdir $*)
 # environment
 CHROME_DESKTOP = code-url-handler.desktop
 # environment
-DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus,guid=73567cbb3d07954e9ad0450262ad5fb2
+DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus,guid=c579efd6fe96d29f54cdb3c862b20f70
 # automatic
 <D = $(patsubst %/,%,$(dir $<))
 # environment
@@ -157,7 +157,7 @@ LC_TIME = de_AT.UTF-8
 # environment
 GOROOT = /home/hubert/go/install/go
 # environment
-INVOCATION_ID = 19a1a224debd43f3b3ec9d1ff15b2ad1
+INVOCATION_ID = 149f0b19db7d498bbe8612e13cd543fa
 # environment
 VSCODE_LOG_NATIVE = false
 # environment
@@ -183,9 +183,9 @@ GNUMAKEFLAGS :=
 # environment
 LOGNAME = hubert
 # makefile
-.DEFAULT_GOAL := 
+.DEFAULT_GOAL := destroy
 # environment
-SYSTEMD_EXEC_PID = 1909
+SYSTEMD_EXEC_PID = 1950
 # environment
 DISPLAY = :1
 # environment
@@ -195,7 +195,7 @@ GTK_MODULES = gail:atk-bridge
 # default
 MAKE_VERSION := 4.3
 # environment
-MANAGERPID = 1479
+MANAGERPID = 1688
 # environment
 DBUS_STARTER_BUS_TYPE = session
 # environment
@@ -213,13 +213,13 @@ GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
 COLORTERM = truecolor
 # environment
-JOURNAL_STREAM = 8:39141
+JOURNAL_STREAM = 8:32532
 # environment
 XDG_SESSION_CLASS = user
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
-TILIX_ID = 2d8c0d29-0460-4df1-834e-9bde5fd8a5ca
+TILIX_ID = 99023cfb-56dc-4f65-b6fb-6c03e762cfa2
 # environment
 HOME = /home/hubert
 # environment
@@ -255,7 +255,7 @@ GDMSESSION = ubuntu
 # environment
 LC_IDENTIFICATION = de_AT.UTF-8
 # variable set hash-table stats:
-# Load=121/1024=12%, Rehash=0, Collisions=7/148=5%
+# Load=121/1024=12%, Rehash=0, Collisions=7/151=5%
 
 # Pattern-specific Variable Values
 
@@ -263,22 +263,15 @@ LC_IDENTIFICATION = de_AT.UTF-8
 
 # Directories
 
-# . (device 66306, inode 15358751): 12 files, no impossibilities.
+# . (device 66306, inode 15358751): 15 files, no impossibilities.
 
-# 12 files, no impossibilities in 1 directories.
+# 15 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
 # No implicit rules.
 
 # Files
-
-# Not a target:
-Makefile:
-#  Implicit rule search has been done.
-#  File does not exist.
-#  File has been updated.
-#  Failed to be updated.
 
 # Not a target:
 .DEFAULT:
@@ -293,35 +286,54 @@ all:
 #  File does not exist.
 #  File has not been updated.
 
+destroy:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'makefile', line 3):
+	cd ~/master/kubeone; kubeone reset --manifest kubeone.yaml -t tf.json -y
+	cd ~/master/kubeone; terraform destroy -auto-approve
+	cd ~/seed/kubeone; kubeone reset --manifest kubeone.yaml -t tf.json -y
+	cd ~/seed/kubeone; terraform destroy -auto-approve
+	rm -rf /tmp/kubeone
+	rm -rf /tmp/kkp
+	rm -rf ~/master
+	rm -rf ~/seed
+	rm -rf ~/trainings
+	rm -rf ~/key.json
+	rm -rf ~/.ssh
+	# TODO issue with networks terraform destroy
+	# │ Error: Error waiting for Deleting Network: The network resource 'projects/student-00-kkp-admin-training/global/networks/master' is already being used by 'projects/student-00-kkp-admin-training/global/routes/master-21959b73-0fd5-455a-8826-9f49ce4cb7da'
+	# TODO delete the serviceaccount
+
 # Not a target:
+ 
 makefile:
 #  Implicit rule search has been done.
-#  File does not exist.
+#  Last modified 2022-06-21 17:37:30.172503899
 #  File has been updated.
-#  Failed to be updated.
+#  Successfully updated.
 
- 
-# Not a target:
-GNUmakefile:
-#  Implicit rule search has been done.
-#  File does not exist.
-#  File has been updated.
-#  Failed to be updated.
+.PHONY: destroy
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # files hash-table stats:
-# Load=6/1024=1%, Rehash=0, Collisions=0/15=0%
+# Load=6/1024=1%, Rehash=0, Collisions=0/18=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 20 / storage = 188 B / avg = 9 B
-# current buf: size = 8162 B / used = 188 B / count = 20 / avg = 9 B
+# strcache buffers: 1 (0) / strings = 22 / storage = 230 B / avg = 10 B
+# current buf: size = 8162 B / used = 230 B / count = 22 / avg = 10 B
 
-# strcache performance: lookups = 23 / hit rate = 13%
+# strcache performance: lookups = 29 / hit rate = 24%
 # hash-table stats:
-# Load=20/8192=0%, Rehash=0, Collisions=0/23=0%
-# Finished Make data base on Tue Jun 21 09:39:23 2022
+# Load=22/8192=0%, Rehash=0, Collisions=0/29=0%
+# Finished Make data base on Wed Jun 22 09:10:48 2022
 
  
