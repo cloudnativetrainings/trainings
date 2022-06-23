@@ -14,3 +14,9 @@ destroy:
 	# TODO issue with networks terraform destroy
 	# │ Error: Error waiting for Deleting Network: The network resource 'projects/student-00-kkp-admin-training/global/networks/master' is already being used by 'projects/student-00-kkp-admin-training/global/routes/master-21959b73-0fd5-455a-8826-9f49ce4cb7da'
 	# TODO delete the serviceaccount
+
+
+# manual deletes
+# * vpc network
+# * service account
+# * dns entry ?!?!?!

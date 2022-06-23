@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Wed Jun 22 09:10:48 2022
+# Make data base, printed on Thu Jun 23 08:29:04 2022
 
 # Variables
 
@@ -21,11 +21,13 @@ GDK_BACKEND = x11
 # environment
 LC_ALL = C
 # environment
+NO_AT_BRIDGE = 1
+# environment
 GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
 SSH_AGENT_LAUNCHER = gnome-keyring
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-1a91e03e-cd60-42f6-893b-1390f7ad9416.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-90aec2fc-764a-434b-bb04-8f59417fc953.sock
 # environment
 LC_NAME = de_AT.UTF-8
 # environment
@@ -219,7 +221,7 @@ XDG_SESSION_CLASS = user
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
-TILIX_ID = 99023cfb-56dc-4f65-b6fb-6c03e762cfa2
+TILIX_ID = bb591472-9a44-42db-ac6f-95403c0dc519
 # environment
 HOME = /home/hubert
 # environment
@@ -239,7 +241,7 @@ IM_CONFIG_PHASE = 1
 # default
 SUFFIXES := 
 # environment
-_P9K_TTY = /dev/pts/0
+_P9K_TTY = /dev/pts/1
 # environment
 VSCODE_CLI = 1
 # environment
@@ -255,7 +257,7 @@ GDMSESSION = ubuntu
 # environment
 LC_IDENTIFICATION = de_AT.UTF-8
 # variable set hash-table stats:
-# Load=121/1024=12%, Rehash=0, Collisions=7/151=5%
+# Load=122/1024=12%, Rehash=0, Collisions=7/152=5%
 
 # Pattern-specific Variable Values
 
@@ -263,9 +265,9 @@ LC_IDENTIFICATION = de_AT.UTF-8
 
 # Directories
 
-# . (device 66306, inode 15358751): 15 files, no impossibilities.
+# . (device 66306, inode 15358751): 18 files, no impossibilities.
 
-# 15 files, no impossibilities in 1 directories.
+# 18 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -296,6 +298,7 @@ destroy:
 	cd ~/master/kubeone; terraform destroy -auto-approve
 	cd ~/seed/kubeone; kubeone reset --manifest kubeone.yaml -t tf.json -y
 	cd ~/seed/kubeone; terraform destroy -auto-approve
+ 
 	rm -rf /tmp/kubeone
 	rm -rf /tmp/kkp
 	rm -rf ~/master
@@ -308,10 +311,9 @@ destroy:
 	# TODO delete the serviceaccount
 
 # Not a target:
- 
 makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-21 17:37:30.172503899
+#  Last modified 2022-06-22 18:02:46.064507537
 #  File has been updated.
 #  Successfully updated.
 
@@ -328,12 +330,12 @@ makefile:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 22 / storage = 230 B / avg = 10 B
-# current buf: size = 8162 B / used = 230 B / count = 22 / avg = 10 B
+# strcache buffers: 1 (0) / strings = 25 / storage = 313 B / avg = 12 B
+# current buf: size = 8162 B / used = 313 B / count = 25 / avg = 12 B
 
-# strcache performance: lookups = 29 / hit rate = 24%
+# strcache performance: lookups = 32 / hit rate = 21%
 # hash-table stats:
-# Load=22/8192=0%, Rehash=0, Collisions=0/29=0%
-# Finished Make data base on Wed Jun 22 09:10:48 2022
+# Load=25/8192=0%, Rehash=0, Collisions=0/32=0%
+# Finished Make data base on Thu Jun 23 08:29:04 2022
 
  

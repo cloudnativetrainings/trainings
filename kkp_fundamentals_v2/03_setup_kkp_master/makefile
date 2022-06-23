@@ -1,6 +1,6 @@
 DNS_ZONE=$(shell gcloud dns managed-zones list --format json | jq '.[].name' | tr -d \")
 DOMAIN=$(DNS_ZONE).loodse.training
-IP=35.246.171.166
+# IP=35.246.171.166
 
 .PHONY: create_dns_records
 create_dns_records: 
