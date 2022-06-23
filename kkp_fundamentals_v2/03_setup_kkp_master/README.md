@@ -1,7 +1,3 @@
-export KUBECONFIG=~/master/kubeone/master-kubeconfig
-
-# increase worker nodes
-kubectl -n kube-system scale md master-pool1 --replicas 3
 
 # change URLs
 
