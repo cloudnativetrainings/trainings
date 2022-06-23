@@ -33,7 +33,6 @@ setup_master_folder: install_kkp
 	cp -r /tmp/kkp/charts ~/master/kkp
 	cp /tmp/kkp/examples/kubermatic.example.yaml ~/master/kkp/kubermatic.yaml
 	cp /tmp/kkp/examples/values.example.yaml ~/master/kkp/values.yaml
-	cp /tmp/kkp/examples/clusterissuer.yaml ~/master/kkp/clusterissuer.yaml
 
 .PHONY: setup_seed_folder
 setup_seed_folder: setup_master_folder
@@ -42,24 +41,14 @@ setup_seed_folder: setup_master_folder
 	mkdir -p ~/seed/kkp
 	cp /tmp/kkp/examples/seed.example.yaml ~/seed/kkp/seed.yaml
 
-.PHONY: chreate_ssh_key_pair
-chreate_ssh_key_pair: setup_seed_folder
-	rm -f ~/.ssh/kkp_admin_training
-	rm -f ~/.ssh/kkp_admin_training.pub
-	ssh-keygen -N '' -f ~/.ssh/kkp_admin_training
-	# TODO does not work in makefile
-	eval `ssh-agent`
-	ssh-add ~/.ssh/kkp_admin_training
-
-.PHONY: copy_kubeone_yaml_files
-copy_kubeone_yaml_files: chreate_ssh_key_pair
+.PHONY: copy_kubeone_files
+copy_kubeone_yaml_files: setup_master_folder
 	cp ./kubeone.yaml ~/master/kubeone
 	cp ./kubeone.yaml ~/seed/kubeone
-
-.PHONY: copy_terraform_tfvars_files
-copy_terraform_tfvars_files: copy_kubeone_yaml_files
 	sed s/\<GCP_PROJECT\>/$(PROJECT_ID)/g ./terraform.tfvars | sed s/\<CLUSTER_NAME\>/master/g > ~/master/kubeone/terraform.tfvars
 	sed s/\<GCP_PROJECT\>/$(PROJECT_ID)/g ./terraform.tfvars | sed s/\<CLUSTER_NAME\>/seed/g > ~/seed/kubeone/terraform.tfvars
+	# TODO do this in proper section
+	# cp /tmp/kkp/examples/clusterissuer.yaml ~/master/kkp/clusterissuer.yaml
 
 .PHONY: prepare
 prepare: copy_terraform_tfvars_files
