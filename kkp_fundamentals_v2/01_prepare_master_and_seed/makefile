@@ -9,6 +9,7 @@ install_tools:
 
 .PHONY: install_k1
 install_k1: install_tools
+	mkdir -p ~/tmp
 	curl -L https://github.com/kubermatic/kubeone/releases/download/v$(KUBEONE_VERSION)/kubeone_$(KUBEONE_VERSION)_linux_amd64.zip --output ~/tmp/kubeone.zip
 	mkdir -p ~/tmp/kubeone
 	rm -rf ~/tmp/kubeone/*

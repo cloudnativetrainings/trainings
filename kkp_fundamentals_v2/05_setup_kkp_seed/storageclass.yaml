@@ -6,6 +6,7 @@ metadata:
   annotations:
     storageclass.kubernetes.io/is-default-class: "true"  
 provisioner: kubernetes.io/gce-pd
+volumeBindingMode: Immediate
+reclaimPolicy: Delete
 parameters:
   type: pd-standard
-  replication-type: none
