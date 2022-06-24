@@ -4,6 +4,6 @@ metadata:
   name: kubermatic-fast
 provisioner: kubernetes.io/gce-pd
 reclaimPolicy: Delete
-volumeBindingMode: Immediate
+volumeBindingMode: WaitForFirstConsumer
 parameters:
   type: pd-ssd

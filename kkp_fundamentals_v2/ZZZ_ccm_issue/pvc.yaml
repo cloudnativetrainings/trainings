@@ -5,7 +5,7 @@ metadata:
 spec:
   storageClassName: kubermatic-fast
   accessModes:
-   - ReadWriteOnce
+    - ReadWriteOnce
   resources:
-   requests:
-    storage: 1Gi
+    requests:
+      storage: 1Gi

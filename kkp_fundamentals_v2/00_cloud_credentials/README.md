@@ -16,6 +16,7 @@ export GOOGLE_CREDENTIALS=$(cat ~/key.json)
 <!-- TODO maybe move that stuff into secrets folder, also the kubeconfigs -->
 
 # create ssh key pair
+<!-- TODO put keys into secret folder? -->
 ssh-keygen -N '' -f ~/.ssh/kkp_admin_training
 eval `ssh-agent`
 ssh-add ~/.ssh/kkp_admin_training

@@ -1,0 +1,162 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    backup.velero.io/backup-volumes: minio-backup
+    kubermatic.io/chart: minio
+    pre.hook.backup.velero.io/command:
+      '["mc", "mirror", "--remove", "--quiet", "src",
+      "/backup"]'
+    pre.hook.backup.velero.io/container: backup
+    pre.hook.backup.velero.io/timeout: 60m
+    prometheus.io/metrics_path: /minio/prometheus/metrics
+    prometheus.io/port: "9000"
+    prometheus.io/scrape: "true"
+  creationTimestamp: "2022-06-24T11:54:17Z"
+  generateName: minio-845b78ffc5-
+  labels:
+    app: minio
+    pod-template-hash: 845b78ffc5
+  name: minio-845b78ffc5-qxhp9
+  namespace: minio
+  ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: minio-845b78ffc5
+      uid: c488b5da-d3c8-4e95-ba20-7eae3a0761a7
+  resourceVersion: "14374"
+  uid: 6db0cf07-d448-4e50-a360-91de47910296
+spec:
+  affinity: {}
+  containers:
+    - args:
+        - server
+        - /storage
+      env:
+        - name: MINIO_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              key: accessKey
+              name: minio
+        - name: MINIO_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              key: secretKey
+              name: minio
+        - name: MINIO_PROMETHEUS_AUTH_TYPE
+          value: public
+      image: docker.io/minio/minio:RELEASE.2021-08-20T18-32-01Z
+      imagePullPolicy: IfNotPresent
+      name: minio
+      ports:
+        - containerPort: 9000
+          protocol: TCP
+      resources:
+        limits:
+          cpu: "1"
+          memory: 512Mi
+        requests:
+          cpu: 100m
+          memory: 32Mi
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+        - mountPath: /storage
+          name: storage
+        - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+          name: kube-api-access-twfwr
+          readOnly: true
+    - args:
+        - /bin/sh
+        - -c
+        - mc config host add src http://127.0.0.1:9000 "$MINIO_ACCESS_KEY" "$MINIO_SECRET_KEY"
+          && while true; do sleep 1h; done
+      env:
+        - name: MINIO_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              key: accessKey
+              name: minio
+        - name: MINIO_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              key: secretKey
+              name: minio
+      image: quay.io/kubermatic/util:2.0.0
+      imagePullPolicy: IfNotPresent
+      name: backup
+      resources:
+        limits:
+          cpu: "1"
+          memory: 1500Mi
+        requests:
+          cpu: 50m
+          memory: 32Mi
+      securityContext:
+        runAsNonRoot: false
+        runAsUser: 0
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+        - mountPath: /backup
+          name: minio-backup
+        - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+          name: kube-api-access-twfwr
+          readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+  volumes:
+    - name: storage
+      persistentVolumeClaim:
+        claimName: minio-data
+    - emptyDir: {}
+      name: minio-backup
+    - name: kube-api-access-twfwr
+      projected:
+        defaultMode: 420
+        sources:
+          - serviceAccountToken:
+              expirationSeconds: 3607
+              path: token
+          - configMap:
+              items:
+                - key: ca.crt
+                  path: ca.crt
+              name: kube-root-ca.crt
+          - downwardAPI:
+              items:
+                - fieldRef:
+                    apiVersion: v1
+                    fieldPath: metadata.namespace
+                  path: namespace
+status:
+  conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-24T11:54:17Z"
+      message:
+        "0/6 nodes are available: 3 node(s) had taint {node-role.kubernetes.io/master:
+        }, that the pod didn't tolerate, 3 node(s) had volume node affinity conflict."
+      reason: Unschedulable
+      status: "False"
+      type: PodScheduled
+  phase: Pending
+  qosClass: Burstable
