@@ -1,40 +1,25 @@
 
 # apply storageclasses
+kubectl apply -f ~/seed/kkp/storageclass-fast.yaml
+kubectl apply -f ~/seed/kkp/storageclass-backup.yaml
 
-# adapt minio settings
-in values.yaml
+# run installer for creation of CRDs?
+kubermatic-installer deploy kubermatic-seed --config ~/seed/kkp/kubermatic.yaml --helm-values ~/seed/kkp/values.yaml 
 
-```yaml
-minio:
-  storeSize: '10Gi'
-  storageClass: kubermatic-backup
-  # access key/secret for the exposed minio S3 gateway
-  credentials:
-    # access key length should be at least 3 characters
-    accessKey: "reoshe9Eiwei2ku5foB6owiva2Sheeth"
-    # secret key length should be at least 8 characters
-    secretKey: "rooNgohsh4ohJo7aefoofeiTae4poht0cohxua5eithiexu7quieng5ailoosha8"
-```
+<!-- TODO charts dir problem??? -->
 
+# configure seed at master
 
-<!-- TODO -->
-apply seed secret and seed in master prio of installer
+<!-- TODO try via applying the CRDs manually and helm charts -->
 
-# apply seed
-<!-- TODO copy charts directory -->
-<!-- TODO bug due charts directory does not work -->
-
-kubermatic-installer deploy kubermatic-seed --config ~/master/kkp/kubermatic.yaml --helm-values ~/master/kkp/values.yaml 
-
-# create kubeconfig secret from seed
-
-## seed
+## secret
 cp $KUBECONFIG ./temp-seed-kubeconfig
-kubectl create secret generic seed-kubeconfig -n kubermatic --from-file kubeconfig=./temp-seed-kubeconfig --dry-run=client -o yaml > ./seed.kubeconfig.secret.yaml
+kubectl create secret generic seed-kubeconfig -n kubermatic --from-file kubeconfig=./temp-seed-kubeconfig --dry-run=client -o yaml > ~/seed/kkp/seed-kubeconfig-secret.yaml
 
-## master
+export KUBECONFIG=~/master/kubeone/master-kubeconfig
+kubectl apply -f seed-kubeconfig-secret.yaml
 
-kubectl -n kubermatic apply -f seed.kubeconfig.secret.yaml
+## seed configuration
 
 seed config
 ```yaml
@@ -51,9 +36,32 @@ country: DE
           zone_suffixes: [a, b, c]
 ```
 
+kubectl apply -f ~/seed/kkp/seed.yaml
+
+# adapt minio settings
+in values.yaml
+
+```yaml
+minio:
+  storeSize: '10Gi'
+  storageClass: kubermatic-backup
+  credentials:
+    accessKey: "reoshe9Eiwei2ku5foB6owiva2Sheeth"
+    secretKey: "rooNgohsh4ohJo7aefoofeiTae4poht0cohxua5eithiexu7quieng5ailoosha8"
+```
+
+# apply seed
+<!-- TODO copy charts directory -->
+<!-- TODO bug due charts directory does not work -->
+<!-- TODO bug due charts directory does not work -->
+
+export KUBECONFIG=~/seed/kubeone/seed-kubeconfig
+
+kubermatic-installer deploy kubermatic-seed --config ~/seed/kkp/kubermatic.yaml --helm-values ~/seed/kkp/values.yaml 
+
 # DNS entry for seed
 
 *.kubermatic.student-00-kkp-admin-training.loodse.training.  IN  A  34.159.48.164
 
+make IP=34.159.159.191 create_dns_records
 
-<!-- TODO ensure sc on master is also not immediate!!! -->

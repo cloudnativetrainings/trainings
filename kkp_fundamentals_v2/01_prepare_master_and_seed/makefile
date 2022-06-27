@@ -34,12 +34,15 @@ setup_master_folder: install_kkp
 .PHONY: setup_seed_folder
 setup_seed_folder: setup_master_folder
 	cp -r ~/.tmp/kubeone/examples/terraform/gce/* ~/seed/kubeone
-	cp ~/.tmp/kkp/examples/seed.example.yaml ~/seed/kkp/seed.yaml
+	cp -r ~/.tmp/kkp/charts ~/seed/kkp
+	cp ~/.tmp/kkp/examples/kubermatic.example.yaml ~/seed/kkp/kubermatic.yaml
+	cp ~/.tmp/kkp/examples/values.example.yaml ~/seed/kkp/values.yaml
 
 .PHONY: copy_kubeone_files
 copy_kubeone_files: setup_seed_folder
+# TODO maybe does not work properly
 	sed -i 's/\<GCP_PROJECT\>/$(PROJECT_ID)/g' ~/master/kubeone/terraform.tfvars
-	sed -i 's/\<GCP_PROJECT\>/$(PROJECT_ID)/g' ~/master/kubeone/terraform.tfvars
+	sed -i 's/\<GCP_PROJECT\>/$(PROJECT_ID)/g' ~/seed/kubeone/terraform.tfvars
 
 .PHONY: prepare
 prepare: copy_kubeone_files

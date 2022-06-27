@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Mon Jun 27 09:05:59 2022
+# Make data base, printed on Mon Jun 27 14:43:41 2022
 
 # Variables
 
@@ -25,7 +25,7 @@ GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
 SSH_AGENT_LAUNCHER = gnome-keyring
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-1fd6631c-4e60-4366-ad56-2da648153a6e.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-4bced3ad-ccb2-40e4-9e53-ffca63ccaecd.sock
 # environment
 LC_NAME = de_AT.UTF-8
 # environment
@@ -77,6 +77,8 @@ XAUTHORITY = /run/user/1000/gdm/Xauthority
 # makefile
 MAKEFLAGS = pqrR
 # environment
+KUBECONFIG = /home/hubert/Downloads/kubeconfig-admin-pgrwrdqgzj
+# environment
 DBUS_STARTER_ADDRESS = unix:path=/run/user/1000/bus,guid=691e3cabd34218f72010323262b7904e
 # makefile
 CURDIR := /home/hubert/git/trainings/kkp_fundamentals_v2
@@ -109,7 +111,7 @@ ZSH = /home/hubert/.oh-my-zsh
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 50740
+VSCODE_PID = 81986
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
@@ -255,7 +257,7 @@ GDMSESSION = ubuntu
 # environment
 LC_IDENTIFICATION = de_AT.UTF-8
 # variable set hash-table stats:
-# Load=121/1024=12%, Rehash=0, Collisions=7/151=5%
+# Load=122/1024=12%, Rehash=0, Collisions=7/152=5%
 
 # Pattern-specific Variable Values
 
@@ -263,9 +265,9 @@ LC_IDENTIFICATION = de_AT.UTF-8
 
 # Directories
 
-# . (device 66306, inode 15358751): 22 files, no impossibilities.
+# . (device 66306, inode 15358751): 27 files, no impossibilities.
 
-# 22 files, no impossibilities in 1 directories.
+# 27 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -291,6 +293,7 @@ destroy:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
+ 
 #  recipe to execute (from 'makefile', line 3):
 	cd ~/master/kubeone; kubeone reset --manifest kubeone.yaml -t tf.json -y
 	cd ~/master/kubeone; terraform destroy -auto-approve
@@ -301,7 +304,6 @@ destroy:
 	rm -rf ~/seed
 	rm -rf ~/trainings
 	rm -rf ~/key.json
- 
 	rm -rf ~/.ssh
 	# TODO issue with networks terraform destroy
 	# │ Error: Error waiting for Deleting Network: The network resource 'projects/student-00-kkp-admin-training/global/networks/master' is already being used by 'projects/student-00-kkp-admin-training/global/routes/master-21959b73-0fd5-455a-8826-9f49ce4cb7da'
@@ -310,7 +312,7 @@ destroy:
 # Not a target:
 makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-24 11:19:56.358115291
+#  Last modified 2022-06-27 09:31:31.085670244
 #  File has been updated.
 #  Successfully updated.
 
@@ -327,12 +329,12 @@ makefile:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 29 / storage = 364 B / avg = 12 B
-# current buf: size = 8162 B / used = 364 B / count = 29 / avg = 12 B
+# strcache buffers: 1 (0) / strings = 34 / storage = 447 B / avg = 13 B
+# current buf: size = 8162 B / used = 447 B / count = 34 / avg = 13 B
 
-# strcache performance: lookups = 36 / hit rate = 19%
+# strcache performance: lookups = 41 / hit rate = 17%
 # hash-table stats:
-# Load=29/8192=0%, Rehash=0, Collisions=0/36=0%
-# Finished Make data base on Mon Jun 27 09:05:59 2022
+# Load=34/8192=0%, Rehash=0, Collisions=0/41=0%
+# Finished Make data base on Mon Jun 27 14:43:41 2022
 
  

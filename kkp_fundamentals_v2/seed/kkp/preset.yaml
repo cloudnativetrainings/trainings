@@ -1,0 +1,9 @@
+apiVersion: kubermatic.k8s.io/v1
+kind: Preset
+metadata:
+  name: kubermatic
+spec:
+# TODO loodse.training
+  requiredEmailDomain: kubermatic.com
+  gcp:
+    serviceAccount: TODO

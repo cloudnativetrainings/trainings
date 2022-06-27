@@ -1,7 +1,7 @@
-export GOOGLE_CREDENTIALS=$(cat ~/key.json)
+export GOOGLE_CREDENTIALS=$(cat ~/secrets/key.json)
 
 eval `ssh-agent`
-ssh-add ~/.ssh/kkp_admin_training
+ssh-add ~/secrets/kkp_admin_training
 
 sudo apt-get install -y uuid-runtime apache2-utils 
 

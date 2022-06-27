@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hust-addon-pod
+  namespace: default
+spec:
+  containers:
+    - name: hust-addon-pod
+      image: nginx

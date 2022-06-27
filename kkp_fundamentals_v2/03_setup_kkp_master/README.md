@@ -1,6 +1,4 @@
 
-# storageclass
-
 # change URLs
 
 gcloud dns managed-zones list --format json | jq '.[].dnsName' | tr -d \"
@@ -32,9 +30,13 @@ email: student-00.kkp-admin-training@loodse.training
 
 uuidgen -r
 
+# storageclass
+
+kubectl apply -f storageclass-fast.yaml
+
 # install kkp
 
-kubermatic-installer --charts-directory ./charts deploy --config kubermatic.yaml --helm-values values.yaml --storageclass gce
+kubermatic-installer --charts-directory ./charts deploy --config kubermatic.yaml --helm-values values.yaml 
 
 # clusterissuer
 => change email address
@@ -44,7 +46,7 @@ kubectl apply -f clusterissuer.yaml
 student-00-kkp-admin-training.loodse.training.      IN  A  35.246.171.166
 *.student-00-kkp-admin-training.loodse.training.    IN  A  35.246.171.166
 
-make IP=34.159.40.249 create_dns_records
+make IP=35.198.157.140 create_dns_records
 
 gcloud dns record-sets list --zone student-00-kkp-admin-training
 nslookup student-00-kkp-admin-training.loodse.training
@@ -62,7 +64,8 @@ visit url
 
 change letsencrypt-staging to letsencrypt-pod in values.yaml and kubermatic.yaml
 
-kubermatic-installer --charts-directory ./charts deploy --config kubermatic.yaml --helm-values values.yaml --storageclass gce
+<!-- TODO abs paths everywhere -->
+kubermatic-installer --charts-directory ./charts deploy --config kubermatic.yaml --helm-values values.yaml 
 
 kubectl get certs -A
 

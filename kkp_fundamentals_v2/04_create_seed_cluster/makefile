@@ -8,3 +8,8 @@ terraform_seed:
 create_seed: terraform_seed
 	cd ~/seed/kubeone; kubeone apply -m kubeone.yaml -t tf.json -y
 	cd ~/seed/kubeone; terraform apply -auto-approve
+
+# TODO does not work due to same user
+# .PHONY: create_kubeconfig
+# create_kubeconfig: 
+# 	KUBECONFIG=~/master/kubeone/master-kubeconfig:~/seed/kubeone/seed-kubeconfig kubectl config view --flatten > /tmp/config 
