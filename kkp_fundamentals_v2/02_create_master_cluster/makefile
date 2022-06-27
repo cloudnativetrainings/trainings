@@ -8,4 +8,3 @@ terraform_master:
 create_master: terraform_master
 	cd ~/master/kubeone; kubeone apply -m kubeone.yaml -t tf.json -y
 	cd ~/master/kubeone; terraform apply -auto-approve
-

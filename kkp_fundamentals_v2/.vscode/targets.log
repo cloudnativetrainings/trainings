@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Fri Jun 24 08:51:03 2022
+# Make data base, printed on Mon Jun 27 09:05:59 2022
 
 # Variables
 
@@ -25,7 +25,7 @@ GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
 SSH_AGENT_LAUNCHER = gnome-keyring
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-3d3347c0-2326-46b6-8109-322d87289faa.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-1fd6631c-4e60-4366-ad56-2da648153a6e.sock
 # environment
 LC_NAME = de_AT.UTF-8
 # environment
@@ -77,7 +77,7 @@ XAUTHORITY = /run/user/1000/gdm/Xauthority
 # makefile
 MAKEFLAGS = pqrR
 # environment
-DBUS_STARTER_ADDRESS = unix:path=/run/user/1000/bus,guid=94bd52febc01441e371679b162b54957
+DBUS_STARTER_ADDRESS = unix:path=/run/user/1000/bus,guid=691e3cabd34218f72010323262b7904e
 # makefile
 CURDIR := /home/hubert/git/trainings/kkp_fundamentals_v2
 # environment
@@ -109,19 +109,19 @@ ZSH = /home/hubert/.oh-my-zsh
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 18428
+VSCODE_PID = 50740
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
-SESSION_MANAGER = local/ueberbiber:@/tmp/.ICE-unix/1928,unix/ueberbiber:/tmp/.ICE-unix/1928
+SESSION_MANAGER = local/ueberbiber:@/tmp/.ICE-unix/1939,unix/ueberbiber:/tmp/.ICE-unix/1939
 # automatic
 *F = $(notdir $*)
 # environment
 CHROME_DESKTOP = code-url-handler.desktop
 # environment
-DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus,guid=94bd52febc01441e371679b162b54957
+DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus,guid=691e3cabd34218f72010323262b7904e
 # automatic
 <D = $(patsubst %/,%,$(dir $<))
 # environment
@@ -157,7 +157,7 @@ LC_TIME = de_AT.UTF-8
 # environment
 GOROOT = /home/hubert/go/install/go
 # environment
-INVOCATION_ID = 351809383ea74f54a3160320f4eb2013
+INVOCATION_ID = 1cac081d4e9a4db3920ff995f1830a33
 # environment
 VSCODE_LOG_NATIVE = false
 # environment
@@ -185,7 +185,7 @@ LOGNAME = hubert
 # makefile
 .DEFAULT_GOAL := destroy
 # environment
-SYSTEMD_EXEC_PID = 1928
+SYSTEMD_EXEC_PID = 1939
 # environment
 DISPLAY = :1
 # environment
@@ -195,7 +195,7 @@ GTK_MODULES = gail:atk-bridge
 # default
 MAKE_VERSION := 4.3
 # environment
-MANAGERPID = 1684
+MANAGERPID = 1689
 # environment
 DBUS_STARTER_BUS_TYPE = session
 # environment
@@ -213,13 +213,13 @@ GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
 COLORTERM = truecolor
 # environment
-JOURNAL_STREAM = 8:33357
+JOURNAL_STREAM = 8:34624
 # environment
 XDG_SESSION_CLASS = user
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
-TILIX_ID = 844fcc19-8ee0-4876-9dff-c5aec024a6fc
+TILIX_ID = 9c290f3a-8dc0-4b38-999b-303426912342
 # environment
 HOME = /home/hubert
 # environment
@@ -263,9 +263,9 @@ LC_IDENTIFICATION = de_AT.UTF-8
 
 # Directories
 
-# . (device 66306, inode 15358751): 19 files, no impossibilities.
+# . (device 66306, inode 15358751): 22 files, no impossibilities.
 
-# 19 files, no impossibilities in 1 directories.
+# 22 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -296,22 +296,21 @@ destroy:
 	cd ~/master/kubeone; terraform destroy -auto-approve
 	cd ~/seed/kubeone; kubeone reset --manifest kubeone.yaml -t tf.json -y
 	cd ~/seed/kubeone; terraform destroy -auto-approve
-	rm -rf ~/tmp/kubeone
-	rm -rf ~/tmp/kkp
+	rm -rf ~/.tmp
 	rm -rf ~/master
 	rm -rf ~/seed
 	rm -rf ~/trainings
 	rm -rf ~/key.json
+ 
 	rm -rf ~/.ssh
 	# TODO issue with networks terraform destroy
 	# │ Error: Error waiting for Deleting Network: The network resource 'projects/student-00-kkp-admin-training/global/networks/master' is already being used by 'projects/student-00-kkp-admin-training/global/routes/master-21959b73-0fd5-455a-8826-9f49ce4cb7da'
 	# TODO delete the serviceaccount
 
- 
 # Not a target:
 makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-23 12:53:43.554265994
+#  Last modified 2022-06-24 11:19:56.358115291
 #  File has been updated.
 #  Successfully updated.
 
@@ -328,12 +327,12 @@ makefile:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 26 / storage = 330 B / avg = 12 B
-# current buf: size = 8162 B / used = 330 B / count = 26 / avg = 12 B
+# strcache buffers: 1 (0) / strings = 29 / storage = 364 B / avg = 12 B
+# current buf: size = 8162 B / used = 364 B / count = 29 / avg = 12 B
 
-# strcache performance: lookups = 33 / hit rate = 21%
+# strcache performance: lookups = 36 / hit rate = 19%
 # hash-table stats:
-# Load=26/8192=0%, Rehash=0, Collisions=0/33=0%
-# Finished Make data base on Fri Jun 24 08:51:03 2022
+# Load=29/8192=0%, Rehash=0, Collisions=0/36=0%
+# Finished Make data base on Mon Jun 27 09:05:59 2022
 
  
