@@ -9,7 +9,7 @@ destroy:
 	rm -rf ~/seed
 	rm -rf ~/trainings
 	rm -rf ~/key.json
-	rm -rf ~/.ssh
+	rm -rf ~/secrets
 	# TODO issue with networks terraform destroy
 	# │ Error: Error waiting for Deleting Network: The network resource 'projects/student-00-kkp-admin-training/global/networks/master' is already being used by 'projects/student-00-kkp-admin-training/global/routes/master-21959b73-0fd5-455a-8826-9f49ce4cb7da'
 	# TODO delete the serviceaccount

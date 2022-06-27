@@ -15,3 +15,6 @@ make KKP_VERSION_NEW=2.20.4 install_new_kkp
 <!-- TODO create new structures in ~/master/kkp-newversion -->
 
 kubermatic-installer-2.20.4 --charts-directory ~/.tmp/kkp-2.20.4/charts deploy --config kubermatic.yaml --helm-values values.yaml 
+
+
+<!-- TODO upgrade seed??? -->
