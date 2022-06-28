@@ -36,7 +36,9 @@ kubectl apply -f ~/master/kkp/storageclass-fast.yaml
 
 # install kkp
 
-kubermatic-installer --charts-directory ~/master/kkp/charts deploy --config ~/master/kkp/kubermatic.yaml --helm-values ~/master/kkp/values.yaml 
+kubermatic-installer --charts-directory ~/master/kkp/charts deploy \
+    --config ~/master/kkp/kubermatic.yaml \
+    --helm-values ~/master/kkp/values.yaml
 
 # clusterissuer
 => change email address
@@ -46,32 +48,33 @@ kubectl apply -f ~/master/kkp/clusterissuer.yaml
 student-00-kkp-admin-training.loodse.training.      IN  A  35.246.171.166
 *.student-00-kkp-admin-training.loodse.training.    IN  A  35.246.171.166
 
-make IP=35.198.157.140 create_dns_records
+make IP=34.141.9.19 create_dns_records
 
 gcloud dns record-sets list --zone student-00-kkp-admin-training
+<!-- TODO student-00 is not true for students -->
 nslookup student-00-kkp-admin-training.loodse.training
 nslookup test.student-00-kkp-admin-training.loodse.training
 
+gcloud dns record-sets list --zone student-01-kkp-admin-training
+
 dig NS $SUBDOMAIN.$TLDpwd
-
-# verify in browser
-
-visit url
-
-=> not secure
 
 # switch to letsencrypt-prod
 
 change letsencrypt-staging to letsencrypt-pod in values.yaml and kubermatic.yaml
+auth.skipTokenIssuerTLSVerify=false
 
 <!-- TODO abs paths everywhere -->
-kubermatic-installer deploy \
+kubermatic-installer --charts-directory ~/master/kkp/charts deploy \
     --config ~/master/kkp/kubermatic.yaml \
-    --helm-values ~/master/kkp/values.yaml \
-    --charts-directory ~/master/kkp/charts
+    --helm-values ~/master/kkp/values.yaml     
 
 kubectl get certs -A
 
 => wait and hope
+
+# verify in browser
+
+visit url
 
 

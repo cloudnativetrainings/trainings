@@ -1,38 +1,45 @@
 
+# create project
+
 # without preset
 
 base64 -w0 ~/secrets/key.json
 
 ssd disk
-n1-standard2
+n1-standard-2
 number of nodes!!!
 
 an 2 times older kubernetes version for being able to upgrade
 
-# create preset for seed
-
-<!-- TODO rename to preset-gce.yaml -->
-
-export KUBECONFIG=~/seed/kubeone/seed-kubeconfig
-
-base64 -w0 ~/secrets/key.json
-
-kubectl apply -f ~/seed/kkp/charts/kubermatic-operator/crd/crd-presets.yaml
-
-kubectl apply -f ~/seed/kkp/preset.yaml
-
-<!-- TODO -->
-
-download kubeconfig
-
-create cluster via api
-
-kubectl get cluster
-kubectl describe cluster
-
-# cli
+## cli on seed
 
 kubectl get cluster pgrwrdqgzj -o yaml
 
 kubectl delete cluster pgrwrdqgzj 
 
+## download kubeconfig
+
+export KUBECONFIG=~/Downloads/kubeconfig-admin-v7bx9dhwgm  
+
+=> delete ETCD
+
+## delete cluster
+
+# Provider Presets & Cluster Templates
+
+## create preset
+
+Admin Panel
+
+Create Preset
+
+## create cluster Template
+
+## create cluster
+
+# create cluster via BYO
+
+# create cluster via api
+<!-- TODO -->
+
+<!-- HINT to zz generated files https://github.com/kubermatic/kubermatic/tree/master/docs -->

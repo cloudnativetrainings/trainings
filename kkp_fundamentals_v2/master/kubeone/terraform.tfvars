@@ -1,4 +1,4 @@
-project = "<GCP_PROJECT>"
+project = "GCP_PROJECT"
 cluster_name = "master"
 region = "europe-west3"
 

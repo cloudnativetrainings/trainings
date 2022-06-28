@@ -4,6 +4,6 @@ metadata:
   name: kubermatic
 spec:
 # TODO loodse.training
-  requiredEmailDomain: kubermatic.com
+  requiredEmailDomain: loodse.training
   gcp:
     serviceAccount: TODO

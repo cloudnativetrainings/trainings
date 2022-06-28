@@ -4,17 +4,24 @@ metadata:
   name: kubermatic
   namespace: kubermatic
 spec:
-  country: DE
-  location: Frankfurt
+  # these two fields are only informational
+  country: FR
+  location: Paris
+
+  # List of datacenters where this seed cluster is allowed to create clusters in
+  # In this example, user cluster will be deployed in eu-central-1 on AWS.
   datacenters:
-    gcp-frankfurt:
+    aws-eu-central-1a:
       country: DE
       location: EU (Frankfurt)
       spec:
-        gcp:
-          region: "europe-west3"
-          regional: false
-          zoneSuffixes: [a, b, c]
+        aws:
+          images: null
+          region: eu-central-1
+        enforceAuditLogging: false
+        enforcePodSecurityPolicy: false
+
+  # reference to the kubeconfig to use when connecting to this seed cluster
   kubeconfig:
-    name: seed-kubeconfig
+    name: kubeconfig-cluster-example
     namespace: kubermatic
