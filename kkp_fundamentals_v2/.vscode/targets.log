@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Mon Jun 27 14:43:41 2022
+# Make data base, printed on Tue Jun 28 08:13:29 2022
 
 # Variables
 
@@ -21,11 +21,13 @@ GDK_BACKEND = x11
 # environment
 LC_ALL = C
 # environment
+NO_AT_BRIDGE = 1
+# environment
 GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
 SSH_AGENT_LAUNCHER = gnome-keyring
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-4bced3ad-ccb2-40e4-9e53-ffca63ccaecd.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-cf04ba47-b3ae-4768-a84e-22e5b4e5d918.sock
 # environment
 LC_NAME = de_AT.UTF-8
 # environment
@@ -257,7 +259,7 @@ GDMSESSION = ubuntu
 # environment
 LC_IDENTIFICATION = de_AT.UTF-8
 # variable set hash-table stats:
-# Load=122/1024=12%, Rehash=0, Collisions=7/152=5%
+# Load=123/1024=12%, Rehash=0, Collisions=7/153=5%
 
 # Pattern-specific Variable Values
 
@@ -265,9 +267,9 @@ LC_IDENTIFICATION = de_AT.UTF-8
 
 # Directories
 
-# . (device 66306, inode 15358751): 27 files, no impossibilities.
+# . (device 66306, inode 15358751): 30 files, no impossibilities.
 
-# 27 files, no impossibilities in 1 directories.
+# 30 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -276,6 +278,7 @@ LC_IDENTIFICATION = de_AT.UTF-8
 # Files
 
 # Not a target:
+ 
 .DEFAULT:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -293,18 +296,12 @@ destroy:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
- 
 #  recipe to execute (from 'makefile', line 3):
 	cd ~/master/kubeone; kubeone reset --manifest kubeone.yaml -t tf.json -y
 	cd ~/master/kubeone; terraform destroy -auto-approve
 	cd ~/seed/kubeone; kubeone reset --manifest kubeone.yaml -t tf.json -y
 	cd ~/seed/kubeone; terraform destroy -auto-approve
-	rm -rf ~/.tmp
-	rm -rf ~/master
-	rm -rf ~/seed
-	rm -rf ~/trainings
-	rm -rf ~/key.json
-	rm -rf ~/.ssh
+	sudo rm -rf ~/*
 	# TODO issue with networks terraform destroy
 	# │ Error: Error waiting for Deleting Network: The network resource 'projects/student-00-kkp-admin-training/global/networks/master' is already being used by 'projects/student-00-kkp-admin-training/global/routes/master-21959b73-0fd5-455a-8826-9f49ce4cb7da'
 	# TODO delete the serviceaccount
@@ -312,7 +309,8 @@ destroy:
 # Not a target:
 makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-27 09:31:31.085670244
+ 
+#  Last modified 2022-06-27 18:49:36.224135442
 #  File has been updated.
 #  Successfully updated.
 
@@ -329,12 +327,12 @@ makefile:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 34 / storage = 447 B / avg = 13 B
-# current buf: size = 8162 B / used = 447 B / count = 34 / avg = 13 B
+# strcache buffers: 1 (0) / strings = 37 / storage = 486 B / avg = 13 B
+# current buf: size = 8162 B / used = 486 B / count = 37 / avg = 13 B
 
-# strcache performance: lookups = 41 / hit rate = 17%
+# strcache performance: lookups = 44 / hit rate = 15%
 # hash-table stats:
-# Load=34/8192=0%, Rehash=0, Collisions=0/41=0%
-# Finished Make data base on Mon Jun 27 14:43:41 2022
+# Load=37/8192=0%, Rehash=0, Collisions=0/44=0%
+# Finished Make data base on Tue Jun 28 08:13:29 2022
 
  

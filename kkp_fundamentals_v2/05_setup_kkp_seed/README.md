@@ -4,7 +4,10 @@ kubectl apply -f ~/seed/kkp/storageclass-fast.yaml
 kubectl apply -f ~/seed/kkp/storageclass-backup.yaml
 
 # run installer for creation of CRDs?
-kubermatic-installer deploy kubermatic-seed --config ~/seed/kkp/kubermatic.yaml --helm-values ~/seed/kkp/values.yaml 
+kubermatic-installer deploy kubermatic-seed \
+  --config ~/seed/kkp/kubermatic.yaml \
+  --helm-values ~/seed/kkp/values.yaml \
+  --charts-directory ~/seed/kkp/charts
 
 <!-- TODO charts dir problem??? -->
 
@@ -57,7 +60,10 @@ minio:
 
 export KUBECONFIG=~/seed/kubeone/seed-kubeconfig
 
-kubermatic-installer deploy kubermatic-seed --config ~/seed/kkp/kubermatic.yaml --helm-values ~/seed/kkp/values.yaml 
+kubermatic-installer deploy kubermatic-seed \
+  --config ~/seed/kkp/kubermatic.yaml \
+  --helm-values ~/seed/kkp/values.yaml \
+  --charts-directory ~/seed/kkp/charts
 
 # DNS entry for seed
 

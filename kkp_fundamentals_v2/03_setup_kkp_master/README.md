@@ -32,15 +32,15 @@ uuidgen -r
 
 # storageclass
 
-kubectl apply -f storageclass-fast.yaml
+kubectl apply -f ~/master/kkp/storageclass-fast.yaml
 
 # install kkp
 
-kubermatic-installer --charts-directory ./charts deploy --config kubermatic.yaml --helm-values values.yaml 
+kubermatic-installer --charts-directory ~/master/kkp/charts deploy --config ~/master/kkp/kubermatic.yaml --helm-values ~/master/kkp/values.yaml 
 
 # clusterissuer
 => change email address
-kubectl apply -f clusterissuer.yaml
+kubectl apply -f ~/master/kkp/clusterissuer.yaml
 
 # DNS
 student-00-kkp-admin-training.loodse.training.      IN  A  35.246.171.166
@@ -65,7 +65,10 @@ visit url
 change letsencrypt-staging to letsencrypt-pod in values.yaml and kubermatic.yaml
 
 <!-- TODO abs paths everywhere -->
-kubermatic-installer --charts-directory ./charts deploy --config kubermatic.yaml --helm-values values.yaml 
+kubermatic-installer deploy \
+    --config ~/master/kkp/kubermatic.yaml \
+    --helm-values ~/master/kkp/values.yaml \
+    --charts-directory ~/master/kkp/charts
 
 kubectl get certs -A
 
