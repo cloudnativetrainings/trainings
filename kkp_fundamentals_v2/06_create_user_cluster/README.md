@@ -35,11 +35,12 @@ Create Preset
 
 ## create cluster Template
 
+<!-- TODO show decl preset and template -->
+
 ## create cluster
 
 # create cluster via BYO
 
 # create cluster via api
-<!-- TODO -->
 
 <!-- HINT to zz generated files https://github.com/kubermatic/kubermatic/tree/master/docs -->

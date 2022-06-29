@@ -16,6 +16,12 @@ add to yaml
     default: '1.21.8'
 ```
 
+<!-- TODO bug https://github.com/kubermatic/kubermatic/issues/10204
+
+=> ensure that versions section is in the kubermatic-configuration!!!
+
+-->
+
 kubectl apply -f kubermatic-configuration.yaml
 
 check UI

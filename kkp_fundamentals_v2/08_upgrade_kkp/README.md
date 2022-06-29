@@ -10,6 +10,8 @@ https://docs.kubermatic.com/kubermatic/master/architecture/compatibility/support
 
 # install new kkp release
 
+<!-- TODO may overwrite the old installer and charts -->
+
 check a minor release upgrade here: https://github.com/kubermatic/kubermatic/releases
 
 make KKP_VERSION_NEW=2.20.4 setup_new_master_folder

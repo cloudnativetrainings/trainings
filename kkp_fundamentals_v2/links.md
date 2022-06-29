@@ -13,3 +13,5 @@ https://docs.google.com/presentation/d/1lHWtxc8AWgrovYgONsfYQtH8LnBWtD6M4sqtw69f
 check in interhyp if there are diffs from michal
 
 https://github.com/kubermatic-labs/trainings/tree/master/kkp_fundamentals/04-add-seed-cluster
+
+https://docs.kubermatic.com/kubermatic/v2.20/architecture/concept/kkp-concepts/addons/
