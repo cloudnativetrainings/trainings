@@ -1,11 +1,8 @@
 
 # apply storageclasses
-kubectl apply -f ~/seed/kkp/storageclass-fast.yaml
 kubectl apply -f ~/seed/kkp/storageclass-backup.yaml
 
 # adapt minio settings
-
-<!-- TODO do this in master -->
 
 in values.yaml
 
@@ -18,27 +15,15 @@ minio:
     secretKey: "rooNgohsh4ohJo7aefoofeiTae4poht0cohxua5eithiexu7quieng5ailoosha8"
 ```
 
-<!-- TODO delete charts kubermatic.yaml and values.yaml in seed -->
-
-<!-- TODO we have to have the kubermatic.yaml and values.yaml from the master -->
-
-<!-- TODO maybe keep task specific files in task -->
-
-# run installer for creation of CRDs?
-kubermatic-installer --charts-directory ~/master/kkp/charts deploy kubermatic-seed \
-  --config ~/master/kkp/kubermatic.yaml \
-  --helm-values ~/master/kkp/values.yaml  
-
 # configure seed at master
 
 <!-- TODO try via applying the CRDs manually and helm charts -->
 
 ## secret
 cp $KUBECONFIG ./temp-seed-kubeconfig
-kubectl create secret generic seed-kubeconfig -n kubermatic --from-file kubeconfig=./temp-seed-kubeconfig --dry-run=client -o yaml > ~/seed/kkp/seed-kubeconfig-secret.yaml
+kubectl create secret generic seed-kubeconfig -n kubermatic --from-file kubeconfig=./temp-seed-kubeconfig --dry-run=client -o yaml > ~/kkp/seed-kubeconfig-secret.yaml
 
-export KUBECONFIG=~/master/kubeone/master-kubeconfig
-kubectl apply -f ~/seed/kkp/seed-kubeconfig-secret.yaml
+kubectl apply -f ~/kkp/seed-kubeconfig-secret.yaml
 
 ## seed configuration
 
@@ -74,7 +59,7 @@ spec:
     namespace: kubermatic        
 ```
 
-kubectl apply -f ~/seed/kkp/seed.yaml
+kubectl apply -f ~/kkp/seed.yaml
 
 # apply seed
 
@@ -83,15 +68,16 @@ export KUBECONFIG=~/seed/kubeone/seed-kubeconfig
 => check if stuff is running in kubermatic namespace
 kubectl -n kubermatic get pods
 
-kubermatic-installer --charts-directory ~/master/kkp/charts deploy kubermatic-seed \
-  --config ~/master/kkp/kubermatic.yaml \
-  --helm-values ~/master/kkp/values.yaml  
+kubermatic-installer --charts-directory ~/kkp/charts deploy kubermatic-seed \
+  --config ~/kkp/kubermatic.yaml \
+  --helm-values ~/kkp/values.yaml  
   
 # DNS entry for seed
 
 *.kubermatic.student-00-kkp-admin-training.loodse.training.  IN  A  34.159.48.164
 
-make IP=34.159.2.10 create_dns_records
+<!-- TODO maybe other make target name -->
+make IP=35.242.246.120 create_dns_records
 
 <!-- TODO student-00 does not work everywhere -->
 nslookup test.kubermatic.student-01-kkp-admin-training.loodse.training

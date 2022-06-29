@@ -36,6 +36,8 @@ kubectl apply -f ~/kkp/storageclass-fast.yaml
 
 # install kkp
 
+export KUBECONFIG=~/.kube/config
+
 kubermatic-installer --charts-directory ~/kkp/charts deploy \
     --config ~/kkp/kubermatic.yaml \
     --helm-values ~/kkp/values.yaml
@@ -48,7 +50,7 @@ kubectl apply -f ~/kkp/clusterissuer.yaml
 student-00-kkp-admin-training.loodse.training.      IN  A  35.246.171.166
 *.student-00-kkp-admin-training.loodse.training.    IN  A  35.246.171.166
 
-make IP=34.141.9.19 create_dns_records
+make IP=34.159.160.52 create_dns_records
 
 gcloud dns record-sets list --zone student-00-kkp-admin-training
 <!-- TODO student-00 is not true for students -->
@@ -57,12 +59,12 @@ nslookup test.student-00-kkp-admin-training.loodse.training
 
 gcloud dns record-sets list --zone student-01-kkp-admin-training
 
-dig NS $SUBDOMAIN.$TLDpwd
+dig NS $SUBDOMAIN.$TLD
 
 # switch to letsencrypt-prod
 
 change letsencrypt-staging to letsencrypt-pod in values.yaml and kubermatic.yaml
-auth.skipTokenIssuerTLSVerify=false
+auth.skipTokenIssuerTLSVerify=false in kubermatic.yaml
 
 kubermatic-installer --charts-directory ~/kkp/charts deploy \
     --config ~/kkp/kubermatic.yaml \

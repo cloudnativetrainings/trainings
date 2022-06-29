@@ -5,11 +5,6 @@ install_new_kkp:
 	rm -rf ~/.tmp/kkp-$(KKP_VERSION_NEW)/*
 	tar -xvf ~/.tmp/kubermatic-ce-$(KKP_VERSION_NEW).tar.gz -C ~/.tmp/kkp-$(KKP_VERSION_NEW)
 	chmod +x ~/.tmp/kkp-$(KKP_VERSION_NEW)/kubermatic-installer
-	sudo cp ~/.tmp/kkp-$(KKP_VERSION_NEW)/kubermatic-installer /usr/local/bin/kubermatic-installer-$(KKP_VERSION_NEW)
-
-.PHONY: setup_new_master_folder
-setup_new_master_folder: install_new_kkp
-	mkdir -p ~/master/kkp-$(KKP_VERSION_NEW)
-	cp -r ~/.tmp/kkp-$(KKP_VERSION_NEW)/charts ~/master/kkp-$(KKP_VERSION_NEW)
-	cp ~/master/kkp/kubermatic.yaml ~/master/kkp-$(KKP_VERSION_NEW)/kubermatic.yaml
-	cp ~/master/kkp/values.yaml ~/master/kkp-$(KKP_VERSION_NEW)/values.yaml
+	sudo cp ~/.tmp/kkp-$(KKP_VERSION_NEW)/kubermatic-installer /usr/local/bin/kubermatic-installer
+	rm -rf ~/kkp/charts
+	cp -r ~/.tmp/kkp-$(KKP_VERSION_NEW)/charts ~/kkp

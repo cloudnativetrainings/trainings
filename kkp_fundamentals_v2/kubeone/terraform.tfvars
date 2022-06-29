@@ -1,5 +1,5 @@
 project = "GCP_PROJECT"
-cluster_name = "master"
+cluster_name = "kkp-admin"
 region = "europe-west3"
 
 ssh_private_key_file = "~/secrets/kkp_admin_training"

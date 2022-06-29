@@ -24,16 +24,16 @@ install_kkp: install_k1
 	chmod +x ~/.tmp/kkp/kubermatic-installer
 	sudo cp ~/.tmp/kkp/kubermatic-installer /usr/local/bin
 
-.PHONY: setup_master_folder
-setup_master_folder: install_kkp
+.PHONY: setup_kubeone_folder
+setup_kubeone_folder: install_kkp
 	cp -r ~/.tmp/kubeone/examples/terraform/gce/* ~/kubeone
+	sed -i 's/GCP_PROJECT/$(PROJECT_ID)/g' ~/kubeone/terraform.tfvars
+
+.PHONY: setup_kkp_folder
+setup_kkp_folder: setup_kubeone_folder
 	cp -r ~/.tmp/kkp/charts ~/kkp
 	cp ~/.tmp/kkp/examples/kubermatic.example.yaml ~/kkp/kubermatic.yaml
 	cp ~/.tmp/kkp/examples/values.example.yaml ~/kkp/values.yaml
 
-.PHONY: copy_kubeone_files
-copy_kubeone_files: setup_master_folder
-	sed -i 's/GCP_PROJECT/$(PROJECT_ID)/g' ~/kubeone/terraform.tfvars
-
 .PHONY: prepare
-prepare: copy_kubeone_files
+prepare: setup_kkp_folder
