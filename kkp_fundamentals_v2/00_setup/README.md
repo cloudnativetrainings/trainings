@@ -6,6 +6,11 @@ cp -r ~/.tmp/trainings/kkp_fundamentals_v2/* .
 
 choose project in google cloud shell
 
+<!-- going master/seed !!! due to monitoring and config file madness -->
+
+<!-- TODO go big with the machines due MLA n1 standard 4 -->
+<!-- TODO enable auto-scaling -->
+
 source <(kubectl completion bash)
 
 cd ~/00_setup

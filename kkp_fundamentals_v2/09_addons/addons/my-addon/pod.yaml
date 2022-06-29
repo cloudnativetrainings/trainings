@@ -7,7 +7,7 @@ spec:
   containers:
     - name: my-addon-container
       image: alpine:3.16.0
-      command: [ "/bin/bash", "-c", "--" ]
+      command: [ "/bin/sh", "-c", "--" ]
       args: [ "while true; do echo $(date); sleep 1; done;" ]
       resources:
         requests:
