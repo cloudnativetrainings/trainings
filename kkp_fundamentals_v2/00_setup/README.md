@@ -11,8 +11,6 @@ choose project in google cloud shell
 <!-- TODO go big with the machines due MLA n1 standard 4 -->
 <!-- TODO enable auto-scaling -->
 
-source <(kubectl completion bash)
-
 cd ~/00_setup
 
 # set gcp credentials

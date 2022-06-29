@@ -26,23 +26,14 @@ install_kkp: install_k1
 
 .PHONY: setup_master_folder
 setup_master_folder: install_kkp
-	cp -r ~/.tmp/kubeone/examples/terraform/gce/* ~/master/kubeone
-	cp -r ~/.tmp/kkp/charts ~/master/kkp
-	cp ~/.tmp/kkp/examples/kubermatic.example.yaml ~/master/kkp/kubermatic.yaml
-	cp ~/.tmp/kkp/examples/values.example.yaml ~/master/kkp/values.yaml
-
-.PHONY: setup_seed_folder
-setup_seed_folder: setup_master_folder
-	cp -r ~/.tmp/kubeone/examples/terraform/gce/* ~/seed/kubeone
-	cp -r ~/.tmp/kkp/charts ~/seed/kkp
-	cp ~/.tmp/kkp/examples/kubermatic.example.yaml ~/seed/kkp/kubermatic.yaml
-	cp ~/.tmp/kkp/examples/values.example.yaml ~/seed/kkp/values.yaml
+	cp -r ~/.tmp/kubeone/examples/terraform/gce/* ~/kubeone
+	cp -r ~/.tmp/kkp/charts ~/kkp
+	cp ~/.tmp/kkp/examples/kubermatic.example.yaml ~/kkp/kubermatic.yaml
+	cp ~/.tmp/kkp/examples/values.example.yaml ~/kkp/values.yaml
 
 .PHONY: copy_kubeone_files
-copy_kubeone_files: setup_seed_folder
-	sed -i 's/GCP_PROJECT/$(PROJECT_ID)/g' ~/master/kubeone/terraform.tfvars
-	sed -i 's/GCP_PROJECT/$(PROJECT_ID)/g' ~/seed/kubeone/terraform.tfvars
-
+copy_kubeone_files: setup_master_folder
+	sed -i 's/GCP_PROJECT/$(PROJECT_ID)/g' ~/kubeone/terraform.tfvars
 
 .PHONY: prepare
 prepare: copy_kubeone_files
