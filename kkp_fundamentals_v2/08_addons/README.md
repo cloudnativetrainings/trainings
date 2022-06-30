@@ -29,8 +29,12 @@ check pod.yaml in my-addon folder
 <!-- TODO student-01 -->
 <!-- maybe makefile -->
 
+cd into folder
+
 docker build -t gcr.io/student-01-kkp-admin-training/kkp-addons:v2.20.4-kkp-admin .
 docker push gcr.io/student-01-kkp-admin-training/kkp-addons:v2.20.4-kkp-admin
+
+=> verify in https://console.cloud.google.com/gcr/images/student-01-kkp-admin-training?project=student-01-kkp-admin-training
 
 
 ## change kubermaticconfiguration
@@ -45,45 +49,31 @@ docker push gcr.io/student-01-kkp-admin-training/kkp-addons:v2.20.4-kkp-admin
       - my-addon
 ```
 
-kubectl apply -f kubermatic.yaml
+kubectl apply -f ~/kkp/kubermatic.yaml
 
-kubectl describe pod kubermatic-seed-controller-manager-57f4458d65-nsfd9
-kubectl exec -it kubermatic-seed-controller-manager-57f4458d65-nsfd9 -- sh
-ls -alh /opt/addons/kubernetes
+kubectl -n kubermatic get pods
+kubectl -n kubermatic describe pod kubermatic-seed-controller-manager-57f4458d65-nsfd9
+kubectl -n kubermatic exec -it kubermatic-seed-controller-manager-57f4458d65-nsfd9 -- sh
+
+[in container] ls -alh /opt/addons
+=> find my-addon
 
 ## create AddOnConfig
 
 <!-- maybe makefile -->
 
 
-cat logo_78x78.png | base64 -w0 > logo.tmp
+cat logo_32x32.png | base64 -w0 > logo.tmp
 
 => insert into logo section
 
-
-<!--  -->
-
 <!-- TODO maybe do this at the installation phase of kkp -->
-kubectl apply -f ~/master/kkp-2.20.4/charts/kubermatic-operator/crd/
-kubectl apply -f my-addon
+kubectl apply -f ~/kkp/charts/kubermatic-operator/crd/crd-addon-configs.yaml
+kubectl apply -f ~/kkp/charts/kubermatic-operator/crd/crd-addons.yaml
+kubectl apply -f ~/kkp/my-addon.yaml
 
+check in UI
+apply add-on
+check in Dashboard
 
-
-
-<!-- TODO ensure that the one and only kubermaticconfiguration is used everywhere -->
-
-<!-- kubectl -n kubermatic get kubermaticconfiguration kubermatic  -o yaml => is in master -->
-
-
-
-export KUBECONFIG=~/seed/kubeone/seed-kubeconfig
-
-kubectl -n kubermatic get pod kubermatic-seed-controller-manager-7d9f8f9bd8-hbv7f  -o yaml
-kubectl -n kubermatic exec kubermatic-seed-controller-manager-7d9f8f9bd8-hbv7f  -- ls -alh /opt/addons
-kubectl -n kubermatic exec -it kubermatic-seed-controller-manager-7d9f8f9bd8-hbv7f -- sh
-
-
-
-<!-- TODO now I am completely confused -->
-
-
+<!-- TODO addon formspec -->

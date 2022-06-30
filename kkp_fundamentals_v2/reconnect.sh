@@ -11,4 +11,7 @@ sudo cp ~/.tmp/kubeone/kubeone /usr/local/bin
 chmod +x ~/.tmp/kkp/kubermatic-installer
 sudo cp ~/.tmp/kkp/kubermatic-installer /usr/local/bin
 
+chmod +x ~/.tmp/kkp-2.20.4/kubermatic-installer
+sudo cp ~/.tmp/kkp-2.20.4/kubermatic-installer /usr/local/bin
+
 source <(kubectl completion bash)

@@ -1,0 +1,223 @@
+# Copyright 2020 The Kubermatic Kubernetes Platform contributors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Dex Is the OpenID Provider for Kubermatic.
+dex:
+  ingress:
+    # configure your base domain, under which the Kubermatic dashboard shall be available
+    host: kubermatic.sdp.telekom.de
+
+  clients:
+  # The "kubermatic" client is used for logging into the Kubermatic dashboard. It always
+  # needs to be configured.
+  - id: kubermatic
+    name: Kubermatic
+    # Generate a secure secret key
+    # Those can be generated on the shell using:
+    # cat /dev/urandom | tr -dc A-Za-z0-9 | head -c32
+    secret: 7MQaAvayRYGpBILFOX87ZLiMwxDofIxW
+    RedirectURIs:
+    # ensure the URLs below use the dex.ingress.host configured above
+    - http://localhost:8000
+    - http://localhost:8000/projects
+    - https://kubermatic.sdp.telekom.de
+    - https://kubermatic.sdp.telekom.de/projects
+  - id: alertmanager
+    name: AlertManager
+    secret: L5d3gFnBGJ23Yz1DG1txz6svltyHuaYa
+    RedirectURIs:
+    - https://alertmanager.kubermatic.sdp.telekom.de/oauth/callback
+  - id: grafana
+    name: Grafana
+    secret: YAvTcA51H7zLwxaDqxu3at45Enw0dZWa
+    RedirectURIs:
+    - https://grafana.kubermatic.sdp.telekom.de/oauth/callback
+  - id: kibana
+    name: Kibana
+    secret: n4QyFKbcDcJsQCF6CQzrA419A5H3LZ2a
+    RedirectURIs:
+    - https://kibana.kubermatic.sdp.telekom.de/oauth/callback
+  - id: prometheus
+    name: Prometheus
+    secret: SiReLvxdXNZjTij2YUusovuP6o8R0Dga
+    RedirectURIs:
+    - https://prometheus.kubermatic.sdp.telekom.de/oauth/callback
+
+  # Depending on your chosen login method, you need to configure either an OAuth provider like
+  # Google or GitHub, or configure a set of static passwords. Check the `charts/oauth/values.yaml`
+  # for an overview over all available connectors.
+
+  # For testing purposes, we configure a single static user/password combination.
+  staticPasswords:
+  - email: kubermatic@sdp.telekom.de
+    # bcrypt hash of the string "password", can be created using recent versions of htpasswd:
+    # `htpasswd -bnBC 10 "" PASSWORD_HERE | tr -d ':\n' | sed 's/$2y/$2a/'`
+    hash: "$2a$10$zMJhg/3axbm/m0KmoVxJiO1eO5gtNrgKDysy5GafQFrXY93OE9LsK"
+
+    # these are used within Kubermatic to identify the user
+    username: admin
+    userID: 08a8684b-db88-4b73-90a9-3cd1661f5466
+
+  # the cert-manager Issuer (or ClusterIssuer) responsible for managing the certificates
+  # If you want to deploy your own certificate without relying on cert-manager
+  # uncomment the next line and remove subsequent certIssuer configuration.
+  # certIssuer: null
+  certIssuer:
+    # For generating a certificate signed by a trusted root authority replace
+    # with "letsencrypt-prod".
+    name: ca-issuer
+    kind: ClusterIssuer
+
+kubermaticOperator:
+  # insert the Docker authentication JSON provided by Kubermatic here
+  imagePullSecret: |
+    {
+      "auths": {
+        "quay.io": {
+          "auth": "a3ViZXJtYXRpYytkdGFnOlBLR05QVlFGRTdTMzVQRFRKMEsxMkhaWklGSkJJQlNMWE1SRENUMFQ2Uk8yNTVIUFRTOENHSFY3U1hWVkpGVzU=",
+          "email": ""
+        }
+      }
+    }
+
+minio:
+  storeSize: '100Gi'
+  storageClass: kubermatic-backup
+  credentials:
+    accessKey: NlLbRSgMQ6HR5bP0qJpuAVZjLsbVgxOh
+    secretKey: lJxBzMFu63i5R5rxDSSBt5b2pJQxGFUh       
+
+
+
+iap:
+  image:
+    repository: quay.io/oauth2-proxy/oauth2-proxy
+    tag: v6.1.1
+    pullPolicy: IfNotPresent
+
+  oidc_issuer_url: https://kubermatic.sdp.telekom.de/dex
+  port: 3000
+
+  # replicas per deployment; you can set this explicitly per deployment
+  # to override this
+  replicas: 2
+
+  deployments:
+    alertmanager:
+      name: alertmanager
+      replicas: 3
+      client_id: alertmanager
+      client_secret: L5d3gFnBGJ23Yz1DG1txz6svltyHuaYa
+      encryption_key: ncdnDoajVV6bGRH34yDFTF0xGk5DSt8b
+      config: ## see https://github.com/oauth2-proxy/oauth2-proxy/blob/master/docs/configuration/configuration.md
+        scope: "groups openid email"
+        email_domains:
+          - '*'
+        ## example configuration allowing access only to the mygroup from mygithuborg organization
+        github_org: mygithuborg
+        github_team: mygroup
+        ## do not route health endpoint through the proxy
+        skip_auth_regex:
+          - '/-/healthy'
+      upstream_service: alertmanager.monitoring.svc.cluster.local
+      upstream_port: 9093
+      ingress:
+        host: "alertmanager.kubermatic.sdp.telekom.de"
+        annotations: {}    
+    grafana:
+      name: grafana
+      client_id: grafana
+      client_secret: YAvTcA51H7zLwxaDqxu3at45Enw0dZWa
+      encryption_key: YLOxeT9VrP6upz3H52e95E9x8ezwaIMb
+      config: ## see https://github.com/oauth2-proxy/oauth2-proxy/blob/master/docs/configuration/configuration.md
+        scope: "groups openid email"
+        email_domains:
+          - '*'
+        ## do not route health endpoint through the proxy
+        skip_auth_regex:
+          - '/api/health'
+        ## auto-register users based on their email address
+        ## Grafana is configured to look for the X-Forwarded-Email header
+        pass_user_headers: true
+#        enable-authorization-header: false  
+      upstream_service: grafana.monitoring.svc.cluster.local
+      upstream_port: 3000
+      ingress:
+        host: "grafana.kubermatic.sdp.telekom.de"
+        annotations: {}      
+    kibana:
+      name: kibana
+      client_id: kibana
+      client_secret: n4QyFKbcDcJsQCF6CQzrA419A5H3LZ2a
+      encryption_key: tRq4d1n4aVhquSOHKCgOBdiOzy1HrSpb
+      config: ## see https://github.com/oauth2-proxy/oauth2-proxy/blob/master/docs/configuration/configuration.md
+        scope: "groups openid email"
+        email_domains:
+          - '*'
+        ## do not route health endpoint through the proxy
+        skip_auth_regex:
+          - '/ui/favicons/favicon.ico'
+        # enable-authorization-header: false
+      upstream_service: kibana-logging.logging.svc.cluster.local
+      upstream_port: 5601
+      ingress:
+        host: "kibana.kubermatic.sdp.telekom.de"
+        annotations: {}
+    prometheus:
+      name: prometheus
+      client_id: prometheus
+      client_secret: SiReLvxdXNZjTij2YUusovuP6o8R0Dga
+      encryption_key: bklZUGM2V6LGXGNtb6sAGw0vu3mXYpkb
+      config: ## see https://github.com/oauth2-proxy/oauth2-proxy/blob/master/docs/configuration/configuration.md
+        scope: "groups openid email"
+        email_domains:
+          - '*'
+        ## do not route health endpoint through the proxy
+        skip_auth_regex:
+          - '/-/healthy'
+      upstream_service: prometheus.monitoring.svc.cluster.local
+      upstream_port: 9090
+      ingress:
+        host: "prometheus.kubermatic.sdp.telekom.de"
+        annotations:
+          ingress.kubernetes.io/upstream-hash-by: "ip_hash" ## needed for prometheus federations
+
+  # the cert-manager Issuer (or ClusterIssuer) responsible for managing the certificates
+  certIssuer:
+    name: ca-issuer  
+    kind: ClusterIssuer
+
+  resources:
+    requests:
+      cpu: 50m
+      memory: 25Mi
+    limits:
+      cpu: 200m
+      memory: 50Mi
+
+  # You can use Go templating inside affinities and access
+  # the deployment's values directly (e.g. via .name or .client_id).
+  affinity:
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - podAffinityTerm:
+          labelSelector:
+            matchLabels:
+              app: iap
+              target: '{{ .name }}'
+          topologyKey: kubernetes.io/hostname
+        weight: 10
+
+  nodeSelector: {}
+  tolerations: []

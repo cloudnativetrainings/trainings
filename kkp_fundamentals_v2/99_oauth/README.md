@@ -13,3 +13,7 @@ https://authorization-server.com/authorize?
   &scope=openid+profile+email+photos
   &state=5YkBhSLBIxnyOWZy
   &nonce=fhGepjVbrqlssYEB
+
+
+
+<!-- TODO user kubectl get user  => admin  -->
