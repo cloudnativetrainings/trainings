@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Wed Jun 29 08:56:16 2022
+# Make data base, printed on Mon Jul  4 10:49:17 2022
 
 # Variables
 
@@ -25,7 +25,7 @@ GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
 SSH_AGENT_LAUNCHER = gnome-keyring
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-675552f6-c74c-450c-a7ad-7a48cd05f004.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-c1081c2c-16c2-402d-bee5-835631992f47.sock
 # environment
 LC_NAME = de_AT.UTF-8
 # environment
@@ -77,7 +77,7 @@ XAUTHORITY = /run/user/1000/gdm/Xauthority
 # makefile
 MAKEFLAGS = pqrR
 # environment
-DBUS_STARTER_ADDRESS = unix:path=/run/user/1000/bus,guid=d2276317521cc72bb725a30e62bbe7ea
+DBUS_STARTER_ADDRESS = unix:path=/run/user/1000/bus,guid=7734e8b563c9780fd6e14f1662c27a92
 # makefile
 CURDIR := /home/hubert/git/trainings/kkp_fundamentals_v2
 # environment
@@ -109,19 +109,19 @@ ZSH = /home/hubert/.oh-my-zsh
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 72299
+VSCODE_PID = 18484
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
-SESSION_MANAGER = local/ueberbiber:@/tmp/.ICE-unix/1943,unix/ueberbiber:/tmp/.ICE-unix/1943
+SESSION_MANAGER = local/ueberbiber:@/tmp/.ICE-unix/1951,unix/ueberbiber:/tmp/.ICE-unix/1951
 # automatic
 *F = $(notdir $*)
 # environment
 CHROME_DESKTOP = code-url-handler.desktop
 # environment
-DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus,guid=d2276317521cc72bb725a30e62bbe7ea
+DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus,guid=7734e8b563c9780fd6e14f1662c27a92
 # automatic
 <D = $(patsubst %/,%,$(dir $<))
 # environment
@@ -157,7 +157,7 @@ LC_TIME = de_AT.UTF-8
 # environment
 GOROOT = /home/hubert/go/install/go
 # environment
-INVOCATION_ID = bacfdd7ef14a42fe87969641583e3415
+INVOCATION_ID = f814eb672a7f48a7b325dc62173823a8
 # environment
 VSCODE_LOG_NATIVE = false
 # environment
@@ -185,7 +185,7 @@ LOGNAME = hubert
 # makefile
 .DEFAULT_GOAL := destroy
 # environment
-SYSTEMD_EXEC_PID = 1943
+SYSTEMD_EXEC_PID = 1951
 # environment
 DISPLAY = :1
 # environment
@@ -195,7 +195,7 @@ GTK_MODULES = gail:atk-bridge
 # default
 MAKE_VERSION := 4.3
 # environment
-MANAGERPID = 1696
+MANAGERPID = 1708
 # environment
 DBUS_STARTER_BUS_TYPE = session
 # environment
@@ -213,13 +213,13 @@ GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
 COLORTERM = truecolor
 # environment
-JOURNAL_STREAM = 8:37201
+JOURNAL_STREAM = 8:34471
 # environment
 XDG_SESSION_CLASS = user
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
-TILIX_ID = a81fd9bc-bb01-468f-b8e1-698bef7c933d
+TILIX_ID = 44d1d676-9e8c-4583-80f7-1626ef913fa6
 # environment
 HOME = /home/hubert
 # environment
@@ -263,9 +263,9 @@ LC_IDENTIFICATION = de_AT.UTF-8
 
 # Directories
 
-# . (device 66306, inode 15358751): 30 files, no impossibilities.
+# . (device 66306, inode 15358751): 31 files, no impossibilities.
 
-# 30 files, no impossibilities in 1 directories.
+# 31 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -294,6 +294,7 @@ destroy:
 #  recipe to execute (from 'makefile', line 3):
 	cd ~/master/kubeone; kubeone reset --manifest kubeone.yaml -t tf.json -y
 	cd ~/master/kubeone; terraform destroy -auto-approve
+ 
 	cd ~/seed/kubeone; kubeone reset --manifest kubeone.yaml -t tf.json -y
 	cd ~/seed/kubeone; terraform destroy -auto-approve
 	sudo rm -rf ~/*
@@ -304,8 +305,7 @@ destroy:
 # Not a target:
 makefile:
 #  Implicit rule search has been done.
- 
-#  Last modified 2022-06-27 18:49:36.224135442
+#  Last modified 2022-06-29 18:25:49.3897534
 #  File has been updated.
 #  Successfully updated.
 
@@ -322,12 +322,12 @@ makefile:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 37 / storage = 484 B / avg = 13 B
-# current buf: size = 8162 B / used = 484 B / count = 37 / avg = 13 B
+# strcache buffers: 1 (0) / strings = 38 / storage = 466 B / avg = 12 B
+# current buf: size = 8162 B / used = 466 B / count = 38 / avg = 12 B
 
-# strcache performance: lookups = 44 / hit rate = 15%
+# strcache performance: lookups = 45 / hit rate = 15%
 # hash-table stats:
-# Load=37/8192=0%, Rehash=0, Collisions=0/44=0%
-# Finished Make data base on Wed Jun 29 08:56:16 2022
+# Load=38/8192=0%, Rehash=0, Collisions=0/45=0%
+# Finished Make data base on Mon Jul  4 10:49:17 2022
 
  

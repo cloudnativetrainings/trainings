@@ -14,4 +14,6 @@ sudo cp ~/.tmp/kkp/kubermatic-installer /usr/local/bin
 chmod +x ~/.tmp/kkp-2.20.4/kubermatic-installer
 sudo cp ~/.tmp/kkp-2.20.4/kubermatic-installer /usr/local/bin
 
+export KUBECONFIG=~/kubeone/kkp-admin-kubeconfig
+
 source <(kubectl completion bash)
