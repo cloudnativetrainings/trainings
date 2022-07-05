@@ -1,9 +1,7 @@
 .PHONY: destroy
 destroy:
-	cd ~/master/kubeone; kubeone reset --manifest kubeone.yaml -t tf.json -y
-	cd ~/master/kubeone; terraform destroy -auto-approve
-	cd ~/seed/kubeone; kubeone reset --manifest kubeone.yaml -t tf.json -y
-	cd ~/seed/kubeone; terraform destroy -auto-approve
+	cd ~/kubeone; kubeone reset --manifest kubeone.yaml -t tf.json -y
+	cd ~/kubeone; terraform destroy -auto-approve
 	sudo rm -rf ~/*
 	# TODO issue with networks terraform destroy
 	# │ Error: Error waiting for Deleting Network: The network resource 'projects/student-00-kkp-admin-training/global/networks/master' is already being used by 'projects/student-00-kkp-admin-training/global/routes/master-21959b73-0fd5-455a-8826-9f49ce4cb7da'

@@ -1,5 +1,3 @@
-DNS_ZONE=$(shell gcloud dns managed-zones list --format json | jq '.[].name' | tr -d \")
-DOMAIN=$(DNS_ZONE).loodse.training
 
 .PHONY: create_dns_records
 create_dns_records: 

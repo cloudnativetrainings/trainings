@@ -5,6 +5,6 @@ terraform:
 	cd ~/kubeone; terraform output -json > tf.json
 
 .PHONY: create_cluster
-create_cluster: terraform
+create_cluster:
 	cd ~/kubeone; kubeone apply -m kubeone.yaml -t tf.json -y
 	cd ~/kubeone; terraform apply -auto-approve

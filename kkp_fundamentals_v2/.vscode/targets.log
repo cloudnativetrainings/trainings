@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Mon Jul  4 10:49:17 2022
+# Make data base, printed on Tue Jul  5 08:35:54 2022
 
 # Variables
 
@@ -25,7 +25,7 @@ GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
 SSH_AGENT_LAUNCHER = gnome-keyring
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-c1081c2c-16c2-402d-bee5-835631992f47.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-422bfced-39f2-475a-85dc-954c924ec556.sock
 # environment
 LC_NAME = de_AT.UTF-8
 # environment
@@ -109,7 +109,7 @@ ZSH = /home/hubert/.oh-my-zsh
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 18484
+VSCODE_PID = 63847
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
@@ -219,7 +219,7 @@ XDG_SESSION_CLASS = user
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
-TILIX_ID = 44d1d676-9e8c-4583-80f7-1626ef913fa6
+TILIX_ID = 4a9ca126-f4d9-42e4-8dbd-4b6324909409
 # environment
 HOME = /home/hubert
 # environment
@@ -287,16 +287,14 @@ all:
 #  File has not been updated.
 
 destroy:
+ 
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
 #  recipe to execute (from 'makefile', line 3):
-	cd ~/master/kubeone; kubeone reset --manifest kubeone.yaml -t tf.json -y
-	cd ~/master/kubeone; terraform destroy -auto-approve
- 
-	cd ~/seed/kubeone; kubeone reset --manifest kubeone.yaml -t tf.json -y
-	cd ~/seed/kubeone; terraform destroy -auto-approve
+	cd ~/kubeone; kubeone reset --manifest kubeone.yaml -t tf.json -y
+	cd ~/kubeone; terraform destroy -auto-approve
 	sudo rm -rf ~/*
 	# TODO issue with networks terraform destroy
 	# │ Error: Error waiting for Deleting Network: The network resource 'projects/student-00-kkp-admin-training/global/networks/master' is already being used by 'projects/student-00-kkp-admin-training/global/routes/master-21959b73-0fd5-455a-8826-9f49ce4cb7da'
@@ -305,7 +303,7 @@ destroy:
 # Not a target:
 makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-29 18:25:49.3897534
+#  Last modified 2022-07-04 16:54:32.468113209
 #  File has been updated.
 #  Successfully updated.
 
@@ -328,6 +326,6 @@ makefile:
 # strcache performance: lookups = 45 / hit rate = 15%
 # hash-table stats:
 # Load=38/8192=0%, Rehash=0, Collisions=0/45=0%
-# Finished Make data base on Mon Jul  4 10:49:17 2022
+# Finished Make data base on Tue Jul  5 08:35:54 2022
 
  

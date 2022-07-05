@@ -1,79 +1,139 @@
+# Setup KKP Master
 
-# change URLs
+```bash
+cd ~/03_setup_kkp_master
+```
 
-gcloud dns managed-zones list --format json | jq '.[].dnsName' | tr -d \"
-<!-- TODO remove last dot -->
+## Configure KKP
 
-=> replace cluster.example.dev via url in values.yaml and kubermatic.yaml
+### Exchange URLs
 
-# DEX
+```bash
+sed -i 's/cluster.example.dev/'$DOMAIN'/g' ~/kkp/kubermatic.yaml
+sed -i 's/cluster.example.dev/'$DOMAIN'/g' ~/kkp/values.yaml
+```
 
-SECRETS 
+### Generate Secrets
 
+Create random secrets via 
+```bash
 cat /dev/urandom | tr -dc A-Za-z0-9 | head -c32
+```
 
-create random secret in values.yaml
+for the following fields in the file `values.yaml`
+* `dex.clients[kubermatic].secret`
+* `dex.clients[kubermaticIssuer].secret`
 
-kubermatic.yaml - auth / issuerclientsecret 
-has to match
-values - dex / cleints / kubermaticIssuer / secret
+and for the following fields in the file `kubermatic.yaml`
+* `auth.issuerCookieKey`
+* `auth.serviceAccountKey`
 
-## static passwords
+Copy the secret from `dex.clients[kubermaticIssuer].secret` from the file `values.yaml` into `auth.issuerClientSecret` field of the file `kubermatic.yaml`.
 
-htpasswd -bnBC 10 "" password | tr -d ':\n' | sed 's/$2y/$2a/'
+### Create static login credentials
 
-(password)
+```bash
+sed -i 's/kubermatic@example.com/'$MAIL'/g' ~/kkp/values.yaml
+```
 
-email: student-00.kkp-admin-training@loodse.training
+### Generate uuid for telemetry
 
-# telemetry
+```bash
+sed -i 's/uuid: \"\"/uuid: \"'$(uuidgen -r)'\"/g' ~/kkp/values.yaml
+```
 
-uuidgen -r
+### Adapt Minio Settings
 
-# storageclass
+Change the minio settings to the following:
 
+```yaml
+minio:
+  storeSize: '10Gi'
+  storageClass: kubermatic-backup
+  credentials:
+    accessKey: "reoshe9Eiwei2ku5foB6owiva2Sheeth"
+    secretKey: "rooNgohsh4ohJo7aefoofeiTae4poht0cohxua5eithiexu7quieng5ailoosha8"
+```
+
+## Apply StorageClasses
+
+```bash
 kubectl apply -f ~/kkp/storageclass-fast.yaml
+kubectl apply -f ~/kkp/storageclass-backup.yaml
+```
 
-# install kkp
+## Install KKP
 
-export KUBECONFIG=~/.kube/config
+<!-- TODO explain installer -->
 
+```bash
 kubermatic-installer --charts-directory ~/kkp/charts deploy \
     --config ~/kkp/kubermatic.yaml \
     --helm-values ~/kkp/values.yaml
 
-# clusterissuer
-=> change email address
+# Verify everyting is running smoothly
+kubectl get pods -A
+```
+
+## Apply the Production ClusterIssuer
+
+```bash
+# Change the email address
+sed -i 's/TODO-STUDENT-EMAIL@loodse.training/'$MAIL'/g' ~/kkp/clusterissuer.yaml
+
 kubectl apply -f ~/kkp/clusterissuer.yaml
+```
 
-# DNS
-student-00-kkp-admin-training.loodse.training.      IN  A  35.246.171.166
-*.student-00-kkp-admin-training.loodse.training.    IN  A  35.246.171.166
+## Configure DNS
 
-make IP=34.159.160.52 create_dns_records
+Copy the IP address from the kubermatic-installer output and make use of it like the following:
 
-gcloud dns record-sets list --zone student-00-kkp-admin-training
-<!-- TODO student-00 is not true for students -->
-nslookup student-00-kkp-admin-training.loodse.training
-nslookup test.student-00-kkp-admin-training.loodse.training
+```bash
+# Store IP of Loadbalancer into environment variable
+export INGRESS_IP=$(kubectl -n nginx-ingress-controller get service nginx-ingress-controller -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
 
-gcloud dns record-sets list --zone student-01-kkp-admin-training
+# Verify that environment variable is set
+echo $INGRESS_IP
 
-dig NS $SUBDOMAIN.$TLD
+make IP=$INGRESS_IP create_dns_records
 
-# switch to letsencrypt-prod
+# Verify DNS records
+nslookup $DOMAIN
+nslookup test.$DOMAIN
+```
 
-change letsencrypt-staging to letsencrypt-pod in values.yaml and kubermatic.yaml
-auth.skipTokenIssuerTLSVerify=false in kubermatic.yaml
+## Switch to LetsEncrypt Prod
 
+Adapt the settings in the configuration files with the following:
+
+```bash
+sed -i 's/letsencrypt-staging/letsencrypt-prod/g' ~/kkp/values.yaml
+sed -i 's/letsencrypt-staging/letsencrypt-prod/g' ~/kkp/kubermatic.yaml
+sed -i 's/skipTokenIssuerTLSVerify: true/skipTokenIssuerTLSVerify: false/g' ~/kkp/kubermatic.yaml
+```
+
+Re-run the installer again
+
+```bash
 kubermatic-installer --charts-directory ~/kkp/charts deploy \
     --config ~/kkp/kubermatic.yaml \
     --helm-values ~/kkp/values.yaml     
 
+# Verify everyting is running smoothly
+kubectl get pods -A
+
+# Verify you are obtain valid certificates from LetsEncrypt
 kubectl get certs -A
+```
 
-=> wait and hope
+## Visit your KKP Master Installation
 
-# verify in browser
+```bash
+# The URL
+echo $DOMAIN
 
-visit url
+# The Email Address
+echo $MAIL
+
+# The password is `password` if you haven't changed it
+```

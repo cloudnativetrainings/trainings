@@ -1,20 +1,4 @@
 
-# apply storageclasses
-kubectl apply -f ~/seed/kkp/storageclass-backup.yaml
-
-# adapt minio settings
-
-in values.yaml
-
-```yaml
-minio:
-  storeSize: '10Gi'
-  storageClass: kubermatic-backup
-  credentials:
-    accessKey: "reoshe9Eiwei2ku5foB6owiva2Sheeth"
-    secretKey: "rooNgohsh4ohJo7aefoofeiTae4poht0cohxua5eithiexu7quieng5ailoosha8"
-```
-
 # configure seed at master
 
 <!-- TODO try via applying the CRDs manually and helm charts -->

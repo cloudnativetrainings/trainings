@@ -74,6 +74,8 @@ dex.clients
     - https://grafana.kubermatic.student-01-kkp-admin-training.loodse.training/oauth/callback
 ```
 
+<!-- TODO do via helm -->
+
 kubermatic-installer --charts-directory ~/kkp/charts deploy \
     --config ~/kkp/kubermatic.yaml \
     --helm-values ~/kkp/values.yaml
