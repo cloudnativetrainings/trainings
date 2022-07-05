@@ -1,58 +1,87 @@
+# Create User Clusters
 
-# create project
+## Create Cluster within UI
 
-# without preset
+Generate a ServiceAccount holding the GCE Credentials via
 
+```bash
 base64 -w0 ~/secrets/key.json
+```
 
-ssd disk
-n1-standard-2
-number of nodes!!!
-<!-- TODO how to configure that 3 is default??? -->
-replicas 3!!!
+* Create a new project
+* Click Create Cluster
+* Within Tab `Provider`
+    * Choose Provider `Google Cloud`
+    * Choose Datecenter `Frankurt`
+* Within Tab `Cluster`
+    * Generate a random Cluster name
+* Within Tab `Settings`
+    * Copy the base64 encoded GCE key.json
+* Within Tab `Initial Nodes`
+    * Generate a random MachineDeployment name
+    * Set the number of replicas to 3
+    * Choose Disk Type `pd-ssd`
+    * Choose Machine Type `n1-standard-2`
 
-an 2 times older kubernetes version for being able to upgrade
+### Verify in Terminal
 
-## cli on seed
+You will find a new namespace holding all the control plane components of the user cluster
 
+```bash
 kubectl get ns
 
-=> delete ETCD
+# See all the control plane components of the cluster
+kubectl -n cluster-XXXXX get pods 
 
-kubectl get cluster pgrwrdqgzj -o yaml
+# Delete one of the etcd nodes
+kubectl -n cluster-XXXXX delete pod etcd-0
 
-=> download user cluster kubeconfig
-=> drag and drop into cloud shell explorer
+# The StatefulSet will take care to restart the deleted etcd-0 node
+kubectl -n cluster-XXXXX get pods 
 
-export KUBECONFIG=~/Downloads/kubeconfig-admin-v7bx9dhwgm  
+# Show the cluster CRD
+kubectl get cluster XXXXX -o yaml
+```
 
-!!! switch back to other termianl
+### Connect to the User Cluster
 
-kubectl delete cluster pgrwrdqgzj 
+<!-- TODO image indent -->
 
-# Provider Presets & Cluster Templates
+1. Download the kubeconfig via the following button:
+![](../pics/get_kubeconfig.png)
+1. Drag&Drop the downloaded kubeconfig into the Google Cloud Shell.
+1. Create a new Terminal:
+![](../pics/choose_project.png)
+1. Connect to the User Cluster
+```bash
+export KUBECONFIG=~/kubeconfig-admin-XXXXX
 
-## create preset
+kubectl get nodes
+```
 
-Admin Panel
+### Delete the cluster
 
-Create Preset
+Within the UI delete the cluster.
 
-base64 -w0 ~/secrets/key.json
+## Create Provider Presets & Cluster Templates
 
-## create cluster Template
+### Create a Provider Preset
 
+1. Open the Admin Panel like this:
+![](../pics/get_kubeconfig.png)
+1. Choose Provider Presets
+1. Create a Preset
+    1. On the Preset Tab choose a name, eg `gce`
+    1. On the Provider Tab choose Google Cloud
+    1. In the Settings Tab add the base64 encoded GCE key.json (you can get it again via `base64 ~/secrets/key.json -w0`)
 
-kubectl get preset gce  -o yaml
+### Create Cluster Template
 
-kubectl get clustertemplate wz6tg725vb  -o yaml
+See the steps of the section `Create Cluster within UI` on how to create a ClusterTemplate. Make sure to make use of the Provider Preset of the previous step.
 
-## create cluster
+### Create Cluster using the Provider Preset and the Cluster Template
+
+Within the UI create a cluster via the button `Create Cluster from Template` and make use of the template created in the previous step.
 
 <!-- TODO -->
-# create cluster via BYO
-
-<!-- TODO -->
-# create cluster via api
-
-<!-- HINT to zz generated files https://github.com/kubermatic/kubermatic/tree/master/docs -->
+## create cluster via BYO

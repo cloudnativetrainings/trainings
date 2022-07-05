@@ -1,17 +1,22 @@
+# Installation of the Seed 
 
-# configure seed at master
+```bash
+cd ~/04_setup_kkp_seed/
+```
 
 <!-- TODO try via applying the CRDs manually and helm charts -->
 
-## secret
+## Add the Seed kubeconfig to the Master
+
+```bash
 cp $KUBECONFIG ./temp-seed-kubeconfig
 kubectl create secret generic seed-kubeconfig -n kubermatic --from-file kubeconfig=./temp-seed-kubeconfig --dry-run=client -o yaml > ~/kkp/seed-kubeconfig-secret.yaml
-
 kubectl apply -f ~/kkp/seed-kubeconfig-secret.yaml
+```
 
-## seed configuration
+## Configure the Seed
 
-datacenter and seed-kubeconfig secret
+Copy the following content into `~/kkp/seed.yaml`
 
 seed config
 ```yaml
@@ -40,30 +45,43 @@ spec:
         bringyourown: {}
   kubeconfig:
     name: seed-kubeconfig
-    namespace: kubermatic        
+    namespace: kubermatic
 ```
 
+## Apply the Seed
+
+```bash
 kubectl apply -f ~/kkp/seed.yaml
 
-# apply seed
-
-export KUBECONFIG=~/seed/kubeone/seed-kubeconfig
-
-=> check if stuff is running in kubermatic namespace
+# Verify installation
 kubectl -n kubermatic get pods
 
+# Verify that the following pods are running
+# * kubermatic-seed-controller-manager-...
+# * nodeport-proxy-...
+# * seed-proxy-kubermatic-...
+
+# Re-run the installer with kubermatic-seed option
 kubermatic-installer --charts-directory ~/kkp/charts deploy kubermatic-seed \
   --config ~/kkp/kubermatic.yaml \
   --helm-values ~/kkp/values.yaml  
-  
-# DNS entry for seed
+```
 
-*.kubermatic.student-00-kkp-admin-training.loodse.training.  IN  A  34.159.48.164
+## Create DNS entries for Seed
 
-<!-- TODO maybe other make target name -->
-make IP=35.242.246.120 create_dns_records
+```bash
+export kubectl -n kubermatic get svc nodeport-proxy -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
 
-<!-- TODO student-00 does not work everywhere -->
-nslookup test.kubermatic.student-01-kkp-admin-training.loodse.training
+# Store IP of NodePort Proxy into environment variable
+export SEED_IP=$(kubectl -n kubermatic get svc nodeport-proxy -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
 
-gcloud dns record-sets list --zone student-01-kkp-admin-training
+# Verify that environment variable is set
+echo $SEED_IP
+
+make IP=$SEED_IP create_dns_records
+
+# Verify DNS record
+nslookup test.kubermatic.$DOMAIN
+```
+
+Congrats your KKP installation is now ready for use!!!
