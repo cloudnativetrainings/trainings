@@ -1,4 +1,3 @@
-
 .PHONY: set_env_vars
 set_env_vars: 
 	echo 'export PROJECT_ID=$(gcloud projects list --format json | jq .[].name | tr -d \")' >> ~/.bashrc
@@ -7,6 +6,8 @@ set_env_vars:
 	echo 'export SA_NAME=kkp-admin-training' >> ~/.bashrc
 	echo 'export SA_MAIL=$(SA_NAME)@$(PROJECT_ID).iam.gserviceaccount.com' >> ~/.bashrc
 	echo 'export DOMAIN=$(PROJECT_ID).loodse.training' >> ~/.bashrc
+	echo 'export REPO_URL=gcr.io/$(PROJECT_ID)' >> ~/.bashrc
+# TODO move stuff in file and cat it into .bashrc => safeguard via ifs
 
 .PHONY: get_gcp_sa_key
 get_gcp_sa_key: 

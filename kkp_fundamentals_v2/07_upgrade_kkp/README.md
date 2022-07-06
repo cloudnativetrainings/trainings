@@ -1,31 +1,38 @@
+# Upgrade KKP
 
-# breaking changes
+```bash
+cd ~/07_upgrade_kkp
+```
 
-https://github.com/kubermatic/kubermatic/blob/master/CHANGELOG.md
+## Install the new KKP version
 
-https://docs.kubermatic.com/kubermatic/master/tutorials_howtos/upgrading/
-
-https://docs.kubermatic.com/kubermatic/master/architecture/compatibility/supported_versions/
-
-
-# install new kkp release
-
-<!-- TODO may overwrite the old installer and charts -->
-
-check a minor release upgrade here: https://github.com/kubermatic/kubermatic/releases
-
+```bash
 make KKP_VERSION_NEW=2.20.4 install_new_kkp
 
+# Verify the upgraded version
 kubermatic-installer --charts-directory ~/kkp/charts version
+```
 
-# update
+## Update KKP
 
+```bash
+# Update Master Components
 kubermatic-installer --charts-directory ~/kkp/charts deploy \
     --config ~/kkp/kubermatic.yaml \
     --helm-values ~/kkp/values.yaml
 
-## verify everything got updated
+# Update Seed Components
+kubermatic-installer --charts-directory ~/kkp/charts deploy kubermatic-seed \
+  --config ~/kkp/kubermatic.yaml \
+  --helm-values ~/kkp/values.yaml     
 
+# Verify KKP got updated
 kubectl -n kubermatic get pods
+```    
 
-=> Check UI
+<!-- TODO slides# breaking changes
+https://github.com/kubermatic/kubermatic/blob/master/CHANGELOG.md
+https://docs.kubermatic.com/kubermatic/master/tutorials_howtos/upgrading/
+https://docs.kubermatic.com/kubermatic/master/architecture/compatibility/supported_versions/ 
+check a minor release upgrade here: https://github.com/kubermatic/kubermatic/releases
+-->
