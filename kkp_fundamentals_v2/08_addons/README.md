@@ -12,7 +12,7 @@ Click on the tab `Open Dashboard`:
 
 ![](../pics/dashboard.png)
 
-Choose `All Namespaces` in the Namespace Dropdown and select Pods in the Menubar.
+Choose `All Namespaces` in the Namespace Dropdown and select Pods in the Side Panel.
 
 <!-- TODO slides autoscaler plugin -->
 

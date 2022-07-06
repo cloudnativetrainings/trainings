@@ -7,13 +7,13 @@
 Visit https://console.cloud.google.com/apis/credentials/consent and create an OAuth Consent Screen. In the Tab `OAuth Consent Screen` fill in 
 * `App name`
 * `User support email`
-* Add the `Authorized Domain` `loodse.training`
+* Add the `Authorized Domain` with the domain `loodse.training`
 
 ### Create an OAuth 2.0 Client ID
 
 Visit https://console.cloud.google.com/apis/credentials and click the button `Create Credentials` and choose `OAuth client ID`
-* Choose `Application Type` `Web application` and fill in a proper name.
-* Add the following `Authorized redirect URI` `https://<DOMAIN>/dex/callback`. Fill in your domain.
+* Choose `Application Type` with type `Web application` and fill in a proper name.
+* Add the following `Authorized redirect URI` with the URI `https://<DOMAIN>/dex/callback`. Fill in your domain.
 
 ### Connect KKP to the OIDC Provider
 
