@@ -14,8 +14,6 @@ Click on the tab `Open Dashboard`:
 
 Choose `All Namespaces` in the Namespace Dropdown and select Pods in the Side Panel.
 
-<!-- TODO slides autoscaler plugin -->
-
 ## Add a custom Addon
 
 Take a look into `./addons/my-addon/pod.yaml`.
@@ -73,19 +71,6 @@ cat logo_32x32.png | base64 -w0
 kubectl apply -f ~/kkp/my-addon.yaml
 ```
 
-Finally you can add your Addon in the UI.
-
-<!-- TODO addon formspec -->
-
-<!-- TODO slides intro https://docs.kubermatic.com/kubermatic/v2.20/architecture/concept/kkp-concepts/addons/ -->
-
-<!-- TODO slides
-## accessible addons are defaulted
-https://github.com/kubermatic/kubermatic/blob/master/docs/zz_generated.kubermaticConfiguration.yaml#L10-L15
-https://github.com/kubermatic/kubermatic/blob/master/docs/zz_generated.kubermaticConfiguration.yaml#L323-L392
-https://github.com/kubermatic/kubermatic/blob/master/pkg/controller/operator/defaults/defaults.go#L358-L372
- -->
-
-<!-- TODO ensure all code indents are 0 -->
+Finally you can add your Addon in the UI. Apply the Addon and verify in the Kubernetes Dashboatd that your Pod is running.
 
 Jump > [Home](../README.md) | Previous > [Upgrade KKP](../07_upgrade_kkp/README.md) | Next > [OAuth](../09_oauth/README.md)

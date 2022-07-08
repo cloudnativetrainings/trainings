@@ -26,6 +26,4 @@ kubectl -n kube-system scale md kkp-admin-pool1 --replicas 5
 kubectl get nodes
 ```
 
-<!-- TODO autoscaling addon -->
-
 Jump > [Home](../README.md) | Previous > [Prepare Installation](../01_prepare/README.md) | Next > [Setup KKP Master](../03_setup_kkp_master/README.md)

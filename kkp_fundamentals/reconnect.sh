@@ -20,3 +20,5 @@ if test -f "$FILE"; then
 fi
 
 export KUBECONFIG=~/kubeone/kkp-admin-kubeconfig
+
+source <(kubectl completion bash)

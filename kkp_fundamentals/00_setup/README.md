@@ -31,21 +31,29 @@ cp -r ~/.tmp/trainings/kkp_fundamentals/* .
 ## Set Environment Variables
 
 ```bash
-cd ~/00_setup
-make set_env_vars
+echo 'export PROJECT_ID=$(gcloud projects list --format json | jq .[].name | tr -d \")' >> ~/.bashrc
+echo 'export DNS_ZONE=$(gcloud dns managed-zones list --format json | jq '.[].name' | tr -d \")' >> ~/.bashrc
+echo 'export MAIL=$PROJECT_ID@loodse.training' >> ~/.bashrc
+echo 'export SA_NAME=kkp-admin-training' >> ~/.bashrc
+echo 'export SA_MAIL=$SA_NAME@$PROJECT_ID.iam.gserviceaccount.com' >> ~/.bashrc
+echo 'export DOMAIN=$PROJECT_ID.loodse.training' >> ~/.bashrc
+echo 'export REPO_URL=gcr.io/$PROJECT_ID' >> ~/.bashrc
 ```
 
-### Select Project in Terminal
+### Open a new tab
 
 ![](../pics/choose_project.png)
 
 ### Verify Environment Variables are set
+
 ```bash
 echo $PROJECT_ID
+echo $DNS_ZONE
 echo $MAIL
 echo $SA_NAME
 echo $SA_MAIL
 echo $DOMAIN
+echo $REPO_URL
 ```
 
 ## Set GCE Credentials
@@ -74,7 +82,10 @@ ssh-add ~/secrets/kkp_admin_training
 make install_tools
 ```
 
+## Install bash completion
+
+```bash
+source <(kubectl completion bash)
+```
+
 Jump > [Home](../README.md) | Next > [Prepare Installation](../01_prepare/README.md)
-
-<!-- TODO check if kubernetes in .bashrc file works -->
-

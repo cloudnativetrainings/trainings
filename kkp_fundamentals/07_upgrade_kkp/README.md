@@ -30,11 +30,4 @@ kubermatic-installer --charts-directory ~/kkp/charts deploy kubermatic-seed \
 kubectl -n kubermatic get pods
 ```    
 
-<!-- TODO slides# breaking changes
-https://github.com/kubermatic/kubermatic/blob/master/CHANGELOG.md
-https://docs.kubermatic.com/kubermatic/master/tutorials_howtos/upgrading/
-https://docs.kubermatic.com/kubermatic/master/architecture/compatibility/supported_versions/ 
-check a minor release upgrade here: https://github.com/kubermatic/kubermatic/releases
--->
-
 Jump > [Home](../README.md) | Previous > [Upgrade User Cluster](../06_upgrade_user_cluster/README.md) | Next > [Addons](../08_addons/README.md)

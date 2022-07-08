@@ -6,8 +6,6 @@ Check on an existing cluster the upgrade possibilities
 
 ![](../pics/upgrade_user_clusters.png)
 
-<!-- TODO Slides kubernetes components version diffs -->
-
 ## Manage the available Kubernetes versions
 
 Add the following to the file `kubermatic.yaml` in the `spec` section (mind the proper indent):
@@ -58,13 +56,7 @@ Connected to the User Cluster you can change the version of the MachineDeploymen
 kubectl -n kube-system edit md XXXXX
 
 # Watch the nodes getting upgraded
-watch -n1 kubectl get nodes   
+watch -n 1 kubectl get nodes   
 ```
-
-<!-- TODO remove the deletion of cluster in prev step -->
-
-<!-- TODO links to nect task -->
-
-<!-- TODO tip kubermatic-installer print -->
 
 Jump > [Home](../README.md) | Previous > [Create User Cluster](../05_create_user_cluster/README.md) | Next > [Upgrade KKP](../07_upgrade_kkp/README.md)

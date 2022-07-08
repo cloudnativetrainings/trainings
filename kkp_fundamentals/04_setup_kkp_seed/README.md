@@ -4,8 +4,6 @@
 cd ~/04_setup_kkp_seed/
 ```
 
-<!-- TODO try via applying the CRDs manually and helm charts -->
-
 ## Add the Seed kubeconfig to the Master
 
 ```bash
@@ -37,12 +35,6 @@ spec:
           region: "europe-west3"
           regional: false
           zoneSuffixes: [a, b, c]
-    byo:
-      country: DE
-      location: Frankfurt
-      node: {}
-      spec:
-        bringyourown: {}
   kubeconfig:
     name: seed-kubeconfig
     namespace: kubermatic
@@ -70,15 +62,13 @@ kubermatic-installer --charts-directory ~/kkp/charts deploy kubermatic-seed \
 ## Create DNS entries for Seed
 
 ```bash
-export kubectl -n kubermatic get svc nodeport-proxy -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
-
 # Store IP of NodePort Proxy into environment variable
 export SEED_IP=$(kubectl -n kubermatic get svc nodeport-proxy -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
 
 # Verify that environment variable is set
 echo $SEED_IP
 
-make IP=$SEED_IP create_dns_records
+make IP=$SEED_IP create_seed_dns_record
 
 # Verify DNS record
 nslookup test.kubermatic.$DOMAIN

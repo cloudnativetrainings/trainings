@@ -3,7 +3,6 @@ kind: Preset
 metadata:
   name: kubermatic
 spec:
-# TODO loodse.training
   requiredEmailDomain: loodse.training
   gcp:
     serviceAccount: TODO

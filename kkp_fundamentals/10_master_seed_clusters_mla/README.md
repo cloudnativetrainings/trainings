@@ -114,12 +114,6 @@ kubectl create ns iap
 helm --namespace iap upgrade --install --wait --atomic --values ~/kkp/values.yaml iap ~/kkp/charts/iap
 ```
 
-<!-- TODO
-# loki
-
-{app="etcd"}
- -->
-
 ## Add Link to KKP Side Panel
 
 1. Open the `Admin Panel`

@@ -64,14 +64,13 @@ kubectl apply -f ~/kkp/storageclass-backup.yaml
 
 ## Install KKP
 
-<!-- TODO explain installer -->
-
 ```bash
 kubermatic-installer --charts-directory ~/kkp/charts deploy \
     --config ~/kkp/kubermatic.yaml \
     --helm-values ~/kkp/values.yaml
 
-# Verify everyting is running smoothly
+# Verify everyting is running smoothly 
+# (Note that the pods kubermatic-api-XXXXX will not run smoothly due to DNS is not setup yet)
 kubectl get pods -A
 ```
 
@@ -123,6 +122,7 @@ kubermatic-installer --charts-directory ~/kkp/charts deploy \
 kubectl get pods -A
 
 # Verify you are obtain valid certificates from LetsEncrypt
+# (Note that it can take up a few minutes to get the certs in ready state)
 kubectl get certs -A
 ```
 

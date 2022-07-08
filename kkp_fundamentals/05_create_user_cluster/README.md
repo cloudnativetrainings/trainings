@@ -45,8 +45,6 @@ kubectl get cluster XXXXX -o yaml
 
 ### Connect to the User Cluster
 
-<!-- TODO image indent -->
-
 Download the kubeconfig via the following button:
 
 ![](../pics/get_kubeconfig.png)
@@ -65,17 +63,13 @@ export KUBECONFIG=~/kubeconfig-admin-XXXXX
 kubectl get nodes
 ```
 
-### Delete the cluster
-
-Within the UI delete the cluster.
-
 ## Create Provider Presets & Cluster Templates
 
 ### Create a Provider Preset
 
 Open the Admin Panel like this:
 
-![](../pics/get_kubeconfig.png)
+![](../pics/admin_panel.png)
 
 Choose Provider Presets
 
@@ -91,8 +85,5 @@ See the steps of the section `Create Cluster within UI` on how to create a Clust
 ### Create Cluster using the Provider Preset and the Cluster Template
 
 Within the UI create a cluster via the button `Create Cluster from Template` and make use of the template created in the previous step.
-
-<!-- TODO -->
-## create cluster via BYO
 
 Jump > [Home](../README.md) | Previous > [Setup KKP Seed](../04_setup_kkp_seed/README.md) | Next > [Upgrade User Cluster](../06_upgrade_user_cluster/README.md)
