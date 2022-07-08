@@ -1,6 +1,4 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
-make: *** No rule to make target 'all'.  Stop.
-
 # GNU Make 4.3
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2020 Free Software Foundation, Inc.
@@ -8,7 +6,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Fri Jul  8 07:15:16 2022
+# Make data base, printed on Fri Jul  8 11:21:12 2022
 
 # Variables
 
@@ -21,11 +19,13 @@ GDK_BACKEND = x11
 # environment
 LC_ALL = C
 # environment
+NO_AT_BRIDGE = 1
+# environment
 GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
 SSH_AGENT_LAUNCHER = gnome-keyring
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-1d6f73cf-60c3-4499-bafb-20b126db567d.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-d77138d1-e8d7-4629-b18a-d1f26973e896.sock
 # environment
 LC_NAME = de_AT.UTF-8
 # environment
@@ -49,7 +49,7 @@ VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # default
 .VARIABLES := 
 # environment
-PWD = /home/hubert/git/trainings/kkp_fundamentals_v2
+PWD = /home/hubert/git/trainings/kkp_fundamentals
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # environment
@@ -79,7 +79,7 @@ MAKEFLAGS = pqrR
 # environment
 DBUS_STARTER_ADDRESS = unix:path=/run/user/1000/bus,guid=2c8f84e9052845171274ae2562c505e4
 # makefile
-CURDIR := /home/hubert/git/trainings/kkp_fundamentals_v2
+CURDIR := /home/hubert/git/trainings/kkp_fundamentals
 # environment
 VSCODE_PIPE_LOGGING = true
 # environment
@@ -100,8 +100,8 @@ XDG_CONFIG_DIRS = /etc/xdg/xdg-ubuntu:/etc/xdg
 P9K_SSH = 0
 # environment
 XDG_SESSION_DESKTOP = ubuntu
-# makefile (from 'makefile', line 1)
-MAKEFILE_LIST := makefile
+# makefile
+MAKEFILE_LIST := 
 # automatic
 @F = $(notdir $@)
 # environment
@@ -183,7 +183,7 @@ GNUMAKEFLAGS :=
 # environment
 LOGNAME = hubert
 # makefile
-.DEFAULT_GOAL := destroy
+.DEFAULT_GOAL := 
 # environment
 SYSTEMD_EXEC_PID = 1917
 # environment
@@ -219,7 +219,7 @@ XDG_SESSION_CLASS = user
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
-TILIX_ID = 6b5ad9ad-e6f9-4f28-b1ed-68f9d5d56cd5
+TILIX_ID = 7560f0e8-57d0-4983-b97b-d64910f673aa
 # environment
 HOME = /home/hubert
 # environment
@@ -239,7 +239,7 @@ IM_CONFIG_PHASE = 1
 # default
 SUFFIXES := 
 # environment
-_P9K_TTY = /dev/pts/1
+_P9K_TTY = /dev/pts/0
 # environment
 VSCODE_CLI = 1
 # environment
@@ -255,7 +255,7 @@ GDMSESSION = ubuntu
 # environment
 LC_IDENTIFICATION = de_AT.UTF-8
 # variable set hash-table stats:
-# Load=121/1024=12%, Rehash=0, Collisions=7/151=5%
+# Load=122/1024=12%, Rehash=0, Collisions=7/149=5%
 
 # Pattern-specific Variable Values
 
@@ -263,15 +263,25 @@ LC_IDENTIFICATION = de_AT.UTF-8
 
 # Directories
 
-# . (device 66306, inode 15358751): 34 files, no impossibilities.
+# . (device 66306, inode 15346284): 20 files, no impossibilities.
 
-# 34 files, no impossibilities in 1 directories.
+# 20 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
 # No implicit rules.
 
 # Files
+
+# Not a target:
+Makefile:
+#  Implicit rule search has been done.
+ 
+make: *** No rule to make target 'all'.  Stop.
+
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
 
 # Not a target:
 .DEFAULT:
@@ -286,46 +296,34 @@ all:
 #  File does not exist.
 #  File has not been updated.
 
-destroy:
-#  Phony target (prerequisite of .PHONY).
-#  Implicit rule search has not been done.
-#  File does not exist.
-#  File has not been updated.
-#  recipe to execute (from 'makefile', line 3):
-	cd ~/kubeone; kubeone reset --manifest kubeone.yaml -t tf.json -y
-	cd ~/kubeone; terraform destroy -auto-approve
-	sudo rm -rf ~/*
-	# TODO issue with networks terraform destroy
-	# │ Error: Error waiting for Deleting Network: The network resource 'projects/student-00-kkp-admin-training/global/networks/master' is already being used by 'projects/student-00-kkp-admin-training/global/routes/master-21959b73-0fd5-455a-8826-9f49ce4cb7da'
- 
-	# TODO delete the serviceaccount
-
 # Not a target:
 makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-04 16:54:32.468113209
+#  File does not exist.
 #  File has been updated.
-#  Successfully updated.
+#  Failed to be updated.
 
-.PHONY: destroy
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+# Not a target:
+GNUmakefile:
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
 
 # files hash-table stats:
-# Load=6/1024=1%, Rehash=0, Collisions=0/18=0%
+# Load=6/1024=1%, Rehash=0, Collisions=0/15=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 41 / storage = 486 B / avg = 11 B
-# current buf: size = 8162 B / used = 486 B / count = 41 / avg = 11 B
+# strcache buffers: 1 (0) / strings = 28 / storage = 370 B / avg = 13 B
+# current buf: size = 8162 B / used = 370 B / count = 28 / avg = 13 B
 
-# strcache performance: lookups = 48 / hit rate = 14%
+# strcache performance: lookups = 31 / hit rate = 9%
 # hash-table stats:
-# Load=41/8192=1%, Rehash=0, Collisions=0/48=0%
-# Finished Make data base on Fri Jul  8 07:15:16 2022
+# Load=28/8192=0%, Rehash=0, Collisions=1/31=3%
+# Finished Make data base on Fri Jul  8 11:21:12 2022
 
  

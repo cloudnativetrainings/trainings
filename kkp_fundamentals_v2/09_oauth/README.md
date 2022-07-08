@@ -48,3 +48,5 @@ kubectl get user
 # Change the field `spec.admin` to true
 kubectl edit user XXXXX
 ```
+
+Jump > [Home](../README.md) | Previous > [Addons](../08_addons/README.md) | Next > [Setup Master/Seed MLA](../10_master_seed_clusters_mla/README.md)

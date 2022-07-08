@@ -5,12 +5,15 @@
 ### Allow Cookies
 
 If you are in Incognito Mode you may get this message:
+
 ![](../pics/cookies_01.png)
 
 Open this dialogue:
+
 ![](../pics/cookies_02.png)
 
 Allow Cookies:
+
 ![](../pics/cookies_03.png)
 
 ### Select Home Directory
@@ -71,6 +74,8 @@ ssh-add ~/secrets/kkp_admin_training
 ```bash
 make install_tools
 ```
+
+Jump > [Home](../README.md) | Next > [Prepare Installation](../01_prepare/README.md)
 
 <!-- TODO check if kubernetes in .bashrc file works -->
 

@@ -87,3 +87,5 @@ https://github.com/kubermatic/kubermatic/blob/master/pkg/controller/operator/def
  -->
 
 <!-- TODO ensure all code indents are 0 -->
+
+Jump > [Home](../README.md) | Previous > [Upgrade KKP](../07_upgrade_kkp/README.md) | Next > [OAuth](../09_oauth/README.md)

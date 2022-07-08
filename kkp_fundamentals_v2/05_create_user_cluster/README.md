@@ -47,12 +47,18 @@ kubectl get cluster XXXXX -o yaml
 
 <!-- TODO image indent -->
 
-1. Download the kubeconfig via the following button:
+Download the kubeconfig via the following button:
+
 ![](../pics/get_kubeconfig.png)
-1. Drag&Drop the downloaded kubeconfig into the Google Cloud Shell.
-1. Create a new Terminal:
+
+Drag&Drop the downloaded kubeconfig into the Google Cloud Shell.
+
+Create a new Terminal:
+
 ![](../pics/choose_project.png)
-1. Connect to the User Cluster
+
+Connect to the User Cluster
+
 ```bash
 export KUBECONFIG=~/kubeconfig-admin-XXXXX
 
@@ -67,13 +73,16 @@ Within the UI delete the cluster.
 
 ### Create a Provider Preset
 
-1. Open the Admin Panel like this:
+Open the Admin Panel like this:
+
 ![](../pics/get_kubeconfig.png)
-1. Choose Provider Presets
-1. Create a Preset
-    1. On the Preset Tab choose a name, eg `gce`
-    1. On the Provider Tab choose Google Cloud
-    1. In the Settings Tab add the base64 encoded GCE key.json (you can get it again via `base64 ~/secrets/key.json -w0`)
+
+Choose Provider Presets
+
+Create a Preset
+1. On the Preset Tab choose a name, eg `gce`
+1. On the Provider Tab choose Google Cloud
+1. In the Settings Tab add the base64 encoded GCE key.json (you can get it again via `base64 ~/secrets/key.json -w0`)
 
 ### Create Cluster Template
 
@@ -85,3 +94,5 @@ Within the UI create a cluster via the button `Create Cluster from Template` and
 
 <!-- TODO -->
 ## create cluster via BYO
+
+Jump > [Home](../README.md) | Previous > [Setup KKP Seed](../04_setup_kkp_seed/README.md) | Next > [Upgrade User Cluster](../06_upgrade_user_cluster/README.md)

@@ -66,3 +66,5 @@ watch -n1 kubectl get nodes
 <!-- TODO links to nect task -->
 
 <!-- TODO tip kubermatic-installer print -->
+
+Jump > [Home](../README.md) | Previous > [Create User Cluster](../05_create_user_cluster/README.md) | Next > [Upgrade KKP](../07_upgrade_kkp/README.md)
