@@ -1,6 +1,10 @@
 make --dry-run --always-make --keep-going --print-directory
-make: Entering directory '/home/hubert/git/trainings/kkp_fundamentals'
-make: Leaving directory '/home/hubert/git/trainings/kkp_fundamentals'
+make: Entering directory '/home/hubert/git/trainings/kkp_fundamentals_v2'
+cd ~/kubeone; kubeone reset --manifest kubeone.yaml -t tf.json -y
+cd ~/kubeone; terraform destroy -auto-approve
+sudo rm -rf ~/*
+# TODO issue with networks terraform destroy
+# │ Error: Error waiting for Deleting Network: The network resource 'projects/student-00-kkp-admin-training/global/networks/master' is already being used by 'projects/student-00-kkp-admin-training/global/routes/master-21959b73-0fd5-455a-8826-9f49ce4cb7da'
+# TODO delete the serviceaccount
+make: Leaving directory '/home/hubert/git/trainings/kkp_fundamentals_v2'
  
-make: *** No targets specified and no makefile found.  Stop.
-

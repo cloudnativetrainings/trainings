@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Fri Jul  8 07:15:16 2022
+# Make data base, printed on Fri Jul  8 14:06:59 2022
 
 # Variables
 
@@ -21,17 +21,19 @@ GDK_BACKEND = x11
 # environment
 LC_ALL = C
 # environment
+NO_AT_BRIDGE = 1
+# environment
 GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
 SSH_AGENT_LAUNCHER = gnome-keyring
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-1d6f73cf-60c3-4499-bafb-20b126db567d.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-f951e250-5273-421c-8990-c25e2bc12201.sock
 # environment
 LC_NAME = de_AT.UTF-8
 # environment
 LC_NUMERIC = de_AT.UTF-8
 # environment
-VSCODE_CWD = /home/hubert
+VSCODE_CWD = /home/hubert/git/trainings/kkp_fundamentals_v2
 # environment
 WINDOWPATH = 2
 # environment
@@ -41,6 +43,8 @@ MAKE_COMMAND := make
 # environment
 QT_ACCESSIBILITY = 1
 # environment
+VSCODE_GIT_ASKPASS_EXTRA_ARGS = --ms-enable-electron-run-as-node
+# environment
 GOPATH = /home/hubert/go/code
 # automatic
 @D = $(patsubst %/,%,$(dir $@))
@@ -49,7 +53,7 @@ VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # default
 .VARIABLES := 
 # environment
-PWD = /home/hubert/git/trainings/kkp_fundamentals_v2
+PWD = /home/hubert/git/trainings
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # environment
@@ -57,7 +61,7 @@ LSCOLORS = Gxfxcxdxbxegedabagacad
 # environment
 XDG_DATA_DIRS = /usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop
 # environment
-OLDPWD = /home/hubert
+OLDPWD = /home/hubert/git/trainings/kkp_fundamentals_v2
 # automatic
 ^D = $(patsubst %/,%,$(dir $^))
 # environment
@@ -79,7 +83,7 @@ MAKEFLAGS = pqrR
 # environment
 DBUS_STARTER_ADDRESS = unix:path=/run/user/1000/bus,guid=2c8f84e9052845171274ae2562c505e4
 # makefile
-CURDIR := /home/hubert/git/trainings/kkp_fundamentals_v2
+CURDIR := /home/hubert/git/trainings
 # environment
 VSCODE_PIPE_LOGGING = true
 # environment
@@ -99,9 +103,11 @@ XDG_CONFIG_DIRS = /etc/xdg/xdg-ubuntu:/etc/xdg
 # environment
 P9K_SSH = 0
 # environment
+GIT_ASKPASS = /usr/share/code/resources/app/extensions/git/dist/askpass.sh
+# environment
 XDG_SESSION_DESKTOP = ubuntu
-# makefile (from 'makefile', line 1)
-MAKEFILE_LIST := makefile
+# makefile
+MAKEFILE_LIST := 
 # automatic
 @F = $(notdir $@)
 # environment
@@ -139,21 +145,27 @@ MAKECMDGOALS := all
 # environment
 XMODIFIERS = @im=ibus
 # environment
-SHLVL = 1
+SHLVL = 2
 # environment
 MAKELEVEL := 0
 # default
 MAKE = $(MAKE_COMMAND)
 # environment
-PATH = /usr/lib/jvm/java-11-openjdk-amd64:/home/hubert/go/install/go/bin:/home/hubert/go/code/bin:/home/hubert/.krew/bin:/home/hubert/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/hubert/.dotnet/tools:/home/hubert/.oh-my-zsh/custom/plugins/kubetail
+PATH = /home/hubert/go/install/go/bin:/usr/lib/jvm/java-11-openjdk-amd64:/home/hubert/go/code/bin:/home/hubert/.krew/bin:/usr/lib/jvm/java-11-openjdk-amd64:/home/hubert/go/code/bin:/home/hubert/.krew/bin:/home/hubert/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/hubert/.dotnet/tools:/home/hubert/.oh-my-zsh/custom/plugins/kubetail:/home/hubert/.oh-my-zsh/custom/plugins/kubetail
 # default
 MAKEFILES := 
+# environment
+VSCODE_GIT_IPC_HANDLE = /run/user/1000/vscode-git-ad715b599f.sock
+# environment
+VSCODE_GIT_ASKPASS_NODE = /usr/share/code/code
 # environment
 LC_MONETARY = de_AT.UTF-8
 # automatic
 ^F = $(notdir $^)
 # environment
 LC_TIME = de_AT.UTF-8
+# environment
+VSCODE_GIT_ASKPASS_MAIN = /usr/share/code/resources/app/extensions/git/dist/askpass-main.js
 # environment
 GOROOT = /home/hubert/go/install/go
 # environment
@@ -162,6 +174,8 @@ INVOCATION_ID = d586b8c99dce463797b758b3e2ad1cf6
 VSCODE_LOG_NATIVE = false
 # environment
 USERNAME = hubert
+# environment
+TERM_PROGRAM = vscode
 # environment
 LC_TELEPHONE = de_AT.UTF-8
 # automatic
@@ -177,13 +191,13 @@ LESS = -R
 # environment
 DESKTOP_SESSION = ubuntu
 # environment
-ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
+ORIGINAL_XDG_CURRENT_DESKTOP = Unity
 # 'override' directive
 GNUMAKEFLAGS := 
 # environment
 LOGNAME = hubert
 # makefile
-.DEFAULT_GOAL := destroy
+.DEFAULT_GOAL := 
 # environment
 SYSTEMD_EXEC_PID = 1917
 # environment
@@ -215,6 +229,8 @@ COLORTERM = truecolor
 # environment
 JOURNAL_STREAM = 8:37388
 # environment
+GOMODCACHE = /home/hubert/go/code/pkg/mod
+# environment
 XDG_SESSION_CLASS = user
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
@@ -232,6 +248,8 @@ VSCODE_IPC_HOOK = /run/user/1000/vscode-56a8d6b8-1.66.2-main.sock
 TERM = xterm-256color
 # environment
 IM_CONFIG_PHASE = 1
+# environment
+GOPROXY = https://proxy.golang.org,direct
 # default
 .RECIPEPREFIX := 
 # automatic
@@ -251,11 +269,13 @@ VTE_VERSION = 6800
 # environment
 XDG_MENU_PREFIX = gnome-
 # environment
+TERM_PROGRAM_VERSION = 1.66.2
+# environment
 GDMSESSION = ubuntu
 # environment
 LC_IDENTIFICATION = de_AT.UTF-8
 # variable set hash-table stats:
-# Load=121/1024=12%, Rehash=0, Collisions=7/151=5%
+# Load=131/1024=13%, Rehash=0, Collisions=8/158=5%
 
 # Pattern-specific Variable Values
 
@@ -263,15 +283,23 @@ LC_IDENTIFICATION = de_AT.UTF-8
 
 # Directories
 
-# . (device 66306, inode 15358751): 34 files, no impossibilities.
+# . (device 66306, inode 3804365): 21 files, no impossibilities.
 
-# 34 files, no impossibilities in 1 directories.
+ 
+# 21 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
 # No implicit rules.
 
 # Files
+
+# Not a target:
+Makefile:
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
 
 # Not a target:
 .DEFAULT:
@@ -286,46 +314,34 @@ all:
 #  File does not exist.
 #  File has not been updated.
 
-destroy:
-#  Phony target (prerequisite of .PHONY).
-#  Implicit rule search has not been done.
-#  File does not exist.
-#  File has not been updated.
-#  recipe to execute (from 'makefile', line 3):
-	cd ~/kubeone; kubeone reset --manifest kubeone.yaml -t tf.json -y
-	cd ~/kubeone; terraform destroy -auto-approve
-	sudo rm -rf ~/*
-	# TODO issue with networks terraform destroy
-	# │ Error: Error waiting for Deleting Network: The network resource 'projects/student-00-kkp-admin-training/global/networks/master' is already being used by 'projects/student-00-kkp-admin-training/global/routes/master-21959b73-0fd5-455a-8826-9f49ce4cb7da'
- 
-	# TODO delete the serviceaccount
-
 # Not a target:
 makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-04 16:54:32.468113209
+#  File does not exist.
 #  File has been updated.
-#  Successfully updated.
+#  Failed to be updated.
 
-.PHONY: destroy
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+# Not a target:
+GNUmakefile:
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
 
 # files hash-table stats:
-# Load=6/1024=1%, Rehash=0, Collisions=0/18=0%
+# Load=6/1024=1%, Rehash=0, Collisions=0/15=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 41 / storage = 486 B / avg = 11 B
-# current buf: size = 8162 B / used = 486 B / count = 41 / avg = 11 B
+# strcache buffers: 1 (0) / strings = 29 / storage = 347 B / avg = 11 B
+# current buf: size = 8162 B / used = 347 B / count = 29 / avg = 11 B
 
-# strcache performance: lookups = 48 / hit rate = 14%
+# strcache performance: lookups = 32 / hit rate = 9%
 # hash-table stats:
-# Load=41/8192=1%, Rehash=0, Collisions=0/48=0%
-# Finished Make data base on Fri Jul  8 07:15:16 2022
+# Load=29/8192=0%, Rehash=0, Collisions=0/32=0%
+# Finished Make data base on Fri Jul  8 14:06:59 2022
 
  

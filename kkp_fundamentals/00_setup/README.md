@@ -22,11 +22,10 @@ Allow Cookies:
 
 ## Clone Git Repo
 
-<!-- TODO remove v2 -->
 ```bash
 mkdir -p ~/.tmp
 git clone https://github.com/kubermatic-labs/trainings.git ~/.tmp/trainings
-cp -r ~/.tmp/trainings/kkp_fundamentals_v2/* .
+cp -r ~/.tmp/trainings/kkp_fundamentals/* .
 ```
 
 ## Set Environment Variables
