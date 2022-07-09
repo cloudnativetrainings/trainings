@@ -4,7 +4,7 @@
 
 ### Create OAuth Consent Screen
 
-Visit https://console.cloud.google.com/apis/credentials/consent and create an OAuth Consent Screen. In the Tab `OAuth Consent Screen` fill in 
+Visit https://console.cloud.google.com/apis/credentials/consent and create an OAuth Consent Screen. In the Tab `OAuth Consent Screen` choose `External` and fill in 
 * `App name`
 * `User support email`
 * Add the `Authorized Domain` with the domain `loodse.training`
@@ -48,5 +48,7 @@ kubectl get user
 # Change the field `spec.admin` to true
 kubectl edit user XXXXX
 ```
+
+Now you have admin permissions also for this user.
 
 Jump > [Home](../README.md) | Previous > [Addons](../08_addons/README.md) | Next > [Setup Master/Seed MLA](../10_master_seed_clusters_mla/README.md)

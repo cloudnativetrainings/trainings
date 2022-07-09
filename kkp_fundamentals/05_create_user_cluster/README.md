@@ -47,13 +47,13 @@ kubectl get cluster XXXXX -o yaml
 
 Download the kubeconfig via the following button:
 
-![](../pics/get_kubeconfig.png)
+![](../img/get_kubeconfig.png)
 
 Drag&Drop the downloaded kubeconfig into the Google Cloud Shell.
 
 Create a new Terminal:
 
-![](../pics/choose_project.png)
+![](../img/choose_project.png)
 
 Connect to the User Cluster
 
@@ -69,7 +69,7 @@ kubectl get nodes
 
 Open the Admin Panel like this:
 
-![](../pics/admin_panel.png)
+![](../img/admin_panel.png)
 
 Choose Provider Presets
 

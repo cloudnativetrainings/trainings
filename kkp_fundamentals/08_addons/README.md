@@ -4,13 +4,13 @@
 
 Click on the tab `Addons` within a cluster:
 
-![](../pics/addons.png)
+![](../img/addons.png)
 
 Click the `Install Addon` button and add the Addon `cluster-autoscaler`. Choose the option `Continuously reconcile addon`.
 
 Click on the tab `Open Dashboard`:
 
-![](../pics/dashboard.png)
+![](../img/dashboard.png)
 
 Choose `All Namespaces` in the Namespace Dropdown and select Pods in the Side Panel.
 
@@ -71,6 +71,6 @@ cat logo_32x32.png | base64 -w0
 kubectl apply -f ~/kkp/my-addon.yaml
 ```
 
-Finally you can add your Addon in the UI. Apply the Addon and verify in the Kubernetes Dashboatd that your Pod is running.
+Finally you can add your Addon in the UI. Apply the Addon and verify in the Kubernetes Dashboatd if your Pod is running.
 
 Jump > [Home](../README.md) | Previous > [Upgrade KKP](../07_upgrade_kkp/README.md) | Next > [OAuth](../09_oauth/README.md)

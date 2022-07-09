@@ -2,7 +2,7 @@
 
 ## Configure Monitoring Stack
 
-Add the following to the file `values.yaml` on root level:
+Add the following to the file `values.yaml` on root level. Take care about the Domain.
 
 ```yaml
 prometheus:

@@ -6,19 +6,19 @@
 
 If you are in Incognito Mode you may get this message:
 
-![](../pics/cookies_01.png)
+![](../img/cookies_01.png)
 
 Open this dialogue:
 
-![](../pics/cookies_02.png)
+![](../img/cookies_02.png)
 
 Allow Cookies:
 
-![](../pics/cookies_03.png)
+![](../img/cookies_03.png)
 
 ### Select Home Directory
 
-![](../pics/open_home_workspace.png)
+![](../img/open_home_workspace.png)
 
 ## Clone Git Repo
 
@@ -42,7 +42,7 @@ echo 'export REPO_URL=gcr.io/$PROJECT_ID' >> ~/.bashrc
 
 ### Open a new tab
 
-![](../pics/choose_project.png)
+![](../img/choose_project.png)
 
 ### Verify Environment Variables are set
 

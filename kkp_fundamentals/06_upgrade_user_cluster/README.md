@@ -4,7 +4,7 @@
 
 Check on an existing cluster the upgrade possibilities
 
-![](../pics/upgrade_user_clusters.png)
+![](../img/upgrade_user_clusters.png)
 
 ## Manage the available Kubernetes versions
 
