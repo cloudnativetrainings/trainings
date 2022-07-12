@@ -82,6 +82,8 @@ Create a Preset
 
 See the steps of the section `Create Cluster within UI` on how to create a ClusterTemplate. Make sure to make use of the Provider Preset of the previous step.
 
+<!-- TODO add kubectl commands for getting ProviderPreset and ClusterTemplate -->
+
 ### Create Cluster using the Provider Preset and the Cluster Template
 
 Within the UI create a cluster via the button `Create Cluster from Template` and make use of the template created in the previous step.

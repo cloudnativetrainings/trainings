@@ -14,31 +14,7 @@ kubectl apply -f ~/kkp/seed-kubeconfig-secret.yaml
 
 ## Configure the Seed
 
-Copy the following content into `~/kkp/seed.yaml`
-
-seed config
-```yaml
-apiVersion: kubermatic.k8c.io/v1
-kind: Seed
-metadata:
-  name: kubermatic
-  namespace: kubermatic
-spec:
-  country: DE
-  location: Frankfurt
-  datacenters:
-    gcp-frankfurt:
-      country: DE
-      location: Frankfurt
-      spec:
-        gcp:
-          region: "europe-west3"
-          regional: false
-          zoneSuffixes: [a, b, c]
-  kubeconfig:
-    name: seed-kubeconfig
-    namespace: kubermatic
-```
+Take a look into `~/kkp/seed.yaml`
 
 ## Apply the Seed
 
