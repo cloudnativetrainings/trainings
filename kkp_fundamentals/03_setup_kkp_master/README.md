@@ -62,6 +62,11 @@ kubectl apply -f ~/kkp/storageclass-fast.yaml
 kubectl apply -f ~/kkp/storageclass-backup.yaml
 ```
 
+Verify the storage class
+```bash
+kubectl get sc
+```
+
 ## Install KKP
 
 ```bash
