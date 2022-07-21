@@ -31,7 +31,7 @@ cp -r ~/.tmp/trainings/kkp_fundamentals/* .
 ## Set Environment Variables
 
 ```bash
-echo 'export PROJECT_ID=$(gcloud config get project)' >> ~/.bashrc
+echo 'export PROJECT_ID=$(gcloud projects list --format json | jq .[].name | tr -d \")' >> ~/.bashrc
 echo 'export DNS_ZONE=$(gcloud dns managed-zones list --format json | jq '.[].name' | tr -d \")' >> ~/.bashrc
 echo 'export MAIL=$PROJECT_ID@loodse.training' >> ~/.bashrc
 echo 'export SA_NAME=kkp-admin-training' >> ~/.bashrc
