@@ -1,5 +1,9 @@
 # Addons
 
+```bash
+cd ~/08_addons
+```
+
 ## Make use of an existing Addon
 
 Click on the tab `Addons` within a cluster:
@@ -36,7 +40,7 @@ cd ..
 gcloud container images list --repository=$REPO_URL
 ```
 
-### Adapte the Kubermatic Configuration
+### Adapt the Kubermatic Configuration
 
 You have to add the following block in the section `spec` in the file `kubermatic.yaml`. Also ensure that you change the PROJECT_ID.
 

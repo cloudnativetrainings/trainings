@@ -56,6 +56,10 @@ echo $DOMAIN
 echo $REPO_URL
 ```
 
+```bash
+cd ~/00_setup
+```
+
 ## Set GCE Credentials
 
 ```bash
