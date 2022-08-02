@@ -1,0 +1,10 @@
+apiVersion: audit.k8s.io/v1
+kind: Policy
+omitStages: ["RequestReceived"]
+rules:
+  - namespaces: ["default"]
+    verbs: ["get", "list", "watch"]
+    resources:
+      - groups: ""
+        resources: ["secrets"]
+    level: Request

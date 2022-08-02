@@ -1,0 +1,124 @@
+#cloud-config
+write_files:
+
+  # containerd
+  - path: /etc/modules-load.d/containerd.conf
+    content: |
+      overlay
+      br_netfilter
+  - path: /etc/sysctl.d/99-kubernetes-cri.conf
+    content: |
+      net.bridge.bridge-nf-call-iptables  = 1
+      net.ipv4.ip_forward                 = 1
+      net.bridge.bridge-nf-call-ip6tables = 1
+
+  # crictl
+  - path: /etc/crictl.yaml
+    content: |
+      runtime-endpoint: unix:///var/run/containerd/containerd.sock
+      image-endpoint: unix:///var/run/containerd/containerd.sock
+      timeout: 10
+      debug: false
+
+  # kubernetes
+  - path: /etc/modules-load.d/k8s.conf
+    content: |
+      br_netfilter
+
+runcmd:
+  - echo "================================================= Update Machine"
+  - DEBIAN_FRONTEND=noninteractive apt-get update
+  - DEBIAN_FRONTEND=noninteractive apt-get upgrade -y
+
+  - echo "================================================= CloudInit Phase Install Containerd"
+  - DEBIAN_FRONTEND=noninteractive apt-get install -y containerd
+  - modprobe overlay
+  - modprobe br_netfilter
+  - sysctl --system
+  - mkdir -p /etc/containerd
+  - containerd config default | tee /etc/containerd/config.toml
+  - sed -i 's/SystemdCgroup = false/SystemdCgroup = true/g' /etc/containerd/config.toml
+  - systemctl restart containerd
+  - apt-mark hold containerd
+  # TODO set crictl on hold?
+
+  - echo "================================================= CloudInit Phase Install Kubernetes"
+  - sysctl --system
+  - swapoff -a
+  - curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+  - echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+  - apt-get update
+  - apt-get install -y kubelet=1.23.6-00 kubeadm=1.23.6-00 kubectl=1.23.6-00
+  - apt-mark hold kubelet kubeadm kubectl
+  - kubeadm init --pod-network-cidr=192.168.0.0/16
+
+  - echo "================================================= CloudInit Phase Manage Kube Config"
+  - mkdir -p $HOME/.kube
+  - cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  - chown $(id -u):$(id -g) $HOME/.kube/config
+
+  - echo "================================================= CloudInit Phase Taint Node"
+  - kubectl taint nodes --all node-role.kubernetes.io/master-
+
+  - echo "================================================= CloudInit Phase Patch Kubernetes"
+  - kubectl apply -f https://docs.projectcalico.org/manifests/canal.yaml
+  - kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.5.2/components.yaml
+  - kubectl patch deployment metrics-server -n kube-system --type 'json' -p '[{"op":"add", "path":"/spec/template/spec/containers/0/args/-", "value":"--kubelet-insecure-tls"}]'
+
+  - echo "================================================= CloudInit Phase User Preps"
+  - mkdir -p /root/.kube
+  - cp -i /etc/kubernetes/admin.conf /root/.kube/config
+  - echo "source <(kubectl completion bash)" >>/root/.bashrc
+
+  - echo "================================================= CloudInit Phase Install kubectx"
+  - git clone https://github.com/ahmetb/kubectx /opt/kubectx
+  - ln -s /opt/kubectx/kubectx /usr/local/bin/kubectx
+  - ln -s /opt/kubectx/kubens /usr/local/bin/kubens
+
+  - echo "================================================= CloudInit Phase Install Helm"
+  - curl https://baltocdn.com/helm/signing.asc | apt-key add -
+  - apt-get install apt-transport-https --yes
+  - echo "deb https://baltocdn.com/helm/stable/debian/ all main" | tee /etc/apt/sources.list.d/helm-stable-debian.list
+  - apt update
+  - apt-get install helm --yes
+
+  - echo "================================================= CloudInit Phase Install ETCD Client"
+  - apt-get install etcd-client --yes
+
+  - echo "================================================= CloudInit Phase Install KubeSec"
+  - wget https://github.com/controlplaneio/kubesec/releases/download/v2.11.4/kubesec_linux_amd64.tar.gz
+  - tar -xvf kubesec_linux_amd64.tar.gz
+  - mv kubesec /usr/local/bin/
+
+  - echo "================================================= CloudInit Phase Install Trivy"
+  - apt-get install wget apt-transport-https gnupg lsb-release --yes
+  - wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | apt-key add -
+  - echo deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main | tee -a /etc/apt/sources.list.d/trivy.list
+  - apt-get update
+  - apt-get install trivy --yes
+
+  - echo "================================================= CloudInit Phase Install Kyverno"
+  - helm repo add kyverno https://kyverno.github.io/kyverno/
+  - helm repo update
+  - helm install --namespace kyverno --create-namespace kyverno kyverno/kyverno --version v2.3.3
+
+  - echo "================================================= CloudInit Phase Install AppArmor Utils"
+  - apt-get install apparmor-utils --yes
+
+  - echo "================================================= CloudInit Phase Install Falco"
+  - curl -s https://falco.org/repo/falcosecurity-3672BA8F.asc | apt-key add -
+  - echo "deb https://download.falco.org/packages/deb stable main" | tee -a /etc/apt/sources.list.d/falcosecurity.list
+  - apt-get update --yes
+  - apt-get --yes install linux-headers-$(uname -r)
+  - apt-get install -y falco
+  - systemctl enable falco
+  - systemctl start falco
+
+  - echo "================================================= CloudInit Phase Clone Git Repo"
+  - git clone https://github.com/stroebitzer/lines-of-defence.git /root/lines-of-defence
+
+  - echo "================================================= CloudInit Phase Running Shell Script"
+  - /root/lines-of-defence/tasks/setup.sh
+
+  - echo "================================================= CloudInit Finished Successfully"
+  - reboot

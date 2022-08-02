@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-suboptimal-pod
+  # annotations:
+  #   container.apparmor.security.beta.kubernetes.io/my-ubuntu: localhost/my-apparmor-profile
+spec:
+  terminationGracePeriodSeconds: 0
+  # automountServiceAccountToken: false
+  containers:
+    - name: my-ubuntu
+      image: ubuntu
+      args: ["sleep", "1d"]
+      securityContext:
+        readOnlyRootFilesystem: false
+        privileged: true
+        allowPrivilegeEscalation: true
+        runAsUser: 0 # 65534
+        runAsNonRoot: false
+      # resources:
+      #   requests:
+      #     cpu: "0.5"
+      #     memory: "256Mi"
+      #   limits:
+      #     cpu: "0.5"
+      #     memory: "256Mi"
+      volumeMounts:
+        - name: host
+          mountPath: /host/
+          # readOnly: true
+        # - name: secret-data
+        #   mountPath: /secret/
+        #   readOnly: true
+  volumes:
+    - name: host
+      hostPath:
+        path: /
+        type: Directory
+    # - name: secret-data
+    #   secret:
+    #     secretName: my-secret
