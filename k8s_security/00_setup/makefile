@@ -6,7 +6,7 @@
 
 .PHONY: create
 create:
-	gcloud compute instances create hubert-cloud-init-test \
+	gcloud compute instances create kubernetes-security \
   		--zone=europe-west3-a \
   		--machine-type=n2-standard-2 \
   		--image-family=ubuntu-2204-lts \

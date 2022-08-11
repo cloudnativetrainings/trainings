@@ -15,7 +15,7 @@ etcdctl get /registry/secrets/default/my-secret
 
 take a look at encryption config => PW and resource types
 
-cp /root/lines-of-defence/tasks/06_encryption_at_rest/encryption-config.yaml /root/apiserver
+cp /root/training/tasks/06_encryption_at_rest/encryption-config.yaml /root/apiserver
 
 ```
 - --encryption-provider-config=/apiserver/encryption-config.yaml
