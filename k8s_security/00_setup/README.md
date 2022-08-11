@@ -3,6 +3,8 @@ set project in terminal
 
 git clone https://github.com/kubermatic-labs/trainings
 
+cd trainings/k8s_security/00_setup/
+
 make create
 
 gcloud compute instances list

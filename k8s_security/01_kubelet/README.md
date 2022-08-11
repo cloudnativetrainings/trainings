@@ -1,6 +1,8 @@
 
 # get infos
 
+<!-- external ip does not work -->
+
 curl -k https://$IP:10250/metrics
 curl -k https://$IP:10250/logs/
 curl -k https://$IP:10250/logs/pods/    <!-- last slash is important -->\
