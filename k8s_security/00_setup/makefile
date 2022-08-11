@@ -11,7 +11,7 @@ create:
   		--machine-type=n2-standard-2 \
   		--image-family=ubuntu-2204-lts \
   		--image-project=ubuntu-os-cloud \
-  		--metadata-from-file user-data=cloud-config.yaml
+  		--metadata-from-file user-data=cloudinit.yaml
 
 # .PHONY: connect
 # connect: export LOD_IP=$$(hcloud server list -o noheader -o columns=ipv4)
