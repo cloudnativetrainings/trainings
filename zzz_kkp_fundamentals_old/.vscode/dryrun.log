@@ -1,6 +1,0 @@
-make --dry-run --always-make --keep-going --print-directory
-make: Entering directory '/home/hubert/git/trainings/kkp_fundamentals'
-make: Leaving directory '/home/hubert/git/trainings/kkp_fundamentals'
- 
-make: *** No targets specified and no makefile found.  Stop.
-

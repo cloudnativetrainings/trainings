@@ -1,8 +1,0 @@
-.terraform/
-terraform.tfstate.backup
-terraform.tfstate
-.terraform.*
-.keys
-.secrets
-*.tar.gz
-*-kubeconfig
