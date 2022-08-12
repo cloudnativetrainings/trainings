@@ -15,8 +15,9 @@ etcdctl get /registry/secrets/default/my-secret
 
 take a look at encryption config => PW and resource types
 
-cp /root/training/tasks/06_encryption_at_rest/encryption-config.yaml /root/apiserver
+cp /root/06_encryption_at_rest/encryption-config.yaml /root/apiserver
 
+vi /etc/kubernetes/manifests/kube-apiserver.yaml
 ```
 - --encryption-provider-config=/apiserver/encryption-config.yaml
 ```

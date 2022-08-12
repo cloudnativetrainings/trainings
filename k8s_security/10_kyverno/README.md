@@ -1,5 +1,6 @@
 # image registries
-kubectl apply -f image-registry-cluster-policy.yaml
+<!-- TODO change to avoiding latest -->
+kubectl apply -f 10_kyverno/image-registry-cluster-policy.yaml
 kubectl delete pod my-suboptimal-pod 
 kubectl apply -f pod.yaml
 => expect error

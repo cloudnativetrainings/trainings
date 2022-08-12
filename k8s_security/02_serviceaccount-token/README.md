@@ -9,6 +9,9 @@ kubectl exec -it my-suboptimal-pod -- cat /var/run/secrets/kubernetes.io/service
 TOKEN=$(kubectl exec -it my-suboptimal-pod -- cat /var/run/secrets/kubernetes.io/serviceaccount/token)
 kubectl exec -it my-suboptimal-pod -- cat /var/run/secrets/kubernetes.io/serviceaccount/ca.crt > ca.crt
 
+<!-- TODO APISERVER variable not set properly -->
+<!-- TODO INTERNAL_IP: 10.156.0.5 for ip server -->
+<!-- TODO hostname -i -->
 curl -s $API_SERVER/api/v1/namespaces/default/pods --header "Authorization: Bearer $TOKEN" --cacert ca.crt
 => should work
 

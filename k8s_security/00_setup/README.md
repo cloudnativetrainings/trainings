@@ -9,11 +9,11 @@ make create
 
 gcloud compute instances list
 
-gcloud compute ssh kubernetes-security
+gcloud compute ssh root@kubernetes-security
 
 sudo su
 
 kubectl get nodes
 
-cd /root/training
+cd /root
 

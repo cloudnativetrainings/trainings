@@ -47,17 +47,18 @@ systemctl enable falco
 systemctl start falco
 
 echo "================================================= Init Training Script - Apply Kubernetes Manifests"
-kubectl apply -f /root/training/pod.yaml
+kubectl apply -f /root/pod.yaml
 kubectl create clusterrolebinding my-suboptimal-clusterrolebinding --clusterrole=cluster-admin --serviceaccount default:default
 
 echo "================================================= Init Training Script - Add Exports To .bashrc"
-echo "export IP=$(curl https://ipinfo.io/ip)" >> /root/.bashrc
+echo "export IP=$(hostname -i)" >> /root/.bashrc
 echo "export API_SERVER=https://$IP:6443" >> /root/.bashrc
 echo "export ETCDCTL_API=3" >> /root/.bashrc
 echo "export ETCDCTL_ENDPOINTS=https://127.0.0.1:2379" >> /root/.bashrc
 echo "export ETCDCTL_CACERT=/etc/kubernetes/pki/etcd/ca.crt" >> /root/.bashrc
 echo "export ETCDCTL_KEY=/etc/kubernetes/pki/etcd/server.key" >> /root/.bashrc
 echo "export ETCDCTL_CERT=/etc/kubernetes/pki/etcd/server.crt" >> /root/.bashrc
+echo 'PS1="\[\033[0;32m\]\u@\H \[\033[0;34m\]\w >\e[0m "' >> /root/.bashrc
 
 echo "================================================= Init Training Script - Patching Kubelet"
 mkdir /root/tmp

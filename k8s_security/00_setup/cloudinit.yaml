@@ -71,10 +71,10 @@ runcmd:
 
   - echo "================================================= CloudInit Phase Clone Git Repo"
   - git clone https://github.com/kubermatic-labs/trainings.git /root/tmp/trainings
-  - cp -r /root/tmp/trainings/k8s_security/ /root/training
+  - cp -r /root/tmp/trainings/k8s_security/ /root
 
   - echo "================================================= CloudInit Phase Run Training Script"
-  - /root/training/00_setup/setup_training.sh
+  - /root/00_setup/setup_training.sh
 
   - echo "================================================= CloudInit Finished Successfully"
   - reboot

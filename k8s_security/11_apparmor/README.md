@@ -1,4 +1,5 @@
 
+<!-- TODO maybe find a better example -->
 => ensure that pod is allowed to write again (kyverno and pod.yaml)
 kubectl exec my-suboptimal-pod -- touch /tmp/some.file
 kubectl exec -it my-suboptimal-pod -- ls -alh /tmp
