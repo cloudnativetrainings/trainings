@@ -61,7 +61,7 @@ echo "export ETCDCTL_CERT=/etc/kubernetes/pki/etcd/server.crt" >> /root/.bashrc
 echo 'PS1="\[\033[0;32m\]\u@\H \[\033[0;34m\]\w >\e[0m "' >> /root/.bashrc
 
 echo "================================================= Init Training Script - Patching Kubelet"
-mkdir /root/tmp
+mkdir -p /root/tmp
 sed  's/    enabled: false/    enabled: true/g' /var/lib/kubelet/config.yaml > /root/tmp/kubelet-1.yaml
 sed  's/  mode: Webhook/  mode: AlwaysAllow/g' /root/tmp/kubelet-1.yaml > /root/tmp/kubelet-2.yaml
 mv /root/tmp/kubelet-2.yaml /var/lib/kubelet/config.yaml

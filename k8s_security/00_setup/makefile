@@ -13,5 +13,6 @@ create:
 
 .PHONY: destroy
 destroy:
+# TODO firewall and vm asks - make it quiet
 	gcloud compute instances delete kubernetes-security --zone europe-west3-a
 	gcloud compute firewall-rules delete you-are-welcome

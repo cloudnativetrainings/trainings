@@ -71,7 +71,7 @@ runcmd:
 
   - echo "================================================= CloudInit Phase Clone Git Repo"
   - git clone https://github.com/kubermatic-labs/trainings.git /root/tmp/trainings
-  - cp -r /root/tmp/trainings/k8s_security/ /root
+  - cp -r /root/tmp/trainings/k8s_security/* /root
 
   - echo "================================================= CloudInit Phase Run Training Script"
   - /root/00_setup/setup_training.sh
