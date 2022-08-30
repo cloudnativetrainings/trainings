@@ -31,7 +31,7 @@ kubectl get nodes
 
 # verify bash completion is in place
 kubectl get node <TAB>
-```
 
 # verify that a single pod is running in the default namespace
 kubectl get pods
+```

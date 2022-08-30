@@ -1,6 +1,6 @@
-# Making the kubelet safe
+# Kubelet
 
-## Attacking the kubelet
+## Attack
 
 Before fixing the kubelet we will try to get sensitive data via the kubelet.
 
@@ -29,7 +29,7 @@ curl -k https://$IP:10250/logs/pods/<ETCD_POD>/etcd/0.log
 curl -XPOST -k https://$IP:10250/run/default/my-suboptimal-pod/my-ubuntu -d "cmd=cat /host/etc/passwd"
 ```
 
-## Fixing the kubelet
+## Avoiding the Attack
 
 ### SSH into the VM
 ```bash
@@ -42,25 +42,32 @@ vi /var/lib/kubelet/config.yaml
 ```
 
 ### Fix Authentication
+
 ```yaml
+...
 authentication:
   anonymous:
     enabled: true # <= change to false
+...    
 ```
 
 ### Fix Authorization
+
 ```yaml
+...
 authorization:
   mode: AlwaysAllow # <= change to Webhook
+...  
 ```
 
 ### Restart the kubelet
+
 ```bash
 systemctl restart kubelet
 ```
 
 ### Verify kubelet is now save again
-# getting infos from the host
+
 ```bash
 # exit the VM - for being in the Google Cloud Shell again
 exit

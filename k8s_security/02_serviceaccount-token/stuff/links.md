@@ -1,1 +1,0 @@
-https://github.com/kubermatic-labs/trainings/blob/5050c42d7cc34650edd9451f854b6acf6921dbd5/k8s/fundamentals/kubernetes_advanced/10_rbac.md
