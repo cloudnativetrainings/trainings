@@ -52,7 +52,7 @@ kubectl create clusterrolebinding my-suboptimal-clusterrolebinding --clusterrole
 
 echo "================================================= Init Training Script - Add Exports To .bashrc"
 echo "export IP=$(hostname -i)" >> /root/.bashrc
-echo "export API_SERVER=https://$IP:6443" >> /root/.bashrc
+echo "export API_SERVER=https://$(hostname -i):6443" >> /root/.bashrc
 echo "export ETCDCTL_API=3" >> /root/.bashrc
 echo "export ETCDCTL_ENDPOINTS=https://127.0.0.1:2379" >> /root/.bashrc
 echo "export ETCDCTL_CACERT=/etc/kubernetes/pki/etcd/ca.crt" >> /root/.bashrc

@@ -33,9 +33,5 @@ kubectl get nodes
 kubectl get node <TAB>
 ```
 
-asdfdsafafdafd
-
-did not work due to reboot
-
 # verify that a single pod is running in the default namespace
 kubectl get pods
