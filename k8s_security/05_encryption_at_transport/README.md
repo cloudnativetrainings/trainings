@@ -1,15 +1,34 @@
+# Encryption at Transport
 
-# master communication
+## Verify Certs
+
+### Certs for Master Components
+
+```bash
 ls -alh /etc/kubernetes/pki/
+```
 
-# worker to master communication
+### Cert for Worker Nodes
+
+```bash
 cat /etc/kubernetes/kubelet.conf
+```
 
-# dev to apiserver communication
+### Cert for Developer
+
+```bash
 cat ~/.kube/config
+```
 
-# update certs
+## Update Certs
+
+```bash
+# verify expiration dates of certs
 kubeadm certs check-expiration
-kubeadm certs renew --help
-openssl x509 -in /etc/kubernetes/pki/apiserver.crt -text -noout
 
+# check renew possibilities of kubeadm
+kubeadm certs renew --help
+
+# verify expiration date via openssl
+openssl x509 -in /etc/kubernetes/pki/apiserver.crt -text -noout
+```

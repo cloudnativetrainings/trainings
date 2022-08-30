@@ -1,37 +1,77 @@
+# Encryption at Rest
 
-# inspect etcd
+## Communication with etcd
+
+```bash
+# verify etcdctl is installed
+etcdctl version
+
+# verify etcd configuration
+env | grep ETCD
+
+# note that most of those values are taken from the etcd configuration
 cat /etc/kubernetes/manifests/etcd.yaml 
-ls -alh /var/lib/etcd/
+```
 
-# check secret is in plain text
+## Get a secret from etcd
 
+```bash
+# create a secret (if it does not exist yet)
 kubectl create secret generic my-secret --from-literal password=password123
 
+# get the secret directly from etcd - note that it is in plain text
 etcdctl get /registry/secrets/default/my-secret
+```
 
-# implement encryption at rest
+## Engage Encryption at Rest
 
-# customize encryption-provider-config
+```bash
+# inspect the encryption config
+cat /root/06_encryption_at_rest/encryption-config.yaml
 
-take a look at encryption config => PW and resource types
-
+# copy the encryption config file into the folder `/root/apiserver`
 cp /root/06_encryption_at_rest/encryption-config.yaml /root/apiserver
+```
 
+### Engage the encryption config file in the apiserver
+
+```bash
 vi /etc/kubernetes/manifests/kube-apiserver.yaml
 ```
-- --encryption-provider-config=/apiserver/encryption-config.yaml
+
+```yaml
+...
+spec:
+  containers:
+  - command:
+    - kube-apiserver
+    - --encryption-provider-config=/apiserver/encryption-config.yaml
+...
 ```
-=> crictl ps
 
-# check encryption => expected fail
+Note that the kubelet is restarting the apiserver due to we changed the pod in the static pod manifests. This will take ~ 2 minutes. The Kubernetes Cluster is not reachable until the apiserver has been restarted. You can check the progress via `crictl ps`.
 
-etcdctl get /registry/secrets/default/my-secret
+## Verify Encryption
 
+### New Secrets
+
+```bash
+# create a new secret
 kubectl create secret generic my-secret-2 --from-literal password2=password456
 
+# verify the new secret is encrypted
 etcdctl get /registry/secrets/default/my-secret-2
+```
 
-# encrypt all existing secrets
+### Old Secrets
+
+```bash
+# create a new secret - note the secret is not encrypted
+etcdctl get /registry/secrets/default/my-secret
+
+# re-create all secrets in the cluster
 kubectl get secrets --all-namespaces -o json | kubectl replace -f -
 
+# verify the secret is now encrypted
 etcdctl get /registry/secrets/default/my-secret
+```
