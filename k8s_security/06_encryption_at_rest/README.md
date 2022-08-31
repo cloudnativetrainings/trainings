@@ -33,8 +33,9 @@ cat /root/06_encryption_at_rest/encryption-config.yaml
 cp /root/06_encryption_at_rest/encryption-config.yaml /root/apiserver
 ```
 
-### Engage the encryption config file in the apiserver
+### Engage the Encryption Config File in the API Server
 
+Edit the static manifest for the API Server
 ```bash
 vi /etc/kubernetes/manifests/kube-apiserver.yaml
 ```
@@ -45,7 +46,7 @@ spec:
   containers:
   - command:
     - kube-apiserver
-    - --encryption-provider-config=/apiserver/encryption-config.yaml
+    - --encryption-provider-config=/apiserver/encryption-config.yaml # <= add this line
 ...
 ```
 

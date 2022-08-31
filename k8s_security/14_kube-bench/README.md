@@ -1,5 +1,13 @@
-# kubebench
+# Benchmarking via kubebench
 
+
+```bash
+# inspect the kubebench job
+14_kube-bench/job.yaml
+
+# run kubebench
 kubectl apply -f 14_kube-bench/job.yaml
-kubectl logs -f <KUBE_BENCH_POD>
-kubectl logs -f <KUBE_BENCH_POD> | grep FAIL
+
+# inspect the logs of kubebench 
+kubectl logs <KUBE_BENCH_POD>
+```

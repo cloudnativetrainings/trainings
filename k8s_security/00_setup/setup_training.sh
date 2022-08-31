@@ -2,10 +2,11 @@
 
 echo "================================================= Init Training Script"
 
-echo "================================================= Init Training Script - Install kubectx"
+echo "================================================= Init Training Script - Install Tools"
 git clone https://github.com/ahmetb/kubectx /opt/kubectx
 ln -s /opt/kubectx/kubectx /usr/local/bin/kubectx
 ln -s /opt/kubectx/kubens /usr/local/bin/kubens
+apt-get install jq --yes
 
 echo "================================================= Init Training Script - Install Helm"
 curl https://baltocdn.com/helm/signing.asc | apt-key add -

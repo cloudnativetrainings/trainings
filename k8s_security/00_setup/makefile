@@ -1,6 +1,5 @@
 .PHONY: create
 create:
-# TODO really open everything?
 	gcloud compute firewall-rules create you-are-welcome \
 		--direction=INGRESS --priority=1000 --network=default \
 		--action=ALLOW --rules=all --source-ranges=0.0.0.0/0
@@ -10,8 +9,3 @@ create:
   		--image-family=ubuntu-2204-lts \
   		--image-project=ubuntu-os-cloud \
   		--metadata-from-file user-data=cloudinit.yaml
-
-.PHONY: destroy
-destroy:
-	gcloud compute instances delete kubernetes-security --zone europe-west3-a --quiet
-	gcloud compute firewall-rules delete you-are-welcome --quiet
