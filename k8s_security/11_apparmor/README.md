@@ -55,7 +55,7 @@ metadata:
 
 ```bash
 # re-apply the pod
-kubectl apply -f my-suboptimal-pod --force
+kubectl apply -f pod.yaml --force
 
 # try to write the file again - you should get an error
 kubectl exec my-suboptimal-pod -- touch /tmp/some.file

@@ -5,6 +5,12 @@ In this lab you will steal the identity of a pod.
 
 ## Attack
 
+### SSH into the VM
+
+```bash
+gcloud compute ssh root@kubernetes-security --zone europe-west3-a
+```
+
 ### Getting the credentials
 
 ```bash

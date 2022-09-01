@@ -5,6 +5,7 @@
 Before fixing the kubelet we will try to get sensitive data via the kubelet.
 
 ### Preparations
+
 ```bash
 # exit the VM - for being in the Google Cloud Shell again
 exit
@@ -32,11 +33,13 @@ curl -XPOST -k https://$IP:10250/run/default/my-suboptimal-pod/my-ubuntu -d "cmd
 ## Avoiding the Attack
 
 ### SSH into the VM
+
 ```bash
 gcloud compute ssh root@kubernetes-security --zone europe-west3-a
 ```
 
 ### vi the kubelet config
+
 ``` bash
 vi /var/lib/kubelet/config.yaml
 ```
@@ -60,13 +63,15 @@ authorization:
 ...  
 ```
 
-### Restart the kubelet
+### Restart the kubelet and check the status
 
 ```bash
 systemctl restart kubelet
+
+systemctl status kubelet
 ```
 
-### Verify kubelet is now save again
+### Verify kubelet is now safe again
 
 ```bash
 # exit the VM - for being in the Google Cloud Shell again
