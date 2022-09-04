@@ -14,6 +14,7 @@ cp 12_auditing/my-policy.yaml /root/apiserver/
 ### Enable Auditing in the API Server
 
 Edit the static manifest for the API Server
+
 ```bash
 vi /etc/kubernetes/manifests/kube-apiserver.yaml
 ```
