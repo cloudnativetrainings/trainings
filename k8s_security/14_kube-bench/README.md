@@ -3,7 +3,7 @@
 
 ```bash
 # inspect the kubebench job
-14_kube-bench/job.yaml
+cat 14_kube-bench/job.yaml
 
 # run kubebench
 kubectl apply -f 14_kube-bench/job.yaml
