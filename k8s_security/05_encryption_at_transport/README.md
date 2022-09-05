@@ -20,7 +20,7 @@ cat /etc/kubernetes/kubelet.conf
 cat ~/.kube/config
 ```
 
-## Update Certs
+## Check Certs
 
 ```bash
 # verify expiration dates of certs
