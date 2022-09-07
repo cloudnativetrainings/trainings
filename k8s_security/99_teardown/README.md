@@ -5,5 +5,5 @@
 exit
 
 # destroy environment
-make -C trainings/k8s_security/00_setup/ destroy
+make -C trainings/k8s_security/99_teardown/ destroy
 ```
