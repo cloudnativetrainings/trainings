@@ -1,4 +1,4 @@
-# Kubernetes Fundamentals (K8sF) Training
+# Kubernetes Fundamentals
 
 **Pre-requisites:**
 

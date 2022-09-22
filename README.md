@@ -4,41 +4,32 @@ In this repo, you will find Kubermatic training materials.
 
 ## Overview
 
-### [Container Fundamentals (ConF)](container_fundamentals/README.md)
-Learn the basics on how to work with Containers.
-
-### [Kubernetes Fundamentals (K8sF)](k8s_fundamentals/README.md)
-Learn the basics about Kubernetes.
-
-### [Kubernetes with Helm (K8sH)](k8s_helm/README.md)
-Learn the basics about Helm to manage your Kubernetes applications. 
-
-### Kubernetes Administration (K8sA)
-Learn how to manage Kubernetes clusters. Make use of kubeadm and kubeone to install and upgrade your clusters.
-
-### Kubermatic (K8sC)
-Learn how to manage Kubernetes clusters with kubermatic.
-
-### [KubeOne Fundamentals](k1_fundamentals/README.md)
+### [Advanced Operations of Kubernetes with KubeOne](advanced_operations_of_k8s_with_k1/README.md)
 Learn about KubeOne - the open source Kubernetes cluster lifecycle management tool for a single cluster on any infrastructure.
 
-### [Kubermatic Kubernetes Platform Fundamentals](kkp_fundamentals/README.md)
-Learn about KKP(CE) - centrally manage the global automation of thousands of Kubernetes clusters across multi-cloud, on-prem and edge with unparalleled density and resilience.
+### [Container Fundamentals](container_fundamentals/README.md)
+Learn the basics on how to work with Containers.
 
-### Kubernetes Application Development (K8sAD)
+### [Kubernetes Application Development](k8s_application_development/README.md)
 Learn how to implement cloud native applications to be run on Kubernetes.
 
-### Kubernetes Operator Development (K8sOD)
-Learn how to extend Kubernetes with your own operators.
+### [Kubernetes Fundamentals](k8s_fundamentals/README.md)
+Learn the basics about Kubernetes.
 
-### ServiceMesh (SeMe)
-Learn about ServiceMesh.
+### [Kubernetes Helm](k8s_helm/README.md)
+Learn the basics about Helm to manage your Kubernetes applications. 
 
-### Prometheus (Prom)
-Learn how to do monitoring in Kubernetes with Prometheus.
+### [Kubernetes Operations Fundamentals](k8s_operations_fundamentals/README.md)
+Learn how to setup a Kubernetes Cluster without any tool support.
 
-### Kubernetes Serverless (K8sSL)
-Learn how to run a serverless stack on top of Kubernetes.
+### [Kubernetes Security](k8s_security/README.md)
+Learn how to secure a Kubernetes Cluster.
+
+### [Kubermatic Administration](kkp_administration/README.md)
+Learn how to setup and configure KKP.
+
+### [Servicemesh](servicemesh/README.md)
+Learn the feature set of a ServiceMesh.
 
 ## Installation
 

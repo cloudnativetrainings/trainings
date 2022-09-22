@@ -1,4 +1,4 @@
-# Kubernetes with Helm (K8sH)
+# Kubernetes Helm
 
 **Pre-requisites:**
 
