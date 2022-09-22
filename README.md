@@ -10,6 +10,9 @@ Learn about KubeOne - the open source Kubernetes cluster lifecycle management to
 ### [Container Fundamentals](container_fundamentals/README.md)
 Learn the basics on how to work with Containers.
 
+### [KKP Administration](kkp_administration/README.md)
+Learn how to setup and configure KKP.
+
 ### [Kubernetes Application Development](kubernetes_application_development/README.md)
 Learn how to implement cloud native applications to be run on Kubernetes.
 
@@ -24,9 +27,6 @@ Learn how to setup a Kubernetes Cluster without any tool support.
 
 ### [Kubernetes Security](kubernetes_security/README.md)
 Learn how to secure a Kubernetes Cluster.
-
-### [Kubermatic Administration](kkp_administration/README.md)
-Learn how to setup and configure KKP.
 
 ### [Servicemesh](servicemesh/README.md)
 Learn the feature set of a ServiceMesh.
