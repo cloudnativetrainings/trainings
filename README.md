@@ -4,25 +4,25 @@ In this repo, you will find Kubermatic training materials.
 
 ## Overview
 
-### [Advanced Operations of Kubernetes with KubeOne](advanced_operations_of_k8s_with_k1/README.md)
+### [Advanced Operations of Kubernetes with KubeOne](advanced_operations_of_kubernetes_with_kubeone/README.md)
 Learn about KubeOne - the open source Kubernetes cluster lifecycle management tool for a single cluster on any infrastructure.
 
 ### [Container Fundamentals](container_fundamentals/README.md)
 Learn the basics on how to work with Containers.
 
-### [Kubernetes Application Development](k8s_application_development/README.md)
+### [Kubernetes Application Development](kubernetes_application_development/README.md)
 Learn how to implement cloud native applications to be run on Kubernetes.
 
-### [Kubernetes Fundamentals](k8s_fundamentals/README.md)
+### [Kubernetes Fundamentals](kubernetes_fundamentals/README.md)
 Learn the basics about Kubernetes.
 
-### [Kubernetes Helm](k8s_helm/README.md)
+### [Kubernetes Helm](kubernetes_helm/README.md)
 Learn the basics about Helm to manage your Kubernetes applications. 
 
-### [Kubernetes Operations Fundamentals](k8s_operations_fundamentals/README.md)
+### [Kubernetes Operations Fundamentals](kubernetes_operations_fundamentals/README.md)
 Learn how to setup a Kubernetes Cluster without any tool support.
 
-### [Kubernetes Security](k8s_security/README.md)
+### [Kubernetes Security](kubernetes_security/README.md)
 Learn how to secure a Kubernetes Cluster.
 
 ### [Kubermatic Administration](kkp_administration/README.md)
