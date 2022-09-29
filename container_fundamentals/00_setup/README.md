@@ -2,7 +2,7 @@
 
 ## Open Google Cloud Console Run the setup.sh bash script
 
-* You will be asked to enter the project name.
+You will be asked to enter the project name.
 
 ```bash
 00_setup/setup.sh
@@ -40,7 +40,7 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 Do this to avoid use of `sudo` for each docker command. Note to put this change into effect, if you have to re-open the cloud shell.
 
 ```bash
-sudo group
+sudo groupadd docker
 sudo usermod -aG docker $USER
 newgrp docker
 ```
@@ -49,7 +49,7 @@ newgrp docker
 
 ```bash
 sudo apt-get update
-sudo apt-get install podman
+sudo apt-get install -y podman
 ```
 
 [Jump to Home](../README.md)

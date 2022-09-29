@@ -55,7 +55,7 @@ then
     --maintenance-policy=MIGRATE \
     --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append \
     --tags=http-server,https-server \
-    --image=ubuntu-2004-focal-v20201028 --image-project=ubuntu-os-cloud \
+    --image=ubuntu-2204-jammy-v20220924 --image-project=ubuntu-os-cloud \
     --boot-disk-size=100GB --boot-disk-type=pd-standard --boot-disk-device-name=container-training \
     --no-shielded-secure-boot --shielded-vtpm --shielded-integrity-monitoring --reservation-affinity=any
 else
