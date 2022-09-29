@@ -19,7 +19,7 @@ gcloud compute ssh root@training-cf --zone europe-west3-a
 ```bash
 # Update apt package index and install necessary dependencies
 sudo apt-get update
-sudo apt-get install ca-certificates curl gnupg lsb-release
+sudo apt-get install -y ca-certificates curl gnupg lsb-release
 
 # Add Docker's official GPG key
 sudo mkdir -p /etc/apt/keyrings
@@ -32,7 +32,7 @@ echo \
 
 # Install docker
 sudo apt-get update
-sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 ```
 
 ## Add your user to the docker group

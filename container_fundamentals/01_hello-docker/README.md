@@ -57,14 +57,8 @@ docker rm <Container-ID>
 Just try the same commands with changing `docker` to `podman`.
 
 ```bash
-# Run the container
-podman run -it -p 80:80 ubuntu:22.04
-
-  # Run below commands inside the container
-  apt update && apt install -y apache2
-  apache2ctl -DFOREGROUND
-  <CTRL>-C
-  exit
+# Run the container and curl to example.org
+podman run -it docker.io/curlimages/curl http://example.org
 
 # List containers
 podman ps
