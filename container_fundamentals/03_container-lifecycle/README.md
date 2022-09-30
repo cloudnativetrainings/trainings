@@ -12,12 +12,6 @@ docker run -d --name my-nginx nginx:1.23.1
 
 ## Inspect state of the container
 
-Install the tool jq
-
-```bash
-sudo apt install -y jq
-```
-
 Inspect the State of container
 
 ```bash

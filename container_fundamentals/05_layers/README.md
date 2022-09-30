@@ -49,7 +49,7 @@ Layers are stacked on top of each other to form a base for a container's root fi
   You can also use these SHA ID to run the container.
 
   ```bash
-  docker run -it <VALUE-OF-SHA-ID>
+  docker run -it $(docker inspect debian:10.5 | jq -r .[].Id)
   ```
 
 * Cleanup:
@@ -69,13 +69,6 @@ Layers are stacked on top of each other to form a base for a container's root fi
 
 Dive <https://github.com/wagoodman/dive> is a CLI tool to inspect the layers of an image.
 
-* Install dive
-
-  ```bash
-  wget https://github.com/wagoodman/dive/releases/download/v0.9.2/dive_0.9.2_linux_amd64.deb
-  sudo apt install ./dive_0.9.2_linux_amd64.deb
-  ```
-
 * Inspect an image via dive
 
   ```bash
@@ -85,13 +78,6 @@ Dive <https://github.com/wagoodman/dive> is a CLI tool to inspect the layers of 
 ## Extract the container layers via skopeo
 
 Skopeo <https://github.com/containers/skopeo> is a command line utility that performs various operations on container images and image repositories.
-
-* Install skopeo
-
-  ```bash
-  sudo apt-get -y update
-  sudo apt-get -y install skopeo
-  ```
 
 * Extract container layers to your filesystem
 

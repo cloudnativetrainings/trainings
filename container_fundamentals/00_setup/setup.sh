@@ -95,3 +95,19 @@ then
 else
       echo "Firewall $response_firewall_ssh already exists, skip creation"
 fi
+
+# wait until the vm is up
+while true; do
+  gcloud compute ssh --quiet root@$VM_NAME --zone=$ZONE --project=$PROJECT_NAME --command="true" 2> /dev/null
+  if [ $? == 0 ]; then
+    echo "$VM_NAME is UP and RUNNING!.."
+    break
+  else
+    echo "$VM_NAME is not ready yet, will try again in 5 seconds..."
+    sleep 5
+  fi
+done
+
+# install additional tools
+gcloud compute ssh root@$VM_NAME --zone=$ZONE --project=$PROJECT_NAME \
+  --command="apt-get update && apt-get install -y skopeo jq && wget https://github.com/wagoodman/dive/releases/download/v0.10.0/dive_0.10.0_linux_amd64.deb && sudo apt install ./dive_0.10.0_linux_amd64.deb"
