@@ -69,30 +69,30 @@ Layers are stacked on top of each other to form a base for a container's root fi
 
 Dive <https://github.com/wagoodman/dive> is a CLI tool to inspect the layers of an image.
 
-* Inspect an image via dive
+Inspect an image via dive
 
-  ```bash
-  dive nginx:1.23.1
-  ```
+```bash
+dive nginx:1.23.1
+```
 
 ## Extract the container layers via skopeo
 
 Skopeo <https://github.com/containers/skopeo> is a command line utility that performs various operations on container images and image repositories.
 
-* Extract container layers to your filesystem
+Extract container layers to your filesystem
 
-  ```bash
-  # Copy/extract nginx image to /tmp directory
-  skopeo copy docker://nginx:1.23.1 dir://tmp/nginx-image-layers
+```bash
+# Copy/extract nginx image to /tmp directory
+skopeo copy docker://nginx:1.23.1 dir://tmp/nginx-image-layers
 
-  # Check what files are there
-  ls -l /tmp/nginx-image-layers
+# Check what files are there
+ls -l /tmp/nginx-image-layers
 
-  # Check the file type, it is a gzip compressed data
-  file /tmp/nginx-image-layers/31b3f1ad4ce1f369084d0f959813c51df0ca17d9877d5ee88c2db6ff88341430
+# Check the file type, it is a gzip compressed data
+file /tmp/nginx-image-layers/31b3f1ad4ce1f369084d0f959813c51df0ca17d9877d5ee88c2db6ff88341430
 
-  # Check the contents of the file via tar
-  tar ztvf /tmp/nginx-image-layers/31b3f1ad4ce1f369084d0f959813c51df0ca17d9877d5ee88c2db6ff88341430
-  ```
+# Check the contents of the file via tar
+tar ztvf /tmp/nginx-image-layers/31b3f1ad4ce1f369084d0f959813c51df0ca17d9877d5ee88c2db6ff88341430
+```
 
 [Jump to Home](../README.md) | [Previous Training](../04_interact/README.md) | [Next Training](../06_build-images-interactive/README.md)

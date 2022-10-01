@@ -15,7 +15,7 @@ In this training, you will learn how to manage images.
 * You can pull an image from Docker Hub using below pull command, which can be used for container creation afterwards. Adjust the image tag to download required version.
 
   ```bash
-    docker pull nginx:1.23.1
+  docker pull nginx:1.23.1
   ```
 
 ## List local docker images
