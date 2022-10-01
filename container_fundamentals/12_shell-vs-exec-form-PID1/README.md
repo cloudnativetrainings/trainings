@@ -30,6 +30,9 @@ docker run -it shell-vs-exec-form-pid1:1.0.0
 
 ```docker
 ENTRYPOINT ps aux
+
+# or run the command below:
+sed -i 's|\(ENTRYPOINT \).*|\1ps aux|' Dockerfile
 ```
 
 > This is shell form of `ENTRYPOINT`

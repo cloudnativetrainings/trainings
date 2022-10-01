@@ -30,6 +30,9 @@ docker run -it shell-vs-exec-form-vars:1.0.0
 
 ```docker
 ENTRYPOINT /bin/echo $FOO
+
+# or run the command below:
+sed -i 's|\(ENTRYPOINT \).*|\1/bin/echo $FOO|' Dockerfile
 ```
 
 > This is shell form of `ENTRYPOINT`

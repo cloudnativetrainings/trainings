@@ -50,7 +50,7 @@ You can costumize the log-driver in the file `/etc/docker/daemon.json` via these
   You can get the logs via
 
   ```bash
-  cat /var/log/syslog | grep <CONTAINER_ID>
+  cat /var/log/syslog | grep $(docker ps -aqf "name=redis-syslog")
   ```
 
 * Disable logging

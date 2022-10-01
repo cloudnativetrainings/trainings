@@ -4,25 +4,15 @@ In this training, we will install a minimal Prometheus stack via Docker Compose.
 
 >Navigate to the folder `18_docker-compose` from CLI, before you get started.
 
-## Install Docker Compose
+## Verify that docker compose is installed
 
-* Get Docker Compose
+>We have installed it during `00_setup` lab.
 
-  ```bash
-  sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-  ```
+Verify the installation
 
-* Make Docker Compose executable
-
-  ```bash
-  sudo chmod +x /usr/local/bin/docker-compose
-  ```
-
-* Verify the installation
-
-  ```bash
-  docker-compose version
-  ```
+```bash
+docker compose version
+```
 
 ## Inspect the file `prometheus.yaml`
 
@@ -38,10 +28,10 @@ cat docker-compose.yaml
 
 ## Start all containers
 
-* Using docker-compose, start all the containers as follows.
+* Using `docker compose`, start all the containers as follows.
 
   ```bash
-  docker-compose up -d
+  docker compose up -d
   ```
 
 * Verify everything is working
@@ -75,7 +65,7 @@ Import the Dashboard with id `193`. Set the Datasource to the previously generat
 * Remove all the containers
 
   ```bash
-  docker-compose down
+  docker compose down
   ```
 
 * Remove all the images

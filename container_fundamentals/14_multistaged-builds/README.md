@@ -26,14 +26,14 @@ Adapt the Dockerfile to the following
 
 ```docker
 # builder image
-FROM golang:1.15.2-alpine3.12 as builder
+FROM golang:1.19.1-alpine3.16 as builder
 RUN mkdir /build
 ADD main.go /build/
 WORKDIR /build
-RUN CGO_ENABLED=0 GOOS=linux go build -o main .
+RUN go mod init myapp && CGO_ENABLED=0 GOOS=linux go build -o main .
 
 # run image
-FROM alpine:3.12
+FROM alpine:3.16
 RUN mkdir /app
 WORKDIR /app
 COPY --from=builder /build/main .

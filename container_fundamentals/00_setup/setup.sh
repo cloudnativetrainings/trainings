@@ -111,3 +111,6 @@ done
 # install additional tools
 gcloud compute ssh root@$VM_NAME --zone=$ZONE --project=$PROJECT_NAME \
   --command="apt-get update && apt-get install -y skopeo jq && wget https://github.com/wagoodman/dive/releases/download/v0.10.0/dive_0.10.0_linux_amd64.deb && sudo apt install ./dive_0.10.0_linux_amd64.deb"
+
+gcloud compute ssh root@VM_NAME --zone=$ZONE --project=$PROJECT_NAME \
+  --command="git clone https://github.com/kubermatic-labs/trainings.git && echo 'cd ~/trainings/container_fundamentals' >> ~/.bashrc"
