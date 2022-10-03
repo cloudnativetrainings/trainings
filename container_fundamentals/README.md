@@ -2,14 +2,16 @@
 
 **Pre-requisites:**
 
-1. Navigate and login to [Google Cloud Shell](https://ssh.cloud.google.com ) via web browser. 
+1. Navigate and login to [Google Cloud Shell](https://ssh.cloud.google.com ) via web browser.
 
 2. Clone the Kubermatic trainings git repository:
+
     ```bash
     git clone https://github.com/kubermatic-labs/trainings.git
     ```
 
 3. Navigate to Container Fundamentals training folder to get started
+
     ```bash  
     cd trainings/container_fundamentals/
     ```
@@ -40,7 +42,6 @@
 18. [Docker Compose](18_docker-compose/README.md)
 19. [Privileged Container](19_privileged-container/README.md)
 
-
-[TearDown Setup](99_teardown/README.md) - Optional, for the training playground cleanup only. 
+[TearDown Setup](99_teardown/README.md) - Optional, for the training playground cleanup only.
 
 [Back to Main](../README.md)

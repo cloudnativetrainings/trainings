@@ -3,11 +3,13 @@
 In this training, you will start a Linux OS container and install a web server into it.
 
 ## Run an Ubuntu container
+
 ```bash
-docker run -it -p 80:80 ubuntu:20.10
+docker run -it -p 80:80 ubuntu:22.04
 ```
 
 ## Install a web server
+
 ```bash
 apt update && apt install -y apache2
 ```
@@ -18,9 +20,9 @@ apt update && apt install -y apache2
 apache2ctl -DFOREGROUND
 ```
 
-## Visit the welcome page in your browser 
+## Visit the welcome page in your browser
 
-To get the external IP you can visit https://console.cloud.google.com/networking/addresses/.
+To get the external IP you can visit <https://console.cloud.google.com/networking/addresses/>.
 
 ## Stop the process in the Docker container
 
@@ -48,6 +50,24 @@ docker ps -a
 
 ```bash
 docker rm <Container-ID>
+```
+
+## What about Podman?
+
+Just try the same commands with changing `docker` to `podman`.
+
+```bash
+# Run the container and curl to example.org
+podman run -it docker.io/curlimages/curl http://example.org
+
+# List containers
+podman ps
+
+# List all containers
+podman ps -a
+
+# Remove the container
+podman rm <Container-ID>
 ```
 
 [Jump to Home](../README.md) | [Next Training](../02_images/README.md)

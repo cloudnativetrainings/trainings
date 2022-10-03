@@ -15,7 +15,7 @@ services:
     ports:
       - "9090:9090"
   cadvisor:
-    image: google/cadvisor:v0.33.0
+    image: gcr.io/cadvisor/cadvisor:v0.45.0
     container_name: cadvisor
     volumes:
       - /:/rootfs:ro

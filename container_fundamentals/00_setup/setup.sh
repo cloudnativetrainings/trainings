@@ -55,7 +55,7 @@ then
     --maintenance-policy=MIGRATE \
     --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append \
     --tags=http-server,https-server \
-    --image=ubuntu-2004-focal-v20201028 --image-project=ubuntu-os-cloud \
+    --image=ubuntu-2204-jammy-v20220924 --image-project=ubuntu-os-cloud \
     --boot-disk-size=100GB --boot-disk-type=pd-standard --boot-disk-device-name=container-training \
     --no-shielded-secure-boot --shielded-vtpm --shielded-integrity-monitoring --reservation-affinity=any
 else
@@ -95,3 +95,22 @@ then
 else
       echo "Firewall $response_firewall_ssh already exists, skip creation"
 fi
+
+# wait until the vm is up
+while true; do
+  gcloud compute ssh --quiet root@$VM_NAME --zone=$ZONE --project=$PROJECT_NAME --command="true" 2> /dev/null
+  if [ $? == 0 ]; then
+    echo "$VM_NAME is UP and RUNNING!.."
+    break
+  else
+    echo "$VM_NAME is not ready yet, will try again in 5 seconds..."
+    sleep 5
+  fi
+done
+
+# install additional tools
+gcloud compute ssh root@$VM_NAME --zone=$ZONE --project=$PROJECT_NAME \
+  --command="apt-get update && apt-get install -y skopeo jq && wget https://github.com/wagoodman/dive/releases/download/v0.10.0/dive_0.10.0_linux_amd64.deb && sudo apt install ./dive_0.10.0_linux_amd64.deb"
+
+gcloud compute ssh root@VM_NAME --zone=$ZONE --project=$PROJECT_NAME \
+  --command="git clone https://github.com/kubermatic-labs/trainings.git && echo 'cd ~/trainings/container_fundamentals' >> ~/.bashrc"
