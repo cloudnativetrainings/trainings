@@ -7,7 +7,7 @@ cd ~/07_upgrade_kkp
 ## Install the new KKP version
 
 ```bash
-make KKP_VERSION_NEW=2.20.4 install_new_kkp
+make KKP_VERSION_NEW=2.21.2 install_new_kkp
 
 # Verify the upgraded version
 kubermatic-installer --charts-directory ~/kkp/charts version
