@@ -17,7 +17,7 @@ In the training, we will learn about Deployment.
   watch -n 1 kubectl get pods
   ```
 
-* Scale the number of replicas to 1 and take a look at the second terminal
+* Scale the number of replicas to 3 and take a look at the second terminal
   ```bash
   kubectl scale deployment my-deployment --replicas 3
   ```

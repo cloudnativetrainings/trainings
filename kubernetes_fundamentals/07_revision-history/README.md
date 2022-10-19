@@ -16,6 +16,15 @@ kubectl create -f deployment.yaml
 kubectl set image deployment my-deployment nginx=nginx:1.19.1 --record
 ```
 
+> You will receive a message that `--record` is deprecated. This is how it works now:
+
+```bash
+kubectl set image deployment my-deployment nginx=nginx:1.19.1
+
+# change-cause is however you want to document this change
+kubectl annotate deployment/my-deployment kubernetes.io/change-cause="Nginx version is updated to 1.19.1"
+```
+
 ## Take a look at the rollout history
 
 ```bash

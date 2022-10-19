@@ -9,13 +9,13 @@ In the training, we will learn about Services.
 * Inspect deployment.yaml definition file and create the pod
   ```bash
   cat deployment.yaml
-  kubectl create -f deployment.yaml
+  kubectl apply -f deployment.yaml
   ```
 
 * Inspect service-v1.yaml definition file and create the service
   ```bash
   cat service-v1.yaml
-  kubectl create -f service-v1.yaml
+  kubectl apply -f service-v1.yaml
   ```
 
 * Take a look at the created endpoints and IPs of the pods
