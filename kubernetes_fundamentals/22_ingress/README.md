@@ -24,18 +24,24 @@ kubectl get pods,svc
 
 ## Inspect and create the resources for the ingress controller
 > Before you start, create role binding 
-> - With user account -> using `gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member user:$GCP_USER_ACCOUNT --role='roles/container.admin'` where set the values of parameters `GCP_PROJECT_ID` to your project and `GCP_USER_ACCOUNT` to your user account.
-> - With serviceaccount -> using `gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member serviceAccount:$GCP_SERVICE_ACCOUNT_ID --role='roles/container.admin'` where set the values of parameters `GCP_PROJECT_ID` to your project and `GCP_SERVICE_ACCOUNT_ID` to your service account.
+
 ```bash
-kubectl create -f ingress-controller-rbac.yaml
-kubectl create -f ingress-controller-deployment.yaml
-kubectl create -f ingress-controller-service.yaml
+# Make sure you update your username
+kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin --user=student-xx.yyy@loodse.training
+```
+
+```bash
+# Install NGINX Ingress
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.4.0/deploy/static/provider/cloud/deploy.yaml
 ```
 
 ## Verify everything is running
 
 ```bash
 kubectl get deployments,pods,services
+
+# to view nginx-ingress related stuff
+kubectl get deployments,pods,services -n ingress-nginx
 ```
 
 ## Inspect and create the ingress
@@ -63,6 +69,7 @@ Get the external IP of your LoadBalancer and vist via web browser as follows
 
 ```bash
 kubectl delete -f .
+kubectl delete -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.4.0/deploy/static/provider/cloud/deploy.yaml
 ```
 
 [Jump to Home](../README.md) | [Previous Training](../21_scheduling-taints-and-tolerations/README.md) | [Next Training](../23_cordon/README.md)
