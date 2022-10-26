@@ -59,7 +59,7 @@ kubectl describe ing my-ingress
 ## Visit the applications "red" and "blue" in your browser via
 
 ```bash
-kubectl get svc traefik-ingress-service
+kubectl get svc ingress-nginx-controller -n ingress-nginx
 ```
 Get the external IP of your LoadBalancer and vist via web browser as follows
 * `http://<EXTERNAL-IP>/red`
