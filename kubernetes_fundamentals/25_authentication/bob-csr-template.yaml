@@ -1,12 +1,11 @@
-apiVersion: certificates.k8s.io/v1beta1
+apiVersion: certificates.k8s.io/v1
 kind: CertificateSigningRequest
 metadata:
   name: bob
 spec:
-  groups:
-    - system:authenticated
+  signerName: kubernetes.io/kube-apiserver-client
   request: $CSR
   usages:
     - digital signature
     - key encipherment
-    - server auth
+    - client auth
