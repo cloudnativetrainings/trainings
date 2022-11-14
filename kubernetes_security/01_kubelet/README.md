@@ -11,7 +11,7 @@ Before fixing the kubelet we will try to get sensitive data via the kubelet.
 exit
 
 # store the external IP of the worker node
-export IP=$(gcloud compute instances list --format json | jq .[].networkInterfaces[].accessConfigs[].natIP | tr -d \")
+export IP=$(gcloud compute instances list --filter="name=kubernetes-security" --format json | jq .[].networkInterfaces[].accessConfigs[].natIP | tr -d \")
 ```
 
 ### Getting sensitive data from the kubelet
