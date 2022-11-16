@@ -27,9 +27,21 @@ Curl backend from the frontend
 kubectl exec -it frontend -- curl --connect-timeout 5 backend
 ```
 
->Now backend is not reachable from frontend.
+>Now backend is not reachable from frontend due to Name Resolution timeout failure.
 
-## Create a specific rule to allow frontend access to backend again
+## Allow for DNS traffic
+
+```bash
+kubectl create -f /root/03_network_policies/networkpolicy-allow-dns.yaml
+```
+
+Curl backend from the frontend
+```bash
+kubectl exec -it frontend -- curl --connect-timeout 5 backend
+```
+>Backend is not reachable due to Connection Timeout
+
+## Create a specific rules to allow frontend access to backend again
 
 ```bash
 kubectl create -f /root/03_network_policies/networkpolicy-allow-be-ingress.yaml
@@ -49,16 +61,7 @@ Curl backend from the frontend
 ```bash
 kubectl exec -it frontend -- curl backend
 ```
->Now, firewall between frontend and backend is open, but DNS does not work!
-
-```bash
-kubectl create -f /root/03_network_policies/networkpolicy-allow-dns.yaml
-```
-
-Curl backend from the frontend
-```bash
-kubectl exec -it frontend -- curl backend
-> Finally, everything works!
+>Finally, firewall between frontend and backend is open, and it works!
 
 ## Cleanup
 
