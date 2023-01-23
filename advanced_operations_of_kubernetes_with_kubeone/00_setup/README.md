@@ -18,7 +18,7 @@ If you have docker, git and a common IDE installed locally, you can quickly star
 
 ```bash
 git clone https://github.com/kubermatic-labs/trainings.git
-docker run --name kubeone-tool-container -v $(pwd):/home/kubermatic/mnt -t -d quay.io/kubermatic-labs/kubeone-tooling:1.4.2
+docker run --name kubeone-tool-container -v $(pwd):/home/kubermatic/mnt -t -d quay.io/kubermatic-labs/kubeone-tooling:1.5.4
 ```
 Connect into the running container and ensures that you can reattach if you get kicked out of the container:
 
@@ -32,7 +32,7 @@ docker exec -it kubeone-tool-container bash
 # remove old container
 docker rm -f kubeone-tool-container
 
-docker run --rm --name kubeone-tool-container -v $(pwd):/home/kubermatic/mnt -it quay.io/kubermatic-labs/kubeone-tooling:1.4.2 bash
+docker run --rm --name kubeone-tool-container -v $(pwd):/home/kubermatic/mnt -it quay.io/kubermatic-labs/kubeone-tooling:1.5.4 bash
 ```
 
 ### (Alternative) Use Google Cloud Shell
@@ -47,7 +47,7 @@ After you entered the container, verify the setup:
 
 * Set the training directory path inside the container.
   ```bash
-  export TRAINING_DIR=`pwd`/mnt/trainings/k1_fundamentals
+  export TRAINING_DIR=`pwd`/mnt/trainings/advanced_operations_of_kubernetes_with_kubeone
   cd $TRAINING_DIR
   ```
 
@@ -56,22 +56,22 @@ After you entered the container, verify the setup:
   ls -la
   ```
 
-* Verify the kubeone version, a json with kubeone v1.4.2 should be shown
+* Verify the kubeone version, a json with kubeone v1.5.4 should be shown
   ```bash
   kubeone version
   ```
 
-* Verify terraform version, a recent version (>= 1.1.x) should be shown
+* Verify terraform version, a recent version (>= 1.3.x) should be shown
   ```bash
   terraform version
   ```
 
-* Verify teh Google Cloud SDK version, a recent gcloud SDK (>= 384.0.0)
+* Verify teh Google Cloud SDK version, a recent gcloud SDK (>= 412.0.0)
   ```bash
   gcloud version
   ```
 
-* Verify kubectl version, a recent kubectl version (>= v.1.22.0)
+* Verify kubectl version, a recent kubectl version (>= v.1.25.0)
   ```bash
   kubectl version --short
   ```

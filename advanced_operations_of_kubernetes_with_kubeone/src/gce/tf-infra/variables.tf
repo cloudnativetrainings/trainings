@@ -84,7 +84,7 @@ variable "control_plane_volume_size" {
 }
 
 variable "control_plane_image_family" {
-  default     = "ubuntu-1804-lts"
+  default     = "ubuntu-2204-lts"
   description = "Image family to use for provisioning instances"
 }
 
@@ -103,3 +103,8 @@ variable "cluster_network_cidr" {
   description = "Cluster network subnet cidr"
 }
 
+variable "preemptible" {
+  default     = true
+  type        = bool
+  description = "Worker GCE instance preemptible or not"
+}

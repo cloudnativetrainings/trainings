@@ -57,9 +57,9 @@ Create a service account `k1-service-account` for your Google Cloud resources, w
   { "type": "service_account", "project_id": "YOUR PROJECT", "private_key_id": "..." }
   ```
 
-* Jump back to k1_fundamentals dir
+* Jump back to training dir
   ```bash
-  cd -
+  cd $TRAINING_DIR
   ```
 
 Jump > [**Home**](../README.md) | Previous > [**Setup**](../00_setup/README.md) | Next > [**Cloud Infra Setup using Terraform**](../02_initial-cloud-infra-with-terraform/README.md)

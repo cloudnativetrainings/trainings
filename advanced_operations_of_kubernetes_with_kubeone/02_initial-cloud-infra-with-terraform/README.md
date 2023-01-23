@@ -74,6 +74,8 @@ SSH](https://github.com/kubermatic/kubeone/blob/master/docs/ssh.md) before you c
 
    Default is `${var.region}-a` which is fine for almost all the regions. If the zone information is not correct, the worker nodes will not be created. The *machinedeployment POD* will also generate an error that the specified zone does not exist in that region.
 
+3. By default, the worker nodes will be [preemptible](https://cloud.google.com/compute/docs/instances/preemptible) machines. Please do not change this setting unless you are instructed to.
+
 ## Execute terraform changes
 
 * You can see the changes to the Google Cloud infrastructure when you use the following commands:
@@ -128,7 +130,7 @@ SSH](https://github.com/kubermatic/kubeone/blob/master/docs/ssh.md) before you c
           "machineType" = "n1-standard-2"
           "multizone" = true
           "network" = "https://www.googleapis.com/compute/v1/projects/test-01-int-05/global/networks/k1"
-          "preemptible" = false
+          "preemptible" = true
           "regional" = false
           "subnetwork" = "https://www.googleapis.com/compute/v1/projects/test-01-int-05/regions/europe-west4/subnetworks/k1-subnet"
           "tags" = [
