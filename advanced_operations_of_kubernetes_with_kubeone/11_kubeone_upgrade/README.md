@@ -25,18 +25,18 @@ To start with the upgrade, please follow the below steps.
 
 # KubeOne Cluster Upgrade Process
 
-In this section, we are going to upgrade the KubeOne cluster from version `1.22.5` to latest `1.23.6`
+In this section, we are going to upgrade the KubeOne cluster from version `1.23.9` to latest `1.24.8`
 
 ## Update Cluster Config
 
-Update the `kubeone.yaml` file by changing the value of kubernetes to `1.23.6`:
+Update the `kubeone.yaml` file by changing the value of kubernetes to `1.24.8`:
 
 ```yaml
 apiVersion: kubeone.k8c.io/v1beta2
 kind: KubeOneCluster
 name: k1
 versions:
-  kubernetes: '1.23.6' <<< UPDATE
+  kubernetes: '1.24.8' <<< UPDATE
 cloudProvider:
 #....
 ```
@@ -86,8 +86,8 @@ kubectl version --short
 ```
 
 ```text
-Client Version: v1.23.6
-Server Version: v1.22.5
+Client Version: v1.26.0
+Server Version: v1.23.9
 ```
 
 If the `Client Version` < your target kubernetes version, please update your `kubectl` to the latest version:
@@ -129,7 +129,7 @@ terraform refresh
 kubeone apply -t . -m ../kubeone.yaml --upgrade-machine-deployments --verbose
 ```
 
-You can also check the full documentation for the upgrade process: [KubeOne Upgrade Process](https://docs.kubermatic.com/kubeone/master/tutorials/upgrading_clusters/)
+You can also check the full documentation for the upgrade process: [KubeOne Upgrade Process](https://docs.kubermatic.com/kubeone/v1.5/tutorials/upgrading-clusters/)
 
 #### Check/confirm status of the new upgrade version
 
@@ -140,8 +140,8 @@ kubectl version --short
 ```
 
 ```text
-Client Version: v1.23.6
-Server Version: v1.23.6
+Client Version: v1.26.0
+Server Version: v1.24.8
 ```
 
 ```bash
@@ -154,12 +154,12 @@ kubectl get nodes
 
 ```text
 NAME                                STATUS   ROLES    AGE     VERSION
-k1-control.1.test-00-kubermatic     Ready    master   24h     v1.23.6
-k1-control.2.test-00-kubermatic     Ready    master   24h     v1.23.6
-k1-control.3.test-00-kubermatic     Ready    master   24h     v1.23.6
-k1-pool-az-a-75dfcdb6cb-4ms69       Ready    <none>   5m54s   v1.23.6
-k1-pool-az-a-75dfcdb6cb-bfxk2       Ready    <none>   8m5s    v1.23.6
-k1-pool-az-a-75dfcdb6cb-pn2n5       Ready    <none>   3m53s   v1.23.6
+k1-control.1.test-00-kubermatic     Ready    master   24h     v1.24.8
+k1-control.2.test-00-kubermatic     Ready    master   24h     v1.24.8
+k1-control.3.test-00-kubermatic     Ready    master   24h     v1.24.8
+k1-pool-az-a-75dfcdb6cb-4ms69       Ready    <none>   5m54s   v1.24.8
+k1-pool-az-a-75dfcdb6cb-bfxk2       Ready    <none>   8m5s    v1.24.8
+k1-pool-az-a-75dfcdb6cb-pn2n5       Ready    <none>   3m53s   v1.24.8
 ```
 
 ### Option 2: Upgrade first master nodes and then the workers
@@ -172,7 +172,7 @@ terraform refresh
 kubeone apply -t . -m ../kubeone.yaml --verbose
 ```
 
-If you take this route, then you will have to upgrade the worker nodes manually by editing all the MachineDeployment objects after upgrading the master nodes. Therefore, you need change the **`spec.template.spec.providerSpec.versions.kubelet`** section to `1.23.6`
+If you take this route, then you will have to upgrade the worker nodes manually by editing all the MachineDeployment objects after upgrading the master nodes. Therefore, you need change the **`spec.template.spec.providerSpec.versions.kubelet`** section to `1.24.8`
 
 ```bash
 vim ../machines/md-zone-a.yaml
@@ -198,7 +198,7 @@ Modify the yaml:
             machineType: n1-standard-1
             multizone: true
             network: https://www.googleapis.com/compute/v1/projects/test-01-int-05/global/networks/k1
-            preemptible: false
+            preemptible: true
             regional: false
             subnetwork: https://www.googleapis.com/compute/v1/projects/test-01-int-05/regions/europe-west4/subnetworks/k1-subnet
             tags:
@@ -213,13 +213,13 @@ Modify the yaml:
           - |
             ssh-rsa ...
       versions:
-        kubelet: 1.22.5  << UPDATE to 1.23.6
+        kubelet: 1.23.9  << UPDATE to 1.24.8
 ```
 
 Or use `sed`:
 
 ```bash
-sed -i 's/1.22.5/1.23.6/g' ../machines/*.yaml
+sed -i 's/1.23.9/1.24.8/g' ../machines/*.yaml
 kubectl apply -f ../machines
 ```
 
@@ -234,36 +234,36 @@ kubectl get md,ms,ma,nodes -A
 
 ```text
 NAMESPACE     NAME                                            REPLICAS   AVAILABLE-REPLICAS   PROVIDER   OS       KUBELET   AGE
-kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-a   1          1                    gce        ubuntu   1.23.6    2d
-kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-b   1          1                    gce        ubuntu   1.23.6    38h
-kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-c   1          1                    gce        ubuntu   1.23.6    38h
+kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-a   1          1                    gce        ubuntu   1.24.8    2d
+kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-b   1          1                    gce        ubuntu   1.24.8    38h
+kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-c   1          1                    gce        ubuntu   1.24.8    38h
 
 NAMESPACE     NAME                                                REPLICAS   AVAILABLE-REPLICAS   PROVIDER   OS       KUBELET   AGE
-kube-system   machineset.cluster.k8s.io/k1-pool-az-a-584d589c8c   1                               gce        ubuntu   1.23.6    108s
-kube-system   machineset.cluster.k8s.io/k1-pool-az-a-7f976c98dd   0                               gce        ubuntu   1.22.5    2d
-kube-system   machineset.cluster.k8s.io/k1-pool-az-a-bd95f5c65    1          1                    gce        ubuntu   1.22.5    37h
-kube-system   machineset.cluster.k8s.io/k1-pool-az-b-6996d8f668   1          1                    gce        ubuntu   1.22.5    37h
-kube-system   machineset.cluster.k8s.io/k1-pool-az-b-6b7fcd6985   0                               gce        ubuntu   1.22.5    38h
-kube-system   machineset.cluster.k8s.io/k1-pool-az-b-7c455dc654   1                               gce        ubuntu   1.23.6    108s
-kube-system   machineset.cluster.k8s.io/k1-pool-az-c-66f96d6b66   0                               gce        ubuntu   1.22.5    38h
-kube-system   machineset.cluster.k8s.io/k1-pool-az-c-77478767d5   1                               gce        ubuntu   1.23.6    108s
-kube-system   machineset.cluster.k8s.io/k1-pool-az-c-7bdfbcd567   1          1                    gce        ubuntu   1.22.5    37h
+kube-system   machineset.cluster.k8s.io/k1-pool-az-a-584d589c8c   1                               gce        ubuntu   1.24.8    108s
+kube-system   machineset.cluster.k8s.io/k1-pool-az-a-7f976c98dd   0                               gce        ubuntu   1.23.9    2d
+kube-system   machineset.cluster.k8s.io/k1-pool-az-a-bd95f5c65    1          1                    gce        ubuntu   1.23.9    37h
+kube-system   machineset.cluster.k8s.io/k1-pool-az-b-6996d8f668   1          1                    gce        ubuntu   1.23.9    37h
+kube-system   machineset.cluster.k8s.io/k1-pool-az-b-6b7fcd6985   0                               gce        ubuntu   1.23.9    38h
+kube-system   machineset.cluster.k8s.io/k1-pool-az-b-7c455dc654   1                               gce        ubuntu   1.24.8    108s
+kube-system   machineset.cluster.k8s.io/k1-pool-az-c-66f96d6b66   0                               gce        ubuntu   1.23.9    38h
+kube-system   machineset.cluster.k8s.io/k1-pool-az-c-77478767d5   1                               gce        ubuntu   1.24.8    108s
+kube-system   machineset.cluster.k8s.io/k1-pool-az-c-7bdfbcd567   1          1                    gce        ubuntu   1.23.9    37h
 
 NAMESPACE     NAME                                                   PROVIDER   OS       ADDRESS                         KUBELET   AGE
-kube-system   machine.cluster.k8s.io/k1-pool-az-a-584d589c8c-7f9gb   gce        ubuntu   10.240.0.23                     1.23.6    108s
-kube-system   machine.cluster.k8s.io/k1-pool-az-a-bd95f5c65-lm4fj    gce        ubuntu   10.240.0.19                     1.22.5    6h50m
-kube-system   machine.cluster.k8s.io/k1-pool-az-b-6996d8f668-kx96z   gce        ubuntu   10.240.0.20                     1.22.5    6h50m
-kube-system   machine.cluster.k8s.io/k1-pool-az-b-7c455dc654-j2ggk   gce        ubuntu   k1-pool-az-b-7c455dc654-j2ggk   1.23.6    108s
-kube-system   machine.cluster.k8s.io/k1-pool-az-c-77478767d5-vffmd   gce        ubuntu   10.240.0.25                     1.23.6    108s
-kube-system   machine.cluster.k8s.io/k1-pool-az-c-7bdfbcd567-kdfn2   gce        ubuntu   10.240.0.22                     1.22.5    6h50m
+kube-system   machine.cluster.k8s.io/k1-pool-az-a-584d589c8c-7f9gb   gce        ubuntu   10.240.0.23                     1.24.8    108s
+kube-system   machine.cluster.k8s.io/k1-pool-az-a-bd95f5c65-lm4fj    gce        ubuntu   10.240.0.19                     1.23.9    6h50m
+kube-system   machine.cluster.k8s.io/k1-pool-az-b-6996d8f668-kx96z   gce        ubuntu   10.240.0.20                     1.23.9    6h50m
+kube-system   machine.cluster.k8s.io/k1-pool-az-b-7c455dc654-j2ggk   gce        ubuntu   k1-pool-az-b-7c455dc654-j2ggk   1.24.8    108s
+kube-system   machine.cluster.k8s.io/k1-pool-az-c-77478767d5-vffmd   gce        ubuntu   10.240.0.25                     1.24.8    108s
+kube-system   machine.cluster.k8s.io/k1-pool-az-c-7bdfbcd567-kdfn2   gce        ubuntu   10.240.0.22                     1.23.9    6h50m
 
 NAMESPACE   NAME                                 STATUS   ROLES                  AGE     VERSION
-            node/k1-control-plane-1              Ready    control-plane,master   2d      v1.23.6
-            node/k1-control-plane-2              Ready    control-plane,master   38h     v1.23.6
-            node/k1-control-plane-3              Ready    control-plane,master   38h     v1.23.6
-            node/k1-pool-az-a-bd95f5c65-lm4fj    Ready    <none>                 6h48m   v1.22.5
-            node/k1-pool-az-b-6996d8f668-kx96z   Ready    <none>                 6h47m   v1.22.5
-            node/k1-pool-az-c-7bdfbcd567-kdfn2   Ready    <none>                 6h48m   v1.23.6
+            node/k1-control-plane-1              Ready    control-plane,master   2d      v1.24.8
+            node/k1-control-plane-2              Ready    control-plane,master   38h     v1.24.8
+            node/k1-control-plane-3              Ready    control-plane,master   38h     v1.24.8
+            node/k1-pool-az-a-bd95f5c65-lm4fj    Ready    <none>                 6h48m   v1.23.9
+            node/k1-pool-az-b-6996d8f668-kx96z   Ready    <none>                 6h47m   v1.23.9
+            node/k1-pool-az-c-7bdfbcd567-kdfn2   Ready    <none>                 6h48m   v1.24.8
 ```
 
 After a few more minutes, the worker nodes also will be there in a new version. 

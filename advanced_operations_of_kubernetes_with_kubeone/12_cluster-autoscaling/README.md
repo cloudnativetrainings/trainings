@@ -14,7 +14,7 @@ kubeone apply -t ./tf-infra/
 
 ## Upscale
 
-Now deploy our test application with quite high CPU reservation of `1000m` => 1 core * 5 pods. This should lead to pending pods. If not, just scale up your application replica.
+Now deploy our test application with quite high CPU reservation of `250m` => 1/4 core * 5 pods. This should lead to pending pods. If not, just scale up your application replica.
 
 ```bash
 kubectl create ns app-ext

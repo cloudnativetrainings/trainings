@@ -42,10 +42,10 @@ In the next step, we will setup a real HA cluster over 3 availability zones to m
   Output:
   ```text
   NAME                           STATUS   ROLES    AGE     VERSION
-  k1-control-plane-1             Ready    master   32m     v1.22.5
-  k1-control-plane-2             Ready    master   4m12s   v1.22.5
-  k1-control-plane-3             Ready    master   3m10s   v1.22.5
-  k1-pool-az-a-ff4979f74-dnwzt   Ready    <none>   22m     v1.22.5
+  k1-control-plane-1             Ready    master   32m     v1.23.9
+  k1-control-plane-2             Ready    master   4m12s   v1.23.9
+  k1-control-plane-3             Ready    master   3m10s   v1.23.9
+  k1-pool-az-a-ff4979f74-dnwzt   Ready    <none>   22m     v1.23.9
   ```
   >Hint: Apply Changes of Cluster Properties by Using `kubeone apply`
 
@@ -105,9 +105,9 @@ In the next step, we will setup a real HA cluster over 3 availability zones to m
   INFO[23:48:20 CEST] Verifying that all nodes in the cluster are ready…
   INFO[23:48:20 CEST] Verifying that there is no upgrade in the progress…
   NODE                 VERSION   APISERVER   ETCD
-  k1-control-plane-1   v1.22.5   healthy     healthy
-  k1-control-plane-2   v1.22.5   healthy     healthy
-  k1-control-plane-3   v1.22.5   healthy     healthy
+  k1-control-plane-1   v1.23.9   healthy     healthy
+  k1-control-plane-2   v1.23.9   healthy     healthy
+  k1-control-plane-3   v1.23.9   healthy     healthy
   ```
 
 * By default, the machine-controller deploys only one worker node:
@@ -117,10 +117,10 @@ In the next step, we will setup a real HA cluster over 3 availability zones to m
   
   ```text
   NAME                            STATUS   ROLES    AGE    VERSION
-  k1-control-plane-1              Ready    master   16m    v1.22.5
-  k1-control-plane-2              Ready    master   15m    v1.22.5
-  k1-control-plane-3              Ready    master   13m    v1.22.5
-  k1-pool-az-a-ff4979f74-dnwzt    Ready    <none>   14m    v1.22.5
+  k1-control-plane-1              Ready    master   16m    v1.23.9
+  k1-control-plane-2              Ready    master   15m    v1.23.9
+  k1-control-plane-3              Ready    master   13m    v1.23.9
+  k1-pool-az-a-ff4979f74-dnwzt    Ready    <none>   14m    v1.23.9
   ```
 
 * The number of worker nodes can be controlled in a similar fashion like a Kubernetes deployment, in that the number of worker nodes are controlled by the `replicas` field. You can check the current status of the machine-deployment replicas with the following command:
@@ -130,7 +130,7 @@ In the next step, we will setup a real HA cluster over 3 availability zones to m
   ```
   ```text
   NAME           REPLICAS   AVAILABLE-REPLICAS   PROVIDER   OS       KUBELET   AGE
-  k1-pool-az-a   1          1                    gce        ubuntu   1.22.5    10m
+  k1-pool-az-a   1          1                    gce        ubuntu   1.23.9    10m
   ```
 
 * You can scale it up by using the normal kubectl scale command. The only difference in this scenario is that we are scaling up/down worker nodes instead of Pods.
@@ -144,7 +144,7 @@ In the next step, we will setup a real HA cluster over 3 availability zones to m
 
   ```text
   NAME           REPLICAS   AVAILABLE-REPLICAS   PROVIDER   OS       KUBELET   AGE
-  k1-pool-az-a   2          1                    gce        ubuntu   1.22.5    43m
+  k1-pool-az-a   2          1                    gce        ubuntu   1.23.9    43m
   ```
 
 * After a few minutes the healthy node should show up:
@@ -153,9 +153,9 @@ In the next step, we will setup a real HA cluster over 3 availability zones to m
   ```
 
   ```text
-  NAME                           STATUS   ROLES    AGE    VERSION   INTERNAL-IP   EXTERNAL-IP      OS-IMAGE             KERNEL-VERSION   CONTAINER-RUNTIME
-  k1-pool-az-a-cbfbfdb56-mtj8n   Ready    <none>   29m    v1.22.5   10.240.0.6    34.141.231.178   Ubuntu 18.04.5 LTS   5.4.0-1051-gcp   docker://19.3.15
-  k1-pool-az-a-cbfbfdb56-z8kv2   Ready    <none>   105m   v1.22.5   10.240.0.3    35.204.176.30    Ubuntu 18.04.5 LTS   5.4.0-1051-gcp   docker://19.3.15
+  NAME                           STATUS   ROLES    AGE    VERSION   INTERNAL-IP   EXTERNAL-IP      OS-IMAGE             KERNEL-VERSION    CONTAINER-RUNTIME
+  k1-pool-az-a-cbfbfdb56-mtj8n   Ready    <none>   29m    v1.23.9   10.240.0.6    34.141.231.178   Ubuntu 22.04.1 LTS   5.15.0-1027-gcp   containerd://1.6.15
+  k1-pool-az-a-cbfbfdb56-z8kv2   Ready    <none>   105m   v1.23.9   10.240.0.3    35.204.176.30    Ubuntu 22.04.1 LTS   5.15.0-1027-gcp   containerd://1.6.15
   ```
 
 * Currently, we don't need more than one node, so we scale down the workers back to 1:

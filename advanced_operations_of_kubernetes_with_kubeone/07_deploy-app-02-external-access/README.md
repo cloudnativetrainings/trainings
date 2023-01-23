@@ -49,7 +49,7 @@ The application stack with external access will be created with the following st
 Let's deploy the CertManager:
 * Install the CustomResourceDefinitions and cert-manager itself
   ```bash
-  kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.5.1/cert-manager.yaml
+  kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.11.0/cert-manager.yaml
   ```
 
 * Check the pods

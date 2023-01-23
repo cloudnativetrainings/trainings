@@ -99,23 +99,23 @@ kubectl -n kube-system get md,ma,node
 
 ```text
 NAMESPACE     NAME                                            REPLICAS   AVAILABLE-REPLICAS   PROVIDER   OS       KUBELET   AGE
-kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-a   1          1                    gce        coreos   1.22.5    4h47m
-kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-b   1          1                    gce        ubuntu   1.22.5    78m
-kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-c   1          1                    gce        ubuntu   1.22.5    78m
+kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-a   1          1                    gce        coreos   1.23.9    4h47m
+kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-b   1          1                    gce        ubuntu   1.23.9    78m
+kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-c   1          1                    gce        ubuntu   1.23.9    78m
 
 NAMESPACE     NAME                                                   PROVIDER   OS       ADDRESS       KUBELET   AGE
-kube-system   machine.cluster.k8s.io/k1-pool-az-a-6d996bd447-8skhq   gce        coreos                 1.22.5    16s
-kube-system   machine.cluster.k8s.io/k1-pool-az-a-75cddb6cd9-slgqk   gce        ubuntu   10.240.0.13   1.22.5    78m
-kube-system   machine.cluster.k8s.io/k1-pool-az-b-777d7cc84b-g76zf   gce        ubuntu   10.240.0.15   1.22.5    78m
-kube-system   machine.cluster.k8s.io/k1-pool-az-c-5d5cfcc5bf-gpjpg   gce        ubuntu   10.240.0.14   1.22.5    78m
+kube-system   machine.cluster.k8s.io/k1-pool-az-a-6d996bd447-8skhq   gce        coreos                 1.23.9    16s
+kube-system   machine.cluster.k8s.io/k1-pool-az-a-75cddb6cd9-slgqk   gce        ubuntu   10.240.0.13   1.23.9    78m
+kube-system   machine.cluster.k8s.io/k1-pool-az-b-777d7cc84b-g76zf   gce        ubuntu   10.240.0.15   1.23.9    78m
+kube-system   machine.cluster.k8s.io/k1-pool-az-c-5d5cfcc5bf-gpjpg   gce        ubuntu   10.240.0.14   1.23.9    78m
 
 NAMESPACE   NAME                                 STATUS   ROLES    AGE     VERSION
-            node/k1-control-plane-1              Ready    master   5h25m   v1.22.5
-            node/k1-control-plane-2              Ready    master   4h49m   v1.22.5
-            node/k1-control-plane-3              Ready    master   4h48m   v1.22.5
-            node/k1-pool-az-a-75cddb6cd9-slgqk   Ready    <none>   75m     v1.22.5
-            node/k1-pool-az-b-777d7cc84b-g76zf   Ready    <none>   75m     v1.22.5
-            node/k1-pool-az-c-5d5cfcc5bf-gpjpg   Ready    <none>   75m     v1.22.5
+            node/k1-control-plane-1              Ready    master   5h25m   v1.23.9
+            node/k1-control-plane-2              Ready    master   4h49m   v1.23.9
+            node/k1-control-plane-3              Ready    master   4h48m   v1.23.9
+            node/k1-pool-az-a-75cddb6cd9-slgqk   Ready    <none>   75m     v1.23.9
+            node/k1-pool-az-b-777d7cc84b-g76zf   Ready    <none>   75m     v1.23.9
+            node/k1-pool-az-c-5d5cfcc5bf-gpjpg   Ready    <none>   75m     v1.23.9
 ```
 
 Now update the files `machines/md-zone-b.yaml` and `machines/md-zone-c.yaml` in the same way and apply the final config of all MachineDeployments:
@@ -135,47 +135,47 @@ watch kubectl -n kube-system get md,ma,node -o wide
 
 ```text
 NAME                                            REPLICAS   AVAILABLE-REPLICAS   PROVIDER   OS       KUBELET   AGE   DELETED
-machinedeployment.cluster.k8s.io/k1-pool-az-a   1          1                    gce        ubuntu   1.22.5    11h   
-machinedeployment.cluster.k8s.io/k1-pool-az-b   1          1                    gce        ubuntu   1.22.5    66m   
-machinedeployment.cluster.k8s.io/k1-pool-az-c   1          1                    gce        ubuntu   1.22.5    66m   
+machinedeployment.cluster.k8s.io/k1-pool-az-a   1          1                    gce        ubuntu   1.23.9    11h   
+machinedeployment.cluster.k8s.io/k1-pool-az-b   1          1                    gce        ubuntu   1.23.9    66m   
+machinedeployment.cluster.k8s.io/k1-pool-az-c   1          1                    gce        ubuntu   1.23.9    66m   
 
 NAME                                                   PROVIDER   OS       MACHINESET                NODE                            ADDRESS       KUBELET   AGE     DELETED
-machine.cluster.k8s.io/k1-pool-az-a-7f976c98dd-fp4xt   gce        ubuntu   k1-pool-az-a-7f976c98dd   k1-pool-az-a-7f976c98dd-fp4xt   10.240.0.7    1.22.5    78m     5s
-machine.cluster.k8s.io/k1-pool-az-a-bd95f5c65-pmzfb    gce        ubuntu   k1-pool-az-a-bd95f5c65    k1-pool-az-a-bd95f5c65-pmzfb    10.240.0.10   1.22.5    2m50s   
-machine.cluster.k8s.io/k1-pool-az-b-6996d8f668-2wfp4   gce        ubuntu   k1-pool-az-b-6996d8f668                                   10.240.0.11   1.22.5    2m4s    
-machine.cluster.k8s.io/k1-pool-az-b-6b7fcd6985-wd6fm   gce        ubuntu   k1-pool-az-b-6b7fcd6985   k1-pool-az-b-6b7fcd6985-wd6fm   10.240.0.8    1.22.5    66m     
-machine.cluster.k8s.io/k1-pool-az-c-66f96d6b66-nvjfk   gce        ubuntu   k1-pool-az-c-66f96d6b66   k1-pool-az-c-66f96d6b66-nvjfk   10.240.0.9    1.22.5    66m     
-machine.cluster.k8s.io/k1-pool-az-c-7bdfbcd567-cb5kb   gce        ubuntu   k1-pool-az-c-7bdfbcd567                                   10.240.0.12   1.22.5    2m4s    
+machine.cluster.k8s.io/k1-pool-az-a-7f976c98dd-fp4xt   gce        ubuntu   k1-pool-az-a-7f976c98dd   k1-pool-az-a-7f976c98dd-fp4xt   10.240.0.7    1.23.9    78m     5s
+machine.cluster.k8s.io/k1-pool-az-a-bd95f5c65-pmzfb    gce        ubuntu   k1-pool-az-a-bd95f5c65    k1-pool-az-a-bd95f5c65-pmzfb    10.240.0.10   1.23.9    2m50s   
+machine.cluster.k8s.io/k1-pool-az-b-6996d8f668-2wfp4   gce        ubuntu   k1-pool-az-b-6996d8f668                                   10.240.0.11   1.23.9    2m4s    
+machine.cluster.k8s.io/k1-pool-az-b-6b7fcd6985-wd6fm   gce        ubuntu   k1-pool-az-b-6b7fcd6985   k1-pool-az-b-6b7fcd6985-wd6fm   10.240.0.8    1.23.9    66m     
+machine.cluster.k8s.io/k1-pool-az-c-66f96d6b66-nvjfk   gce        ubuntu   k1-pool-az-c-66f96d6b66   k1-pool-az-c-66f96d6b66-nvjfk   10.240.0.9    1.23.9    66m     
+machine.cluster.k8s.io/k1-pool-az-c-7bdfbcd567-cb5kb   gce        ubuntu   k1-pool-az-c-7bdfbcd567                                   10.240.0.12   1.23.9    2m4s    
 
-NAME                                 STATUS                     ROLES    AGE   VERSION   INTERNAL-IP   EXTERNAL-IP      OS-IMAGE             KERNEL-VERSION   CONTAINER-RUNTIME
-node/k1-control-plane-1              Ready                      master   11h   v1.22.5   10.240.0.2    34.141.138.245   Ubuntu 18.04.5 LTS   5.4.0-1043-gcp   docker://19.3.14
-node/k1-control-plane-2              Ready                      master   84m   v1.22.5   10.240.0.4    34.141.210.40    Ubuntu 18.04.5 LTS   5.4.0-1043-gcp   docker://19.3.14
-node/k1-control-plane-3              Ready                      master   83m   v1.22.5   10.240.0.5    34.141.148.120   Ubuntu 18.04.5 LTS   5.4.0-1043-gcp   docker://19.3.14
-node/k1-pool-az-a-7f976c98dd-fp4xt   Ready,SchedulingDisabled   <none>   75m   v1.22.5   10.240.0.7    34.141.201.46    Ubuntu 18.04.5 LTS   5.4.0-1043-gcp   docker://19.3.13
-node/k1-pool-az-a-bd95f5c65-pmzfb    Ready                      <none>   26s   v1.22.5   10.240.0.10   34.141.168.104   Ubuntu 18.04.5 LTS   5.4.0-1043-gcp   docker://19.3.13
-node/k1-pool-az-b-6b7fcd6985-wd6fm   Ready                      <none>   63m   v1.22.5   10.240.0.8    34.91.8.207      Ubuntu 18.04.5 LTS   5.4.0-1043-gcp   docker://19.3.13
-node/k1-pool-az-c-66f96d6b66-nvjfk   Ready                      <none>   64m   v1.22.5   10.240.0.9    34.141.205.68    Ubuntu 18.04.5 LTS   5.4.0-1043-gcp   docker://19.3.13
+NAME                                 STATUS                     ROLES    AGE   VERSION   INTERNAL-IP   EXTERNAL-IP      OS-IMAGE             KERNEL-VERSION    CONTAINER-RUNTIME
+node/k1-control-plane-1              Ready                      master   11h   v1.23.9   10.240.0.2    34.141.138.245   Ubuntu 22.04.1 LTS   5.15.0-1027-gcp   containerd://1.6.15
+node/k1-control-plane-2              Ready                      master   84m   v1.23.9   10.240.0.4    34.141.210.40    Ubuntu 22.04.1 LTS   5.15.0-1027-gcp   containerd://1.6.15
+node/k1-control-plane-3              Ready                      master   83m   v1.23.9   10.240.0.5    34.141.148.120   Ubuntu 22.04.1 LTS   5.15.0-1027-gcp   containerd://1.6.15
+node/k1-pool-az-a-7f976c98dd-fp4xt   Ready,SchedulingDisabled   <none>   75m   v1.23.9   10.240.0.7    34.141.201.46    Ubuntu 22.04.1 LTS   5.15.0-1027-gcp   containerd://1.6.15
+node/k1-pool-az-a-bd95f5c65-pmzfb    Ready                      <none>   26s   v1.23.9   10.240.0.10   34.141.168.104   Ubuntu 22.04.1 LTS   5.15.0-1027-gcp   containerd://1.6.15
+node/k1-pool-az-b-6b7fcd6985-wd6fm   Ready                      <none>   63m   v1.23.9   10.240.0.8    34.91.8.207      Ubuntu 22.04.1 LTS   5.15.0-1027-gcp   containerd://1.6.15
+node/k1-pool-az-c-66f96d6b66-nvjfk   Ready                      <none>   64m   v1.23.9   10.240.0.9    34.141.205.68    Ubuntu 22.04.1 LTS   5.15.0-1027-gcp   containerd://1.6.15
 ```
 
 After a few minutes we will see that all new nodes are ready:
 
 ```text
-machinedeployment.cluster.k8s.io/k1-pool-az-a   1          1                    gce        ubuntu   1.22.5    11h   
-machinedeployment.cluster.k8s.io/k1-pool-az-b   1          1                    gce        ubuntu   1.22.5    68m   
-machinedeployment.cluster.k8s.io/k1-pool-az-c   1          1                    gce        ubuntu   1.22.5    68m   
+machinedeployment.cluster.k8s.io/k1-pool-az-a   1          1                    gce        ubuntu   1.23.9    11h   
+machinedeployment.cluster.k8s.io/k1-pool-az-b   1          1                    gce        ubuntu   1.23.9    68m   
+machinedeployment.cluster.k8s.io/k1-pool-az-c   1          1                    gce        ubuntu   1.23.9    68m   
 
 NAME                                                   PROVIDER   OS       MACHINESET                NODE                            ADDRESS       KUBELET   AGE     DELETED
-machine.cluster.k8s.io/k1-pool-az-a-bd95f5c65-pmzfb    gce        ubuntu   k1-pool-az-a-bd95f5c65    k1-pool-az-a-bd95f5c65-pmzfb    10.240.0.10   1.22.5    5m11s   
-machine.cluster.k8s.io/k1-pool-az-b-6996d8f668-2wfp4   gce        ubuntu   k1-pool-az-b-6996d8f668   k1-pool-az-b-6996d8f668-2wfp4   10.240.0.11   1.22.5    4m25s   
-machine.cluster.k8s.io/k1-pool-az-c-7bdfbcd567-cb5kb   gce        ubuntu   k1-pool-az-c-7bdfbcd567   k1-pool-az-c-7bdfbcd567-cb5kb   10.240.0.12   1.22.5    4m25s   
+machine.cluster.k8s.io/k1-pool-az-a-bd95f5c65-pmzfb    gce        ubuntu   k1-pool-az-a-bd95f5c65    k1-pool-az-a-bd95f5c65-pmzfb    10.240.0.10   1.23.9    5m11s
+machine.cluster.k8s.io/k1-pool-az-b-6996d8f668-2wfp4   gce        ubuntu   k1-pool-az-b-6996d8f668   k1-pool-az-b-6996d8f668-2wfp4   10.240.0.11   1.23.9    4m25s
+machine.cluster.k8s.io/k1-pool-az-c-7bdfbcd567-cb5kb   gce        ubuntu   k1-pool-az-c-7bdfbcd567   k1-pool-az-c-7bdfbcd567-cb5kb   10.240.0.12   1.23.9    4m25s
 
-NAME                                 STATUS   ROLES    AGE     VERSION   INTERNAL-IP   EXTERNAL-IP      OS-IMAGE             KERNEL-VERSION   CONTAINER-RUNTIME
-node/k1-control-plane-1              Ready    master   11h     v1.22.5   10.240.0.2    34.141.138.245   Ubuntu 18.04.5 LTS   5.4.0-1043-gcp   docker://19.3.14
-node/k1-control-plane-2              Ready    master   86m     v1.22.5   10.240.0.4    34.141.210.40    Ubuntu 18.04.5 LTS   5.4.0-1043-gcp   docker://19.3.14
-node/k1-control-plane-3              Ready    master   85m     v1.22.5   10.240.0.5    34.141.148.120   Ubuntu 18.04.5 LTS   5.4.0-1043-gcp   docker://19.3.14
-node/k1-pool-az-a-bd95f5c65-pmzfb    Ready    <none>   2m47s   v1.22.5   10.240.0.10   34.141.168.104   Ubuntu 18.04.5 LTS   5.4.0-1043-gcp   docker://19.3.13
-node/k1-pool-az-b-6996d8f668-2wfp4   Ready    <none>   2m7s    v1.22.5   10.240.0.11   34.91.242.55     Ubuntu 18.04.5 LTS   5.4.0-1043-gcp   docker://19.3.13
-node/k1-pool-az-c-7bdfbcd567-cb5kb   Ready    <none>   2m15s   v1.22.5   10.240.0.12   34.141.216.253   Ubuntu 18.04.5 LTS   5.4.0-1043-gcp   docker://19.3.13
+NAME                                 STATUS   ROLES    AGE     VERSION   INTERNAL-IP   EXTERNAL-IP      OS-IMAGE             KERNEL-VERSION    CONTAINER-RUNTIME
+node/k1-control-plane-1              Ready    master   11h     v1.23.9   10.240.0.2    34.141.138.245   Ubuntu 22.04.1 LTS   5.15.0-1027-gcp   containerd://1.6.15
+node/k1-control-plane-2              Ready    master   86m     v1.23.9   10.240.0.4    34.141.210.40    Ubuntu 22.04.1 LTS   5.15.0-1027-gcp   containerd://1.6.15
+node/k1-control-plane-3              Ready    master   85m     v1.23.9   10.240.0.5    34.141.148.120   Ubuntu 22.04.1 LTS   5.15.0-1027-gcp   containerd://1.6.15
+node/k1-pool-az-a-bd95f5c65-pmzfb    Ready    <none>   2m47s   v1.23.9   10.240.0.10   34.141.168.104   Ubuntu 22.04.1 LTS   5.15.0-1027-gcp   containerd://1.6.15
+node/k1-pool-az-b-6996d8f668-2wfp4   Ready    <none>   2m7s    v1.23.9   10.240.0.11   34.91.242.55     Ubuntu 22.04.1 LTS   5.15.0-1027-gcp   containerd://1.6.15
+node/k1-pool-az-c-7bdfbcd567-cb5kb   Ready    <none>   2m15s   v1.23.9   10.240.0.12   34.141.216.253   Ubuntu 22.04.1 LTS   5.15.0-1027-gcp   containerd://1.6.15
 ```
 
 Finally, verify that your app is still running and reachable:
@@ -212,22 +212,22 @@ watch kubectl -n kube-system get md,ma,node
 
 ```text
 NAME                                            REPLICAS   AVAILABLE-REPLICAS   PROVIDER   OS       KUBELET   AGE
-machinedeployment.cluster.k8s.io/k1-pool-az-a   0                               gce        ubuntu   1.22.5    11h
-machinedeployment.cluster.k8s.io/k1-pool-az-b   0                               gce        ubuntu   1.22.5    69m
-machinedeployment.cluster.k8s.io/k1-pool-az-c   0                               gce        ubuntu   1.22.5    69m
+machinedeployment.cluster.k8s.io/k1-pool-az-a   0                               gce        ubuntu   1.23.9    11h
+machinedeployment.cluster.k8s.io/k1-pool-az-b   0                               gce        ubuntu   1.23.9    69m
+machinedeployment.cluster.k8s.io/k1-pool-az-c   0                               gce        ubuntu   1.23.9    69m
 
 NAME                                                   PROVIDER   OS       ADDRESS       KUBELET   AGE
-machine.cluster.k8s.io/k1-pool-az-a-bd95f5c65-pmzfb    gce        ubuntu   10.240.0.10   1.22.5    6m5s
-machine.cluster.k8s.io/k1-pool-az-b-6996d8f668-2wfp4   gce        ubuntu   10.240.0.11   1.22.5    5m19s
-machine.cluster.k8s.io/k1-pool-az-c-7bdfbcd567-cb5kb   gce        ubuntu   10.240.0.12   1.22.5    5m19s
+machine.cluster.k8s.io/k1-pool-az-a-bd95f5c65-pmzfb    gce        ubuntu   10.240.0.10   1.23.9    6m5s
+machine.cluster.k8s.io/k1-pool-az-b-6996d8f668-2wfp4   gce        ubuntu   10.240.0.11   1.23.9    5m19s
+machine.cluster.k8s.io/k1-pool-az-c-7bdfbcd567-cb5kb   gce        ubuntu   10.240.0.12   1.23.9    5m19s
 
 NAME                                 STATUS                     ROLES    AGE     VERSION
-node/k1-control-plane-1              Ready                      master   11h     v1.22.5
-node/k1-control-plane-2              Ready                      master   87m     v1.22.5
-node/k1-control-plane-3              Ready                      master   86m     v1.22.5
-node/k1-pool-az-a-bd95f5c65-pmzfb    Ready,SchedulingDisabled   <none>   3m41s   v1.22.5
-node/k1-pool-az-b-6996d8f668-2wfp4   Ready,SchedulingDisabled   <none>   3m1s    v1.22.5
-node/k1-pool-az-c-7bdfbcd567-cb5kb   Ready,SchedulingDisabled   <none>   3m9s    v1.22.5
+node/k1-control-plane-1              Ready                      master   11h     v1.23.9
+node/k1-control-plane-2              Ready                      master   87m     v1.23.9
+node/k1-control-plane-3              Ready                      master   86m     v1.23.9
+node/k1-pool-az-a-bd95f5c65-pmzfb    Ready,SchedulingDisabled   <none>   3m41s   v1.23.9
+node/k1-pool-az-b-6996d8f668-2wfp4   Ready,SchedulingDisabled   <none>   3m1s    v1.23.9
+node/k1-pool-az-c-7bdfbcd567-cb5kb   Ready,SchedulingDisabled   <none>   3m9s    v1.23.9
 ```
 
 After a few minutes, verify that your app is still running and reachable:
@@ -236,7 +236,7 @@ After a few minutes, verify that your app is still running and reachable:
 curl https://app-ext.$DNS_ZONE.loodse.training
 ```
 
-Now you see the app is not reachable anymore, as now compute worker nodes are available:
+Now you see the app is not reachable anymore, as no compute worker nodes are available:
 
 ```text
 curl: (7) Failed to connect to app-ext.YOUR_DNS_ZONE.loodse.training port 443: Connection refused
@@ -248,9 +248,9 @@ kubectl get nodes
 
 ```text
 NAME                 STATUS   ROLES    AGE   VERSION
-k1-control-plane-1   Ready    master   11h   v1.22.5
-k1-control-plane-2   Ready    master   90m   v1.22.5
-k1-control-plane-3   Ready    master   88m   v1.22.5
+k1-control-plane-1   Ready    master   11h   v1.23.9
+k1-control-plane-2   Ready    master   90m   v1.23.9
+k1-control-plane-3   Ready    master   88m   v1.23.9
 ```
 
 ## Scale MachineDeployments back to one
@@ -275,7 +275,7 @@ kubectl delete ns app-ext
 You can optionally delete the cert-manager at this moment.
 
 ```bash
-kubectl delete -f https://github.com/jetstack/cert-manager/releases/download/v1.5.1/cert-manager.yaml
+kubectl delete -f https://github.com/jetstack/cert-manager/releases/download/v1.11.0/cert-manager.yaml
 ```
 
 Jump > [**Home**](../README.md) | Previous > [**Application with External Access**](../07_deploy-app-02-external-access/README.md) | Next > [**Velero Backup Process**](../09_backup_velero/README.md)

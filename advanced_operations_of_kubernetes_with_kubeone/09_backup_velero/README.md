@@ -58,7 +58,7 @@ Due to the small nodes, we need decrease a little the default resource CPU limit
 ```bash
 velero install \
   --provider gcp \
-  --plugins velero/velero-plugin-for-gcp:v1.2.1 \
+  --plugins velero/velero-plugin-for-gcp:v1.6.0 \
   --bucket k1-backup-bucket-$GCP_PROJECT_ID \
   --velero-pod-cpu-request 250m \
   --secret-file .secrets/credentials-velero.json

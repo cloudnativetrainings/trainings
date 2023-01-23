@@ -38,7 +38,7 @@ spec:
         terminationMessagePolicy: File
         resources:
           requests:
-            cpu: 1000m
+            cpu: 250m
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler

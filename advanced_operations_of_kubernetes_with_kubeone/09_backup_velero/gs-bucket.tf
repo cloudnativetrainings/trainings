@@ -1,8 +1,9 @@
 ### S3 bucket for tf-state
 resource "google_storage_bucket" "gs-storage" {
-  name = "k1-backup-bucket-${var.project}"
+  name          = "k1-backup-bucket-${var.project}"
   storage_class = "STANDARD"
-  location = var.region
+  location      = var.region
+  force_destroy = true
 }
 
 ### create SA binding
@@ -18,6 +19,6 @@ resource "google_storage_bucket" "gs-storage" {
 output "gs" {
   value = {
     name = google_storage_bucket.gs-storage.name
-    url = google_storage_bucket.gs-storage.url
+    url  = google_storage_bucket.gs-storage.url
   }
 }

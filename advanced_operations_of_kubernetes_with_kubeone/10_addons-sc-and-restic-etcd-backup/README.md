@@ -127,7 +127,7 @@ apiVersion: kubeone.k8c.io/v1beta2
 kind: KubeOneCluster
 name: k1
 versions:
-  kubernetes: '1.22.5'
+  kubernetes: '1.23.9'
 cloudProvider:
   gce: {}
   cloudConfig: |-
@@ -195,6 +195,7 @@ volumeBindingMode: Immediate
 Now let's see what happens with our example pod:
 
 ```bash
+kcns sc-test
 kubectl get pod,pvc,pv
 ```
 
