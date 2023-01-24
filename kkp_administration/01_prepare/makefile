@@ -1,5 +1,5 @@
-KUBEONE_VERSION=1.5.1
-KKP_VERSION=2.21.1
+KUBEONE_VERSION=1.5.4
+KKP_VERSION=2.21.5
 
 .PHONY: install_k1
 install_k1:
@@ -23,6 +23,8 @@ install_kkp:
 setup_k1_folder:
 	cp -r ~/.tmp/kubeone-$(KUBEONE_VERSION)/examples/terraform/gce/* ~/kubeone
 	sed -i 's/GCP_PROJECT/$(PROJECT_ID)/g' ~/kubeone/terraform.tfvars
+	# added to make worker nodes preemptible
+	sed -i 's/\(preemptible *=\).*/\1 true/' ~/kubeone/output.tf
 
 .PHONY: setup_kkp_folder
 setup_kkp_folder:

@@ -22,6 +22,7 @@ base64 -w0 ~/secrets/key.json
     * Set the number of replicas to 3
     * Choose Disk Type `pd-ssd`
     * Choose Machine Type `n1-standard-2`
+    * Check `Preemptible` box
 
 ### Verify in Terminal
 
