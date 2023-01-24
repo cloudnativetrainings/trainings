@@ -23,8 +23,11 @@ Create a service account `k1-service-account` for your Google Cloud resources, w
 
 * Configure your IDs
   ```bash
-  export GCP_PROJECT_ID=__YOUR_GCP_PROJECT_ID__                  #student-XX-project
-  export GCP_SERVICE_ACCOUNT_ID=__YOUR_GCP_SERVICE_ACCOUNT_ID__  # k1-service-account@student-XX-project.iam.gserviceaccount.com
+  export GCP_PROJECT_ID=$(gcloud config list project --format='value(core.project)')
+  # e.g.: student-XX-project
+
+  export GCP_SERVICE_ACCOUNT_ID=$(gcloud iam service-accounts list --format='value(email)' --filter='email~k1-service-account.*')
+  # e.g.: k1-service-account@student-XX-project.iam.gserviceaccount.com
   ```
 
 * Create policy binding

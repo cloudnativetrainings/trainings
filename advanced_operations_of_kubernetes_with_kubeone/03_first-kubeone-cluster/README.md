@@ -32,14 +32,16 @@ As to not having to input these values manually to create the machine-controller
 - Cloud Controller Manager configuration `cloud-config`
 - Full MachineDeployment yaml and apply it to the Kubernetes cluster automatically.
 
-**Alternative:** You could also export the Terraform output into a tf.json file and use this one (not recommended, but makes the used content more visible):
-
-```bash
-cd $TRAINING_DIR/src/gce/tf-infra
-terraform output -json > tf.json
-cd ..
-kubeone install --tfjson tf.json --verbose
-```
+>
+> **Alternative:** You could also export the Terraform output into a tf.json file and use this one (not recommended, but makes the used content more visible):
+>
+> ```bash
+> cd $TRAINING_DIR/src/gce/tf-infra
+> terraform output -json > tf.json
+> cd ..
+> kubeone install --tfjson tf.json --verbose
+> ```
+>
 
 To Adjust defaults for the upcoming Machine Deployment, take a look at the `output.tf` file. The rendered output of this file gets parsed by the `kubeone -t` command.
 
@@ -194,7 +196,7 @@ kubectl -n kube-system get machinedeployment,machineset,machine,node
 Check the Cloud Controller Manager credentials (used for provisioning worker nodes).
 
 ```bash
-kubectl get secret -n kube-system cloud-provider-credentials -o jsonpath='{.data.GOOGLE_SERVICE_ACCOUNT}' | base64 -d | base64 -d
+kubectl get secret -n kube-system kubeone-ccm-credentials -o jsonpath='{.data.GOOGLE_SERVICE_ACCOUNT}' | base64 -d
 ```
 
 This Secret is created by KubeOne and used when creating MachineDeployment by `machine-controller`.
