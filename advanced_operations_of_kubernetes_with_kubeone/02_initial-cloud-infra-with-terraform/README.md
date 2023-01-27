@@ -17,7 +17,7 @@ To avoid the usage of your recent private SSH key, you can freshly create one fo
 
 ## Initial Cluster Setup on GCE
 
-* Change your folder to the GCE terraform folder [`src/gce/tf-infra`](../src/gce/tf-infra) for our terraform GCE code and initialize terraform (You will find more terraform examples in the KubeOne repo under [`examples/terraform`](https://github.com/kubermatic/kubeone/tree/master/examples/terraform) folder. 
+* Change your folder to the GCE terraform folder [`src/gce/tf-infra`](../src/gce/tf-infra) for our terraform GCE code and initialize terraform (You will find more terraform examples in the KubeOne repo under [`examples/terraform`](https://github.com/kubermatic/kubeone/tree/main/examples/terraform) folder. 
   ```bash
   cd $TRAINING_DIR/src/gce/tf-infra
   terraform init
@@ -49,7 +49,7 @@ To avoid the usage of your recent private SSH key, you can freshly create one fo
   ```
 
 * If you are **NOT** using a ssh-agent for the upcoming tasks, please take a look at [How KubeOne uses
-SSH](https://github.com/kubermatic/kubeone/blob/master/docs/ssh.md) before you continue. Ensure your `ssh-agent` is started and SSH private key is added:
+SSH](https://docs.kubermatic.com/kubeone/main/guides/ssh/) before you continue. Ensure your `ssh-agent` is started and SSH private key is added:
   ```bash
   eval `ssh-agent`
   ssh-add /path/to/.secrets/id_rsa

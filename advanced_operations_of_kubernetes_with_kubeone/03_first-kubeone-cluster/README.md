@@ -1,6 +1,6 @@
 # Create your first KubeOne cluster
 
-Create a cluster `kubeone.yaml` file ([supported versions](https://docs.kubermatic.com/kubeone/v1.5/architecture/compatibility/supported-versions/) should be at least one version behind of the latest, to be able to proceed with an upgrade later):
+Create a cluster `kubeone.yaml` file ([supported versions](https://docs.kubermatic.com/kubeone/main/architecture/compatibility/supported-versions/) should be at least one version behind of the latest, to be able to proceed with an upgrade later):
 
 ```yaml
 # src/gce/kubeone.yaml

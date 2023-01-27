@@ -24,7 +24,7 @@ Add bash completion
 echo 'source <(kubeone completion bash)' >> ~/.bashrc && source ~/.bashrc
 ```
 
-[optional] Create a local copy of the KubeOne CLI documentation. The folder contains the docs for the `kubeone` command line tool. Additional useful documentation can be found under [KubeOne - docs](https://docs.kubermatic.com/kubeone/master/). 
+[optional] Create a local copy of the KubeOne CLI documentation. The folder contains the docs for the `kubeone` command line tool. Additional useful documentation can be found under [KubeOne - docs](https://docs.kubermatic.com/kubeone/main/).
 
 ```bash
 mkdir kubeone-cli-doc
@@ -33,7 +33,7 @@ kubeone document md --output-dir ./kubeone-cli-doc
 
 ### Terraform
 
-Install Terraform >= 1.0.x (visit [www.terraform.io](https://www.terraform.io/downloads.html) with an SSH setup in place (preferred SSH agent), for more details see [How KubeOne uses SSH](https://docs.kubermatic.com/kubeone/master/using_kubeone/ssh/).
+Install Terraform >= 1.0.x (visit [www.terraform.io](https://www.terraform.io/downloads.html) with an SSH setup in place (preferred SSH agent), for more details see [How KubeOne uses SSH](https://docs.kubermatic.com/kubeone/main/guides/ssh/).
 
 ### GCP `gcloud` CLI
 

@@ -1,20 +1,20 @@
 # KubeOne Addons
 
-In this chapter, we will create a [KubeOne addon](https://docs.kubermatic.com/kubeone/master/guides/addons/) on the creation of:
+In this chapter, we will create a [KubeOne addon](https://docs.kubermatic.com/kubeone/main/guides/addons/) on the creation of:
  1. Storage Class
- 2. [Restic backup addon](https://docs.kubermatic.com/kubeone/master/examples/addons_backup) adjusted for GCP 
+ 2. [Restic backup addon](https://docs.kubermatic.com/kubeone/main/examples/addons-backup) adjusted for GCP
 
 Addons are a mechanism used to deploy Kubernetes resources after provisioning the cluster. Addons allow operators to use KubeOne to deploy various components such as CNI and CCM, and various stacks such as logging and monitoring, backups and recovery, log rotating. Addons can be used also for any other extension of your Kubernetes cluster, e.g:
  - Storage Class (CSI)
  - Ingress Controllers
- - LoadBalancers (e.g. [MetalLB](https://metallb.universe.tf/), see as ref. [KKP - MetalLB Addon](https://github.com/kubermatic/community-components/tree/master/kubermatic-addons/custom-addon/metallb))
+ - LoadBalancers (e.g. [MetalLB](https://metallb.universe.tf/), see as ref. [KKP - MetalLB Addon](https://github.com/kubermatic/community-components/blob/master/kubermatic-addons/addon-manifests/metallb.yaml))
 
-This document explains how to use addons in your workflow. If you want to learn more about how addons are implemented, you can check the [documentation](https://docs.kubermatic.com/kubeone/master/guides/addons/) for more details.
+This document explains how to use addons in your workflow. If you want to learn more about how addons are implemented, you can check the [documentation](https://docs.kubermatic.com/kubeone/main/guides/addons/) for more details.
 
->**HINT:** Some Kubermatic KKP Addons will potentially work as well for KubeOne, you only need to ensure that executed Templating matches, see [KubeOne Addon Templating](https://docs.kubermatic.com/kubeone/master/guides/addons/#templating) vs. [KKP Addon - Manifest Templating](https://docs.kubermatic.com/kubermatic/master/guides/addons/#manifest-templating).
+>**HINT:** Some Kubermatic KKP Addons will potentially work as well for KubeOne, you only need to ensure that executed Templating matches, see [KubeOne Addon Templating](https://docs.kubermatic.com/kubeone/main/guides/addons/#templating) vs. [KKP Addon - Manifest Templating](https://docs.kubermatic.com/kubermatic/main/architecture/concept/kkp-concepts/addons/#manifest-templating).
 
 Some "raw" Addons can be found here:
-- [KKP Default Addons](https://github.com/kubermatic/kubermatic/tree/master/addons)
+- [KKP Default Addons](https://github.com/kubermatic/kubermatic/tree/main/addons)
 - [KKP Community Addons](https://github.com/kubermatic/community-components/tree/master/kubermatic-addons/custom-addon)
 
 ## 1. GCE Storage Class Addon
@@ -86,7 +86,7 @@ Events:
 
 As the error tells you `no storage class is set`, we need to configure a storage class. To get familiar with the storage class concept, take a look at the official [Kubernetes Documentation - Storage Classes](https://kubernetes.io/docs/concepts/storage/storage-classes/).
 
-As a reference, we could take a look into the [KKP Addon > Default Storage Class](https://github.com/kubermatic/kubermatic/blob/master/addons/default-storage-class/storage-class.yaml) and search GCP one.
+As a reference, we could take a look into the [KKP Addon > Default Storage Class](https://github.com/kubermatic/kubermatic/blob/main/addons/default-storage-class/storage-class.yaml) and search GCP one.
 
 ```yaml
 apiVersion: storage.k8s.io/v1
@@ -230,12 +230,12 @@ persistentvolume/pvc-c3979b78-4898-4576-be9b-047c31abc11c   1Gi        RWO      
 
 # 2. Restic Backup for etcd Snapshots
 
-Next we want to create a dedicated backup for our etcd database in an automated way. So as reference, KubeOne already have a default addon for storing the etcd snapshots at a S3 Location, see [Restic backup addon](https://docs.kubermatic.com/kubeone/master/examples/addons_backup). Now we want to adjust it to use our GCP Storage Bucket.
+Next we want to create a dedicated backup for our etcd database in an automated way. So as reference, KubeOne already have a default addon for storing the etcd snapshots at a S3 Location, see [Restic backup addon](https://docs.kubermatic.com/kubeone/main/examples/addons-backup). Now we want to adjust it to use our GCP Storage Bucket.
 
-The chapter folder already contains and template what have been adjusted to use GS bucket. If you compare the both files [`template.backups-restic.yaml`](./template.backups-restic.yaml) and [`backups-restic.yaml`](https://github.com/kubermatic/kubeone/raw/master/addons/backups-restic/backups-restic.yaml), you see that only minor adjustment has been needed. For more details how to configure Restic, see the [Restic Documentation - Preparing a new repository - Google Cloud Storage](https://restic.readthedocs.io/en/stable/030_preparing_a_new_repo.html#google-cloud-storage).
+The chapter folder already contains and template what have been adjusted to use GS bucket. If you compare the both files [`template.backups-restic.yaml`](./template.backups-restic.yaml) and [`backups-restic.yaml`](https://github.com/kubermatic/kubeone/raw/main/addons/backups-restic/backups-restic.yaml), you see that only minor adjustment has been needed. For more details how to configure Restic, see the [Restic Documentation - Preparing a new repository - Google Cloud Storage](https://restic.readthedocs.io/en/stable/030_preparing_a_new_repo.html#google-cloud-storage).
 ![restic_yaml_diff_s3_vs_gs](../.images/restic_yaml_diff_s3_vs_gs.png)
 
-To prevent to manage Google Service Account credential secret, we can use the [KubeOne Addon Templating](https://docs.kubermatic.com/kubeone/master/guides/addons/#templating) and render the `.Credentials object` into a base64 encoded secret. At the KubeOne Go code, we can see the data constant what get used for credential rendering [`pkg/credentials/credentials.go`](https://github.com/kubermatic/kubeone/blob/c824810769d4ce55b3cfdc560b46b6563c8c509e/pkg/credentials/credentials.go). In our case, we use the `.Credentials.GOOGLE_CREDENTIALS` what is wrapped into the [`b64enc` sprig function](http://masterminds.github.io/sprig/encoding.html).
+To prevent to manage Google Service Account credential secret, we can use the [KubeOne Addon Templating](https://docs.kubermatic.com/kubeone/main/guides/addons/#templating) and render the `.Credentials object` into a base64 encoded secret. At the KubeOne Go code, we can see the data constant what get used for credential rendering [`pkg/credentials/credentials.go`](https://github.com/kubermatic/kubeone/blob/c824810769d4ce55b3cfdc560b46b6563c8c509e/pkg/credentials/credentials.go). In our case, we use the `.Credentials.GOOGLE_CREDENTIALS` what is wrapped into the [`b64enc` sprig function](http://masterminds.github.io/sprig/encoding.html).
 
 Now let's copy the template and adjust the needed `<<TODO_xxxx>>` parameters to our lab environment:
 

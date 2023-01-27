@@ -4,7 +4,7 @@ The GCE Quickstart Terraform scripts can be used to create the needed infrastruc
 Check out the following [GCE getting started walkthrough][gce-quickstart] to learn more about how to use the
 scripts and how to provision a Kubernetes cluster using KubeOne.
 
-[gce-quickstart]: https://github.com/kubermatic/kubeone/blob/master/docs/quickstart-gce.md
+[gce-quickstart]: https://github.com/kubermatic/kubeone/tree/main/examples/terraform/gce
 
 ## GCE Provider configuration
 

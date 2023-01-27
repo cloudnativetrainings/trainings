@@ -1,6 +1,6 @@
 # Cluster AutoScaling
 
-First we need to deploy the cluster autoscaler controller. As reference take a look at [Cluster Autoscaler](https://github.com/kubermatic/kubeone/tree/master/addons/cluster-autoscaler) addon.
+First we need to deploy the cluster autoscaler controller. As reference take a look at [Cluster Autoscaler](https://github.com/kubermatic/kubeone/tree/main/addons/cluster-autoscaler) addon.
 
 For this lab, current version is copied to the KubeOne `addons` folder:
 ```bash

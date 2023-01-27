@@ -247,7 +247,7 @@ After the backup process, we can now proceed to attempt the upgrade.
 ## Further Thoughts
 
 For production usage, we recommend to manage Velero by a reproducible and git-ops based setup. For this e.g. KKP brings with his own preconfigured chart, take a look into the following resources:
-* [KKP Velero Helm Chart](https://github.com/kubermatic/kubermatic/tree/master/charts/backup/velero)
+* [KKP Velero Helm Chart](https://github.com/kubermatic/kubermatic/tree/main/charts/backup/velero)
 * [Velero Backup Config API](https://velero.io/docs/v1.6/api-types/)
 
 For a production system a regular based scheduled backup is recommended. The backup strategy it-self depends on the workload:

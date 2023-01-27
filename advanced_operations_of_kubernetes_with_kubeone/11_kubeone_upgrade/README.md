@@ -1,6 +1,6 @@
 # KubeOne and Kubernetes Upgrade
 
-KubeOne version and Kubernetes supported upgrade version, are quite in a close relationship as both follow a so called **Skew Policy**. To ensure that you get the latest fixes, run your latest KubeOne version for your target Kubernetes version, as a reference take a look to [KubeOne Docs > Architecture > Compatibility: Supported Kubernetes Versions](https://docs.kubermatic.com/kubeone/master/architecture/compatibility/).
+KubeOne version and Kubernetes supported upgrade version, are quite in a close relationship as both follow a so called **Skew Policy**. To ensure that you get the latest fixes, run your latest KubeOne version for your target Kubernetes version, as a reference take a look to [KubeOne Docs > Architecture > Compatibility: Kubernetes](https://docs.kubermatic.com/kubeone/main/architecture/compatibility/supported-versions/).
 
 As KubeOne will upgrade the Kubernetes cluster as a glance, it starts first by upgrading the control plane nodes (i.e. masters), Machine Controller, the MachineDeployments (optional: will update worker nodes) and at the last point with the features/addons.
 
@@ -12,9 +12,9 @@ KubeOne is doing a set of preflight checks to ensure all prerequisites are satis
 
 Once the upgrade process starts for a node, KubeOne applies the `kubeone.io/upgrade-in-progress` label on the node object. This label is used as a lock mechanism, so if the upgrade fails or it's already in progress, you can't start it again.
 
-**NOTE:** For production environments, it's recommended to backup your cluster before running the upgrade process. You can do it by the [restic backup addon](https://docs.kubermatic.com/kubeone/master/examples/addons_backup), using [Velero](https://github.com/vmware-tanzu/velero) or any other tool of your choice.
+**NOTE:** For production environments, it's recommended to backup your cluster before running the upgrade process. You can do it by the [restic backup addon](https://docs.kubermatic.com/kubeone/main/examples/addons-backup), using [Velero](https://github.com/vmware-tanzu/velero) or any other tool of your choice.
 
-Before running an upgrade, please ensure that your KubeOne version supports upgrading to the desired Kubernetes version. Check the [Kubernetes Versions Compatibility](https://docs.kubermatic.com/kubeone/master/architecture/compatibility/) part of the KubeOne's README for more details on supported Kubernetes versions for each KubeOne release. You can check what KubeOne version you're running using the `kubeone version` command.
+Before running an upgrade, please ensure that your KubeOne version supports upgrading to the desired Kubernetes version. Check the [Kubernetes Versions Compatibility](https://docs.kubermatic.com/kubeone/main/architecture/compatibility/supported-versions/) part of the KubeOne's README for more details on supported Kubernetes versions for each KubeOne release. You can check what KubeOne version you're running using the `kubeone version` command.
 
 **NOTE:** In Kubernetes it is recommended to only update one minor version every time. So if you want to update from `1.15.x` to `1.17.x`, please upgrade first to `1.16.x`! The latest release version can be found at [Github Kubernetes Releases](https://github.com/kubernetes/kubernetes/tags).
 
@@ -58,7 +58,7 @@ cd $TRAINING_DIR
 export GOOGLE_CREDENTIALS=$(cat ./.secrets/k8c-cluster-provisioner-sa-key.json)
 ```
 
-2. SSH keys should be part of your key list (see also [How KubeOne uses SSH](https://docs.kubermatic.com/kubeone/master/guides/ssh/)):
+2. SSH keys should be part of your key list (see also [How KubeOne uses SSH](https://docs.kubermatic.com/kubeone/main/guides/ssh/)):
 
 ```bash
 ssh-add -l
@@ -129,7 +129,7 @@ terraform refresh
 kubeone apply -t . -m ../kubeone.yaml --upgrade-machine-deployments --verbose
 ```
 
-You can also check the full documentation for the upgrade process: [KubeOne Upgrade Process](https://docs.kubermatic.com/kubeone/v1.5/tutorials/upgrading-clusters/)
+You can also check the full documentation for the upgrade process: [KubeOne Upgrade Process](https://docs.kubermatic.com/kubeone/main/tutorials/upgrading-clusters/)
 
 #### Check/confirm status of the new upgrade version
 
