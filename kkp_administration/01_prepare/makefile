@@ -1,6 +1,3 @@
-KUBEONE_VERSION=1.5.4
-KKP_VERSION=2.21.5
-
 .PHONY: install_k1
 install_k1:
 	curl -L https://github.com/kubermatic/kubeone/releases/download/v$(KUBEONE_VERSION)/kubeone_$(KUBEONE_VERSION)_linux_amd64.zip --output ~/.tmp/kubeone-$(KUBEONE_VERSION).zip

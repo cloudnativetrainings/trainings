@@ -1,3 +1,4 @@
-FROM quay.io/kubermatic/addons:v2.20.4
+ARG KKP_VERSION
+FROM quay.io/kubermatic/addons:v${KKP_VERSION}
 
 ADD . /addons/

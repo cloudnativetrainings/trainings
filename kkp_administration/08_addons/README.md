@@ -32,8 +32,8 @@ gcloud container images list --repository=$REPO_URL
 
 # Build and push the new addon image
 cd addons
-docker build -t $REPO_URL/kkp-addons:v2.20.4-v0.0.1 .
-docker push $REPO_URL/kkp-addons:v2.20.4-v0.0.1
+docker build -t $REPO_URL/kkp-addons:v${KKP_VERSION}-v0.0.1 --build-arg KKP_VERSION=${KKP_VERSION} .
+docker push $REPO_URL/kkp-addons:v${KKP_VERSION}-v0.0.1
 cd ..
 
 # Verify the image exists in the repository

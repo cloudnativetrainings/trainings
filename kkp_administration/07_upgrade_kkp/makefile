@@ -8,3 +8,4 @@ install_new_kkp:
 	sudo cp ~/.tmp/kkp-$(KKP_VERSION_NEW)/kubermatic-installer /usr/local/bin/kubermatic-installer
 	rm -rf ~/kkp/charts
 	cp -r ~/.tmp/kkp-$(KKP_VERSION_NEW)/charts ~/kkp
+	sed -i "s/\(KKP_VERSION=\).*/\1${KKP_VERSION_NEW}/g" ~/.bashrc

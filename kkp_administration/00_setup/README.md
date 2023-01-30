@@ -38,6 +38,9 @@ echo 'export SA_NAME=kkp-admin-training' >> ~/.bashrc
 echo 'export SA_MAIL=$SA_NAME@$PROJECT_ID.iam.gserviceaccount.com' >> ~/.bashrc
 echo 'export DOMAIN=$PROJECT_ID.loodse.training' >> ~/.bashrc
 echo 'export REPO_URL=gcr.io/$PROJECT_ID' >> ~/.bashrc
+echo 'export KUBEONE_VERSION=1.5.4' >> ~/.bashrc
+echo 'export KKP_VERSION=2.20.12' >> ~/.bashrc      # Make sure that this is not the latest version for the 07_upgrade_kkp to work
+echo 'export KKP_VERSION_NEW=2.21.5' >> ~/.bashrc  # This is the latest KKP version
 ```
 
 ### Open a new tab
