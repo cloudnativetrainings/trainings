@@ -18,13 +18,38 @@
 
 4. [Setup](00_setup/README.md) - the training playground
 
-<!-- TODO -->
-<!-- >If you do not have Google Cloud Account, instead you are working on your local machine then you can simply skip #1 and #4 steps. Before you get started, please make sure that you have [docker installation](https://docs.docker.com/engine/install/) on your local machine. -->
 
 **Hands-On:**
 
-1. [Hello Docker](01_hello-docker/README.md)
-<!-- TODO -->
+1. Getting around
+    1. Introducing Bash
+    2. File Management
+    3. Search Tools
+    4. Regular Expressions
+    5. Pipes and Redirectionb
+    6. Customizing Bash
+    7. Text Manipulation Tools
+2. Configuration
+    1. Hardware Configuration
+    2. fdisk, gdisk, and parted
+    3. Configuraing Filesystems
+    4. mount and fstab
+    5. Time Tools
+3. Management
+    1. Users and Groups
+    2. Access Permissions
+    3. su and sudo
+    4. Managing Processes
+    5. Package Tools
+4. Communication
+    1. Networking Tools
+    2. SSH
+    3. Rsync
+5. Automation
+    1. Cron
+    2. Bash Scripting
+    3. Services
+
 
 [TearDown Setup](99_teardown/README.md) - Optional, for the training playground cleanup only.
 
