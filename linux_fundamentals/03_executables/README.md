@@ -14,4 +14,8 @@ go version
 
 cd 03_executables
 
+go build my-executable.go
+
+ls -alh
+
 ```
