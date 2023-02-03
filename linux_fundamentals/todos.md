@@ -1,0 +1,4 @@
+magazine
+academy
+zsh
+cks
