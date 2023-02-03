@@ -58,6 +58,8 @@ vi
 visudo
 base64
 grep regex
+git
+zip and tar
 
 
 
