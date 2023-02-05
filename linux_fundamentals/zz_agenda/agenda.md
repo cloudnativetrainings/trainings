@@ -41,11 +41,8 @@ bash vs shell vs zsh vs fish
 root sudo versus user sudo => how to get the user into the sudo group
 piping stuff
 wordcount
-sed -i 's/\(preemptible *=\).*/\1 true/' ~/kubeone/output.tf
 makefiles
-ssh
-scp rsync 
-ssh config
+
 curl wget
 curl ssh
 curl download
@@ -60,7 +57,33 @@ base64
 grep regex
 git
 zip and tar
+file permissions 777
+chmod
+change user
+source and dot
+mkdir including parent dirs mkdir -p
+cp and mv
+nmap
+date
+sys time
+dev/random
+regex
+file links
+history
+reverse history search
+mot of the day
 
 
 
 * check makefiles in kkp_administration
+
+
+# TO HEAVY
+sed -i 's/\(preemptible *=\).*/\1 true/' ~/kubeone/output.tf
+envsubst
+
+while true; do echo $(date) >> my-file.txt; sleep 1; done;
+STRG+C
+cat my-file.txt
+
+vi searching

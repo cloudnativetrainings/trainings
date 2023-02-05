@@ -133,14 +133,6 @@ jim ALL=(ALL) NOPASSWD:ALL
 %admin ALL=(ALL) ALL
 ```
 
-# Packages
-
-```bash
-
-# see all installed packages
-apt list --installed
-
-```
 
 ## Services
 

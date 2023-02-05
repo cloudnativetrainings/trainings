@@ -1,0 +1,7 @@
+```bash
+
+crontab -l
+
+
+
+```
