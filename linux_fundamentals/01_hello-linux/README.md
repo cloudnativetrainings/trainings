@@ -10,6 +10,12 @@ whoami
 
 # getting the current directory
 pwd
+
+# clearing the screen
+clear
+
+# clearing the screen (the fancy way)
+<CTRL>+<L>
 ```
 
 ## Working with Directories
@@ -67,3 +73,5 @@ echo $MY_ENV_VAR
 
 
 TODO slides file structure of linux
+
+TODO help and man are your friends

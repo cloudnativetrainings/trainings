@@ -1,84 +1,102 @@
+# Networking
 
-# ip address
+## Getting your IP Adresses
+
 ```bash
-
+# getting the ip address of your internal network
 ip address
-curl https://ipinfo.io/ip
+
+# getting the external ip address (you can also use https://ipinfo.io/ip ;) )
 curl https://wtfismyip.com/json
 ```
 
-# webserver
+## Running a Webserver
+
 ```bash
+# install nginx
 apt install nginx
 
+# check the state of the nginx service (note that you get the service config file with this command)
 systemctl status nginx
 
+# take a look into this file (this is how you configure services in Linux, but that is out of scope for this training)
 cat /lib/systemd/system/nginx.service
-
-
 ```
 
-# curl
+## Accessing the Webserver
+
 ```bash
+# get the html response via curl
 curl localhost
+
+# stop the nginx service
 systemctl stop nginx
+
+# now the curl will fail
 curl localhost
+
+# restart the nginx service again
 systemctl start nginx
 
+# try out the different ways to access the webserver
+curl localhost
 curl localhost:80
 curl http://localhost:80
-curl external ip
+curl $(curl https://ipinfo.io/ip )
+
+# get more info about the response
 curl --verbose localhost
 
-# http response
+# get the metadata from the response
 curl -I localhost
-curl -i localhost
 
-# download files
+# downloading files with curl
 curl https://www.google.com/favicon.ico --output google_favicon.ico
-
+ls -alh google_favicon.ico
 ```
 
-# DNS
-```bash
+## Looking up DNS Entries
 
+```bash
 nslookup google.com
-
 ```
 
-# ports
-```bash
+## Getting info about ports
 
+Sometimes you are in the situation that some port is used by an application which you are not aware of. The following commands can be very helpful in those situations.
+```bash
+# install the package containing the netstat tool
 apt install net-tools
 
-netstat -tulpen | grep 8088
-systemctl list-units  -t service --state active | grep -i openlitespeed
-systemctl stop lshttpd
-systemctl disable lshttpd
-apt list --installed | grep openlitespeed
-apt remove openlitespeed -y
+# find the application which is using port 80
+netstat -tulpen | grep 80
+
+# check the active services
+systemctl list-units  -t service --state active | grep -i nginx
 ```
 
-# webserver benchmarking
+# Benchmarking the Webserver
+
 ```bash
+# install the package containing apache-ab
 apt-get install apache2-utils
 
-# Suppose we want to see how fast Yahoo can handle 100 requests, with a maximum of 10 requests running concurrently:
+# send 1000 requests with concurrency set to 100 to our webserver (please note the last `/`, apache-ab is a little bit picky here)
 ab -n 1000 -c 100 http://localhost:80/
-# TODO hint to last /
-
 ```
 
-# port scanning
-```bash
+# Port Scanning
 
+Nmap is a very neat tool to detect security issues.
+```bash
+# install nmap
 apt install nmap
 
+# see the open ports on your machine
 nmap localhost
 
-# detect OS and services 
+# detect OS and services on your machine
 nmap -A localhost
-
-# scan the top ports
-nmap --top-ports 100 localhost
 ```
+
+TODO slides discuss systemctl and daemons
