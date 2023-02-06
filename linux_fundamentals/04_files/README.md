@@ -28,7 +28,7 @@ cat my-file.txt
 cp my-file.txt my-copy-of-my-file.txt
 ls -alh
 
-# move a file
+# move/rename a file
 mv my-copy-of-my-file.txt my-moved-copy-of-my-file.txt
 ls -alh
 
@@ -80,6 +80,9 @@ head -n 3 /var/log/syslog\
 
 # showing the last 3 lines of a file
 tail -n 3 /var/log/syslog
+
+# wait for new data to the file and follow
+tail -f /var/log/syslog
 ```
 
 # vi
@@ -92,11 +95,11 @@ insert something
 
 # save file and exit vi
 <ESC>
-wq<ENTER>
+:wq<ENTER>
 
 # alternatively if you want to discard your changes
 <ESC>
-q!<ENTER>
+:q!<ENTER>
 ```
 
 TODO slides nano, emacs and other crap

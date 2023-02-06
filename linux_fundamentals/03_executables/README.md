@@ -52,7 +52,7 @@ mv trainings/linux_fundamentals/my-executable /usr/local/bin
 
 # now our application is known by the Linux system
 which my-executable
-./my-executable
+my-executable
 <CTRL>+<C>
 ```
 
