@@ -64,6 +64,9 @@ echo \
 # verify that the repository got added
 ls -alh /etc/apt/sources.list.d/
 
+# update apt package metadata with new packages from the recently added repository
+apt update
+
 # install docker
 apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 

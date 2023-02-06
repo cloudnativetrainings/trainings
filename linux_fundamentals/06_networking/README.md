@@ -55,6 +55,10 @@ curl -I localhost
 # downloading files with curl
 curl https://www.google.com/favicon.ico --output google_favicon.ico
 ls -alh google_favicon.ico
+
+# or with wget
+wget https://www.google.com/favicon.ico -O google_favicon_2.ico
+ls -lah google_favicon_2.ico
 ```
 
 ## Looking up DNS Entries

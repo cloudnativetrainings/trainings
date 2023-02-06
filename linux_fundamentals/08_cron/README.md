@@ -15,4 +15,7 @@ crontab -e
 
 # verify the cronjob is working (maybe you have to wait for a minute for it), you can exit the command `watch` via <CTRL>+<C>
 watch -n 1 cat cron_output.log
+
+# remove the crontab file (this will delete all entries immediately)
+crontab -r
 ```
