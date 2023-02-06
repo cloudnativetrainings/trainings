@@ -101,8 +101,3 @@ insert something
 <ESC>
 :q!<ENTER>
 ```
-
-TODO slides nano, emacs and other crap
-TODO slides vi jokes
-TODO linux philosophy about chaining commands
-TODO slides expain pipe

@@ -104,5 +104,3 @@ nmap localhost
 # detect OS and services on your machine
 nmap -A localhost
 ```
-
-TODO slides discuss systemctl and daemons

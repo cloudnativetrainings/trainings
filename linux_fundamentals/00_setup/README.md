@@ -13,5 +13,3 @@ You will be asked to enter the project name.
 ```bash
 gcloud compute ssh root@training-lf --zone europe-west3-a
 ```
-
-TODO export DEBIAN_FRONTEND=noninteractive into .bashrc

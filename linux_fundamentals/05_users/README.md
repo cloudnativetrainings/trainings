@@ -95,8 +95,3 @@ su my-user-b
 cat /home/my-user-a/my-file.txt
 exit
 ```
-
-TODO slides explain sudo and root
-TODO slides what are groups
-TODO slides https://askubuntu.com/questions/83/how-do-file-permissions-work
-TODO slides https://www.cyberciti.biz/faq/understanding-etcpasswd-file-format/

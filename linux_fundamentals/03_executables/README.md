@@ -81,6 +81,3 @@ kill -9 PROCESS_ID
 # the "task manager" on our box
 htop
 ```
-
-TODO slides explain dot on starting executables
-TODO slides stderr stdout

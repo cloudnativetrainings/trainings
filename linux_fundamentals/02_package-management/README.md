@@ -73,6 +73,3 @@ apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 # verify the docker installation (you should get infos about the versions of docker)
 docker version   
 ```
-
-TODO slides what is package management
-TODO slides package manager repository structure

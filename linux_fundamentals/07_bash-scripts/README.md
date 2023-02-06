@@ -20,6 +20,3 @@ ls -alh
 # verify the bash script worked out
 cat my-bash-script-file.txt
 ```
-
-TODO slides set euxo pipefail
-TODO slides discuss shebang line

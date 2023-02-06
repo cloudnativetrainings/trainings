@@ -45,5 +45,3 @@ source ~/.zshrc
 
 # et voilà => you have pimped your shell  ;)
 ```
-
-TODO slides sh vs bash vs fish vs zsh - fish marketing joke

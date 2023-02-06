@@ -76,5 +76,3 @@ scp shared.txt destination:
 # you can trigger commands via ssh on the destination machine like this
 ssh destination "hostname && ls -alh && cat ~/shared.txt"
 ```
-
-TODO slides scp syntax source destination
