@@ -1,41 +1,49 @@
-# zsh
+# ZSH
+
+ZSH brings in some neat behaviour and good styling into your daily work with Linux Machines. Lets give it a try.
+
+## Install ZSH
+
 ```bash
+# first check that /bin/bash is the current shell
+cat /etc/passwd | grep root
 
-# TODO slides sh vs bash vs fish vs zsh - fish marketing joke
-
+# install zsh
 apt install zsh
 
+# install oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
+# now zsh has become the current shell (note you change the shell via the command `chsh`)
 cat /etc/passwd | grep root
-chsh
+```
 
+## Add Plugins to ZSH
+
+```bash
+# git clone the plugins
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
-vi .zshrc
-i
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
-esc
-wq
-source .zshrc
+# add the plugins to the plugins section via vi, so it looks like this: `plugins=(git zsh-autosuggestions zsh-syntax-highlighting)`
+vi ~/.zshrc
 
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-vi .zshrc
-i
-ZSH_THEME="powerlevel10k/powerlevel10k"
-esc
-wq
-p10k configure
+# execute the file again
+source ~/.zshrc
 
+# now you have some syntax higlighting in place and also some good proposals from your history
 ```
 
+# Making your shell beautiful
 
-install zsh
+```bash
+# git clone the theme
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
+# execute the file again, you will get some questions about your preferred look and feel
+source ~/.zshrc
 
+# et voilà => you have pimped your shell  ;)
+```
 
-install oh-my-zsh
-install plugins zsh-autosuggestions zsh-syntax-highlighting
-enable plugins plugins=( git zsh-autosuggestions zsh-syntax-highlighting kube-ps1 kubectx )
-install and set ZSH_THEME="powerlevel10k/powerlevel10k"
+TODO slides sh vs bash vs fish vs zsh - fish marketing joke
