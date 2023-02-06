@@ -20,3 +20,6 @@ ls -alh
 
 
 ```
+
+
+TODO set euxo pipefail

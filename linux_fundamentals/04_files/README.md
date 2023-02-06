@@ -70,3 +70,15 @@ q!
 
 ```
 
+## Piping and Greping
+
+```bash
+# pipes allow you to send the output of a command to the input of another command
+# grep searches a text for
+echo something | grep th
+
+
+
+```
+
+TODO linux philosophy about chaining commands

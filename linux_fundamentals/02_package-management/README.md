@@ -1,39 +1,75 @@
+# Package Management
 
-<!-- TODO slides what is package management -->
+In this lab you will learn how to make use of a package manager to add and remove the installed packages on a Linux machine.
 
+## Install Packages from the official Ubuntu Repositories
 ```bash
 
-apt install tree
-=> FAIL
-
-apt update
-=> ignore upgradable packages
-
-apt install tree
-
-ls -alh
+# try to run `tree` (this command will fail because `tree` is not installed yet)
 tree
 
-apt upgrade
-=> No
+# install tree (this command will fail due to we have to update the package metainfo first)
+apt install tree
 
-apt upgrade -y
-# TODO fix linux versions => no reboot should be needed in this phase
+# update the package metainfo (ignore the output concerning upgradable packages, we will cover this later)
+apt update
 
-apt update && apt upgrade -y
+# install `tree`
+apt install tree
 
-# TODO install docker
-https://docs.docker.com/engine/install/ubuntu/
+# make use of `tree`
+tree
 
+# list all installed packages
 apt list --installed
 
+# lets filter for the lines with the word tree in it (we will cover pipes and grep later in detail)
 apt list --installed | grep tree
 
+# print out the location of the executable `tree`
 which tree
 
+# remove the package `tree` again
 apt remove tree
-
 which tree
 
+# upgrade all installed packages 
+# if you get a dialog with the header `Daemons using outdated libraries` click TAB and ENTER
+apt upgrade
 
+# you can chain commands like this
+apt update && apt upgrade -y
 ```
+
+## Install Packages from other Repositories
+
+Some packages are not contained in the official Ubuntu repositories. To install them you have to add the repository and its GPG key. We will try this via installing Docker.
+
+```bash
+# add some additional packages (note you can spawn commands over several lines via the character `\`)
+apt install \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+
+# add the official docker gpg key
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+
+# set up the repository
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+# verify that the repository got added
+ls -alh /etc/apt/sources.list.d/
+
+# install docker
+apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+
+# verify the docker installation (you should get infos about the versions of docker)
+docker version   
+```
+
+TODO slides what is package management
+TODO slides package manager repository structure
