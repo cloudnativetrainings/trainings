@@ -63,11 +63,11 @@ else
 fi
 
 # create SSH VM
-response_instance=`gcloud compute instances list --filter="name=$VM_NAME-SSH" --format="value(name)" --project=$PROJECT_NAME`
+response_instance=`gcloud compute instances list --filter="name=$VM_NAME-ssh" --format="value(name)" --project=$PROJECT_NAME`
 
 if [ -z "$response_instance" ]
 then
-  gcloud beta compute --project=$PROJECT_NAME instances create $VM_NAME-SSH \
+  gcloud beta compute --project=$PROJECT_NAME instances create $VM_NAME-ssh \
     --zone=$ZONE --machine-type=n2-standard-2 \
     --subnet=$NETWORK_NAME-subnet --network-tier=PREMIUM \
     --maintenance-policy=MIGRATE \
