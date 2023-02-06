@@ -1,5 +1,7 @@
 # Networking
 
+In this lab you will learn some useful tools to handle networking.
+
 ## Getting your IP Adresses
 
 ```bash
