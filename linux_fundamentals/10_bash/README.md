@@ -1,5 +1,7 @@
 # Bash
 
+In this lab you will learn how to search your bash commands you did in the past and how you can customize your bash.
+
 ## History
 
 ```bash
