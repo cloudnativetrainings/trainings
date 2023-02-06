@@ -8,3 +8,4 @@ ssh config
 
 scp
 
+ssh --command

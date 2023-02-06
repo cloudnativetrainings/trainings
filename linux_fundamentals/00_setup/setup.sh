@@ -11,7 +11,8 @@ fi
 export REGION=europe-west3
 export ZONE=europe-west3-a
 export TRAINING_NAME=training-lf
-export VM_NAME=$TRAINING_NAME
+export VM_NAME_1=$TRAINING_NAME-1
+export VM_NAME_2=$TRAINING_NAME-2
 export NETWORK_NAME=$TRAINING_NAME
 export FIREWALL_NAME=$TRAINING_NAME
 
@@ -44,18 +45,35 @@ else
       echo "Subnet $response_subnet already exists, skip creation"
 fi
 
-# create VM
-response_instance=`gcloud compute instances list --filter="name=$VM_NAME" --format="value(name)" --project=$PROJECT_NAME`
+# create VMs
+response_instance=`gcloud compute instances list --filter="name=$VM_NAME_1" --format="value(name)" --project=$PROJECT_NAME`
 
 if [ -z "$response_instance" ]
 then
-  gcloud beta compute --project=$PROJECT_NAME instances create $VM_NAME \
+  gcloud beta compute --project=$PROJECT_NAME instances create $VM_NAME_1 \
     --zone=$ZONE --machine-type=n2-standard-2 \
     --subnet=$NETWORK_NAME-subnet --network-tier=PREMIUM \
     --maintenance-policy=MIGRATE \
     --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append \
     --tags=http-server,https-server \
-    --image=ubuntu-2204-jammy-v20220924 --image-project=ubuntu-os-cloud \
+    --image=ubuntu-2204-jammy-v20230114 --image-project=ubuntu-os-cloud \
+    --boot-disk-size=100GB --boot-disk-type=pd-standard --boot-disk-device-name=container-training \
+    --no-shielded-secure-boot --shielded-vtpm --shielded-integrity-monitoring --reservation-affinity=any
+else
+      echo "Instance $response_instance already exists, skip creation"
+fi
+
+response_instance=`gcloud compute instances list --filter="name=$VM_NAME_2" --format="value(name)" --project=$PROJECT_NAME`
+
+if [ -z "$response_instance" ]
+then
+  gcloud beta compute --project=$PROJECT_NAME instances create $VM_NAME_2 \
+    --zone=$ZONE --machine-type=n2-standard-2 \
+    --subnet=$NETWORK_NAME-subnet --network-tier=PREMIUM \
+    --maintenance-policy=MIGRATE \
+    --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append \
+    --tags=http-server,https-server \
+    --image=ubuntu-2204-jammy-v20230114 --image-project=ubuntu-os-cloud \
     --boot-disk-size=100GB --boot-disk-type=pd-standard --boot-disk-device-name=container-training \
     --no-shielded-secure-boot --shielded-vtpm --shielded-integrity-monitoring --reservation-affinity=any
 else
@@ -98,17 +116,30 @@ fi
 
 # wait until the vm is up
 while true; do
-  gcloud compute ssh --quiet root@$VM_NAME --zone=$ZONE --project=$PROJECT_NAME --command="true" 2> /dev/null
+  gcloud compute ssh --quiet root@$VM_NAME_1 --zone=$ZONE --project=$PROJECT_NAME --command="true" 2> /dev/null
   if [ $? == 0 ]; then
-    echo "$VM_NAME is UP and RUNNING!.."
+    echo "$VM_NAME_1 is UP and RUNNING!.."
     break
   else
-    echo "$VM_NAME is not ready yet, will try again in 5 seconds..."
+    echo "$VM_NAME_1 is not ready yet, will try again in 5 seconds..."
+    sleep 5
+  fi
+done
+
+# wait until the vm is up
+while true; do
+  gcloud compute ssh --quiet root@$VM_NAME_2 --zone=$ZONE --project=$PROJECT_NAME --command="true" 2> /dev/null
+  if [ $? == 0 ]; then
+    echo "$VM_NAME_2 is UP and RUNNING!.."
+    break
+  else
+    echo "$VM_NAME_2 is not ready yet, will try again in 5 seconds..."
     sleep 5
   fi
 done
 
 # clone trainings repo
-
-gcloud compute ssh root@$VM_NAME --zone=$ZONE --project=$PROJECT_NAME \
-  --command="git clone https://github.com/kubermatic-labs/trainings.git && echo 'cd ~/trainings/linux_fundamentals' >> ~/.bashrc"
+gcloud compute ssh root@$VM_NAME_1 --zone=$ZONE --project=$PROJECT_NAME \
+  --command="git clone https://github.com/kubermatic-labs/trainings.git && echo 'cd ~/trainings/linux_fundamentals' >> ~/.bashrc && echo 'export DEBIAN_FRONTEND=noninteractive' >> ~/.bashrc"
+gcloud compute ssh root@$VM_NAME_2 --zone=$ZONE --project=$PROJECT_NAME \
+  --command="git clone https://github.com/kubermatic-labs/trainings.git && echo 'cd ~/trainings/linux_fundamentals' >> ~/.bashrc && echo 'export DEBIAN_FRONTEND=noninteractive' >> ~/.bashrc"
