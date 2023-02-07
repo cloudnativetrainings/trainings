@@ -34,11 +34,14 @@ source ~/.zshrc
 # now you have some syntax higlighting in place and also some good proposals from your history
 ```
 
-# Making your shell beautiful
+# Making your shell even more beautiful
 
 ```bash
 # git clone the theme
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+
+# change the theme via vi, so it looks like this: `ZSH_THEME="powerlevel10k/powerlevel10k"`
+vi ~/.zshrc
 
 # execute the file again, you will get some questions about your preferred look and feel
 source ~/.zshrc
