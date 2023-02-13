@@ -1,3 +1,6 @@
+
+# TODO delete user clusters!!!
+
 .PHONY: destroy
 destroy:
 	cd ~/kubeone; kubeone reset --manifest kubeone.yaml -t tf.json -y

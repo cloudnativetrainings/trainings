@@ -9,20 +9,22 @@ base64 -w0 ~/secrets/key.json
 ```
 
 * Create a new project
-* Click Create Cluster
+* Click the button `Create Cluster`
 * Within Tab `Provider`
     * Choose Provider `Google Cloud`
     * Choose Datecenter `Frankurt`
 * Within Tab `Cluster`
     * Generate a random Cluster name
 * Within Tab `Settings`
-    * Copy the base64 encoded GCE key.json
+    * Copy the base64 encoded GCE key.json in the field `Service Account`
 * Within Tab `Initial Nodes`
     * Generate a random MachineDeployment name
     * Set the number of replicas to 3
     * Choose Disk Type `pd-ssd`
     * Choose Machine Type `n1-standard-2`
     * Check `Preemptible` box
+* Within Tab `Summary`
+    * Click the button `Create Cluster`
 
 ### Verify in Terminal
 

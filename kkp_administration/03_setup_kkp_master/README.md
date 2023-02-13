@@ -47,6 +47,7 @@ sed -i 's/uuid: \"\"/uuid: \"'$(uuidgen -r)'\"/g' ~/kkp/values.yaml
 Change the minio settings to the following:
 
 ```yaml
+# Take care about the proper indent in the yaml file!!!
 minio:
   storeSize: '10Gi'
   storageClass: kubermatic-backup

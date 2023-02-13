@@ -14,6 +14,7 @@ Visit https://console.cloud.google.com/apis/credentials/consent and create an OA
 Visit https://console.cloud.google.com/apis/credentials and click the button `Create Credentials` and choose `OAuth client ID`
 * Choose `Application Type` with type `Web application` and fill in a proper name.
 * Add the following `Authorized redirect URI` with the URI `https://<DOMAIN>/dex/callback`. Fill in your domain.
+* Download the client secret json file
 
 ### Connect KKP to the OIDC Provider
 
