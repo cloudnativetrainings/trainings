@@ -28,6 +28,9 @@ Learn how to setup a Kubernetes Cluster without any tool support.
 ### [Kubernetes Security](kubernetes_security/README.md)
 Learn how to secure a Kubernetes Cluster.
 
+### [Linux Fundamentals](linux_fundamentals/README.md)
+Learn the basics on how to work with Linux.
+
 ### [Servicemesh](servicemesh/README.md)
 Learn the feature set of a ServiceMesh.
 

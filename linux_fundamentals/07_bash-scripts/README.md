@@ -1,6 +1,10 @@
 # Bash Scripts
 
-Create a bash script via vi with the following content
+In this lab you will learn how to write your own bash scripts.
+
+## Create your own bash script
+
+Create a file called `my-bash-script.sh` via vi with the following content
 >#!/bin/bash
 >
 >echo $(date) >> my-bash-script-file.txt
