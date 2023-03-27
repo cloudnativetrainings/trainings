@@ -27,7 +27,7 @@ write_files:
 
 runcmd:
   - echo "================================================= Update Machine"
-  - DEBIAN_FRONTEND=noninteractive apt-get update
+  - apt-get update
   - DEBIAN_FRONTEND=noninteractive apt-get upgrade -y
 
   - echo "================================================= CloudInit Phase Install Containerd"
@@ -47,7 +47,7 @@ runcmd:
   - curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
   - echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
   - apt-get update
-  - apt-get install -y kubelet=1.23.6-00 kubeadm=1.23.6-00 kubectl=1.23.6-00
+  - DEBIAN_FRONTEND=noninteractive apt-get install -y kubelet=1.23.6-00 kubeadm=1.23.6-00 kubectl=1.23.6-00
   - apt-mark hold kubelet kubeadm kubectl
   - kubeadm init --pod-network-cidr=192.168.0.0/16
 
@@ -60,7 +60,8 @@ runcmd:
   - kubectl taint nodes --all node-role.kubernetes.io/master-
 
   - echo "================================================= CloudInit Phase Patch Kubernetes"
-  - kubectl apply -f https://docs.projectcalico.org/manifests/canal.yaml
+  - kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.25.0/manifests/tigera-operator.yaml
+  - kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.25.0/manifests/custom-resources.yaml
   - kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.5.2/components.yaml
   - kubectl patch deployment metrics-server -n kube-system --type 'json' -p '[{"op":"add", "path":"/spec/template/spec/containers/0/args/-", "value":"--kubelet-insecure-tls"}]'
 
@@ -70,10 +71,10 @@ runcmd:
   - echo "source <(kubectl completion bash)" >>/root/.bashrc
 
   - echo "================================================= CloudInit Phase Install GVisor"
-  - apt-get update && apt-get install -y apt-transport-https ca-certificates curl gnupg
+  - apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y apt-transport-https ca-certificates curl gnupg
   - curl -fsSL https://gvisor.dev/archive.key | gpg --dearmor -o /usr/share/keyrings/gvisor-archive-keyring.gpg
   - echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/gvisor-archive-keyring.gpg] https://storage.googleapis.com/gvisor/releases release main" | tee /etc/apt/sources.list.d/gvisor.list > /dev/null
-  - apt-get update && apt-get install -y runsc
+  - apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y runsc
   - sed -i '/\[plugins."io.containerd.grpc.v1.cri".containerd.runtimes\.runc\]/i \
             [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runsc]\n          runtime_type = "io.containerd.runsc.v1"\n' /etc/containerd/config.toml
   - systemctl restart containerd
@@ -85,5 +86,5 @@ runcmd:
   - echo "================================================= CloudInit Phase Run Training Script"
   - /root/00_setup/setup_training.sh
 
-  - echo "================================================= CloudInit Finished Successfully"
-  - reboot
+  # - echo "================================================= CloudInit Finished Successfully"
+  # - reboot

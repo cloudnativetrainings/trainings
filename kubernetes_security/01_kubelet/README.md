@@ -11,7 +11,7 @@ Before fixing the kubelet we will try to get sensitive data via the kubelet.
 exit
 
 # store the external IP of the worker node
-export IP=$(gcloud compute instances list --filter="name=kubernetes-security" --format json | jq .[].networkInterfaces[].accessConfigs[].natIP | tr -d \")
+export IP=$(gcloud compute instances list --filter="name=kubernetes-security" --format json | jq '.[].networkInterfaces[].accessConfigs[].natIP' | tr -d \")
 ```
 
 ### Getting sensitive data from the kubelet
@@ -77,6 +77,6 @@ systemctl status kubelet
 # exit the VM - for being in the Google Cloud Shell again
 exit
 
-# try to attack the kublet atain - now you will get an `Unauthorized` response
+# try to attack the kublet again - now you will get an `Unauthorized` response
 curl -XPOST -k https://$IP:10250/run/default/my-suboptimal-pod/my-ubuntu -d "cmd=cat /host/etc/passwd"
 ```

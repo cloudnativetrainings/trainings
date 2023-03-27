@@ -2,22 +2,24 @@
 
 ## Create Training VM
 
-Open a new terminal tab with the project properly set.
+Open a new terminal tab.
+
+> Ensure that the project is properly set.
 
 ```bash
 # clone the git repo
 git clone https://github.com/kubermatic-labs/trainings
 
 # change directory
-cd trainings/k8s_security/00_setup/
+cd trainings/kubernetes_security/00_setup/
 
 # create the VM
 make create
 ```
 
-Note that the VM will get setup via Cloud-Init which will take ~ 5 minutes for setting up everything.
-
 ## Verify setup
+
+> Note that the VM will get setup via Cloud-Init which will take ~ 5 minutes for setting up everything.
 
 ```bash
 # ssh into the new VM

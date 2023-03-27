@@ -6,17 +6,17 @@ echo "================================================= Init Training Script - I
 git clone https://github.com/ahmetb/kubectx /opt/kubectx
 ln -s /opt/kubectx/kubectx /usr/local/bin/kubectx
 ln -s /opt/kubectx/kubens /usr/local/bin/kubens
-apt-get install jq --yes
+DEBIAN_FRONTEND=noninteractive apt-get install jq --yes
 
 echo "================================================= Init Training Script - Install Helm"
 curl https://baltocdn.com/helm/signing.asc | apt-key add -
-apt-get install apt-transport-https --yes
+DEBIAN_FRONTEND=noninteractive apt-get install apt-transport-https --yes
 echo "deb https://baltocdn.com/helm/stable/debian/ all main" | tee /etc/apt/sources.list.d/helm-stable-debian.list
 apt update
-apt-get install helm --yes
+DEBIAN_FRONTEND=noninteractive apt-get install helm --yes
 
 echo "================================================= Init Training Script - Install ETCD Client"
-apt-get install etcd-client --yes
+DEBIAN_FRONTEND=noninteractive apt-get install etcd-client --yes
 
 echo "================================================= Init Training Script - Install KubeSec"
 wget https://github.com/controlplaneio/kubesec/releases/download/v2.11.4/kubesec_linux_amd64.tar.gz
@@ -24,11 +24,11 @@ tar -xvf kubesec_linux_amd64.tar.gz
 mv kubesec /usr/local/bin/
 
 echo "================================================= Init Training Script - Install Trivy"
-apt-get install wget apt-transport-https gnupg lsb-release --yes
+DEBIAN_FRONTEND=noninteractive apt-get install wget apt-transport-https gnupg lsb-release --yes
 wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | apt-key add -
 echo deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main | tee -a /etc/apt/sources.list.d/trivy.list
 apt-get update
-apt-get install trivy --yes
+DEBIAN_FRONTEND=noninteractive apt-get install trivy --yes
 
 echo "================================================= Init Training Script - Install Kyverno"
 helm repo add kyverno https://kyverno.github.io/kyverno/
@@ -36,13 +36,13 @@ helm repo update
 helm install --namespace kyverno --create-namespace kyverno kyverno/kyverno --version v2.3.3
 
 echo "================================================= Init Training Script - Install AppArmor Utils"
-apt-get install apparmor-utils --yes
+DEBIAN_FRONTEND=noninteractive apt-get install apparmor-utils --yes
 
 echo "================================================= Init Training Script - Install Falco"
 curl -s https://falco.org/repo/falcosecurity-3672BA8F.asc | apt-key add -
 echo "deb https://download.falco.org/packages/deb stable main" | tee -a /etc/apt/sources.list.d/falcosecurity.list
 apt-get update --yes
-apt-get --yes install linux-headers-$(uname -r)
+DEBIAN_FRONTEND=noninteractive apt-get --yes install linux-headers-$(uname -r)
 apt-get install -y falco
 systemctl enable falco
 systemctl start falco
