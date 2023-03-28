@@ -59,9 +59,18 @@ runcmd:
   - echo "================================================= CloudInit Phase Taint Node"
   - kubectl taint nodes --all node-role.kubernetes.io/master-
 
-  - echo "================================================= CloudInit Phase Patch Kubernetes"
+  - echo "================================================= CloudInit Phase Install CNI Plugin"
   - kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.25.0/manifests/tigera-operator.yaml
+  - echo "================================================= CloudInit Phase DEBUG CNI Plugin sleeping"
+  - sleep 10s
+  - kubectl get pods -A
+  - echo "================================================= CloudInit Phase DEBUG CNI Plugin stop sleeping"
   - kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.25.0/manifests/custom-resources.yaml
+  - sleep 10s
+  - kubectl get pods -A  
+  - echo "================================================= CloudInit Phase DEBUG CNI Plugin sleeping"
+  
+  - echo "================================================= CloudInit Phase Install Metrics Server"
   - kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.5.2/components.yaml
   - kubectl patch deployment metrics-server -n kube-system --type 'json' -p '[{"op":"add", "path":"/spec/template/spec/containers/0/args/-", "value":"--kubelet-insecure-tls"}]'
 
