@@ -46,6 +46,7 @@ DEBIAN_FRONTEND=noninteractive apt-get install -y dkms make linux-headers-$(unam
 DEBIAN_FRONTEND=noninteractive apt-get install -y clang llvm
 DEBIAN_FRONTEND=noninteractive FALCO_FRONTEND=noninteractive apt-get install -y falco
 falco-driver-loader bpf
+systemctl enable falco-bpf.service 
 systemctl start falco-bpf.service
 
 echo "================================================= Init Training Script - Apply Kubernetes Manifests"
