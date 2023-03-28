@@ -39,13 +39,14 @@ echo "================================================= Init Training Script - I
 DEBIAN_FRONTEND=noninteractive apt-get install apparmor-utils --yes
 
 echo "================================================= Init Training Script - Install Falco"
-curl -s https://falco.org/repo/falcosecurity-3672BA8F.asc | apt-key add -
+curl -s https://falco.org/repo/falcosecurity-packages.asc | apt-key add -
 echo "deb https://download.falco.org/packages/deb stable main" | tee -a /etc/apt/sources.list.d/falcosecurity.list
-apt-get update --yes
-DEBIAN_FRONTEND=noninteractive apt-get --yes install linux-headers-$(uname -r)
-apt-get install -y falco
-systemctl enable falco
-systemctl start falco
+apt-get update -y
+DEBIAN_FRONTEND=noninteractive apt-get install -y dkms make linux-headers-$(uname -r)
+DEBIAN_FRONTEND=noninteractive apt-get install -y clang llvm
+DEBIAN_FRONTEND=noninteractive FALCO_FRONTEND=noninteractive apt-get install -y falco
+falco-driver-loader bpf
+systemctl start falco-bpf.service
 
 echo "================================================= Init Training Script - Apply Kubernetes Manifests"
 kubectl apply -f /root/pod.yaml
