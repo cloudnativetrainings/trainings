@@ -86,5 +86,5 @@ runcmd:
   - echo "================================================= CloudInit Phase Run Training Script"
   - /root/00_setup/setup_training.sh
 
-  # - echo "================================================= CloudInit Finished Successfully"
-  # - reboot
+  - echo "================================================= CloudInit Finished Successfully"
+  - reboot
