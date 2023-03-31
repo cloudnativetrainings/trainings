@@ -53,7 +53,7 @@ echo "deb https://download.falco.org/packages/deb stable main" | tee -a /etc/apt
 apt-get update -y 
 DEBIAN_FRONTEND=noninteractive apt-get --yes install linux-headers-$(uname -r)
 # TODO Falco changed the installation routine completely with version 0.34.x and version 0.34.1 does not work
-DEBIAN_FRONTEND=noninteractive apt-get install falco=0.33.1
+DEBIAN_FRONTEND=noninteractive apt-get --yes install falco=0.33.1
 systemctl enable falco
 systemctl start falco
 
