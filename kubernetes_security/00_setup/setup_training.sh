@@ -38,16 +38,24 @@ helm install --namespace kyverno --create-namespace kyverno kyverno/kyverno --ve
 echo "================================================= Init Training Script - Install AppArmor Utils"
 DEBIAN_FRONTEND=noninteractive apt-get install apparmor-utils --yes
 
+echo "================================================= Init Training Script - Install GVisor"
+apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y apt-transport-https ca-certificates curl gnupg
+curl -fsSL https://gvisor.dev/archive.key | gpg --dearmor -o /usr/share/keyrings/gvisor-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/gvisor-archive-keyring.gpg] https://storage.googleapis.com/gvisor/releases release main" | tee /etc/apt/sources.list.d/gvisor.list > /dev/null
+apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y runsc
+sed -i '/\[plugins."io.containerd.grpc.v1.cri".containerd.runtimes\.runc\]/i \
+        [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runsc]\n          runtime_type = "io.containerd.runsc.v1"\n' /etc/containerd/config.toml
+systemctl restart containerd
+
 echo "================================================= Init Training Script - Install Falco"
 curl -s https://falco.org/repo/falcosecurity-packages.asc | apt-key add -
 echo "deb https://download.falco.org/packages/deb stable main" | tee -a /etc/apt/sources.list.d/falcosecurity.list
-apt-get update -y
-DEBIAN_FRONTEND=noninteractive apt-get install -y dkms make linux-headers-$(uname -r)
-DEBIAN_FRONTEND=noninteractive apt-get install -y clang llvm
-DEBIAN_FRONTEND=noninteractive FALCO_FRONTEND=noninteractive apt-get install -y falco
-falco-driver-loader bpf
-systemctl enable falco-bpf.service 
-systemctl start falco-bpf.service
+apt-get update -y 
+DEBIAN_FRONTEND=noninteractive apt-get --yes install linux-headers-$(uname -r)
+# TODO Falco changed the installation routine completely with version 0.34.x and version 0.34.1 does not work
+DEBIAN_FRONTEND=noninteractive apt-get install falco=0.33.1
+systemctl enable falco
+systemctl start falco
 
 echo "================================================= Init Training Script - Apply Kubernetes Manifests"
 kubectl apply -f /root/pod.yaml

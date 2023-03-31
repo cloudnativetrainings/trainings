@@ -6,7 +6,7 @@
 # create a backup
 etcdctl snapshot save backup.db
 
-# verify the 2nd secret
+# verify the 2nd secret - note that you should not get any output due to the backup does not hold the 2nd password as plaintext 
 cat backup.db | grep -a password456
 
 # verify the 1st secret - note that the secret is still in plain text due to etcd still holds the old revisions of the secret

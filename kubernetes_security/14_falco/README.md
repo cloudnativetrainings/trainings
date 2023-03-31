@@ -4,12 +4,6 @@
 ## Verify installation
 
 ```bash
-# fix falco installation (falco changed the installation process completely and the current version 0.34.1 does not work)
-apt remove falco
-apt install falco=0.33.1
-```
-
-```bash
 systemctl status falco
 ```
 
