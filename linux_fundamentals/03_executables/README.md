@@ -78,6 +78,6 @@ ps aux | grep my-executable
 # get the process id via the previous command, it is in the second column
 kill -9 PROCESS_ID
 
-# the "task manager" on our box
+# the "task manager" on our box (you can exit htop via clicking 'q')
 htop
 ```

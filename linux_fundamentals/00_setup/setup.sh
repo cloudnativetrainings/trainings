@@ -126,8 +126,14 @@ while true; do
   fi
 done
 
+# clone git repo
 gcloud compute ssh root@$VM_NAME --zone=$ZONE --project=$PROJECT_NAME \
   --command="git clone https://github.com/kubermatic-labs/trainings.git && echo 'cd ~/trainings/linux_fundamentals' >> ~/.bashrc"
 
+# avoid apt dialogues
 gcloud compute ssh root@$VM_NAME --zone=$ZONE --project=$PROJECT_NAME \
   --command="echo 'export DEBIAN_FRONTEND=noninteractive' >> ~/.bashrc"
+
+# reboot machine
+gcloud compute ssh root@$VM_NAME --zone=$ZONE --project=$PROJECT_NAME \
+  --command="shutdown -r now"

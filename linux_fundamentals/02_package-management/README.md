@@ -58,8 +58,7 @@ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/
 
 # set up the repository
 echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-  $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu  $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 # verify that the repository got added
 ls -alh /etc/apt/sources.list.d/
@@ -68,7 +67,7 @@ ls -alh /etc/apt/sources.list.d/
 apt update
 
 # install docker
-apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+apt install docker-ce
 
 # verify the docker installation (you should get infos about the versions of docker)
 docker version   

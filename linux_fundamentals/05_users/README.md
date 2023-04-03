@@ -86,7 +86,7 @@ echo "hello from user a" > my-file.txt
 ls -alh
 
 # change the file permission to RW only for user my-user-a
-chmod 600 my-file
+chmod 600 my-file.txt
 ls -alh
 exit
 
