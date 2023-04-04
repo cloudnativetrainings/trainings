@@ -134,6 +134,4 @@ gcloud compute ssh root@$VM_NAME --zone=$ZONE --project=$PROJECT_NAME \
 gcloud compute ssh root@$VM_NAME --zone=$ZONE --project=$PROJECT_NAME \
   --command="echo 'export DEBIAN_FRONTEND=noninteractive' >> ~/.bashrc"
 
-# reboot machine
-gcloud compute ssh root@$VM_NAME --zone=$ZONE --project=$PROJECT_NAME \
-  --command="shutdown -r now"
+# TODO reboot
