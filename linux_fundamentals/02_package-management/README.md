@@ -31,6 +31,8 @@ which tree
 
 # remove the package `tree` again
 apt remove tree
+
+# now the tool `which` will deliver an empty output due to we uninstalled `tree`
 which tree
 
 # upgrade all installed packages 
