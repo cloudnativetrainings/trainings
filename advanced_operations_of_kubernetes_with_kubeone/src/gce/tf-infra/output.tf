@@ -18,7 +18,8 @@ output "kubeone_api" {
   description = "kube-apiserver LB endpoint"
 
   value = {
-    endpoint = google_compute_address.lb_ip.address
+    endpoint                    = local.kubeapi_endpoint
+    apiserver_alternative_names = var.apiserver_alternative_names
   }
 }
 
@@ -36,6 +37,8 @@ output "kubeone_hosts" {
       ssh_port             = var.ssh_port
       ssh_private_key_file = var.ssh_private_key_file
       ssh_user             = var.ssh_username
+      ssh_hosts_keys       = var.ssh_hosts_keys
+      bastion_host_key     = var.bastion_host_key
     }
   }
 }
@@ -46,14 +49,32 @@ output "kubeone_workers" {
   value = {
     # following outputs will be parsed by kubeone and automatically merged into
     # corresponding (by name) worker definition
-    "${var.cluster_name}-pool-az-a" = {
-      replicas = 1
+    "${var.cluster_name}-pool1" = {
+      replicas = var.initial_machinedeployment_replicas
       providerSpec = {
+        annotations = {
+          "k8c.io/operating-system-profile"                           = var.initial_machinedeployment_operating_system_profile
+          "cluster.k8s.io/cluster-api-autoscaler-node-group-min-size" = tostring(local.cluster_autoscaler_min_replicas)
+          "cluster.k8s.io/cluster-api-autoscaler-node-group-max-size" = tostring(local.cluster_autoscaler_max_replicas)
+        }
         sshPublicKeys   = [file(var.ssh_public_key_file)]
         operatingSystem = var.worker_os
         operatingSystemSpec = {
           distUpgradeOnBoot = false
         }
+        # nodeAnnotations are applied on resulting Node objects
+        # nodeAnnotations = {
+        #   "key" = "value"
+        # }
+        # machineObjectAnnotations are applied on resulting Machine objects
+        # uncomment to following to set those kubelet parameters. More into at:
+        # https://kubernetes.io/docs/tasks/administer-cluster/reserve-compute-resources/
+        # machineObjectAnnotations = {
+        #   "v1.kubelet-config.machine-controller.kubermatic.io/SystemReserved" = "cpu=200m,memory=200Mi"
+        #   "v1.kubelet-config.machine-controller.kubermatic.io/KubeReserved"   = "cpu=200m,memory=300Mi"
+        #   "v1.kubelet-config.machine-controller.kubermatic.io/EvictionHard"   = ""
+        #   "v1.kubelet-config.machine-controller.kubermatic.io/MaxPods"        = "110"
+        # }
         cloudProviderSpec = {
           # provider specific fields:
           # see example under `cloudProviderSpec` section at:
@@ -61,85 +82,22 @@ output "kubeone_workers" {
           diskSize              = 50
           diskType              = "pd-ssd"
           machineType           = var.workers_type
-          network               = google_compute_network.network.self_link
-          subnetwork            = google_compute_subnetwork.subnet.self_link
-          zone                  = "${var.region}-a"
-          preemptible           = var.preemptible
+          network               = data.google_compute_network.network.self_link
+          subnetwork            = data.google_compute_subnetwork.subnet.self_link
+          zone                  = "${local.zone_first}"
+          preemptible           = false
           assignPublicIPAddress = true
           # Enable support for multizone clusters
-          multizone             = true
+          multizone = true
           labels = {
-            "${var.cluster_name}-workers" = "pool-az-a"
+            "${var.cluster_name}-workers" = "pool1"
           }
-          tags     = ["firewall", "targets", "${var.cluster_name}-pool-az-a"]
+          tags     = ["firewall", "targets", "${var.cluster_name}-pool1"]
           regional = false
+          # Use custom image (optional)
+          # customImage = ""
         }
       }
     }
-//    "${var.cluster_name}-pool-az-b" = {
-//      replicas = 1
-//      providerSpec = {
-//        sshPublicKeys   = [file(var.ssh_public_key_file)]
-//        operatingSystem = var.worker_os
-//        operatingSystemSpec = {
-//          distUpgradeOnBoot = false
-//        }
-//        cloudProviderSpec = {
-//          # provider specific fields:
-//          # see example under `cloudProviderSpec` section at:
-//          # https://github.com/kubermatic/machine-controller/blob/main/examples/gce-machinedeployment.yaml
-//          diskSize              = 50
-//          diskType              = "pd-ssd"
-//          machineType           = var.workers_type
-//          network               = google_compute_network.network.self_link
-//          subnetwork            = google_compute_subnetwork.subnet.self_link
-//          zone                  = "${var.region}-b"
-//          preemptible           = false
-//          assignPublicIPAddress = true
-//          # Enable support for multizone clusters
-//          multizone             = true
-//          labels = {
-//            "${var.cluster_name}-workers" = "pool-az-b"
-//          }
-//          tags     = ["firewall", "targets", "${var.cluster_name}-az-b"]
-//          regional = false
-//        }
-//      }
-//    }
-//    "${var.cluster_name}-pool-az-c" = {
-//      replicas = 1
-//      providerSpec = {
-//        sshPublicKeys = [
-//          file(var.ssh_public_key_file)]
-//        operatingSystem = var.worker_os
-//        operatingSystemSpec = {
-//          distUpgradeOnBoot = false
-//        }
-//        cloudProviderSpec = {
-//          # provider specific fields:
-//          # see example under `cloudProviderSpec` section at:
-//          # https://github.com/kubermatic/machine-controller/blob/main/examples/gce-machinedeployment.yaml
-//          diskSize = 50
-//          diskType = "pd-ssd"
-//          machineType = var.workers_type
-//          network = google_compute_network.network.self_link
-//          subnetwork = google_compute_subnetwork.subnet.self_link
-//          zone = "${var.region}-c"
-//          preemptible = false
-//          assignPublicIPAddress = true
-//          # Enable support for multizone clusters
-//          multizone = true
-//          labels = {
-//            "${var.cluster_name}-workers" = "pool-az-c"
-//          }
-//          tags = [
-//            "firewall",
-//            "targets",
-//            "${var.cluster_name}-az-c"]
-//          regional = false
-//        }
-//      }
-//    }
   }
 }
-

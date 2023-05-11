@@ -20,7 +20,13 @@ provider "google" {
 }
 
 locals {
-  zones_count = length(data.google_compute_zones.available.names)
+  zones_count        = length(data.google_compute_zones.available.names)
+  zone_first         = data.google_compute_zones.available.names[0]
+  kubeapi_endpoint   = var.disable_kubeapi_loadbalancer ? google_compute_instance.control_plane.0.network_interface.0.network_ip : google_compute_address.lb_ip.0.address
+  loadbalancer_count = var.disable_kubeapi_loadbalancer ? 0 : 1
+
+  cluster_autoscaler_min_replicas = var.cluster_autoscaler_min_replicas > 0 ? var.cluster_autoscaler_min_replicas : var.initial_machinedeployment_replicas
+  cluster_autoscaler_max_replicas = var.cluster_autoscaler_max_replicas > 0 ? var.cluster_autoscaler_max_replicas : var.initial_machinedeployment_replicas
 }
 
 data "google_compute_zones" "available" {
@@ -31,21 +37,18 @@ data "google_compute_image" "control_plane_image" {
   project = var.control_plane_image_project
 }
 
-resource "google_compute_network" "network" {
-  name                    = var.cluster_name
-  auto_create_subnetworks = false
+data "google_compute_network" "network" {
+  name = "default"
 }
 
-resource "google_compute_subnetwork" "subnet" {
-  name          = "${var.cluster_name}-subnet"
-  network       = google_compute_network.network.self_link
-  region        = var.region
-  ip_cidr_range = var.cluster_network_cidr
+data "google_compute_subnetwork" "subnet" {
+  name   = "default"
+  region = var.region
 }
 
 resource "google_compute_firewall" "common" {
   name    = "${var.cluster_name}-common"
-  network = google_compute_network.network.self_link
+  network = data.google_compute_network.network.self_link
 
   allow {
     protocol = "tcp"
@@ -59,7 +62,7 @@ resource "google_compute_firewall" "common" {
 
 resource "google_compute_firewall" "control_plane" {
   name    = "${var.cluster_name}-control-plane"
-  network = google_compute_network.network.self_link
+  network = data.google_compute_network.network.self_link
 
   allow {
     protocol = "tcp"
@@ -73,7 +76,7 @@ resource "google_compute_firewall" "control_plane" {
 
 resource "google_compute_firewall" "internal" {
   name    = "${var.cluster_name}-internal"
-  network = google_compute_network.network.self_link
+  network = data.google_compute_network.network.self_link
 
   allow {
     protocol = "tcp"
@@ -90,11 +93,28 @@ resource "google_compute_firewall" "internal" {
   }
 
   source_ranges = [
-    var.cluster_network_cidr,
+    data.google_compute_subnetwork.subnet.ip_cidr_range,
   ]
 }
 
+resource "google_compute_firewall" "nodeports" {
+  name    = "${var.cluster_name}-nodeports"
+  network = data.google_compute_network.network.self_link
+
+  allow {
+    protocol = "tcp"
+    ports    = ["30000-32767"]
+  }
+
+  source_ranges = [
+    "0.0.0.0/0",
+  ]
+}
+
+
 resource "google_compute_address" "lb_ip" {
+  count = local.loadbalancer_count
+
   name = "${var.cluster_name}-lb-ip"
 }
 
@@ -123,21 +143,23 @@ resource "google_compute_target_pool" "control_plane_pool" {
 }
 
 resource "google_compute_forwarding_rule" "control_plane" {
+  count = local.loadbalancer_count
+
   name       = "${var.cluster_name}-apiserver"
   target     = google_compute_target_pool.control_plane_pool.self_link
   port_range = "6443-6443"
-  ip_address = google_compute_address.lb_ip.address
+  ip_address = google_compute_address.lb_ip.0.address
 }
 
 resource "google_compute_instance" "control_plane" {
-  count = var.control_plane_count
+  count = var.control_plane_vm_count
 
   name         = "${var.cluster_name}-control-plane-${count.index + 1}"
   machine_type = var.control_plane_type
   zone         = data.google_compute_zones.available.names[count.index % local.zones_count]
 
   # Changing the machine_type, min_cpu_platform, or service_account on an
-  # instance requires stopping it. To acknowledge this, 
+  # instance requires stopping it. To acknowledge this,
   # allow_stopping_for_update = true is required
   allow_stopping_for_update = true
 
@@ -149,7 +171,7 @@ resource "google_compute_instance" "control_plane" {
   }
 
   network_interface {
-    subnetwork = google_compute_subnetwork.subnet.self_link
+    subnetwork = data.google_compute_subnetwork.subnet.self_link
 
     access_config {
       nat_ip = ""

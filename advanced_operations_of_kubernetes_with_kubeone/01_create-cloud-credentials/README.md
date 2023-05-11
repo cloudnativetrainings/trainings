@@ -38,6 +38,8 @@ Create a service account `k1-service-account` for your Google Cloud resources, w
   gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member serviceAccount:$GCP_SERVICE_ACCOUNT_ID --role='roles/storage.admin'
   ```
 
+<!-- TODO training is not set yet, where does it happen??? -->
+
 * Create a new json key for your service account
   ```bash
   cd $TRAINING_DIR
@@ -66,3 +68,4 @@ Create a service account `k1-service-account` for your Google Cloud resources, w
   ```
 
 Jump > [**Home**](../README.md) | Previous > [**Setup**](../00_setup/README.md) | Next > [**Cloud Infra Setup using Terraform**](../02_initial-cloud-infra-with-terraform/README.md)
+
