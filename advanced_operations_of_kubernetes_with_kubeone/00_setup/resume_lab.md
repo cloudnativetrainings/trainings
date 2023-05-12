@@ -9,6 +9,9 @@ docker run --name kubeone-tool-container -v $(pwd):/home/kubermatic/mnt -t -d qu
 docker exec -it kubeone-tool-container bash
 ```
 
+TODO
+
+
 ```bash
 export GCP_PROJECT_ID=student-xx-xxxx
 export GCP_SERVICE_ACCOUNT_ID=k1-service-account@student-xx-xxxx.iam.gserviceaccount.com

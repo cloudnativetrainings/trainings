@@ -18,8 +18,8 @@ fi
 if [[ -z $PROJECT_ID ]]; then
   echo "INPUT: Type PROJECT_ID (student-XX-project):" && read PROJECT_ID
 fi
-export REGION=europe-west4
-export ZONE=europe-west4-a
+REGION=europe-west4
+ZONE=europe-west4-a
 
 set -euxo pipefail
 
@@ -27,3 +27,9 @@ set -euxo pipefail
 gcloud config set project $PROJECT_ID
 gcloud config set compute/region $REGION
 gcloud config set compute/zone $ZONE
+
+# manifest environment variables in ~/.bashrc file
+echo "export GCP_PROJECT_ID=$PROJECT_ID" >> ~/.bashrc
+echo "export GCP_REGION=$REGION" >> ~/.bashrc
+echo "export GCP_ZONE=$ZONE" >> ~/.bashrc
+. ~/.bashrc
