@@ -157,7 +157,7 @@ SSH](https://docs.kubermatic.com/kubeone/main/guides/ssh/) before you continue. 
 
 * Now change back the root of a training repo
   ```bash
-  cd -
+  cd $TRAINING_DIR
   ```
 
 Jump > [**Home**](../README.md) | Previous > [**GCE Service Account Setup**](../01_create-cloud-credentials/README.md) | Next > [**First KubeOne Cluster Setup**](../03_first-kubeone-cluster/README.md)

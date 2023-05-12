@@ -17,10 +17,6 @@ If you have already a deeper experience with Kubernetes, you can verify the clus
   ```bash
   kubectl config set-context --current --namespace=app
   ```
-  or with kcns
-  ```bash
-  kcns app
-  ```
 
 ## Create a deployment
 
@@ -55,71 +51,15 @@ kubectl get events
 
 We can also get the yaml from an existing deployment using the command - 
 ```bash
-kubectl get deployment nginx -o yaml | kexp
+kubectl get deployment nginx -o yaml 
 ```
 
 ## Reuse the YAML
 
 Save the output yaml to a file using 
 ```bash
-kubectl get deployment nginx -o yaml | kexp > first.yaml
+kubectl get deployment nginx -o yaml > first.yaml
 ```
-
-Open a file using `vim first.yaml`:
-
-Now the yaml file should look similar to this example:
-
-```yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  labels:
-    app: nginx
-  name: nginx
-  namespace: app
-spec:
-  progressDeadlineSeconds: 600
-  replicas: 1
-  revisionHistoryLimit: 10
-  selector:
-    matchLabels:
-      app: nginx
-  strategy:
-    rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 25%
-    type: RollingUpdate
-  template:
-    metadata:
-      labels:
-        app: nginx
-    spec:
-      containers:
-      - image: nginx
-        imagePullPolicy: Always
-        name: nginx
-        resources: 
-        terminationMessagePath: /dev/termination-log
-        terminationMessagePolicy: File
-      dnsPolicy: ClusterFirst
-      restartPolicy: Always
-      schedulerName: default-scheduler
-      securityContext: 
-      terminationGracePeriodSeconds: 30
-```
-
-Now delete the existing deployment using the command 
-```bash
-kubectl delete deployment nginx
-```
-
-Create a new deployment from the file we just modified, using 
-```bash
-kubectl apply -f first.yaml
-```
-> We can now use the `first.yaml` to check if the cluster behaves like expected. 
-
-> **HINT:** `kubectl get <OBJECT> -o yaml | kexp` removes `status` and `metadata` fields for you. `kexp` is a command of [fubectl](https://github.com/kubermatic/fubectl).
 
 ## Expose deployment using a service
 
@@ -127,47 +67,7 @@ The newly deployed nginx container is a lightweight web server. We will need to 
 
 Now to expose a deployment, we need to execute 
 ```bash
-kubectl expose deployment/nginx
-```
-
-As we have not declared port to use we will get following error.
-
-```text
-error: couldn't find port via --port flag or introspection
-See 'kubectl expose -h' for help and examples.
-```
-
-This is because we haven't added port for container to listen on. To do this open `first.yaml` in a `vim` using `vim first.yaml`.
-
-Find the container name in a file and add the port information as mentioned below.
-
-```yaml
-spec:
-    containers:
-    - image: nginx
-        imagePullPolicy: Always
-        name: nginx
-        ports:                               # Add these
-        - containerPort: 80                  # three
-          protocol: TCP                      # lines
-        resources: 
-```
-
-Save the file and apply the change by using 
-```bash
-kubectl apply -f first.yaml
-```
-
-View the Pod and Deployment using 
-```bash
-kubectl get deploy,pod
-```
-> Note the AGE shows that the pod was re-created.
-
-
-Try to expose a resource again using 
-```bash
-kubectl expose deployment/nginx
+kubectl expose deployment/nginx --port 80
 ```
 
 Verify the service configuration using `
@@ -187,8 +87,7 @@ Our nginx server is now reachable through the service IP and the endpoint IP. We
 
 ```bash
 kubectl run --image=nicolaka/netshoot --rm -it -- bash
-curl http://<cluster-ip>
-curl http://<endpoint-ip>
+curl nginx
 exit
 ```
 

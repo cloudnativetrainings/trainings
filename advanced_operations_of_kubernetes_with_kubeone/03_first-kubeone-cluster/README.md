@@ -20,8 +20,7 @@ cloudProvider:
 Start the KubeOne installation:
 
 ```bash
-cd $TRAINING_DIR/src/gce
-kubeone install -t ./tf-infra -m kubeone.yaml --verbose
+kubeone install -t $TRAINING_DIR/src/gce/tf-infra -m $TRAINING_DIR/src/gce/kubeone.yaml --verbose
 ```
 
 KubeOne is combining the `kubeone.yaml` and Terraform state `./tf-infra/terraform.tfstate` files together. The initial infrastructure created by Terraform is used for the control plane. Afterwards KubeOne uses the Kubermatic machine-controller to manage the life-cycle of the worker nodes. The machine-controller requires several bits of information that must be provided by the user. Information that is needed is the following:
@@ -88,13 +87,16 @@ INFO[23:08:36 CEST] Creating worker machines…
 A kubeconfig file will be generated after the KubeOne installation. Export it and use it to check the status of the Kubernetes cluster that was created:
 >Replace the cluster_name as set in `terraform.tfvars`
 ```bash
-export KUBECONFIG=$PWD/<cluster_name>-kubeconfig 
+export KUBECONFIG=$TRAINING_DIR/k1-kubeconfig
+
+# for avoiding problem with Google Cloud Shell on reconnects we persist this value also into our ~/.bashrc rile
+echo "export KUBECONFIG=$TRAINING_DIR/k1-kubeconfig" >> ~/.bashrc
 ```
 
 Check if you get one master and one worker node:
 
 ```bash
-kubeone status -t ./tf-infra/
+kubeone status -t $TRAINING_DIR/src/gce/tf-infra -m $TRAINING_DIR/src/gce/kubeone.yaml
 ```
 
 ```text
