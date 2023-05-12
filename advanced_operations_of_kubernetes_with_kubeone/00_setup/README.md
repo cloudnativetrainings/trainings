@@ -2,7 +2,7 @@
 
 ## Install Tooling
 
-### KubeOne
+### Install KubeOne
 
 ```bash
 mkdir -p /tmp/k1 && cd /tmp/k1 && wget https://github.com/kubermatic/kubeone/releases/download/v1.6.2/kubeone_1.6.2_linux_amd64.zip
@@ -11,11 +11,11 @@ mkdir -p ~/bin && cp kubeone ~/bin/kubeone
 cd ~
 ```
 
-### Setup Environment
+### Setup Training Environment
 
 ```bash
-mkdir -p ~/bin
-echo "export TRAINING_DIR=~/trainings/advanced_operations_of_kubernetes_with_kubeone" >> ~/.bashrc
+export TRAINING_DIR=~/trainings/advanced_operations_of_kubernetes_with_kubeone
+echo "export TRAINING_DIR=$TRAINING_DIR" >> ~/.bashrc
 echo "export PATH=$PATH:~/bin" >> ~/.bashrc
 echo ". <(kubeone completion bash)" >> ~/.bashrc
 echo "cd $TRAINING_DIR" >> ~/.bashrc
