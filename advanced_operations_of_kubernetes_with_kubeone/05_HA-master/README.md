@@ -6,7 +6,7 @@ In the next step, we will setup a real HA cluster over 3 availability zones to m
 
 ### Create and setup additional HA master nodes
 
-* The current `terraform.tfvars` file contains a value `control_plane_count = 1 ` and `control_plane_target_pool_members_count = 1`. This indicates that we only have one master instance set up and one listener to the load balancer for the control plane. Let's add the remaining master nodes to the cluster first. Change the value of the `control_plane_count` in `terraform.tfvars` to `3` and save: 
+* The current `terraform.tfvars` file contains a value `control_plane_vm_count = 1 ` and `control_plane_target_pool_members_count = 1`. This indicates that we only have one master instance set up and one listener to the load balancer for the control plane. Let's add the remaining master nodes to the cluster first. Change the value of the `control_plane_vm_count` in `terraform.tfvars` to `3` and save: 
   ```hcl-terraform
   cluster_name = "k1"
   
@@ -14,7 +14,7 @@ In the next step, we will setup a real HA cluster over 3 availability zones to m
   
   region = "europe-west4"
   # instance to create of the control plane
-  control_plane_count = 3 # <<<< CHANGE
+  control_plane_vm_count = 3 # <<<< CHANGE
   
   # listeners of the Loadbalancer. Default is NOT HA, but ensure the bootstraping works -> after bootstraping increase to e.g. 3
   control_plane_target_pool_members_count = 1
@@ -77,7 +77,7 @@ In the next step, we will setup a real HA cluster over 3 availability zones to m
   
   region = "europe-west4"
   # instance to create of the control plane
-  control_plane_count = 3
+  control_plane_vm_count = 3
   
   # listeners of the LoadBalancer. Default is NOT HA, but ensure the bootstrapping works -> after bootstrapping increase to e.g. 3
   control_plane_target_pool_members_count = 3  # <<<< CHANGE

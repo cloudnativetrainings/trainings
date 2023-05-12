@@ -71,7 +71,9 @@ student-00-xxx  student-00-xxx   999999999999
 ```
 
 ```bash
-echo $PROJECT_ID
+echo $GCP_PROJECT_ID
 ```
+
+> Note you may have to start a new bash terminal tab to engage the changes we made.
 
 Jump > [**Home**](../README.md) | Next > [**GCE Service Account Setup**](../01_create-cloud-credentials/README.md)

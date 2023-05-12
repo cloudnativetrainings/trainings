@@ -6,7 +6,6 @@ To avoid the usage of your recent private SSH key, you can freshly create one fo
 
 * Create SSH Key, if no ssh key is present
   ```bash
-  cd $TRAINING_DIR
   ssh-keygen -f .secrets/id_rsa
   ```
   >HINT: For now no password is needed, but for prodution would be recommended
@@ -36,7 +35,7 @@ To avoid the usage of your recent private SSH key, you can freshly create one fo
   region = "europe-west4"
   
   # Instance to create of the control plane
-  control_plane_count = 1  
+  control_plane_vm_count = 1  
 
   # Listeners of the LoadBalancer. Default is NOT HA, but ensure the bootstrapping works -> after bootstrapping we will increase it to e.g. 3
   control_plane_target_pool_members_count = 1

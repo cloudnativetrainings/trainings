@@ -23,11 +23,13 @@ Create a service account `k1-service-account` for your Google Cloud resources, w
 
 * Configure your IDs
   ```bash
-  export GCP_PROJECT_ID=$(gcloud config list project --format='value(core.project)')
-  # e.g.: student-XX-project
-
   export GCP_SERVICE_ACCOUNT_ID=$(gcloud iam service-accounts list --format='value(email)' --filter='email~k1-service-account.*')
   # e.g.: k1-service-account@student-XX-project.iam.gserviceaccount.com
+
+  # for avoiding problem with Google Cloud Shell on reconnects we persist this value also into our ~/.bashrc rile
+  echo "GCP_SERVICE_ACCOUNT_ID=$GCP_SERVICE_ACCOUNT_ID" >> ~/.bashrc
+
+
   ```
 
 * Create policy binding
@@ -42,7 +44,6 @@ Create a service account `k1-service-account` for your Google Cloud resources, w
 
 * Create a new json key for your service account
   ```bash
-  cd $TRAINING_DIR
   mkdir -p ./.secrets && cd ./.secrets
   gcloud iam service-accounts keys create --iam-account $GCP_SERVICE_ACCOUNT_ID k8c-cluster-provisioner-sa-key.json
   ``` 
@@ -51,11 +52,15 @@ Create a service account `k1-service-account` for your Google Cloud resources, w
   ```bash
   ls -la *.json
   export GOOGLE_CREDENTIALS=$(cat ./k8c-cluster-provisioner-sa-key.json)
+
+  # for avoiding problem with Google Cloud Shell on reconnects we persist this value also into our ~/.bashrc rile
+  echo "GOOGLE_CREDENTIALS='$(cat ./k8c-cluster-provisioner-sa-key.json)'" >> ~/.bashrc
+
   ```
 
 * Test if your environment variable contains the json key
   ```bash
-  echo $GOOGLE_CREDENTIALS
+  echo $GOOGLE_CREDENTIALS | jq .
   ```
   Output
   ```text
