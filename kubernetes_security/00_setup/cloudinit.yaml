@@ -44,7 +44,8 @@ runcmd:
   - echo "================================================= CloudInit Phase Install Kubernetes"
   - sysctl --system
   - swapoff -a
-  - curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 6A030B21BA07F4FB
+  - curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add
+  - apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 6A030B21BA07F4FB
   - sudo apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
   # - sudo curl -fsSLo /etc/apt/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
   # - echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
