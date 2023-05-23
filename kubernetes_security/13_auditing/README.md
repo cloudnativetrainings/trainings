@@ -5,10 +5,10 @@
 
 ```bash
 # inspect the auditing policy
-vi 12_auditing/my-policy.yaml
+vi 13_auditing/my-policy.yaml
 
 # copy the policy file into the apiserver mount
-cp 12_auditing/my-policy.yaml /root/apiserver/
+cp 13_auditing/my-policy.yaml /root/apiserver/
 ```
 
 ### Enable Auditing in the API Server
