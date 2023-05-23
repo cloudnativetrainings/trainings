@@ -33,7 +33,7 @@ DEBIAN_FRONTEND=noninteractive apt-get install trivy --yes
 echo "================================================= Init Training Script - Install Kyverno"
 helm repo add kyverno https://kyverno.github.io/kyverno/
 helm repo update
-helm install --namespace kyverno --create-namespace kyverno kyverno/kyverno --version v2.3.3
+helm install --atomic --namespace kyverno --create-namespace kyverno kyverno/kyverno --version v2.3.3
 
 echo "================================================= Init Training Script - Install AppArmor Utils"
 DEBIAN_FRONTEND=noninteractive apt-get install apparmor-utils --yes
