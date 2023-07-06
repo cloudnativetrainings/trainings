@@ -40,7 +40,7 @@ Curl bob from the susan
 ```bash
 kubectl exec -it susan -- curl bob
 ```
->Now Bob is not reachable from Susan.
+>Now Bob is now reachable from Susan.
 
 ## Cleanup
 
