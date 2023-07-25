@@ -13,7 +13,7 @@
 
 3. Navigate to Kubernetes Fundamentals training folder to get started
     ```bash  
-    cd trainings/k8s_fundamentals/
+    cd trainings/kubernetes_fundamentals/
     ```
 
 4. [Setup](00_setup/README.md) - the GKE cluster for training.

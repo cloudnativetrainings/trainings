@@ -24,11 +24,9 @@ docker run -it --rm --name entrypoint-vs-cmd entrypoint-vs-cmd:1.0.0
 * Adapt the Dockerfile like this
 
   ```bash
-  cat << EOF | sudo tee Dockerfile
   FROM ubuntu:22.04
   ENTRYPOINT [ "echo" ]
   CMD [ "hello docker" ]
-  EOF
   ```
 
 * Build and run the image

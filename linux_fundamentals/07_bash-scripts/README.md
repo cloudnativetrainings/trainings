@@ -14,9 +14,9 @@ Create a file called `my-bash-script.sh` via vi with the following content
 ./my-bash-script.sh
 
 # make the bash script executable
-ls -alh
+ls -alh my-bash-script.sh
 chmod 700 my-bash-script.sh
-ls -alh
+ls -alh my-bash-script.sh
 
 # run the bash script
 ./my-bash-script.sh

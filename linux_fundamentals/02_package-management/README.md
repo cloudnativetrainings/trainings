@@ -72,5 +72,5 @@ apt update
 apt install docker-ce
 
 # verify the docker installation (you should get infos about the versions of docker)
-docker version   
+docker --version   
 ```

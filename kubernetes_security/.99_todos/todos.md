@@ -13,3 +13,8 @@ read-only pods
 small images
 
 firewall - really open everything
+
+add sops
+add sealed secrets
+container signing
+distroless lab, showing the issues
