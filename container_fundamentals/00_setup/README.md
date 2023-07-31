@@ -1,19 +1,3 @@
-# Provision VM with docker and podman installations
-
-## Open Google Cloud Console Run the setup.sh bash script
-
-You will be asked to enter the project name.
-
-```bash
-00_setup/setup.sh
-```
-
-## SSH into the new VM
-
-```bash
-gcloud compute ssh root@training-cf --zone europe-west3-a
-```
-
 ## Install docker
 
 ```bash
@@ -44,12 +28,3 @@ sudo groupadd docker
 sudo usermod -aG docker $USER
 newgrp docker
 ```
-
-## Install Podman
-
-```bash
-sudo apt-get update
-sudo apt-get install -y podman
-```
-
-[Jump to Home](../README.md)

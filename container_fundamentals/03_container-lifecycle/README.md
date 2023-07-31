@@ -167,5 +167,3 @@ Remove all the containers
 ```bash
 docker rm -f $(docker ps -qa)
 ```
-
-[Jump to Home](../README.md) | [Previous Training](../02_images/README.md) | [Next Training](../04_interact/README.md)

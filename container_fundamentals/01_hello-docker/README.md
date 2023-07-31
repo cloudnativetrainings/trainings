@@ -11,22 +11,18 @@ docker run -it -p 80:80 ubuntu:22.04
 ## Install a web server
 
 ```bash
-apt update && apt install -y apache2
+apt update && apt install -y nginx
 ```
 
 ## Run the web server
 
 ```bash
-apache2ctl -DFOREGROUND
+/etc/init.d/nginx start
 ```
 
 ## Visit the welcome page in your browser
 
-To get the external IP you can visit <https://console.cloud.google.com/networking/addresses/>.
-
-## Stop the process in the Docker container
-
-Press CTRL+C keys.
+# TODO make get-external-ip
 
 ## Exit the container
 
@@ -69,5 +65,3 @@ podman ps -a
 # Remove the container
 podman rm <Container-ID>
 ```
-
-[Jump to Home](../README.md) | [Next Training](../02_images/README.md)

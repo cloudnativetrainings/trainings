@@ -94,5 +94,3 @@ file /tmp/nginx-image-layers/31b3f1ad4ce1f369084d0f959813c51df0ca17d9877d5ee88c2
 # Check the contents of the file via tar
 tar ztvf /tmp/nginx-image-layers/31b3f1ad4ce1f369084d0f959813c51df0ca17d9877d5ee88c2db6ff88341430
 ```
-
-[Jump to Home](../README.md) | [Previous Training](../04_interact/README.md) | [Next Training](../06_build-images-interactive/README.md)

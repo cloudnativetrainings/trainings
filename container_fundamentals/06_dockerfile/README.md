@@ -2,7 +2,7 @@
 
 In this training, you will create your own image and run it afterwards.
 
->Navigate to the folder `07_dockerfile` from CLI, before you get started.
+>Navigate to the folder `06_dockerfile` from CLI, before you get started.
 
 ## Inspect the Dockerfile
 
@@ -46,5 +46,3 @@ docker run -it my-image:1.0.0
   ```bash
   docker rmi -f $(docker images -qa)
   ```
-
-[Jump to Home](../README.md) | [Previous Training](../06_build-images-interactive/README.md) | [Next Training](../08_dockerfile_webserver/README.md)

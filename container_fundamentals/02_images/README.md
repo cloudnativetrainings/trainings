@@ -61,5 +61,3 @@ In this training, you will learn how to manage images.
   ```
 
   >At this time, the docker image will be removed as there is no running container associated to this image.
-
-  [Jump to Home](../README.md) | [Previous Training](../01_hello-docker/README.md) | [Next Training](../03_container-lifecycle/README.md)

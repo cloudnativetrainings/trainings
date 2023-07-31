@@ -2,7 +2,7 @@
 
 In this training, you will learn the difference between exec and shell form concerning variable substitution.
 
->Navigate to the folder `11_shell-vs-exec-form-variable-substitution` from CLI, before you get started.
+>Navigate to the folder `10_shell-vs-exec-form-variable-substitution` from CLI, before you get started.
 
 ## Inspect the Dockerfile
 

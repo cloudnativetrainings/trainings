@@ -1,0 +1,28 @@
+#cloud-config
+runcmd:
+  - echo "================================================= Update Machine"
+  - apt-get update
+  - DEBIAN_FRONTEND=noninteractive apt-get upgrade -y
+  - DEBIAN_FRONTEND=noninteractive apt-get autoremove -y
+
+  - echo "================================================= Install Tools"
+  - DEBIAN_FRONTEND=noninteractive apt-get install -y jq
+
+  - echo "================================================= Install Skopeo"
+  - DEBIAN_FRONTEND=noninteractive apt-get install -y skopeo
+
+  - echo "================================================= Install Dive"
+  - wget https://github.com/wagoodman/dive/releases/download/v0.11.0/dive_0.11.0_linux_amd64.deb 
+  - DEBIAN_FRONTEND=noninteractive apt-get install -y ./dive_0.11.0_linux_amd64.deb
+
+  - echo "================================================= Install Podman"
+  - DEBIAN_FRONTEND=noninteractive apt-get install -y podman
+
+  - echo "================================================= Install Hadolint"
+  - wget https://github.com/hadolint/hadolint/releases/download/v2.12.0/hadolint-Linux-x86_64
+  - chmod +x ./hadolint-Linux-x86_64
+  - mv ./hadolint-Linux-x86_64 /usr/local/bin/hadolint
+
+  - echo "================================================= Install Labs"
+  - git clone https://github.com/kubermatic-labs/trainings.git /tmp/trainings/
+  - cp -r /tmp/trainings/container_fundamentals/* /root/

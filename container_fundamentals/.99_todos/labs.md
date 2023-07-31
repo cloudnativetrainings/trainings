@@ -1,3 +1,5 @@
+# readme setup
+
 # labs
 make use of tags everywhere
 make sure entrypoint/cmd used properly everywhere
