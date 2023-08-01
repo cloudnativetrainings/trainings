@@ -1,4 +1,7 @@
-# slides
+remove duplicate infos and reorder slides
+
+lab slides do not have the same look and feel
+
 make use of tags everywhere
 make sure entrypoint/cmd used properly everywhere
 
