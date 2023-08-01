@@ -33,5 +33,3 @@ docker run -it --rm --privileged -v /:/host ubuntu:22.04 ls -alh /host
   ```bash
   docker rmi -f $(docker images -qa)
   ```
-
-[Jump to Home](../README.md) | [Previous Training](../18_docker-compose/README.md) | [Final](../99_teardown/README.md)

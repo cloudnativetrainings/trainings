@@ -59,5 +59,3 @@ docker run -it --rm --name entrypoint-vs-cmd entrypoint-vs-cmd:1.0.0
   ```bash
   docker rmi -f $(docker images -qa)
   ```
-
-[Jump to Home](../README.md) | [Previous Training](../09_build-ignore/README.md) | [Next Training](../11_shell-vs-exec-form-variable-substitution/README.md)

@@ -78,5 +78,3 @@ docker inspect --format '{{ .HostConfig.LogConfig }}' redis
   ```bash
   docker rmi -f $(docker images -qa)
   ```
-
-[Jump to Home](../README.md) | [Previous Training](../14_multistaged-builds/README.md) | [Next Training](../16_networking/README.md)

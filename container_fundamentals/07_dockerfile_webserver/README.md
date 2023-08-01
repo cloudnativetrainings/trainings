@@ -44,5 +44,3 @@ curl localhost:80
   ```bash
   docker rmi -f $(docker images -qa)
   ```
-
-[Jump to Home](../README.md) | [Previous Training](../07_dockerfile/README.md) | [Next Training](../09_build-ignore/README.md)

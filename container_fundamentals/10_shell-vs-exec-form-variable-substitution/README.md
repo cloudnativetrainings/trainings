@@ -30,9 +30,6 @@ docker run -it shell-vs-exec-form-vars:1.0.0
 
 ```docker
 ENTRYPOINT /bin/echo $FOO
-
-# or run the command below:
-sed -i 's|\(ENTRYPOINT \).*|\1/bin/echo $FOO|' Dockerfile
 ```
 
 > This is shell form of `ENTRYPOINT`
@@ -64,5 +61,3 @@ docker run -it shell-vs-exec-form-vars:2.0.0
   ```bash
   docker rmi -f $(docker images -qa)
   ```
-
-[Jump to Home](../README.md) | [Previous Training](../10_entrypoint-vs-cmd/README.md) | [Next Training](../12_shell-vs-exec-form-PID1/README.md)

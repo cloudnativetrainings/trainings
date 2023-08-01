@@ -26,14 +26,11 @@ docker run -it ignore:1.0.0
 
 ## Exclude files from the build
 
-* Create a .dockerignore file
-  Create a file called `.dockerignore` as follows
+* Create a .dockerignore file with the following content
 
   ```bash
-  cat << EOF | sudo tee .dockerignore 
   passwords.txt
   some-large-image.jpg
-  EOF
   ```
 
 * Build the image
@@ -63,5 +60,3 @@ docker run -it ignore:1.0.0
   ```bash
   docker rmi -f $(docker images -qa)
   ```
-
-[Jump to Home](../README.md) | [Previous Training](../08_dockerfile_webserver/README.md) | [Next Training](../10_entrypoint-vs-cmd/README.md)

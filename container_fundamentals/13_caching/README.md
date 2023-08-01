@@ -15,7 +15,7 @@ cat server.js
 
 ```bash
 docker build -t node:1.0.0 .
-docker run -it --rm -p 80:80 node:1.0.0
+docker run -it -d --rm -p 80:80 node:1.0.0
 ```
 
 >Visit the site via the external IP of your node
@@ -34,7 +34,7 @@ Change the message to something different in the file `server.js`
 
 ```bash
 docker build -t node:1.0.0 .
-docker run -it --rm -p 80:80 node:1.0.0
+docker run -it -d --rm -p 80:80 node:1.0.0
 ```
 
 >Visit the site via the external IP of your node
@@ -50,7 +50,8 @@ docker run -it --rm -p 80:80 node:1.0.0
   COPY package.json .
   RUN npm install
   COPY server.js .
-  CMD [ "npm", "start" ]
+  ENTRYPOINT [ "npm" ]
+  CMD [ "start" ]
   ```
 
 * Do the initial build
@@ -65,7 +66,7 @@ Change the message to something different in the file `server.js`.
 
 ```bash
 docker build -t node:2.0.0 .
-docker run -it --rm -p 80:80 node:2.0.0
+docker run -it -d --rm -p 80:80 node:2.0.0
 ```
 
 >Visit the site via the external IP of your node
@@ -78,5 +79,3 @@ Remove all the images
 ```bash
 docker rmi -f $(docker images -qa)
 ```
-
-[Jump to Home](../README.md) | [Previous Training](../12_shell-vs-cmd-form-PID1/README.md) | [Next Training](../14_multistaged-builds/README.md)

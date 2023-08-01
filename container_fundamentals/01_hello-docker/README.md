@@ -22,7 +22,7 @@ apt update && apt install -y nginx
 
 ## Visit the welcome page in your browser
 
-# TODO make get-external-ip
+  >You can get the external IP via the command `make get-external-ip` in your home directory.
 
 ## Exit the container
 

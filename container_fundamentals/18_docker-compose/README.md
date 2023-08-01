@@ -48,6 +48,8 @@ cat docker-compose.yaml
 
 * Visit Grafana in your Browser (User admin, Password admin)
 
+  >You can get the external IP via the command `make get-external-ip` in your home directory.
+
   ```bash
   http://<EXTERNAL-IP>
   ```
@@ -73,5 +75,3 @@ Import the Dashboard with id `193`. Set the Datasource to the previously generat
   ```bash
   docker rmi -f $(docker images -qa)
   ```
-
-[Jump to Home](../README.md) | [Previous Training](../17_volumes/README.md) | [Next Training](../19_privileged-container/README.md)

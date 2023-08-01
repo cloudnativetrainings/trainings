@@ -97,5 +97,3 @@ docker network ls
   ```bash
   docker rmi -f $(docker images -qa)
   ```
-
-[Jump to Home](../README.md) | [Previous Training](../15_logs/README.md) | [Next Training](../17_volumes/README.md)

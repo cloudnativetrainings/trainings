@@ -66,5 +66,3 @@ docker image ls go
   ```bash
   docker rmi -f $(docker images -qa)
   ```
-
-[Jump to Home](../README.md) | [Previous Training](../13_caching/README.md) | [Next Training](../15_logs/README.md)

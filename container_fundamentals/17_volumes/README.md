@@ -194,5 +194,3 @@ Bind mount volumes let you manage the lifecycle of your data youself.
   ```bash
   docker rmi -f $(docker images -qa)
   ```
-
-[Jump to Home](../README.md) | [Previous Training](../16_networking/README.md) | [Next Training](../18_docker-compose/README.md)

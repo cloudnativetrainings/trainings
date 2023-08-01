@@ -7,3 +7,5 @@ docker logs should also be in there
 
 ## CRI visualisations
 https://www.inovex.de/de/blog/containers-docker-containerd-nabla-kata-firecracker/
+
+# hadolint slides
