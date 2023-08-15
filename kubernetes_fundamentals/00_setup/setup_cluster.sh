@@ -14,7 +14,7 @@ export ZONE=europe-west3-a
 export CLUSTER_NAME=training-kf
 export NETWORK_NAME=$CLUSTER_NAME
 export FIREWALL_NAME=$CLUSTER_NAME
-export CLUSTER_VERSION=1.22
+export CLUSTER_VERSION=1.24
 
 set -euxo pipefail
 
@@ -56,7 +56,6 @@ then
     --zone=$ZONE \
     --cluster-version $CLUSTER_VERSION \
     --machine-type "n1-standard-4" --num-nodes "2" \
-    --image-type "UBUNTU" --disk-type "pd-standard" --disk-size "100" \
     --enable-network-policy --enable-ip-alias \
     --no-enable-autoupgrade --enable-autorepair --max-surge-upgrade 1 --max-unavailable-upgrade 0 \
     --no-enable-basic-auth --metadata disable-legacy-endpoints=true \
