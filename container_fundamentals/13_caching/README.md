@@ -15,10 +15,16 @@ cat server.js
 
 ```bash
 docker build -t node:1.0.0 .
-docker run -it -d --rm -p 80:80 node:1.0.0
+docker run -it -d --rm --name my-webserver -p 80:80 node:1.0.0
 ```
 
 >Visit the site via the external IP of your node
+
+### Remove the container
+
+```bash
+docker rm -f my-webserver 
+```
 
 ## Re-build the docker image
 
@@ -38,7 +44,13 @@ docker run -it -d --rm -p 80:80 node:1.0.0
 ```
 
 >Visit the site via the external IP of your node
->Note that all layers starting from the `RUN npm install` layer is not taken from the cache. On bigger projects, this can increase your build times significantly.
+>Note that all layers starting from the `RUN npm install` layer are not taken from the cache. On bigger projects, this can increase your build times significantly.
+
+### Remove the container
+
+```bash
+docker rm -f my-webserver 
+```
 
 ## Fix the Dockerfile
 
@@ -66,7 +78,7 @@ Change the message to something different in the file `server.js`.
 
 ```bash
 docker build -t node:2.0.0 .
-docker run -it -d --rm -p 80:80 node:2.0.0
+docker run -it -d --rm --name my-webserver -p 80:80 node:2.0.0
 ```
 
 >Visit the site via the external IP of your node
@@ -74,8 +86,14 @@ docker run -it -d --rm -p 80:80 node:2.0.0
 
 ## Cleanup
 
-Remove all the images
+* Remove all the containers
 
-```bash
-docker rmi -f $(docker images -qa)
-```
+  ```bash
+  docker rm -f $(docker ps -qa)
+  ```
+
+* Remove all the images
+
+  ```bash
+  docker rmi -f $(docker images -qa)
+  ```

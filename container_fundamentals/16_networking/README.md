@@ -97,3 +97,9 @@ docker network ls
   ```bash
   docker rmi -f $(docker images -qa)
   ```
+
+* Remove the custom network
+
+  ```bash
+  docker network rm my-network
+  ```

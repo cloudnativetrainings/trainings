@@ -12,3 +12,10 @@ docker logs should also be in there
 https://www.inovex.de/de/blog/containers-docker-containerd-nabla-kata-firecracker/
 
 # hadolint slides
+lab should be near the slides
+
+# multistaged build
+lab should be near the slides
+
+# advanced dockerfiles
+order of slides are confusing
