@@ -38,7 +38,7 @@ cp 11_apparmor/my-apparmor-profile /etc/apparmor.d/
 systemctl restart apparmor
 
 # verify new profile got added
- aa-status | grep my-apparmor-profile
+aa-status | grep my-apparmor-profile
 ```
 
 ### Engage Profile in Pod

@@ -67,7 +67,7 @@ etcdctl get /registry/secrets/default/my-secret-2
 ### Old Secrets
 
 ```bash
-# create a new secret - note the secret is not encrypted
+# note the first secret is not encrypted
 etcdctl get /registry/secrets/default/my-secret
 
 # re-create all secrets in the cluster
