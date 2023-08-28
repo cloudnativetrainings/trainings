@@ -7,11 +7,8 @@ Open a new terminal tab.
 > Ensure that the project is properly set.
 
 ```bash
-# clone the git repo
-git clone https://github.com/kubermatic-labs/trainings
-
 # change directory
-cd trainings/kubernetes_security/00_setup/
+cd 00_setup/
 
 # create the VM
 make create

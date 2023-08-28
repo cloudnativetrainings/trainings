@@ -47,10 +47,8 @@ runcmd:
   - curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add
   - apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 6A030B21BA07F4FB
   - sudo apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
-  # - sudo curl -fsSLo /etc/apt/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
-  # - echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
   - apt-get update
-  - DEBIAN_FRONTEND=noninteractive apt-get install -y kubelet=1.23.6-00 kubeadm=1.23.6-00 kubectl=1.23.6-00
+  - DEBIAN_FRONTEND=noninteractive apt-get install -y kubelet=1.27.5-00 kubeadm=1.27.5-00 kubectl=1.27.5-00
   - apt-mark hold kubelet kubeadm kubectl
   - kubeadm init --pod-network-cidr=192.168.0.0/16
 
@@ -60,7 +58,7 @@ runcmd:
   - chown $(id -u):$(id -g) $HOME/.kube/config
 
   - echo "================================================= CloudInit Phase Taint Node"
-  - kubectl taint nodes --all node-role.kubernetes.io/master-
+  - kubectl taint nodes --all node-role.kubernetes.io/control-plane-
 
   - echo "================================================= CloudInit Phase Install CNI Plugin"
   - kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.25.0/manifests/tigera-operator.yaml
@@ -71,7 +69,7 @@ runcmd:
   - kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.5.2/components.yaml
   - kubectl patch deployment metrics-server -n kube-system --type 'json' -p '[{"op":"add", "path":"/spec/template/spec/containers/0/args/-", "value":"--kubelet-insecure-tls"}]'
 
-  - echo "================================================= CloudInit Phase User Preps"
+  - echo "================================================= CloudInit Phase Root User Preps"
   - mkdir -p /root/.kube
   - cp -i /etc/kubernetes/admin.conf /root/.kube/config
   - echo "source <(kubectl completion bash)" >>/root/.bashrc
@@ -83,5 +81,5 @@ runcmd:
   - echo "================================================= CloudInit Phase Run Training Script"
   - /root/00_setup/setup_training.sh
 
-  - echo "================================================= CloudInit Finished Successfully"
-  - reboot
+  # - echo "================================================= CloudInit Finished Successfully"
+  # - reboot
