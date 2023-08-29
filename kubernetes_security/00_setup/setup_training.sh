@@ -57,11 +57,6 @@ DEBIAN_FRONTEND=noninteractive apt-get --yes install falco=0.33.1
 systemctl enable falco
 systemctl start falco
 
-echo "================================================= Init Training Script - Install Cosign"
-wget "https://github.com/sigstore/cosign/releases/download/v2.0.0/cosign-linux-amd64" 
-mv cosign-linux-amd64 /usr/local/bin/cosign 
-chmod +x /usr/local/bin/cosign
-
 echo "================================================= Init Training Script - Apply Kubernetes Manifests"
 kubectl apply -f /root/pod.yaml
 kubectl create clusterrolebinding my-suboptimal-clusterrolebinding --clusterrole=cluster-admin --serviceaccount default:default

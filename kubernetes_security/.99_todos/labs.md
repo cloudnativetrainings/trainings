@@ -4,3 +4,4 @@ small images
 distroless - show the pain points
 
 # container signing
+=> needs container registry...
