@@ -30,5 +30,5 @@ kubeadm certs check-expiration
 kubeadm certs renew --help
 
 # verify expiration date via openssl
-openssl x509 -in /etc/kubernetes/pki/apiserver.crt -text -noout
+openssl x509 -in /etc/kubernetes/pki/apiserver.crt -dates
 ```

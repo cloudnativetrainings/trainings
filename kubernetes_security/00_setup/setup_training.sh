@@ -92,5 +92,5 @@ sed  '/  volumeMounts:/a \
       mountPath: /apiserver' /root/tmp/apiserver-1.yaml > /root/tmp/apiserver-2.yaml
 mv /root/tmp/apiserver-2.yaml /etc/kubernetes/manifests/kube-apiserver.yaml
 
-echo "================================================= Init Training Script - Finished successfully"
+echo "================================================= Init Training Script - Finished Successfully"
 
