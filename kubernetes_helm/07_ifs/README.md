@@ -56,7 +56,7 @@ watch curl $ENDPOINT
   ```bash
   helm uninstall ifs
   ```
-* Jump back to home directory `k8s_helm`:
+* Jump back to home directory `kubernetes_helm`:
   ```bash
   cd -
   ```

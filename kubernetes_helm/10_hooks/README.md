@@ -81,7 +81,7 @@ helm install hooks ./my-app --no-hooks
   ```bash
   helm uninstall hooks --no-hooks
   ```
-* Jump back to home directory `k8s_helm`:
+* Jump back to home directory `kubernetes_helm`:
   ```bash
   cd -
   ```

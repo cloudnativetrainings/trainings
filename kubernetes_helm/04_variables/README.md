@@ -37,7 +37,7 @@ kubectl get pods
   ```bash
   helm uninstall my-app
   ```
-* Jump back to home directory `k8s_helm`:
+* Jump back to home directory `kubernetes_helm`:
   ```bash
   cd -
   ```

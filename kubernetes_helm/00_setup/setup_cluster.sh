@@ -14,7 +14,7 @@ export ZONE=europe-west3-a
 export CLUSTER_NAME=training-kh
 export NETWORK_NAME=$CLUSTER_NAME
 export FIREWALL_NAME=$CLUSTER_NAME
-export CLUSTER_VERSION=1.22
+export CLUSTER_VERSION=1.27
 
 set -euxo pipefail
 
@@ -42,7 +42,16 @@ then
   gcloud compute networks subnets create $NETWORK_NAME-subnet --project=$PROJECT_NAME \
     --range=10.0.0.0/24 --network=$NETWORK_NAME --region=$REGION
 else
-      echo "Subnet $response_network already exists, skip creation"
+  echo "Subnet $response_network already exists, skip creation"
+fi
+
+# create static IP address for NGINX ingress
+response_addr=`gcloud compute addresses list $CLUSTER_NAME-addr --filter=region:$REGION`
+if [ -z "$response_addr" ]
+then
+  gcloud compute addresses create $CLUSTER_NAME-addr --region=$REGION
+else
+  echo "Static IP Address already exists, skip creation"
 fi
 
 # create cluster

@@ -1,22 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: blue
-  labels:
-    app: blue
+  name: my-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: blue
+      app: my-deployment
   template:
     metadata:
       labels:
-        app: blue
+        app: my-deployment
     spec:
       containers:
-        - name: blue
-          image: nginx:1.19.2
+        - name: my-nginx
+          image: nginx:1.25.2
           volumeMounts:
             - name: html
               mountPath: /usr/share/nginx/html
@@ -30,7 +28,7 @@ spec:
       volumes:
         - name: html
           configMap:
-            name: blue
+            name: my-configmap
             items:
               - key: body
                 path: index.html

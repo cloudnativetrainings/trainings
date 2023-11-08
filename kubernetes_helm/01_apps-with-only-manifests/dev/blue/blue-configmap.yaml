@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: blue
+  namespace: dev
+data:
+  body: <body style="background-color:blue;"><h1>DEV</h1></body>

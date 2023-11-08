@@ -1,9 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: red
+  name: blue
+  namespace: prod
 spec:
   selector:
-    app: red
+    app: blue
   ports:
     - port: 80

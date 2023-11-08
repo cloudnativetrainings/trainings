@@ -6,31 +6,24 @@ In this task, we will setup the needed components for the training.
 ## Create Kubernetes Cluster
 
 ```bash
-cd k8s_helm/00_setup
+cd kubernetes_helm/00_setup
 ./setup_cluster.sh
-```
-
-## Install Ingress
-> Before you start, create role binding
-
-```bash
-# Make sure you update your username
-kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin --user=student-xx.yyy@loodse.training
-```
-
-```bash
-# Install NGINX Ingress
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.4.0/deploy/static/provider/cloud/deploy.yaml
 ```
 
 ## Store the IP Adress of the Ingress LB in an environment variable
 
 ```bash
-kubectl -n ingress-nginx get svc
+export ENDPOINT=$(gcloud compute addresses list --filter="region:europe-west3" --filter="name=training-kh-addr" --format="get(address)")
 ```
->Note that it may take some time to get the EXTERNAL-IP
+
+## Install Ingress
+
 ```bash
-export ENDPOINT=$(kubectl -n ingress-nginx get svc ingress-nginx-controller -o jsonpath="{.status.loadBalancer.ingress[0].ip}")
+# Install NGINX Ingress via Helm
+helm upgrade --install ingress-nginx ingress-nginx \
+  --repo https://kubernetes.github.io/ingress-nginx \
+  --namespace ingress-nginx --create-namespace \
+  --set controller.service.loadBalancerIP=${ENDPOINT}
 ```
 
 ## Verify Ingress is running
@@ -42,7 +35,7 @@ curl http://$ENDPOINT:80
 ```
 
 ## Cleanup 
-* Jump back to home directory `k8s_helm`:
+* Jump back to home directory `kubernetes_helm`:
   ```bash
   cd -
   ```

@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: red
+  namespace: prod
+data:
+  body: <body style="background-color:red;"><h1>PROD</h1></body>
