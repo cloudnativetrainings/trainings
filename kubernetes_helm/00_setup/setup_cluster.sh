@@ -46,7 +46,7 @@ else
 fi
 
 # create static IP address for NGINX ingress
-response_addr=`gcloud compute addresses list $CLUSTER_NAME-addr --filter=region:$REGION`
+response_addr=`gcloud compute addresses list --filter=region:$REGION --filter="name=$CLUSTER_NAME-addr"`
 if [ -z "$response_addr" ]
 then
   gcloud compute addresses create $CLUSTER_NAME-addr --region=$REGION
@@ -65,11 +65,11 @@ then
     --zone=$ZONE \
     --cluster-version $CLUSTER_VERSION \
     --machine-type "n1-standard-4" --num-nodes "2" \
-    --image-type "UBUNTU" --disk-type "pd-standard" --disk-size "100" \
+    --disk-type "pd-standard" --disk-size "100" \
     --enable-network-policy --enable-ip-alias \
     --no-enable-autoupgrade --enable-autorepair --max-surge-upgrade 1 --max-unavailable-upgrade 0 \
     --no-enable-basic-auth --metadata disable-legacy-endpoints=true \
-    --no-enable-stackdriver-kubernetes --no-enable-master-authorized-networks \
+    --logging=NONE --monitoring=NONE --no-enable-master-authorized-networks \
     --scopes "https://www.googleapis.com/auth/devstorage.read_only","https://www.googleapis.com/auth/logging.write","https://www.googleapis.com/auth/monitoring","https://www.googleapis.com/auth/servicecontrol","https://www.googleapis.com/auth/service.management.readonly","https://www.googleapis.com/auth/trace.append" \
     --addons HorizontalPodAutoscaling,HttpLoadBalancing
 else

@@ -64,4 +64,4 @@ kubectl get all
   cd -
   ```
   
-Jump > [Home](../README.md) | Previous > [Install Apps without Helm](../01_apps-without-helm/README.md) | Next > [Rollback](../03_rollback/README.md)
+Jump > [Home](../README.md) | Previous > [Deploy with Kustomize](../02_deploy-with-kustomize/README.md) | Next > [Rollback](../03_rollback/README.md)

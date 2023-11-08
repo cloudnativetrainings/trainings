@@ -6,7 +6,7 @@ In this task, we will setup the needed components for the training.
 ## Create Kubernetes Cluster
 
 ```bash
-cd kubernetes_helm/00_setup
+cd $HOME/trainings/kubernetes_helm/00_setup
 ./setup_cluster.sh
 ```
 
@@ -40,4 +40,4 @@ curl http://$ENDPOINT:80
   cd -
   ```
 
-Jump > [Home](../README.md) | Next > [Install Apps without Helm](../01_apps-without-helm/README.md)
+Jump > [Home](../README.md) | Next > [Install Apps with Manifests](../01_apps-with-only-manifests/README.md)

@@ -21,7 +21,8 @@ patches:
       version: v1
       kind: Ingress
       name: my-ingress
+- path: deployment-patch.yaml
 
 ## patchesStrategicMerge and patchesJson6902 are deprecated!
 # patchesStrategicMerge:
-# - deployment_patch.yaml
+# - deployment-patch.yaml

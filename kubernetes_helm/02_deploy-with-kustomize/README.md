@@ -3,6 +3,7 @@
 ## Inspect the Layout
 
 ```bash
+cd $HOME/trainings/kubernetes_helm/02_deploy-with-kustomize
 tree .
 ```
 
@@ -42,6 +43,7 @@ bat overlays/prod/kustomization.yaml
 - Add namespace=prod to all resources created
 - Patch deployment to have 3 replicas
 - Patch ingress to change the URL path
+- Patch deployment to use different Pod resources
 
 # Deploy using Kustomize
 
@@ -72,14 +74,12 @@ Checkout the pods and verify that the application is running:
 kubectl get pods -n dev
 ```
 
-Access the page: 
+Access the page via curl or your browser: 
 ```bash
 export ENDPOINT=$(gcloud compute addresses list --filter="region:europe-west3" --filter="name=training-kh-addr" --format="get(address)")
 
-curl http://${ENDPOINT}/dev`
+curl http://${ENDPOINT}/dev
 ```
-or via [ACCESS DEV](http://${ENDPOINT}/dev)
-
 
 ## Deploy prod
 
@@ -106,7 +106,6 @@ kubectl get pods -n prod
 curl http://${ENDPOINT}/prod
 ```
 
-or via [ACCESS PROD](http://${ENDPOINT}/prod)
 
 # Cleanup
 
@@ -117,3 +116,5 @@ kubectl delete -k overlays/dev
 
 kubectl delete -k overlays/prod
 ```
+
+Jump > [Home](../README.md) | Previous > [Apps with Only Manifests](../01_apps-with-only-manifests/README.md) | Next > [Deploy with Helm](../03_apps-with-helm/README.md)

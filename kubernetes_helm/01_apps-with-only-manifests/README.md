@@ -2,11 +2,18 @@
 
 ## Manifests
 
-Check the manifests with `tree` command
+Check the manifests:
+
+```bash
+cd $HOME/trainings/kubernetes_helm/01_apps-with-only-manifests
+
+tree .
+```
 
 ## Create the blue app on Development environment
 
 ```bash
+kubectl create ns dev
 kubectl create -f dev/blue
 ```
 
@@ -15,14 +22,12 @@ Check the status of the pods and see the blue pod running:
 kubectl get pods -n dev
 ```
 
-Afterwards, you can visit the app via 
+Afterwards, you can visit the app via curl or your browser
 ```bash
 export ENDPOINT=$(gcloud compute addresses list --filter="region:europe-west3" --filter="name=training-kh-addr" --format="get(address)")
 
 curl http://${ENDPOINT}/dev/blue
 ```
-
-or via [ACCESS BLUE](http://${ENDPOINT}/dev/blue)
 
 ## Create the red app on Development environment
 
@@ -36,17 +41,16 @@ Check the status of the pods and see the red and blue pods running:
 kubectl get pods -n dev
 ```
 
-Afterwards, you can visit the app via 
+Afterwards, you can visit the app via curl or your browser
 
 ```bash
 curl http://${ENDPOINT}/dev/red
 ```
 
-or via [ACCESS RED](http://${ENDPOINT}/dev/red)
-
 ## Create the blue app on Production
 
 ```bash
+kubectl create ns prod
 kubectl create -f prod/blue
 ```
 
@@ -56,13 +60,11 @@ Check the status of the pods and see 3 blue pods running:
 kubectl get pods -n prod
 ```
 
-Afterwards, you can visit the app via 
+Afterwards, you can visit the app via curl or your browser
 
 ```bash
 curl http://${ENDPOINT}/prod/blue
 ```
-
-or via [ACCESS BLUE](http://${ENDPOINT}/prod/blue)
 
 ## Create the red app on Production
 
@@ -76,13 +78,11 @@ Check the status of the pods and see 3 red and 3 blue pods running:
 kubectl get pods -n prod
 ```
 
-Afterwards, you can visit the app via 
+Afterwards, you can visit the app via curl or your browser
 
 ```bash
 curl http://${ENDPOINT}/prod/red
 ```
-
-or via [ACCESS RED](http://${ENDPOINT}/prod/red)
 
 ## How long will it take to make a green app on both environments?
 
@@ -92,4 +92,4 @@ or via [ACCESS RED](http://${ENDPOINT}/prod/red)
   kubectl delete -f dev/**,prod/**
   ```
 
-Jump > [Home](../README.md) | Previous > [Cluster Setup](../00_setup/README.md) | Next > [Deploy with Kustomize](02_deploy-with-kustomize/README.md)
+Jump > [Home](../README.md) | Previous > [Cluster Setup](../00_setup/README.md) | Next > [Deploy with Kustomize](../02_deploy-with-kustomize/README.md)

@@ -16,7 +16,7 @@
     set shiftwidth=2
     EOT
 
-    sudo apt-get update && apt-get -y install tree batcat
+    sudo apt-get update && sudo apt-get -y install tree bat
     ```
 
 3. Create `.customize_environment` file to make sure tree and batcat will always be installed with new Cloud Shell instances
