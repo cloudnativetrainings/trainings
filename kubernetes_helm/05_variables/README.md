@@ -2,7 +2,7 @@
 
 In this task, we will add a variable to our Helm Chart.
 
-> Navigate to folder `04_variables` before getting started
+> Navigate to folder `$HOME/trainings/kubernetes_helm/05_variables` before getting started
 
 ## Add templating for the deployment in the file ./color-viewer/templates/deployment.yaml
 
@@ -42,4 +42,4 @@ kubectl get pods
   cd -
   ```
 
-Jump > [Home](../README.md) | Previous > [Rollback](../03_rollback/README.md) | Next > [Functions](../05_functions/README.md)
+Jump > [Home](../README.md) | Previous > [Rollback](../04_rollback/README.md) | Next > [Functions](../06_functions/README.md)

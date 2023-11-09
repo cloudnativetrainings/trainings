@@ -5,13 +5,19 @@ In this task, you will learn how to implement helper functions.
 ## Run the Helm Chart
 
 ```bash
-cd 05_functions
+cd $HOME/trainings/kubernetes_helm/06_functions
 helm install my-app ./my-chart
+```
+
+Wait until the pods are ready
+
+```bash
+kubectl wait pod -l app=my-chart-my-app --for=condition=ready --timeout=120s
 ```
 
 Access the endpoint via 
 ```bash
-curl $ENDPOINT
+curl http://$ENDPOINT
 ```
 
 ## Cleanup
@@ -25,15 +31,22 @@ curl $ENDPOINT
 ### Implement the function
 
 Put the following function into the file `_helpers.tpl` in the folder `my-chart/templates`
-```tpl
+
+```bash
+cat <<EOF > my-chart/templates/_helpers.tpl
 {{- define "id" }}
 {{- printf "%s-%s" .Chart.Name .Release.Name }}
 {{- end }}
+EOF
 ```
 
 ### Make use of the `id` function
 
 Replace all occurancies in the directory `my-chart/templates` of `{{ .Chart.Name }}-{{ .Release.Name }}` with `{{ template "id" . }}`
+
+```bash
+sed -i 's/{{ .Chart.Name }}-{{ .Release.Name }}/{{ template "id" . }}/g' ./my-chart/templates/*
+```
 
 ### Release the application
 
@@ -41,9 +54,15 @@ Replace all occurancies in the directory `my-chart/templates` of `{{ .Chart.Name
 helm install helper-functions ./my-chart 
 ```
 
+Wait until the pods are ready
+
+```bash
+kubectl wait pod -l app=my-chart-helper-functions --for=condition=ready --timeout=120s
+```
+
 Access the endpoint via 
 ```bash
-curl $ENDPOINT
+curl http://$ENDPOINT
 ```
 
 ### Cleanup
@@ -57,11 +76,14 @@ curl $ENDPOINT
 ### Re-implement the function
 
 Override the `id` function the file `_helpers.tpl` in the folder `my-chart/templates`
-```tpl
+
+```bash
+cat <<EOF > my-chart/templates/_helpers.tpl
 {{- define "id" }}
-{{- $name := printf "%s-%s" .Chart.Name .Release.Name }}
-{{- default $name .Values.id | trunc 6 }}
+{{- \$name := printf "%s-%s" .Chart.Name .Release.Name }}
+{{- default \$name .Values.id | trunc 6 }}
 {{- end }}
+EOF
 ```
 
 ### Release the application
@@ -70,9 +92,15 @@ Override the `id` function the file `_helpers.tpl` in the folder `my-chart/templ
 helm install default-values --set id=foo-123456 ./my-chart 
 ```
 
+Wait until the pods are ready
+
+```bash
+kubectl wait pod -l app=foo-12 --for=condition=ready --timeout=120s
+```
+
 Access the endpoint via 
 ```bash
-curl $ENDPOINT
+curl http://$ENDPOINT
 ```
 
 ### Cleanup
@@ -85,4 +113,4 @@ curl $ENDPOINT
   cd -
   ```
 
-Jump > [Home](../README.md) | Previous > [Variables](../04_variables/README.md) | Next > ['include' Function](../06_includes/README.md)
+Jump > [Home](../README.md) | Previous > [Variables](../05_variables/README.md) | Next > ['include' Function](../07_includes/README.md)

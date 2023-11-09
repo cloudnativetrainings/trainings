@@ -9,7 +9,7 @@ In this task, we will use Helm for installing the app.
 ### Show all installed Helm Releases
 
 ```bash
-cd 02_apps-with-helm
+cd $HOME/trainings/kubernetes_helm/03_apps-with-helm
 helm ls
 ```
 
@@ -64,4 +64,4 @@ kubectl get all
   cd -
   ```
   
-Jump > [Home](../README.md) | Previous > [Deploy with Kustomize](../02_deploy-with-kustomize/README.md) | Next > [Rollback](../03_rollback/README.md)
+Jump > [Home](../README.md) | Previous > [Deploy with Kustomize](../02_deploy-with-kustomize/README.md) | Next > [Rollback](../04_rollback/README.md)

@@ -4,10 +4,16 @@ In this task, we will rollback a release.
 
 ### Inspect the Helm Chart
 
+```bash
+tree color-viewer
+
+batcat color-viewer/values.yaml
+```
+
 ## Release the red app
 
 ```bash
-cd 03_rollback
+cd $HOME/trainings/kubernetes_helm/04_rollback
 helm install my-app ./color-viewer
 ```
 
@@ -26,15 +32,37 @@ Take a look at the Helm releases
 helm ls
 ```
 
-## Rollback to the previous version of my-app
+## History and changes
 
 Take a look at the history of my-app
 ```bash
 helm history my-app
 ```
 
+Check the values on this current release:
+
+```bash
+helm get values my-app --all
+```
+
+Previous release:
+
+```bash
+helm get values my-app --all --revision 1
+```
+
+## Rollback
+
+Rollback to the first revision
+
 ```bash
 helm rollback my-app 1
+```
+
+Check the history again
+
+```bash
+helm history my-app
 ```
 
 You can visit the app on `http://$ENDPOINT/red`
@@ -49,4 +77,4 @@ You can visit the app on `http://$ENDPOINT/red`
   cd -
   ```
 
-Jump > [Home](../README.md) | Previous > [Install Apps with Helm](../02_apps-with-helm/README.md) | Next > [Variables](../04_variables/README.md)
+Jump > [Home](../README.md) | Previous > [Install Apps with Helm](../03_apps-with-helm/README.md) | Next > [Variables](../05_variables/README.md)

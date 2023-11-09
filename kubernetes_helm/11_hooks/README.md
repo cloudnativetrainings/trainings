@@ -2,11 +2,16 @@
 
 In this task, you will learn how to write Hooks.
 
-> Navigate to the directory `10_hooks`, before getting started.
+> Navigate to the directory `$HOME/trainings/kubernetes_helm/11_hooks`, before getting started.
 
 ## Inspect the Chart
 
 Take a look at the Hooks.
+```bash
+batcat ./my-app/templates/hook-pre-install.yaml
+
+batcat ./my-app/templates/hook-pre-delete.yaml
+```
 
 ## Running Hooks
 
@@ -86,4 +91,4 @@ helm install hooks ./my-app --no-hooks
   cd -
   ```
 
-Jump > [Home](../README.md) | Previous > [Helm Test](../09_tests/README.md) | Next > [Dependencies](../11_dependencies/README.md)
+Jump > [Home](../README.md) | Previous > [Helm Test](../10_tests/README.md) | Next > [Dependencies](../12_dependencies/README.md)

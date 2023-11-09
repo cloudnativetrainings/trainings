@@ -1,8 +1,8 @@
 # Teardown Cluster
 
 ```bash
-cd 99_teardown
+cd $HOME/trainings/kubernetes_helm/99_teardown
 ./teardown_cluster.sh
 ```
 
-Jump > [Home](../README.md) | Previous > [Dependencies](../11_dependencies/README.md)
+Jump > [Home](../README.md) | Previous > [Dependencies](../12_dependencies/README.md)
