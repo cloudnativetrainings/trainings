@@ -6,6 +6,7 @@ In this task, you will learn how to use the 'required' function.
 
 ## Adapt the Deployment to the following
 
+Edit `./my-chart/templates/deployment.yaml` file:
 ```yaml
 ...
 containers:

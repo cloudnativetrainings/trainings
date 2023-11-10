@@ -6,6 +6,7 @@ In this task, you will make use of an if statement.
 
 ## Adapt the Configmap to the following
 
+Update `./my-chart/templates/configmap.yaml` file as follows"
 ```yaml
 apiVersion: v1
 kind: ConfigMap
@@ -54,7 +55,7 @@ helm upgrade ifs ./my-chart --set meta=false
 
 Watch the endpoint via
 ```bash
-watch curl http://$ENDPOINT
+watch curl -s http://$ENDPOINT
 ```
 
 > Question:

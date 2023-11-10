@@ -11,6 +11,8 @@ spec:
     metadata:
       labels:
         {{- include "labels" . | nindent 8 }}
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
     spec:
       containers:
         - name: my-nginx

@@ -5,6 +5,8 @@ In this task, we will rollback a release.
 ### Inspect the Helm Chart
 
 ```bash
+cd $HOME/trainings/kubernetes_helm/04_rollback
+
 tree color-viewer
 
 batcat color-viewer/values.yaml
@@ -13,7 +15,6 @@ batcat color-viewer/values.yaml
 ## Release the red app
 
 ```bash
-cd $HOME/trainings/kubernetes_helm/04_rollback
 helm install my-app ./color-viewer
 ```
 

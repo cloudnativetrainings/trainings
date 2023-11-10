@@ -34,7 +34,7 @@ batcat overlays/dev/kustomization.yaml
 ## Inspect prod overlay kustomization.yaml
 
 ```bash
-bat overlays/prod/kustomization.yaml
+batcat overlays/prod/kustomization.yaml
 ```
 
 - Get all resource from and and configmap.yaml from the current directory
@@ -76,7 +76,7 @@ kubectl get pods -n dev
 
 Access the page via curl or your browser: 
 ```bash
-export ENDPOINT=$(gcloud compute addresses list --filter="region:europe-west3" --filter="name=training-kh-addr" --format="get(address)")
+# export ENDPOINT=$(gcloud compute addresses list --filter="region:europe-west3" --filter="name=training-kh-addr" --format="get(address)")
 
 curl http://${ENDPOINT}/dev
 ```

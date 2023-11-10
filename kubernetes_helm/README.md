@@ -3,6 +3,8 @@
 **Pre-requisites:**
 
 >If you do not have Google Cloud Account, instead you are working on your local machine then you can simply skip #1 and #4 steps. Before you get started, please make sure that you have [Minikube installation](https://minikube.sigs.k8s.io/docs/start/) on your local machine.
+>
+>In that case, enable ingress addon: `minikube addons enable ingress`
 
 1. Navigate and login to [Google Cloud Shell](https://ssh.cloud.google.com ) via web browser. 
 
@@ -16,12 +18,19 @@
     set shiftwidth=2
     EOT
 
+    mkdir $HOME/.cloudshell && touch $HOME/.cloudshell/no-apt-get-warning
+
     sudo apt-get update && sudo apt-get -y install tree bat
     ```
 
 3. Create `.customize_environment` file to make sure tree and batcat will always be installed with new Cloud Shell instances
     ```bash
-    cp customize_environment.sh $HOME/.customize_environment
+    cat <<EOF > $HOME/.customize_environment
+    #!/bin/bash
+
+    apt-get update
+    apt-get -y install tree bat
+    EOF
     ```
 
 4. Clone the Kubermatic trainings git repository:

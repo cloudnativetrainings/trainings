@@ -24,7 +24,10 @@ kubectl get pods -n dev
 
 Afterwards, you can visit the app via curl or your browser
 ```bash
-export ENDPOINT=$(gcloud compute addresses list --filter="region:europe-west3" --filter="name=training-kh-addr" --format="get(address)")
+# if $ENDPOINT is not defined, you can set it:
+# export ENDPOINT=$(gcloud compute addresses list --filter="region:europe-west3" --filter="name=training-kh-addr" --format="get(address)")
+# or
+# kubectl get svc ingress-nginx-controller -n ingress-nginx -o jsonpath={.status.loadBalancer.ingress[].ip}
 
 curl http://${ENDPOINT}/dev/blue
 ```
