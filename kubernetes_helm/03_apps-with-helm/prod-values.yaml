@@ -1,0 +1,15 @@
+color: green
+
+environment: prod
+
+replicas: 3
+
+imagetag: 1.25.2
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 200Mi
+  limits:
+    cpu: 100m
+    memory: 200Mi

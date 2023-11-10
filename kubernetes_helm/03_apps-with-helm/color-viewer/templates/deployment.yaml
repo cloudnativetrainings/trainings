@@ -1,34 +1,35 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-{{ .Values.color }}-deployment
+  name: my-deployment
 spec:
-  replicas: 1
+  replicas: {{ .Values.replicas }}
   selector:
     matchLabels:
-      app: my-{{ .Values.color }}-deployment
+      app: my-deployment
   template:
     metadata:
       labels:
-        app: my-{{ .Values.color }}-deployment
+        app: my-deployment
     spec:
       containers:
         - name: my-nginx
-          image: nginx:1.19.2
+          image: nginx:{{ .Values.imagetag }}
           volumeMounts:
             - name: html
               mountPath: /usr/share/nginx/html
           resources:
             requests:
-              cpu: 100m
-              memory: 100Mi
+              cpu: {{ .Values.resources.requests.cpu }}
+              memory: {{ .Values.resources.requests.memory }}
             limits:
-              cpu: 100m
-              memory: 100Mi
+              cpu: {{ .Values.resources.limits.cpu }}
+              memory: {{ .Values.resources.limits.memory }}
       volumes:
         - name: html
           configMap:
-            name: my-{{ .Values.color }}-configmap
+            name: my-configmap
             items:
               - key: body
                 path: index.html
+

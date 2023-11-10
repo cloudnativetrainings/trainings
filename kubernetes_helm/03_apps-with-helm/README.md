@@ -6,58 +6,94 @@ In this task, we will use Helm for installing the app.
 
 ### Inspect the Helm Chart
 
+```bash
+cd $HOME/trainings/kubernetes_helm/03_apps-with-helm
+tree color-viewer
+```
+
+You will see 2 important files and a directory with manifests.
+
+- Chart.yaml: Contains information about the chart
+- values.yaml: Contains customizable values to be used in templates
+- templates/*.yaml: Manifest files with some go templating to be customized
+
+Check the default values of the chart:
+
+```
+batcat color-viewer/values.yaml
+```
+
 ### Show all installed Helm Releases
 
 ```bash
-cd $HOME/trainings/kubernetes_helm/03_apps-with-helm
 helm ls
 ```
 
-### Release the red application
+## Check the templating result
+
+This command will show which manifest files will be deployed with default values:
 
 ```bash
-helm install red ./color-viewer
+helm template ./color-viewer
 ```
 
-### Verify your app
-
-You can visit the red application on `http://$ENDPOINT/red`
+Change a value and check again:
 
 ```bash
-helm ls
-kubectl get all
+helm template ./color-viewer --set replicas=3
 ```
 
-## Doing a customized release
+## Deploy dev
 
-### Using inline Values
-
+Deploy your application with Helm:
 ```bash
-helm install green --set color=green ./color-viewer
+helm install demo-app ./color-viewer --namespace=dev --create-namespace
 ```
 
-You can visit the red application on `http://$ENDPOINT/green`
-
-
-### Use a custom values file
-
+Checkout the status of the installation:
 ```bash
-helm install magenta ./color-viewer -f my-values.yaml 
+helm ls -A
 ```
 
-You can visit the red application on `http://$ENDPOINT/magenta`
-
-### Verify the installed components
-
+Checkout the pods and verify that the application is running:
 ```bash
-helm ls
-kubectl get all
+# Wait until the pod is ready:
+kubectl get pods -n dev
+
+curl http://${ENDPOINT}/dev
+```
+
+## Deploy prod
+
+Checkout the values for production:
+```bash
+batcat prod-values.yaml
+```
+
+Deploy your application with Helm:
+```bash
+helm install demo-app ./color-viewer --namespace=prod --create-namespace -f prod-values.yaml
+```
+
+Checkout the status of the installation:
+```bash
+helm ls -A
+```
+
+Checkout the pods and verify that the application is running. There must be 3 pods running.
+```bash
+# Wait until the pod is ready:
+kubectl get pods -n prod
+
+curl http://${ENDPOINT}/prod
 ```
 
 ### Cleanup
 * Delete the releases
   ```bash
-  helm uninstall red green magenta
+  helm uninstall demo-app -n dev
+
+  helm uninstall demo-app -n prod
   ```
 * Jump back to home directory `kubernetes_helm`:
   ```bash
