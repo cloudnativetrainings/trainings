@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  namespace: default
+  name: my-app
+  labels:
+    app: my-app
+spec:
+  terminationGracePeriodSeconds: 0
+  containers:
+    - name: my-app
+      image: eu.gcr.io/loodse-training-playground/loodse-training/app:0.0.1
+      ports:
+        - containerPort: 8080
+      imagePullPolicy: Always
+      livenessProbe:
+        httpGet:
+          port: 8080
+          path: /actuator/liveness
+      readinessProbe:
+        httpGet:
+          port: 8080
+          path: /actuator/readiness          
