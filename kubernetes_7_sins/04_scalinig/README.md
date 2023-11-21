@@ -2,7 +2,7 @@
 
 In the training, we will learn about Horizontal Pod Autoscaler.
 
->Navigate to the folder `15_hpas` from CLI, before you get started. 
+>Navigate to the folder `04_scaling` from CLI, before you get started.
 
 ## Create the service and the deployment
 
@@ -47,9 +47,5 @@ kubectl scale deployment load-deployment --replicas 5
 ## Cleanup
 
 ```bash
-kubectl delete deployment --all
-kubectl delete svc my-service
-kubectl delete hpa my-autoscaler
+kubectl delete all --all --force --grace-period=0
 ```
-
-[Jump to Home](../README.md) | [Previous Training](../14_statefulsets/README.md) | [Next Training](../16_daemonsets/README.md)

@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: my-deployment
+  name: my-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-deployment
+  template:
+    metadata:
+      labels:
+        app: my-deployment
+    spec:
+      containers:
+        - name: seven-sins-application
+          image: quay.io/kubermatic-labs/seven-sins-application:0.0.3
+          imagePullPolicy: Always

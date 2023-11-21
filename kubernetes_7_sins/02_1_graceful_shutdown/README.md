@@ -4,7 +4,7 @@ In this training, we will create a pod and learn how to ensure a graceful shutdo
 
 The application implements a shutdown hook and needs 10 seconds for a proper shutdown.
 
->Navigate to the folder `42_graceful-shutdown` from CLI, before you get started. 
+>Navigate to the folder `02_1_graceful_shutdown` from CLI, before you get started. 
 
 ## Possible data loss
 
@@ -70,4 +70,3 @@ kubectl logs -f seven-sins-application
 kubectl delete pod seven-sins-application --grace-period=0
 ```
 >Note that the application now has enough time to do a graceful shutdown
-

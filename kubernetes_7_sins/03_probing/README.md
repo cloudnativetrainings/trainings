@@ -6,7 +6,7 @@ The application implements the following health probes:
 * liveness: http://SERVICE_IP:8080/liveness
 * readiness: http://SERVICE_IP:8080/readiness
 
->Navigate to the folder `41_probing` from CLI, before you get started. 
+>Navigate to the folder `03_probing` from CLI, before you get started.
 
 ## Create the Pod
 Inspect pod.yaml and service.yaml definition file and create the pod and the service
@@ -29,7 +29,7 @@ You should get a `HTTP/1.1 200 OK` status code.
 We will now change the readiness state of the application. Therefore please open an additional terminal for being able to communicate with the application.
 ```bash
 # [TERMINAL-2] Attach to the application
-kubectl attach -it my-app  
+kubectl attach -it my-app
 
 # [TERMINAL-2] Set the application to not ready
 set unready
@@ -59,5 +59,5 @@ curl -I http://$SERVICE_IP/
 ## Cleanup
 Delete the created resources.
 ```bash
-kubectl delete -f pod.yaml,service.yaml
+kubectl delete all --all --force --grace-period=0
 ```

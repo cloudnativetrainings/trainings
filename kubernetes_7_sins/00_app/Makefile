@@ -26,3 +26,10 @@ docker-run: docker-build
 .PHONY: docker-push
 docker-push: docker-build
 	docker push ${IMAGE_REPOSITORY}/${APPLICATION_NAME}:${BUILD_VERSION}
+
+.PHONY: docker-push-daemon
+docker-push-daemon:
+	docker build -f Dockerfile-A -t ${IMAGE_REPOSITORY}/${APPLICATION_NAME}:A-${BUILD_VERSION} .
+	docker push ${IMAGE_REPOSITORY}/${APPLICATION_NAME}:A-${BUILD_VERSION}
+	docker build -f Dockerfile-B -t ${IMAGE_REPOSITORY}/${APPLICATION_NAME}:B-${BUILD_VERSION} .
+	docker push ${IMAGE_REPOSITORY}/${APPLICATION_NAME}:B-${BUILD_VERSION}
