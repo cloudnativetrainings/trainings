@@ -8,4 +8,3 @@ spec:
     - name: seven-sins-application-b
       image: quay.io/kubermatic-labs/seven-sins-application:B-0.0.3
       imagePullPolicy: Always
-      

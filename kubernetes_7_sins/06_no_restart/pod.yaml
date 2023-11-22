@@ -1,11 +1,10 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: seven-sins-application
+  name: my-pod
 spec:
   terminationGracePeriodSeconds: 12
   containers:
     - name: seven-sins-application
       image: quay.io/kubermatic-labs/seven-sins-application:0.0.3
       imagePullPolicy: Always
-      

@@ -16,4 +16,4 @@ spec:
           memory: 10Mi
         requests:
           cpu: 0.03
-          memory: 10Mi   
+          memory: 10Mi

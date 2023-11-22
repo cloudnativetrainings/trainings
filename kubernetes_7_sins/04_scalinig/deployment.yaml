@@ -15,10 +15,11 @@ spec:
         app: my-deployment
     spec:
       containers:
-      - name: nginx
-        image: nginx:1.19.2
-        resources:
-          limits:
-            cpu: 100m
-          requests:
-            cpu: 100m
+        - name: nginx
+          image: nginx:1.19.2
+          imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: 100m
+            requests:
+              cpu: 100m

@@ -1,13 +1,14 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: my-app
+  name: seven-sins-application
   labels:
-    app: my-app
+    app: seven-sins-application
 spec:
   containers:
-    - name: my-app
+    - name: seven-sins-application
       image: quay.io/kubermatic-labs/seven-sins-application:0.0.3
+      imagePullPolicy: Always
       tty: true
       stdin: true
       ports:

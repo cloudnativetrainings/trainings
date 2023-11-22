@@ -1,6 +1,10 @@
-# Graceful Shutdown
+# There may be Dragons
 
-#TODO
+Although you taught Kubernetes about the proper period of time to do a graceful shutdown data loss can still happen.
+
+In this lab you will learn about a possible reason for data loss.
+
+>Navigate to the folder `02_2_dragons` from CLI, before you get started.
 
 ## Create the Pods
 Inspect pod-A.yaml and pod-B.yaml definition files and create the pods.
@@ -23,15 +27,15 @@ kubectl get pods -o wide
 # SSH into the Worker Nodes where the Pods are running
 gcloud compute ssh <NODE>
 
-# Switch to the default logging directory of the Worker Node
-[WORKER-NODE] cd /var/log/containers 
+# [WORKER-NODE] Switch to the default logging directory of the Worker Node
+cd /var/log/containers 
 
-# Verify the log files are present
-[WORKER-NODE] ls seven-sins-application-*
+# [WORKER-NODE] Verify the log files are present
+ls seven-sins-application-*
 
-# Tail each log file
-[WORKER-NODE] sudo tail -f seven-sins-application-a<TAB>
-[WORKER-NODE] sudo tail -f seven-sins-application-b<TAB>
+# [WORKER-NODE] Tail each log file
+sudo tail -f seven-sins-application-a<TAB>
+sudo tail -f seven-sins-application-b<TAB>
 
 # Delete the pods
 kubectl delete -f .  

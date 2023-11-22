@@ -17,6 +17,7 @@ spec:
       containers:
         - name: curl
           image: curlimages/curl:7.72.0
+          imagePullPolicy: Always
           command:
             - "/bin/sh"
           args:
