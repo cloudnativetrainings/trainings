@@ -1,7 +1,7 @@
 # labs
 README file
 
-1. [TBD] Resource Requests and Limits: killd bey OOM
+1. [OK] Resource Requests and Limits: killd bey OOM
 2. Graceful Shutdown: 
     [OK] graceful
     [OK] shell vs exec form
