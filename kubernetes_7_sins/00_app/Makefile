@@ -21,7 +21,7 @@ docker-build: build
 
 .PHONY: docker-run
 docker-run: docker-build
-	docker run -it --rm -p 8080:8080 --name ${APPLICATION_NAME} ${IMAGE_REPOSITORY}/${APPLICATION_NAME}:${BUILD_VERSION}
+	docker run -it --rm -p 8080:8080 -m=10m --cpus=".5" --name ${APPLICATION_NAME} ${IMAGE_REPOSITORY}/${APPLICATION_NAME}:${BUILD_VERSION}
 
 .PHONY: docker-push
 docker-push: docker-build

@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"runtime"
 	"strings"
 	"syscall"
 	"time"
@@ -51,6 +52,12 @@ func handleCommand(command string) {
 	} else if command == "set dead" {
 		log.Info("Set application to dead")
 		alive = false
+	} else if command == "leak mem" {
+		log.Info("Leaking Memory")
+		leakMem()
+	} else if command == "leak cpu" {
+		log.Info("Leaking CPU")
+		leakCpu()
 	} else {
 		log.Infof("Unknown command '%s'", command)
 	}
@@ -105,4 +112,47 @@ func handleLifecycle() {
 	}()
 	exitCode := <-exitChanel
 	os.Exit(exitCode)
+}
+
+func leakMem() {
+	memLeak := make([]string, 0)
+	count := 0
+	for {
+		if count%1000 == 0 {
+			var m runtime.MemStats
+			runtime.ReadMemStats(&m)
+			fmt.Printf("Alloc = %v MiB", m.Alloc/1024/1024)
+			fmt.Printf("\tTotalAlloc = %v MiB", m.TotalAlloc/1024/1024)
+			fmt.Printf("\tSys = %v MiB", m.Sys/1024/1024)
+			fmt.Printf("\tNumGC = %v\n", m.NumGC)
+		}
+		time.Sleep(time.Nanosecond)
+		count++
+		memLeak = append(memLeak, "THIS IS A MEM LEAK")
+	}
+}
+
+func leakCpu() {
+
+	// TODO is this really the smartest way to create a CPU leak?
+
+	f, err := os.Open(os.DevNull)
+	if err != nil {
+		panic(err)
+	}
+	defer f.Close()
+
+	n := runtime.NumCPU()
+	runtime.GOMAXPROCS(n)
+
+	for i := 0; i < n; i++ {
+		go func() {
+			for {
+				fmt.Fprintf(f, ".")
+			}
+		}()
+	}
+
+	time.Sleep(10 * time.Second)
+
 }
