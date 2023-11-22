@@ -51,7 +51,7 @@ leak mem
 kubectl get pods
 
 # The reason for the last restart (=OOMKilled) you can find out via the following command
-kubectl get pod seven-sins-application -o yaml
+kubectl get pod seven-sins-application -o jsonpath='{.status.containerStatuses[0].lastState}' | jq
 ```
 
 ## Cleanup

@@ -86,4 +86,4 @@ kubectl logs -f seven-sins-application
 kubectl delete pod seven-sins-application --grace-period=0
 ```
 
-> Note that the application now has enough time to do a graceful shutdown
+> Note that the application now does not have enough time to do a graceful shutdown

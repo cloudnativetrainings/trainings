@@ -3,8 +3,8 @@
 - Change into k8s_fundamental directory and run the script to initialize GKE cluster.
 
   ```bash
-  cd kubernetes__7_sins_
-  00_setup/setup_cluster.sh
+  cd kubernetes_7_sins/00_setup
+  ./setup_cluster.sh
   ```
 
   > Provide project details against `INPUT: Type PROJECT_NAME (student-XX-project):`

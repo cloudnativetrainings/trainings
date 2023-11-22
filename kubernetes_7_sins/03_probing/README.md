@@ -24,8 +24,13 @@ kubectl create -f pod.yaml,service.yaml
 > Note the Service is of type `LoadBalancer` so it may take a few seconds to get an external ip address.
 
 ```bash
+# Wait until the loadbalancer is ready
+kubectl wait svc/seven-sins-application --for=jsonpath='{status.loadBalancer.ingress[0].ip}'
+
 # Save the external ip address into an environment variable
 export SERVICE_IP=$(kubectl get svc seven-sins-application -o jsonpath='{.status.loadBalancer.ingress[*].ip}')
+
+# Access the application
 curl -I http://$SERVICE_IP/
 ```
 
