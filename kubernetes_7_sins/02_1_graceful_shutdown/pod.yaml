@@ -3,7 +3,7 @@ kind: Pod
 metadata:
   name: seven-sins-application
 spec:
-  terminationGracePeriodSeconds: 12
+  terminationGracePeriodSeconds: 5
   containers:
     - name: seven-sins-application
       image: quay.io/kubermatic-labs/seven-sins-application:0.0.3

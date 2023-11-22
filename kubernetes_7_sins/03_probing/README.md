@@ -25,7 +25,7 @@ kubectl create -f pod.yaml,service.yaml
 
 ```bash
 # Save the external ip address into an environment variable
-export SERVICE_IP=$(kubectl get svc -o jsonpath='{.items[*].status.loadBalancer.ingress[*].ip}')
+export SERVICE_IP=$(kubectl get svc seven-sins-application -o jsonpath='{.status.loadBalancer.ingress[*].ip}')
 curl -I http://$SERVICE_IP/
 ```
 
