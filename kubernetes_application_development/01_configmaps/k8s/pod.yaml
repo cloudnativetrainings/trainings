@@ -9,7 +9,7 @@ spec:
   terminationGracePeriodSeconds: 0
   containers:
     - name: my-app
-      image: eu.gcr.io/loodse-training-playground/loodse-training/app:0.0.1
+      image: quay.io/kubermatic-labs/kad-training:1.0.0-java
       ports:
         - containerPort: 8080
       imagePullPolicy: Always

@@ -4,9 +4,8 @@ metadata:
   namespace: default
   name: my-app
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: my-app
   ports:
     - port: 8080
-      nodePort: 30000

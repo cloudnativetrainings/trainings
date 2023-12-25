@@ -19,8 +19,9 @@ export INGRESS_IP=$(gcloud compute addresses list --filter="region:europe-west6"
 
 ## Install Ingress
 
+Install NGINX Ingress using Helm
+
 ```bash
-# Install NGINX Ingress using Helm
 helm upgrade --install ingress-nginx ingress-nginx \
   --repo https://kubernetes.github.io/ingress-nginx \
   --namespace ingress-nginx --create-namespace \
@@ -41,7 +42,7 @@ First, install `kube-prometheus-stack` helm chart, which will install these comp
 helm upgrade --install monitoring kube-prometheus-stack \
   --repo https://prometheus-community.github.io/helm-charts \
   --namespace monitoring --create-namespace \
-  --set grafana.ingress.enabled=true
+  --set grafana.ingress.enabled=true,grafana.ingress.ingressClassName=nginx
 ```
 
 Get the username and password for grafana:
@@ -71,6 +72,8 @@ helm upgrade --install logging loki-stack \
 
 You need to add Loki as a data source to the existing Grafana and then explore the logs.
 
+> Hint: URL will be `http://logging-loki.logging.svc.cluster.local:3100`
+
 ---
 
-Jump > [Home](../README.md) | Next > [Build your apps](../00_apps/README.md)
+Jump > [Home](../README.md) | Next > [Config Maps](../01_configmaps/README.md)
