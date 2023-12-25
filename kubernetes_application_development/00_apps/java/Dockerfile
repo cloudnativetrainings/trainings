@@ -1,0 +1,12 @@
+FROM gradle:7.6-jdk17 AS builder
+ARG BUILD_VERSION=0.0.0
+COPY --chown=gradle:gradle . /code
+WORKDIR /code
+RUN gradle build --no-daemon -Pversion=$BUILD_VERSION --stacktrace
+
+FROM openjdk:21-jdk-slim-bookworm
+ARG BUILD_VERSION=0.0.0
+COPY --from=builder /code/build/libs/app-$BUILD_VERSION.jar /srv/app/app.jar
+WORKDIR /srv/app
+
+ENTRYPOINT java -server -XshowSettings:vm -XX:InitialRAMPercentage=50 -XX:MaxRAMPercentage=70 -jar /srv/app/app.jar

@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: seven-sins-application
+spec:
+  terminationGracePeriodSeconds: 12
+  containers:
+    - name: seven-sins-application
+      image: quay.io/kubermatic-labs/seven-sins-application:0.0.3
+      imagePullPolicy: Always
+      tty: true
+      stdin: true
+      resources:
+        limits:
+          cpu: 0.03
+          memory: 10Mi
+        requests:
+          cpu: 0.03
+          memory: 10Mi
