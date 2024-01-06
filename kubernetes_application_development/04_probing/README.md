@@ -7,31 +7,24 @@ The application implements the following health probes:
 - liveness: http://SERVICE_IP:8080/liveness
 - readiness: http://SERVICE_IP:8080/readiness
 
-> Navigate to the folder `03_probing` from CLI, before you get started.
+> Navigate to the folder `04_probing` from CLI, before you get started.
 
 ## Create the Pod
 
 Inspect pod.yaml and service.yaml definition file and create the pod and the service
 
 ```bash
-cat pod.yaml
-cat service.yaml
-kubectl create -f pod.yaml,service.yaml
+cat k8s/pod.yaml
+cat k8s/service.yaml
+cat k8s/ingress.yaml
+kubectl create -f k8s/
 ```
 
 ## Access the application
 
-> Note the Service is of type `LoadBalancer` so it may take a few seconds to get an external ip address.
-
 ```bash
-# Wait until the loadbalancer is ready
-kubectl wait svc/seven-sins-application --for=jsonpath='{status.loadBalancer.ingress[0].ip}'
-
-# Save the external ip address into an environment variable
-export SERVICE_IP=$(kubectl get svc seven-sins-application -o jsonpath='{.status.loadBalancer.ingress[*].ip}')
-
 # Access the application
-curl -I http://$SERVICE_IP/
+curl -I http://${INGRESS_IP}/probe_app
 ```
 
 You should get a `HTTP/1.1 200 OK` status code.
@@ -51,7 +44,7 @@ set unready
 kubectl get pods
 
 # [TERMINAL-1] Access the application (this will fail)
-curl -I http://$SERVICE_IP/
+curl -I http://${INGRESS_IP}/probe_app
 ```
 
 > Kubernetes does not route any traffic anymore to the unready Pod. If you would have created the application via a Deployment scaled to 2 replicas the application would still serve traffic on the ready Pod.
@@ -68,7 +61,7 @@ set dead
 kubectl get pods
 
 # [TERMINAL-1] Access the application
-curl -I http://$SERVICE_IP/
+curl -I http://${INGRESS_IP}/probe_app
 ```
 
 ## Cleanup

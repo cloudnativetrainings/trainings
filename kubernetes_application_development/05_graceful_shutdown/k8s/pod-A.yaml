@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kad-go-application-a
+spec:
+  terminationGracePeriodSeconds: 12
+  containers:
+    - name: kad-go-application-a
+      image: quay.io/kubermatic-labs/kad-training:1.0.1-go
+      imagePullPolicy: Always

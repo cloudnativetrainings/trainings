@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: seven-sins-application
+  name: probe-app
   labels:
-    app: seven-sins-application
+    app: probe-app
 spec:
   containers:
-    - name: seven-sins-application
-      image: quay.io/kubermatic-labs/seven-sins-application:0.0.3
+    - name: probe-app
+      image: quay.io/kubermatic-labs/kad-training:1.0.0-go
       imagePullPolicy: Always
       tty: true
       stdin: true
