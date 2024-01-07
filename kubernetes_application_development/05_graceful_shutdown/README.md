@@ -4,7 +4,12 @@ In this training, we will create a pod and learn how to ensure a graceful shutdo
 
 The application implements a shutdown hook and needs 10 seconds for a proper shutdown.
 
-> Navigate to the folder `05_graceful_shutdown` from CLI, before you get started.
+Change into the lab directory:
+
+```bash
+cd $HOME/trainings/kubernetes_application_development/05_graceful_shutdown
+```
+
 
 ## Possible data loss
 

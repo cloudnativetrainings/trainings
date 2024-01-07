@@ -4,10 +4,14 @@ In this training, you will learn about health probes.
 
 The application implements the following health probes:
 
-- liveness: http://SERVICE_IP:8080/liveness
-- readiness: http://SERVICE_IP:8080/readiness
+- `liveness :` http://${INGRESS_IP}/probe_app/liveness
+- `readiness:` http://${INGRESS_IP}/probe_app/readiness
 
-> Navigate to the folder `04_probing` from CLI, before you get started.
+Change into the lab directory:
+
+```bash
+cd $HOME/trainings/kubernetes_application_development/04_probing
+```
 
 ## Create the Pod
 

@@ -3,6 +3,7 @@ APPLICATION_NAME = kad-training
 BUILD_VERSION = 1.0.0-go
 A_BUILD_VERSION = 1.0.1-go
 B_BUILD_VERSION = 1.0.2-go
+C_BUILD_VERSION = 1.1.0-go
 
 .PHONY: update-dependencies
 update-dependencies: 
@@ -35,3 +36,5 @@ docker-push-all: docker-push
 	docker push ${IMAGE_REPOSITORY}/${APPLICATION_NAME}:${A_BUILD_VERSION}
 	docker build -f Dockerfile-B -t ${IMAGE_REPOSITORY}/${APPLICATION_NAME}:${B_BUILD_VERSION} .
 	docker push ${IMAGE_REPOSITORY}/${APPLICATION_NAME}:${B_BUILD_VERSION}
+	docker build -f Dockerfile-C -t ${IMAGE_REPOSITORY}/${APPLICATION_NAME}:${C_BUILD_VERSION} .
+	docker push ${IMAGE_REPOSITORY}/${APPLICATION_NAME}:${C_BUILD_VERSION}
