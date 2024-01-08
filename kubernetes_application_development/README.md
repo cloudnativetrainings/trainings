@@ -22,7 +22,14 @@
 
 ## Hands-On
 
-> TO DO!!
+1. [Config Maps](01_configmaps/README.md)
+1. [Secrets](02_secrets/README.md)
+1. [Downward API](03_downward_api/README.md)
+1. [Probing](04_probing/README.md)
+1. [Graceful Shutdown](05_graceful_shutdown/README.md)
+1. [OOM (Out of Memory)](06_oom/README.md)
+1. [Init Containers](07_init_containers/README.md)
+1. [Debug Containers](08_debug_containers/README.md)
 
 ## Teardown
 

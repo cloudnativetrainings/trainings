@@ -81,4 +81,4 @@ cd ..
 
 ---
 
-Jump > [Init Containers](../07_init_containers/README.md) | Next > [Kubernetes API](../09_k8s_api/README.md)
+Jump > [Init Containers](../07_init_containers/README.md) | Next > [Teardown](../99_teardown/README.md)

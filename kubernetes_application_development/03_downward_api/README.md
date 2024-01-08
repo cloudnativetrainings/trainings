@@ -76,4 +76,4 @@ cd ..
 
 ---
 
-Jump > [Config Maps](../01_configmaps/README.md) | Next > [Downward API](../03_downward_api/README.md)
+Jump > [Config Maps](../02_secrets/README.md) | Next > [Downward API](../04_probing/README.md)
