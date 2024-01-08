@@ -20,7 +20,9 @@ Apply the manifests and check the result through the ingress:
 
 ```bash
 kubectl apply -f k8s/
-curl http://${INGRESS_IP}/my-app
+
+# Get the environment values
+curl http://${INGRESS_IP}/my-app/downward_api
 ```
 
 Also, check the `downwardAPI` volume:
@@ -31,6 +33,15 @@ kubectl exec -it my-app -- cat /etc/podinfo/annotations
 
 # Check labels
 kubectl exec -it my-app -- cat /etc/podinfo/labels
+```
+
+## Cleanup
+
+Remove installed applications and pods
+
+```bash
+kubectl delete -f k8s/
+cd ..
 ```
 
 ## Available Fields
@@ -62,3 +73,7 @@ kubectl exec -it my-app -- cat /etc/podinfo/labels
 |--------|---------------|
 | `metadata.labels` | all of the pod's labels, formatted as `label-key="escaped-label-value"` with one label per line |
 | `metadata.annotations` | all of the pod's annotations, formatted as `annotation-key="escaped-annotation-value"` with one annotation per line |
+
+---
+
+Jump > [Config Maps](../01_configmaps/README.md) | Next > [Downward API](../03_downward_api/README.md)

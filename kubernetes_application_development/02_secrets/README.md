@@ -195,3 +195,17 @@ Checkout the created `db-creds` file:
 ```bash
 kubectl exec -it my-app -c my-app -- cat /vault/secrets/db-creds
 ```
+
+## Cleanup
+
+Remove installed applications and pods
+
+```bash
+kubectl delete -f k8s/
+helm uninstall vault -n vault
+cd ..
+```
+
+---
+
+Jump > [Config Maps](../01_configmaps/README.md) | Next > [Downward API](../03_downward_api/README.md)

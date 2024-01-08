@@ -60,7 +60,7 @@ spec:
 ### Re-Create the Pod
 
 ```bash
-kubectl create -f pod.yaml
+kubectl create -f k8s/pod.yaml
 ```
 
 ### Follow the logs of the pod
@@ -86,7 +86,7 @@ kubectl delete pod kad-go-application
 ### Re-Create the Pod
 
 ```bash
-kubectl create -f pod.yaml
+kubectl create -f k8s/pod.yaml
 ```
 
 ### Follow the logs of the pod
@@ -141,22 +141,34 @@ kubectl get pods
 kubectl get pods -o wide
 
 # SSH into the Worker Nodes where the Pods are running
-gcloud compute ssh <NODE>
+gcloud compute ssh $(kubectl get pod kad-go-application-a -o jsonpath='{.spec.nodeName}')
 
 # [WORKER-NODE] Switch to the default logging directory of the Worker Node
-cd /var/log/containers 
+cd /var/log/containers
 
 # [WORKER-NODE] Verify the log files are present
 ls kad-go-application-*
 
-# [WORKER-NODE] Tail each log file
+# [WORKER-NODE] Tail log file for pod-A
 sudo tail -f kad-go-application-a<TAB>
+
+# Delete the pod-A
+kubectl delete -f k8s/pod-A.yaml
+
+# [WORKER-NODE] Tail log file for pod-B
 sudo tail -f kad-go-application-b<TAB>
 
-# Delete the pods
-kubectl delete -f k8s/
+# Delete the pod-B
+kubectl delete -f k8s/pod-B.yaml
 ```
+
+> [!TIP]
+> You can check the logs on Grafana!
 
 ## Verification of Graceful Shutdown
 
 Take a look at the logfiles. Did the graceful shutdown happen on both Pods? If not, why?
+
+---
+
+Jump > [Probing](../04_probing/README.md) | Next > [OOM (Out of Memory)](../06_oom/README.md)

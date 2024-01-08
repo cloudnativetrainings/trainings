@@ -87,6 +87,12 @@ then
     --action=ALLOW \
     --source-ranges=0.0.0.0/0 \
     --rules=tcp:80,tcp:8080,tcp:443
+  gcloud compute firewall-rules create $FIREWALL_NAME-ssh \
+    --network $NETWORK_NAME \
+    --direction=INGRESS \
+    --action=ALLOW \
+    --source-ranges=0.0.0.0/0 \
+    --rules=tcp:22
 else
       echo "Firewall $response_firewall_ingress already exists, skip creation"
 fi

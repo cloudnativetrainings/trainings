@@ -4,15 +4,19 @@ In this training, you will learn about resource limits.
 
 The application implements a CPU and a Memory leak.
 
-> Navigate to the folder `01_oom` from CLI, before you get started.
+Change into the lab directory:
+
+```bash
+cd $HOME/trainings/kubernetes_application_development/06_oom
+```
 
 ## Create the Pod
 
 Inspect pod.yaml and service.yaml definition file and create the pod and the service
 
 ```bash
-cat pod.yaml
-kubectl create -f pod.yaml
+cat k8s/pod.yaml
+kubectl create -f k8s/pod.yaml
 ```
 
 ## Leaking CPU
@@ -21,7 +25,7 @@ Learn what happens when your application reaches its CPU limits.
 
 ```bash
 # [TERMINAL-2] Attach to the application
-kubectl attach -it seven-sins-application
+kubectl attach -it my-app
 
 # [TERMINAL-2] Engage the CPU leak
 leak cpu
@@ -30,7 +34,11 @@ leak cpu
 watch -n 1 kubectl top pods
 ```
 
-> > Note that the Container does not get restarted. The amount of CPU is limited to 30 MilliCores.
+> [!TIP]
+> You can check the situation on the Grafana dashboard `Kubernetes / Compute Resources / Pod`!
+
+> [!IMPORTANT]
+> Note that the Container does not get restarted. The amount of CPU is limited to 30 MilliCores.
 
 ## Leaking Memory
 
@@ -38,11 +46,11 @@ Learn what happens when your application reaches its Memory limits.
 
 ```bash
 # Restart the Pod
-kubectl delete pod seven-sins-application --force --grace-period=0
-kubectl apply -f pod.yaml
+kubectl delete pod my-app --force --grace-period=0
+kubectl apply -f k8s/pod.yaml
 
 # [TERMINAL-2] Attach to the application
-kubectl attach -it seven-sins-application
+kubectl attach -it my-app
 
 # [TERMINAL-2] Engage the Memory Leak
 leak mem
@@ -51,7 +59,7 @@ leak mem
 kubectl get pods
 
 # The reason for the last restart (=OOMKilled) you can find out via the following command
-kubectl get pod seven-sins-application -o jsonpath='{.status.containerStatuses[0].lastState}' | jq
+kubectl get pod my-app -o jsonpath='{.status.containerStatuses[0].lastState}' | jq
 ```
 
 ## Cleanup
@@ -59,5 +67,9 @@ kubectl get pod seven-sins-application -o jsonpath='{.status.containerStatuses[0
 Delete the created resources.
 
 ```bash
-kubectl delete all --all --force --grace-period=0
+kubectl delete -f k8s/ --all --force --grace-period=0
 ```
+
+---
+
+Jump > [Graceful Shutdown](../05_graceful_shutdown/) | Next > [Init Containers](../07_init_containers/README.md)

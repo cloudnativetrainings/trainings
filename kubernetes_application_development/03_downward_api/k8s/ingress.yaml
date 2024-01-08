@@ -4,14 +4,14 @@ metadata:
   name: my-app
   annotations:
     ingress.kubernetes.io/ssl-redirect: "false"
-    nginx.ingress.kubernetes.io/rewrite-target: "/"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   ingressClassName: nginx
   rules:
     - http:
         paths:
-          - path: /my-app
-            pathType: Exact
+          - path: /my-app(/|$)(.*)
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: my-app

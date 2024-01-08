@@ -28,7 +28,7 @@ kubectl create -f k8s/
 
 ```bash
 # Access the application
-curl -I http://${INGRESS_IP}/probe_app
+curl -I http://${INGRESS_IP}/probe-app
 ```
 
 You should get a `HTTP/1.1 200 OK` status code.
@@ -39,7 +39,7 @@ We will now change the readiness state of the application. Therefore please open
 
 ```bash
 # [TERMINAL-2] Attach to the application
-kubectl attach -it seven-sins-application
+kubectl attach -it probe-app
 
 # [TERMINAL-2] Set the application to not ready
 set unready
@@ -48,7 +48,7 @@ set unready
 kubectl get pods
 
 # [TERMINAL-1] Access the application (this will fail)
-curl -I http://${INGRESS_IP}/probe_app
+curl -I http://${INGRESS_IP}/probe-app
 ```
 
 > Kubernetes does not route any traffic anymore to the unready Pod. If you would have created the application via a Deployment scaled to 2 replicas the application would still serve traffic on the ready Pod.
@@ -65,7 +65,7 @@ set dead
 kubectl get pods
 
 # [TERMINAL-1] Access the application
-curl -I http://${INGRESS_IP}/probe_app
+curl -I http://${INGRESS_IP}/probe-app
 ```
 
 ## Cleanup
@@ -73,5 +73,10 @@ curl -I http://${INGRESS_IP}/probe_app
 Delete the created resources.
 
 ```bash
-kubectl delete all --all --force --grace-period=0
+kubectl delete -f k8s/ --force --grace-period=0
+cd ..
 ```
+
+---
+
+Jump > [Downward API](../03_downward_api/README.md) | Next > [Graceful Shutdown](../05_graceful_shutdown/README.md)
