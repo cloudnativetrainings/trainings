@@ -76,7 +76,3 @@ Delete the created resources.
 kubectl delete -f k8s/ --force --grace-period=0
 cd ..
 ```
-
----
-
-Jump > [Downward API](../03_downward_api/README.md) | Next > [Graceful Shutdown](../05_graceful_shutdown/README.md)

@@ -53,7 +53,3 @@ Remove the created objects, and go back to training home:
 kubectl delete -f k8s/
 cd ..
 ```
-
----
-
-Jump > [Setup](../00_setup/README.md) | Next > [Secrets](../02_secrets/README.md)

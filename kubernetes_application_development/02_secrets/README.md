@@ -205,7 +205,3 @@ kubectl delete -f k8s/
 helm uninstall vault -n vault
 cd ..
 ```
-
----
-
-Jump > [Config Maps](../01_configmaps/README.md) | Next > [Downward API](../03_downward_api/README.md)

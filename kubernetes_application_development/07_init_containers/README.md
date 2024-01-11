@@ -59,7 +59,3 @@ Remove the pods and the service:
 kubectl delete -f k8s/
 cd ..
 ```
-
----
-
-Jump > [OOM](../06_oom/README.md) | Next > [Debug Containers](../08_ephemeral_containers/README.md)

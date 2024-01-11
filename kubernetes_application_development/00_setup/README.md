@@ -73,7 +73,3 @@ helm upgrade --install logging loki-stack \
 You need to add Loki as a data source to the existing Grafana and then explore the logs.
 
 > Hint: URL will be `http://logging-loki.logging.svc.cluster.local:3100`
-
----
-
-Jump > [Home](../README.md) | Next > [Config Maps](../01_configmaps/README.md)

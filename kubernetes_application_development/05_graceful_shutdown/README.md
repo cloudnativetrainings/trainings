@@ -168,7 +168,3 @@ kubectl delete -f k8s/pod-B.yaml
 ## Verification of Graceful Shutdown
 
 Take a look at the logfiles. Did the graceful shutdown happen on both Pods? If not, why?
-
----
-
-Jump > [Probing](../04_probing/README.md) | Next > [OOM (Out of Memory)](../06_oom/README.md)

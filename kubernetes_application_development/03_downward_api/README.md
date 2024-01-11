@@ -73,7 +73,3 @@ cd ..
 |--------|---------------|
 | `metadata.labels` | all of the pod's labels, formatted as `label-key="escaped-label-value"` with one label per line |
 | `metadata.annotations` | all of the pod's annotations, formatted as `annotation-key="escaped-annotation-value"` with one annotation per line |
-
----
-
-Jump > [Secrets](../02_secrets/README.md) | Next > [Probing](../04_probing/README.md)

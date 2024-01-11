@@ -69,7 +69,3 @@ Delete the created resources.
 ```bash
 kubectl delete -f k8s/ --force --grace-period=0
 ```
-
----
-
-Jump > [Graceful Shutdown](../05_graceful_shutdown/) | Next > [Init Containers](../07_init_containers/README.md)

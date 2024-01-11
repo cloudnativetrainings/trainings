@@ -78,7 +78,3 @@ Delete all pods:
 kubectl delete pods --all
 cd ..
 ```
-
----
-
-Jump > [Init Containers](../07_init_containers/README.md) | Next > [Teardown](../99_teardown/README.md)
