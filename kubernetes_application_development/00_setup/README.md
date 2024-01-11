@@ -25,6 +25,7 @@ Install NGINX Ingress using Helm
 helm upgrade --install ingress-nginx ingress-nginx \
   --repo https://kubernetes.github.io/ingress-nginx \
   --namespace ingress-nginx --create-namespace \
+  --version 4.9.0 \
   --set controller.service.loadBalancerIP=${INGRESS_IP}
 ```
 
@@ -42,6 +43,7 @@ First, install `kube-prometheus-stack` helm chart, which will install these comp
 helm upgrade --install monitoring kube-prometheus-stack \
   --repo https://prometheus-community.github.io/helm-charts \
   --namespace monitoring --create-namespace \
+  --version 55.7.1 \
   --set grafana.ingress.enabled=true,grafana.ingress.ingressClassName=nginx
 ```
 
@@ -67,9 +69,12 @@ Deploy `loki-stack`
 helm upgrade --install logging loki-stack \
     --repo https://grafana.github.io/helm-charts \
     --namespace logging --create-namespace \
+    --version 2.10.0 \
     --set fluent-bit.enabled=true,promtail.enabled=false
 ```
 
 You need to add Loki as a data source to the existing Grafana and then explore the logs.
 
 > Hint: URL will be `http://logging-loki.logging.svc.cluster.local:3100`
+>
+> You may see an error on Grafana UI, but check the datasource on "Explore" tab.

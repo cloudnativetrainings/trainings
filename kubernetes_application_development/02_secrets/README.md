@@ -16,6 +16,7 @@ Install the helm chart:
 helm install vault vault \
   --repo https://helm.releases.hashicorp.com \
   --namespace vault --create-namespace \
+  --version 0.27.0 \
   --set ui.enabled=true
 ```
 
