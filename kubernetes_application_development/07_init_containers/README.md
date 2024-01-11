@@ -5,7 +5,7 @@ Init containers can contain utilities or setup scripts not present in an app ima
 Change into the lab directory:
 
 ```bash
-cd $HOME/trainings/kubernetes_application_development/06_oom
+cd $HOME/trainings/kubernetes_application_development/07_init_containers
 ```
 
 ## Deploy apps
@@ -62,4 +62,4 @@ cd ..
 
 ---
 
-Jump > [OOM](../06_oom/README.md) | Next > [Debug Containers](../08_debug_containers/README.md)
+Jump > [OOM](../06_oom/README.md) | Next > [Debug Containers](../08_ephemeral_containers/README.md)

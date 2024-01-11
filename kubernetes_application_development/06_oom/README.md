@@ -67,7 +67,7 @@ kubectl get pod my-app -o jsonpath='{.status.containerStatuses[0].lastState}' | 
 Delete the created resources.
 
 ```bash
-kubectl delete -f k8s/ --all --force --grace-period=0
+kubectl delete -f k8s/ --force --grace-period=0
 ```
 
 ---
