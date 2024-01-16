@@ -23,6 +23,7 @@ export ENDPOINT=$(gcloud compute addresses list --filter="region:europe-west3" -
 helm upgrade --install ingress-nginx ingress-nginx \
   --repo https://kubernetes.github.io/ingress-nginx \
   --namespace ingress-nginx --create-namespace \
+  --version 4.9.0 \
   --set controller.service.loadBalancerIP=${ENDPOINT}
 ```
 

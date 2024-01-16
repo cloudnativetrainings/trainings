@@ -9,7 +9,7 @@ cd $HOME/trainings/kubernetes_helm/04_rollback
 
 tree color-viewer
 
-batcat color-viewer/values.yaml
+cat color-viewer/values.yaml
 ```
 
 ## Release the red app

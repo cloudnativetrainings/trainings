@@ -122,13 +122,13 @@ kubectl get hpa
 There is a `hpa.yaml` file in the templates, check it out:
 
 ```bash
-batcat my-chart/templates/hpa.yaml
+cat my-chart/templates/hpa.yaml
 ```
 
 So, it depends on the values. Check out the values.yaml:
 
 ```bash
-batcat my-chart/values.yaml
+cat my-chart/values.yaml
 ```
 
 As you see, HPA is not enabled by default.

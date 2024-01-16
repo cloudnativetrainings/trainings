@@ -12,7 +12,7 @@ You will see that, there are 2 directories: base and overlay. Under overlay, the
 ## Inspect base kustomization.yaml
 
 ```bash
-batcat base/kustomization.yaml
+cat base/kustomization.yaml
 ```
 
 - Add label app=demo to all the resources created.
@@ -21,7 +21,7 @@ batcat base/kustomization.yaml
 ## Inspect dev overlay kustomization.yaml
 
 ```bash
-batcat overlays/dev/kustomization.yaml
+cat overlays/dev/kustomization.yaml
 ```
 
 - Get all resources from base
@@ -34,7 +34,7 @@ batcat overlays/dev/kustomization.yaml
 ## Inspect prod overlay kustomization.yaml
 
 ```bash
-batcat overlays/prod/kustomization.yaml
+cat overlays/prod/kustomization.yaml
 ```
 
 - Get all resource from and and configmap.yaml from the current directory

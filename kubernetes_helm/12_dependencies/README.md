@@ -10,7 +10,7 @@ Take a look athe `Chart.yaml` file. There is a dependency defined for the Chart 
 ```bash
 tree
 
-batcat ./my-app/Chart.yaml
+cat ./my-app/Chart.yaml
 ```
 
 You can also inspect the dependencies via the following command.
@@ -31,9 +31,9 @@ helm dependency update ./my-app
 
 Inspect the dependency in the file `Chart.yaml`. It is enabled depending on a Value. Take a look at the file `values.yaml` on how to set this Value.
 ```bash
-batcat ./my-app/Chart.yaml
+cat ./my-app/Chart.yaml
 
-batcat ./my-app/values.yaml
+cat ./my-app/values.yaml
 ```
 
 Install the app with its default values.
@@ -78,7 +78,7 @@ helm uninstall app
 Check the values of the subchart values.yaml:
 
 ```bash
-batcat ./my-dependency/values.yaml
+cat ./my-dependency/values.yaml
 ```
 
 Install the app with the dependency enabled.

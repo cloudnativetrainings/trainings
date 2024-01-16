@@ -8,9 +8,9 @@ In this task, you will learn how to write Hooks.
 
 Take a look at the Hooks.
 ```bash
-batcat ./my-app/templates/hook-pre-install.yaml
+cat ./my-app/templates/hook-pre-install.yaml
 
-batcat ./my-app/templates/hook-pre-delete.yaml
+cat ./my-app/templates/hook-pre-delete.yaml
 ```
 
 ## Running Hooks

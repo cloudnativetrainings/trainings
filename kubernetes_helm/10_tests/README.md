@@ -17,7 +17,7 @@ tree .
 A Kubernetes Job to check ir the App responses successfully:
 
 ```bash
-batcat ./my-app/templates/tests/test-my-app.yaml
+cat ./my-app/templates/tests/test-my-app.yaml
 ```
 
 ## Run the test

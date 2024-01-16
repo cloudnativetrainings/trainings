@@ -20,7 +20,7 @@ You will see 2 important files and a directory with manifests.
 Check the default values of the chart:
 
 ```
-batcat color-viewer/values.yaml
+cat color-viewer/values.yaml
 ```
 
 ### Show all installed Helm Releases
@@ -67,7 +67,7 @@ curl http://${ENDPOINT}/dev
 
 Checkout the values for production:
 ```bash
-batcat prod-values.yaml
+cat prod-values.yaml
 ```
 
 Deploy your application with Helm:
