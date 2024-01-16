@@ -1,6 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: red
-data:
-  body: <body style="background-color:red;"></body>

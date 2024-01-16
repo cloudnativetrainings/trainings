@@ -1,0 +1,15 @@
+color: yellow
+
+environment: dev
+
+replicas: 1
+
+imagetag: 1.25.2-alpine3.18-slim
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 100Mi
+  limits:
+    cpu: 100m
+    memory: 100Mi

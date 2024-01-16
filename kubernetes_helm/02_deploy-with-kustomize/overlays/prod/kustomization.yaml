@@ -1,0 +1,28 @@
+resources:
+- ../../base
+- configmap.yaml
+
+commonLabels:
+  environment: prod
+
+commonAnnotations:
+  managed-by: kustomize
+
+namespace: prod
+
+replicas:
+- name: my-deployment
+  count: 3
+
+patches:
+- path: ingress-patch.yaml
+  target:
+      group: networking.k8s.io
+      version: v1
+      kind: Ingress
+      name: my-ingress
+- path: deployment-patch.yaml
+
+## patchesStrategicMerge and patchesJson6902 are deprecated!
+# patchesStrategicMerge:
+# - deployment-patch.yaml

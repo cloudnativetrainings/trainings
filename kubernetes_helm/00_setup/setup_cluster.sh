@@ -14,7 +14,7 @@ export ZONE=europe-west3-a
 export CLUSTER_NAME=training-kh
 export NETWORK_NAME=$CLUSTER_NAME
 export FIREWALL_NAME=$CLUSTER_NAME
-export CLUSTER_VERSION=1.22
+export CLUSTER_VERSION=1.27
 
 set -euxo pipefail
 
@@ -42,7 +42,16 @@ then
   gcloud compute networks subnets create $NETWORK_NAME-subnet --project=$PROJECT_NAME \
     --range=10.0.0.0/24 --network=$NETWORK_NAME --region=$REGION
 else
-      echo "Subnet $response_network already exists, skip creation"
+  echo "Subnet $response_network already exists, skip creation"
+fi
+
+# create static IP address for NGINX ingress
+response_addr=`gcloud compute addresses list --filter=region:$REGION --filter="name=$CLUSTER_NAME-addr"`
+if [ -z "$response_addr" ]
+then
+  gcloud compute addresses create $CLUSTER_NAME-addr --region=$REGION
+else
+  echo "Static IP Address already exists, skip creation"
 fi
 
 # create cluster
@@ -56,11 +65,11 @@ then
     --zone=$ZONE \
     --cluster-version $CLUSTER_VERSION \
     --machine-type "n1-standard-4" --num-nodes "2" \
-    --image-type "UBUNTU" --disk-type "pd-standard" --disk-size "100" \
+    --disk-type "pd-standard" --disk-size "100" \
     --enable-network-policy --enable-ip-alias \
     --no-enable-autoupgrade --enable-autorepair --max-surge-upgrade 1 --max-unavailable-upgrade 0 \
     --no-enable-basic-auth --metadata disable-legacy-endpoints=true \
-    --no-enable-stackdriver-kubernetes --no-enable-master-authorized-networks \
+    --logging=NONE --monitoring=NONE --no-enable-master-authorized-networks \
     --scopes "https://www.googleapis.com/auth/devstorage.read_only","https://www.googleapis.com/auth/logging.write","https://www.googleapis.com/auth/monitoring","https://www.googleapis.com/auth/servicecontrol","https://www.googleapis.com/auth/service.management.readonly","https://www.googleapis.com/auth/trace.append" \
     --addons HorizontalPodAutoscaling,HttpLoadBalancing
 else

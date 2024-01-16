@@ -1,0 +1,3 @@
+- op: replace                             #action
+  path: /spec/rules/0/http/paths/0/path   #resouirce we want to change
+  value: /prod                            #value we want to use for patching

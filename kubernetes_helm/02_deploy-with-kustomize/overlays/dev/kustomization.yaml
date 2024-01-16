@@ -1,0 +1,27 @@
+resources:
+- ../../base
+
+commonLabels:
+  environment: dev
+
+namespace: dev
+
+patches:
+- patch: |-
+    - op: replace
+      path: /spec/rules/0/http/paths/0/path
+      value: /dev
+  target:
+      group: networking.k8s.io
+      version: v1
+      kind: Ingress
+      name: my-ingress
+
+configMapGenerator:
+- name: my-configmap
+  literals:
+  - body=<body style="background-color:yellow;"><h1>DEV</h1></body>
+
+images:
+- name: nginx
+  newTag: 1.25.2-alpine3.18-slim

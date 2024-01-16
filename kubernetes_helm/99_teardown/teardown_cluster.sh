@@ -23,6 +23,7 @@ gcloud config set compute/zone $ZONE
 
 # delete resources
 gcloud beta container clusters delete $CLUSTER_NAME --quiet
+gcloud compute addresses delete $CLUSTER_NAME-addr --region=$REGION --quiet
 gcloud compute firewall-rules delete $FIREWALL_NAME-ingress-gateway --quiet
 gcloud compute firewall-rules delete $FIREWALL_NAME-ssh --quiet
 gcloud compute firewall-rules delete $FIREWALL_NAME-nodeport --quiet

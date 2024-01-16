@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: my-{{ .Values.color }}-ingress
+  annotations:
+    ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/rewrite-target: "/"
+spec:
+  ingressClassName: nginx
+  rules:
+    - http:
+        paths:
+          - path: /{{ .Values.color }}
+            pathType: Exact
+            backend:
+              service:
+                name: my-{{ .Values.color }}-service
+                port: 
+                  number: 80
