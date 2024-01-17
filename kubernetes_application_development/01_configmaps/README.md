@@ -12,6 +12,8 @@ Apply the manifests:
 
 ```bash
 kubectl apply -f k8s/
+
+kubectl wait pod -l app=my-app --for=condition=ready --timeout=120s
 ```
 
 Try to reach the application:
@@ -36,7 +38,7 @@ kubectl describe pod my-app
 
 kubectl describe svc my-app
 
-kubectl get cm my-configmap -o yaml | yq '.data'
+kubectl get cm my-configmap -o yaml
 ```
 
 Fix the error, and try again.
