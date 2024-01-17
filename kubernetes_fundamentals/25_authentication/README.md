@@ -77,7 +77,7 @@ kubectl get csr
 
   ```bash
   CURRENT_CONTEXT=$(kubectl config current-context --kubeconfig my-config.yaml)
-  kubectl config set-context bob --cluster=$CURRENT_CONTEXT --user=bob
+  kubectl config set-context bob --kubeconfig my-config.yaml --cluster=$CURRENT_CONTEXT --user=bob
   kubectl config use-context bob --kubeconfig my-config.yaml
   ```
 
