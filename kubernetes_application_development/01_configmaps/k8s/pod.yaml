@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  namespace: default
+  name: my-app
+  labels:
+    app: my-app
+spec:
+  terminationGracePeriodSeconds: 0
+  containers:
+    - name: my-app
+      image: quay.io/kubermatic-labs/kad-training:1.0.0-java
+      ports:
+        - containerPort: 8080
+      imagePullPolicy: Always
+      volumeMounts:
+        - name: my-volume
+          mountPath: /srv/app/config
+  volumes:
+    - name: my-volume
+      configMap:
+        name: my-configmap
