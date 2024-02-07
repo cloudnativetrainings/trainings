@@ -4,7 +4,7 @@ metadata:
   name: letsencrypt-prod
 spec:
   acme:
-    email: TODO-STUDENT-EMAIL@loodse.training
+    email: TODO-STUDENT-EMAIL@kubermatic.training
     server: https://acme-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
       name: letsencrypt-prod-acme-account-key

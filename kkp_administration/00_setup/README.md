@@ -33,10 +33,10 @@ cp -r ~/.tmp/trainings/kkp_administration/* .
 ```bash
 echo 'export PROJECT_ID=$(gcloud projects list --format json | jq .[].name | tr -d \")' >> ~/.bashrc
 echo 'export DNS_ZONE=$(gcloud dns managed-zones list --format json | jq '.[].name' | tr -d \")' >> ~/.bashrc
-echo 'export MAIL=$PROJECT_ID@loodse.training' >> ~/.bashrc
+echo 'export MAIL=$PROJECT_ID@kubermatic.training' >> ~/.bashrc
 echo 'export SA_NAME=kkp-admin-training' >> ~/.bashrc
 echo 'export SA_MAIL=$SA_NAME@$PROJECT_ID.iam.gserviceaccount.com' >> ~/.bashrc
-echo 'export DOMAIN=$PROJECT_ID.loodse.training' >> ~/.bashrc
+echo 'export DOMAIN=$PROJECT_ID.kubermatic.training' >> ~/.bashrc
 echo 'export REPO_URL=gcr.io/$PROJECT_ID' >> ~/.bashrc
 echo 'export KUBEONE_VERSION=1.5.4' >> ~/.bashrc
 echo 'export KKP_VERSION=2.20.12' >> ~/.bashrc      # Make sure that this is not the latest version for the 07_upgrade_kkp to work
