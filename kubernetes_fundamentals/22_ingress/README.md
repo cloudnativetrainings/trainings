@@ -27,7 +27,7 @@ kubectl get pods,svc
 
 ```bash
 # Make sure you update your username
-kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin --user=student-xx.yyy@loodse.training
+kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin --user=student-xx.yyy@kubermatic.training
 ```
 
 ```bash

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ## check if authenticated
-if [ $(gcloud auth list --filter=status:ACTIVE --format='value(account)' | grep loodse.training) ]; then
+if [ $(gcloud auth list --filter=status:ACTIVE --format='value(account)' | grep kubermatic.training) ]; then
   echo successfull authenticated!
 else
   gcloud auth login

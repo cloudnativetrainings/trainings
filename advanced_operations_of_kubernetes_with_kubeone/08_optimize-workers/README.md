@@ -181,7 +181,7 @@ node/k1-pool-az-c-7bdfbcd567-cb5kb   Ready    <none>   2m15s   v1.23.9   10.240.
 Finally, verify that your app is still running and reachable:
 
 ```bash
-curl https://app-ext.$DNS_ZONE.loodse.training 
+curl https://app-ext.$DNS_ZONE.kubermatic.training 
 ```
 
 See also the resource usage:
@@ -233,13 +233,13 @@ node/k1-pool-az-c-7bdfbcd567-cb5kb   Ready,SchedulingDisabled   <none>   3m9s   
 After a few minutes, verify that your app is still running and reachable:
 
 ```bash
-curl https://app-ext.$DNS_ZONE.loodse.training
+curl https://app-ext.$DNS_ZONE.kubermatic.training
 ```
 
 Now you see the app is not reachable anymore, as no compute worker nodes are available:
 
 ```text
-curl: (7) Failed to connect to app-ext.YOUR_DNS_ZONE.loodse.training port 443: Connection refused
+curl: (7) Failed to connect to app-ext.YOUR_DNS_ZONE.kubermatic.training port 443: Connection refused
 ```
 
 ```bash

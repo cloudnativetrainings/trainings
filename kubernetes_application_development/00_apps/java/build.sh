@@ -2,8 +2,8 @@
 
 export APP=app
 export VERSION=0.0.1
-export PROJECT_NAME=loodse-training-playground
-export CONTAINER_REGISTRY=eu.gcr.io/$PROJECT_NAME/loodse-training
+export PROJECT_NAME=kubermatic-training-playground
+export CONTAINER_REGISTRY=eu.gcr.io/$PROJECT_NAME/kubermatic-training
 export IMAGE=$CONTAINER_REGISTRY/$APP:$VERSION
 
 # build application

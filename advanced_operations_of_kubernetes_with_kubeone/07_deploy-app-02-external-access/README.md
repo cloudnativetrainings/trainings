@@ -79,7 +79,7 @@ Let's deploy the CertManager:
   ```
   ```text
   NAME                DNS_NAME                             DESCRIPTION                VISIBILITY
-  student-XX-XXXX     student-XX-XXXX.loodse.training.     zone for student-XX-XXXX  public
+  student-XX-XXXX     student-XX-XXXX.kubermatic.training.     zone for student-XX-XXXX  public
   ```
   Adjust to your zone name
   ```bash
@@ -88,14 +88,14 @@ Let's deploy the CertManager:
   ```
 
 * Then proceed to add the A records:
-  `*.student-XX-XXXX.loodse.training`  ---->  LoadBalancer IP address of the Nginx Service
+  `*.student-XX-XXXX.kubermatic.training`  ---->  LoadBalancer IP address of the Nginx Service
   ```bash
   kubectl get svc -n ingress-nginx
   ```
   Use your external service ip
   ```bash
   export SERVICE_NGINX_EXT_IP=xx.xx.xx.xx
-  gcloud dns record-sets transaction add --zone=$DNS_ZONE --name="*.$DNS_ZONE.loodse.training" --ttl 300 --type A $SERVICE_NGINX_EXT_IP
+  gcloud dns record-sets transaction add --zone=$DNS_ZONE --name="*.$DNS_ZONE.kubermatic.training" --ttl 300 --type A $SERVICE_NGINX_EXT_IP
   ```
 
 * Finally, verify DNS transaction yaml and execute those changes.
@@ -112,7 +112,7 @@ Let's deploy the CertManager:
 
   ```text
   NAME                                           TYPE   TTL    DATA
-  *.student-XX.loodse.XXXX.                      A      300    34.90.218.24
+  *.student-XX.kubermatic.XXXX.                      A      300    34.90.218.24
   ```
 
 **Alternative:** You could create an AWS Route 53 record on a hosted domain and link the `$EXTERNAL IP` accordingly to create DNS for `student-XX-XXXX.domain.name` and `*.student-XX-XXXX.domain.name`
@@ -125,7 +125,7 @@ Let's deploy the CertManager:
   >Use email provided by trainer for `TRAINING_EMAIL`
   ```bash
   cd $TRAINING_DIR/07_deploy-app-02-external-access
-  export TRAINING_EMAIL=student-XX.XXXX@loodse.training       
+  export TRAINING_EMAIL=student-XX.XXXX@kubermatic.training       
   sed -i "s/your-email@example.com/$TRAINING_EMAIL/g" manifests/lb.cluster-issuer.yaml
   kubectl apply -f manifests/lb.cluster-issuer.yaml
   ```
@@ -162,7 +162,7 @@ Let's deploy a sample application. This will entail creating a deployment, a ser
   kubectl apply -f manifests/app.service.yaml
   ```
 
-Now let's configure a valid SSL certificate for you app. `sed` will replace `TODO-YOUR-DNS-ZONE` with your DNS ZONE, e.g.:`student-XX-XXXX.loodse.training`. Please ensure you will use **YOUR STUDENT ID**:
+Now let's configure a valid SSL certificate for you app. `sed` will replace `TODO-YOUR-DNS-ZONE` with your DNS ZONE, e.g.:`student-XX-XXXX.kubermatic.training`. Please ensure you will use **YOUR STUDENT ID**:
 
 * Check no certificate is present
   ```bash
@@ -215,7 +215,7 @@ kubectl get ingresses.networking.k8s.io
 
 ```text
 NAME       HOSTS                                     ADDRESS          PORTS      AGE
-helloweb   app-ext.student-XX-XXXX.loodse.training   34.90.218.24     80, 443    98s
+helloweb   app-ext.student-XX-XXXX.kubermatic.training   34.90.218.24     80, 443    98s
 ```
 
 Ensure that there are endpoints available for the service.
@@ -223,11 +223,11 @@ Ensure that there are endpoints available for the service.
 Test the application (this is being served via the ingress controller with the Let's encrypt SSL certificate):
 
 ```bash
-echo https://app-ext.$DNS_ZONE.loodse.training
+echo https://app-ext.$DNS_ZONE.kubermatic.training
 ```
-Your DNS zone should be displayed. Similar to https://app-ext.YOUR-DNS-ZONE.loodse.training
+Your DNS zone should be displayed. Similar to https://app-ext.YOUR-DNS-ZONE.kubermatic.training
 ```bash
-curl https://app-ext.$DNS_ZONE.loodse.training
+curl https://app-ext.$DNS_ZONE.kubermatic.training
 ```
 
 ```text
@@ -254,7 +254,7 @@ I0717 11:06:04.039261       6 event.go:258] Event(v1.ObjectReference{Kind:"Ingre
 
 I0717 11:06:36.110931       6 event.go:258] Event(v1.ObjectReference{Kind:"Ingress", Namespace:"default", Name:"helloweb", UID:"c3748923-a882-11e9-aac8-42010af00003", APIVersion:"networking.k8s.io/v1beta1", ResourceVersion:"19038", FieldPath:""}): type: 'Normal' reason: 'UPDATE' Ingress default/helloweb
 
-I0717 11:06:36.110991       6 backend_ssl.go:58] Updating Secret "default/loodse-dev-tls" in the local store
+I0717 11:06:36.110991       6 backend_ssl.go:58] Updating Secret "default/kubermatic-dev-tls" in the local store
 
 I0717 11:06:36.111294       6 controller.go:133] Configuration changes detected, backend reload required.
 

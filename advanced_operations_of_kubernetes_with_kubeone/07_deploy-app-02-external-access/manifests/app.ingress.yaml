@@ -10,10 +10,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - app-ext.TODO-YOUR-DNS-ZONE.loodse.training
-      secretName: loodse-dev-tls
+        - app-ext.TODO-YOUR-DNS-ZONE.kubermatic.training
+      secretName: kubermatic-dev-tls
   rules:
-    - host: app-ext.TODO-YOUR-DNS-ZONE.loodse.training
+    - host: app-ext.TODO-YOUR-DNS-ZONE.kubermatic.training
       http:
         paths:
           - pathType: Prefix

@@ -20,7 +20,7 @@ spec:
       terminationGracePeriodSeconds: 0
       containers:
         - name: frontend
-          image: eu.gcr.io/loodse-training-playground/kubernetes-servicemesh/frontend:1.0.0
+          image: eu.gcr.io/kubermatic-training-playground/kubernetes-servicemesh/frontend:1.0.0
           imagePullPolicy: Always
           ports:
             - name: http

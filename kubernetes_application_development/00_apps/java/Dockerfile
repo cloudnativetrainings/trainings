@@ -1,4 +1,4 @@
-FROM gradle:7.6-jdk17 AS builder
+FROM gradle:8.6.0-jdk21 AS builder
 ARG BUILD_VERSION=0.0.0
 COPY --chown=gradle:gradle . /code
 WORKDIR /code

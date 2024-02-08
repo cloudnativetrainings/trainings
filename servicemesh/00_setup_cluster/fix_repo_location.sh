@@ -12,4 +12,4 @@ fi
 set -euxo pipefail
 
 # fix yaml files
-find ./.. -type f -name "*.yaml" -exec sed -i "s/loodse-training-playground/$PROJECT_NAME/g" {} +
+find ./.. -type f -name "*.yaml" -exec sed -i "s/kubermatic-training-playground/$PROJECT_NAME/g" {} +

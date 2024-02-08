@@ -1,10 +1,10 @@
-FROM gradle:6.3.0-jdk14 AS builder
+FROM gradle:8.6.0-jdk21 AS builder
 ARG BUILD_VERSION=0.0.0
 COPY --chown=gradle:gradle . /code
 WORKDIR /code
 RUN gradle build --no-daemon -Pversion=$BUILD_VERSION
 
-FROM openjdk:14-jdk-slim-buster
+FROM openjdk:21-jdk-slim-bookworm
 RUN apt update && apt install curl -y
 ARG BUILD_VERSION=0.0.0
 ENV BUILD_VERSION=$BUILD_VERSION
