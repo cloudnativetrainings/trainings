@@ -1,4 +1,4 @@
-package training.kubermatic.servicemesh.frontend;
+package training.cloudnative.servicemesh.frontend;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -6,19 +6,19 @@ In this task you will setup a certificate to be used for inbound traffic.
 
 ```bash
 # create root certificate
-openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -subj '/O=kubermatic training/CN=kubermatic.training' -keyout kubermatic.training.key -out kubermatic.training.crt
+openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -subj '/O=kubermatic training/CN=cloud-native.training' -keyout cloud-native.training.key -out cloud-native.training.crt
 
 # create csr and key
-openssl req -out frontend.kubermatic.training.csr -newkey rsa:2048 -nodes -keyout frontend.kubermatic.training.key -subj "/CN=frontend.kubermatic.training/O=kubermatic training"
+openssl req -out frontend.cloud-native.training.csr -newkey rsa:2048 -nodes -keyout frontend.cloud-native.training.key -subj "/CN=frontend.cloud-native.training/O=kubermatic training"
 
 # create certificate
-openssl x509 -req -days 365 -CA kubermatic.training.crt -CAkey kubermatic.training.key -set_serial 0 -in frontend.kubermatic.training.csr -out frontend.kubermatic.training.crt
+openssl x509 -req -days 365 -CA cloud-native.training.crt -CAkey cloud-native.training.key -set_serial 0 -in frontend.cloud-native.training.csr -out frontend.cloud-native.training.crt
 ```
 
 ## Create a Secret in the `istio-system` namespace
 
 ```bash
-kubectl create -n istio-system secret tls frontend.kubermatic.training --key=frontend.kubermatic.training.key --cert=frontend.kubermatic.training.crt
+kubectl create -n istio-system secret tls frontend.cloud-native.training --key=frontend.cloud-native.training.key --cert=frontend.cloud-native.training.crt
 ```
 
 ## Inspect and create the resources
@@ -32,7 +32,7 @@ kubectl create -f .
 ### Verify via curl
 
 ```bash
-while true; do curl -v --resolve "frontend.kubermatic.training:443:$INGRESS_HOST" --cacert kubermatic.training.crt "https://frontend.kubermatic.training:443/"; sleep 5; done
+while true; do curl -v --resolve "frontend.cloud-native.training:443:$INGRESS_HOST" --cacert cloud-native.training.crt "https://frontend.cloud-native.training:443/"; sleep 5; done
 ```
 
 #### Verify TLS with Kiali
@@ -48,12 +48,12 @@ Check the Graph and enable the Security Display Setting. There has to be a TLS s
 ## Curl the backend service and verify the output
 
 ```bash
-curl -v --resolve "frontend.kubermatic.training:443:$INGRESS_HOST"  --cacert kubermatic.training.crt "https://frontend.kubermatic.training:443/"
+curl -v --resolve "frontend.cloud-native.training:443:$INGRESS_HOST"  --cacert cloud-native.training.crt "https://frontend.cloud-native.training:443/"
 ```
 
 ## Clean up
 
 ```bash
 kubectl delete -f .
-kubectl -n istio-system delete secret frontend.kubermatic.training
+kubectl -n istio-system delete secret frontend.cloud-native.training
 ```
