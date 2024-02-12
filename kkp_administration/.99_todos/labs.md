@@ -1,7 +1,6 @@
 
 # Blockers
 * folder setup is broken... make files do not work
-* switch to kubermatic.training domain
 * make use of jumphost instead of using google cloud shell
 
 # new labs
