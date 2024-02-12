@@ -1,4 +1,4 @@
-package com.kubermatic.training;
+package training.cloudnative;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,16 +9,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
-@Endpoint(id="liveness")
+@Endpoint(id="readiness")
 @Component
-public class LivenessProbe {
+public class ReadinessProbe {
 
-    private static final Logger LOG = LoggerFactory.getLogger(LivenessProbe.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ReadinessProbe.class);
 
     @ReadOperation
-    public ResponseEntity<Health> liveness() {
-        LOG.info("liveness request"); 
-        if (MyController.HEALTHY) {
+    public ResponseEntity<Health> readiness() {
+        LOG.info("readiness request"); 
+        if (MyController.READY) {
             return ResponseEntity.ok(Health.up().build());
         } else {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Health.down().build());

@@ -1,4 +1,4 @@
-package com.kubermatic.training;
+package training.cloudnative;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
