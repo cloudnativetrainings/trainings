@@ -13,6 +13,6 @@ spec:
         protocol: HTTPS
       tls:
         mode: SIMPLE
-        credentialName: frontend.kubermatic.training
+        credentialName: frontend.cloud-native.training
       hosts:
-        - "frontend.kubermatic.training"
+        - "frontend.cloud-native.training"

@@ -4,7 +4,7 @@
 	id 'java'
 }
 
-group = 'training.kubermatic.servicemesh.backend'
+group = 'training.cloudnative.servicemesh.backend'
 sourceCompatibility = '21'
 
 configurations {

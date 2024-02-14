@@ -10,10 +10,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - app-ext.TODO-YOUR-DNS-ZONE.kubermatic.training
+        - app-ext.TODO-YOUR-DNS-ZONE.cloud-native.training
       secretName: kubermatic-dev-tls
   rules:
-    - host: app-ext.TODO-YOUR-DNS-ZONE.kubermatic.training
+    - host: app-ext.TODO-YOUR-DNS-ZONE.cloud-native.training
       http:
         paths:
           - pathType: Prefix

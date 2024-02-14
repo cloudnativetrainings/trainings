@@ -84,7 +84,7 @@ kubectl get pods -A
 
 ```bash
 # Change the email address
-sed -i 's/TODO-STUDENT-EMAIL@kubermatic.training/'$MAIL'/g' ~/kkp/clusterissuer.yaml
+sed -i 's/TODO-STUDENT-EMAIL@cloud-native.training/'$MAIL'/g' ~/kkp/clusterissuer.yaml
 
 kubectl apply -f ~/kkp/clusterissuer.yaml
 ```

@@ -1,4 +1,4 @@
-package com.kubermatic.training;
+package training.cloudnative;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

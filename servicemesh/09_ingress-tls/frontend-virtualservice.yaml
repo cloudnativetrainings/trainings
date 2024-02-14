@@ -5,7 +5,7 @@ metadata:
   name: frontend
 spec:
   hosts:
-    - frontend.kubermatic.training
+    - frontend.cloud-native.training
   gateways:
     - gateway
   http:

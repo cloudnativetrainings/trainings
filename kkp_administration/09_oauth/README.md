@@ -7,7 +7,7 @@
 Visit https://console.cloud.google.com/apis/credentials/consent and create an OAuth Consent Screen. In the Tab `OAuth Consent Screen` choose `External` and fill in 
 * `App name`
 * `User support email`
-* Add the `Authorized Domain` with the domain `kubermatic.training`
+* Add the `Authorized Domain` with the domain `cloud-native.training`
 
 ### Create an OAuth 2.0 Client ID
 
@@ -29,7 +29,7 @@ connectors:
       clientSecret: <CLIENT-SECRET>
       redirectURI: https://<DOMAIN>/dex/callback
       hostedDomains:
-        - kubermatic.training
+        - cloud-native.training
 ```
 
 Apply the changes
