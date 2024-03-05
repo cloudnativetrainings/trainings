@@ -1,8 +1,6 @@
 VM_NAME = container-fundamentals
 ZONE = europe-west3-a
-# TODO remove it before commit
-# PROJECT_ID = $(shell gcloud projects list --format json | jq .[].name | tr -d \")
-PROJECT_ID = loodse-training-playground
+PROJECT_ID = $(shell gcloud projects list --format json | jq .[].name | tr -d \")
 
 .PHONY: create
 create:
