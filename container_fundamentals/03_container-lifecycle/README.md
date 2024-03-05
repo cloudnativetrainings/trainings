@@ -70,7 +70,7 @@ docker rm -f my-busybox
 docker run -it -d --name my-busybox busybox:1.32.0 sh -c "while true; do $(echo date); sleep 1; done"
 ```
 
-  >It will start a container in detached mode using `-d` flag.
+>It will start a container in detached mode using `-d` flag.
 
 * Attach local standard input, output, and error streams to a running container
 

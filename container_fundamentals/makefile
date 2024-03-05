@@ -1,6 +1,8 @@
 VM_NAME = container-fundamentals
 ZONE = europe-west3-a
-PROJECT_ID = $(shell gcloud projects list --format json | jq .[].name | tr -d \")
+# TODO remove it before commit
+# PROJECT_ID = $(shell gcloud projects list --format json | jq .[].name | tr -d \")
+PROJECT_ID = loodse-training-playground
 
 .PHONY: create
 create:
@@ -24,9 +26,13 @@ create:
 connect:
 	gcloud compute ssh root@$(VM_NAME) --zone=$(ZONE) 
 
+.PHONY: get-external-ip-from-cloud-shell
+get-external-ip-from-cloud-shell:
+	gcloud compute instances list --format json | jq '.[].networkInterfaces[].accessConfigs[].natIP' | tr -d \"
+
 .PHONY: get-external-ip
 get-external-ip:
-	gcloud compute instances list --format json | jq '.[].networkInterfaces[].accessConfigs[].natIP' | tr -d \"
+	curl https://wtfismyip.com/text
 
 .PHONY: destroy
 destroy:

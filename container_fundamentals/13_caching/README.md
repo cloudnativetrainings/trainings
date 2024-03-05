@@ -14,11 +14,11 @@ cat server.js
 ## Build and run the docker image
 
 ```bash
-docker build -t node:1.0.0 .
-docker run -it -d --rm --name my-webserver -p 80:80 node:1.0.0
+docker build -t webserver:1.0.0 .
+docker run -it -d --rm --name my-webserver -p 80:80 webserver:1.0.0
 ```
 
->Visit the site via the external IP of your node
+>Visit the site via the external IP of your VM on port 80 via http
 
 ### Remove the container
 
@@ -29,7 +29,7 @@ docker rm -f my-webserver
 ## Re-build the docker image
 
 ```bash
-docker build -t node:1.0.0 .
+docker build -t webserver:1.0.0 .
 ```
 
 >Note that all layers are taken from the cache.
@@ -39,11 +39,11 @@ docker build -t node:1.0.0 .
 Change the message to something different in the file `server.js`
 
 ```bash
-docker build -t node:1.0.0 .
-docker run -it -d --rm -p 80:80 node:1.0.0
+docker build -t webserver:1.0.0 .
+docker run -it -d --rm --name my-webserver -p 80:80 webserver:1.0.0
 ```
 
->Visit the site via the external IP of your node
+>Visit the site via the external IP of your VM on port 80 via http
 >Note that all layers starting from the `RUN npm install` layer are not taken from the cache. On bigger projects, this can increase your build times significantly.
 
 ### Remove the container
@@ -56,44 +56,40 @@ docker rm -f my-webserver
 
 * Change the content of the Dockerfile to this
 
-  ```docker
-  FROM node:12
-  WORKDIR /app
-  COPY package.json .
-  RUN npm install
-  COPY server.js .
-  ENTRYPOINT [ "npm" ]
-  CMD [ "start" ]
-  ```
+```docker
+FROM node:12
+WORKDIR /app
+COPY package.json .
+RUN npm install
+COPY server.js .
+ENTRYPOINT [ "npm" ]
+CMD [ "start" ]
+```
 
 * Do the initial build
 
-  ```bash
-  docker build -t node:2.0.0 .
-  ```
+```bash
+docker build -t webserver:2.0.0 .
+```
 
 * Re-build the docker image
 
 Change the message to something different in the file `server.js`.
 
 ```bash
-docker build -t node:2.0.0 .
-docker run -it -d --rm --name my-webserver -p 80:80 node:2.0.0
+docker build -t webserver:2.0.0 .
+docker run -it -d --rm --name my-webserver -p 80:80 webserver:2.0.0
 ```
 
->Visit the site via the external IP of your node
+>Visit the site via the external IP of your VM on port 80 via http
 >Note the layers which are taken from the cache.
 
 ## Cleanup
 
-* Remove all the containers
+```bash
+# Remove all the containers
+docker rm -f $(docker ps -qa)
 
-  ```bash
-  docker rm -f $(docker ps -qa)
-  ```
-
-* Remove all the images
-
-  ```bash
-  docker rmi -f $(docker images -qa)
-  ```
+#  Remove all the images
+docker rmi -f $(docker images -qa)
+```

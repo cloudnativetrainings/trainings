@@ -6,30 +6,30 @@
 
 2. Clone the Kubermatic trainings git repository:
 
-  ```bash
-  git clone https://github.com/kubermatic-labs/trainings.git
-  ```
+```bash
+git clone https://github.com/kubermatic-labs/trainings.git
+```
 
 3. Navigate to Container Fundamentals training folder to get started
 
-  ```bash  
-  cd trainings/container_fundamentals/
-  ```
+```bash  
+cd trainings/container_fundamentals/
+```
 
 4. Create the VM via 
 
-  ```bash  
-  make create
-  ```
+```bash  
+make create
+```
 
 4. Connect to the VM via
 
-  ```bash  
-  make connect
-  ```
+```bash  
+make connect
+```
 
 ## Destroying the lab environment
 
-  ```bash  
-  make destroy
-  ```
+```bash  
+make destroy
+```

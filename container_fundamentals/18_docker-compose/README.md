@@ -30,29 +30,29 @@ cat docker-compose.yaml
 
 * Using `docker compose`, start all the containers as follows.
 
-  ```bash
-  docker compose up -d
-  ```
+```bash
+docker compose up -d
+```
 
 * Verify everything is working
 
-  ```bash
-  docker ps
-  ```
+```bash
+# via docker
+docker ps
 
-* Verify the exposed metrics of CAdvisor
+# via docker compose
+docker compose ps
+```
 
-  ```bash
-  curl localhost:8080/metrics
-  ```
+* Verify the exposed metrics of CAdvisor. Note that there are a lot of metrics.
 
-* Visit Grafana in your Browser (User admin, Password admin)
+```bash
+curl localhost:8080/metrics
+```
 
-  >You can get the external IP via the command `make get-external-ip` in your home directory.
+* Visit Grafana in your Browser (User admin, Password admin) on port 80 via http.
 
-  ```bash
-  http://<EXTERNAL-IP>
-  ```
+>You can get the external IP via the command `make get-external-ip` in your home directory.
 
 ## Create a Datasource
 
@@ -64,14 +64,10 @@ Import the Dashboard with id `193`. Set the Datasource to the previously generat
 
 ## Cleanup
 
-* Remove all the containers
+```bash
+# Remove all the containers
+docker compose down
 
-  ```bash
-  docker compose down
-  ```
-
-* Remove all the images
-
-  ```bash
-  docker rmi -f $(docker images -qa)
-  ```
+# Remove all the images
+docker rmi -f $(docker images -qa)
+```

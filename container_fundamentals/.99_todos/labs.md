@@ -1,11 +1,7 @@
-# 04_interact
-slides are about attach, lab is about exec
-# 08_docker-compose
-grafana password - how to find out?
+# setup VM: install countdown tool (only for trainer)
 
-# add wormhole pattern lab
+# new lab: add wormhole pattern lab
 
+# new lab: creating a base image from scratch => golden image
 
-# VM
-install make for getting external ip
-install countdown tool
+# move podman lab after hadolint

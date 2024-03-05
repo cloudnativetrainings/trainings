@@ -2,6 +2,12 @@
 
 In this training, you will start a Linux OS container and install a web server into it.
 
+## Verify no web server is running on your VM
+
+Visit your VM on port 80 via http in your browser.
+
+>You can get the external IP of your VM via the command `make get-external-ip` in your home directory.
+
 ## Run an Ubuntu container
 
 ```bash
@@ -20,9 +26,9 @@ apt update && apt install -y nginx
 /etc/init.d/nginx start
 ```
 
-## Visit the welcome page in your browser
+## Revisit the welcome page in your browser
 
-  >You can get the external IP via the command `make get-external-ip` in your home directory.
+Now you should see the welcome page of nginx.
 
 ## Exit the container
 
@@ -56,7 +62,7 @@ Just try the same commands with changing `docker` to `podman`.
 # Run the container and curl to example.org
 podman run -it docker.io/curlimages/curl http://example.org
 
-# List containers
+# List running containers
 podman ps
 
 # List all containers

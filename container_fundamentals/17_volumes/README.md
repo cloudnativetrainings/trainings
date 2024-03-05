@@ -21,43 +21,43 @@ Follow below steps to understand this behaviour.
 
 * Create the container
 
-  ```bash
-  docker run -it -d --name rw-layer volumes:1.0.0
-  ```
+```bash
+docker run -it -d --name rw-layer volumes:1.0.0
+```
 
 * Print the content of the file
 
-  ```bash
-  docker exec -it rw-layer cat /data/file.txt
-  ```
+```bash
+docker exec -it rw-layer cat /data/file.txt
+```
 
 * Stop the container
 
-  ```bash
-  docker stop rw-layer
-  ```
+```bash
+docker stop rw-layer
+```
 
 * Restart the container
 
-  ```bash
-  docker start rw-layer
-  ```
+```bash
+docker start rw-layer
+```
 
 * Print the content of the file again  
 
-  ```bash
-  docker exec -it rw-layer cat /data/file.txt
-  ```
+```bash
+docker exec -it rw-layer cat /data/file.txt
+```
 
-  >Note that the file contains the timestamps from the first run.
+>Note that the file contains the timestamps from the first run.
 
 * Remove the container
 
-  ```bash
-  docker rm -f rw-layer
-  ```
+```bash
+docker rm -f rw-layer
+```
 
-  >Note that all changes are lost now, since the /data/file.txt was residing inside the container.
+>Note that all changes are lost now, since the /data/file.txt was residing inside the container.
 
 ## Docker-managed volumes
 
@@ -65,83 +65,83 @@ Docker-managed volumes are managed by docker.
 
 * Create the container
 
-  ```bash
-  docker run -it -d --name docker-managed-volume -v /data volumes:1.0.0
-  ```
+```bash
+docker run -it -d --name docker-managed-volume -v /data volumes:1.0.0
+```
 
 * Printout the content of the file
 
-  ```bash
-  docker exec -it docker-managed-volume cat /data/file.txt
-  ```
+```bash
+docker exec -it docker-managed-volume cat /data/file.txt
+```
 
 * Cleanup all pre-existing volumes
 
-  ```bash
-  docker volume prune
-  ```
+```bash
+docker volume prune
+```
 
-  >Note that Docker will not delete volumes of running containers.
+>Note that Docker will not delete volumes of running containers.
 
 * List all volumes
 
-  ```bash
-  docker volume ls
-  ```
+```bash
+docker volume ls
+```
 
 * Show the details of the volume via `volume inspect`
 
-  ```bash
-  docker volume inspect <VOLUME-NAME>
-  ```
+```bash
+docker volume inspect <VOLUME-NAME>
+```
 
 * Show the details of the volume via `inspect`
 
-  ```bash
-  docker inspect docker-managed-volume | grep -A10 Mounts
-  ```
+```bash
+docker inspect docker-managed-volume | grep -A10 Mounts
+```
 
 * Change the content of the file on the host
 
-  ```bash
-  sudo bash -c 'echo text from host >>  <HOST-VOLUME-PATH>/file.txt'
-  ```
+```bash
+sudo bash -c 'echo text from host >>  <HOST-VOLUME-PATH>/file.txt'
+```
 
 * Print the content of the file
 
-  ```bash
-  docker exec -it docker-managed-volume cat /data/file.txt
-  ```
+```bash
+docker exec -it docker-managed-volume cat /data/file.txt
+```
 
-  >Note that your change is available made in previous step.
+>Note that your change is available made in previous step.
 
 * Delete the container
 
-  ```bash
-  docker rm -f docker-managed-volume 
-  ```
+```bash
+docker rm -f docker-managed-volume 
+```
 
 * List the volumes
 
-  ```bash
-  docker volume ls
-  ```
+```bash
+docker volume ls
+```
 
-  >Note that the volume is not deleted yet.
+>Note that the volume is not deleted yet.
 
 * Cleanup all volumes
 
-  ```bash
-  docker volume prune
-  ```
+```bash
+docker volume prune
+```
 
 * Try to print the content of the file
 
-  ```bash
-  sudo cat <HOST-VOLUME-PATH>/file.txt
-  ```
+```bash
+sudo cat <HOST-VOLUME-PATH>/file.txt
+```
 
-  >Note that the file does not exist anymore.
+>Note that the file does not exist anymore.
 
 ## Bind mount volumes
 
@@ -149,48 +149,50 @@ Bind mount volumes let you manage the lifecycle of your data youself.
 
 * Create the container
 
-  ```bash
-  docker run -it -d --name bind-mount-volume -v $PWD/data:/data volumes:1.0.0
-  ```
+```bash
+docker run -it -d --name bind-mount-volume -v $PWD/data:/data volumes:1.0.0
+```
 
 * Check the content of the file `file.txt` in the folder `data` in your current directory
 
-  ```bash
-  cat data/file.txt
-  ```
+```bash
+cat data/file.txt
+```
 
 * List the volumes
 
-  ```bash
-  docker volume ls
-  ```
+```bash
+docker volume ls
+```
 
-  >Bind volume is not managed by docker.
+>Bind volume is not managed by docker.
 
 * Delete the container
 
-  ```bash
-  docker rm -f bind-mount-volume
-  ```
+```bash
+docker rm -f bind-mount-volume
+```
 
 * Cleanup all volumes
 
-  ```bash
-  docker volume prune
-  ```
+```bash
+docker volume prune
+```
 
 * Check the content of the file `file.txt` again
 
-  ```bash
-  cat data/file.txt
-  ```
+```bash
+cat data/file.txt
+```
 
-  >Since docker is not managing the bind volume, the data file exists.
+>Since docker is not managing the bind volume, the data file exists.
 
 ## Cleanup
 
-* Remove all the images
+```bash
+# Remove all the containers
+docker rm -f $(docker ps -qa)
 
-  ```bash
-  docker rmi -f $(docker images -qa)
-  ```
+#  Remove all the images
+docker rmi -f $(docker images -qa)
+```

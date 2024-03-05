@@ -28,35 +28,31 @@ docker run -it ignore:1.0.0
 
 * Create a .dockerignore file with the following content
 
-  ```bash
-  passwords.txt
-  some-large-image.jpg
-  ```
+```txt
+passwords.txt
+some-large-image.jpg
+```
 
 * Build the image
 
-  ```bash
-  docker build -t ignore:2.0.0 .
-  ```
+```bash
+docker build -t ignore:2.0.0 .
+```
 
 * Run the image
 
-  ```bash
-  docker run -it ignore:2.0.0
-  ```
+```bash
+docker run -it ignore:2.0.0
+```
 
-  >Notice the output of the container, the files defined in the `.dockerignore` file are not included in the resulting image / container. Furthermore, this speeds up the build process as those files will not get sent to the docker engine.
+>Notice the output of the container, the files defined in the `.dockerignore` file are not included in the resulting image / container. Furthermore, this speeds up the build process as those files will not get sent to the docker engine.
 
 ## Cleanup
 
-* Remove all the containers
+```bash
+# Remove all the containers
+docker rm -f $(docker ps -qa)
 
-  ```bash
-  docker rm -f $(docker ps -qa)
-  ```
-
-* Remove all the images
-
-  ```bash
-  docker rmi -f $(docker images -qa)
-  ```
+#  Remove all the images
+docker rmi -f $(docker images -qa)
+```

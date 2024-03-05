@@ -4,6 +4,12 @@ In this training, we will make use of a linter for Dockerfiles.
 
 >Navigate to the folder `12_linting` from CLI, before you get started.
 
+## Verify Hadolint is installed properly
+
+```bash
+hadolint --version
+```
+
 ## Inspect the Dockerfile
 
 ```bash

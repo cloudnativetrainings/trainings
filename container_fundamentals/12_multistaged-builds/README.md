@@ -55,14 +55,10 @@ docker image ls go
 
 ## Cleanup
 
-* Remove all the containers
+```bash
+# Remove all the containers
+docker rm -f $(docker ps -qa)
 
-  ```bash
-  docker rm -f $(docker ps -qa)
-  ```
-
-* Remove all the images
-
-  ```bash
-  docker rmi -f $(docker images -qa)
-  ```
+#  Remove all the images
+docker rmi -f $(docker images -qa)
+```

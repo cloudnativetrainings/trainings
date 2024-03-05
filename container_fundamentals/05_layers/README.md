@@ -8,62 +8,43 @@ Layers are stacked on top of each other to form a base for a container's root fi
 
 * Pull `debian` image to your local system.
 
-  ```bash
-  docker pull debian:10.5
-  ```
+```bash
+docker pull debian:10.5
+```
 
 * Show image history
 
-  ```bash
-  docker history debian:10.5
-  ```
+```bash
+docker history debian:10.5
+```
 
-  >shows you list of layers that `debian` image contains.
+>shows you list of layers that `debian` image contains.
 
-## Inspect the layers
+## Inspect the layers via docker inspect
 
 * More Information about an image you can find out with `inspect`:
 
-  ```bash
-  docker inspect debian:10.5
-  ```
+```bash
+docker inspect debian:10.5
+```
 
 * There you will also see how the image is build and e.g. which command will executed at the container startup.
 
-  ```bash
-  docker inspect debian:10.5 | grep Cmd --after-context=10
-  ```
+```bash
+docker inspect debian:10.5 | grep Cmd --after-context=10
+```
 
   Or what user
 
-  ```bash
-  docker inspect debian:10.5 | grep User --before-context=5
-  ```
+```bash
+docker inspect debian:10.5 | grep User --before-context=5
+```
 
   What is the SHA of the image.
 
-  ```bash
-  docker inspect debian:10.5 | grep Id
-  ```
-
-  You can also use these SHA ID to run the container.
-
-  ```bash
-  docker run -it $(docker inspect debian:10.5 | jq -r .[].Id)
-  ```
-
-* Cleanup:
-  Remove all the containers
-
-  ```bash
-  docker rm -f $(docker ps -qa)
-  ```
-
-  Remove all the images
-
-  ```bash
-  docker rmi -f $(docker images -qa)
-  ```
+```bash
+docker inspect debian:10.5 | grep Id
+```
 
 ## Inspect via dive
 
@@ -72,25 +53,21 @@ Dive <https://github.com/wagoodman/dive> is a CLI tool to inspect the layers of 
 Inspect an image via dive
 
 ```bash
+# Verify dive is installed properly
+dive --version
+
+# Inspect a specific nginx image
 dive nginx:1.23.1
 ```
 
-## Extract the container layers via skopeo
+> Note that you can navigate the layers in dive via arrow up and down keys. Via the tab key you can dig deeper in the specific layer. You can exit dive via CTRL+C.
 
-Skopeo <https://github.com/containers/skopeo> is a command line utility that performs various operations on container images and image repositories.
-
-Extract container layers to your filesystem
+## Cleanup
 
 ```bash
-# Copy/extract nginx image to /tmp directory
-skopeo copy docker://nginx:1.23.1 dir://tmp/nginx-image-layers
+# Remove all the containers
+docker rm -f $(docker ps -qa)
 
-# Check what files are there
-ls -l /tmp/nginx-image-layers
-
-# Check the file type, it is a gzip compressed data
-file /tmp/nginx-image-layers/31b3f1ad4ce1f369084d0f959813c51df0ca17d9877d5ee88c2db6ff88341430
-
-# Check the contents of the file via tar
-tar ztvf /tmp/nginx-image-layers/31b3f1ad4ce1f369084d0f959813c51df0ca17d9877d5ee88c2db6ff88341430
+#  Remove all the images
+docker rmi -f $(docker images -qa)
 ```
