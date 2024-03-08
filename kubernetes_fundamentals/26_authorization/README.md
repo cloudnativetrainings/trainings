@@ -61,5 +61,3 @@ TOKEN=$(cat token)
 ```bash
 kubectl delete -f .
 ```
-
-[Jump to Home](../README.md) | [Previous Training](../25_authentication/README.md) | [Next Training](../27_networkpolicies/README.md)

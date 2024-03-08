@@ -137,5 +137,3 @@ chmod 700 get_helm.sh
 ```bash
 helm delete my-release-custom
 ```
-
-[Jump to Home](../README.md) | [Previous Training](../27_networkpolicies/README.md) | [Next Training](../29_prometheus/README.md)

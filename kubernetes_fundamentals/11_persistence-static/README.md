@@ -29,5 +29,3 @@ kubectl get pv,pvc
 kubectl delete pvc my-pvc
 kubectl delete pv my-pv
 ```
-
-[Jump to Home](../README.md) | [Previous Training](../10_secrets/README.md) | [Next Training](../12_persistence-dynamic/README.md)

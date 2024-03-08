@@ -81,5 +81,3 @@ kubectl get pvc,pv
 kubectl delete pv --all
 kubectl delete sc my-storageclass
 ```
-
-[Jump to Home](../README.md) | [Previous Training](../11_persistence-static/README.md) | [Next Training](../13_persistence-use-volume/README.md)

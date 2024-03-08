@@ -49,5 +49,3 @@ In this course, we will create an application which will be reachable in the WWW
   kubectl delete pod my-pod
   kubectl delete service my-service
   ```
-
-[Jump to Home](../README.md) | [Next Training](../02_pods/README.md)

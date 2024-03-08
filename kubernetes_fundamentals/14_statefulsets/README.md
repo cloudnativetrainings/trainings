@@ -62,14 +62,9 @@ In the training, we will learn about Statefulsets.
 kubectl run -it nslookup --image nicolaka/netshoot --restart=Never --rm -- nslookup my-service
 ```
 
-### Get a specific IP of a pod of the statefulset
-```bash
-kubectl run -it nslookup --image nicolaka/netshoot --restart=Never --rm -- nslookup my-sts-0.my-service
-```
+> This should give you a list of ip addresses of all the Pods within the StatefulSet. You can verify the correctness of those via `kubectl get pods -o wide`
 
 ## Clean up
 ```bash
-kubectl delete svc,sts,pv,pvc --all
+kubectl delete svc,sts,pvc,pv --all
 ```
-
-[Jump to Home](../README.md) | [Previous Training](../13_persistence-use-volume/README.md) | [Next Training](../15_hpas/README.md)

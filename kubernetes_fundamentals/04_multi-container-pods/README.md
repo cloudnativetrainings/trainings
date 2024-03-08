@@ -13,10 +13,10 @@ kubectl create -f pod-v1.yaml
 
 ## Get the logs of the Pod
 
-```bash
-kubectl logs -f my-pod
-```
->This will not work, please follow the instructions or consult `--help`.
+  ```bash
+  kubectl logs -f my-pod
+  ```
+  >Pay attention to the first line of the output.
 
 ## Exec into the Pod
 
@@ -50,4 +50,3 @@ kubectl logs -f my-pod
   kubectl delete pod my-pod
   ```
 
-[Jump to Home](../README.md) | [Previous Training](../03_commands-and-args/README.md) | [Next Training](../05_replicasets/README.md)

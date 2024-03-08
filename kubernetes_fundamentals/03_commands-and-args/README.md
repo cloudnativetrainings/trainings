@@ -48,5 +48,3 @@ kubectl replace --force -f pod.yaml
   ```bash
   kubectl delete pod my-pod
   ```
-
-[Jump to Home](../README.md) | [Previous Training](../02_pods/README.md) | [Next Training](../04_multi-container-pods/README.md)

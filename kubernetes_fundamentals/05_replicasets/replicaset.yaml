@@ -14,4 +14,4 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: my-image
+          image: nginy:1.19.2

@@ -7,6 +7,7 @@ In the training, we will learn how to track the Revision History.
 ## Inspect deployment.yaml definition file and create the deployment
 
 ```bash
+cat deployment.yaml
 kubectl create -f deployment.yaml
 ```
 
@@ -68,5 +69,3 @@ kubectl rollout restart deployment my-deployment
 ```bash
 kubectl delete deployment --all
 ```
-
-[Jump to Home](../README.md) | [Previous Training](../06_deployments/README.md) | [Next Training](../08_services/README.md)

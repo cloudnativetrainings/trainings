@@ -1,16 +1,7 @@
-# labs
+# new lab sealed secrets / alternatives to secrets
 
-kyverno lab
-installation of dive is missing
+# new lab PSP alternatives -> kyverno, opa
 
-## 04_multi-container-pods
-it is defaulting to the first container on exec / log
+# new lab specific debug container lab => new feature in K8s debug containers
 
-## ingress
-why do I need email for RBAC?
-
-# sealed secrets / alternatives to secrets
-
-# fix outdated apiversions in slides
-
-# PSP alternatives -> kyverno, opa
+# new lab (copy the one from 7sins talk) for schedulung - resource requests and limits

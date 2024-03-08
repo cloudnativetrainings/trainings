@@ -16,17 +16,17 @@ kubectl get nodes --show-labels
 kubectl label node <NODE-NAME> preferred=true
 ```
 
-## Inspect pod.yaml definition file and create the pod
+## Inspect deployment.yaml definition file and create the deployment
 
 ```bash
-cat pod.yaml
-kubectl create -f pod.yaml
+cat deployment.yaml
+kubectl create -f deployment.yaml
 ```
 
-## Verify that the pod is running on the labeled node
+## Verify that all the pods of the deployment are running on the labeled node
 
 ```bash
- kubectl get pods -o wide
+kubectl get pods -o wide
 ```
 
 ## Cleanup
@@ -35,5 +35,3 @@ kubectl create -f pod.yaml
 kubectl label node <NODE-NAME> preferred-
 kubectl delete pods my-pod
 ```
-
-[Jump to Home](../README.md) | [Previous Training](../18_cronjobs/README.md) | [Next Training](../20_scheduling-affinity/README.md)

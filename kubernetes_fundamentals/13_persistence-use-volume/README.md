@@ -48,5 +48,3 @@ kubectl exec -it my-pod -- cat /app/buffer
 kubectl delete pod my-pod
 kubectl delete pv,pvc --all
 ```
-
-[Jump to Home](../README.md) | [Previous Training](../12_persistence-dynamic/README.md) | [Next Training](../14_statefulsets/README.md)

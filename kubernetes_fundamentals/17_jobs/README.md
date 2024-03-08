@@ -46,5 +46,3 @@ watch -n 1 kubectl get pods,jobs
 ```bash
 kubectl delete jobs --all
 ```
-
-[Jump to Home](../README.md) | [Previous Training](../16_daemonsets/README.md) | [Next Training](../18_cronjobs/README.md)

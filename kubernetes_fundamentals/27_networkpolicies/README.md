@@ -47,5 +47,3 @@ kubectl exec -it susan -- curl bob
 ```bash
 kubectl delete -f .
 ```
-
-[Jump to Home](../README.md) | [Previous Training](../26_authorization/README.md) | [Next Training](../28_helm/README.md)

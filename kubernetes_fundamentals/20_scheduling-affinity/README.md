@@ -31,5 +31,3 @@ kubectl get pods -o=custom-columns='POD_NAME:metadata.name,NODE_NAME:spec.nodeNa
 kubectl delete pod water
 kubectl delete deployment fire
 ```
-
-[Jump to Home](../README.md) | [Previous Training](../19_scheduling-node-selector/README.md) | [Next Training](../21_scheduling-taints-and-tolerations/README.md)

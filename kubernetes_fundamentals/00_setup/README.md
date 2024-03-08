@@ -15,5 +15,3 @@
   kubectl cluster-info
   kubectl get nodes
   ```
-
-[Jump to Home](../README.md) | [Next Training](../01_hello-k8s/README.md)

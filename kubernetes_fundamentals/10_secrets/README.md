@@ -43,5 +43,3 @@ kubectl get secret my-secret -o jsonpath='{.data.foo}' | base64 -d
 kubectl delete pod my-pod
 kubectl delete secret my-secret
 ```
-
-[Jump to Home](../README.md) | [Previous Training](../09_configmaps/README.md) | [Next Training](../11_persistence-static/README.md)

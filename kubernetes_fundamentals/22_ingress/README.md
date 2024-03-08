@@ -23,24 +23,12 @@ kubectl get pods,svc
 ```
 
 ## Inspect and create the resources for the ingress controller
-> Before you start, create role binding 
 
 ```bash
-# Make sure you update your username
-kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin --user=student-xx.yyy@cloud-native.training
-```
-
-```bash
-# Install NGINX Ingress
+# install NGINX ingress controller
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.9.5/deploy/static/provider/cloud/deploy.yaml
-```
 
-## Verify everything is running
-
-```bash
-kubectl get deployments,pods,services
-
-# to view nginx-ingress related stuff
+# verify everything is running
 kubectl get deployments,pods,services -n ingress-nginx
 ```
 
@@ -71,5 +59,3 @@ Get the external IP of your LoadBalancer and vist via web browser as follows
 kubectl delete -f .
 kubectl delete -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.9.5/deploy/static/provider/cloud/deploy.yaml
 ```
-
-[Jump to Home](../README.md) | [Previous Training](../21_scheduling-taints-and-tolerations/README.md) | [Next Training](../23_cordon/README.md)

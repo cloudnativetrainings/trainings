@@ -10,7 +10,7 @@ In this training, we will learn about Replicasets.
 cat replicaset.yaml
 kubectl create -f replicaset.yaml
 ```
->Find and fix the two issues in there.
+>Find and fix the two issues in there. Note, that you haven't finished this section until the pod of the ReplicaSet is in Running state.
 
 ## Take a look at the number of Pods
 
@@ -50,4 +50,3 @@ Verify if replicaset is delete including all the associated pods
 kubectl get rs,po
 ```
 
-[Jump to Home](../README.md) | [Previous Training](../04_multi-container-pods/README.md) | [Next Training](../06_deployments/README.md)

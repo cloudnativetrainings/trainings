@@ -4,8 +4,6 @@ In the training, we will learn about Configmaps.
 
 >Navigate to the folder `09_configmaps` from CLI, before you get started. 
 
->Note that, there are errors in the yaml files. Try to fix them.
-
 ## Inspect configmap.yaml definition file and create the configmap
 
 ```bash
@@ -14,6 +12,8 @@ kubectl create -f configmap.yaml
 ```
 
 ## Inspect pod.yaml definition file and create the pod
+
+>Note that, there are errors in the yaml files. Try to fix them. Check the output of `kubectl describe pod my-pod` to debug the issues.
 
 ```bash
 cat pod.yaml
@@ -35,5 +35,3 @@ bar
 ```bash
 kubectl delete po,cm --all
 ```
-
-[Jump to Home](../README.md) | [Previous Training](../08_services/README.md) | [Next Training](../10_secrets/README.md)

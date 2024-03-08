@@ -6,41 +6,25 @@ In the training, we will learn about create authentication configuration using C
 
 ## Create the CSR
 
-* Create the key
+```bash
+# create the key
+openssl genrsa -out bob.key 2048
 
-  ```bash
-  openssl genrsa -out bob.key 2048
-  ```
+# create the CSR
+openssl req -new -key bob.key -out bob.csr -subj "/CN=bob/O=eng"\n
 
-* Create the CSR
+# copy the content of the CSR into an environment variable
+export CSR=$(cat bob.csr | base64 | tr -d '\n')
 
-  ```bash
-  openssl req -new -key bob.key -out bob.csr -subj "/CN=bob/O=eng"\n
-  ```
+# use envsubst the set the CSR into the yaml file
+envsubst < bob-csr-template.yaml > bob-csr.yaml
 
-* Copy the content of the CSR into an environment variable
+# apply the CSR
+kubectl create -f bob-csr.yaml
 
-  ```bash
-  export CSR=$(cat bob.csr | base64 | tr -d '\n')
-  ```
-
-* Use envsubst the set the CSR into the yaml file
-
-  ```bash
-  envsubst < bob-csr-template.yaml > bob-csr.yaml
-  ```
-
-* Apply the CSR
-
-  ```bash
-  kubectl create -f bob-csr.yaml
-  ```
-
-* Verify the state of the CSR
-
-  ```bash
-  kubectl get csr
-  ```
+# verify the "Pending" state of the CSR
+kubectl get csr
+```
 
 ## Approve the CSR
 
@@ -51,35 +35,30 @@ kubectl get csr
 
 ## Create a kubeconfig for Bob
 
-* Store the certificate into the file bob.crt
+```bash
+# make a copy of the admins kube config file
+cp ~/.kube/config ./my-config.yaml
 
-  ```bash
-  kubectl get csr bob -o jsonpath='{.status.certificate}' | base64 --decode > bob.crt
-  ```
+# store the certificate into the file bob.crt
+kubectl get csr bob -o jsonpath='{.status.certificate}' | base64 --decode > bob.crt
 
-* Make a copy of the admins kube config file
-
-  ```bash
-  cp ~/.kube/config ./my-config.yaml
-  ```
-
-* Add the user Bob to my-config.yaml
-
-  ```bash
-  kubectl config set-credentials bob \
+# add the user Bob to my-config.yaml
+kubectl config set-credentials bob \
   --client-certificate=bob.crt \
   --client-key bob.key \
   --embed-certs \
   --kubeconfig my-config.yaml
-  ```
 
-* Set the current context and user
+# create a context for Bob and the existing cluster
+CURRENT_CLUSTER=$(kubectl config view -o jsonpath='{.clusters[].name}{"\n"}')
+kubectl config set-context bob \
+  --kubeconfig my-config.yaml \
+  --cluster=$CURRENT_CLUSTER \
+  --user=bob
 
-  ```bash
-  CURRENT_CONTEXT=$(kubectl config current-context --kubeconfig my-config.yaml)
-  kubectl config set-context bob --kubeconfig my-config.yaml --cluster=$CURRENT_CONTEXT --user=bob
-  kubectl config use-context bob --kubeconfig my-config.yaml
-  ```
+# engage Bobs context
+kubectl config use-context bob --kubeconfig my-config.yaml
+```
 
 ## Verify your work
 
@@ -87,27 +66,25 @@ kubectl get csr
 
 # Check if you can list pods via your admin user
 
-  ```bash
-  kubectl get pods
-  ```
+```bash
+kubectl get pods
+```
 
 * Check if you cannot list pods via the user bob
 
-  ```bash
-  kubectl --kubeconfig my-config.yaml get pods
-  ```
+```bash
+kubectl --kubeconfig my-config.yaml get pods
+```
 
 * There is also a kubectl command to verify your permissions
 
-  ```bash
-  kubectl auth can-i get pods
-  kubectl auth can-i get pods --as bob
-  ```
+```bash
+kubectl auth can-i get pods
+kubectl auth can-i get pods --as bob
+```
 
 ## Cleanup
 
 ```bash
 kubectl delete csr bob
 ```
-
-[Jump to Home](../README.md) | [Previous Training](../24_drain/README.md) | [Next Training](../26_authorization/README.md)

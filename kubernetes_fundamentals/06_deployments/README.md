@@ -54,6 +54,3 @@ Verify if deployment is delete including all the associated pods and replicasets
 ```bash
 kubectl get deploy,rs,po
 ```
-
-
-[Jump to Home](../README.md) | [Previous Training](../05_replicasets/README.md) | [Next Training](../07_revision-history/README.md)

@@ -57,7 +57,7 @@ In this training, we will create a pod and learn how to interact with it.
   kubectl describe pod my-pod
   ```
 
-## Debug a Pod
+## Getting the Logfiles of a Container of a Pod
 
 * Get logs of a Container
   ```bash
@@ -69,15 +69,28 @@ In this training, we will create a pod and learn how to interact with it.
   kubectl logs -f my-pod
   ```
 
-* Exec into a Container
+## Debug a Container of a Pod
+
+### Spawn a new process in the container for debugging
+
   ```bash
+  # exec into the container
   kubectl exec -it my-pod -- bash
+
+  # exit the container again
+  exit
+  ```
+
+### Get the events of a Pod
+
+  ```bash
+  # take a look at the events section of the output
+  kubectl describe pod my-pod 
   ```
 
 ## Cleanup
 * Delete the created resource - pod.
+
   ```bash
   kubectl delete pod my-pod
   ```
-
-[Jump to Home](../README.md) | [Previous Training](../01_hello-k8s/README.md) | [Next Training](../03_commands-and-args/README.md)

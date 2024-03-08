@@ -23,5 +23,3 @@ kubectl get cronjobs,pods
 ```bash
 kubectl delete cronjobs --all
 ```
-
-[Jump to Home](../README.md) | [Previous Training](../17_jobs/README.md) | [Next Training](../19_scheduling-node-selector/README.md)

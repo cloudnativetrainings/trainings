@@ -2,7 +2,7 @@
 
 In the training, we will learn about Daemonsets.
 
->Navigate to the folder `16_dameonsets` from CLI, before you get started. 
+>Navigate to the folder `16_daemonsets` from CLI, before you get started. 
 
 ## Inspect daemonset.yaml definition file and create the daemonset
 
@@ -29,5 +29,3 @@ kubectl logs <POD-NAME>
 ```bash
 kubectl delete ds --all
 ```
-
-[Jump to Home](../README.md) | [Previous Training](../15_hpas/README.md) | [Next Training](../17_jobs/README.md)
