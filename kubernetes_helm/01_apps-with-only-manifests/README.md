@@ -90,9 +90,8 @@ curl http://${ENDPOINT}/prod/red
 ## How long will it take to make a green app on both environments?
 
 ## Cleanup
-* Delete the created resources
-  ```bash
-  kubectl delete -f dev/**,prod/**
-  ```
 
-Jump > [Home](../README.md) | Previous > [Cluster Setup](../00_setup/README.md) | Next > [Deploy with Kustomize](../02_deploy-with-kustomize/README.md)
+```bash
+# delete the created resources
+kubectl delete -f dev/**,prod/**
+```

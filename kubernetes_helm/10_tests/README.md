@@ -22,58 +22,69 @@ cat ./my-app/templates/tests/test-my-app.yaml
 
 ## Run the test
 
-Relase the app:
+### Relase the app
+
 ```bash
 helm install my-app ./my-app 
 ```
 
-Wait until the pods are ready
+### Wait until the pods are ready
+
 ```bash
 kubectl wait pod -l app=my-app --for=condition=ready --timeout=120s
 ```
 
-Run the test:
+### Run the test
+
 ```bash
 helm test my-app
-```
-
-Cleanup the release:
-```bash
-helm uninstall my-app
 ```
 
 ## Verify failing test
 
-Adapt the URL in the test to something faulty and release:
-```bash
-sed -i 's/:80/-xx:80/' ./my-app/templates/tests/test-my-app.yaml
-helm install my-app ./my-app
+### Add a bug in the templates
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: wrong-service-name
+...
 ```
 
-Wait until the pods are ready
+### Release the chart again
+
+```bash
+helm upgrade my-app ./my-app/
+```
+
+### Wait until the pods are ready
+
 ```bash
 kubectl wait pod -l app=my-app --for=condition=ready --timeout=120s
 ```
 
-Test the release
+### Test the release
+
 ```bash
 helm test my-app
 ```
 
-Check the logfile of the test
+> Note that the test is failing due to the service is not reachable from the curl command of the test.
+
+### Check the logfile of the test
+
 ```bash
 kubectl logs -l job-name=my-app-test
 ```
 
 ## Cleanup
-* Delete the release and resources
-  ```bash
-  helm uninstall my-app
-  kubectl delete job my-app-test
-  ```
-* Jump back to home directory `kubernetes_helm`:
-  ```bash
-  cd -
-  ```
 
-Jump > [Home](../README.md) | Previous > ['required' Function](../09_required/README.md) | Next > [Hooks](../11_hooks/README.md)
+```bash
+# delete the resources
+helm uninstall my-app
+kubectl delete job my-app-test
+
+# jump back to home directory `kubernetes_helm`:
+cd -
+```

@@ -39,13 +39,11 @@ curl $ENDPOINT
 ```
 
 ## Cleanup
-* Delete the release
-  ```bash
-  helm uninstall required
-  ```
-* Jump back to home directory `kubernetes_helm`:
-  ```bash
-  cd -
-  ```
 
-Jump > [Home](../README.md) | Previous > [If Statement](../08_ifs/README.md) | Next > [Helm Test](../10_tests/README.md)
+```bash
+# delete the resources
+helm uninstall required
+
+# jump back to home directory `kubernetes_helm`:
+cd -
+```

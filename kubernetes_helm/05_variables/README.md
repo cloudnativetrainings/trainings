@@ -34,13 +34,11 @@ kubectl get pods
 ```
 
 ## Cleanup
-* Delete the release
-  ```bash
-  helm uninstall my-app
-  ```
-* Jump back to home directory `kubernetes_helm`:
-  ```bash
-  cd -
-  ```
 
-Jump > [Home](../README.md) | Previous > [Rollback](../04_rollback/README.md) | Next > [Functions](../06_functions/README.md)
+```bash
+# delete the resources
+helm uninstall my-app
+
+# jump back to home directory `kubernetes_helm`:
+cd -
+```

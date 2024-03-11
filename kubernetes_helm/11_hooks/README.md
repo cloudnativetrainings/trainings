@@ -82,13 +82,11 @@ helm install hooks ./my-app --no-hooks
 ```
 
 ## Cleanup
-* Delete the release
-  ```bash
-  helm uninstall hooks --no-hooks
-  ```
-* Jump back to home directory `kubernetes_helm`:
-  ```bash
-  cd -
-  ```
 
-Jump > [Home](../README.md) | Previous > [Helm Test](../10_tests/README.md) | Next > [Dependencies](../12_dependencies/README.md)
+```bash
+# delete the resources
+helm uninstall hooks --no-hooks
+
+# jump back to home directory `kubernetes_helm`:
+cd -
+```

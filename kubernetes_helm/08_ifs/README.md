@@ -148,13 +148,11 @@ kubectl get hpa
 ```
 
 ## Cleanup
-* Delete the release
-  ```bash
-  helm uninstall ifs
-  ```
-* Jump back to home directory `kubernetes_helm`:
-  ```bash
-  cd -
-  ```
 
-Jump > [Home](../README.md) | Previous > ['include' Function](../07_includes/README.md) | Next > ['required' Function](../09_required/README.md)
+```bash
+# delete the resources
+helm uninstall ifs
+
+# jump back to home directory `kubernetes_helm`:
+cd -
+```

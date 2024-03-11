@@ -69,13 +69,11 @@ helm history my-app
 You can visit the app on `http://$ENDPOINT/red`
 
 ## Cleanup
-* Delete the resources
-  ```bash
-  helm uninstall my-app
-  ```
-* Jump back to home directory `kubernetes_helm`:
-  ```bash
-  cd -
-  ```
 
-Jump > [Home](../README.md) | Previous > [Install Apps with Helm](../03_apps-with-helm/README.md) | Next > [Variables](../05_variables/README.md)
+```bash
+# delete the resources
+helm uninstall my-app
+
+# jump back to home directory `kubernetes_helm`:
+cd -
+```

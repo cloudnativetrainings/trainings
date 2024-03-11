@@ -89,15 +89,12 @@ curl http://${ENDPOINT}/prod
 ```
 
 ### Cleanup
-* Delete the releases
-  ```bash
-  helm uninstall demo-app -n dev
 
-  helm uninstall demo-app -n prod
-  ```
-* Jump back to home directory `kubernetes_helm`:
-  ```bash
-  cd -
-  ```
-  
-Jump > [Home](../README.md) | Previous > [Deploy with Kustomize](../02_deploy-with-kustomize/README.md) | Next > [Rollback](../04_rollback/README.md)
+```bash
+# delete the releases
+helm uninstall demo-app -n dev
+helm uninstall demo-app -n prod
+
+# jump back to home directory `kubernetes_helm`:
+cd -
+```

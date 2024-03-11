@@ -15,29 +15,29 @@ Wait until the pods are ready
 kubectl wait pod -l app=my-chart-my-app --for=condition=ready --timeout=120s
 ```
 
-Access the endpoint via 
+Access the endpoint via
+
 ```bash
 curl http://$ENDPOINT
 ```
 
-## Cleanup
-* Delete the release
-  ```bash
-  helm uninstall my-app
-  ```
+### Cleanup
+
+```bash
+# delete the release
+helm uninstall my-app
+```
 
 ## Add the function called `id`
 
 ### Implement the function
 
-Put the following function into the file `_helpers.tpl` in the folder `my-chart/templates`
+Create a file with the name `_helpers.tpl` in the folder `my-chart/templates` and copy the following content into it.
 
-```bash
-cat <<EOF > my-chart/templates/_helpers.tpl
+```tpl
 {{- define "id" }}
 {{- printf "%s-%s" .Chart.Name .Release.Name }}
 {{- end }}
-EOF
 ```
 
 ### Make use of the `id` function
@@ -51,7 +51,7 @@ sed -i 's/{{ .Chart.Name }}-{{ .Release.Name }}/{{ template "id" . }}/g' ./my-ch
 ### Release the application
 
 ```bash
-helm install helper-functions ./my-chart 
+helm install helper-functions ./my-chart
 ```
 
 Wait until the pods are ready
@@ -60,57 +60,20 @@ Wait until the pods are ready
 kubectl wait pod -l app=my-chart-helper-functions --for=condition=ready --timeout=120s
 ```
 
-Access the endpoint via 
+Access the endpoint via
+
 ```bash
 curl http://$ENDPOINT
 ```
 
-### Cleanup
-* Delete the release
-  ```bash
-  helm uninstall helper-functions
-  ```
+>Note the output now gets calculated via the `id` function defined in the file `_helpers.tpl`. The expected output is `my-chart-helper-functions`
 
-## Using default values
-
-### Re-implement the function
-
-Override the `id` function the file `_helpers.tpl` in the folder `my-chart/templates`
+## Cleanup
 
 ```bash
-cat <<EOF > my-chart/templates/_helpers.tpl
-{{- define "id" }}
-{{- \$name := printf "%s-%s" .Chart.Name .Release.Name }}
-{{- default \$name .Values.id | trunc 6 }}
-{{- end }}
-EOF
+# delete the resources
+helm uninstall helper-functions
+
+# jump back to home directory `kubernetes_helm`:
+cd -
 ```
-
-### Release the application
-
-```bash
-helm install default-values --set id=foo-123456 ./my-chart 
-```
-
-Wait until the pods are ready
-
-```bash
-kubectl wait pod -l app=foo-12 --for=condition=ready --timeout=120s
-```
-
-Access the endpoint via 
-```bash
-curl http://$ENDPOINT
-```
-
-### Cleanup
-* Delete the release
-  ```bash
-  helm uninstall default-values
-  ```
-* Jump back to home directory `kubernetes_helm`:
-  ```bash
-  cd -
-  ```
-
-Jump > [Home](../README.md) | Previous > [Variables](../05_variables/README.md) | Next > ['include' Function](../07_includes/README.md)

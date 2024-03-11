@@ -97,14 +97,12 @@ Verify that the dependency was installed
 kubectl exec -it my-app -- curl http://my-dependency
 ```
 
-## Cleanup 
-* Delete the release
-  ```bash
-  helm uninstall app
-  ```
-* Jump back to home directory `kubernetes_helm`:
-  ```bash
-  cd -
-  ```
+## Cleanup
 
-Jump > [Home](../README.md) | Previous > [Hooks](../11_hooks/README.md) | Next > [Teardown](../99_teardown/README.md)
+```bash
+# delete the resources
+helm uninstall app
+
+# jump back to home directory `kubernetes_helm`:
+cd -
+```

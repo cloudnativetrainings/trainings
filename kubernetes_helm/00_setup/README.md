@@ -1,7 +1,6 @@
 # Setup
 
-In this task, we will setup the needed components for the training.
-
+In this lab, we will setup the needed components for the training.
 
 ## Create Kubernetes Cluster
 
@@ -35,10 +34,9 @@ Visit the Ingress Admin Port using below curl command or in your browser on `htt
 curl http://$ENDPOINT:80
 ```
 
-## Cleanup 
-* Jump back to home directory `kubernetes_helm`:
-  ```bash
-  cd -
-  ```
+## Cleanup
 
-Jump > [Home](../README.md) | Next > [Install Apps with Manifests](../01_apps-with-only-manifests/README.md)
+```bash
+# jump back to home directory `kubernetes_helm`
+cd -
+```

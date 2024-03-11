@@ -109,12 +109,8 @@ curl http://${ENDPOINT}/prod
 
 # Cleanup
 
-* Delete the deployments:
-
 ```bash
+# delete the deployments:
 kubectl delete -k overlays/dev
-
 kubectl delete -k overlays/prod
 ```
-
-Jump > [Home](../README.md) | Previous > [Apps with Only Manifests](../01_apps-with-only-manifests/README.md) | Next > [Deploy with Helm](../03_apps-with-helm/README.md)
