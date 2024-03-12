@@ -10,3 +10,21 @@ create:
 		--image-project=ubuntu-os-cloud \
 		--boot-disk-size=100GB \
 		--metadata-from-file user-data=cloudinit.yaml
+
+.PHONY: verify
+verify:
+	containerd --version
+	kubelet --version
+	kubeadm version
+	kubectl version
+	# TODO ceck node is in ready state (=CNI plugin)
+	# TODO check metrics server
+	# TODO check git repo is on its place
+	helm version
+	etcdctl --version
+	kubesec version
+	trivy --version
+	# TODO check kyverno installed via helm script
+	systemctl is-active apparmor
+	# TODO check gvisor
+	# TODO check falco

@@ -3,5 +3,5 @@ read-only pods
 small images
 distroless - show the pain points
 
-# container signing
+# container image signing
 => needs container registry...

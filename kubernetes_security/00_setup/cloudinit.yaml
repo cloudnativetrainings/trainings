@@ -1,4 +1,16 @@
 #cloud-config
+package_update: 'true'
+package_upgrade: 'true'
+packages:
+  - make
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - jq
+  - wget
+  - gnupg
+  - lsb-release
+
 write_files:
 
   # containerd
@@ -26,9 +38,6 @@ write_files:
       br_netfilter
 
 runcmd:
-  - echo "================================================= Update Machine"
-  - apt-get update
-  - DEBIAN_FRONTEND=noninteractive apt-get upgrade -y
 
   - echo "================================================= CloudInit Phase Install Containerd"
   - DEBIAN_FRONTEND=noninteractive apt-get install -y containerd
@@ -44,11 +53,10 @@ runcmd:
   - echo "================================================= CloudInit Phase Install Kubernetes"
   - sysctl --system
   - swapoff -a
-  - curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add
-  - apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 6A030B21BA07F4FB
-  - sudo apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
+  - curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.27/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+  - echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.27/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
   - apt-get update
-  - DEBIAN_FRONTEND=noninteractive apt-get install -y kubelet=1.27.5-00 kubeadm=1.27.5-00 kubectl=1.27.5-00
+  - DEBIAN_FRONTEND=noninteractive apt-get install -y kubelet kubeadm kubectl
   - apt-mark hold kubelet kubeadm kubectl
   - kubeadm init --pod-network-cidr=192.168.0.0/16
 

@@ -6,11 +6,9 @@ echo "================================================= Init Training Script - I
 git clone https://github.com/ahmetb/kubectx /opt/kubectx
 ln -s /opt/kubectx/kubectx /usr/local/bin/kubectx
 ln -s /opt/kubectx/kubens /usr/local/bin/kubens
-DEBIAN_FRONTEND=noninteractive apt-get install jq --yes
 
 echo "================================================= Init Training Script - Install Helm"
 curl https://baltocdn.com/helm/signing.asc | apt-key add -
-DEBIAN_FRONTEND=noninteractive apt-get install apt-transport-https --yes
 echo "deb https://baltocdn.com/helm/stable/debian/ all main" | tee /etc/apt/sources.list.d/helm-stable-debian.list
 apt update
 DEBIAN_FRONTEND=noninteractive apt-get install helm --yes
