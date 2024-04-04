@@ -106,7 +106,6 @@ kubectl get pods -n prod
 curl http://${ENDPOINT}/prod
 ```
 
-
 # Cleanup
 
 ```bash
