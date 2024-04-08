@@ -112,5 +112,4 @@ else
 fi
 
 # connect to cluster
-gcloud container clusters get-credentials $CLUSTER_NAME 
-echo 'source <(kubectl completion bash)' >> ~/.bashrc && source ~/.bashrc
+gcloud container clusters get-credentials $CLUSTER_NAME
