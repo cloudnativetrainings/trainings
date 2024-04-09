@@ -1,18 +1,17 @@
+TRAINING_RC_FILE=~/.trainingrc
+
 .PHONY setup:
 setup:
 	$(MAKE) -C ../kubernetes_fundamentals/ setup
 	./setup.sh
-	# ingress
-	# prom
-	# loki
-	# grep -qxF "source <(helm completion bash)" $(TRAINING_RC_FILE) || echo "source <(helm completion bash)" >> $(TRAINING_RC_FILE)
+	grep -qxF "source <(helm completion bash)" $(TRAINING_RC_FILE) || echo "source <(helm completion bash)" >> $(TRAINING_RC_FILE)
 
 .PHONY verify:
 verify:
 	$(MAKE) -C ../kubernetes_fundamentals/ verify
-	# ingress
-	# prom
-	# loki
+	helm status -n ingress-nginx ingress-nginx
+	helm status -n monitoring monitoring
+	helm status -n logging logging
 
 .PHONY teardown:
 teardown:

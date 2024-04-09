@@ -78,3 +78,7 @@ You need to add Loki as a data source to the existing Grafana and then explore t
 > Hint: URL will be `http://logging-loki.logging.svc.cluster.local:3100`
 >
 > You may see an error on Grafana UI, but check the datasource on "Explore" tab.
+
+
+
+# TODO readme kf und kfadmerge
