@@ -16,10 +16,12 @@ git clone https://github.com/kubermatic-labs/trainings.git
 cd trainings/kubernetes_fundamentals/
 ```
 
-4. Create the cluster
+4. Create the training environment
 
 ```bash
 make setup
+
+source ~/.trainingrc
 ```
 
 ## Verify training environment

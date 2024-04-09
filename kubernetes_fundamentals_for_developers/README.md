@@ -20,6 +20,8 @@ cd trainings/kubernetes_fundamentals_for_developers/
 
 ```bash
 make setup
+
+source ~/.trainingrc
 ```
 
 ## Verify training environment
@@ -34,8 +36,8 @@ For getting monitoring and logging infos you can access Grafana as follows
 
 ```bash
 # get the IP address of the Grafana UI
-export INGRESS_IP=$(gcloud compute addresses list --filter="region:europe-west6" \
-                      --filter="name=training-kad-addr" --format="get(address)")
+export INGRESS_IP=$(gcloud compute addresses list --filter="region:europe-west6"  --filter="name=training-kf-addr" --format="get(address)")
+echo $INGRESS_IP
 
 # get the username for the Grafana UI
 kubectl get secret monitoring-grafana -n monitoring -o jsonpath='{.data.admin-user}' | base64 -d
