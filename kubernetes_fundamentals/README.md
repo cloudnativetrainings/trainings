@@ -1,8 +1,8 @@
 # Kubernetes Fundamentals
 
-## Setup
+## Setup training environment
 
-1. Navigate and login to [Google Cloud Shell](https://ssh.cloud.google.com ) via web browser. 
+1. Navigate and login to [Google Cloud Shell](https://ssh.cloud.google.com ) via web browser.
 
 2. Clone the Kubermatic trainings git repository:
 
@@ -17,19 +17,19 @@ cd trainings/kubernetes_fundamentals/
 ```
 
 4. Create the cluster
-   
+
 ```bash
-make create-cluster
+make setup
 ```
 
-5. Verify everything is working
+## Verify training environment
+
 ```bash
-kubectl cluster-info
-kubectl get nodes
+make verify
 ```
 
-## Teardown
+## Teardown training environment
 
 ```bash
-make teardown-cluster
+make teardown
 ```

@@ -1,8 +1,8 @@
 # Kubernetes Fundamentals for Developers
 
-## Setup
+## Setup training environment
 
-1. Navigate and login to [Google Cloud Shell](https://ssh.cloud.google.com ) via web browser. 
+1. Navigate and login to [Google Cloud Shell](https://ssh.cloud.google.com ) via web browser.
 
 2. Clone the Kubermatic trainings git repository:
 
@@ -17,19 +17,35 @@ cd trainings/kubernetes_fundamentals_for_developers/
 ```
 
 4. Create the cluster
-   
+
 ```bash
-make create-cluster
+make setup
 ```
 
-5. Verify everything is working
+## Verify training environment
+
 ```bash
-kubectl cluster-info
-kubectl get nodes
+make verify
 ```
 
-## Teardown
+## Access Grafana
+
+For getting monitoring and logging infos you can access Grafana as follows
 
 ```bash
-make teardown-cluster
+# get the IP address of the Grafana UI
+export INGRESS_IP=$(gcloud compute addresses list --filter="region:europe-west6" \
+                      --filter="name=training-kad-addr" --format="get(address)")
+
+# get the username for the Grafana UI
+kubectl get secret monitoring-grafana -n monitoring -o jsonpath='{.data.admin-user}' | base64 -d
+
+# get the password for the Grafana UI
+kubectl get secret monitoring-grafana -n monitoring -o jsonpath='{.data.admin-password}' | base64 -d
+```
+
+## Teardown training environment
+
+```bash
+make teardown
 ```
