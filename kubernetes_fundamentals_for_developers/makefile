@@ -1,9 +1,11 @@
-.PHONY create-cluster:
-create-cluster:
-	$(MAKE) -C ../kubernetes_fundamentals/ create-cluster
-	PWD
+.PHONY setup:
+setup:
+	$(MAKE) -C ../kubernetes_fundamentals/ setup
 
-.PHONY teardown-cluster:
-teardown-cluster:
-	$(MAKE) -C ../kubernetes_fundamentals/ teardown-cluster
-	PWD
+.PHONY verify:
+verify:
+	$(MAKE) -C ../kubernetes_fundamentals/ verify
+
+.PHONY teardown:
+teardown:
+	$(MAKE) -C ../kubernetes_fundamentals/ teardown
