@@ -2,7 +2,7 @@ TRAINING_RC_FILE=~/.trainingrc
 
 .PHONY create-cluster:
 create-cluster:
-	00_setup/setup_cluster.sh
+	./setup_cluster.sh
 
 .PHONY setup:
 setup: create-cluster
@@ -19,7 +19,7 @@ verify:
 
 .PHONY teardown-cluster:
 teardown-cluster:
-	99_teardown/teardown_cluster.sh
+	./teardown_cluster.sh
 
 .PHONY teardown:
 teardown: teardown-cluster

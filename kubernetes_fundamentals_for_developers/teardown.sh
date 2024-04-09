@@ -6,13 +6,12 @@ if (( PROJECT_COUNT == 1)); then
   echo "Using project $PROJECT_NAME"
 fi
 if [[ -z $PROJECT_NAME ]]; then
-  echo "INPUT: Type PROJECT_NAME: " && read PROJECT_NAME
+  echo "INPUT: Type PROJECT_NAME:" && read PROJECT_NAME
 fi
-export REGION=europe-west6
-export ZONE=europe-west6-a
-export CLUSTER_NAME=training-kad
-export NETWORK_NAME=$CLUSTER_NAME
-export FIREWALL_NAME=$CLUSTER_NAME
+
+export REGION=europe-west3
+export ZONE=europe-west3-a
+export CLUSTER_NAME=training-kf
 
 set -euxo pipefail
 
@@ -22,9 +21,4 @@ gcloud config set compute/region $REGION
 gcloud config set compute/zone $ZONE
 
 # delete resources
-gcloud beta container clusters delete $CLUSTER_NAME --quiet
 gcloud compute addresses delete $CLUSTER_NAME-addr --region=$REGION --quiet
-gcloud compute firewall-rules delete $FIREWALL_NAME-ingress-gateway --quiet
-gcloud compute firewall-rules delete $FIREWALL_NAME-ssh --quiet
-gcloud compute networks subnets delete $NETWORK_NAME-subnet --quiet
-gcloud compute networks delete $NETWORK_NAME --quiet
