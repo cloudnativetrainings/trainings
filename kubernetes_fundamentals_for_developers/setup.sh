@@ -11,7 +11,7 @@ fi
 
 export REGION=europe-west3
 export ZONE=europe-west3-a
-export CLUSTER_NAME=training-kf
+export IP_NAME=training-ingress
 
 set -euxo pipefail
 
@@ -21,16 +21,16 @@ gcloud config set compute/region $REGION
 gcloud config set compute/zone $ZONE
 
 # create static IP address for NGINX ingress
-response_addr=`gcloud compute addresses list --filter=region:$REGION --filter="name=$CLUSTER_NAME-addr"`
+response_addr=`gcloud compute addresses list --filter=region:$REGION --filter="name=$IP_NAME"`
 if [ -z "$response_addr" ]
 then
-  gcloud compute addresses create $CLUSTER_NAME-addr --region=$REGION
+  gcloud compute addresses create $IP_NAME --region=$REGION
 else
   echo "Static IP Address already exists, skip creation"
 fi
 
 # install NGINX ingress
-export INGRESS_IP=$(gcloud compute addresses list --filter="name=training-kad-addr" --format="get(address)")
+export INGRESS_IP=$(gcloud compute addresses list --filter="name=$IP_NAME" --format="get(address)")
 helm upgrade --install ingress-nginx ingress-nginx \
   --repo https://kubernetes.github.io/ingress-nginx \
   --namespace ingress-nginx --create-namespace \

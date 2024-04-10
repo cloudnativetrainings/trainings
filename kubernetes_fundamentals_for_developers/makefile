@@ -1,5 +1,6 @@
-TRAINING_RC_FILE=~/.trainingrc
+INGRESS_IP_NAME=training-ingress
 
+TRAINING_RC_FILE=~/.trainingrc
 .PHONY setup:
 setup:
 	$(MAKE) -C ../kubernetes_fundamentals/ setup
@@ -12,10 +13,11 @@ verify:
 	helm status -n ingress-nginx ingress-nginx
 	helm status -n monitoring monitoring
 	helm status -n logging logging
+	# TODO veriication of ingress needed
 
 .PHONY get-ingress-ip:
 get-ingress-ip:
-	gcloud compute addresses list --filter="region:europe-west3"  --filter="name=training-kf-addr" --format="get(address)"
+	gcloud compute addresses list --filter="name=$(INGRESS_IP_NAME)" --format="get(address)"
 
 .PHONY teardown:
 teardown:

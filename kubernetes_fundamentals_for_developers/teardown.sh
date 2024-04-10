@@ -11,7 +11,7 @@ fi
 
 export REGION=europe-west3
 export ZONE=europe-west3-a
-export CLUSTER_NAME=training-kf
+export IP_NAME=training-ingress
 
 set -euxo pipefail
 
@@ -21,4 +21,4 @@ gcloud config set compute/region $REGION
 gcloud config set compute/zone $ZONE
 
 # delete resources
-gcloud compute addresses delete $CLUSTER_NAME-addr --region=$REGION --quiet
+gcloud compute addresses delete $IP_NAME --region=$REGION --quiet
