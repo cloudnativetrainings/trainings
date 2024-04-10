@@ -30,8 +30,7 @@ else
 fi
 
 # install NGINX ingress
-export INGRESS_IP=$(gcloud compute addresses list --filter="region:europe-west6" \
-  --filter="name=training-kad-addr" --format="get(address)")
+export INGRESS_IP=$(gcloud compute addresses list --filter="name=training-kad-addr" --format="get(address)")
 helm upgrade --install ingress-nginx ingress-nginx \
   --repo https://kubernetes.github.io/ingress-nginx \
   --namespace ingress-nginx --create-namespace \

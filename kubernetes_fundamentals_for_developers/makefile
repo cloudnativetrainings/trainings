@@ -13,6 +13,10 @@ verify:
 	helm status -n monitoring monitoring
 	helm status -n logging logging
 
+.PHONY get-ingress-ip:
+get-ingress-ip:
+	gcloud compute addresses list --filter="region:europe-west3"  --filter="name=training-kf-addr" --format="get(address)"
+
 .PHONY teardown:
 teardown:
 	./teardown.sh

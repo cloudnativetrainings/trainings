@@ -1,0 +1,13 @@
+FROM golang:alpine3.15 as builder
+WORKDIR /src
+COPY go.mod go.sum ./
+RUN go mod download
+COPY main.go ./
+RUN CGO_ENABLED=0 go build -o kad-training
+
+FROM gcr.io/distroless/static-debian12
+COPY --from=builder /src/application /kad-training
+COPY app.conf ./
+ENTRYPOINT [ "/kad-training" ]
+
+# TODO why do I need this Dockerfile?

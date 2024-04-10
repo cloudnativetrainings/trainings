@@ -1,0 +1,5 @@
+.gitignore
+Dockerfile*
+kad-training
+makefile
+README.md

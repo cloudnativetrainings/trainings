@@ -141,7 +141,7 @@ kubectl get pods
 kubectl get pods -o wide
 
 # SSH into the Worker Nodes where the Pods are running
-gcloud compute ssh $(kubectl get pod kad-go-application-a -o jsonpath='{.spec.nodeName}') --zone europe-west6-a
+gcloud compute ssh $(kubectl get pod kad-go-application-a -o jsonpath='{.spec.nodeName}')
 
 # [WORKER-NODE] Switch to the default logging directory of the Worker Node
 cd /var/log/containers

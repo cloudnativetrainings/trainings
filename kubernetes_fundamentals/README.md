@@ -20,7 +20,11 @@ cd trainings/kubernetes_fundamentals/
 
 ```bash
 make setup
+```
 
+5. Bring in some convenience into training environment
+
+```bash
 source ~/.trainingrc
 ```
 

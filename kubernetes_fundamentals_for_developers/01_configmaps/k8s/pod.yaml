@@ -9,14 +9,23 @@ spec:
   terminationGracePeriodSeconds: 0
   containers:
     - name: my-app
-      image: quay.io/kubermatic-labs/kad-training:1.0.0-java
+      image: quay.io/kubermatic-labs/kad-training:1.0.0
       ports:
         - containerPort: 8080
       imagePullPolicy: Always
+      resources:
+        requests:
+          cpu: "250m"
+          memory: "250Mi"
+        limits:
+          cpu: "250m"
+          memory: "250Mi"
       volumeMounts:
         - name: my-volume
-          mountPath: /srv/app/config
+          mountPath: /app/conf/
   volumes:
     - name: my-volume
       configMap:
         name: my-configmap
+
+# TODO resource requests and limits everywhere, keep it consistant, format

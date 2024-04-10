@@ -4,6 +4,5 @@ metadata:
   namespace: default
   name: my-configmap
 data: 
-  application.properties: |-
-    management.endpoints.web.exposure.include=prometheus,liveness,readiness
-    server.port=8081
+  app.conf: |-
+    message = Message from ConfigMap
