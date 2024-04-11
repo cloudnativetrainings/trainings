@@ -1,5 +1,10 @@
 # Manage Secrets with Vault
 
+# TODO motivation, why are secrets not secret? => table 3 layers of encryption also in slides
+# TODO move lab to a later stage - to difficult for the beginning
+# TODO get rid of / $ everywhere
+# TODO use golang app
+
 In this task, we will use HashiCorp Vault to store and use our `Secrets` securely.
 
 Change into the lab directory:
@@ -8,19 +13,11 @@ Change into the lab directory:
 cd $HOME/trainings/kubernetes_application_development/02_secrets
 ```
 
-## Install and Configure Vault
+## Configure Vault
 
-Install the helm chart:
+Vault CLI is already installed on the Google Cloud Shell and the Helm Chart is already applied in your cluster. However, the vault-0 pod will not become ready automatically.
 
-```bash
-helm install vault vault \
-  --repo https://helm.releases.hashicorp.com \
-  --namespace vault --create-namespace \
-  --version 0.27.0 \
-  --set ui.enabled=true
-```
-
-The vault-0 pod will not become ready automatically:
+### Unseal Vault in the Cluster
 
 ```bash
 kubectl get pods -n vault
@@ -131,7 +128,7 @@ vault-0                                 1/1     Running   0          116m
 vault-agent-injector-55748c487f-xflrn   1/1     Running   0          116m
 ```
 
-Let's Prepare the vault to be used with our Pods inside Kubernetes
+### Prepare vault to be used with our Pods inside Kubernetes
 
 ```bash
 kubectl exec -it vault-0 -n vault -- /bin/sh
@@ -203,6 +200,4 @@ Remove installed applications and pods
 
 ```bash
 kubectl delete -f k8s/
-helm uninstall vault -n vault
-cd ..
 ```

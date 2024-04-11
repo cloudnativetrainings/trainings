@@ -46,7 +46,13 @@ helm upgrade --install monitoring kube-prometheus-stack \
 
 # install Loki
 helm upgrade --install logging loki-stack \
-    --repo https://grafana.github.io/helm-charts \
-    --namespace logging --create-namespace \
-    --version 2.10.0 \
-    --set fluent-bit.enabled=true,promtail.enabled=false
+  --repo https://grafana.github.io/helm-charts \
+  --namespace logging --create-namespace \
+  --version 2.10.0 \
+  --set fluent-bit.enabled=true,promtail.enabled=false
+
+# install vault
+helm upgrade --install vault vault \
+  --repo https://helm.releases.hashicorp.com \
+  --namespace vault --create-namespace \
+  --version 0.27.0 
