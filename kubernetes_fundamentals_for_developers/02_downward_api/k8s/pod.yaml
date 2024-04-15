@@ -9,7 +9,7 @@ spec:
   terminationGracePeriodSeconds: 0
   containers:
     - name: my-app
-      image: quay.io/kubermatic-labs/kad-training:1.0.0-java
+      image: quay.io/kubermatic-labs/kad-training:1.0.0
       ports:
         - containerPort: 8080
       imagePullPolicy: Always

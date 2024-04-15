@@ -37,12 +37,11 @@ kubectl exec -it my-app -- cat /etc/podinfo/labels
 
 ## Cleanup
 
-Remove installed applications and pods
-
 ```bash
 kubectl delete -f k8s/
-cd ..
 ```
+
+<!--  TODO move this to slides  -->
 
 ## Available Fields
 

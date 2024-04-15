@@ -13,13 +13,6 @@ spec:
       ports:
         - containerPort: 8080
       imagePullPolicy: Always
-      resources:
-        requests:
-          cpu: "250m"
-          memory: "250Mi"
-        limits:
-          cpu: "250m"
-          memory: "250Mi"
       volumeMounts:
         - name: my-volume
           mountPath: /app/conf/

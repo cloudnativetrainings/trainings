@@ -57,8 +57,6 @@ curl http://${INGRESS_IP}/my-app
 
 ## Cleanup
 
-Remove the created objects, and go back to training home:
-
 ```bash
 kubectl delete -f k8s/
 ```

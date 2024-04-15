@@ -13,6 +13,7 @@ INGRESS_IP=$(shell gcloud compute addresses list --filter="name=$(INGRESS_IP_NAM
 .PHONY verify:
 verify:
 	$(MAKE) -C ../kubernetes_fundamentals/ verify
+	test -n "$(INGRESS_IP)"
 	helm status -n ingress-nginx ingress-nginx
 	helm status -n monitoring monitoring
 	helm status -n logging logging

@@ -36,6 +36,7 @@ func main() {
 	http.HandleFunc("/", handleRoot)
 	http.HandleFunc("/liveness", handleLiveness)
 	http.HandleFunc("/readiness", handleReadiness)
+	http.HandleFunc("/downward_api", handleDownwardApi)
 	http.ListenAndServe(":8080", nil)
 }
 
@@ -99,6 +100,12 @@ func handleReadiness(w http.ResponseWriter, r *http.Request) {
 	} else {
 		w.WriteHeader(http.StatusServiceUnavailable)
 	}
+}
+
+func handleDownwardApi(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "MY_NODE_NAME: %s<br>", os.Getenv("MY_NODE_NAME"))
+	fmt.Fprintf(w, "MY_POD_NAME: %s<br>", os.Getenv("MY_POD_NAME"))
+	fmt.Fprintf(w, "MY_POD_IP: %s<br>", os.Getenv("MY_POD_IP"))
 }
 
 func handleLifecycle() {
