@@ -9,15 +9,15 @@ In the training, we will learn about create role based access for a user to gran
 ## Inspect definition files and create the servicaccount, clusterrole and clusterrolebinding
 
 ```bash
-cat serviceaccount.yaml
-cat clusterrole.yaml
-cat clusterrolebinding.yaml
+cat k8s/serviceaccount.yaml
+cat k8s/clusterrole.yaml
+cat k8s/clusterrolebinding.yaml
 ```
 
 ```bash
-kubectl create -f serviceaccount.yaml
-kubectl create -f clusterrole.yaml
-kubectl create -f clusterrolebinding.yaml
+kubectl create -f k8s/serviceaccount.yaml
+kubectl create -f k8s/clusterrole.yaml
+kubectl create -f k8s/clusterrolebinding.yaml
 ```
 
 ## Inspect pod.yaml definition file and create the pod
@@ -50,18 +50,24 @@ TOKEN=$(cat token)
 
 * List the pods - this is allowed
 
-  ```bash
-  curl -s https://kubernetes/api/v1/namespaces/default/pods/ --header "Authorization: Bearer $TOKEN" --cacert ca.crt 
-  ```
+```bash
+curl -s https://kubernetes/api/v1/namespaces/default/pods/ --header "Authorization: Bearer $TOKEN" --cacert ca.crt 
+```
 
 * List the services - you should get a 403 status code back
 
-  ```bash
-  curl -s https://kubernetes/api/v1/namespaces/default/services/ --header "Authorization: Bearer $TOKEN" --cacert ca.crt 
-  ```
+```bash
+curl -s https://kubernetes/api/v1/namespaces/default/services/ --header "Authorization: Bearer $TOKEN" --cacert ca.crt 
+```
+
+## Exit the Pod
+
+```bash
+exit
+```
 
 ## Cleanup
 
 ```bash
-kubectl delete -f .
+kubectl delete -f k8s
 ```

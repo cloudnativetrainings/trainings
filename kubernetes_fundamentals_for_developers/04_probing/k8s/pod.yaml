@@ -8,7 +8,7 @@ metadata:
 spec:
   containers:
     - name: probe-app
-      image: quay.io/kubermatic-labs/kad-training:1.0.0-go
+      image: quay.io/kubermatic-labs/training-application:2.0.0
       imagePullPolicy: Always
       tty: true
       stdin: true

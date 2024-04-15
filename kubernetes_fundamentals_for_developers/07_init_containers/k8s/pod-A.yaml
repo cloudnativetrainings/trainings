@@ -12,7 +12,7 @@ spec:
       args: [ '-c', 'until [[ "$(curl -s -o /dev/null -w "%{http_code}" http://pod-b-svc:8080/liveness)" == "200" ]]; do echo "Sleeping a bit..."; sleep 3; done; echo "pod-b is ready!";' ]
   containers:
     - name: kad-go-application
-      image: quay.io/kubermatic-labs/kad-training:1.0.0-go
+      image: quay.io/kubermatic-labs/training-application:2.0.0
       imagePullPolicy: Always
       ports:
         - name: http

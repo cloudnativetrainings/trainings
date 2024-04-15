@@ -1,6 +1,6 @@
 IMAGE_REPOSITORY = quay.io/kubermatic-labs
-APPLICATION_NAME = kad-training
-BUILD_VERSION = 1.0.0
+APPLICATION_NAME = training-application
+BUILD_VERSION = 2.0.0
 # A_BUILD_VERSION = 1.0.1
 # B_BUILD_VERSION = 1.0.2
 # C_BUILD_VERSION = 1.1.0

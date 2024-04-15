@@ -3,11 +3,11 @@ WORKDIR /src
 COPY go.mod go.sum ./
 RUN go mod download
 COPY main.go ./
-RUN CGO_ENABLED=0 go build -o kad-training
+RUN CGO_ENABLED=0 go build -o training-application
 
 FROM gcr.io/distroless/static-debian12
-COPY --from=builder /src/application /kad-training
+COPY --from=builder /src/application /training-application
 COPY app.conf ./
-ENTRYPOINT [ "/kad-training" ]
+ENTRYPOINT [ "/training-application" ]
 
 # TODO why do I need this Dockerfile?

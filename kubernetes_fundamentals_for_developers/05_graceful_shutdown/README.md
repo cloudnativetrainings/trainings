@@ -53,7 +53,7 @@ spec:
   terminationGracePeriodSeconds: 12  # --> Change this line
   containers:
     - name: kad-go-application
-      image: quay.io/kubermatic-labs/kad-training:1.0.0-go
+      image: quay.io/kubermatic-labs/training-application:1.0.0-go
       imagePullPolicy: Always
 ```
 

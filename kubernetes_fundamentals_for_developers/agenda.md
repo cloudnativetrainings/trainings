@@ -2,7 +2,7 @@
 
 * [OK] Application Configuration via ConfigMaps
 * [OK] Getting K8s Metainfo into your Application
-* Calling the Kubernetes API from your Application
+* [OK] Calling the Kubernetes API from your Application
 * Healthchecking your Application
 * Graceful Shutdown of your Application
 * Managing Resources of your Application

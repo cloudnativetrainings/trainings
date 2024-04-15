@@ -3,10 +3,10 @@ WORKDIR /src
 COPY go.mod go.sum ./
 RUN go mod download
 COPY main.go ./
-RUN go build -o kad-training
+RUN go build -o training-application
 
 FROM --platform=linux/amd64 ubuntu:22.04
 WORKDIR /app
-COPY --from=builder /src/kad-training /app/kad-training
+COPY --from=builder /src/training-application /app/training-application
 COPY app.conf ./
-ENTRYPOINT ./kad-training
+ENTRYPOINT ./training-application

@@ -1,5 +1,5 @@
 .gitignore
 Dockerfile*
-kad-training
+training-application
 makefile
 README.md
