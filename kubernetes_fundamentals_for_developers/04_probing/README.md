@@ -70,9 +70,6 @@ curl -I http://${INGRESS_IP}/probe-app
 
 ## Cleanup
 
-Delete the created resources.
-
 ```bash
 kubectl delete -f k8s/ --force --grace-period=0
-cd ..
 ```
