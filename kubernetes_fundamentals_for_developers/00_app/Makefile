@@ -1,9 +1,8 @@
 IMAGE_REPOSITORY = quay.io/kubermatic-labs
 APPLICATION_NAME = training-application
 BUILD_VERSION = 2.0.0
-# A_BUILD_VERSION = 1.0.1
-# B_BUILD_VERSION = 1.0.2
-# C_BUILD_VERSION = 1.1.0
+BUILD_VERSION_A = 2.0.0-A
+BUILD_VERSION_B = 2.0.0-B
 
 .PHONY: update-dependencies
 update-dependencies: 
@@ -30,22 +29,9 @@ docker-run: docker-build
 docker-push: docker-build
 	docker push ${IMAGE_REPOSITORY}/${APPLICATION_NAME}:${BUILD_VERSION}
 
-.PHONY: docker-push
-docker-push-all: docker-push
-	docker build -f Dockerfile -t ${IMAGE_REPOSITORY}/${APPLICATION_NAME}:${BUILD_VERSION} .
-	docker push ${IMAGE_REPOSITORY}/${APPLICATION_NAME}:${BUILD_VERSION}
-
-# docker build -f Dockerfile-A -t ${IMAGE_REPOSITORY}/${APPLICATION_NAME}:${A_BUILD_VERSION} .
-# docker push ${IMAGE_REPOSITORY}/${APPLICATION_NAME}:${A_BUILD_VERSION}
-# docker build -f Dockerfile-B -t ${IMAGE_REPOSITORY}/${APPLICATION_NAME}:${B_BUILD_VERSION} .
-# docker push ${IMAGE_REPOSITORY}/${APPLICATION_NAME}:${B_BUILD_VERSION}
-# docker build -f Dockerfile-C -t ${IMAGE_REPOSITORY}/${APPLICATION_NAME}:${C_BUILD_VERSION} .
-# docker push ${IMAGE_REPOSITORY}/${APPLICATION_NAME}:${C_BUILD_VERSION}
-
-# docker-multiarch:
-# 	docker buildx build --push --platform linux/arm/v7,linux/arm64/v8,linux/amd64 -f Dockerfile --tag ${IMAGE_REPOSITORY}/${APPLICATION_NAME}:${BUILD_VERSION} .
-# 	docker buildx build --push --platform linux/arm/v7,linux/arm64/v8,linux/amd64 -f Dockerfile-A --tag ${IMAGE_REPOSITORY}/${APPLICATION_NAME}:${A_BUILD_VERSION} .
-# 	docker buildx build --push --platform linux/arm/v7,linux/arm64/v8,linux/amd64 -f Dockerfile-B --tag ${IMAGE_REPOSITORY}/${APPLICATION_NAME}:${B_BUILD_VERSION} .
-# 	docker buildx build --push --platform linux/arm/v7,linux/arm64/v8,linux/amd64 -f Dockerfile-C --tag ${IMAGE_REPOSITORY}/${APPLICATION_NAME}:${C_BUILD_VERSION} .
-
-# TODO
+.PHONY: docker-push-dragons
+docker-push-dragons:
+	docker build -f Dockerfile-A -t ${IMAGE_REPOSITORY}/${APPLICATION_NAME}:${BUILD_VERSION_A} .
+	docker push ${IMAGE_REPOSITORY}/${APPLICATION_NAME}:${BUILD_VERSION_A}
+	docker build -f Dockerfile-B -t ${IMAGE_REPOSITORY}/${APPLICATION_NAME}:${BUILD_VERSION_B} .
+	docker push ${IMAGE_REPOSITORY}/${APPLICATION_NAME}:${BUILD_VERSION_B}

@@ -4,6 +4,12 @@ Although you taught Kubernetes about the proper period of time to do a graceful 
 
 In this lab you will learn about a possible reason for data loss.
 
+Change into the lab directory:
+
+```bash
+cd $HOME/trainings/kubernetes_application_development/06_graceful_shutdown_dragons
+```
+
 ## Create the Pods
 
 Inspect pod-A.yaml and pod-B.yaml definition files and create the pods.
@@ -11,8 +17,7 @@ Inspect pod-A.yaml and pod-B.yaml definition files and create the pods.
 ```bash
 cat k8s/pod-A.yaml
 cat k8s/pod-B.yaml
-kubectl create -f k8s/pod-A.yaml
-kubectl create -f k8s/pod-B.yaml
+kubectl create -f k8s/
 kubectl get pods
 ```
 

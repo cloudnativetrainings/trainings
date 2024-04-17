@@ -8,7 +8,7 @@ spec:
   terminationGracePeriodSeconds: 12
   containers:
     - name: app-a
-      image: quay.io/kubermatic-labs/training-application:2.0.0
+      image: quay.io/kubermatic-labs/training-application:2.0.0-A
       imagePullPolicy: Always
   affinity:
     podAffinity:

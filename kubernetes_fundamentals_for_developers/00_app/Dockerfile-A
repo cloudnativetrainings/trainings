@@ -8,5 +8,5 @@ RUN go build -o training-application
 FROM --platform=linux/amd64 ubuntu:22.04
 WORKDIR /app
 COPY --from=builder /src/training-application /app/training-application
-COPY app.conf ./
+COPY conf/app.conf ./conf/
 ENTRYPOINT [ "./training-application" ]

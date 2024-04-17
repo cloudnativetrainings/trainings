@@ -8,5 +8,5 @@ RUN go build -o app
 FROM --platform=linux/amd64 alpine:3.15
 WORKDIR /app
 COPY --from=builder /src/app /app/app
-COPY app.conf ./conf/
+COPY conf/app.conf ./conf/
 ENTRYPOINT [ "./app" ]

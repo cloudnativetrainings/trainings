@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-b
+  labels:
+    app: pod-b
+spec:
+  containers:
+    - name: app
+      image: quay.io/kubermatic-labs/training-application:2.0.0
+      imagePullPolicy: Always
+      ports:
+        - name: http
+          containerPort: 8080

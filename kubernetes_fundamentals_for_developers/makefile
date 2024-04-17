@@ -7,6 +7,7 @@ setup:
 	$(MAKE) -C ../kubernetes_fundamentals/ setup
 	./setup.sh
 	grep -qxF "source <(helm completion bash)" $(TRAINING_RC_FILE) || echo "source <(helm completion bash)" >> $(TRAINING_RC_FILE)
+	test -n "$(INGRESS_IP)" # TODO does not work the first time, ENV VAR is not set properly looks like a race condition
 	grep -qxF "export INGRESS_IP=" $(TRAINING_RC_FILE) || echo "export INGRESS_IP=$(INGRESS_IP)" >> $(TRAINING_RC_FILE)
 
 POD_NAME=test-pod

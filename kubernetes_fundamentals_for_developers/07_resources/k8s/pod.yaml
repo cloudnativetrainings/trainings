@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-app
+spec:
+  terminationGracePeriodSeconds: 12
+  containers:
+    - name: my-app
+      image: quay.io/kubermatic-labs/training-application:2.0.0
+      imagePullPolicy: Always
+      tty: true
+      stdin: true
+      resources:
+        limits:
+          cpu: 30m
+          memory: 10Mi
+        requests:
+          cpu: 30m
+          memory: 10Mi

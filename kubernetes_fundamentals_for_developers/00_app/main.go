@@ -37,6 +37,8 @@ func main() {
 	http.HandleFunc("/liveness", handleLiveness)
 	http.HandleFunc("/readiness", handleReadiness)
 	http.HandleFunc("/downward_api", handleDownwardApi)
+
+	log.Info("App started")
 	http.ListenAndServe(":8080", nil)
 }
 
