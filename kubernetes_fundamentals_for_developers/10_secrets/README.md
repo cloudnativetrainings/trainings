@@ -1,16 +1,11 @@
 # Manage Secrets with Vault
 
-# TODO motivation, why are secrets not secret? => table 3 layers of encryption also in slides
-# TODO move lab to a later stage - to difficult for the beginning
-# TODO get rid of / $ everywhere
-# TODO use golang app
-
 In this task, we will use HashiCorp Vault to store and use our `Secrets` securely.
 
 Change into the lab directory:
 
 ```bash
-cd $HOME/trainings/kubernetes_application_development/02_secrets
+cd $HOME/trainings/kubernetes_application_development/10_secrets
 ```
 
 ## Configure Vault
@@ -142,33 +137,33 @@ kubectl exec -it vault-0 -n vault -- /bin/sh
 / $ vault kv put myapp/secret-data username=admin password=DScq53H9gGKkepCs
 
 # Create a read policy
-cat <<EOF > /home/vault/policy.hcl
+/ $ cat <<EOF > /home/vault/policy.hcl
 path "myapp/data/secret-data" {
   capabilities = ["read"]
 }
 EOF
 
 # Apply the policy
-vault policy write myapp-policy /home/vault/policy.hcl
+/ $ vault policy write myapp-policy /home/vault/policy.hcl
 
 # Enable Kubernetes authentication
-vault auth enable kubernetes
+/ $ vault auth enable kubernetes
 
 # Configure Kubernetes auth
-vault write auth/kubernetes/config \
+/ $ vault write auth/kubernetes/config \
   token_reviewer_jwt="$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)"  \
   kubernetes_host=https://${KUBERNETES_PORT_443_TCP_ADDR}:443 \
   kubernetes_ca_cert=@/var/run/secrets/kubernetes.io/serviceaccount/ca.crt
 
 # Create the role with our policy on the default namespace
-vault write auth/kubernetes/role/vault-read \
+/ $ vault write auth/kubernetes/role/vault-read \
   bound_service_account_names=default \
   bound_service_account_namespaces=default \
   policies=myapp-policy \
   ttl=24h
 
 # Exit the vault-0 container
-exit
+/ $ exit
 ```
 
 ## Deploy a Pod with Secrets from Vault

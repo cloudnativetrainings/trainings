@@ -8,8 +8,8 @@
 * [OK] Why Graceful Shutdown does not happen?
 * [OK] Managing Resources of your Application
 * [OK] Init Containers
-* Debugging Containers
-* Managing Secrets via Hashicorp Vault
+* [OK] Debugging Containers
+* [OK] Managing Secrets via Hashicorp Vault
 
 ## TODO labs
 * Providing custom Metrics from your Application
@@ -18,9 +18,5 @@
   * Why you should not deploy your Application via Pods?
   * Debugging Ingress Issues
 
-
-# TODO 
-* IP regex does not work => ip is not set in .trainingrc
-  * the problem is probably there is no make goal dep
-  * the env is evaluated before the kf setup is done
-* dragons => fix and make use of loki
+# TODO dragons => fix and make use of loki
+# TODO motivation, why are secrets not secret? => table 3 layers of encryption also in slides
