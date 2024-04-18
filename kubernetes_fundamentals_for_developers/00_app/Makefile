@@ -41,8 +41,7 @@ docker-push-dragons:
 docker-push-distroless:
 	# docker buildx create --use --platform=linux/arm64,linux/amd64 --name multi-platform-builder
 	# docker buildx inspect --bootstrap
-	docker buildx build --push --platform linux/arm64,linux/amd64 -f Dockerfile --tag ${IMAGE_REPOSITORY}/${APPLICATION_NAME}:${BUILD_VERSION_DISTROLESS} .
-	docker push ${IMAGE_REPOSITORY}/${APPLICATION_NAME}:${BUILD_VERSION_DISTROLESS}
+	docker buildx build --push --platform linux/arm64,linux/amd64 -f Dockerfile-distroless --tag ${IMAGE_REPOSITORY}/${APPLICATION_NAME}:${BUILD_VERSION_DISTROLESS} .
 
 .PHONY: docker-push-all
 docker-push-all: docker-build docker-push docker-push-dragons docker-push-distroless

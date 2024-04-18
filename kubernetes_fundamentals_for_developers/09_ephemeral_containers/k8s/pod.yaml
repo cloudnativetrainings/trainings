@@ -5,6 +5,7 @@ metadata:
   labels:
     app: my-app
 spec:
+  terminationGracePeriodSeconds: 0
   containers:
     - name: my-app
       image: quay.io/kubermatic-labs/training-application:2.0.0-distroless

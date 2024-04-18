@@ -72,9 +72,6 @@ kubectl debug node/<NODE_NAME> -it --image=ubuntu
 
 ## Cleanup
 
-Delete all pods:
-
 ```bash
 kubectl delete pods --all
-cd ..
 ```
