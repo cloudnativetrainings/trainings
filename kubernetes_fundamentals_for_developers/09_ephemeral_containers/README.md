@@ -5,7 +5,7 @@ Ephemeral containers are a special type of container that runs temporarily in an
 Change into the lab directory:
 
 ```bash
-cd $HOME/trainings/kubernetes_application_development/08_ephemeral_containers
+cd $HOME/trainings/kubernetes_application_development/09_ephemeral_containers
 ```
 
 ## Distroless Images

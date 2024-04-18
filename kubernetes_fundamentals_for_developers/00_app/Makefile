@@ -3,6 +3,7 @@ APPLICATION_NAME = training-application
 BUILD_VERSION = 2.0.0
 BUILD_VERSION_A = 2.0.0-A
 BUILD_VERSION_B = 2.0.0-B
+BUILD_VERSION_DISTROLESS = 2.0.0-distroless
 
 .PHONY: update-dependencies
 update-dependencies: 
@@ -35,3 +36,13 @@ docker-push-dragons:
 	docker push ${IMAGE_REPOSITORY}/${APPLICATION_NAME}:${BUILD_VERSION_A}
 	docker build -f Dockerfile-B -t ${IMAGE_REPOSITORY}/${APPLICATION_NAME}:${BUILD_VERSION_B} .
 	docker push ${IMAGE_REPOSITORY}/${APPLICATION_NAME}:${BUILD_VERSION_B}
+
+.PHONY: docker-push-distroless
+docker-push-distroless:
+	# docker buildx create --use --platform=linux/arm64,linux/amd64 --name multi-platform-builder
+	# docker buildx inspect --bootstrap
+	docker buildx build --push --platform linux/arm64,linux/amd64 -f Dockerfile --tag ${IMAGE_REPOSITORY}/${APPLICATION_NAME}:${BUILD_VERSION_DISTROLESS} .
+	docker push ${IMAGE_REPOSITORY}/${APPLICATION_NAME}:${BUILD_VERSION_DISTROLESS}
+
+.PHONY: docker-push-all
+docker-push-all: docker-build docker-push docker-push-dragons docker-push-distroless

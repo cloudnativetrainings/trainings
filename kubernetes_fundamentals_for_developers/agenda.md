@@ -11,6 +11,7 @@
 * Debugging Containers
 * Managing Secrets via Hashicorp Vault
 
+## TODO labs
 * Providing custom Metrics from your Application
 * Manage Logs of a legacy Application
 * Troubleshooting
@@ -22,4 +23,4 @@
 * IP regex does not work => ip is not set in .trainingrc
   * the problem is probably there is no make goal dep
   * the env is evaluated before the kf setup is done
-* dragons => make use of loki
+* dragons => fix and make use of loki
