@@ -10,3 +10,7 @@ setup:
 verify:
 	cfssl version
 	cfssljson --version
+
+.PHONY teardown:
+teardown:
+	./teardown.sh

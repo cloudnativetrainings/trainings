@@ -6,7 +6,7 @@ set -euxo pipefail
 
 sudo mkdir -p /etc/kubernetes/config /var/lib/kubernetes/
 
-kube_ver="v1.19.3"
+kube_ver="v1.30.0"
 
 wget -q --show-progress --https-only --timestamping \
   "https://storage.googleapis.com/kubernetes-release/release/$kube_ver/bin/linux/amd64/kube-apiserver" \
