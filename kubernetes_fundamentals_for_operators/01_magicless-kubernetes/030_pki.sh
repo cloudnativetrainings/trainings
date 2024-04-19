@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# cfssl available per:
-# * `go get github.com/cloudflare/cfssl/cmd/{cfssl,cfssljson}`
-
 set -euxo pipefail
 
 . ./000_func.sh

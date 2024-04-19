@@ -14,10 +14,10 @@ wget -q --show-progress --https-only --timestamping \
   "https://storage.googleapis.com/kubernetes-release/release/$kube_ver/bin/linux/amd64/kube-scheduler" \
   "https://storage.googleapis.com/kubernetes-release/release/$kube_ver/bin/linux/amd64/kubectl"
 
-sudo install -o 0:0 -m 0755 kube{ctl,-apiserver,-controller-manager,-scheduler} /usr/local/bin/
+sudo install -o root -m 0755 kube{ctl,-apiserver,-controller-manager,-scheduler} /usr/local/bin/
 
-sudo install -o 0:0 -m 0644 ca.pem kubernetes.pem service-account.pem encryption-config.yaml /var/lib/kubernetes/
-sudo install -o 0:0 -m 0600 ca-key.pem kubernetes-key.pem service-account-key.pem /var/lib/kubernetes/
+sudo install -o root -m 0644 ca.pem kubernetes.pem service-account.pem encryption-config.yaml /var/lib/kubernetes/
+sudo install -o root -m 0600 ca-key.pem kubernetes-key.pem service-account-key.pem /var/lib/kubernetes/
 
 INTERNAL_IP=$( curl -s -H "Metadata-Flavor: Google" \
   http://metadata.google.internal/computeMetadata/v1/instance/network-interfaces/0/ip)
@@ -65,7 +65,7 @@ RestartSec=5
 WantedBy=multi-user.target
 EOF
 
-sudo install -o 0:0 -m 0600 \
+sudo install -o root -m 0600 \
   kube-controller-manager.kubeconfig \
   kube-scheduler.kubeconfig \
   /var/lib/kubernetes/

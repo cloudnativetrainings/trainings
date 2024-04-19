@@ -40,11 +40,11 @@ wget -q --show-progress --https-only --timestamping \
   "https://storage.googleapis.com/kubernetes-release/release/v$kube_ver/bin/linux/amd64/kubelet" \
   "https://storage.googleapis.com/kubernetes-release/release/v$kube_ver/bin/linux/amd64/kube-proxy"
 
-sudo install -o 0:0 -m 0755 kubelet kube-proxy /usr/local/bin/
-sudo install -o 0:0 -m 0644 ${HOSTNAME}.pem /var/lib/kubelet/
-sudo install -o 0:0 -m 0600 ${HOSTNAME}-key.pem /var/lib/kubelet/
-sudo install -o 0:0 -m 0600 ${HOSTNAME}.kubeconfig /var/lib/kubelet/kubeconfig
-sudo install -o 0:0 -m 0644 ca.pem /var/lib/kubernetes/
+sudo install -o root -m 0755 kubelet kube-proxy /usr/local/bin/
+sudo install -o root -m 0644 ${HOSTNAME}.pem /var/lib/kubelet/
+sudo install -o root -m 0600 ${HOSTNAME}-key.pem /var/lib/kubelet/
+sudo install -o root -m 0600 ${HOSTNAME}.kubeconfig /var/lib/kubelet/kubeconfig
+sudo install -o root -m 0644 ca.pem /var/lib/kubernetes/
 
 POD_CIDR=$(curl -s -H "Metadata-Flavor: Google" \
   http://metadata.google.internal/computeMetadata/v1/instance/attributes/pod-cidr)
@@ -96,7 +96,7 @@ RestartSec=5
 WantedBy=multi-user.target
 EOF
 
-sudo install -o 0:0 -m 0600 kube-proxy.kubeconfig /var/lib/kube-proxy/kubeconfig
+sudo install -o root -m 0600 kube-proxy.kubeconfig /var/lib/kube-proxy/kubeconfig
 
 cat <<EOF | sudo tee /var/lib/kube-proxy/kube-proxy-config.yaml
 kind: KubeProxyConfiguration

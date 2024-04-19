@@ -1,19 +1,19 @@
 #!/bin/false
 # this is meant to be run on each master node
-# (use tmux sync panes) and git clone https://github.com/USER/REPO.git
+# (use tmux sync panes) and git clone https://github.com/kubermatic-labs/trainings
 
 set -euxo pipefail
 
-etcd_ver=3.4.13
+etcd_ver=3.5.11
 
 wget -q --show-progress --https-only --timestamping \
   "https://github.com/coreos/etcd/releases/download/v$etcd_ver/etcd-v$etcd_ver-linux-amd64.tar.gz"
 
 tar -xvf etcd-v$etcd_ver-linux-amd64.tar.gz
-sudo install -o 0:0 -m 0755 etcd-v$etcd_ver-linux-amd64/etcd* /usr/local/bin
+sudo install -o root -m 0755 etcd-v$etcd_ver-linux-amd64/etcd* /usr/local/bin
 
 sudo mkdir -p /etc/etcd /var/lib/etcd
-sudo install -o 0:0 -m 0644 ca.pem kubernetes-key.pem kubernetes.pem /etc/etcd/
+sudo install -o root -m 0644 ca.pem kubernetes-key.pem kubernetes.pem /etc/etcd/
 
 INTERNAL_IP=$( curl -s -H "Metadata-Flavor: Google" \
  http://metadata.google.internal/computeMetadata/v1/instance/network-interfaces/0/ip)
