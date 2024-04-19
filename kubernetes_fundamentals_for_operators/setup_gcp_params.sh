@@ -1,5 +1,7 @@
 #!/bin/bash
 
+TRAINING_RC_FILE=~/.trainingrc
+
 PROJECT_COUNT=$(gcloud projects list --format json | jq .[].name | tr -d \" | wc -l)
 if (( PROJECT_COUNT == 1)); then
   PROJECT_NAME=$(gcloud projects list --format json | jq .[].name | tr -d \" )
@@ -17,3 +19,7 @@ set -euxo pipefail
 gcloud config set project $PROJECT_NAME
 gcloud config set compute/region $REGION
 gcloud config set compute/zone $ZONE
+
+grep -qxF "export REGION=europe-west3" $TRAINING_RC_FILE || echo "export REGION=europe-west3" >> $TRAINING_RC_FILE
+grep -qxF "export ZONE=europe-west3-a" $TRAINING_RC_FILE || echo "export ZONE=europe-west3-a" >> $TRAINING_RC_FILE
+grep -qxF "export PROJECT_NAME=$PROJECT_NAME" $TRAINING_RC_FILE || echo "export PROJECT_NAME=$PROJECT_NAME" >> $TRAINING_RC_FILE
