@@ -1,12 +1,12 @@
 #!/bin/false
 # this is meant to be run on each master node
-# (use tmux sync panes) and git clone https://github.com/USER/REPO.git
+# (use tmux sync panes) and git clone https://github.com/kubermatic-labs/trainings
 
 set -euxo pipefail
 
 sudo mkdir -p /etc/kubernetes/config /var/lib/kubernetes/
 
-kube_ver="v1.30.0"
+kube_ver="v1.28.7"
 
 wget -q --show-progress --https-only --timestamping \
   "https://storage.googleapis.com/kubernetes-release/release/$kube_ver/bin/linux/amd64/kube-apiserver" \

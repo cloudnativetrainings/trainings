@@ -4,7 +4,7 @@
 
 set -euxo pipefail
 
-etcd_ver=3.5.11
+etcd_ver=3.5.12
 
 wget -q --show-progress --https-only --timestamping \
   "https://github.com/coreos/etcd/releases/download/v$etcd_ver/etcd-v$etcd_ver-linux-amd64.tar.gz"

@@ -7,6 +7,10 @@ set -euxo pipefail
 # unset TMUX
 # set project in terminal
 
+for node in master-{0..2}; do
+  gcloud compute scp 065_master-etcd.sh 070_master.sh ${node}:
+done
+
 tmux new-session -d -s magicless-master
 tmux split-window -t magicless-master:0.0
 tmux split-window -t magicless-master:0.0

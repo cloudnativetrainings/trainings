@@ -5,6 +5,10 @@ set -euxo pipefail
 ### NOTE!!!
 # on gcloud shell, disable tmux!!! 
 
+for node in worker-{0..2}; do
+  gcloud compute scp 085_worker.sh 087_worker-cni.sh $node:
+done
+
 tmux new-session -d -s magicless-worker
 tmux split-window -t magicless-worker:0.0
 tmux split-window -t magicless-worker:0.0

@@ -1,10 +1,10 @@
 #!/bin/false
 # this is meant to be run on each worker node
-# (use tmux sync panes) and git clone https://github.com/USER/REPO.git
+# (use tmux sync panes) and git clone https://github.com/kubermatic-labs/trainings
 
 set -euxo pipefail
 
-kube_ver="1.19.3"
+kube_ver="1.28.7"
 
 sudo apt-get update
 sudo apt-get -y install socat conntrack ipset apt-transport-https \
