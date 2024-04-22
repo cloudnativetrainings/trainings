@@ -16,7 +16,3 @@ resources:
               secret: ${ENCRYPTION_KEY}
       - identity: {}
 EOF
-
-for instance in master-{0..2}; do
-  gcloud compute scp secrets/encryption-config.yaml ${instance}:
-done
