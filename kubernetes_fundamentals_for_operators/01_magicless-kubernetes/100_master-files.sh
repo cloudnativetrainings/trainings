@@ -18,7 +18,11 @@ for instance in master-{0..2}; do
   gcloud compute scp secrets/encryption-config.yaml ${instance}:
 done
 
+for instance in master-{0..2}; do
+  gcloud compute scp services/{etcd,kube-apiserver,kube-controller-manager,kube-scheduler}.service ${instance}:
+done
+
 for node in master-{0..2}; do
-  gcloud compute scp 065_master-etcd.sh 070_master.sh ${node}:
+  gcloud compute scp 120_master-etcd.sh 130_master.sh ${node}:
 done
 
