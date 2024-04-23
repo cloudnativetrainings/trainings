@@ -2,8 +2,6 @@
 
 set -euxo pipefail
 
-./setup_gcp_params.sh
-
 # machines
 gcloud -q compute instances delete \
   master-0 master-1 master-2 \

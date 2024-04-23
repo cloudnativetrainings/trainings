@@ -15,5 +15,5 @@ for node in worker-{0..2}; do
 done
 
 for node in worker-{0..2}; do
-  gcloud compute scp 220_worker.sh 230_worker-cni.sh $node:
+  gcloud compute scp 2*.sh $node:
 done

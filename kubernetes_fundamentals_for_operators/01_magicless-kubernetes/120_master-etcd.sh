@@ -1,18 +1,15 @@
 #!/bin/false
 # this is meant to be run on each master node
-# (use tmux sync panes) and git clone https://github.com/kubermatic-labs/trainings
 
 set -euxo pipefail
 
-etcd_ver=3.5.12
-
 # install etcd
 wget -q --show-progress --https-only --timestamping \
-  "https://github.com/coreos/etcd/releases/download/v$etcd_ver/etcd-v$etcd_ver-linux-amd64.tar.gz"
-tar -xvf etcd-v$etcd_ver-linux-amd64.tar.gz
-sudo install -o root -m 0755 etcd-v$etcd_ver-linux-amd64/etcd* /usr/local/bin
+  "https://github.com/coreos/etcd/releases/download/v$ETCD_VERSION/etcd-v$etcd_ver-linux-amd64.tar.gz"
+tar -xvf etcd-v$ETCD_VERSION-linux-amd64.tar.gz
+sudo install -o root -m 0755 etcd-v$ETCD_VERSION-linux-amd64/etcd* /usr/local/bin
 
-# configure etcd
+# copy etcd certs
 sudo mkdir -p /etc/etcd /var/lib/etcd
 sudo install -o root -m 0644 ca.pem kubernetes-key.pem kubernetes.pem /etc/etcd/
 
