@@ -3,7 +3,7 @@
 
 set -euxo pipefail
 
-# create kube-apiserver service
+# create kube-apiserver service file
 export INTERNAL_IP=$( curl -s -H "Metadata-Flavor: Google" \
  http://metadata.google.internal/computeMetadata/v1/instance/network-interfaces/0/ip)
 envsubst < kube-apiserver.service > kube-apiserver.service.subst

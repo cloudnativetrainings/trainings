@@ -5,7 +5,7 @@ set -euxo pipefail
 
 # install etcd
 wget -q --show-progress --https-only --timestamping \
-  "https://github.com/coreos/etcd/releases/download/v$ETCD_VERSION/etcd-v$etcd_ver-linux-amd64.tar.gz"
+  "https://github.com/coreos/etcd/releases/download/v$ETCD_VERSION/etcd-v$ETCD_VERSION-linux-amd64.tar.gz"
 tar -xvf etcd-v$ETCD_VERSION-linux-amd64.tar.gz
 sudo install -o root -m 0755 etcd-v$ETCD_VERSION-linux-amd64/etcd* /usr/local/bin
 
@@ -13,7 +13,7 @@ sudo install -o root -m 0755 etcd-v$ETCD_VERSION-linux-amd64/etcd* /usr/local/bi
 sudo mkdir -p /etc/etcd /var/lib/etcd
 sudo install -o root -m 0644 ca.pem kubernetes-key.pem kubernetes.pem /etc/etcd/
 
-# create etcd service
+# create etcd service file
 export INTERNAL_IP=$( curl -s -H "Metadata-Flavor: Google" \
  http://metadata.google.internal/computeMetadata/v1/instance/network-interfaces/0/ip)
 export ETCD_NAME=$(hostname -s)

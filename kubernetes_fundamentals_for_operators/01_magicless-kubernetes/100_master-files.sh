@@ -21,9 +21,15 @@ for instance in master-{0..2}; do
   gcloud compute scp secrets/encryption-config.yaml ${instance}:
 done
 
-# copy service configs
+# copy service files
 for instance in master-{0..2}; do
   gcloud compute scp services/{etcd,kube-apiserver,kube-controller-manager,kube-scheduler}.service ${instance}:
+done
+
+# copy misc config files
+for instance in master-{0..2}; do
+  gcloud compute scp configs/kube-scheduler.yaml ${instance}:
+  gcloud compute scp configs/kube-apiserver-to-kubelet.yaml ${instance}:
 done
 
 # copy shell scripts
@@ -33,6 +39,5 @@ done
 
 # copy .trainingrc file
 for node in master-{0..2}; do
-  gcloud compute scp ~/.trainingrc ${node}:
+  gcloud compute scp ~/.node_trainingrc ${node}:~/.trainingrc
 done
-
