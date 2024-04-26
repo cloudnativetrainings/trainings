@@ -30,4 +30,3 @@ grep -qxF "gcloud config set compute/zone $ZONE" $TRAINING_RC_FILE || echo "gclo
 # versions
 grep -qxF "export ETCD_VERSION=$ETCD_VERSION" $TRAINING_RC_FILE || echo "export ETCD_VERSION=$ETCD_VERSION" >> $TRAINING_RC_FILE
 grep -qxF "export KUBERNETES_VERSION=$KUBERNETES_VERSION" $TRAINING_RC_FILE || echo "export KUBERNETES_VERSION=$KUBERNETES_VERSION" >> $TRAINING_RC_FILE
-

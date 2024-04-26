@@ -18,6 +18,3 @@ sudo mkdir -p /var/lib/kubernetes/
 sudo install -o root -m 0644 ca.pem kubernetes.pem service-account.pem encryption-config.yaml /var/lib/kubernetes/
 sudo install -o root -m 0600 ca-key.pem kubernetes-key.pem service-account-key.pem /var/lib/kubernetes/
 sudo install -o root -m 0600 kube{-controller-manager,-scheduler}.kubeconfig /var/lib/kubernetes/
-
-# TODO copy admin config???
-# TODO shouldn that copy config files stuff not be in the specific service shell scripts?

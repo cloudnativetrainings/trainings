@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euxo pipefail
+
 export KUBECONFIG=secrets/admin.kubeconfig
 
 kubectl run nginx --image=nginx
@@ -29,8 +31,5 @@ echo "-----------POD logs ?------------------"
 echo ""
 
 kubectl logs $POD_NAME --tail=10
-
-###conitinue with exec
-# https://github.com/kelseyhightower/kubernetes-the-hard-way/blob/master/docs/13-smoke-test.md#exec
 
 exit 0

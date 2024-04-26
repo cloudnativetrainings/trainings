@@ -1,3 +1,7 @@
+#!/bin/false
+# this is meant to be run on each worker node
+
+set -euxo pipefail
 
 # create cni config files
 export POD_CIDR=$(curl -s -H "Metadata-Flavor: Google" \

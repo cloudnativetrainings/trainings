@@ -4,8 +4,6 @@ set -euxo pipefail
 
 ### NOTE!!!
 # on gcloud shell, disable tmux!!! 
-# unset TMUX
-# set project in terminal
 
 tmux new-session -d -s magicless-master
 tmux split-window -t magicless-master:0.0

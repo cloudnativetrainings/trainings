@@ -1,13 +1,16 @@
+#!/bin/false
+# this is meant to be run on each worker node
 
+set -euxo pipefail
 
-# Add Docker's official GPG key:
+# add Docker's official GPG key:
 sudo apt-get update
 sudo apt-get install ca-certificates curl
 sudo install -m 0755 -d /etc/apt/keyrings
 sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
 sudo chmod a+r /etc/apt/keyrings/docker.asc
 
-# Add the repository to Apt sources:
+# add the repository to apt sources:
 echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
   $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
@@ -29,7 +32,6 @@ sudo install -o root -m 0644 crictl.yaml /etc/
 sudo install -o root -m 0644 containerd.service /etc/systemd/system/containerd.service
 sudo install -o root -m 0644 containerd-config.toml /etc/containerd/config.toml
 
-# start containerd service
-sudo systemctl daemon-reload
-sudo systemctl enable containerd
-sudo systemctl start containerd
+# restart containerd service
+sudo systemctl restart containerd
+# TODO use manual download instead of apt install => for not having to restart containerd service
