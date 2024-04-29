@@ -3,35 +3,30 @@
 
 set -euxo pipefail
 
-# add Docker's official GPG key:
-sudo apt-get update
-sudo apt-get install ca-certificates curl
-sudo install -m 0755 -d /etc/apt/keyrings
-sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
-sudo chmod a+r /etc/apt/keyrings/docker.asc
+# download and install runc
+wget -q --show-progress --https-only --timestamping \
+  "https://github.com/opencontainers/runc/releases/download/v${RUNC_VERSION}/runc.amd64"
+sudo install -D -o root -m 0755 runc.amd64 /usr/local/bin/runc
 
-# add the repository to apt sources:
-echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
-  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
-  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt-get update
-
-# install containerd
-sudo apt-get install containerd.io=1.6.31-*
-
-# install crictl
-VERSION="v1.30.0" 
-curl -L https://github.com/kubernetes-sigs/cri-tools/releases/download/$VERSION/crictl-${VERSION}-linux-amd64.tar.gz --output crictl-${VERSION}-linux-amd64.tar.gz
-sudo tar zxvf crictl-$VERSION-linux-amd64.tar.gz -C /usr/local/bin
-rm -f crictl-$VERSION-linux-amd64.tar.gz
-
-sudo install -o root -m 0644 crictl.yaml /etc/
+# download and install containerd
+wget -q --show-progress --https-only --timestamping \
+  "https://github.com/containerd/containerd/releases/download/v${CONTAINERD_VERSION}/containerd-${CONTAINERD_VERSION}-linux-amd64.tar.gz"
+sudo tar zxvf containerd-${CONTAINERD_VERSION}-linux-amd64.tar.gz -C /usr/local
+rm -f containerd-${CONTAINERD_VERSION}-linux-amd64.tar.gz
 
 # copy the containterd service config
 sudo install -o root -m 0644 containerd.service /etc/systemd/system/containerd.service
-sudo install -o root -m 0644 containerd-config.toml /etc/containerd/config.toml
+sudo install -D -o root -m 0644 containerd-config.toml /etc/containerd/config.toml
 
-# restart containerd service
-sudo systemctl restart containerd
-# TODO use manual download instead of apt install => for not having to restart containerd service
+# start containerd service
+sudo systemctl daemon-reload
+sudo systemctl enable containerd
+sudo systemctl start containerd
+
+# download and install crictl
+wget -q --show-progress --https-only --timestamping \
+  "https://github.com/kubernetes-sigs/cri-tools/releases/download/v${CRICTL_VERSION}/crictl-v${CRICTL_VERSION}-linux-amd64.tar.gz"
+sudo tar zxvf crictl-v${CRICTL_VERSION}-linux-amd64.tar.gz -C /usr/local/bin
+rm -f crictl-v${CRICTL_VERSION}-linux-amd64.tar.gz
+
+sudo install -o root -m 0644 crictl.yaml /etc/

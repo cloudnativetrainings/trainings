@@ -3,12 +3,16 @@
 
 set -euxo pipefail
 
+# download and install binary
+wget -q --show-progress --https-only --timestamping \
+  "https://storage.googleapis.com/kubernetes-release/release/v${KUBERNETES_VERSION}/bin/linux/amd64/kubelet"
+sudo install -o root -m 0755 kubelet /usr/local/bin/
+
 # copy secrets
-mkdir -p /var/lib/kubelet
+sudo install -D -o root -m 0644 ca.pem /var/lib/kubelet/ca.pem
 sudo install -o root -m 0644 ${HOSTNAME}.pem /var/lib/kubelet/kubelet.pem
 sudo install -o root -m 0600 ${HOSTNAME}-key.pem /var/lib/kubelet/kubelet-key.pem
 sudo install -o root -m 0600 ${HOSTNAME}.kubeconfig /var/lib/kubelet/kubeconfig
-sudo install -D -o root -m 0644 ca.pem /var/lib/kubelet/
 
 # create kubelet config file
 export POD_CIDR=$(curl -s -H "Metadata-Flavor: Google" \
@@ -18,13 +22,6 @@ sudo install -D -o root -m 0644 kubelet-config.yaml.subst /var/lib/kubelet/kubel
 
 # create kubelet service file
 sudo install -o root -m 0644 kubelet.service /etc/systemd/system/kubelet.service
-
-# download binaries
-wget -q --show-progress --https-only --timestamping \
-  "https://storage.googleapis.com/kubernetes-release/release/v${KUBERNETES_VERSION}/bin/linux/amd64/kubelet"
-
-# install binaries
-sudo install -o root -m 0755 kubelet /usr/local/bin/
 
 # start kubelet service
 sudo systemctl daemon-reload

@@ -1,5 +1,9 @@
 export ETCD_VERSION=3.5.8
 export KUBERNETES_VERSION=1.28.9
+export RUNC_VERSION=1.1.12
+export CONTAINERD_VERSION=1.7.16
+export CRICTL_VERSION=1.30.0
+export CNI_PLUGINS_VERSION=1.4.1
 
 .PHONY setup:
 setup:
@@ -20,5 +24,3 @@ teardown:
 	rm -rf secrets/*.kubeconfig
 	rm -rf secrets/*.yaml
 	rm -rf bin/
-	# rm -rf $TRAINING_RC_FILE # TODO whati file does not exist
-

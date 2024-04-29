@@ -15,3 +15,5 @@ kubectl cluster-info \
 
   # TODO
   check if configs and services are all used and copied to proper master or worker 
+
+why do we need one public ip for a master node? => no LB probably

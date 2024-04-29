@@ -10,8 +10,7 @@ tar -xvf etcd-v$ETCD_VERSION-linux-amd64.tar.gz
 sudo install -o root -m 0755 etcd-v$ETCD_VERSION-linux-amd64/etcd* /usr/local/bin
 
 # copy etcd certs
-sudo mkdir -p /etc/etcd /var/lib/etcd
-sudo install -o root -m 0644 ca.pem kubernetes-key.pem kubernetes.pem /etc/etcd/
+sudo install -D -o root -m 0644 ca.pem kubernetes-key.pem kubernetes.pem /etc/etcd/
 
 # create etcd service file
 export INTERNAL_IP=$( curl -s -H "Metadata-Flavor: Google" \

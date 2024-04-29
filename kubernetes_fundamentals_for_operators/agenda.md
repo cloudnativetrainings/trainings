@@ -14,7 +14,4 @@
 
 # Todos
 * gcloud params not set on doing teardown if new terminal was spanned
-* apiserver does not work yet
-* trainingrc vs makefile vs setup
 * delete secrets stuff in teardown
-* tmux project issue on master nodes

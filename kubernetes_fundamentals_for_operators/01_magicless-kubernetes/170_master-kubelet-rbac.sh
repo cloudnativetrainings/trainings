@@ -1,8 +1,5 @@
-#!/bin/false
-# this is meant to be run on each master node
+#!/bin/bash
 
 set -euxo pipefail
 
-# download binaries
-kubectl apply --kubeconfig admin.kubeconfig -f kube-apiserver-to-kubelet.yaml
-
+kubectl apply --kubeconfig secrets/admin.kubeconfig -f configs/kube-apiserver-to-kubelet.yaml
