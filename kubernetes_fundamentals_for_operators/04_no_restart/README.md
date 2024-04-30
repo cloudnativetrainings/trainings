@@ -45,14 +45,26 @@ kubectl get pods
 ### Drain all the Worker Nodes
 
 ```bash
-kubectl drain $(kubectl get nodes -o=jsonpath='{.items[*].metadata.name}') --force --ignore-daemonsets --delete-emptydir-data
+# check the state of the nodes
+kubectl get nodes
+
+# try to drain the nodes, note that this will not work due to the manualy created pod
+kubectl drain worker-0 worker-1 worker-2
+
+# force graining the noces
+kubectl drain worker-0 worker-1 worker-2 --force 
+
+# check the state of the nodes
 kubectl get nodes
 ```
 
 ### Cordon all the Worker Nodes
 
 ```bash
-kubectl uncordon $(kubectl get nodes -o=jsonpath='{.items[*].metadata.name}')
+# uncordon the worker nodes
+kubectl uncordon worker-0 worker-1 worker-2
+
+# verify worker nodes state
 kubectl get nodes
 ```
 
