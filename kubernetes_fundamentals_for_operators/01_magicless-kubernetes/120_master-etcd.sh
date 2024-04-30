@@ -29,6 +29,3 @@ sudo install -o root -m 0644 etcd.service.subst /etc/systemd/system/etcd.service
 sudo systemctl daemon-reload
 sudo systemctl enable etcd
 sudo systemctl start etcd
-
-# verify
-etcdctl member list 

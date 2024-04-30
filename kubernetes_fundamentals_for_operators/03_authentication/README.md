@@ -2,7 +2,17 @@
 
 In the training, we will learn about create authentication configuration using CSR, certificate and kubeconfig for a user to grant access over specific k8s cluster.
 
->Navigate to the folder `25_authentication` from CLI, before you get started. 
+>Navigate to the folder `03_authentication` from CLI, before you get started. 
+
+## Setup Environment
+
+```bash
+# configure kubectl for being allowed to talk to the kubernetes cluster
+export KUBECONFIG=<PATH_TO_01_magicless-kubernetes-LAB>/secrets/admin.kubeconfig
+
+# eg 
+# export KUBECONFIG=/home/hubert_training/trainings/kubernetes_fundamentals_for_operators/01_magicless-kubernetes/secrets/admin.kubeconfig
+```
 
 ## Create the CSR
 
@@ -37,7 +47,7 @@ kubectl get csr
 
 ```bash
 # make a copy of the admins kube config file
-cp ~/.kube/config ./my-config.yaml
+cp $KUBECONFIG ./my-config.yaml
 
 # store the certificate into the file bob.crt
 kubectl get csr bob -o jsonpath='{.status.certificate}' | base64 --decode > bob.crt
@@ -64,7 +74,7 @@ kubectl config use-context bob --kubeconfig my-config.yaml
 
 >Note that Bob has no permissions set up via RBAC yet.
 
-# Check if you can list pods via your admin user
+### Check if you can list pods via your admin user
 
 ```bash
 kubectl get pods

@@ -2,7 +2,17 @@
 
 In this training, you will learn about Pods which will not get restarted.
 
-> Navigate to the folder `06_no_restart` from CLI, before you get started.
+> Navigate to the folder `04_no_restart` from CLI, before you get started.
+
+## Setup Environment
+
+```bash
+# configure kubectl for being allowed to talk to the kubernetes cluster
+export KUBECONFIG=<PATH_TO_01_magicless-kubernetes-LAB>/secrets/admin.kubeconfig
+
+# eg 
+# export KUBECONFIG=/home/hubert_training/trainings/kubernetes_fundamentals_for_operators/01_magicless-kubernetes/secrets/admin.kubeconfig
+```
 
 ## Setup the workloads
 

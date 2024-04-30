@@ -5,6 +5,10 @@ coud func() not be part of .trainingrc mechanisms... eg public ip
 # teardown
 make teardown.sh idempotent
 
----
+# Add more content to READMEs
+* attendees should do "manual" verification step
 
-# fix readmes
+# ETCDCTL
+* 120 => does not work due to some strange GCP shell issue
+
+# kubeconfig for doing later labs should be automated in some way

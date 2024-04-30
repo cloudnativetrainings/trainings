@@ -13,10 +13,3 @@ grep -qxF "export RUNC_VERSION=$RUNC_VERSION" $TRAINING_RC_FILE_NODES || echo "e
 grep -qxF "export CONTAINERD_VERSION=$CONTAINERD_VERSION" $TRAINING_RC_FILE_NODES || echo "export CONTAINERD_VERSION=$CONTAINERD_VERSION" >> $TRAINING_RC_FILE_NODES
 grep -qxF "export CRICTL_VERSION=$CRICTL_VERSION" $TRAINING_RC_FILE_NODES || echo "export CRICTL_VERSION=$CRICTL_VERSION" >> $TRAINING_RC_FILE_NODES
 grep -qxF "export CNI_PLUGINS_VERSION=$CNI_PLUGINS_VERSION" $TRAINING_RC_FILE_NODES || echo "export CNI_PLUGINS_VERSION=$CNI_PLUGINS_VERSION" >> $TRAINING_RC_FILE_NODES
-
-# code candy for working with etcdctl
-grep -qxF "export ETCDCTL_API=3" $TRAINING_RC_FILE_NODES || echo "export ETCDCTL_API=3" >> $TRAINING_RC_FILE_NODES
-grep -qxF "export ETCDCTL_ENDPOINTS=https://127.0.0.1:2379" $TRAINING_RC_FILE_NODES || echo "export ETCDCTL_ENDPOINTS=https://127.0.0.1:2379" >> $TRAINING_RC_FILE_NODES
-grep -qxF "export ETCDCTL_CACERT=/etc/etcd/ca.pem" $TRAINING_RC_FILE_NODES || echo "export ETCDCTL_CACERT=/etc/etcd/ca.pem" >> $TRAINING_RC_FILE_NODES
-grep -qxF "export ETCDCTL_CERT=/etc/etcd/kubernetes.pem" $TRAINING_RC_FILE_NODES || echo "export ETCDCTL_CERT=/etc/etcd/kubernetes.pem" >> $TRAINING_RC_FILE_NODES
-grep -qxF "export ETCDCTL_KEY=/etc/etcd/kubernetes-key.pem" $TRAINING_RC_FILE_NODES || echo "export ETCDCTL_KEY=/etc/etcd/kubernetes-key.pem" >> $TRAINING_RC_FILE_NODES
