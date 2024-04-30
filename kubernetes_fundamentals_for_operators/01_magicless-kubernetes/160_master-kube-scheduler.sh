@@ -6,11 +6,14 @@ set -euxo pipefail
 
 source ~/.trainingrc
 
+# create folders
+sudo mkdir -p /etc/kubernetes/config/
+
 # create kube-scheduler service file
 sudo install -o root -m 0644 kube-scheduler.service /etc/systemd/system/kube-scheduler.service
 
 # copy the kube-scheduler config
-sudo install -d -o root -m 0644 kube-scheduler.yaml /etc/kubernetes/config/kube-scheduler.yaml
+sudo install -o root -m 0644 kube-scheduler.yaml /etc/kubernetes/config/kube-scheduler.yaml
 
 # start kube-scheduler service
 sudo systemctl daemon-reload
