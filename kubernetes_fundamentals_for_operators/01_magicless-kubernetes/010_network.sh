@@ -2,6 +2,8 @@
 
 set -euxo pipefail
 
+source ~/.trainingrc
+
 # create the vpc
 gcloud compute networks create magicless-vpc --subnet-mode custom
 

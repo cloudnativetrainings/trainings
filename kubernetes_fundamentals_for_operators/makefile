@@ -23,4 +23,3 @@ teardown:
 	rm -rf secrets/*.csr
 	rm -rf secrets/*.kubeconfig
 	rm -rf secrets/*.yaml
-	rm -rf bin/

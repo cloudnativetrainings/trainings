@@ -2,6 +2,8 @@
 
 set -euxo pipefail
 
+source ~/.trainingrc
+
 export KUBECONFIG=secrets/admin.kubeconfig
 
 kubectl run nginx --image=nginx

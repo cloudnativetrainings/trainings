@@ -1,7 +1,10 @@
 #!/bin/false
+
 # this is meant to be run on each worker node
 
 set -euxo pipefail
+
+source ~/.trainingrc
 
 # download and install binary
 wget -q --show-progress --https-only --timestamping \

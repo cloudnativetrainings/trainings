@@ -2,7 +2,8 @@
 
 set -euxo pipefail
 
-. ./000_func.sh
+source ~/.trainingrc
+source ./000_func.sh
 
 public=$( public_ip )
 

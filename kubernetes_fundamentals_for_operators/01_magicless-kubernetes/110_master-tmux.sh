@@ -1,9 +1,11 @@
 #!/bin/bash
 
-set -euxo pipefail
-
 ### NOTE!!!
 # on gcloud shell, disable tmux!!! 
+
+set -euxo pipefail
+
+source ~/.trainingrc
 
 tmux new-session -d -s magicless-master
 tmux split-window -t magicless-master:0.0

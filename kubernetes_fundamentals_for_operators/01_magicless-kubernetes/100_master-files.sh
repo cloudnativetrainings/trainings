@@ -2,6 +2,8 @@
 
 set -euxo pipefail
 
+source ~/.trainingrc
+
 # copy secrets
 for node in master-{0..2}; do
   gcloud compute scp secrets/ca{,-key}.pem \

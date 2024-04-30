@@ -26,15 +26,3 @@ grep -qxF "export PROJECT_NAME=$PROJECT_NAME" $TRAINING_RC_FILE || echo "export 
 grep -qxF "gcloud config set project $PROJECT_NAME" $TRAINING_RC_FILE || echo "gcloud config set project $PROJECT_NAME" >> $TRAINING_RC_FILE
 grep -qxF "gcloud config set compute/region $REGION" $TRAINING_RC_FILE || echo "gcloud config set compute/region $REGION" >> $TRAINING_RC_FILE
 grep -qxF "gcloud config set compute/zone $ZONE" $TRAINING_RC_FILE || echo "gcloud config set compute/zone $ZONE" >> $TRAINING_RC_FILE
-
-# echo "export ETCDCTL_API=3" >> /root/.bashrc
-# echo "export ETCDCTL_ENDPOINTS=https://127.0.0.1:2379" >> /root/.bashrc
-# echo "export ETCDCTL_CACERT=/etc/kubernetes/pki/etcd/ca.crt" >> /root/.bashrc
-# echo "export ETCDCTL_KEY=/etc/kubernetes/pki/etcd/server.key" >> /root/.bashrc
-# echo "export ETCDCTL_CERT=/etc/kubernetes/pki/etcd/server.crt" >> /root/.bashrc
-
-# ETCDCTL_API=3 etcdctl member list \
-#   --endpoints=https://127.0.0.1:2379 \
-#   --cacert=/etc/etcd/ca.pem \
-#   --cert=/etc/etcd/kubernetes.pem \
-#   --key=/etc/etcd/kubernetes-key.pem

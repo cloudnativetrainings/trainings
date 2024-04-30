@@ -1,7 +1,10 @@
 #!/bin/false
+
 # this is meant to be run on each master node
 
 set -euxo pipefail
+
+source ~/.trainingrc
 
 # download binaries
 wget -q --show-progress --https-only --timestamping \

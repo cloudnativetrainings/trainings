@@ -2,6 +2,8 @@
 
 set -euxo pipefail
 
+source ~/.trainingrc
+
 for x in {0..2}; do
   gcloud compute routes create k8s-pod-route-192-168-1${x}-0-24 \
     --network magicless-vpc \
