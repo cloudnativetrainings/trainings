@@ -10,7 +10,7 @@ source ~/.trainingrc
 sudo install -o root -m 0644 kube-scheduler.service /etc/systemd/system/kube-scheduler.service
 
 # copy the kube-scheduler config
-sudo install -D -o root -m 0644 kube-scheduler.yaml /etc/kubernetes/config/kube-scheduler.yaml
+sudo install -d -o root -m 0644 kube-scheduler.yaml /etc/kubernetes/config/kube-scheduler.yaml
 
 # start kube-scheduler service
 sudo systemctl daemon-reload

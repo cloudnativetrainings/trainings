@@ -12,10 +12,10 @@ wget -q --show-progress --https-only --timestamping \
 sudo install -o root -m 0755 kube-proxy /usr/local/bin/
 
 # copy secrets
-sudo install -D -o root -m 0600 kube-proxy.kubeconfig /var/lib/kube-proxy/kubeconfig
+sudo install -d -o root -m 0600 kube-proxy.kubeconfig /var/lib/kube-proxy/kubeconfig
 
 # create kube-proxy config file
-sudo install -D -o root -m 0644 kube-proxy-config.yaml /var/lib/kube-proxy/kube-proxy-config.yaml
+sudo install -d -o root -m 0644 kube-proxy-config.yaml /var/lib/kube-proxy/kube-proxy-config.yaml
 
 # create kube-proxy service file
 sudo install -o root -m 0644 kube-proxy.service /etc/systemd/system/kube-proxy.service
