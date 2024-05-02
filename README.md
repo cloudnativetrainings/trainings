@@ -4,35 +4,47 @@ In this repo, you will find Kubermatic training materials.
 
 ## Overview
 
-### [Advanced Operations of Kubernetes with KubeOne](advanced_operations_of_kubernetes_with_kubeone/README.md)
-Learn about KubeOne - the open source Kubernetes cluster lifecycle management tool for a single cluster on any infrastructure.
+### Basic Path
 
-### [Container Fundamentals](container_fundamentals/README.md)
-Learn the basics on how to work with Containers.
+#### Linux Fundamentals
 
-### [KKP Administration](kkp_administration/README.md)
-Learn how to setup and configure KKP.
-
-### [Kubernetes Application Development](kubernetes_application_development/README.md)
-Learn how to implement cloud native applications to be run on Kubernetes.
-
-### [Kubernetes Fundamentals](kubernetes_fundamentals/README.md)
-Learn the basics about Kubernetes.
-
-### [Kubernetes Helm](kubernetes_helm/README.md)
-Learn the basics about Helm to manage your Kubernetes applications. 
-
-### [Kubernetes Operations Fundamentals](kubernetes_operations_fundamentals/README.md)
-Learn how to setup a Kubernetes Cluster without any tool support.
-
-### [Kubernetes Security](kubernetes_security/README.md)
-Learn how to secure a Kubernetes Cluster.
-
-### [Linux Fundamentals](linux_fundamentals/README.md)
 Learn the basics on how to work with Linux.
 
-### [Servicemesh](servicemesh/README.md)
+#### Container Fundamentals
+
+Learn the basics on how to work with Containers.
+
+### Developer Path
+
+#### Kubernetes Fundamentals for Developers
+
+Learn the basics about Kubernetes and how to implement cloud native applications.
+
+#### Kubernetes Servicemesh
+
 Learn the feature set of a ServiceMesh.
+
+#### Kubernetes Helm
+
+Learn the basics about Helm to manage your Kubernetes applications. 
+
+### Ops Path
+
+#### Kubernetes Fundamentals for Operators
+
+Learn the basics about Kubernetes and how to setup and operate Kubernetes.
+
+#### Advanced Operations of Kubernetes with KubeOne
+
+Learn about KubeOne - the open source Kubernetes cluster lifecycle management tool for a single cluster on any infrastructure.
+
+#### KKP Administration
+
+Learn how to setup and configure KKP.
+
+#### Kubernetes Security
+
+Learn how to secure a Kubernetes Cluster.
 
 ## Installation
 

@@ -12,3 +12,6 @@ make teardown.sh idempotent
 * 120 => does not work due to some strange GCP shell issue
 
 # kubeconfig for doing later labs should be automated in some way
+
+# teardown persistent disks in gcp
+as it looks they are not deleted
