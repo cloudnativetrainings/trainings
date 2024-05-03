@@ -65,4 +65,3 @@ Thanks for taking the time to join our community and start contributing!
 
 [2]: https://github.com/kubermatic-labs/trainings/blob/master/CONTRIBUTING.md
 [4]: https://github.com/kubermatic-labs/trainings/blob/master/CODE_OF_CONDUCT.md
-

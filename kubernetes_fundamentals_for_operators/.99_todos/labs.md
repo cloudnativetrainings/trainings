@@ -1,3 +1,8 @@
+# add not really optional k8s stuff
+
+* metrics server
+* ccm
+* ...
 
 # 000_func.sh
 coud func() not be part of .trainingrc mechanisms... eg public ip
@@ -7,9 +12,6 @@ make teardown.sh idempotent
 
 # Add more content to READMEs
 * attendees should do "manual" verification step
-
-# ETCDCTL
-* 120 => does not work due to some strange GCP shell issue
 
 # kubeconfig for doing later labs should be automated in some way
 
