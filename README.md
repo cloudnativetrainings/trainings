@@ -1,6 +1,6 @@
 # Kubermatic Training
 
-In this repo, you will find Kubermatic training materials. 
+In this repo, you will find Kubermatic training materials.
 
 ## Overview
 
