@@ -8,10 +8,7 @@ In this training, you will learn about Pods which will not get restarted.
 
 ```bash
 # configure kubectl for being allowed to talk to the kubernetes cluster
-export KUBECONFIG=<PATH_TO_01_magicless-kubernetes-LAB>/secrets/admin.kubeconfig
-
-# eg 
-# export KUBECONFIG=/home/hubert_training/trainings/kubernetes_fundamentals_for_operators/01_magicless-kubernetes/secrets/admin.kubeconfig
+export KUBECONFIG=$HOME/trainings/kubernetes_fundamentals_for_operators/01_magicless-kubernetes/secrets/admin.kubeconfig
 ```
 
 ## Setup the workloads

@@ -10,7 +10,7 @@ The application implements the following health probes:
 Change into the lab directory:
 
 ```bash
-cd $HOME/trainings/kubernetes_application_development/04_probing
+cd $HOME/trainings/kubernetes_fundamentals_for_developers/04_probing
 ```
 
 ## Create the Pod

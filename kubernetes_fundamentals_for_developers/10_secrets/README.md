@@ -5,7 +5,7 @@ In this task, we will use HashiCorp Vault to store and use our `Secrets` securel
 Change into the lab directory:
 
 ```bash
-cd $HOME/trainings/kubernetes_application_development/10_secrets
+cd $HOME/trainings/kubernetes_fundamentals_for_developers/10_secrets
 ```
 
 ## Configure Vault

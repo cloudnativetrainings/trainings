@@ -6,6 +6,10 @@ In the training, we will learn about create role based access for a user to gran
 
 >Navigate to the folder `03_kubernetes_api` from CLI, before you get started.
 
+```bash
+cd $HOME/trainings/kubernetes_fundamentals_for_developers/03_kubernetes_api
+```
+
 ## Inspect definition files and create the servicaccount, clusterrole and clusterrolebinding
 
 ```bash
@@ -23,8 +27,8 @@ kubectl create -f k8s/clusterrolebinding.yaml
 ## Inspect pod.yaml definition file and create the pod
 
 ```bash
-cat pod.yaml
-kubectl create -f pod.yaml
+cat k8s/pod.yaml
+kubectl create -f k8s/pod.yaml
 ```
 
 ## Exec into the container

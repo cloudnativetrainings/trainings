@@ -7,7 +7,7 @@ The application implements a CPU and a Memory leak.
 Change into the lab directory:
 
 ```bash
-cd $HOME/trainings/kubernetes_application_development/07_resources
+cd $HOME/trainings/kubernetes_fundamentals_for_developers/07_resources
 ```
 
 ## Create the Pod

@@ -7,7 +7,7 @@ In this lab you will learn about a possible reason for data loss.
 Change into the lab directory:
 
 ```bash
-cd $HOME/trainings/kubernetes_application_development/06_graceful_shutdown_dragons
+cd $HOME/trainings/kubernetes_fundamentals_for_developers/06_graceful_shutdown_dragons
 ```
 
 ## Create the Pods

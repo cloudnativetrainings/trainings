@@ -5,7 +5,7 @@ In this example, we will deploy an app called `my-app` and it will read the appl
 Change into the lab directory:
 
 ```bash
-cd $HOME/trainings/kubernetes_application_development/01_configmaps
+cd $HOME/trainings/kubernetes_fundamentals_for_developers/01_configmaps
 ```
 
 ## Configure the Application via ConfigMap
@@ -54,6 +54,13 @@ kubectl replace -f k8s/pod.yaml --force
 # verify that the message is updated
 curl http://${INGRESS_IP}/my-app
 ```
+
+## Additional Information
+
+There are some automated ways to restart your applications after ConfigMap/Secret changes. For example:
+
+1. Kyverno Policy: [Restart Deployment on a Secret Change](https://kyverno.io/policies/other/restart-deployment-on-secret-change/restart-deployment-on-secret-change/)
+2. Helm: [Automatically Roll Deployments](https://helm.sh/docs/howto/charts_tips_and_tricks/#automatically-roll-deployments)
 
 ## Cleanup
 

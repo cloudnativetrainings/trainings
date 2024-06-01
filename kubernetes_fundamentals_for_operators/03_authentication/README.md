@@ -8,10 +8,7 @@ In the training, we will learn about create authentication configuration using C
 
 ```bash
 # configure kubectl for being allowed to talk to the kubernetes cluster
-export KUBECONFIG=<PATH_TO_01_magicless-kubernetes-LAB>/secrets/admin.kubeconfig
-
-# eg 
-# export KUBECONFIG=/home/hubert_training/trainings/kubernetes_fundamentals_for_operators/01_magicless-kubernetes/secrets/admin.kubeconfig
+export KUBECONFIG=$HOME/trainings/kubernetes_fundamentals_for_operators/01_magicless-kubernetes/secrets/admin.kubeconfig
 ```
 
 ## Create the CSR
