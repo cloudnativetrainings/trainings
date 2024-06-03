@@ -3,9 +3,9 @@
 set -euxo pipefail
 
 # machines
-# gcloud -q compute instances delete \
-#   master-0 master-1 master-2 \
-#   worker-0 worker-1 worker-2
+gcloud -q compute instances delete \
+  master-0 master-1 master-2 \
+  worker-0 worker-1 worker-2
 
 # networking
 gcloud -q compute addresses delete magicless-ip-address
