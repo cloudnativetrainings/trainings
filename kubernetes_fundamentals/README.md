@@ -1,20 +1,41 @@
 # Kubernetes Fundamentals
 
-**Pre-requisites:**
+## Setup training environment
 
->If you do not have Google Cloud Account, instead you are working on your local machine then you can simply skip #1 and #4 steps. Before you get started, please make sure that you have [Minikube installation](https://minikube.sigs.k8s.io/docs/start/) on your local machine.
-
-1. Navigate and login to [Google Cloud Shell](https://ssh.cloud.google.com ) via web browser. 
+1. Navigate and login to [Google Cloud Shell](https://ssh.cloud.google.com ) via web browser.
 
 2. Clone the Kubermatic trainings git repository:
-    ```bash
-    git clone https://github.com/kubermatic-labs/trainings.git
-    ```
+
+```bash
+git clone https://github.com/kubermatic-labs/trainings.git
+```
 
 3. Navigate to Kubernetes Fundamentals training folder to get started
-    ```bash  
-    cd trainings/kubernetes_fundamentals/
-    ```
 
-4. [Setup](00_setup/README.md) - the GKE cluster for training.
-   
+```bash
+cd trainings/kubernetes_fundamentals/
+```
+
+4. Create the training environment
+
+```bash
+make setup
+```
+
+5. Bring in some convenience into training environment
+
+```bash
+source ~/.trainingrc
+```
+
+## Verify training environment
+
+```bash
+make verify
+```
+
+## Teardown training environment
+
+```bash
+make teardown
+```

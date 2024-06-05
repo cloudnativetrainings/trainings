@@ -1,0 +1,23 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-a
+spec:
+  initContainers:
+    - name: wait-for-pod-b
+      image: curlimages/curl:8.1.1
+      imagePullPolicy: IfNotPresent
+      command: ["/bin/sh"]
+      args:
+        [
+          "-c",
+          'until [[ "$(curl -s -o /dev/null -w "%{http_code}" http://pod-b-svc:8080/liveness)" == "200" ]]; do echo "Sleeping a bit..."; sleep 3; done; echo "pod-b is ready!";',
+        ]
+  containers:
+    - name: app
+      image: quay.io/kubermatic-labs/training-application:2.0.0
+      imagePullPolicy: Always
+      ports:
+        - name: http
+          containerPort: 8080

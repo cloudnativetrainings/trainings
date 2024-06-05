@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: default
+  name: my-configmap
+data: 
+  app.conf: |-
+    message = Message from ConfigMap
