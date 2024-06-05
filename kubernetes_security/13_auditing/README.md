@@ -1,4 +1,3 @@
-
 # Kubernetes Auditing
 
 ## Engage Auditing
@@ -20,26 +19,23 @@ vi /etc/kubernetes/manifests/kube-apiserver.yaml
 ```
 
 ```yaml
-...
 spec:
   containers:
-  - command:
-    - kube-apiserver
-    - --audit-policy-file=/apiserver/my-policy.yaml # <= add this line
-    - --audit-log-path=/apiserver/default-secrets.log # <= add this line
-    - --audit-log-maxage=10 # <= add this line
-    - --audit-log-maxsize=100 # <= add this line
-...
+    - command:
+        - kube-apiserver
+        - --audit-policy-file=/apiserver/my-policy.yaml # <= add this line
+        - --audit-log-path=/apiserver/default-secrets.log # <= add this line
+        - --audit-log-maxage=10 # <= add this line
+        - --audit-log-maxsize=100 # <= add this line
 ```
 
 Note that the kubelet is restarting the apiserver due to we changed the pod in the static pod manifests. This will take ~ 2 minutes. The Kubernetes Cluster is not reachable until the apiserver has been restarted. You can check the progress via `crictl ps`.
-
 
 ## Verify Auditing
 
 ```bash
 # check the logfile - there should be no content in this file
-cat /root/apiserver/default-secrets.log 
+cat /root/apiserver/default-secrets.log
 
 # get secrets from the default namespace
 kubectl get secrets

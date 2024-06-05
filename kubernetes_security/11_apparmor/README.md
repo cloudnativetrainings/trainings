@@ -44,13 +44,12 @@ aa-status | grep my-apparmor-profile
 ### Engage Profile in Pod
 
 Enable the apparmor annotation in the file `pod.yaml`
+
 ```yaml
-...
 metadata:
   name: my-suboptimal-pod
   annotations: # <= uncomment this line
     container.apparmor.security.beta.kubernetes.io/my-ubuntu: localhost/my-apparmor-profile # <= uncomment this line
-...
 ```
 
 ```bash

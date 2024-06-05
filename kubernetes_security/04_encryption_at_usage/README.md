@@ -18,17 +18,14 @@ kubectl get secret my-secret -o jsonpath='{.data.password}' | base64 -d
 ### Enable the secret within the Pod via the file `pod.yaml`
 
 ```yaml
-...
 volumeMounts:
   - name: secret-data
     mountPath: /secret/
     readOnly: true
-...
 volumes:
   - name: secret-data
     secret:
       secretName: my-secret
-...
 ```
 
 ### Apply the Pod

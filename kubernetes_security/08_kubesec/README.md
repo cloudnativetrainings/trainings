@@ -44,9 +44,10 @@ Fix the critical issues. Afterwards run the scan again. You will get a score of 
 ## Advisory Issues
 
 Fix some issues, eg
-* Do not run as root user
-* Enable resource requests and limits
-* Mount the host volume as read only
+
+- Do not run as root user
+- Enable resource requests and limits
+- Mount the host volume as read only
 
 Afterwards run the scan again. You will get a positive score.
 

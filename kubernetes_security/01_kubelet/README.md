@@ -40,27 +40,23 @@ gcloud compute ssh root@kubernetes-security --zone europe-west3-a
 
 ### vi the kubelet config
 
-``` bash
+```bash
 vi /var/lib/kubelet/config.yaml
 ```
 
 ### Fix Authentication
 
 ```yaml
-...
 authentication:
   anonymous:
     enabled: true # <= change to false
-...    
 ```
 
 ### Fix Authorization
 
 ```yaml
-...
 authorization:
   mode: AlwaysAllow # <= change to Webhook
-...  
 ```
 
 ### Restart the kubelet and check the status

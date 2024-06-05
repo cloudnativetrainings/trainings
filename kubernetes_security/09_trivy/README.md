@@ -1,4 +1,3 @@
-
 # Image Scanning via Trivy
 
 ## Verify Installation
