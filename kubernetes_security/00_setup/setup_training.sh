@@ -46,14 +46,15 @@ sed -i '/\[plugins."io.containerd.grpc.v1.cri".containerd.runtimes\.runc\]/i \
 systemctl restart containerd
 
 echo "================================================= Init Training Script - Install Falco"
-curl -s https://falco.org/repo/falcosecurity-packages.asc | apt-key add -
-echo "deb https://download.falco.org/packages/deb stable main" | tee -a /etc/apt/sources.list.d/falcosecurity.list
-apt-get update -y 
-DEBIAN_FRONTEND=noninteractive apt-get --yes install linux-headers-$(uname -r)
-# TODO Falco changed the installation routine completely with version 0.34.x and version 0.34.1 does not work
-DEBIAN_FRONTEND=noninteractive apt-get --yes install falco=0.33.1
-systemctl enable falco
-systemctl start falco
+curl -fsSL https://falco.org/repo/falcosecurity-packages.asc | gpg --dearmor -o /usr/share/keyrings/falco-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/falco-archive-keyring.gpg] https://download.falco.org/packages/deb stable main" | tee -a /etc/apt/sources.list.d/falcosecurity.list
+apt-get update -y
+DEBIAN_FRONTEND=noninteractive apt-get install -y dkms make linux-headers-$(uname -r)
+DEBIAN_FRONTEND=noninteractive apt-get install -y clang llvm
+DEBIAN_FRONTEND=noninteractive FALCO_FRONTEND=noninteractive apt-get install --yes falco=0.38.0
+# falcoctl index add falcosecurity https://falcosecurity.github.io/falcoctl/index.yaml
+# falcoctl index update falcosecurity
+# falcoctl artifact install falco-rules
 
 echo "================================================= Init Training Script - Apply Kubernetes Manifests"
 kubectl apply -f /root/pod.yaml

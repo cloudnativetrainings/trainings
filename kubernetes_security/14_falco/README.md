@@ -29,7 +29,7 @@ Restart Falco
 systemctl restart falco
 ```
 
-# Verify logging
+## Verify logging
 
 ```bash
 # exec into the pod (and exit afterwards)

