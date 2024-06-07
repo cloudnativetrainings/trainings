@@ -23,12 +23,6 @@ file_output:
   filename: /var/log/falco.log
 ```
 
-Restart Falco
-
-```bash
-systemctl restart falco
-```
-
 ## Verify logging
 
 ```bash
