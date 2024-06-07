@@ -86,10 +86,10 @@ runcmd:
   - cp -r /root/tmp/trainings/kubernetes_security/* /root
 
   - echo "================================================= CloudInit Phase Run Training Script"
-  - /root/00_setup/setup_training.sh
+  - /root/setup_training.sh
 
   - echo "================================================= CloudInit Phase Create ~/.trainingrc File"
-  - /root/00_setup/setup_trainingrc_file.sh
+  - /root/setup_trainingrc_file.sh
 
   - echo "================================================= CloudInit Finished Successfully"
   # TODO - reboot 

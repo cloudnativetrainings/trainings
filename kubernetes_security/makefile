@@ -14,31 +14,28 @@ setup:
 
 .PHONY: verify
 verify:
-	# verify installation
 	containerd --version
 	kubelet --version
 	kubeadm version
 	kubectl version
-	# # verify env vars
-    # test -n "$(IP)"
-    # test -n "$(API_SERVER)"
-    # test -n "$(ETCDCTL_API)"
-    # test -n "$(ETCDCTL_ENDPOINTS)"
-    # test -n "$(ETCDCTL_CACERT)"
-    # test -n "$(ETCDCTL_KEY)"
-    # test -n "$(ETCDCTL_CERT)"
-	# TODO ceck node is in ready state (=CNI plugin)
-	# TODO check metrics server
-	# TODO check git repo is on its place
+	test -n "$(IP)"
+	test -n "$(API_SERVER)"
+	test -n "$(ETCDCTL_API)"
+	test -n "$(ETCDCTL_ENDPOINTS)"
+	test -n "$(ETCDCTL_CACERT)"
+	test -n "$(ETCDCTL_KEY)"
+	test -n "$(ETCDCTL_CERT)"
+	kubectl get node kubernetes-security | grep Ready
+	kubectl -n kube-system get pod -l k8s-app=metrics-server | grep Running
 	helm version
-	test -n "$(INGRESS_IP)"
 	etcdctl version
 	kubesec version
 	trivy --version
 	helm status -n kyverno kyverno
 	systemctl is-active apparmor
-	# TODO check gvisor
-	# TODO check falco
+	runsc --version # gvisor
+	falco --version
+	echo "Training Environment successfully verified"
 
 .PHONY: teardown
 teardown:
