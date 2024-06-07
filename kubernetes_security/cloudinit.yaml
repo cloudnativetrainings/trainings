@@ -80,14 +80,16 @@ runcmd:
   - echo "================================================= CloudInit Phase Root User Preps"
   - mkdir -p /root/.kube
   - cp -i /etc/kubernetes/admin.conf /root/.kube/config
-  - echo "source <(kubectl completion bash)" >>/root/.bashrc
-
+ 
   - echo "================================================= CloudInit Phase Clone Git Repo"
   - git clone https://github.com/kubermatic-labs/trainings.git /root/tmp/trainings
   - cp -r /root/tmp/trainings/kubernetes_security/* /root
 
   - echo "================================================= CloudInit Phase Run Training Script"
   - /root/00_setup/setup_training.sh
+
+  - echo "================================================= CloudInit Phase Create ~/.trainingrc File"
+  - /root/00_setup/setup_trainingrc_file.sh
 
   - echo "================================================= CloudInit Finished Successfully"
   # TODO - reboot 

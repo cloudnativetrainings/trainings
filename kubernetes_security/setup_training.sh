@@ -52,23 +52,10 @@ apt-get update -y
 DEBIAN_FRONTEND=noninteractive apt-get install -y dkms make linux-headers-$(uname -r)
 DEBIAN_FRONTEND=noninteractive apt-get install -y clang llvm
 DEBIAN_FRONTEND=noninteractive FALCO_FRONTEND=noninteractive apt-get install --yes falco=0.38.0
-# falcoctl index add falcosecurity https://falcosecurity.github.io/falcoctl/index.yaml
-# falcoctl index update falcosecurity
-# falcoctl artifact install falco-rules
 
 echo "================================================= Init Training Script - Apply Kubernetes Manifests"
 kubectl apply -f /root/pod.yaml
 kubectl create clusterrolebinding my-suboptimal-clusterrolebinding --clusterrole=cluster-admin --serviceaccount default:default
-
-echo "================================================= Init Training Script - Add Exports To .bashrc"
-echo "export IP=$(hostname -i)" >> /root/.bashrc
-echo "export API_SERVER=https://$(hostname -i):6443" >> /root/.bashrc
-echo "export ETCDCTL_API=3" >> /root/.bashrc
-echo "export ETCDCTL_ENDPOINTS=https://127.0.0.1:2379" >> /root/.bashrc
-echo "export ETCDCTL_CACERT=/etc/kubernetes/pki/etcd/ca.crt" >> /root/.bashrc
-echo "export ETCDCTL_KEY=/etc/kubernetes/pki/etcd/server.key" >> /root/.bashrc
-echo "export ETCDCTL_CERT=/etc/kubernetes/pki/etcd/server.crt" >> /root/.bashrc
-echo 'PS1="\[\033[0;32m\]\u@\H \[\033[0;34m\]\w >\e[0m "' >> /root/.bashrc
 
 echo "================================================= Init Training Script - Patching Kubelet"
 mkdir -p /root/tmp
@@ -92,4 +79,3 @@ sed  '/  volumeMounts:/a \
 mv /root/tmp/apiserver-2.yaml /etc/kubernetes/manifests/kube-apiserver.yaml
 
 echo "================================================= Init Training Script - Finished Successfully"
-
