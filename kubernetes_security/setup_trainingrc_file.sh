@@ -1,11 +1,12 @@
 #!/bin/bash
 
-TRAINING_RC_FILE=~/.trainingrc
+TRAINING_RC_FILE=/root/.trainingrc
 
 set -euxo pipefail
 
 # cleanup .trainingrc file
-rm -rf $TRAINING_RC_FILE
+rm -f $TRAINING_RC_FILE
+touch $TRAINING_RC_FILE
 
 # add .trainingrc file into .bashrc
 grep -qxF "source $TRAINING_RC_FILE" ~/.bashrc || echo "source $TRAINING_RC_FILE" >> ~/.bashrc
