@@ -128,7 +128,7 @@ done
 
 # clone git repo
 gcloud compute ssh root@$VM_NAME --zone=$ZONE --project=$PROJECT_NAME \
-  --command="git clone https://github.com/kubermatic-labs/trainings.git && echo 'cd ~/trainings/linux_fundamentals' >> ~/.bashrc"
+  --command="git clone https://github.com/cloudnativetrainings/trainings.git && echo 'cd ~/trainings/linux_fundamentals' >> ~/.bashrc"
 
 # avoid apt dialogues
 gcloud compute ssh root@$VM_NAME --zone=$ZONE --project=$PROJECT_NAME \

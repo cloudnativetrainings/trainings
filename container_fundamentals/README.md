@@ -7,7 +7,7 @@
 2. Clone the Kubermatic trainings git repository:
 
 ```bash
-git clone https://github.com/kubermatic-labs/trainings.git
+git clone https://github.com/cloudnativetrainings/trainings.git
 ```
 
 3. Navigate to Container Fundamentals training folder to get started

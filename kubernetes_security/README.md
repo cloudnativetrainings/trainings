@@ -3,7 +3,7 @@
 ## Setup Training Environment
 
 1. Navigate and login to [Google Cloud Shell](https://ssh.cloud.google.com) via web browser.
-2. Clone the Kubermatic trainings git repository:`git clone https://github.com/kubermatic-labs/trainings.git`
+2. Clone the Kubermatic trainings git repository:`git clone https://github.com/cloudnativetrainings/trainings.git`
 3. Navigate to Kubernetes Fundamentals training folder to get started `cd trainings/kubernetes_security/`
 
 ### Create Training VM

@@ -82,7 +82,7 @@ runcmd:
   - cp -i /etc/kubernetes/admin.conf /root/.kube/config
  
   - echo "================================================= CloudInit Phase Clone Git Repo"
-  - git clone https://github.com/kubermatic-labs/trainings.git /root/tmp/trainings
+  - git clone https://github.com/cloudnativetrainings/trainings.git /root/tmp/trainings
   - cp -r /root/tmp/trainings/kubernetes_security/* /root
 
   - echo "================================================= CloudInit Phase Run Training Script"

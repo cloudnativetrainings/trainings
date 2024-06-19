@@ -31,7 +31,7 @@ EOF
 
 4. Clone the Kubermatic trainings git repository:
 ```bash
-git clone https://github.com/kubermatic-labs/trainings.git
+git clone https://github.com/cloudnativetrainings/trainings.git
 ```
 
 5. Navigate to Kubernetes Helm training folder to get started

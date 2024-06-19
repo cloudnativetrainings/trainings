@@ -24,7 +24,7 @@ Allow Cookies:
 
 ```bash
 mkdir -p ~/.tmp
-git clone https://github.com/kubermatic-labs/trainings.git ~/.tmp/trainings
+git clone https://github.com/cloudnativetrainings/trainings.git ~/.tmp/trainings
 cp -r ~/.tmp/trainings/kkp_administration/* .
 ```
 

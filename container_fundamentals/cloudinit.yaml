@@ -21,5 +21,5 @@ runcmd:
   - DEBIAN_FRONTEND=noninteractive apt-get install -y ./dive_0.12.0_linux_amd64.deb
 
   - echo "================================================= Install Labs"
-  - git clone https://github.com/kubermatic-labs/trainings.git /tmp/trainings/
+  - git clone https://github.com/cloudnativetrainings/trainings.git /tmp/trainings/
   - cp -r /tmp/trainings/container_fundamentals/* /root/
