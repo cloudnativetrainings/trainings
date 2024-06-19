@@ -2,22 +2,6 @@
 
 In this lab you will setup a Kubernetes Cluster from scratch, without any help from tools like kubeadm, kubeone or others.
 
-## Preparations
-
-### Google Cloud Setup
-
-For having a convinient way of working in Google Cloud.
-
-```bash
-make setup
-source ~/.trainingrc
-make verify
-```
-
-### Tmux
-
-Additonally please deactivate Tmux in the Google Cloud Shell.
-
 ## Setting up the HA Cluster
 
 You will create a Kubernetes Cluster with 3 ControlPlane Nodes and 3 Worker Nodes.
@@ -30,17 +14,18 @@ Create the Network and VMs.
 
 Create the
 
-* Network and Subnet where the VMs will be placed in
-* Firewall Rules, for
-    * internal communication
-    * access to the API-Server
-* Static IP Address for the LoadBalancer in front of the API-Server instances.
+- Network and Subnet where the VMs will be placed in
+- Firewall Rules, for
+  - internal communication
+  - access to the API-Server
+- Static IP Address for the LoadBalancer in front of the API-Server instances.
 
 #### Create the VMs
 
 Create the VMs for the HA Cluster
-* 3 VMs for the ControlPlane
-* 3 VMs for the Worker Nodes
+
+- 3 VMs for the ControlPlane
+- 3 VMs for the Worker Nodes
 
 ### Sensitive Data
 
