@@ -2,7 +2,7 @@
 
 In the training, we will learn about create authentication configuration using CSR, certificate and kubeconfig for a user to grant access over specific k8s cluster.
 
->Navigate to the folder `03_authentication` from CLI, before you get started. 
+> Navigate to the folder `03_authentication` from CLI, before you get started.
 
 ## Setup Environment
 
@@ -69,21 +69,17 @@ kubectl config use-context bob --kubeconfig my-config.yaml
 
 ## Verify your work
 
->Note that Bob has no permissions set up via RBAC yet.
-
-### Check if you can list pods via your admin user
+> Note that Bob has no permissions set up via RBAC yet.
 
 ```bash
+# check if you can list pods via your admin user
 kubectl get pods
-```
 
-* Check if you cannot list pods via the user bob
-
-```bash
+# check if you cannot list pods via the user bob
 kubectl --kubeconfig my-config.yaml get pods
 ```
 
-* There is also a kubectl command to verify your permissions
+## Verification via `can-i`
 
 ```bash
 kubectl auth can-i get pods

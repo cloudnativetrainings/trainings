@@ -48,11 +48,14 @@ kubectl get nodes
 # try to drain the nodes, note that this will not work due to the manualy created pod
 kubectl drain worker-0 worker-1 worker-2
 
-# force graining the noces
-kubectl drain worker-0 worker-1 worker-2 --force 
+# force draining the noces
+kubectl drain worker-0 worker-1 worker-2 --force
 
 # check the state of the nodes
 kubectl get nodes
+
+# check the pods
+kubectl get pods
 ```
 
 ### Cordon all the Worker Nodes
@@ -65,7 +68,7 @@ kubectl uncordon worker-0 worker-1 worker-2
 kubectl get nodes
 ```
 
-### Check the running Pods
+### Check the running Pods again
 
 ```bash
 kubectl get pods

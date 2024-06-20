@@ -15,6 +15,7 @@ setup:
 verify:
 	cfssl version
 	cfssljson --version
+	echo "Training Environment successfully verified"
 
 .PHONY teardown:
 teardown:

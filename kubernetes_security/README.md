@@ -13,9 +13,6 @@ Open a new terminal tab.
 > Ensure that the project is properly set.
 
 ```bash
-# change directory
-cd 00_setup/
-
 # create the VM
 make setup
 ```
