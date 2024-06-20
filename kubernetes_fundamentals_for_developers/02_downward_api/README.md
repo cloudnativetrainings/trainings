@@ -41,8 +41,6 @@ kubectl exec -it my-app -- cat /etc/podinfo/labels
 kubectl delete -f k8s/
 ```
 
-<!--  TODO move this to slides  -->
-
 ## Available Fields
 
 ### Both as Environment Variable and downwardAPI volume

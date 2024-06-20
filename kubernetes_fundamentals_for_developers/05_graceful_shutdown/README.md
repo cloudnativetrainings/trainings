@@ -62,7 +62,7 @@ spec:
 kubectl create -f k8s/pod.yaml
 ```
 
-### Follow the logs of the pod
+### Follow the logs of the pod again
 
 > [!IMPORTANT]
 > Do this in a seperate terminal.

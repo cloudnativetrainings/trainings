@@ -2,31 +2,16 @@
 
 ## Setup training environment
 
-1. Navigate and login to [Google Cloud Shell](https://ssh.cloud.google.com ) via web browser.
-
-2. Clone the Kubermatic trainings git repository:
-
-```bash
-git clone https://github.com/cloudnativetrainings/trainings.git
-```
-
-3. Navigate to Kubernetes Fundamentals training folder to get started
-
-```bash
-cd trainings/kubernetes_fundamentals_for_developers/
-```
-
-4. Create the cluster
-
-```bash
-make setup
-```
-
-5. Bring in some convenience into training environment
-
-```bash
-source ~/.trainingrc
-```
+1. Navigate and login to [Google Cloud Shell](https://ssh.cloud.google.com) via web browser.
+1. Clone the Kubermatic trainings git repository: `git clone https://github.com/cloudnativetrainings/trainings.git`
+1. Navigate to Kubernetes Fundamentals training folder to get started `cd trainings/kubernetes_fundamentals_for_developers/`
+1. Create the cluster`make setup`
+1. Persist the ingress IP
+    ```bash
+    export INGRESS_IP=$(gcloud compute addresses list --filter="name=training-ingress" --format="get(address)")
+    echo "export INGRESS_IP=$INGRESS_IP" >> ~/.trainingrc
+    ```
+1. Bring in some convenience into training environment`source ~/.trainingrc`
 
 ## Verify training environment
 

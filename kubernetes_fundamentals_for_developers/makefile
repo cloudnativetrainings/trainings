@@ -6,8 +6,9 @@ setup:
 	$(MAKE) -C ../kubernetes_fundamentals/ setup
 	./setup.sh
 	grep -qxF "source <(helm completion bash)" $(TRAINING_RC_FILE) || echo "source <(helm completion bash)" >> $(TRAINING_RC_FILE)
-	INGRESS_IP=$(shell gcloud compute addresses list --filter="name=$(INGRESS_IP_NAME)" --format="get(address)") && \
-		grep -qxF "export INGRESS_IP=$(INGRESS_IP)" $(TRAINING_RC_FILE) || echo "export INGRESS_IP=$(INGRESS_IP)" >> $(TRAINING_RC_FILE)
+	# TODO does not work 
+	# INGRESS_IP=$(shell gcloud compute addresses list --filter="name=$(INGRESS_IP_NAME)" --format="get(address)") && \
+	# 	grep -qxF "export INGRESS_IP=$(INGRESS_IP)" $(TRAINING_RC_FILE) || echo "export INGRESS_IP=$(INGRESS_IP)" >> $(TRAINING_RC_FILE)
 
 POD_NAME=test-pod
 INGRESS_IP=$(shell gcloud compute addresses list --filter="name=$(INGRESS_IP_NAME)" --format="get(address)")
@@ -23,6 +24,7 @@ verify:
 	helm status -n logging logging
 	curl -I http://$(INGRESS_IP):80
 	helm status -n vault vault
+	echo "Training Environment successfully verified"
 
 .PHONY get-ingress-ip:
 get-ingress-ip:
