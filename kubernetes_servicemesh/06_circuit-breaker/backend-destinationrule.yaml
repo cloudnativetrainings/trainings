@@ -17,6 +17,6 @@ spec:
         http1MaxPendingRequests: 1
         maxRequestsPerConnection: 1
     outlierDetection:
-      consecutiveErrors: 3
+      consecutive5xxErrors: 3
       interval: 3s
       baseEjectionTime: 1m
