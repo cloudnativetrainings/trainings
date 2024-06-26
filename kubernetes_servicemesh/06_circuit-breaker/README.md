@@ -8,7 +8,7 @@ In this task you will configure a circuit breaker.
 kubectl create -f .
 ```
 
-## Curl the api 
+## Curl the api
 
 ```bash
 curl -i $INGRESS_HOST/api
@@ -22,15 +22,16 @@ curl $INGRESS_HOST/set_available/false
 
 ## Curl the api twice
 
-Note that 
-* the first response is a 503 from the backend application
-* the second response is a 503 from the istio proxy (the circuit breaker is in open mode)
+Note that
+
+- the first response is a 503 from the backend application
+- the second response is a 503 from the istio proxy (the circuit breaker is in open mode)
 
 ```bash
 curl -i $INGRESS_HOST/api
 ```
 
-## Take a look at the log files of the `backend` container. 
+## Take a look at the log files of the `backend` container.
 
 Note that there are more than one requests to the api.
 
@@ -44,6 +45,7 @@ curl -i $INGRESS_HOST/api
 ```
 
 ## Clean up
+
 ```bash
 kubectl delete -f .
 ```
