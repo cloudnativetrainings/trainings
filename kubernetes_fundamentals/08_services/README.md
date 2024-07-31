@@ -45,7 +45,7 @@ In the training, we will learn about Services.
   curl http://127.0.0.1:8080
   ```
 
-* You can stop the port-forwarding process via <CTRL>+<C>
+* You can stop the port-forwarding process via `CTRL + C`
 
 ## Access a NodePort Service
 

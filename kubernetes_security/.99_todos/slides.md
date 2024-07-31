@@ -9,3 +9,6 @@ not capitalized
 
 ## psp
 https://kubernetes.io/docs/concepts/security/pod-security-admission/
+
+## secrets
+fix the order of the slides -> confusing

@@ -33,5 +33,5 @@ kubectl get pods -o wide
 
 ```bash
 kubectl label node <NODE-NAME> preferred-
-kubectl delete pods my-pod
+kubectl delete deployment my-deployment
 ```

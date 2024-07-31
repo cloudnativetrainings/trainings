@@ -1,6 +1,7 @@
 
 !!! Slides do not exist yet => only the ones from the 7 deadly sins talk
 
+Order of labs does not fit to the slides
 
 # Motivation
 
