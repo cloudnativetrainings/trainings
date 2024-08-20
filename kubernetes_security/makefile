@@ -35,6 +35,7 @@ verify:
 	systemctl is-active apparmor
 	runsc --version # gvisor
 	falco --version
+	# TODO add a kubectl check => it takes very long that it is happy ~ 11 minutes
 	echo "Training Environment successfully verified"
 
 .PHONY: teardown
