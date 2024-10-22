@@ -94,5 +94,3 @@ make install_tools
 ```bash
 source <(kubectl completion bash)
 ```
-
-Jump > [Home](../README.md) | Next > [Prepare Installation](../01_prepare/README.md)

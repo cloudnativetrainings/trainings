@@ -143,5 +143,3 @@ echo $MAIL
 
 # The password is `password` if you haven't changed it
 ```
-
-Jump > [Home](../README.md) | Previous > [Create KubeOne Cluster](../02_create_kubeone_cluster/README.md) | Next > [Setup KKP Seed](../04_setup_kkp_seed/README.md)

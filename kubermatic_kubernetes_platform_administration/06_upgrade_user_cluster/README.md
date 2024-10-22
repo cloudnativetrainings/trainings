@@ -58,5 +58,3 @@ kubectl -n kube-system edit md XXXXX
 # Watch the nodes getting upgraded
 watch -n 1 kubectl get nodes   
 ```
-
-Jump > [Home](../README.md) | Previous > [Create User Cluster](../05_create_user_cluster/README.md) | Next > [Upgrade KKP](../07_upgrade_kkp/README.md)

@@ -76,5 +76,3 @@ kubectl apply -f ~/kkp/my-addon.yaml
 ```
 
 Finally you can add your Addon in the UI. Apply the Addon and verify in the Kubernetes Dashboatd if your Pod is running.
-
-Jump > [Home](../README.md) | Previous > [Upgrade KKP](../07_upgrade_kkp/README.md) | Next > [OAuth](../09_oauth/README.md)

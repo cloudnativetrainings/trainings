@@ -51,5 +51,3 @@ kubectl edit user XXXXX
 ```
 
 Now you have admin permissions also for this user.
-
-Jump > [Home](../README.md) | Previous > [Addons](../08_addons/README.md) | Next > [Setup Master/Seed MLA](../10_master_seed_clusters_mla/README.md)

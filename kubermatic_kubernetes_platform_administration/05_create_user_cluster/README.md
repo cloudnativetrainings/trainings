@@ -90,5 +90,3 @@ See the steps of the section `Create Cluster within UI` on how to create a Clust
 ### Create Cluster using the Provider Preset and the Cluster Template
 
 Within the UI create a cluster via the button `Create Cluster from Template` and make use of the template created in the previous step.
-
-Jump > [Home](../README.md) | Previous > [Setup KKP Seed](../04_setup_kkp_seed/README.md) | Next > [Upgrade User Cluster](../06_upgrade_user_cluster/README.md)

@@ -38,5 +38,3 @@ make setup_k1_folder
 ```bash
 make setup_kkp_folder
 ```
-
-Jump > [Home](../README.md) | Previous > [Setup Environment](../00_setup/README.md) | Next > [Create KubeOne Cluster](../02_create_kubeone_cluster/README.md)

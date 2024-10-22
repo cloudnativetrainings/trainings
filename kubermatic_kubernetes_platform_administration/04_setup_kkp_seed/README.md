@@ -51,5 +51,3 @@ nslookup test.kubermatic.$DOMAIN
 ```
 
 Congrats your KKP installation is now ready for use!!!
-
-Jump > [Home](../README.md) | Previous > [Setup KKP Master](../03_setup_kkp_master/README.md) | Next > [Create User Cluster](../05_create_user_cluster/README.md)

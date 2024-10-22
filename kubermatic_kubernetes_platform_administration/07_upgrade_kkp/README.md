@@ -30,5 +30,3 @@ kubermatic-installer --charts-directory ~/kkp/charts deploy kubermatic-seed \
 # Verify KKP got updated
 kubectl -n kubermatic get pods
 ```    
-
-Jump > [Home](../README.md) | Previous > [Upgrade User Cluster](../06_upgrade_user_cluster/README.md) | Next > [Addons](../08_addons/README.md)

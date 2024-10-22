@@ -122,5 +122,3 @@ helm --namespace iap upgrade --install --wait --atomic --values ~/kkp/values.yam
     1. With the Label `Grafana`
     1. With the URL `https://grafana.<DOMAIN>`
     1. Note the Icon will be guessed by KKP via the URL
-
-Jump > [Home](../README.md) | Previous > [OAtuh](../09_oauth/README.md) 
