@@ -1,4 +1,3 @@
-
 # Prepare KubeOne and KKP installation
 
 ```bash

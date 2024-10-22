@@ -25,8 +25,8 @@ kubermatic-installer --charts-directory ~/kkp/charts deploy \
 # Update Seed Components
 kubermatic-installer --charts-directory ~/kkp/charts deploy kubermatic-seed \
   --config ~/kkp/kubermatic.yaml \
-  --helm-values ~/kkp/values.yaml     
+  --helm-values ~/kkp/values.yaml
 
 # Verify KKP got updated
 kubectl -n kubermatic get pods
-```    
+```

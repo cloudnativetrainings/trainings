@@ -15,18 +15,21 @@ sed -i 's/cluster.example.dev/'$DOMAIN'/g' ~/kkp/values.yaml
 
 ### Generate Secrets
 
-Create random secrets via 
+Create random secrets via
+
 ```bash
 cat /dev/urandom | tr -dc A-Za-z0-9 | head -c32
 ```
 
 for the following fields in the file `values.yaml`
-* `dex.clients[kubermatic].secret`
-* `dex.clients[kubermaticIssuer].secret`
+
+- `dex.clients[kubermatic].secret`
+- `dex.clients[kubermaticIssuer].secret`
 
 and for the following fields in the file `kubermatic.yaml`
-* `auth.issuerCookieKey`
-* `auth.serviceAccountKey`
+
+- `auth.issuerCookieKey`
+- `auth.serviceAccountKey`
 
 Copy the secret from `dex.clients[kubermaticIssuer].secret` from the file `values.yaml` into `auth.issuerClientSecret` field of the file `kubermatic.yaml`.
 
@@ -49,7 +52,7 @@ Change the minio settings to the following:
 ```yaml
 # Take care about the proper indent in the yaml file!!!
 minio:
-  storeSize: '10Gi'
+  storeSize: "10Gi"
   storageClass: kubermatic-backup
   credentials:
     accessKey: "reoshe9Eiwei2ku5foB6owiva2Sheeth"
@@ -64,6 +67,7 @@ kubectl apply -f ~/kkp/storageclass-backup.yaml
 ```
 
 Verify the storage class
+
 ```bash
 kubectl get sc
 ```
@@ -75,7 +79,7 @@ kubermatic-installer --charts-directory ~/kkp/charts deploy \
     --config ~/kkp/kubermatic.yaml \
     --helm-values ~/kkp/values.yaml
 
-# Verify everyting is running smoothly 
+# Verify everyting is running smoothly
 # (Note that the pods kubermatic-api-XXXXX will not run smoothly due to DNS is not setup yet)
 kubectl get pods -A
 ```
@@ -122,7 +126,7 @@ Re-run the installer again
 ```bash
 kubermatic-installer --charts-directory ~/kkp/charts deploy \
     --config ~/kkp/kubermatic.yaml \
-    --helm-values ~/kkp/values.yaml     
+    --helm-values ~/kkp/values.yaml
 
 # Verify everyting is running smoothly
 kubectl get pods -A

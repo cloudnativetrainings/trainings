@@ -27,7 +27,7 @@ Take a look into `./addons/my-addon/pod.yaml`.
 There should be zero images.
 
 ```bash
-# Verify that there are no images in the 
+# Verify that there are no images in the
 gcloud container images list --repository=$REPO_URL
 
 # Build and push the new addon image
@@ -70,7 +70,7 @@ kubectl -n kubermatic exec -it kubermatic-seed-controller-manager-XXXXX -- cat /
 
 ```bash
 # You can customize the icon of the image via encoding eg a png image via base64. Note the AddonConfig already contains this image in the field `spec.logo`
-cat logo_32x32.png | base64 -w0 
+cat logo_32x32.png | base64 -w0
 
 kubectl apply -f ~/kkp/my-addon.yaml
 ```

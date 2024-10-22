@@ -8,23 +8,23 @@ Generate a ServiceAccount holding the GCE Credentials via
 base64 -w0 ~/secrets/key.json
 ```
 
-* Create a new project
-* Click the button `Create Cluster`
-* Within Tab `Provider`
-    * Choose Provider `Google Cloud`
-    * Choose Datecenter `Frankurt`
-* Within Tab `Cluster`
-    * Generate a random Cluster name
-* Within Tab `Settings`
-    * Copy the base64 encoded GCE key.json in the field `Service Account`
-* Within Tab `Initial Nodes`
-    * Generate a random MachineDeployment name
-    * Set the number of replicas to 3
-    * Choose Disk Type `pd-ssd`
-    * Choose Machine Type `n1-standard-2`
-    * Check `Preemptible` box
-* Within Tab `Summary`
-    * Click the button `Create Cluster`
+- Create a new project
+- Click the button `Create Cluster`
+- Within Tab `Provider`
+  - Choose Provider `Google Cloud`
+  - Choose Datecenter `Frankurt`
+- Within Tab `Cluster`
+  - Generate a random Cluster name
+- Within Tab `Settings`
+  - Copy the base64 encoded GCE key.json in the field `Service Account`
+- Within Tab `Initial Nodes`
+  - Generate a random MachineDeployment name
+  - Set the number of replicas to 3
+  - Choose Disk Type `pd-ssd`
+  - Choose Machine Type `n1-standard-2`
+  - Check `Preemptible` box
+- Within Tab `Summary`
+  - Click the button `Create Cluster`
 
 ### Verify in Terminal
 
@@ -34,13 +34,13 @@ You will find a new namespace holding all the control plane components of the us
 kubectl get ns
 
 # See all the control plane components of the cluster
-kubectl -n cluster-XXXXX get pods 
+kubectl -n cluster-XXXXX get pods
 
 # Delete one of the etcd nodes
 kubectl -n cluster-XXXXX delete pod etcd-0
 
 # The StatefulSet will take care to restart the deleted etcd-0 node
-kubectl -n cluster-XXXXX get pods 
+kubectl -n cluster-XXXXX get pods
 
 # Show the cluster CRD
 kubectl get cluster XXXXX -o yaml
@@ -77,6 +77,7 @@ Open the Admin Panel like this:
 Choose Provider Presets
 
 Create a Preset
+
 1. On the Preset Tab choose a name, eg `gce`
 1. On the Provider Tab choose Google Cloud
 1. In the Settings Tab add the base64 encoded GCE key.json (you can get it again via `base64 ~/secrets/key.json -w0`)

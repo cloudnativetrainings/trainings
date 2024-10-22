@@ -71,6 +71,7 @@ export GOOGLE_CREDENTIALS=$(cat ~/secrets/key.json)
 ```
 
 Verify Google Credentials via
+
 ```bash
 echo $GOOGLE_CREDENTIALS
 ```

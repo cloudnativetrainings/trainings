@@ -1,6 +1,4 @@
-
 # Upgrade User Clusters
-
 
 Check on an existing cluster the upgrade possibilities
 
@@ -19,7 +17,7 @@ versions:
     - v1.22.5
     - v1.22.10
     - v1.22.11
-  default: '1.21.8'
+  default: "1.21.8"
 ```
 
 Apply the updated Kubermatic configuration
@@ -40,12 +38,12 @@ watch -n 1 kubectl get nodes
 
 ## Upgrade of User Cluster in Terminal
 
-### Upgrade the Control Plane 
+### Upgrade the Control Plane
 
 Change the field `spec.version` of the User Cluster to `1.22.11`.
 
 ```bash
-kubectl edit cluster 
+kubectl edit cluster
 ```
 
 ### Upgrade the Worker Nodes
@@ -56,5 +54,5 @@ Connected to the User Cluster you can change the version of the MachineDeploymen
 kubectl -n kube-system edit md XXXXX
 
 # Watch the nodes getting upgraded
-watch -n 1 kubectl get nodes   
+watch -n 1 kubectl get nodes
 ```

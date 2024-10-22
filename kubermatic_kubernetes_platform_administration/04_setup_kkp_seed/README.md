@@ -1,4 +1,4 @@
-# Installation of the Seed 
+# Installation of the Seed
 
 ```bash
 cd ~/04_setup_kkp_seed/
@@ -32,7 +32,7 @@ kubectl -n kubermatic get pods
 # Re-run the installer with kubermatic-seed option
 kubermatic-installer --charts-directory ~/kkp/charts deploy kubermatic-seed \
   --config ~/kkp/kubermatic.yaml \
-  --helm-values ~/kkp/values.yaml  
+  --helm-values ~/kkp/values.yaml
 ```
 
 ## Create DNS entries for Seed

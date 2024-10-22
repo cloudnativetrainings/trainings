@@ -7,13 +7,13 @@ Add the following to the file `values.yaml` on root level. Take care about the D
 ```yaml
 prometheus:
   host: prometheus.<DOMAIN>
-  storageSize: '250Gi'
+  storageSize: "250Gi"
   tsdb:
-    retentionTime: '30d'
+    retentionTime: "30d"
   ruleFiles:
-  - /etc/prometheus/rules/general-*.yaml
-  - /etc/prometheus/rules/kubermatic-master-*.yaml
-  - /etc/prometheus/rules/managed-*.yaml
+    - /etc/prometheus/rules/general-*.yaml
+    - /etc/prometheus/rules/kubermatic-master-*.yaml
+    - /etc/prometheus/rules/managed-*.yaml
 
 alertmanager:
   host: alertmanager.<DOMAIN>
@@ -89,12 +89,12 @@ iap:
       client_id: grafana
       client_secret: # has to match the field `dex.clients[grafana].secret`
       encryption_key: # created via `cat /dev/urandom | tr -dc A-Za-z0-9 | head -c32`
-      config: 
+      config:
         scope: "groups openid email"
         email_domains:
-          - '*'
+          - "*"
         skip_auth_regex:
-          - '/api/health'
+          - "/api/health"
         pass_user_headers: true
       upstream_service: grafana.monitoring.svc.cluster.local
       upstream_port: 3000
@@ -119,6 +119,6 @@ helm --namespace iap upgrade --install --wait --atomic --values ~/kkp/values.yam
 1. Open the `Admin Panel`
 1. Select the Item `Interface` in the Side Panel
 1. Add a custom link
-    1. With the Label `Grafana`
-    1. With the URL `https://grafana.<DOMAIN>`
-    1. Note the Icon will be guessed by KKP via the URL
+   1. With the Label `Grafana`
+   1. With the URL `https://grafana.<DOMAIN>`
+   1. Note the Icon will be guessed by KKP via the URL
