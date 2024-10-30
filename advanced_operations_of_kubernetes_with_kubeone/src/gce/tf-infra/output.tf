@@ -49,7 +49,7 @@ output "kubeone_workers" {
   value = {
     # following outputs will be parsed by kubeone and automatically merged into
     # corresponding (by name) worker definition
-    "${var.cluster_name}-pool1" = {
+    "${var.cluster_name}-pool-az-a" = {
       replicas = var.initial_machinedeployment_replicas
       providerSpec = {
         annotations = {

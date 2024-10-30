@@ -5,8 +5,10 @@
 ### Install KubeOne
 
 ```bash
-mkdir -p /tmp/k1 && cd /tmp/k1 && wget https://github.com/kubermatic/kubeone/releases/download/v1.6.2/kubeone_1.6.2_linux_amd64.zip
-unzip kubeone*.zip
+export KUBEONE_VERSION=1.8.3
+mkdir -p /tmp/k1 && cd /tmp/k1 && \
+  wget https://github.com/kubermatic/kubeone/releases/download/v${KUBEONE_VERSION}/kubeone_${KUBEONE_VERSION}_linux_amd64.zip
+unzip kubeone_${KUBEONE_VERSION}_linux_amd64.zip
 mkdir -p ~/bin && cp kubeone ~/bin/kubeone
 cd ~
 ```
