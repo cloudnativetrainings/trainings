@@ -5,7 +5,7 @@ install_k1:
 	rm -rf ~/.tmp/kubeone-$(KUBEONE_VERSION)/*
 	unzip ~/.tmp/kubeone-$(KUBEONE_VERSION).zip -d ~/.tmp/kubeone-$(KUBEONE_VERSION)
 	chmod +x ~/.tmp/kubeone-$(KUBEONE_VERSION)/kubeone
-	sudo cp ~/.tmp/kubeone-$(KUBEONE_VERSION)/kubeone /usr/local/bin
+	sudo cp ~/.tmp/kubeone-$(KUBEONE_VERSION)/kubeone ~/bin
 
 .PHONY: install_kkp
 install_kkp:
@@ -14,12 +14,12 @@ install_kkp:
 	rm -rf ~/.tmp/kubermatic-ce-$(KKP_VERSION)/*
 	tar -xvf ~/.tmp/kubermatic-ce-$(KKP_VERSION).tar.gz -C ~/.tmp/kubermatic-ce-$(KKP_VERSION)
 	chmod +x ~/.tmp/kubermatic-ce-$(KKP_VERSION)/kubermatic-installer
-	sudo cp ~/.tmp/kubermatic-ce-$(KKP_VERSION)/kubermatic-installer /usr/local/bin
+	sudo cp ~/.tmp/kubermatic-ce-$(KKP_VERSION)/kubermatic-installer ~/bin
 
 .PHONY: setup_k1_folder
 setup_k1_folder:
 	cp -r ~/.tmp/kubeone-$(KUBEONE_VERSION)/examples/terraform/gce/* ~/kubeone
-	sed -i 's/GCP_PROJECT/$(PROJECT_ID)/g' ~/kubeone/terraform.tfvars
+	sed -i 's/GCP_PROJECT/$(GCP_PROJECT_ID)/g' ~/kubeone/terraform.tfvars
 	# added to make worker nodes preemptible
 	sed -i 's/\(preemptible *=\).*/\1 true/' ~/kubeone/output.tf
 

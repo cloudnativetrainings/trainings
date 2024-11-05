@@ -21,7 +21,7 @@ kubeone version
 make install_kkp
 
 # Verify installation
-kubermatic-installer help
+kubermatic-installer --version
 ```
 
 ## Get Configuration Files

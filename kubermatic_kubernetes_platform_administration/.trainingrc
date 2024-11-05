@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# set get GCP environment variables
+export GCP_PROJECT_ID=hubert-training-refactoring
+export GCP_DNS_ZONE=$GCP_PROJECT_ID
+export GCP_MAIL=$GCP_PROJECT_ID@cloud-native.training
+export GCP_SA_NAME=kkp-admin-training
+export GCP_SA_MAIL=$GCP_SA_NAME@$GCP_PROJECT_ID.iam.gserviceaccount.com
+export GCP_DOMAIN=$GCP_PROJECT_ID.cloud-native.training
+export GCP_REPO_URL=gcr.io/$GCP_PROJECT_ID
+
+# set K1 && KKP versions
+export KUBEONE_VERSION=1.7.6
+export KUBEONE_VERSION_NEW=1.8.3
+export KKP_VERSION=2.25.11
+export KKP_VERSION_NEW=2.26.0
+
+# create bin dir in users home directory
+mkdir -p ~/bin
+export PATH=$PATH:$(HOME)/bin
+
+# create and set GCP secret
+mkdir -p ~/secrets
+gcloud iam service-accounts create $(GCP_SA_NAME) --display-name="$(GCP_SA_NAME)"
+gcloud projects add-iam-policy-binding $(GCP_PROJECT_ID) --member serviceAccount:$(GCP_SA_MAIL) --role='roles/compute.admin'
+gcloud projects add-iam-policy-binding $(GCP_PROJECT_ID) --member serviceAccount:$(GCP_SA_MAIL) --role='roles/iam.serviceAccountUser'
+gcloud projects add-iam-policy-binding $(GCP_PROJECT_ID) --member serviceAccount:$(GCP_SA_MAIL) --role='roles/viewer'
+gcloud iam service-accounts keys create --iam-account $(GCP_SA_MAIL) key.json
+mv key.json ~/secrets/key.json
+# TODO rename to GCP_CREDENTIALS => or terraform needs it that way?
+export GOOGLE_CREDENTIALS=$(cat ~/secrets/key.json)
