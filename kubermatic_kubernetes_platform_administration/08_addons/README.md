@@ -28,16 +28,16 @@ There should be zero images.
 
 ```bash
 # Verify that there are no images in the
-gcloud container images list --repository=$REPO_URL
+gcloud container images list --repository=$GCP_REPO_URL
 
 # Build and push the new addon image
 cd addons
-docker build -t $REPO_URL/kkp-addons:v${KKP_VERSION}-v0.0.1 --build-arg KKP_VERSION=${KKP_VERSION} .
-docker push $REPO_URL/kkp-addons:v${KKP_VERSION}-v0.0.1
+docker build -t $GCP_REPO_URL/kkp-addons:v${KKP_VERSION}-v0.0.1 --build-arg KKP_VERSION=${KKP_VERSION} .
+docker push $GCP_REPO_URL/kkp-addons:v${KKP_VERSION}-v0.0.1
 cd ..
 
 # Verify the image exists in the repository
-gcloud container images list --repository=$REPO_URL
+gcloud container images list --repository=$GCP_REPO_URL
 ```
 
 ### Adapt the Kubermatic Configuration

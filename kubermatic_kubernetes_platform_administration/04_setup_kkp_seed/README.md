@@ -40,6 +40,7 @@ kubermatic-installer --charts-directory ~/kkp/charts deploy kubermatic-seed \
 ```bash
 # Store IP of NodePort Proxy into environment variable
 export SEED_IP=$(kubectl -n kubermatic get svc nodeport-proxy -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+# TODO add this to the .trainingrc file
 
 # Verify that environment variable is set
 echo $SEED_IP
@@ -47,7 +48,7 @@ echo $SEED_IP
 make IP=$SEED_IP create_seed_dns_record
 
 # Verify DNS record
-nslookup test.kubermatic.$DOMAIN
+nslookup test.kubermatic.$GCP_DOMAIN
 ```
 
 Congrats your KKP installation is now ready for use!!!

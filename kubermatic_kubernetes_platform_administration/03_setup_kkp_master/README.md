@@ -9,8 +9,8 @@ cd ~/03_setup_kkp_master
 ### Exchange URLs
 
 ```bash
-sed -i 's/cluster.example.dev/'$DOMAIN'/g' ~/kkp/kubermatic.yaml
-sed -i 's/cluster.example.dev/'$DOMAIN'/g' ~/kkp/values.yaml
+sed -i 's/cluster.example.dev/'$GCP_DOMAIN'/g' ~/kkp/kubermatic.yaml
+sed -i 's/cluster.example.dev/'$GCP_DOMAIN'/g' ~/kkp/values.yaml
 ```
 
 ### Generate Secrets
@@ -36,7 +36,7 @@ Copy the secret from `dex.clients[kubermaticIssuer].secret` from the file `value
 ### Create static login credentials
 
 ```bash
-sed -i 's/kubermatic@example.com/'$MAIL'/g' ~/kkp/values.yaml
+sed -i 's/kubermatic@example.com/'$GCP_MAIL'/g' ~/kkp/values.yaml
 ```
 
 ### Generate uuid for telemetry
@@ -88,7 +88,7 @@ kubectl get pods -A
 
 ```bash
 # Change the email address
-sed -i 's/TODO-STUDENT-EMAIL@cloud-native.training/'$MAIL'/g' ~/kkp/clusterissuer.yaml
+sed -i 's/TODO-STUDENT-EMAIL@cloud-native.training/'$GCP_MAIL'/g' ~/kkp/clusterissuer.yaml
 
 kubectl apply -f ~/kkp/clusterissuer.yaml
 ```
@@ -100,6 +100,7 @@ Copy the IP address from the kubermatic-installer output and make use of it like
 ```bash
 # Store IP of Loadbalancer into environment variable
 export INGRESS_IP=$(kubectl -n nginx-ingress-controller get service nginx-ingress-controller -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+# TODO add this to the .trainingrc file
 
 # Verify that environment variable is set
 echo $INGRESS_IP
@@ -107,8 +108,8 @@ echo $INGRESS_IP
 make IP=$INGRESS_IP create_dns_records
 
 # Verify DNS records
-nslookup $DOMAIN
-nslookup test.$DOMAIN
+nslookup $GCP_DOMAIN
+nslookup test.$GCP_DOMAIN
 ```
 
 ## Switch to LetsEncrypt Prod
@@ -140,10 +141,10 @@ kubectl get certs -A
 
 ```bash
 # The URL
-echo $DOMAIN
+echo $GCP_DOMAIN
 
 # The Email Address
-echo $MAIL
+echo $GCP_MAIL
 
 # The password is `password` if you haven't changed it
 ```

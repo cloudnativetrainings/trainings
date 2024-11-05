@@ -15,6 +15,7 @@ make install_k1
 kubeone version
 ```
 
+<!-- TODO should be moved to kkp secrtion -->
 ### Install Kubermatic
 
 ```bash
@@ -32,6 +33,7 @@ kubermatic-installer --version
 make setup_k1_folder
 ```
 
+<!-- TODO should be moved to kkp secrtion -->
 ### Get Kubermatic Configuration Files
 
 ```bash

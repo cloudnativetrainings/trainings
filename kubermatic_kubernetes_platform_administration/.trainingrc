@@ -17,15 +17,19 @@ export KKP_VERSION_NEW=2.26.0
 
 # create bin dir in users home directory
 mkdir -p ~/bin
-export PATH=$PATH:$(HOME)/bin
+export PATH=$PATH:$HOME/bin
+
+# create folders
+mkdir -p ~/secrets
+mkdir -p ~/bin
 
 # create and set GCP secret
-mkdir -p ~/secrets
-gcloud iam service-accounts create $(GCP_SA_NAME) --display-name="$(GCP_SA_NAME)"
-gcloud projects add-iam-policy-binding $(GCP_PROJECT_ID) --member serviceAccount:$(GCP_SA_MAIL) --role='roles/compute.admin'
-gcloud projects add-iam-policy-binding $(GCP_PROJECT_ID) --member serviceAccount:$(GCP_SA_MAIL) --role='roles/iam.serviceAccountUser'
-gcloud projects add-iam-policy-binding $(GCP_PROJECT_ID) --member serviceAccount:$(GCP_SA_MAIL) --role='roles/viewer'
-gcloud iam service-accounts keys create --iam-account $(GCP_SA_MAIL) key.json
+# TODO wrong place, due to otherwise .trainingrc cannot be used for reconnects
+gcloud iam service-accounts create $GCP_SA_NAME --display-name="$GCP_SA_NAME"
+gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member serviceAccount:$GCP_SA_MAIL --role='roles/compute.admin'
+gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member serviceAccount:$GCP_SA_MAIL --role='roles/iam.serviceAccountUser'
+gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member serviceAccount:$GCP_SA_MAIL --role='roles/viewer'
+gcloud iam service-accounts keys create --iam-account $GCP_SA_MAIL key.json
 mv key.json ~/secrets/key.json
 # TODO rename to GCP_CREDENTIALS => or terraform needs it that way?
 export GOOGLE_CREDENTIALS=$(cat ~/secrets/key.json)

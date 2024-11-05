@@ -11,6 +11,7 @@ make terraform
 
 # Inspect the file ~/kubeone/tf.json
 
+# verify
 gcloud compute instances list
 ```
 
@@ -19,13 +20,18 @@ gcloud compute instances list
 ```bash
 make create_cluster
 
-gcloud compute instances list
+# verify
+export KUBECONFIG=~/kubeone/kkp-master-seed-cluster-kubeconfig
+# TODO add this to the .trainingrc file
+kubectl get nodes
 ```
 
 ## Scale the MachineDeployment
 
 ```bash
-export KUBECONFIG=~/kubeone/kkp-admin-kubeconfig
-kubectl -n kube-system scale md kkp-admin-pool1 --replicas 5
+kubectl -n kube-system scale md kkp-master-seed-cluster-pool1 --replicas 3
+
+# verify
+gcloud compute instances list
 kubectl get nodes
 ```

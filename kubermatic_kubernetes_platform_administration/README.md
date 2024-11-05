@@ -1,8 +1,5 @@
 # KKP Administration
 
-In this training you will setup KKP on GCE.
-
-
 ## Setup Environment
 
 ### Prepare Google Cloud Shell
@@ -34,29 +31,24 @@ Allow Cookies:
 ```bash
 
 # TODO fix repo after transition to codespaces
-rm -rf ~/.tmp
 mkdir -p ~/.tmp
 git clone https://github.com/cloudnativetrainings/trainings.git ~/.tmp
 cp -r ~/.tmp/kubermatic_kubernetes_platform_administration/* ~ 
+cp -r ~/.tmp/kubermatic_kubernetes_platform_administration/.trainingrc ~/.trainingrc
 
 set .trainingrc project variable
 # TODO add .trainingrc to .bashrc
 
 source ~/.trainingrc
-make verify
-```
 
-### Set GCE Credentials
+make install_tools
 
-```bash
 make get_gcp_sa_key
 export GOOGLE_CREDENTIALS=$(cat ~/secrets/key.json)
-```
+# TODO add this to the .trainingrc file
 
-Verify Google Credentials via
-
-```bash
-echo $GOOGLE_CREDENTIALS
+make verify
+# TODO verify google creds
 ```
 
 ### Create SSH key pair
@@ -68,8 +60,3 @@ eval `ssh-agent`
 ssh-add ~/secrets/kkp_admin_training
 ```
 
-### Install tools
-
-```bash
-make install_tools
-```

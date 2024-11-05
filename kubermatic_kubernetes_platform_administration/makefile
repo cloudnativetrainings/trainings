@@ -29,19 +29,20 @@ verify:
 	test -n "${KKP_VERSION}"
 	test -n "${KKP_VERSION_NEW}"
 	test -f secrets/key.json
-# test -n "${GOOGLE_CREDENTIALS}" #TODO does not work
+#	test -n "${GOOGLE_CREDENTIALS}" #TODO does not work
 # test other tools - uuid-runtime apache2-utils
 	yq --version
 	echo "Training Environment successfully verified"
 
 .PHONY: destroy
 destroy:
+# TODO delete all user cluster vms
+	kubectl -n kube-system scale md --all --replicas 0
 	cd ~/kubeone; kubeone reset --manifest kubeone.yaml -t tf.json -y
 	cd ~/kubeone; terraform destroy -auto-approve
 
 .PHONY: teardown
-teardown:
-	# gcloud iam service-accounts keys delete --iam-account $(GCP_SA_MAIL) key.json
+teardown: 
 	gcloud iam service-accounts delete $(GCP_SA_MAIL) --quiet
 	sudo rm -rf ~/* ~/.tmp ~/.trainingrc
 

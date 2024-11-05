@@ -16,6 +16,6 @@ if test -f "$FILE"; then
     sudo cp ~/.tmp/kubermatic-ce-$KKP_VERSION/kubermatic-installer /usr/local/bin
 fi
 
-export KUBECONFIG=~/kubeone/kkp-admin-kubeconfig
+export KUBECONFIG=~/kubeone/kkp-master-seed-cluster-kubeconfig
 
 source <(kubectl completion bash)
