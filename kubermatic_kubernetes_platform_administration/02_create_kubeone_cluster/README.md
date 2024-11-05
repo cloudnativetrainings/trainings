@@ -9,13 +9,17 @@ cd ~/02_create_kubeone_cluster/
 ```bash
 make terraform
 
-# Inspect the file tf.json
+# Inspect the file ~/kubeone/tf.json
+
+gcloud compute instances list
 ```
 
 ## Create Cluster
 
 ```bash
 make create_cluster
+
+gcloud compute instances list
 ```
 
 ## Scale the MachineDeployment

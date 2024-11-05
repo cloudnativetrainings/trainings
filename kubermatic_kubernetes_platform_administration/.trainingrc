@@ -10,7 +10,7 @@ export GCP_DOMAIN=$GCP_PROJECT_ID.cloud-native.training
 export GCP_REPO_URL=gcr.io/$GCP_PROJECT_ID
 
 # set K1 && KKP versions
-export KUBEONE_VERSION=1.7.6
+export KUBEONE_VERSION=1.8.2
 export KUBEONE_VERSION_NEW=1.8.3
 export KKP_VERSION=2.25.11
 export KKP_VERSION_NEW=2.26.0

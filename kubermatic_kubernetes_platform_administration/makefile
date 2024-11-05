@@ -12,8 +12,8 @@ get_gcp_sa_key:
 .PHONY: install_tools
 install_tools:
 	sudo apt-get install -y uuid-runtime apache2-utils
-	sudo wget -qO /$(HOME)/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
-	sudo chmod a+x /$(HOME)/bin/yq
+	sudo wget -qO ~/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+	sudo chmod a+x ~/bin/yq
 
 .PHONY: verify
 verify: 
@@ -41,9 +41,9 @@ destroy:
 
 .PHONY: teardown
 teardown:
-	gcloud iam service-accounts keys delete --iam-account $(GCP_SA_MAIL) key.json
-	gcloud iam service-accounts delete $(GCP_SA_NAME) --display-name="$(GCP_SA_NAME)"
-	sudo rm -rf ~/*
+	# gcloud iam service-accounts keys delete --iam-account $(GCP_SA_MAIL) key.json
+	gcloud iam service-accounts delete $(GCP_SA_MAIL) --quiet
+	sudo rm -rf ~/* ~/.tmp ~/.trainingrc
 
 
 # manual deletes

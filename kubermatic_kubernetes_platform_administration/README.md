@@ -63,6 +63,7 @@ echo $GOOGLE_CREDENTIALS
 
 ```bash
 ssh-keygen -N '' -f ~/secrets/kkp_admin_training
+# try and ask artiom if needed...
 eval `ssh-agent`
 ssh-add ~/secrets/kkp_admin_training
 ```
@@ -71,10 +72,4 @@ ssh-add ~/secrets/kkp_admin_training
 
 ```bash
 make install_tools
-```
-
-### Install bash completion
-
-```bash
-source <(kubectl completion bash)
 ```
