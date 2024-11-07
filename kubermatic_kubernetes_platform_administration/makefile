@@ -6,7 +6,6 @@ get-google-credentials:
 	gcloud projects add-iam-policy-binding ${GCP_PROJECT_ID} --member serviceAccount:${GCP_SA_MAIL} --role='roles/viewer'
 	gcloud iam service-accounts keys create --iam-account ${GCP_SA_MAIL} key.json
 	mv key.json ~/secrets/key.json
-	echo "export GOOGLE_CREDENTIALS=$(cat ~/secrets/key.json)" >> ~/.trainingrc
 
 .PHONY: verify
 verify: 
@@ -33,6 +32,9 @@ teardown:
 	kubectl -n kube-system scale md --all --replicas 0
 	cd ~/kubeone; kubeone reset --manifest kubeone.yaml -t tf.json -y
 	cd ~/kubeone; terraform destroy -auto-approve
+
+.PHONY teardown-training-environment
+teardown-training-environment:
 	gcloud dns record-sets transaction start --zone=$(GCP_DNS_ZONE)
 	gcloud dns record-sets transaction remove --zone=$(GCP_DNS_ZONE) --type A $(IP) --name="$(GCP_DOMAIN)." 
 	gcloud dns record-sets transaction remove --zone=$(GCP_DNS_ZONE) --type A $(IP) --name="*.$(GCP_DOMAIN)."

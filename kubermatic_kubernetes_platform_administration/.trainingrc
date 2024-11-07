@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # set get GCP environment variables
-export GCP_PROJECT_ID=hubert-training-refactoring
+export GCP_PROJECT_ID=hubert-training-refactoring # TODO rename or even substitue
 export GCP_DNS_ZONE=$GCP_PROJECT_ID
 export GCP_MAIL=$GCP_PROJECT_ID@cloud-native.training
 export GCP_SA_NAME=kkp-admin-training
@@ -15,12 +15,8 @@ export KUBEONE_VERSION_NEW=1.8.3
 export KKP_VERSION=2.25.11
 export KKP_VERSION_NEW=2.26.0
 
-# create folders
-mkdir -p ~/secrets
-mkdir -p ~/bin
-
 # add bin directory to PATH
-export PATH=$PATH:$HOME/bin
+export PATH=$PATH:~/bin
 
 # add ssh-key
 eval `ssh-agent`
@@ -30,3 +26,5 @@ ssh-add ~/secrets/kkp_admin_training
 sudo apt-get install -y uuid-runtime apache2-utils
 sudo wget -qO ~/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
 sudo chmod a+x ~/bin/yq
+
+# --- variables set during training

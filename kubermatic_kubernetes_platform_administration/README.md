@@ -35,15 +35,22 @@ cp -r ~/.tmp/kubermatic_kubernetes_platform_administration/.trainingrc ~/.traini
 
 # setup the Google Cloud Project in .trainingc file
 
-# get the Google Credentials
-make get-google-credentials
+# create folders
+mkdir -p ~/secrets
+mkdir -p ~/bin
 
 # create SSH key-pair
 ssh-keygen -N '' -f ~/secrets/kkp_admin_training
 
-# 
+# get the Google Credentials and add it to the .trainingrc file
+source ~/.trainingrc
+make get-google-credentials
+echo 'export GOOGLE_CREDENTIALS=$(cat ~/secrets/key.json)' >> ~/.trainingrc
+
+# re-source the .trainingrc file again
 source ~/.trainingrc
 
+# verify the environment
 make verify
 ```
 
