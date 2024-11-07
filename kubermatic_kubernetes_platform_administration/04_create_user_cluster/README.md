@@ -70,25 +70,6 @@ Connect to the User Cluster
 kubectl --kubeconfig=~/kubeconfig-admin-XXXXX get nodes
 ```
 
-----------------
-
-move out sa key generation out of .trainingrc
-
-fix password on KKP
-upscale k1
-
-1. fix dashboard
-2. apps 
-  1. echoserver
-  2. ingress
-3. upgrades
-4. templates
-5. oauth (maybe needed earlier)
-6. user-mla
-
------------------
-
-
 ## Create Provider Presets & Cluster Templates
 
 ### Create a Provider Preset

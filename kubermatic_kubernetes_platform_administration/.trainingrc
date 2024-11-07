@@ -28,3 +28,4 @@ sudo wget -qO ~/bin/yq https://github.com/mikefarah/yq/releases/latest/download/
 sudo chmod a+x ~/bin/yq
 
 # --- variables set during training
+

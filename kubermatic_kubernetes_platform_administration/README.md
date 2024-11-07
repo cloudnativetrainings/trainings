@@ -45,7 +45,7 @@ ssh-keygen -N '' -f ~/secrets/kkp_admin_training
 # get the Google Credentials and add it to the .trainingrc file
 source ~/.trainingrc
 make get-google-credentials
-echo 'export GOOGLE_CREDENTIALS=$(cat ~/secrets/key.json)' >> ~/.trainingrc
+echo "export GOOGLE_CLOUD_KEYFILE_JSON=~/secrets/key.json" >> ~/.trainingrc
 
 # re-source the .trainingrc file again
 source ~/.trainingrc
@@ -53,4 +53,3 @@ source ~/.trainingrc
 # verify the environment
 make verify
 ```
-

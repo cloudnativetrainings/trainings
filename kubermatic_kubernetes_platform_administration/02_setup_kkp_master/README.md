@@ -4,6 +4,9 @@
 cd ~/03_setup_kkp_master
 ```
 
+
+<!-- # TODO fix password -->
+
 ### Install Kubermatic
 
 ```bash
