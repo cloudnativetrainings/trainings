@@ -24,3 +24,8 @@ terraform:
 create_cluster:
 	cd ~/kubeone; kubeone apply -m kubeone.yaml -t tf.json -y
 	cd ~/kubeone; terraform apply -auto-approve
+
+.PHONY: teardown
+teardown: 
+	cd ~/kubeone; kubeone reset --manifest kubeone.yaml -t tf.json -y
+	cd ~/kubeone; terraform destroy -auto-approve
