@@ -42,4 +42,4 @@ teardown-training-environment:
 # gcloud dns record-sets transaction remove --zone=$(GCP_DNS_ZONE) --type A $(IP) --name="*.kubermatic.$(GCP_DOMAIN)." 
 # gcloud dns record-sets transaction execute --zone $(GCP_DNS_ZONE)
 	gcloud iam service-accounts delete $(GCP_SA_MAIL) --quiet
-	sudo rm -rf ~/* ~/.tmp ~/.trainingrc
+	rm -rf ~/* ~/.tmp ~/.trainingrc
