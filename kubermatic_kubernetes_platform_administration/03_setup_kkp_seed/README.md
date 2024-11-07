@@ -7,8 +7,8 @@ cd ~/04_setup_kkp_seed/
 ## Add the Seed kubeconfig to the Master
 
 ```bash
-cp $KUBECONFIG ./temp-seed-kubeconfig
-kubectl create secret generic seed-kubeconfig -n kubermatic --from-file kubeconfig=./temp-seed-kubeconfig --dry-run=client -o yaml > ~/kkp/seed-kubeconfig-secret.yaml
+cp ~/kubeone/kkp-master-seed-cluster-kubeconfig ~/.tmp/temp-seed-kubeconfig
+kubectl create secret generic seed-kubeconfig -n kubermatic --from-file kubeconfig=~/.tmp/temp-seed-kubeconfig --dry-run=client -o yaml > ~/kkp/seed-kubeconfig-secret.yaml
 kubectl apply -f ~/kkp/seed-kubeconfig-secret.yaml
 ```
 
@@ -30,9 +30,10 @@ kubectl -n kubermatic get pods
 # * seed-proxy-kubermatic-...
 
 # Re-run the installer with kubermatic-seed option
-kubermatic-installer --charts-directory ~/kkp/charts deploy kubermatic-seed \
-  --config ~/kkp/kubermatic.yaml \
-  --helm-values ~/kkp/values.yaml
+kubermatic-installer --kubeconfig ~/.kube/config \
+    --charts-directory ~/kkp/charts deploy kubermatic-seed \
+    --config ~/kkp/kubermatic.yaml \
+    --helm-values ~/kkp/values.yaml
 ```
 
 ## Create DNS entries for Seed

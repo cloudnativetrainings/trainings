@@ -4,13 +4,28 @@
 cd ~/03_setup_kkp_master
 ```
 
+### Install Kubermatic
+
+```bash
+make install_kkp
+
+# Verify installation
+kubermatic-installer --version
+```
+
+### Get Kubermatic Configuration Files
+
+```bash
+make setup_kkp_folder
+```
+
 ## Configure KKP
 
 ### Exchange URLs
 
 ```bash
-sed -i 's/cluster.example.dev/'$GCP_DOMAIN'/g' ~/kkp/kubermatic.yaml
-sed -i 's/cluster.example.dev/'$GCP_DOMAIN'/g' ~/kkp/values.yaml
+sed -i 's/kkp.example.com/'$GCP_DOMAIN'/g' ~/kkp/kubermatic.yaml
+sed -i 's/kkp.example.com/'$GCP_DOMAIN'/g' ~/kkp/values.yaml
 ```
 
 ### Generate Secrets
@@ -42,15 +57,17 @@ sed -i 's/kubermatic@example.com/'$GCP_MAIL'/g' ~/kkp/values.yaml
 ### Generate uuid for telemetry
 
 ```bash
+# TODO not working due to gcp reconnect -> sudo apt install uuid-runtime
 sed -i 's/uuid: \"\"/uuid: \"'$(uuidgen -r)'\"/g' ~/kkp/values.yaml
 ```
 
 ### Adapt Minio Settings
 
-Change the minio settings to the following:
+Change the minio settings in the file `values.yaml` to the following:
 
 ```yaml
 # Take care about the proper indent in the yaml file!!!
+# TODO note about keys - or generate them
 minio:
   storeSize: "10Gi"
   storageClass: kubermatic-backup
@@ -75,7 +92,8 @@ kubectl get sc
 ## Install KKP
 
 ```bash
-kubermatic-installer --charts-directory ~/kkp/charts deploy \
+kubermatic-installer --kubeconfig ~/.kube/config \
+    --charts-directory ~/kkp/charts deploy \
     --config ~/kkp/kubermatic.yaml \
     --helm-values ~/kkp/values.yaml
 
@@ -125,11 +143,13 @@ sed -i 's/skipTokenIssuerTLSVerify: true/skipTokenIssuerTLSVerify: false/g' ~/kk
 Re-run the installer again
 
 ```bash
-kubermatic-installer --charts-directory ~/kkp/charts deploy \
+kubermatic-installer --kubeconfig ~/.kube/config \
+    --charts-directory ~/kkp/charts deploy \
     --config ~/kkp/kubermatic.yaml \
     --helm-values ~/kkp/values.yaml
 
 # Verify everyting is running smoothly
+# (Note that the pods kubermatic-api-XXXXX should be fine)
 kubectl get pods -A
 
 # Verify you are obtain valid certificates from LetsEncrypt
@@ -148,3 +168,5 @@ echo $GCP_MAIL
 
 # The password is `password` if you haven't changed it
 ```
+
+Note, we only installed the master componenents yet, which means the UI is reachable, you cannot create Kubernetes Clusters yet.

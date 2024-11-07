@@ -15,21 +15,18 @@ export KUBEONE_VERSION_NEW=1.8.3
 export KKP_VERSION=2.25.11
 export KKP_VERSION_NEW=2.26.0
 
-# create bin dir in users home directory
-mkdir -p ~/bin
-export PATH=$PATH:$HOME/bin
-
 # create folders
 mkdir -p ~/secrets
 mkdir -p ~/bin
 
-# create and set GCP secret
-# TODO wrong place, due to otherwise .trainingrc cannot be used for reconnects
-gcloud iam service-accounts create $GCP_SA_NAME --display-name="$GCP_SA_NAME"
-gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member serviceAccount:$GCP_SA_MAIL --role='roles/compute.admin'
-gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member serviceAccount:$GCP_SA_MAIL --role='roles/iam.serviceAccountUser'
-gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member serviceAccount:$GCP_SA_MAIL --role='roles/viewer'
-gcloud iam service-accounts keys create --iam-account $GCP_SA_MAIL key.json
-mv key.json ~/secrets/key.json
-# TODO rename to GCP_CREDENTIALS => or terraform needs it that way?
-export GOOGLE_CREDENTIALS=$(cat ~/secrets/key.json)
+# add bin directory to PATH
+export PATH=$PATH:$HOME/bin
+
+# add ssh-key
+eval `ssh-agent`
+ssh-add ~/secrets/kkp_admin_training
+
+# install needed tools
+sudo apt-get install -y uuid-runtime apache2-utils
+sudo wget -qO ~/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+sudo chmod a+x ~/bin/yq

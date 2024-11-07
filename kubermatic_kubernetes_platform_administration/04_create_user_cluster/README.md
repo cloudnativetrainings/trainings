@@ -23,6 +23,8 @@ base64 -w0 ~/secrets/key.json
   - Choose Disk Type `pd-ssd`
   - Choose Machine Type `n1-standard-2`
   - Check `Preemptible` box
+- Within Tab `Applications`
+  - do nothing yet
 - Within Tab `Summary`
   - Click the button `Create Cluster`
 
@@ -34,13 +36,17 @@ You will find a new namespace holding all the control plane components of the us
 kubectl get ns
 
 # See all the control plane components of the cluster
-kubectl -n cluster-XXXXX get pods
+watch -n 1 kubectl -n cluster-XXXXX get pods
+
+# TODO note to watch everything is stable
+
+# TODO seperate header
 
 # Delete one of the etcd nodes
 kubectl -n cluster-XXXXX delete pod etcd-0
 
 # The StatefulSet will take care to restart the deleted etcd-0 node
-kubectl -n cluster-XXXXX get pods
+watch -n 1 kubectl -n cluster-XXXXX get pods
 
 # Show the cluster CRD
 kubectl get cluster XXXXX -o yaml
@@ -61,10 +67,27 @@ Create a new Terminal:
 Connect to the User Cluster
 
 ```bash
-export KUBECONFIG=~/kubeconfig-admin-XXXXX
-
-kubectl get nodes
+kubectl --kubeconfig=~/kubeconfig-admin-XXXXX get nodes
 ```
+
+----------------
+
+move out sa key generation out of .trainingrc
+
+fix password on KKP
+upscale k1
+
+1. fix dashboard
+2. apps 
+  1. echoserver
+  2. ingress
+3. upgrades
+4. templates
+5. oauth (maybe needed earlier)
+6. user-mla
+
+-----------------
+
 
 ## Create Provider Presets & Cluster Templates
 

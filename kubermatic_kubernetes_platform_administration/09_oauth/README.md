@@ -38,7 +38,8 @@ connectors:
 Apply the changes
 
 ```bash
-kubermatic-installer --charts-directory ~/kkp/charts deploy \
+kubermatic-installer  --kubeconfig ~/.kube/config \
+    --charts-directory ~/kkp/charts deploy \
     --config ~/kkp/kubermatic.yaml \
     --helm-values ~/kkp/values.yaml
 ```
