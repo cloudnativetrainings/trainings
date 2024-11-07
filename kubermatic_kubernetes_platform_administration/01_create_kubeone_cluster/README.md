@@ -1,12 +1,10 @@
 # Create Master/Seed Kubernetes Cluster
 
 ```bash
-cd ~/02_create_kubeone_cluster/
+cd ~/01_create_kubeone_cluster/
 ```
 
-# Prepare KubeOne and KKP installation
-
-### Install KubeOne
+## Install KubeOne
 
 ```bash
 make install_k1
@@ -15,22 +13,13 @@ make install_k1
 kubeone version
 ```
 
-### Get KubeOne Configuration Files
+## Get KubeOne Configuration Files
 
 ```bash
 make setup_k1_folder
 ```
 
 ## Create infrastructure
-
-
-
-eval `ssh-agent`
-ssh-add ~/secrets/kkp_admin_training
-https://docs.kubermatic.com/kubeone/v1.8/guides/ssh/
-
-
-
 
 ```bash
 make terraform

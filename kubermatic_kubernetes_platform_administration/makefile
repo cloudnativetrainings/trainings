@@ -21,7 +21,7 @@ verify:
 	test -n "${KKP_VERSION}"
 	test -n "${KKP_VERSION_NEW}"
 	test -f secrets/key.json
-	test -n '${GOOGLE_CLOUD_KEYFILE_JSON}'
+	test -n '${GOOGLE_CREDENTIALS}'
 # TODO test other tools - uuid-runtime apache2-utils
 	yq --version
 	echo "Training Environment successfully verified"
