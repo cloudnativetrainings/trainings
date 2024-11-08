@@ -1,7 +1,9 @@
 # Installation of the Seed
 
+In this lab you will create a KKP Seed Cluster.
+
 ```bash
-cd ~/04_setup_kkp_seed/
+cd ~/03_setup_kkp_seed/
 ```
 
 ## Add the Seed kubeconfig to the Master

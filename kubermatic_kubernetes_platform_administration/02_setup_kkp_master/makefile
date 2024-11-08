@@ -22,6 +22,7 @@ create_dns_records:
 
 .PHONY: teardown
 teardown: 
+# TODO
 # gcloud dns record-sets transaction start --zone=$(GCP_DNS_ZONE)
 # gcloud dns record-sets transaction remove --zone=$(GCP_DNS_ZONE) --type A $(IP) --name="$(GCP_DOMAIN)." 
 # gcloud dns record-sets transaction remove --zone=$(GCP_DNS_ZONE) --type A $(IP) --name="*.$(GCP_DOMAIN)."

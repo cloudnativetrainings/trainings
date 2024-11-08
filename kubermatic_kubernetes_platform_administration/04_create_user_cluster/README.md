@@ -1,5 +1,7 @@
 # Create User Clusters
 
+In this lab you will create your first User Cluster.
+
 ## Create Cluster within UI
 
 Generate a ServiceAccount holding the GCE Credentials via
@@ -9,7 +11,7 @@ base64 -w0 ~/secrets/key.json
 ```
 
 - Create a new project
-- Click the button `Create Cluster`
+- Click the button `Create Resource / Cluster`
 - Within Tab `Provider`
   - Choose Provider `Google Cloud`
   - Choose Datecenter `Frankurt`
@@ -28,31 +30,18 @@ base64 -w0 ~/secrets/key.json
 - Within Tab `Summary`
   - Click the button `Create Cluster`
 
-### Verify in Terminal
+## Verify in Terminal
 
 You will find a new namespace holding all the control plane components of the user cluster
 
 ```bash
 kubectl get ns
 
-# See all the control plane components of the cluster
+# see all the control plane components of the cluster
 watch -n 1 kubectl -n cluster-XXXXX get pods
-
-# TODO note to watch everything is stable
-
-# TODO seperate header
-
-# Delete one of the etcd nodes
-kubectl -n cluster-XXXXX delete pod etcd-0
-
-# The StatefulSet will take care to restart the deleted etcd-0 node
-watch -n 1 kubectl -n cluster-XXXXX get pods
-
-# Show the cluster CRD
-kubectl get cluster XXXXX -o yaml
 ```
 
-### Connect to the User Cluster
+## Connect to the User Cluster
 
 Download the kubeconfig via the following button:
 
@@ -60,38 +49,39 @@ Download the kubeconfig via the following button:
 
 Drag&Drop the downloaded kubeconfig into the Google Cloud Shell.
 
-Create a new Terminal:
-
-![](../img/choose_project.png)
-
 Connect to the User Cluster
 
 ```bash
 kubectl --kubeconfig=~/kubeconfig-admin-XXXXX get nodes
 ```
 
-## Create Provider Presets & Cluster Templates
+## Test the resiliency of a User Cluster
 
-### Create a Provider Preset
+Now we will check what happens if a component of the users clusters control plane has an issue.
 
-Open the Admin Panel like this:
+```bash
+# delete one of the etcd nodes
+kubectl -n cluster-XXXXX delete pod etcd-0
 
-![](../img/admin_panel.png)
+# the StatefulSet will take care to restart the deleted etcd-0 node
+watch -n 1 kubectl -n cluster-XXXXX get pods
+```
 
-Choose Provider Presets
+## Scale the User Cluster
 
-Create a Preset
+```bash
+# everything is declarative with KKP
+kubectl get cluster XXXXX -o yaml
 
-1. On the Preset Tab choose a name, eg `gce`
-1. On the Provider Tab choose Google Cloud
-1. In the Settings Tab add the base64 encoded GCE key.json (you can get it again via `base64 ~/secrets/key.json -w0`)
+# get machinedeployments of the user cluster
+kubectl --kubeconfig=~/kubeconfig-admin-XXXXX -n kube-system get machinedeployment
 
-### Create Cluster Template
+# edit the machine deployment of the user cluster
+kubectl --kubeconfig=~/kubeconfig-admin-XXXXX -n kube-system edit md MD-NAME
 
-See the steps of the section `Create Cluster within UI` on how to create a ClusterTemplate. Make sure to make use of the Provider Preset of the previous step.
+# scale the machine deployment of the user cluster
+kubectl --kubeconfig=~/kubeconfig-admin-XXXXX -n kube-system scale md MD-NAME --replicas 1
 
-<!-- TODO add kubectl commands for getting ProviderPreset and ClusterTemplate -->
-
-### Create Cluster using the Provider Preset and the Cluster Template
-
-Within the UI create a cluster via the button `Create Cluster from Template` and make use of the template created in the previous step.
+# verify your changes
+watch -n 1 kubectl --kubeconfig=~/kubeconfig-admin-XXXXX -n kube-system get md,ms,machine,nodes
+```

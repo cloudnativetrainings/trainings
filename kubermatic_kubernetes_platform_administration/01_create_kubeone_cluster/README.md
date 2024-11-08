@@ -1,5 +1,7 @@
 # Create Master/Seed Kubernetes Cluster
 
+In this lab you will create the Kubernetes Cluster in which we will deploy KKP.
+
 ```bash
 cd ~/01_create_kubeone_cluster/
 ```
@@ -35,11 +37,10 @@ gcloud compute instances list
 ```bash
 make create_cluster
 
-# verify
+# copy the kubeconfig to its location
 cp ~/kubeone/kkp-master-seed-cluster-kubeconfig ~/.kube/config
-# export KUBECONFIG=~/kubeone/kkp-master-seed-cluster-kubeconfig
-# TODO use later for merging kubeconfigs: https://hbayraktar.medium.com/merging-multiple-kubeconfig-files-into-one-a-comprehensive-guide-33cb7990edfc
-# TODO add this to the .trainingrc file
+
+# verify
 kubectl get nodes
 ```
 

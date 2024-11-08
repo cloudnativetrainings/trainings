@@ -7,6 +7,8 @@ get-google-credentials:
 	gcloud iam service-accounts keys create --iam-account ${GCP_SA_MAIL} key.json
 	mv key.json ~/secrets/key.json
 
+# TODO rename key.json towards google_key.json
+
 .PHONY: verify
 verify: 
 	test -n "${GCP_PROJECT_ID}"

@@ -26,6 +26,10 @@ Apply the updated Kubermatic configuration
 kubectl apply -f ~/kkp/kubermatic.yaml
 ```
 
+```bash
+while true; do curl 34.159.69.250 | jq; sleep 10s; done;
+```
+
 ## Upgrade of User Cluster with UI
 
 Within the UI upgrade your cluster to version `1.22.5`. Also check the checkbox `Upgrade Machine Deployments`

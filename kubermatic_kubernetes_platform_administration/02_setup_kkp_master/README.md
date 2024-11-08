@@ -1,13 +1,12 @@
 # Setup KKP Master
 
+In this lab you will create KKP Master Cluster.
+
 ```bash
-cd ~/03_setup_kkp_master
+cd ~/02_setup_kkp_master
 ```
 
-
-<!-- # TODO fix password -->
-
-### Install Kubermatic
+## Install KKP
 
 ```bash
 make install_kkp
@@ -16,7 +15,7 @@ make install_kkp
 kubermatic-installer --version
 ```
 
-### Get Kubermatic Configuration Files
+## Get KKP Configuration Files
 
 ```bash
 make setup_kkp_folder
@@ -55,6 +54,11 @@ Copy the secret from `dex.clients[kubermaticIssuer].secret` from the file `value
 
 ```bash
 sed -i 's/kubermatic@example.com/'$GCP_MAIL'/g' ~/kkp/values.yaml
+
+# hash your password like this
+htpasswd -bnBC 10 "" PASSWORD_HERE | tr -d ':\n' | sed 's/$2y/$2a/'
+
+# set the password in the file `values.yaml` in the field `dex.staticPasswords[YOUR-EMAIL].hash`
 ```
 
 ### Generate uuid for telemetry
@@ -92,7 +96,7 @@ Verify the storage class
 kubectl get sc
 ```
 
-## Install KKP
+## Install KKP into K1 Cluster
 
 ```bash
 kubermatic-installer --kubeconfig ~/.kube/config \
@@ -102,7 +106,7 @@ kubermatic-installer --kubeconfig ~/.kube/config \
 
 # Verify everyting is running smoothly
 # (Note that the pods kubermatic-api-XXXXX will not run smoothly due to DNS is not setup yet)
-kubectl get pods -A
+watch -n 1 kubectl get pods -A
 ```
 
 ## Apply the Production ClusterIssuer
@@ -153,7 +157,7 @@ kubermatic-installer --kubeconfig ~/.kube/config \
 
 # Verify everyting is running smoothly
 # (Note that the pods kubermatic-api-XXXXX should be fine)
-kubectl get pods -A
+watch -n 1 kubectl get pods -A
 
 # Verify you are obtain valid certificates from LetsEncrypt
 # (Note that it can take up a few minutes to get the certs in ready state)

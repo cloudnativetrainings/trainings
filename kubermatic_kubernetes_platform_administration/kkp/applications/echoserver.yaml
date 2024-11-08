@@ -1,0 +1,24 @@
+apiVersion: apps.kubermatic.k8c.io/v1
+kind: ApplicationDefinition
+metadata:
+  name: echoserver
+spec:
+  description: An echo server is a server that replicates the request sent by the client and sends it back.
+  method: helm
+  versions:
+    - template:
+        source:
+          helm:
+            chartName: echo-server
+            chartVersion: 0.5.0
+            url: https://ealenn.github.io/charts
+      version: 0.7.0
+  documentationURL: https://ealenn.github.io/Echo-Server/
+  sourceURL: https://github.com/Ealenn/charts/tree/master/charts/echo-server
+  defaultValues:
+    ingress:
+      enabled: true
+      ingressClassName: "nginx"
+      hosts:
+        - paths:
+            - /
