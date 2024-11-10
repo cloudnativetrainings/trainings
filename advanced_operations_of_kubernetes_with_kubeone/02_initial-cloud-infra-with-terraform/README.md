@@ -93,67 +93,71 @@ SSH](https://docs.kubermatic.com/kubeone/main/guides/ssh/) before you continue. 
   terraform output
   ```
 
-  ```bash
-  kubeone_api = {
-    "endpoint" = "34.141.176.241"
-  }
-  kubeone_hosts = {
-    "control_plane" = {
-      "cloud_provider" = "gce"
-      "cluster_name" = "k1"
-      "hostnames" = [
-        "k1-control-plane-1",
-      ]
-      "private_address" = [
-        "10.240.0.2",
-      ]
-      "public_address" = [
-        "34.141.138.245",
-      ]
-      "ssh_agent_socket" = "env:SSH_AUTH_SOCK"
-      "ssh_port" = 22
-      "ssh_private_key_file" = ""
-      "ssh_user" = "root"
+<details>
+  <summary>Example output</summary>
+
+    ```terraform
+    kubeone_api = {
+      "endpoint" = "34.141.176.241"
     }
-  }
-  kubeone_workers = {
-    "k1-pool-az-a" = {
-      "providerSpec" = {
-        "cloudProviderSpec" = {
-          "assignPublicIPAddress" = true
-          "diskSize" = 50
-          "diskType" = "pd-ssd"
-          "labels" = {
-            "k1-workers" = "pool-az-a"
-          }
-          "machineType" = "n1-standard-2"
-          "multizone" = true
-          "network" = "https://www.googleapis.com/compute/v1/projects/test-01-int-05/global/networks/k1"
-          "preemptible" = true
-          "regional" = false
-          "subnetwork" = "https://www.googleapis.com/compute/v1/projects/test-01-int-05/regions/europe-west4/subnetworks/k1-subnet"
-          "tags" = [
-            "firewall",
-            "targets",
-            "k1-pool-az-a",
-          ]
-          "zone" = "europe-west4-a"
-        }
-        "operatingSystem" = "ubuntu"
-        "operatingSystemSpec" = {
-          "distUpgradeOnBoot" = false
-        }
-        "sshPublicKeys" = [
-          <<-EOT
-          ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCvxsGRbxpkpYqjsHmlO0EYtGtxrlXc5vDYwz+CbzWHXiow/XK/3NE2l5XljvsVLvhDmFjP/06zWCBAP9HjV/Vh2Mk0LqDfyLgQOTCspQmxykHp6gSqbVmhn70wl2hMkpq685GlZGRLi7iGoHhJddsrmQUD+dxIeAtUqfcVDn1oP3Mdp+5FdHy9oIcAOp4Trzki16ZS+ee6JYKrGXzcFF1eNM5rVGOk7vMDiM9eOTCEho2UPToZUcKrA3HfpyVR7H5jT4grnQlm/anLB9YnKO9/n2bI2CtDep7POK4yNrVH7a2HMNBJA9gicvLz+un26LSH10Hat60IAQjb4JWqMb1XMvupGaqW5M/ZLOd9JzQOvMurdSx4rFOkM4GpHyZM8J1COJrYiMSesHIiEHc2PUUwzNggSQLMag2b1haj0jbCvV+xgSBSojjPtqKVYg849ockpePMRJRVxyiIUbfdFkJ7VkuG9Op3KAd5URJWXVzFKlq0qBvCthq18ltMutPjYNk= kubermatic@7e54c85f5e39
-          
-          EOT,
+    kubeone_hosts = {
+      "control_plane" = {
+        "cloud_provider" = "gce"
+        "cluster_name" = "k1"
+        "hostnames" = [
+          "k1-control-plane-1",
         ]
+        "private_address" = [
+          "10.240.0.2",
+        ]
+        "public_address" = [
+          "34.141.138.245",
+        ]
+        "ssh_agent_socket" = "env:SSH_AUTH_SOCK"
+        "ssh_port" = 22
+        "ssh_private_key_file" = ""
+        "ssh_user" = "root"
       }
-      "replicas" = 1
     }
-  }
-  ```
+    kubeone_workers = {
+      "k1-pool-az-a" = {
+        "providerSpec" = {
+          "cloudProviderSpec" = {
+            "assignPublicIPAddress" = true
+            "diskSize" = 50
+            "diskType" = "pd-ssd"
+            "labels" = {
+              "k1-workers" = "pool-az-a"
+            }
+            "machineType" = "n1-standard-2"
+            "multizone" = true
+            "network" = "https://www.googleapis.com/compute/v1/projects/test-01-int-05/global/networks/k1"
+            "preemptible" = true
+            "regional" = false
+            "subnetwork" = "https://www.googleapis.com/compute/v1/projects/test-01-int-05/regions/europe-west4/subnetworks/k1-subnet"
+            "tags" = [
+              "firewall",
+              "targets",
+              "k1-pool-az-a",
+            ]
+            "zone" = "europe-west4-a"
+          }
+          "operatingSystem" = "ubuntu"
+          "operatingSystemSpec" = {
+            "distUpgradeOnBoot" = false
+          }
+          "sshPublicKeys" = [
+            <<-EOT
+            ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCvxsGRbxpkpYqjsHmlO0EYtGtxrlXc5vDYwz+CbzWHXiow/XK/3NE2l5XljvsVLvhDmFjP/06zWCBAP9HjV/Vh2Mk0LqDfyLgQOTCspQmxykHp6gSqbVmhn70wl2hMkpq685GlZGRLi7iGoHhJddsrmQUD+dxIeAtUqfcVDn1oP3Mdp+5FdHy9oIcAOp4Trzki16ZS+ee6JYKrGXzcFF1eNM5rVGOk7vMDiM9eOTCEho2UPToZUcKrA3HfpyVR7H5jT4grnQlm/anLB9YnKO9/n2bI2CtDep7POK4yNrVH7a2HMNBJA9gicvLz+un26LSH10Hat60IAQjb4JWqMb1XMvupGaqW5M/ZLOd9JzQOvMurdSx4rFOkM4GpHyZM8J1COJrYiMSesHIiEHc2PUUwzNggSQLMag2b1haj0jbCvV+xgSBSojjPtqKVYg849ockpePMRJRVxyiIUbfdFkJ7VkuG9Op3KAd5URJWXVzFKlq0qBvCthq18ltMutPjYNk= kubermatic@7e54c85f5e39
+
+            EOT,
+          ]
+        }
+        "replicas" = 1
+      }
+    }
+    ```
+  </details>
 
 * Now change back the root of a training repo
   ```bash

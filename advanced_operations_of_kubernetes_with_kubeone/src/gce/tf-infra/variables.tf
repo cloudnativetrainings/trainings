@@ -143,7 +143,7 @@ variable "workers_type" {
 
 variable "initial_machinedeployment_replicas" {
   description = "Number of replicas per MachineDeployment"
-  default     = 2
+  default     = 1
   type        = number
 }
 

@@ -49,7 +49,7 @@ The application stack with external access will be created with the following st
 Let's deploy the CertManager:
 * Install the CustomResourceDefinitions and cert-manager itself
   ```bash
-  kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.11.0/cert-manager.yaml
+  kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.16.1/cert-manager.yaml
   ```
 
 * Check the pods
@@ -78,8 +78,8 @@ Let's deploy the CertManager:
   gcloud dns managed-zones list
   ```
   ```text
-  NAME                DNS_NAME                             DESCRIPTION                VISIBILITY
-  student-XX-XXXX     student-XX-XXXX.cloud-native.trainingne for student-XX-XXXX  public
+  NAME                DNS_NAME                                DESCRIPTION                 VISIBILITY
+  student-XX-XXXX     student-XX-XXXX.cloud-native.training.  zone for student-XX-XXXX    public
   ```
   Adjust to your zone name
   ```bash
@@ -112,7 +112,7 @@ Let's deploy the CertManager:
 
   ```text
   NAME                                           TYPE   TTL    DATA
-  *.student-XX.kubermatic.XXXX.                      A      300    34.90.218.24
+  *.student-XX.kubermatic.XXXX.                  A      300    34.90.218.24
   ```
 
 **Alternative:** You could create an AWS Route 53 record on a hosted domain and link the `$EXTERNAL IP` accordingly to create DNS for `student-XX-XXXX.domain.name` and `*.student-XX-XXXX.domain.name`

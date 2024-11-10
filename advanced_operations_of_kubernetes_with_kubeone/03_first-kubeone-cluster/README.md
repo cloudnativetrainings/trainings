@@ -9,7 +9,7 @@ apiVersion: kubeone.k8c.io/v1beta2
 kind: KubeOneCluster
 name: k1
 versions:
-  kubernetes: '1.30.5'
+  kubernetes: '1.29.10'
 cloudProvider:
   gce: {}
   cloudConfig: |-
@@ -23,30 +23,35 @@ Start the KubeOne installation:
 kubeone install -t $TRAINING_DIR/src/gce/tf-infra -m $TRAINING_DIR/src/gce/kubeone.yaml --verbose
 ```
 
-KubeOne is combining the `kubeone.yaml` and Terraform state `./tf-infra/terraform.tfstate` files together. The initial infrastructure created by Terraform is used for the control plane. Afterwards KubeOne uses the Kubermatic machine-controller to manage the life-cycle of the worker nodes. The machine-controller requires several bits of information that must be provided by the user. Information that is needed is the following:
+<details>
+  <summary>More info</summary>
 
-*zone, machineType, diskSize, network, subnetwork, sshPublicKeys, cloudProviderSpec*
+  KubeOne is combining the `kubeone.yaml` and Terraform state `./tf-infra/terraform.tfstate` files together. The initial infrastructure created by Terraform is used for the control plane. Afterwards KubeOne uses the Kubermatic machine-controller to manage the life-cycle of the worker nodes. The machine-controller requires several bits of information that must be provided by the user. Information that is needed is the following:
 
-As to not having to input these values manually to create the machine-controller spec (MachineDeployment ) for the cluster, KubeOne will merge the contents of the Terraform state (see `terraform output`) with the `kubeone.yaml` to provide:
-- Cloud Controller Manager configuration `cloud-config`
-- Full MachineDeployment yaml and apply it to the Kubernetes cluster automatically.
+  *zone, machineType, diskSize, network, subnetwork, sshPublicKeys, cloudProviderSpec*
 
->
-> **Alternative:** You could also export the Terraform output into a tf.json file and use this one (not recommended, but makes the used content more visible):
->
-> ```bash
-> cd $TRAINING_DIR/src/gce/tf-infra
-> terraform output -json > tf.json
-> cd ..
-> kubeone install --tfjson tf.json --verbose
-> ```
->
+  As to not having to input these values manually to create the machine-controller spec (MachineDeployment ) for the cluster, KubeOne will merge the contents of the Terraform state (see `terraform output`) with the `kubeone.yaml` to provide:
+  - Cloud Controller Manager configuration `cloud-config`
+  - Full MachineDeployment yaml and apply it to the Kubernetes cluster automatically.
 
-To Adjust defaults for the upcoming Machine Deployment, take a look at the `output.tf` file. The rendered output of this file gets parsed by the `kubeone -t` command.
+  >
+  > **Alternative:** You could also export the Terraform output into a tf.json file and use this one (not recommended, but makes the used content more visible):
+  >
+  > ```bash
+  > cd $TRAINING_DIR/src/gce/tf-infra
+  > terraform output -json > tf.json
+  > cd ..
+  > kubeone install --tfjson tf.json --verbose
+  > ```
+  >
 
-```bash
-vim tf-infra/output.tf
+  To Adjust defaults for the upcoming Machine Deployment, take a look at the `output.tf` file. The rendered output of this file gets parsed by the `kubeone -t` command.
+
+  ```bash
+  vim tf-infra/output.tf
 ```
+</details>
+
 
 You should get a similar output as shown below:
 
@@ -108,7 +113,7 @@ INFO[23:48:20 CEST] Verifying that nodes in the cluster match nodes defined in t
 INFO[23:48:20 CEST] Verifying that all nodes in the cluster are ready…
 INFO[23:48:20 CEST] Verifying that there is no upgrade in the progress…
 NODE                 VERSION   APISERVER   ETCD
-k1-control-plane-1   v1.23.9   healthy     healthy
+k1-control-plane-1   v1.29.10   healthy     healthy
 ```
 
 ```bash
@@ -117,7 +122,7 @@ kubectl get nodes
 
 ```text
 NAME                           STATUS   ROLES                  AGE     VERSION
-k1-control-plane-1             Ready    control-plane,master   13m     v1.23.9
+k1-control-plane-1             Ready    control-plane,master   13m     v1.29.10
 ```
 
 Why is the worker node missing? -> Check the Machine Controller objects
@@ -127,14 +132,14 @@ kubectl -n kube-system get machinedeployment,machineset,machine
 ```
 
 ```text
-NAME                                            REPLICAS   AVAILABLE-REPLICAS   PROVIDER   OS       KUBELET   AGE
-machinedeployment.cluster.k8s.io/k1-pool-az-a   1          0                    gce        ubuntu   1.23.9    1m19s
+NAME                                               REPLICAS   AVAILABLE-REPLICAS   PROVIDER   OS       KUBELET   AGE
+machinedeployment.cluster.k8s.io/k1-pool-az-a      1          0                    gce        ubuntu   1.29.10    1m19s
 
 NAME                                               REPLICAS   AVAILABLE-REPLICAS   PROVIDER   OS       KUBELET   AGE
-machineset.cluster.k8s.io/k1-pool-az-a-ff4979f74   1          0                    gce        ubuntu   1.23.9    1m19s
+machineset.cluster.k8s.io/k1-pool-az-a-ff4979f74   1          0                    gce        ubuntu   1.29.10    1m19s
 
 NAME                                                  PROVIDER   OS       ADDRESS      KUBELET   AGE
-machine.cluster.k8s.io/k1-pool-az-a-ff4979f74-4vg7c   gce        ubuntu   10.240.0.6   1.23.9    1m19s
+machine.cluster.k8s.io/k1-pool-az-a-ff4979f74-4vg7c   gce        ubuntu   10.240.0.6   1.29.10    1m19s
 ```
 
 The created `machine` object gives you more information
@@ -145,7 +150,7 @@ kubectl -n kube-system describe machine
 
 ```text
 Versions:
-  Kubelet:  1.23.9
+  Kubelet:  1.29.10
 Status:
 Addresses:
   Address:  10.240.0.7
@@ -180,7 +185,7 @@ Node Ref:
   Resource Version:  1884
   UID:               da325955-841f-4538-bfe0-6f46518cbcc8
 Versions:
-  Kubelet:  v1.23.9
+  Kubelet:  v1.29.10
 Events:
 Type    Reason                          Age                    From                Message
 ----    ------                          ----                   ----                -------

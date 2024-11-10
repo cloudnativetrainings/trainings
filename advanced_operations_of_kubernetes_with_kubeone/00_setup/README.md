@@ -5,7 +5,7 @@
 ### Install KubeOne
 
 ```bash
-export KUBEONE_VERSION=1.8.3
+export KUBEONE_VERSION=1.8.0
 mkdir -p /tmp/k1 && cd /tmp/k1 && \
   wget https://github.com/kubermatic/kubeone/releases/download/v${KUBEONE_VERSION}/kubeone_${KUBEONE_VERSION}_linux_amd64.zip
 unzip kubeone_${KUBEONE_VERSION}_linux_amd64.zip
@@ -50,7 +50,7 @@ After you entered the container, verify the setup:
 
 * Verify kubectl version, a recent kubectl version (>= v.1.27.1)
   ```bash
-  kubectl version --short
+  kubectl version
   ```
 
 ## Authenticate your GCP account
