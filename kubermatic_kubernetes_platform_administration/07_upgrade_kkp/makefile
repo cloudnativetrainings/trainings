@@ -5,7 +5,7 @@ install_new_kkp:
 	rm -rf ~/.tmp/kkp-$(KKP_VERSION_NEW)/*
 	tar -xvf ~/.tmp/kubermatic-ce-$(KKP_VERSION_NEW).tar.gz -C ~/.tmp/kkp-$(KKP_VERSION_NEW)
 	chmod +x ~/.tmp/kkp-$(KKP_VERSION_NEW)/kubermatic-installer
-	sudo cp ~/.tmp/kkp-$(KKP_VERSION_NEW)/kubermatic-installer /usr/local/bin/kubermatic-installer
+	sudo cp ~/.tmp/kkp-$(KKP_VERSION_NEW)/kubermatic-installer ~/bin/kubermatic-installer
 	rm -rf ~/kkp/charts
 	cp -r ~/.tmp/kkp-$(KKP_VERSION_NEW)/charts ~/kkp
 	sed -i "s/\(KKP_VERSION=\).*/\1${KKP_VERSION_NEW}/g" ~/.bashrc

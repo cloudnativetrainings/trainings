@@ -1,14 +1,16 @@
-# Installation of the Seed 
+# Installation of the Seed
+
+In this lab you will create a KKP Seed Cluster.
 
 ```bash
-cd ~/04_setup_kkp_seed/
+cd ~/03_setup_kkp_seed/
 ```
 
 ## Add the Seed kubeconfig to the Master
 
 ```bash
-cp $KUBECONFIG ./temp-seed-kubeconfig
-kubectl create secret generic seed-kubeconfig -n kubermatic --from-file kubeconfig=./temp-seed-kubeconfig --dry-run=client -o yaml > ~/kkp/seed-kubeconfig-secret.yaml
+cp ~/kubeone/kkp-master-seed-cluster-kubeconfig ~/.tmp/temp-seed-kubeconfig
+kubectl create secret generic seed-kubeconfig -n kubermatic --from-file kubeconfig=~/.tmp/temp-seed-kubeconfig --dry-run=client -o yaml > ~/kkp/seed-kubeconfig-secret.yaml
 kubectl apply -f ~/kkp/seed-kubeconfig-secret.yaml
 ```
 
@@ -30,9 +32,10 @@ kubectl -n kubermatic get pods
 # * seed-proxy-kubermatic-...
 
 # Re-run the installer with kubermatic-seed option
-kubermatic-installer --charts-directory ~/kkp/charts deploy kubermatic-seed \
-  --config ~/kkp/kubermatic.yaml \
-  --helm-values ~/kkp/values.yaml  
+kubermatic-installer --kubeconfig ~/.kube/config \
+    --charts-directory ~/kkp/charts deploy kubermatic-seed \
+    --config ~/kkp/kubermatic.yaml \
+    --helm-values ~/kkp/values.yaml
 ```
 
 ## Create DNS entries for Seed
@@ -40,6 +43,7 @@ kubermatic-installer --charts-directory ~/kkp/charts deploy kubermatic-seed \
 ```bash
 # Store IP of NodePort Proxy into environment variable
 export SEED_IP=$(kubectl -n kubermatic get svc nodeport-proxy -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+# TODO add this to the .trainingrc file
 
 # Verify that environment variable is set
 echo $SEED_IP
@@ -47,9 +51,7 @@ echo $SEED_IP
 make IP=$SEED_IP create_seed_dns_record
 
 # Verify DNS record
-nslookup test.kubermatic.$DOMAIN
+nslookup test.kubermatic.$GCP_DOMAIN
 ```
 
 Congrats your KKP installation is now ready for use!!!
-
-Jump > [Home](../README.md) | Previous > [Setup KKP Master](../03_setup_kkp_master/README.md) | Next > [Create User Cluster](../05_create_user_cluster/README.md)

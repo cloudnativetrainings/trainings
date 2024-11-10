@@ -11,24 +11,23 @@ make install_new_kkp
 source ~/.bashrc
 
 # Verify the upgraded version
-kubermatic-installer --charts-directory ~/kkp/charts version
+kubermatic-installer --kubeconfig ~/.kube/config --charts-directory ~/kkp/charts version
 ```
 
 ## Update KKP
 
 ```bash
 # Update Master Components
-kubermatic-installer --charts-directory ~/kkp/charts deploy \
+kubermatic-installer --kubeconfig ~/.kube/config \
+    --charts-directory ~/kkp/charts deploy \
     --config ~/kkp/kubermatic.yaml \
     --helm-values ~/kkp/values.yaml
 
 # Update Seed Components
-kubermatic-installer --charts-directory ~/kkp/charts deploy kubermatic-seed \
+kubermatic-installer --kubeconfig ~/.kube/config --charts-directory ~/kkp/charts deploy kubermatic-seed \
   --config ~/kkp/kubermatic.yaml \
-  --helm-values ~/kkp/values.yaml     
+  --helm-values ~/kkp/values.yaml
 
 # Verify KKP got updated
 kubectl -n kubermatic get pods
-```    
-
-Jump > [Home](../README.md) | Previous > [Upgrade User Cluster](../06_upgrade_user_cluster/README.md) | Next > [Addons](../08_addons/README.md)
+```
