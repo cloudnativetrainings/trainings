@@ -178,6 +178,8 @@ resource "google_compute_instance" "control_plane" {
     }
   }
 
+  tags = ["${var.cluster_name}-control-plane-${count.index + 1}"]
+
   metadata = {
     sshKeys = "${var.ssh_username}:${file(var.ssh_public_key_file)}"
   }

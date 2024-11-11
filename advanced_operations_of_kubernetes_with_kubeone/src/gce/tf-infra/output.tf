@@ -92,7 +92,7 @@ output "kubeone_workers" {
           labels = {
             "${var.cluster_name}-workers" = "pool1"
           }
-          tags     = ["firewall", "targets", "${var.cluster_name}-pool1"]
+          tags     = ["firewall", "targets", "${var.cluster_name}-pool-az"]
           regional = false
           # Use custom image (optional)
           # customImage = ""

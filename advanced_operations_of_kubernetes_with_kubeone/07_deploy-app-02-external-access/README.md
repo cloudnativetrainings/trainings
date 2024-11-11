@@ -71,7 +71,7 @@ Let's deploy the CertManager:
   Ensure gcloud use the correct project
   ```bash
   gcloud projects list
-  gcloud config set project student-XX-xxxx
+  gcloud config set project $GCP_PROJECT_ID
   ```
   Set DNS_ZONE
   ```bash
@@ -214,8 +214,8 @@ kubectl get ingresses.networking.k8s.io
 ```
 
 ```text
-NAME       HOSTS                                     ADDRESS          PORTS      AGE
-helloweb   app-ext.student-XX-XXXX.cloud-native.training   34.90.218.24     80, 443    98s
+NAME       CLASS   HOSTS                                           ADDRESS       PORTS     AGE
+helloweb   nginx   app-ext.student-XX-XXXX.cloud-native.training   35.204.66.3   80, 443   108s
 ```
 
 Ensure that there are endpoints available for the service.

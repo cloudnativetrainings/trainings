@@ -34,29 +34,30 @@
        ```bash
        cd $TRAINING_DIR/src/gce
        mkdir machines
-       kubectl get machinedeployment k1-pool-az-a -o json | jq 'del(.metadata.creationTimestamp)|del(.metadata.resourceVersion)|del(.metadata.generation)|del(.metadata.selfLink)|del(.metadata.uid)|del(.status)' > machines/md-zone-a.json
+       kubectl get machinedeployment k1-pool-az-a -o yaml | kexp > machines/md-zone-a.yaml
        ```
      * Take a look to the definition
        ```bash
-       cat machines/md-zone-a.json
+       cat machines/md-zone-a.yaml
        ```
+
 
   2. Copy and replace the `machindeployment` definitions for zone `b` and `c`
      * Zone b
        ```bash
-       cp machines/md-zone-a.json machines/md-zone-b.json
-       sed -i 's/pool-az-a/pool-az-b/g' machines/md-zone-b.json
-       sed -i 's/europe-west4-a/europe-west4-b/g' machines/md-zone-b.json
+       cp machines/md-zone-a.yaml machines/md-zone-b.yaml
+       sed -i 's/pool-az-a/pool-az-b/g' machines/md-zone-b.yaml
+       sed -i 's/europe-west4-a/europe-west4-b/g' machines/md-zone-b.yaml
        ```
      * See the difference:
        ```bash
-       diff machines/md-zone-a.json machines/md-zone-b.json
+       diff machines/md-zone-a.yaml machines/md-zone-b.yaml
        ```
      * Zone c
        ```bash
-       cp machines/md-zone-a.json machines/md-zone-c.json
-       sed -i 's/pool-az-a/pool-az-c/g' machines/md-zone-c.json
-       sed -i 's/europe-west4-a/europe-west4-c/g' machines/md-zone-c.json
+       cp machines/md-zone-a.yaml machines/md-zone-c.yaml
+       sed -i 's/pool-az-a/pool-az-c/g' machines/md-zone-c.yaml
+       sed -i 's/europe-west4-a/europe-west4-c/g' machines/md-zone-c.yaml
        ```
 
   3. Apply the updated objects
@@ -127,18 +128,18 @@
      ```
 
 <details>
-  <summary>Alternative Method</summary>
+<summary>Alternative Method</summary>
 
-    ### (Alternative) HA by default in the Terraform output definition
+### (Alternative) HA by default in the Terraform output definition
 
-    Another option is to add the needed machine pools already in the beginning to the setup. To do this take a look into the `output.tf` and uncomment the complete section of `"${var.cluster_name}-pool-az-b"` and `"${var.cluster_name}-pool-az-c"`. If you would now create a new cluster, we would automatically get 3 `machinedeployments` for every zone.
+Another option is to add the needed machine pools already in the beginning to the setup. To do this take a look into the `output.tf` and uncomment the complete section of `"${var.cluster_name}-pool-az-b"` and `"${var.cluster_name}-pool-az-c"`. If you would now create a new cluster, we would automatically get 3 `machinedeployments` for every zone.
 
-    ```bash                                         
-    terraform apply
-    kubeone apply -t . -m ../kubeone.yaml --verbose
-    ```
+```bash
+terraform apply
+kubeone apply -t . -m ../kubeone.yaml --verbose
+```
 
-    > ***NOTE:*** The management of the worker nodes is way more flexible than that of the control plane nodes, so it's **NOT** recommended using the `output.tf` for the long term maintenance of the machine deployment objects. We recommend the usage of `md-XXX.yaml` files together with git to manage the cluster sizing. If no initial MachineDeployment should be created, remove all `"${var.cluster_name}-pool-az-X"` sections. 
-</summary>
+> ***NOTE:*** The management of the worker nodes is way more flexible than that of the control plane nodes, so it's **NOT** recommended using the `output.tf` for the long term maintenance of the machine deployment objects. We recommend the usage of `md-XXX.yaml` files together with git to manage the cluster sizing. If no initial MachineDeployment should be created, remove all `"${var.cluster_name}-pool-az-X"` sections. 
+</details>
 
 Jump > [**Home**](../README.md) | Previous > [**HA Cluster Setup**](../05_HA-master/README.md) | Next > [**Application with External Access**](../07_deploy-app-02-external-access/README.md)

@@ -1,144 +1,160 @@
-## Create HA Worker Pool
+## Update KubeOne Cluster to HA setup
 
-## Add additional Machine Pools for a multi AZ cluster
+In the next step, we will setup a real HA cluster over 3 availability zones to match a production setup as close as possible. 
 
-* To ensure that we have a real high-availability cluster we need at least one node in every availability zone. Therefore, we will create new pools by using the `machinedeployment` object. Currently, we only have one machine pool with one node in zone `europe-west4-a`:
+## Modify single master/node cluster to HA master setup
+
+### Create and setup additional HA master nodes
+
+* The current `terraform.tfvars` file contains a value `control_plane_vm_count = 1 ` and `control_plane_target_pool_members_count = 1`. This indicates that we only have one master instance set up and one listener to the load balancer for the control plane. Let's add the remaining master nodes to the cluster first. Change the value of the `control_plane_vm_count` in `terraform.tfvars` to `3` and save: 
+  ```hcl-terraform
+  cluster_name = "k1"
+  
+  project = "stundent-xx-project-name"
+  
+  region = "europe-west4"
+  # instance to create of the control plane
+  control_plane_vm_count = 3 # <<<< CHANGE
+  
+  # listeners of the Loadbalancer. Default is NOT HA, but ensure the bootstraping works -> after bootstraping increase to e.g. 3
+  control_plane_target_pool_members_count = 1
+  ```
+
+* Apply to create the missing infrastructure
   ```bash
-  kubectl -n kube-system get machinedeployments
+  cd $TRAINING_DIR/src/gce/tf-infra
+  terraform apply
+  ```
+
+* Install the missing master nodes with KubeOne
+  ```bash
+  kubeone apply -t . --manifest ../kubeone.yaml --verbose
+  ```
+
+* Now you should see 3 master nodes:
+  ```bash
+  kubectl get nodes
+  ```
+  Output:
+  ```text
+  NAME                           STATUS   ROLES    AGE     VERSION
+  k1-control-plane-1              Ready    control-plane   35m     v1.29.10
+  k1-control-plane-2              Ready    control-plane   3m45s   v1.29.10
+  k1-control-plane-3              Ready    control-plane   2m59s   v1.29.10
+  k1-pool-az-a-7d8ff98f97-4hvnh   Ready    <none>          29m     v1.29.10
+  ```
+  >Hint: Apply Changes of Cluster Properties by Using `kubeone apply`
+
+<details>
+<summary>More info about "kubeone apply"</summary>
+* The regular `kubone apply` command executes every change to the cluster like updates or installation additional nodes. Nevertheless, there are potential changes you need to enforce and skip some preflight checks.
+
+  In case, you want to change some of the cluster properties (e.g. enable a new feature), you can use the `--force-upgrade` command to reconcile the changes. Modify your manifest to include the desired changes, but don't change the Kubernetes version (unless you want to upgrade the cluster), and then run the `appĺy` command with the `--force-upgrade` flag:
+
+  ```bash
+  kubeone apply -t . --manifest ../kubeone.yaml --force-upgrade
+  ```
+  or 
+  ```bash
+  kubeone apply -t tf.json --manifest ../kubeone.yaml --force-upgrade
+  ```
+  Alternatively, the `kubeone upgrade` command can be used as well:
+  ```bash
+  kubeone upgrade --manifest kubeone.yaml -t tf.json --force
+  ```
+  >The `--force` flag instructs KubeOne to ignore the preflight errors, including the error saying that you're trying to upgrade to the already running version. At the upgrade time, KubeOne ensures that the actual cluster configuration matches the expected configuration, and therefore the `upgrade` command can be used to modify cluster properties.
+</details>
+
+### Add Master nodes to Kubernetes API Load Balancer
+  
+* If you now take a look at the LoadBalancer, it still only shows `1` instance, https://console.cloud.google.com/net-services/loadbalancing/details/network/europe-west4/k1-control-plane. To fix this, we need to also update the target pool member count to `3`:
+  ```hcl-terraform
+  cluster_name = "k1"
+  
+  project = "stundent-xx-project-name"
+  
+  region = "europe-west4"
+  # instance to create of the control plane
+  control_plane_vm_count = 3
+  
+  # listeners of the LoadBalancer. Default is NOT HA, but ensure the bootstrapping works -> after bootstrapping increase to e.g. 3
+  control_plane_target_pool_members_count = 3  # <<<< CHANGE
+  ```
+
+* Apply to update the Load Balancer backend listener pool. 
+  ```bash
+  terraform apply
+  ```
+  >Now the LoadBalancer should have 3 `Backend` services. Check: [GCP Console > Network Service > Load Balancing](https://console.cloud.google.com/net-services/loadbalancing/loadBalancers/list)
+  
+### Verify cluster health
+
+* After everything is finished check the status of the kubernetes cluster that was created:
+  ```bash
+  kubeone status -t . --manifest ../kubeone.yaml
+  ```
+  
+  ```text
+  INFO[23:48:18 CEST] Determine hostname…
+  INFO[23:48:19 CEST] Determine operating system…
+  INFO[23:48:20 CEST] Building Kubernetes clientset…
+  INFO[23:48:20 CEST] Verifying that Docker, Kubelet and Kubeadm are installed…
+  INFO[23:48:20 CEST] Verifying that nodes in the cluster match nodes defined in the manifest…
+  INFO[23:48:20 CEST] Verifying that all nodes in the cluster are ready…
+  INFO[23:48:20 CEST] Verifying that there is no upgrade in the progress…
+  NODE                 VERSION   APISERVER   ETCD
+  k1-control-plane-1   v1.29.10   healthy     healthy   
+  k1-control-plane-2   v1.29.10   healthy     healthy   
+  k1-control-plane-3   v1.29.10   healthy     healthy
+  ```
+
+* By default, the machine-controller deploys only one worker node. The number of worker nodes can be controlled in a similar fashion like a Kubernetes deployment, in that the number of worker nodes are controlled by the `replicas` field. You can check the current status of the machine-deployment replicas with the following command:
+  
+  ```bash
+  kubectl -n kube-system get machinedeployment
+  ```
+  ```text
+  NAME           REPLICAS   AVAILABLE-REPLICAS   PROVIDER   OS       KUBELET   AGE
+  k1-pool-az-a   1          1                    gce        ubuntu   1.29.10   33m
+  ```
+
+* You can scale it up by using the normal kubectl scale command. The only difference in this scenario is that we are scaling up/down worker nodes instead of Pods.
+  ```bash
+  kubectl -n kube-system scale machinedeployment k1-pool-az-a --replicas=2
+  ```
+  
+  ```bash
+  kubectl -n kube-system get machinedeployment
   ```
 
   ```text
   NAME           REPLICAS   AVAILABLE-REPLICAS   PROVIDER   OS       KUBELET   AGE
-  k1-pool-az-a   1          1                    gce        ubuntu   1.29.10   34m
+  k1-pool-az-a   2          1                    gce        ubuntu   1.29.10   34m
   ```
-  
+
+* After a few minutes the healthy node should show up:
   ```bash
-  kubectl get nodes --label-columns failure-domain.beta.kubernetes.io/zone
+  kubectl get nodes -l workerset=k1-pool-az-a -o wide
   ```
 
   ```text
-  NAME                            STATUS                        ROLES    AGE     VERSION    ZONE
-  k1-control-plane-1              Ready                         master   117m    v1.29.10   europe-west4-a
-  k1-control-plane-2              Ready                         master   41m     v1.29.10   europe-west4-b
-  k1-control-plane-3              Ready                         master   40m     v1.29.10   europe-west4-c
-  k1-pool-az-a-84dff9464c-g59bv   Ready                         <none>   2m30s   v1.29.10   europe-west4-a
-  ```   
+  NAME                            STATUS   ROLES    AGE   VERSION    INTERNAL-IP   EXTERNAL-IP     OS-IMAGE             KERNEL-VERSION   CONTAINER-RUNTIME
+  k1-pool-az-a-7d8ff98f97-4hvnh   Ready    <none>   34m   v1.29.10   10.164.0.27   34.91.243.116   Ubuntu 22.04.5 LTS   6.8.0-1015-gcp   containerd://1.6.33
+  k1-pool-az-a-7d8ff98f97-k8swf   Ready    <none>   44s   v1.29.10   10.164.0.30   34.34.51.179    Ubuntu 22.04.5 LTS   6.8.0-1015-gcp   containerd://1.6.33
+  ```
 
-* To reach an HA cluster, we would need worker nodes also in zones `europe-west4-b` and `europe-west4-c`. To accomplish this, we could reuse the current MachineDeployment `k1-pool-az-a` and duplicate the object for AZ `b` and `c`.
-  1. Extract the current `machinedeployment` `k1-pool-az-a`:
-     * Go the kube-system namespace
-       ```bash
-       kubectl config set-context --current --namespace=kube-system
-       ```
-     * Export current machine deployment
-       ```bash
-       cd $TRAINING_DIR/src/gce
-       mkdir machines
-       kubectl get machinedeployment k1-pool-az-a -o json | jq 'del(.metadata.creationTimestamp)|del(.metadata.resourceVersion)|del(.metadata.generation)|del(.metadata.selfLink)|del(.metadata.uid)|del(.status)' > machines/md-zone-a.json
-       ```
-     * Take a look to the definition
-       ```bash
-       cat machines/md-zone-a.json
-       ```
+* Currently, we don't need more than one node, so we scale down the workers back to 1:
+  ```bash
+  kubectl -n kube-system scale machinedeployment k1-pool-az-a --replicas=1
+  ```
 
-  2. Copy and replace the `machindeployment` definitions for zone `b` and `c`
-     * Zone b
-       ```bash
-       cp machines/md-zone-a.json machines/md-zone-b.json
-       sed -i 's/pool-az-a/pool-az-b/g' machines/md-zone-b.json
-       sed -i 's/europe-west4-a/europe-west4-b/g' machines/md-zone-b.json
-       ```
-     * See the difference:
-       ```bash
-       diff machines/md-zone-a.json machines/md-zone-b.json
-       ```
-     * Zone c
-       ```bash
-       cp machines/md-zone-a.json machines/md-zone-c.json
-       sed -i 's/pool-az-a/pool-az-c/g' machines/md-zone-c.json
-       sed -i 's/europe-west4-a/europe-west4-c/g' machines/md-zone-c.json
-       ```
+* Now check the node state and scale down by:
+  ```bash
+  watch kubectl get md,ms,ma,node -A
+  ```
 
-  3. Apply the updated objects
-     ```bash
-     kubectl apply -f machines/
-     ```
-  
-  4. Watch the update progress of the provisioning
-     ```bash
-     watch kubectl get machinedeployments,machine,nodes -A
-     ```
-     After a few minutes you should see, 3 nodes in total.
-     ```text
-     NAMESPACE     NAME                                            REPLICAS   AVAILABLE-REPLICAS   PROVIDER   OS       KUBELET   AGE
-     kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-a   1          1                    gce        ubuntu   1.29.10   3h33m
-     kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-b   1          1                    gce        ubuntu   1.29.10   3m30s
-     kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-c   1          1                    gce        ubuntu   1.29.10   3m30s
+* Verify that the machine-controller also deleted the machines on GCE. For this you can check the [Compute Engine Instance](https://console.cloud.google.com/compute/instances) page.
+  ![gce instances](../.images/gce_k1_instances.png)
 
-     NAMESPACE     NAME                                                   PROVIDER   OS       ADDRESS       KUBELET   AGE
-     kube-system   machine.cluster.k8s.io/k1-pool-az-a-75cddb6cd9-slgqk   gce        ubuntu   10.240.0.13   1.29.10   3m30s
-     kube-system   machine.cluster.k8s.io/k1-pool-az-b-777d7cc84b-g76zf   gce        ubuntu   10.240.0.15   1.29.10   3m29s
-     kube-system   machine.cluster.k8s.io/k1-pool-az-c-5d5cfcc5bf-gpjpg   gce        ubuntu   10.240.0.14   1.29.10   3m29s
 
-     NAMESPACE   NAME                                         STATUS   ROLES    AGE     VERSION
-                 node/k1-control-plane-1                       Ready    master   4h11m   v1.29.10
-                 node/k1-control-plane-2                       Ready    master   3h34m   v1.29.10
-                 node/k1-control-plane-3                       Ready    master   3h33m   v1.29.10
-                 node/k1-pool-az-a-75cddb6cd9-slgqk            Ready    <none>   81s     v1.29.10
-                 node/k1-pool-az-b-777d7cc84b-g76zf            Ready    <none>   77s     v1.29.10
-                 node/k1-pool-az-c-5d5cfcc5bf-gpjpg            Ready    <none>   67s     v1.29.10
-     ```
-     
-     Now check again the availability zones
-     ```bash
-     kubectl get nodes --label-columns failure-domain.beta.kubernetes.io/zone
-     ```
-     ```text
-     NAME                            STATUS   ROLES    AGE     VERSION    ZONE
-     k1-control-plane-1              Ready    master   4h11m   v1.29.10   europe-west4-a
-     k1-control-plane-2              Ready    master   3h35m   v1.29.10   europe-west4-b
-     k1-control-plane-3              Ready    master   3h34m   v1.29.10   europe-west4-c
-     k1-pool-az-a-75cddb6cd9-slgqk   Ready    <none>   99s     v1.29.10   europe-west4-a
-     k1-pool-az-b-777d7cc84b-g76zf   Ready    <none>   95s     v1.29.10   europe-west4-b
-     k1-pool-az-c-5d5cfcc5bf-gpjpg   Ready    <none>   85s     v1.29.10   europe-west4-c
-     ```
-
-  5. Change back to the default namespace
-     ```bash
-     kubectl config set-context --current --namespace=default
-     ```
-     or
-     ```bash
-     kcns default
-     ```
-
-  6. Due to the dynamic management of the machine deployments, we could optionally remove the default `machinedeployment` config of the terraform `output.tf` file. In a disaster recovery situation, this would ensure that you will not mis-configure your machine configs. To do this, just remove everything of the `output "kubeone_workers"` section in the `output.tf` file:
-     ```hcl-terraform
-     ### remove everything of
-     output "kubeone_workers" {
-     #...
-     }
-     ```
-     
-     ```bash
-     cd $TRAINING_DIR/src/gce/tf-infra
-     vim output.tf
-     terraform apply
-     ```
-
-<details>
-  <summary>Alternative Method</summary>
-
-    ### (Alternative) HA by default in the Terraform output definition
-
-    Another option is to add the needed machine pools already in the beginning to the setup. To do this take a look into the `output.tf` and uncomment the complete section of `"${var.cluster_name}-pool-az-b"` and `"${var.cluster_name}-pool-az-c"`. If you would now create a new cluster, we would automatically get 3 `machinedeployments` for every zone.
-
-    ```bash                                         
-    terraform apply
-    kubeone apply -t . -m ../kubeone.yaml --verbose
-    ```
-
-    > ***NOTE:*** The management of the worker nodes is way more flexible than that of the control plane nodes, so it's **NOT** recommended using the `output.tf` for the long term maintenance of the machine deployment objects. We recommend the usage of `md-XXX.yaml` files together with git to manage the cluster sizing. If no initial MachineDeployment should be created, remove all `"${var.cluster_name}-pool-az-X"` sections. 
-</summary>
-
-Jump > [**Home**](../README.md) | Previous > [**HA Cluster Setup**](../05_HA-master/README.md) | Next > [**Application with External Access**](../07_deploy-app-02-external-access/README.md)
+Jump > [**Home**](../README.md) | Previous > [**Deploy a Simple Application**](../04_deploy-app-01-simple/README.md) | Next > [**HA Worker Pool**](../06_HA-worker/README.md)

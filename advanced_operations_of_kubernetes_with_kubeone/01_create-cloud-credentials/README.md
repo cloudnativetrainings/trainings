@@ -26,8 +26,8 @@ Create a service account `k1-service-account` for your Google Cloud resources, w
   export GCP_SERVICE_ACCOUNT_ID=$(gcloud iam service-accounts list --format='value(email)' --filter='email~k1-service-account.*')
   # e.g.: k1-service-account@student-XX-project.iam.gserviceaccount.com
 
-  # for avoiding problem with Google Cloud Shell on reconnects we persist this value also into our ~/.bashrc rile
-  echo "export GCP_SERVICE_ACCOUNT_ID=$GCP_SERVICE_ACCOUNT_ID" >> ~/.bashrc
+  # for avoiding problem with Google Cloud Shell on reconnects we persist this value also into our .trainingrc file
+  echo "export GCP_SERVICE_ACCOUNT_ID=$GCP_SERVICE_ACCOUNT_ID" >> $TRAINING_DIR/.trainingrc
 
 
   ```
@@ -53,8 +53,8 @@ Create a service account `k1-service-account` for your Google Cloud resources, w
   ls -la *.json
   export GOOGLE_CREDENTIALS=$(cat ./k8c-cluster-provisioner-sa-key.json)
 
-  # for avoiding problem with Google Cloud Shell on reconnects we persist this value also into our ~/.bashrc rile
-  echo "export GOOGLE_CREDENTIALS='$(cat ./k8c-cluster-provisioner-sa-key.json)'" >> ~/.bashrc
+  # for avoiding problem with Google Cloud Shell on reconnects we persist this value also into our .trainingrc rile
+  echo "export GOOGLE_CREDENTIALS='$(cat ./k8c-cluster-provisioner-sa-key.json)'" >> $TRAINING_DIR/.trainingrc
 
   ```
 

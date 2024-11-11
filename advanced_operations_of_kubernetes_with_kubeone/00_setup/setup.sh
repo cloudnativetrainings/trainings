@@ -28,8 +28,8 @@ gcloud config set project $PROJECT_ID
 gcloud config set compute/region $REGION
 gcloud config set compute/zone $ZONE
 
-# manifest environment variables in ~/.bashrc file
-echo "export GCP_PROJECT_ID=$PROJECT_ID" >> ~/.bashrc
-echo "export GCP_REGION=$REGION" >> ~/.bashrc
-echo "export GCP_ZONE=$ZONE" >> ~/.bashrc
-. ~/.bashrc
+# manifest environment variables in $TRAINING_DIR/.trainingrc file
+echo "export GCP_PROJECT_ID=$PROJECT_ID" >> $TRAINING_DIR/.trainingrc
+echo "export GCP_REGION=$REGION" >> $TRAINING_DIR/.trainingrc
+echo "export GCP_ZONE=$ZONE" >> $TRAINING_DIR/.trainingrc
+. $TRAINING_DIR/.trainingrc

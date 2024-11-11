@@ -24,31 +24,31 @@ kubeone install -t $TRAINING_DIR/src/gce/tf-infra -m $TRAINING_DIR/src/gce/kubeo
 ```
 
 <details>
-  <summary>More info</summary>
+<summary>More info</summary>
 
-  KubeOne is combining the `kubeone.yaml` and Terraform state `./tf-infra/terraform.tfstate` files together. The initial infrastructure created by Terraform is used for the control plane. Afterwards KubeOne uses the Kubermatic machine-controller to manage the life-cycle of the worker nodes. The machine-controller requires several bits of information that must be provided by the user. Information that is needed is the following:
+KubeOne is combining the `kubeone.yaml` and Terraform state `./tf-infra/terraform.tfstate` files together. The initial infrastructure created by Terraform is used for the control plane. Afterwards KubeOne uses the Kubermatic machine-controller to manage the life-cycle of the worker nodes. The machine-controller requires several bits of information that must be provided by the user. Information that is needed is the following:
 
-  *zone, machineType, diskSize, network, subnetwork, sshPublicKeys, cloudProviderSpec*
+*zone, machineType, diskSize, network, subnetwork, sshPublicKeys, cloudProviderSpec*
 
-  As to not having to input these values manually to create the machine-controller spec (MachineDeployment ) for the cluster, KubeOne will merge the contents of the Terraform state (see `terraform output`) with the `kubeone.yaml` to provide:
-  - Cloud Controller Manager configuration `cloud-config`
-  - Full MachineDeployment yaml and apply it to the Kubernetes cluster automatically.
+As to not having to input these values manually to create the machine-controller spec (MachineDeployment ) for the cluster, KubeOne will merge the contents of the Terraform state (see `terraform output`) with the `kubeone.yaml` to provide:
+- Cloud Controller Manager configuration `cloud-config`
+- Full MachineDeployment yaml and apply it to the Kubernetes cluster automatically.
 
-  >
-  > **Alternative:** You could also export the Terraform output into a tf.json file and use this one (not recommended, but makes the used content more visible):
-  >
-  > ```bash
-  > cd $TRAINING_DIR/src/gce/tf-infra
-  > terraform output -json > tf.json
-  > cd ..
-  > kubeone install --tfjson tf.json --verbose
-  > ```
-  >
+>
+> **Alternative:** You could also export the Terraform output into a tf.json file and use this one (not recommended, but makes the used content more visible):
+>
+> ```bash
+> cd $TRAINING_DIR/src/gce/tf-infra
+> terraform output -json > tf.json
+> cd ..
+> kubeone install --tfjson tf.json --verbose
+> ```
+>
 
-  To Adjust defaults for the upcoming Machine Deployment, take a look at the `output.tf` file. The rendered output of this file gets parsed by the `kubeone -t` command.
+To Adjust defaults for the upcoming Machine Deployment, take a look at the `output.tf` file. The rendered output of this file gets parsed by the `kubeone -t` command.
 
-  ```bash
-  vim tf-infra/output.tf
+```bash
+vim tf-infra/output.tf
 ```
 </details>
 
@@ -94,8 +94,8 @@ A kubeconfig file will be generated after the KubeOne installation. Export it an
 ```bash
 export KUBECONFIG=$TRAINING_DIR/k1-kubeconfig
 
-# for avoiding problem with Google Cloud Shell on reconnects we persist this value also into our ~/.bashrc rile
-echo "export KUBECONFIG=$TRAINING_DIR/k1-kubeconfig" >> ~/.bashrc
+# for avoiding problem with Google Cloud Shell on reconnects we persist this value also into our .trainingrc rile
+echo "export KUBECONFIG=$TRAINING_DIR/k1-kubeconfig" >> $TRAINING_DIR/.trainingrc
 ```
 
 Check if you get one master and one worker node:

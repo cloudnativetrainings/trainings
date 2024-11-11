@@ -2,7 +2,37 @@
 
 ## Install Tooling
 
-### Install KubeOne
+### Run KubeOne Tooling Container
+
+Kubermatic provides a container image which consists of all necessary tools to deploy KubeOne [here](https://quay.io/repository/kubermatic-labs/kubeone-tooling?tab=tags)
+
+```bash
+# clone trainings repo
+git clone https://github.com/cloudnativetrainings/trainings.git
+
+# start the tooling container
+export KUBEONE_VERSION=1.8.0
+docker run -d -it --network host -v $HOME/trainings/advanced_operations_of_kubernetes_with_kubeone:/home/kubermatic/training --name kubeone-tooling-${KUBEONE_VERSION} quay.io/kubermatic-labs/kubeone-tooling:${KUBEONE_VERSION}
+
+# start a shell in the container
+docker exec -it kubeone-tooling-${KUBEONE_VERSION} bash
+```
+
+### Setup Training Environment
+
+```bash
+export TRAINING_DIR=~/training
+echo "export TRAINING_DIR=$TRAINING_DIR" >> $TRAINING_DIR/.trainingrc
+echo "cd $TRAINING_DIR" >> $TRAINING_DIR/.trainingrc
+. $TRAINING_DIR/.trainingrc
+```
+
+<details>
+<summary>Without the tooling container</summary>
+
+### Install Tooling
+
+You can also run this on your Linux box (you need to )
 
 ```bash
 export KUBEONE_VERSION=1.8.0
@@ -16,13 +46,15 @@ cd ~
 ### Setup Training Environment
 
 ```bash
+git clone https://github.com/cloudnativetrainings/trainings.git
 export TRAINING_DIR=~/trainings/advanced_operations_of_kubernetes_with_kubeone
-echo "export TRAINING_DIR=$TRAINING_DIR" >> ~/.bashrc
-echo "export PATH=$PATH:~/bin" >> ~/.bashrc
-echo ". <(kubeone completion bash)" >> ~/.bashrc
-echo "cd $TRAINING_DIR" >> ~/.bashrc
-. ~/.bashrc
+echo "export TRAINING_DIR=$TRAINING_DIR" >> $TRAINING_DIR/.trainingrc
+echo "export PATH=$PATH:~/bin" >> $TRAINING_DIR/.trainingrc
+echo ". <(kubeone completion bash)" >> $TRAINING_DIR/.trainingrc
+echo "cd $TRAINING_DIR" >> $TRAINING_DIR/.trainingrc
+. $TRAINING_DIR/.trainingrc
 ```
+</details>
 
 ## Verify setup
 
@@ -59,6 +91,7 @@ After you entered the container, verify the setup:
 
 ```bash
 ./00_setup/setup.sh
+source $TRAINING_DIR/.trainingrc
 ```
 
 ### List your training projects
