@@ -36,8 +36,11 @@ A new bucket should be created! Now let's create a dedicated service account for
   ```
 * Configure your IDs
   ```bash
-  export GCP_PROJECT_ID=__YOUR_GCP_PROJECT_ID__                  #student-XX-project
-  export GCP_VELERO_SERVICE_ACCOUNT_ID=__YOUR_GCP_SERVICE_ACCOUNT_ID__  # velero-service-account@student-XX.iam.gserviceaccount.com 
+  export GCP_VELERO_SERVICE_ACCOUNT_ID=$(gcloud iam service-accounts list --format='value(email)' --filter='email~velero-service-account.*')
+  # e.g.: velero-service-account@student-XX-project.iam.gserviceaccount.com
+
+  # for avoiding problem with Google Cloud Shell on reconnects we persist this value also into our .trainingrc file
+  echo "export GCP_VELERO_SERVICE_ACCOUNT_ID=$GCP_VELERO_SERVICE_ACCOUNT_ID" >> $TRAINING_DIR/.trainingrc
   ```
 * Create policy binding
   ```bash
@@ -45,7 +48,7 @@ A new bucket should be created! Now let's create a dedicated service account for
   ```
 * Create a new json key for your service account
   ```
-  cd -
+  cd $TRAINING_DIR
   cd ./.secrets
   gcloud iam service-accounts keys create --iam-account $GCP_VELERO_SERVICE_ACCOUNT_ID credentials-velero.json
   cd -

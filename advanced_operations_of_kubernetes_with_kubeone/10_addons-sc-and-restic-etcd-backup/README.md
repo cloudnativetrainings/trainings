@@ -127,7 +127,7 @@ apiVersion: kubeone.k8c.io/v1beta2
 kind: KubeOneCluster
 name: k1
 versions:
-  kubernetes: '1.23.9'
+  kubernetes: '1.29.10'
 cloudProvider:
   gce: {}
   cloudConfig: |-
@@ -303,7 +303,7 @@ kubectl logs test-etcd-backup-gg8gw
 
 See, if the bucket contains restic data
 ```
-gsutil ls -r gs://k1-backup-bucket-student-XX/etcd-snapshot-backup
+gsutil ls -r gs://k1-backup-bucket-${GCP_PROJECT_ID}/etcd-snapshot-backup
 ```
 Alright, seems everything looks fine, and our cluster has automatic backup configured.
 
