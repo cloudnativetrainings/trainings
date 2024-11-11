@@ -7,11 +7,9 @@ export GCP_MAIL=$GCP_PROJECT_ID@cloud-native.training
 export GCP_SA_NAME=kkp-admin-training
 export GCP_SA_MAIL=$GCP_SA_NAME@$GCP_PROJECT_ID.iam.gserviceaccount.com
 export GCP_DOMAIN=$GCP_PROJECT_ID.cloud-native.training
-export GCP_REPO_URL=gcr.io/$GCP_PROJECT_ID
 
 # set K1 && KKP versions
 export KUBEONE_VERSION=1.8.2
-export KUBEONE_VERSION_NEW=1.8.3
 export KKP_VERSION=2.25.11
 export KKP_VERSION_NEW=2.26.0
 
@@ -28,4 +26,4 @@ sudo wget -qO ~/bin/yq https://github.com/mikefarah/yq/releases/latest/download/
 sudo chmod a+x ~/bin/yq
 
 # set the Google Credentials file 
-export GOOGLE_CREDENTIALS=$(cat ~/secrets/key.json)
+export GOOGLE_CREDENTIALS=$(cat ~/secrets/google-sa-key.json)

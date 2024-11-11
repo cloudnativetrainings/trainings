@@ -1,14 +1,8 @@
-# Adding Application Templates
+# Templating Applications
 
 In this lab you will create some application definitions. Afterwards those applications will be deployable in the user clusters. The application manifests have to be applied against the master cluster.
 
-```bash
-cd ~/05_applications
-```
-
-<!-- # TODO get rid of the addons repo -->
-
-## Applying the applications
+## Apply the Application Defintions
 
 ```bash
 # apply the application definitions
@@ -31,19 +25,24 @@ You will be able to deploy the applications in your user cluster after ~ 30 seco
 ## Verify your applications got deployed into your user cluster properly
 
 ```bash
-# verify the namespaces got created
-kubectl --kubeconfig=~/kubeconfig-admin-XXXXX get ns
+# verify the helm releases
+helm --kubeconfig ~/kubeconfig-admin-XXXXX ls -A
 
 # verify the echoserver application
 kubectl --kubeconfig=~/kubeconfig-admin-XXXXX -n echoserver get all
 kubectl --kubeconfig=~/kubeconfig-admin-XXXXX -n echoserver get endpoints
-kubectl --kubeconfig=~/kubeconfig-admin-XXXXX -n echoserver desribe echoserver-echoserver-echo-server
+kubectl --kubeconfig=~/kubeconfig-admin-XXXXX -n echoserver desribe ingress echoserver-echoserver-echo-server
 
 # verify the ingress-nginx application
-kubectl --kubeconfig ~/kubeconfig-admin-njl5lrd2fz -n ingress-nginx get all
+kubectl --kubeconfig ~/kubeconfig-admin-XXXXX -n ingress-nginx get all
+
+# get the external ip address of the ingress-controller
+kubectl --kubeconfig ~/kubeconfig-admin-XXXXX -n ingress-nginx get svc ingress-nginx-ingress-nginx-controller
+
+# verify the stack via curl
+curl http://<EXTERNAL-IP>:80/ | jq
 
 # verify the stack via browser
-# copy the external-ip from the service `ingress-nginx-ingress-nginx-controller`
 # visit the url in your browser (pay attention that you are using http) - eg http://34.89.197.223:80/
 # => you will receive the response from the echo server
 ```

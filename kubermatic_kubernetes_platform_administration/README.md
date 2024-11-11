@@ -43,7 +43,7 @@ mkdir -p ~/bin
 ssh-keygen -N '' -f ~/secrets/kkp_admin_training
 
 # get the Google Credentials and add it to the .trainingrc file
-touch ~/secrets/key.json
+touch ~/secrets/google-sa-key.json
 source ~/.trainingrc
 make get-google-credentials
 

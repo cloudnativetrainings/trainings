@@ -106,10 +106,14 @@ kubermatic-installer --kubeconfig ~/.kube/config \
 
 # Verify everyting is running smoothly
 # (Note that the pods kubermatic-api-XXXXX will not run smoothly due to DNS is not setup yet)
-watch -n 1 kubectl get pods -A
+watch -n 1 kubectl -n kubermatic get pods
 ```
 
-## Apply the Production ClusterIssuer
+## Setup DNS and TLS
+
+### Apply the Production Cert-Manager ClusterIssuer
+
+For having TLS communication we are using cert-manager.
 
 ```bash
 # Change the email address
@@ -118,14 +122,13 @@ sed -i 's/TODO-STUDENT-EMAIL@cloud-native.training/'$GCP_MAIL'/g' ~/kkp/clusteri
 kubectl apply -f ~/kkp/clusterissuer.yaml
 ```
 
-## Configure DNS
+### Configure DNS
 
-Copy the IP address from the kubermatic-installer output and make use of it like the following:
+Configure the DNS records for accessing KKP UI.
 
 ```bash
 # Store IP of Loadbalancer into environment variable
 export INGRESS_IP=$(kubectl -n nginx-ingress-controller get service nginx-ingress-controller -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
-# TODO add this to the .trainingrc file
 
 # Verify that environment variable is set
 echo $INGRESS_IP
@@ -137,7 +140,7 @@ nslookup $GCP_DOMAIN
 nslookup test.$GCP_DOMAIN
 ```
 
-## Switch to LetsEncrypt Prod
+### Switch to LetsEncrypt Prod
 
 Adapt the settings in the configuration files with the following:
 
@@ -155,13 +158,13 @@ kubermatic-installer --kubeconfig ~/.kube/config \
     --config ~/kkp/kubermatic.yaml \
     --helm-values ~/kkp/values.yaml
 
-# Verify everyting is running smoothly
-# (Note that the pods kubermatic-api-XXXXX should be fine)
-watch -n 1 kubectl get pods -A
-
 # Verify you are obtain valid certificates from LetsEncrypt
 # (Note that it can take up a few minutes to get the certs in ready state)
 kubectl get certs -A
+
+# Verify everyting is running smoothly
+# (Note that the pods kubermatic-api-XXXXX should be fine)
+watch -n 1 kubectl -n kubermatic get pods
 ```
 
 ## Visit your KKP Master Installation
