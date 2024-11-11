@@ -7,7 +7,7 @@ In this lab you will create your first User Cluster.
 Generate a ServiceAccount holding the GCE Credentials via
 
 ```bash
-base64 -w0 ~/secrets/key.json
+base64 -w0 ~/secrets/google-sa-key.json
 ```
 
 - Create a new project
@@ -18,7 +18,7 @@ base64 -w0 ~/secrets/key.json
 - Within Tab `Cluster`
   - Generate a random Cluster name
 - Within Tab `Settings`
-  - Copy the base64 encoded GCE key.json in the field `Service Account`
+  - Copy the base64 encoded GCE google-sa-key.json in the field `Service Account`
 - Within Tab `Initial Nodes`
   - Generate a random MachineDeployment name
   - Set the number of replicas to 3

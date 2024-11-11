@@ -12,7 +12,7 @@ Create a Preset
 
 1. On the Preset Tab choose a name, eg `gce`
 1. On the Provider Tab choose Google Cloud
-1. In the Settings Tab add the base64 encoded GCE key.json (you can get it again via `base64 ~/secrets/key.json -w0`)
+1. In the Settings Tab add the base64 encoded GCE google-sa-key.json (you can get it again via `base64 ~/secrets/google-sa-key.json -w0`)
 
 ### Create Cluster Template
 

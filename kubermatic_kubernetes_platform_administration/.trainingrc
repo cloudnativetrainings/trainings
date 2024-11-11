@@ -28,4 +28,4 @@ sudo wget -qO ~/bin/yq https://github.com/mikefarah/yq/releases/latest/download/
 sudo chmod a+x ~/bin/yq
 
 # set the Google Credentials file 
-export GOOGLE_CREDENTIALS=$(cat ~/secrets/key.json)
+export GOOGLE_CREDENTIALS=$(cat ~/secrets/google-sa-key.json)

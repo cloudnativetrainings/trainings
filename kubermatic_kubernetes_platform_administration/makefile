@@ -4,10 +4,8 @@ get-google-credentials:
 	gcloud projects add-iam-policy-binding ${GCP_PROJECT_ID} --member serviceAccount:${GCP_SA_MAIL} --role='roles/compute.admin'
 	gcloud projects add-iam-policy-binding ${GCP_PROJECT_ID} --member serviceAccount:${GCP_SA_MAIL} --role='roles/iam.serviceAccountUser'
 	gcloud projects add-iam-policy-binding ${GCP_PROJECT_ID} --member serviceAccount:${GCP_SA_MAIL} --role='roles/viewer'
-	gcloud iam service-accounts keys create --iam-account ${GCP_SA_MAIL} key.json
-	mv key.json ~/secrets/key.json
-
-# TODO rename key.json towards google_key.json
+	gcloud iam service-accounts keys create --iam-account ${GCP_SA_MAIL} google-sa-key.json
+	mv google-sa-key.json ~/secrets/google-sa-key.json
 
 .PHONY: verify
 verify: 
@@ -22,7 +20,7 @@ verify:
 	test -n "${KUBEONE_VERSION_NEW}"
 	test -n "${KKP_VERSION}"
 	test -n "${KKP_VERSION_NEW}"
-	test -f secrets/key.json
+	test -f secrets/google-sa-key.json
 # TODO does not work due to json data test -n '${GOOGLE_CREDENTIALS}'
 # TODO test other tools - uuid-runtime apache2-utils
 	yq --version
