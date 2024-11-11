@@ -10,7 +10,7 @@ Generate a ServiceAccount holding the GCE Credentials via
 base64 -w0 ~/secrets/google-sa-key.json
 ```
 
-- Create a new project
+- Create a new project.
 - Click the button `Create Resource / Cluster`
 - Within Tab `Provider`
   - Choose Provider `Google Cloud`
@@ -29,6 +29,8 @@ base64 -w0 ~/secrets/google-sa-key.json
   - do nothing yet
 - Within Tab `Summary`
   - Click the button `Create Cluster`
+
+Afterwards it will take ~ 5 minutes your cluster will be usable.
 
 ## Verify in Terminal
 
@@ -76,11 +78,11 @@ kubectl get cluster XXXXX -o yaml
 # get machinedeployments of the user cluster
 kubectl --kubeconfig=~/kubeconfig-admin-XXXXX -n kube-system get machinedeployment
 
-# edit the machine deployment of the user cluster
+# edit the machine deployment of the user cluster, eg scale the worker nodes to 1 replica
 kubectl --kubeconfig=~/kubeconfig-admin-XXXXX -n kube-system edit md MD-NAME
 
-# scale the machine deployment of the user cluster
-kubectl --kubeconfig=~/kubeconfig-admin-XXXXX -n kube-system scale md MD-NAME --replicas 1
+# scale the machine deployment of the user cluster back again to 3
+kubectl --kubeconfig=~/kubeconfig-admin-XXXXX -n kube-system scale md MD-NAME --replicas 3
 
 # verify your changes
 watch -n 1 kubectl --kubeconfig=~/kubeconfig-admin-XXXXX -n kube-system get md,ms,machine,nodes

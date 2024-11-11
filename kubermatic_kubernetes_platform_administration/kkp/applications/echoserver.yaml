@@ -4,6 +4,8 @@ metadata:
   name: echoserver
 spec:
   description: An echo server is a server that replicates the request sent by the client and sends it back.
+  documentationURL: https://ealenn.github.io/Echo-Server/
+  sourceURL: https://github.com/Ealenn/charts/tree/master/charts/echo-server
   method: helm
   versions:
     - template:
@@ -13,9 +15,8 @@ spec:
             chartVersion: 0.5.0
             url: https://ealenn.github.io/charts
       version: 0.7.0
-  documentationURL: https://ealenn.github.io/Echo-Server/
-  sourceURL: https://github.com/Ealenn/charts/tree/master/charts/echo-server
   defaultValues:
+    replicaCount: 3
     ingress:
       enabled: true
       ingressClassName: "nginx"

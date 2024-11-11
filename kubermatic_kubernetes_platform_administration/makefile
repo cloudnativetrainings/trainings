@@ -15,9 +15,7 @@ verify:
 	test -n "${GCP_SA_NAME}"
 	test -n "${GCP_SA_MAIL}"
 	test -n "${GCP_DOMAIN}"
-	test -n "${GCP_REPO_URL}"
 	test -n "${KUBEONE_VERSION}"
-	test -n "${KUBEONE_VERSION_NEW}"
 	test -n "${KKP_VERSION}"
 	test -n "${KKP_VERSION_NEW}"
 	test -f secrets/google-sa-key.json
