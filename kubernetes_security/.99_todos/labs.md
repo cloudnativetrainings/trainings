@@ -10,3 +10,5 @@ distroless - show the pain points
 systemctl status falco does not work anymore
 
 # new lab to track syscalls before doing the linux kernel stuff
+
+# cilium tetragon vs falco

@@ -64,7 +64,6 @@ htpasswd -bnBC 10 "" PASSWORD_HERE | tr -d ':\n' | sed 's/$2y/$2a/'
 ### Generate uuid for telemetry
 
 ```bash
-# TODO not working due to gcp reconnect -> sudo apt install uuid-runtime
 sed -i 's/uuid: \"\"/uuid: \"'$(uuidgen -r)'\"/g' ~/kkp/values.yaml
 ```
 
@@ -74,7 +73,6 @@ Change the minio settings in the file `values.yaml` to the following:
 
 ```yaml
 # Take care about the proper indent in the yaml file!!!
-# TODO note about keys - or generate them
 minio:
   storeSize: "10Gi"
   storageClass: kubermatic-backup
