@@ -1,6 +1,8 @@
 # general
 is it possible to hide the img folder via .img???
 enable autoscaling of k1 cluster
+disable telemtry
+add images to applications
 
 # broken labs
 oauth
