@@ -31,7 +31,7 @@ helm --kubeconfig ~/kubeconfig-admin-XXXXX ls -A
 # verify the echoserver application
 kubectl --kubeconfig=~/kubeconfig-admin-XXXXX -n echoserver get all
 kubectl --kubeconfig=~/kubeconfig-admin-XXXXX -n echoserver get endpoints
-kubectl --kubeconfig=~/kubeconfig-admin-XXXXX -n echoserver desribe ingress echoserver-echoserver-echo-server
+kubectl --kubeconfig=~/kubeconfig-admin-XXXXX -n echoserver describe ingress echoserver-echoserver-echo-server
 
 # verify the ingress-nginx application
 kubectl --kubeconfig ~/kubeconfig-admin-XXXXX -n ingress-nginx get all

@@ -6,23 +6,23 @@
 
 If you are in Incognito Mode you may get this message:
 
-![](../img/cookies_01.png)
+![](./img/cookies_01.png)
 
 Open this dialogue:
 
-![](../img/cookies_02.png)
+![](./img/cookies_02.png)
 
 Allow Cookies:
 
-![](../img/cookies_03.png)
+![](./img/cookies_03.png)
 
 ### Select Home Directory
 
-![](../img/open_home_workspace.png)
+![](./img/open_home_workspace.png)
 
 ### Open a new tab
 
-![](../img/choose_project.png)
+![](./img/choose_project.png)
 
 ## Setup Environment
 

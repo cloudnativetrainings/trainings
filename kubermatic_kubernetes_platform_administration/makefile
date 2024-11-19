@@ -10,16 +10,16 @@ get-google-credentials:
 
 .PHONY: verify
 verify: 
-	@test -n "${GCP_PROJECT_ID}" && printf "%-30s \e[32m%s\e[0m\n" "GCP_PROJECT_ID" "OK"  || printf "%-30s \e[31m%s\e[0m\n" "GCP_PROJECT_ID" "NOK"
-	@test -n "${GCP_DNS_ZONE}" && printf "%-30s \e[32m%s\e[0m\n" "GCP_DNS_ZONE" "OK"  || printf "%-30s \e[31m%s\e[0m\n" "GCP_DNS_ZONE" "NOK"
-	@test -n "${GCP_MAIL}" && printf "%-30s \e[32m%s\e[0m\n" "GCP_MAIL" "OK"  || printf "%-30s \e[31m%s\e[0m\n" "GCP_MAIL" "NOK"
-	@test -n "${GCP_SA_NAME}" && printf "%-30s \e[32m%s\e[0m\n" "GCP_SA_NAME" "OK"  || printf "%-30s \e[31m%s\e[0m\n" "GCP_SA_NAME" "NOK"
-	@test -n "${GCP_SA_MAIL}" && printf "%-30s \e[32m%s\e[0m\n" "GCP_SA_MAIL" "OK"  || printf "%-30s \e[31m%s\e[0m\n" "GCP_SA_MAIL" "NOK"
-	@test -n "${GCP_DOMAIN}" && printf "%-30s \e[32m%s\e[0m\n" "GCP_DOMAIN" "OK"  || printf "%-30s \e[31m%s\e[0m\n" "GCP_DOMAIN" "NOK"
-	@test -n "${KUBEONE_VERSION}" && printf "%-30s \e[32m%s\e[0m\n" "KUBEONE_VERSION" "OK"  || printf "%-30s \e[31m%s\e[0m\n" "KUBEONE_VERSION" "NOK"
-	@test -n "${KKP_VERSION}" && printf "%-30s \e[32m%s\e[0m\n" "KKP_VERSION" "OK"  || printf "%-30s \e[31m%s\e[0m\n" "KKP_VERSION" "NOK"
-	@test -n "${KKP_VERSION_NEW}" && printf "%-30s \e[32m%s\e[0m\n" "KKP_VERSION_NEW" "OK"  || printf "%-30s \e[31m%s\e[0m\n" "KKP_VERSION_NEW" "NOK"
-	@test -f secrets/google-sa-key.json && printf "%-30s \e[32m%s\e[0m\n" "Service Account Key File" "OK"  || printf "%-30s \e[31m%s\e[0m\n" "Service Account Key File" "NOK"
+	@printf "%-40s : " "GCP_PROJECT_ID environment variable" && test -n "${GCP_PROJECT_ID}" && printf "\e[32m%s\e[0m\n" "OK" || printf "\e[31m%s\e[0m\n" "NOK"
+	@printf "%-40s : " "GCP_DNS_ZONE environment variable" && test -n "${GCP_DNS_ZONE}" && printf "\e[32m%s\e[0m\n" "OK" || printf "\e[31m%s\e[0m\n" "NOK"
+	@printf "%-40s : " "GCP_MAIL environment variable" && test -n "${GCP_MAIL}" && printf "\e[32m%s\e[0m\n" "OK" || printf "\e[31m%s\e[0m\n" "NOK"
+	@printf "%-40s : " "GCP_SA_NAME environment variable" && test -n "${GCP_SA_NAME}" && printf "\e[32m%s\e[0m\n" "OK" || printf "\e[31m%s\e[0m\n" "NOK"
+	@printf "%-40s : " "GCP_SA_MAIL environment variable" && test -n "${GCP_SA_MAIL}"&& printf "\e[32m%s\e[0m\n" "OK" || printf "\e[31m%s\e[0m\n" "NOK"
+	@printf "%-40s : " "GCP_DOMAIN environment variable" && test -n "${GCP_DOMAIN}" && printf "\e[32m%s\e[0m\n" "OK" || printf "\e[31m%s\e[0m\n" "NOK"
+	@printf "%-40s : " "KUBEONE_VERSION environment variable" && test -n "${KUBEONE_VERSION}" && printf "\e[32m%s\e[0m\n" "OK" || printf "\e[31m%s\e[0m\n" "NOK"
+	@printf "%-40s : " "KKP_VERSION environment variable" && test -n "${KKP_VERSION}" && printf "\e[32m%s\e[0m\n" "OK" || printf "\e[31m%s\e[0m\n" "NOK"
+	@printf "%-40s : " "KKP_VERSION_NEW environment variable" && test -n "${KKP_VERSION_NEW}" && printf "\e[32m%s\e[0m\n" "OK" || printf "\e[31m%s\e[0m\n" "NOK"
+	@printf "%-40s : " "Service Account Key File" && test -f secrets/google-sa-key.json && printf "\e[32m%s\e[0m\n" "OK" || printf "\e[31m%s\e[0m\n" "NOK"
 # TODO does not work due to json data test -n '${GOOGLE_CREDENTIALS}'
 # TODO test other tools - uuid-runtime apache2-utils
 	@yq --version

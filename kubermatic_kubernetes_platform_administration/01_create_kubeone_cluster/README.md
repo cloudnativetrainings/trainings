@@ -38,6 +38,7 @@ gcloud compute instances list
 make create_cluster
 
 # copy the kubeconfig to its location
+mkdir ~/.kube
 cp ~/kubeone/kkp-master-seed-cluster-kubeconfig ~/.kube/config
 
 # verify
