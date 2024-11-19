@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # set get GCP environment variables
-export GCP_PROJECT_ID=hubert-training-refactoring # TODO rename or even substitue
+export GCP_PROJECT_ID=$(gcloud projects list --format json | jq .[].projectId | tr -d \")
 export GCP_DNS_ZONE=$GCP_PROJECT_ID
 export GCP_MAIL=$GCP_PROJECT_ID@cloud-native.training
 export GCP_SA_NAME=kkp-admin-training
