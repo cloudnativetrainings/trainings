@@ -115,3 +115,4 @@ gcloud compute instances list --format json | jq length
 ```bash
 gcloud iam service-accounts delete $GCP_SA_MAIL --quiet
 ```
+
