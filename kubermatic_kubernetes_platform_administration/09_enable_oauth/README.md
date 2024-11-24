@@ -56,3 +56,5 @@ kubectl edit user XXXXX
 ```
 
 Now you have admin permissions also for this user.
+
+<!-- TODO Kubernetes Dashboard -->
