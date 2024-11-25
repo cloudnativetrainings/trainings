@@ -1,6 +1,6 @@
 # Enable the Kubernetes Dashboard
 
-In this lab you will enable the Kubernetes Dashboard for User Clusters.
+In this lab you will enable the Kubernetes Dashboard for User Clusters. The documentation for doing this can be found [here](https://docs.kubermatic.com/kubermatic/v2.26/tutorials-howtos/oidc-provider-configuration/share-clusters-via-delegated-oidc-authentication/).
 
 ## Changes in `kubermatic.yaml`
 

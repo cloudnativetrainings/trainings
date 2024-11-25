@@ -46,3 +46,5 @@ curl http://<EXTERNAL-IP>:80/ | jq
 # visit the url in your browser (pay attention that you are using http) - eg http://34.89.197.223:80/
 # => you will receive the response from the echo server
 ```
+
+<!-- TODO add links to docu for all labs -->
