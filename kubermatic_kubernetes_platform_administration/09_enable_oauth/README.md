@@ -1,5 +1,7 @@
 # Connect to OIDC Provider
 
+In this lab you will teach KKP how to get user info from an OIDC provider.
+
 ## Configure OIDC Provider
 
 ### Create OAuth Consent Screen
@@ -56,5 +58,3 @@ kubectl edit user XXXXX
 ```
 
 Now you have admin permissions also for this user.
-
-<!-- TODO Kubernetes Dashboard -->
