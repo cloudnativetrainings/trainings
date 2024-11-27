@@ -105,7 +105,7 @@ gcloud dns record-sets transaction execute --zone $GCP_DNS_ZONE
 cd ~/kubeone; kubeone reset --manifest kubeone.yaml -t tf.json -y
 cd ~/kubeone; terraform destroy -auto-approve
 
-# verify all machines got deleted 
+# verify all machines got deleted
 # now the number of vms should be 0, if not please delete them in the UI https://console.cloud.google.com/compute/instances
 gcloud compute instances list --format json | jq length
 ```
@@ -115,4 +115,3 @@ gcloud compute instances list --format json | jq length
 ```bash
 gcloud iam service-accounts delete $GCP_SA_MAIL --quiet
 ```
-

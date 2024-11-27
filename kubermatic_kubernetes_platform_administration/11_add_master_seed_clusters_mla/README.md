@@ -9,14 +9,14 @@ Add the following to the file `values.yaml` on root level. Take care about the D
 ```yaml
 prometheus:
   host: prometheus.<DOMAIN>
-  storageSize: '250Gi'
+  storageSize: "250Gi"
   tsdb:
-    retentionTime: '30d'
+    retentionTime: "30d"
   ruleFiles:
-  - /etc/prometheus/rules/general-*.yaml
-  - /etc/prometheus/rules/kubermatic-master-*.yaml
-  - /etc/prometheus/rules/kubermatic-seed-*.yaml
-  - /etc/prometheus/rules/managed-*.yaml
+    - /etc/prometheus/rules/general-*.yaml
+    - /etc/prometheus/rules/kubermatic-master-*.yaml
+    - /etc/prometheus/rules/kubermatic-seed-*.yaml
+    - /etc/prometheus/rules/managed-*.yaml
 
 alertmanager:
   host: alertmanager.<DOMAIN>
@@ -30,7 +30,7 @@ grafana:
 
 loki:
   persistence:
-    size: '100Gi'
+    size: "100Gi"
 ```
 
 Apply your changes
@@ -62,13 +62,13 @@ Additionally you have to make those Services available from the outside. Add the
   name: Prometheus
   secret: # created via `cat /dev/urandom | tr -dc A-Za-z0-9 | head -c32`
   RedirectURIs:
-  - 'https://prometheus.<DOMAIN>/oauth/callback'
+    - "https://prometheus.<DOMAIN>/oauth/callback"
 
 - id: alertmanager
   name: Alertmanager
   secret: # created via `cat /dev/urandom | tr -dc A-Za-z0-9 | head -c32`
   RedirectURIs:
-  - 'https://alertmanager.<DOMAIN>/oauth/callback'
+    - "https://alertmanager.<DOMAIN>/oauth/callback"
 ```
 
 Apply your changes
@@ -115,12 +115,10 @@ iap:
       upstream_port: 9093
       client_id: alertmanager
       client_secret: <SECRET> # <= has to match dex.clients[alertmanager].secret
-      encryption_key: # create via `cat /dev/urandom | tr -dc A-Za-z0-9 | head -c32`   
+      encryption_key: # create via `cat /dev/urandom | tr -dc A-Za-z0-9 | head -c32`
       config:
         scope: "groups openid email"
 ```
-
-
 
 <!-- DID NOT WORK... -->
 
