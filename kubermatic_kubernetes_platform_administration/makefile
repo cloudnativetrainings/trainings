@@ -19,7 +19,7 @@ verify:
 	@printf "%-40s : " "KUBEONE_VERSION environment variable" && test -n "${KUBEONE_VERSION}" && printf "\e[32m%s\e[0m\n" "OK" || printf "\e[31m%s\e[0m\n" "NOK"
 	@printf "%-40s : " "KKP_VERSION environment variable" && test -n "${KKP_VERSION}" && printf "\e[32m%s\e[0m\n" "OK" || printf "\e[31m%s\e[0m\n" "NOK"
 	@printf "%-40s : " "KKP_VERSION_NEW environment variable" && test -n "${KKP_VERSION_NEW}" && printf "\e[32m%s\e[0m\n" "OK" || printf "\e[31m%s\e[0m\n" "NOK"
-	@printf "%-40s : " "Service Account Key File" && test -f secrets/google-sa-key.json && printf "\e[32m%s\e[0m\n" "OK" || printf "\e[31m%s\e[0m\n" "NOK"
+	@printf "%-40s : " "Service Account Key File" && test -f ~/secrets/google-sa-key.json && printf "\e[32m%s\e[0m\n" "OK" || printf "\e[31m%s\e[0m\n" "NOK"
 # TODO does not work due to json data test -n '${GOOGLE_CREDENTIALS}'
 # TODO test other tools - uuid-runtime apache2-utils
 	@yq --version
