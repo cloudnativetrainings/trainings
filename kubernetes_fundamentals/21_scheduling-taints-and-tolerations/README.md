@@ -2,7 +2,7 @@
 
 In this training course, we will use taints and tolerations to influence scheduling.
 
->Navigate to the folder `21_scheduling-taints-and-tolerations` from CLI, before you get started. 
+> Navigate to the folder `21_scheduling-taints-and-tolerations` from CLI, before you get started.
 
 ## Taint the node
 

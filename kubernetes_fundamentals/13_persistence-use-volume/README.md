@@ -2,7 +2,7 @@
 
 In the training, we will learn how to use persistentvolumeclaim in a pod.
 
->Navigate to the folder `13_persistence-use-volume` from CLI, before you get started. 
+> Navigate to the folder `13_persistence-use-volume` from CLI, before you get started.
 
 ## Inspect and create the pvc
 
@@ -15,8 +15,8 @@ kubectl create -f pvc.yaml
 ```bash
 kubectl create -f pod.yaml
 ```
->There is an issue with this structure. Try to fix the error and verify via `kubectl get po`. You are finished if your pod is in state `Running`
 
+> There is an issue with this structure. Try to fix the error and verify via `kubectl get po`. You are finished if your pod is in state `Running`
 
 ## Verify the timestamps in the file `/app/buffer`
 
@@ -36,7 +36,7 @@ kubectl delete pod my-pod
 kubectl create -f pod.yaml
 ```
 
-## Verify the timestamps of the previous pod run are still in the file `/app/buffer` 
+## Verify the timestamps of the previous pod run are still in the file `/app/buffer`
 
 ```bash
 kubectl exec -it my-pod -- cat /app/buffer

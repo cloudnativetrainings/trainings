@@ -2,7 +2,7 @@
 
 In the training, we will learn about Configmaps.
 
->Navigate to the folder `09_configmaps` from CLI, before you get started. 
+> Navigate to the folder `09_configmaps` from CLI, before you get started.
 
 ## Inspect configmap.yaml definition file and create the configmap
 
@@ -13,7 +13,7 @@ kubectl create -f configmap.yaml
 
 ## Inspect pod.yaml definition file and create the pod
 
->Note that, there are errors in the yaml files. Try to fix them. Check the output of `kubectl describe pod my-pod` to debug the issues.
+> Note that, there are errors in the yaml files. Try to fix them. Check the output of `kubectl describe pod my-pod` to debug the issues.
 
 ```bash
 cat pod.yaml
@@ -25,8 +25,10 @@ kubectl create -f pod.yaml
 ```bash
 kubectl logs my-pod
 ```
-Output: 
-```
+
+Output:
+
+```bash
 bar
 ```
 

@@ -2,7 +2,7 @@
 
 In this training course, we will firewall pod to pod Communication. Note that your cluster has to support Network Policies.
 
->Navigate to the folder `27_networkpolicies` from CLI, before you get started. 
+> Navigate to the folder `27_networkpolicies` from CLI, before you get started.
 
 ## Create the resources for Bob and Susan
 
@@ -14,6 +14,7 @@ kubectl create -f susan.yaml
 ## Verify that Susan can reach Bob
 
 Curl bob from the susan
+
 ```bash
 kubectl exec -it susan -- curl bob
 ```
@@ -25,10 +26,12 @@ kubectl create -f networkpolicy-deny-all.yaml
 ```
 
 Curl bob from the susan
+
 ```bash
 kubectl exec -it susan -- curl bob
 ```
->Now Bob is not reachable from Susan.
+
+> Now Bob is not reachable from Susan.
 
 ## Create a specific rule to allow Susan access to Bob again
 
@@ -37,10 +40,12 @@ kubectl create -f networkpolicy-allow-susan.yaml
 ```
 
 Curl bob from the susan
+
 ```bash
 kubectl exec -it susan -- curl bob
 ```
->Now Bob is reachable again from Susan.
+
+> Now Bob is reachable again from Susan.
 
 ## Cleanup
 

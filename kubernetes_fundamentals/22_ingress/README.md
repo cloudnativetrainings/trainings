@@ -2,7 +2,7 @@
 
 In this training, we will setup an Ingress and expose an app showing a blue screen and an app showing a red screen.
 
->Navigate to the folder `22_ingress` from CLI, before you get started. 
+> Navigate to the folder `22_ingress` from CLI, before you get started.
 
 ## Create the red application
 
@@ -16,7 +16,7 @@ kubectl create -f red.yaml
 kubectl create -f blue.yaml
 ```
 
-## Verify your steps
+## Verify your applications are running
 
 ```bash
 kubectl get pods,svc
@@ -38,7 +38,7 @@ kubectl get deployments,pods,services -n ingress-nginx
 kubectl create -f ingress.yaml
 ```
 
-## Verify your steps
+## Verify the ingress
 
 ```bash
 kubectl describe ing my-ingress
@@ -49,9 +49,11 @@ kubectl describe ing my-ingress
 ```bash
 kubectl get svc ingress-nginx-controller -n ingress-nginx
 ```
+
 Get the external IP of your LoadBalancer and vist via web browser as follows
-* `http://<EXTERNAL-IP>/red`
-* `http://<EXTERNAL-IP>/blue`
+
+- `http://<EXTERNAL-IP>/red`
+- `http://<EXTERNAL-IP>/blue`
 
 ## Clean up
 

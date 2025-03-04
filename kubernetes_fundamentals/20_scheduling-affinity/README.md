@@ -2,7 +2,7 @@
 
 In this training course, we will show how the Kubernetes Scheduler tries to keep things away from each other.
 
->Navigate to the folder `20_scheduling-affinity' from CLI, before you get started. 
+> Navigate to the folder `20_scheduling-affinity' from CLI, before you get started.
 
 ## Inspect water-pod.yaml definition file and create the water-pod
 
@@ -20,7 +20,8 @@ kubectl create -f fire-deployment.yaml
 
 ## Verify that the pods location
 
->Pods `fire` must not be on the same node as the pod `water`.
+> Pods `fire` must not be on the same node as the pod `water`.
+
 ```bash
 kubectl get pods -o=custom-columns='POD_NAME:metadata.name,NODE_NAME:spec.nodeName'
 ```

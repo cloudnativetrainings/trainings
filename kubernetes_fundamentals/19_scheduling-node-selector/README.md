@@ -2,7 +2,7 @@
 
 In this training course, we will learn about Node Selector.
 
->Navigate to the folder `19_scheduling-node-selector` from CLI, before you get started. 
+> Navigate to the folder `19_scheduling-node-selector` from CLI, before you get started.
 
 ## Show all Nodes with its Labels
 

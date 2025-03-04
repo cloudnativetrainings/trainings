@@ -2,9 +2,9 @@
 
 In the training, we will learn about Secrets.
 
->Navigate to the folder `10_secrets` from CLI, before you get started. 
+> Navigate to the folder `10_secrets` from CLI, before you get started.
 
->Note that, there are errors in the yaml files. Try to fix them.
+> Note that, there are errors in the yaml files. Try to fix them.
 
 ## Inspect secret.yaml definition file and create the secret
 
@@ -33,6 +33,7 @@ kubectl get secret my-secret -o yaml
 ```
 
 Convert the secret into human readable format
+
 ```bash
 kubectl get secret my-secret -o jsonpath='{.data.foo}' | base64 -d
 ```

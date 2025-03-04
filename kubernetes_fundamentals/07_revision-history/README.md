@@ -2,7 +2,7 @@
 
 In the training, we will learn how to track the Revision History.
 
->Navigate to the folder `07_revision-history` from CLI, before you get started. 
+> Navigate to the folder `07_revision-history` from CLI, before you get started.
 
 ## Inspect deployment.yaml definition file and create the deployment
 
@@ -50,7 +50,7 @@ kubectl get deployment my-deployment -o yaml | grep "revision:\|generation:\|res
 kubectl scale deployment my-deployment --replicas 3
 ```
 
-## Take a look into the Deployment
+## Take a look into the Deployment again
 
 Can you explain why there is a diff between the revision and the generation?
 

@@ -2,7 +2,7 @@
 
 ## Setup training environment
 
-1. Navigate and login to [Google Cloud Shell](https://ssh.cloud.google.com ) via web browser.
+1. Navigate and login to [Google Cloud Shell](https://ssh.cloud.google.com) via web browser.
 
 2. Clone the Kubermatic trainings git repository:
 
