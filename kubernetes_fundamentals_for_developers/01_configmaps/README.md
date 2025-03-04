@@ -26,7 +26,6 @@ curl http://${INGRESS_IP}/my-app
 ```
 
 > Note: You can also get the output via your browser.
-
 > Note that the the message is taken from the ConfigMap and not from the containers default configuration file for the application.
 
 ## Changing the ConfigMap
@@ -34,7 +33,7 @@ curl http://${INGRESS_IP}/my-app
 Change the message of the ConfigMap `k8s/configmap.yaml`
 
 ```yaml
-data: 
+data:
   app.conf: |-
     message = Some different message
 ```

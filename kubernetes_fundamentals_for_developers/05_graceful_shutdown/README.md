@@ -49,7 +49,7 @@ kind: Pod
 metadata:
   name: app
 spec:
-  terminationGracePeriodSeconds: 12  # --> Change this line
+  terminationGracePeriodSeconds: 12 # --> Change this line
   containers:
     - name: app
       image: quay.io/kubermatic-labs/training-application:1.0.0-go

@@ -7,10 +7,10 @@
 1. Navigate to Kubernetes Fundamentals training folder to get started `cd trainings/kubernetes_fundamentals_for_developers/`
 1. Create the cluster`make setup`
 1. Persist the ingress IP
-    ```bash
-    export INGRESS_IP=$(gcloud compute addresses list --filter="name=training-ingress" --format="get(address)")
-    echo "export INGRESS_IP=$INGRESS_IP" >> ~/.trainingrc
-    ```
+   ```bash
+   export INGRESS_IP=$(gcloud compute addresses list --filter="name=training-ingress" --format="get(address)")
+   echo "export INGRESS_IP=$INGRESS_IP" >> ~/.trainingrc
+   ```
 1. Bring in some convenience into training environment`source ~/.trainingrc`
 
 ## Verify training environment

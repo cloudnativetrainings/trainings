@@ -48,13 +48,13 @@ ls app-*
 sudo tail -f app-a<TAB>
 
 # Delete the pod-A
-kubectl delete -f k8s/pod-A.yaml
+kubectl delete pod app-a
 
 # [WORKER-NODE] Tail log file for pod-B
 sudo tail -f app-b<TAB>
 
 # Delete the pod-B
-kubectl delete -f k8s/pod-B.yaml
+kubectl delete pod app-b
 ```
 
 > [!TIP]

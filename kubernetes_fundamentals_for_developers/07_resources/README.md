@@ -36,7 +36,6 @@ watch -n 1 kubectl top pods
 
 > [!TIP]
 > You can check the situation on the Grafana dashboard `Kubernetes / Compute Resources / Pod`!
-
 > [!IMPORTANT]
 > Note that the Container does not get restarted. The amount of CPU is limited to 30 MilliCores.
 
