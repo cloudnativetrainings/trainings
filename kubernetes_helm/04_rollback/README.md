@@ -2,7 +2,7 @@
 
 In this task, we will rollback a release.
 
-### Inspect the Helm Chart
+## Inspect the Helm Chart
 
 ```bash
 cd $HOME/trainings/kubernetes_helm/04_rollback
@@ -29,6 +29,7 @@ helm upgrade my-app --set color=blue ./color-viewer
 You can visit the app on `http://$ENDPOINT/blue`
 
 Take a look at the Helm releases
+
 ```bash
 helm ls
 ```
@@ -36,6 +37,7 @@ helm ls
 ## History and changes
 
 Take a look at the history of my-app
+
 ```bash
 helm history my-app
 ```

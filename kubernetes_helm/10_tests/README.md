@@ -25,7 +25,7 @@ cat ./my-app/templates/tests/test-my-app.yaml
 ### Relase the app
 
 ```bash
-helm install my-app ./my-app 
+helm install my-app ./my-app
 ```
 
 ### Wait until the pods are ready
@@ -49,7 +49,6 @@ apiVersion: v1
 kind: Service
 metadata:
   name: wrong-service-name
-...
 ```
 
 ### Release the chart again
@@ -58,7 +57,7 @@ metadata:
 helm upgrade my-app ./my-app/
 ```
 
-### Wait until the pods are ready
+### Wait until the pods are ready again
 
 ```bash
 kubectl wait pod -l app=my-app --for=condition=ready --timeout=120s

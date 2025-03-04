@@ -17,12 +17,14 @@ kubectl create ns dev
 kubectl create -f dev/blue
 ```
 
-Check the status of the pods and see the blue pod running: 
+Check the status of the pods and see the blue pod running:
+
 ```bash
 kubectl get pods -n dev
 ```
 
 Afterwards, you can visit the app via curl or your browser
+
 ```bash
 # if $ENDPOINT is not defined, you can set it:
 # export ENDPOINT=$(gcloud compute addresses list --filter="region:europe-west3" --filter="name=training-kh-addr" --format="get(address)")
@@ -38,7 +40,7 @@ curl http://${ENDPOINT}/dev/blue
 kubectl create -f dev/red
 ```
 
-Check the status of the pods and see the red and blue pods running: 
+Check the status of the pods and see the red and blue pods running:
 
 ```bash
 kubectl get pods -n dev
@@ -57,7 +59,7 @@ kubectl create ns prod
 kubectl create -f prod/blue
 ```
 
-Check the status of the pods and see 3 blue pods running: 
+Check the status of the pods and see 3 blue pods running:
 
 ```bash
 kubectl get pods -n prod
@@ -75,7 +77,7 @@ curl http://${ENDPOINT}/prod/blue
 kubectl create -f prod/red
 ```
 
-Check the status of the pods and see 3 red and 3 blue pods running: 
+Check the status of the pods and see 3 red and 3 blue pods running:
 
 ```bash
 kubectl get pods -n prod

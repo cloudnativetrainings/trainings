@@ -29,7 +29,9 @@ helm upgrade --install ingress-nginx ingress-nginx \
 ## Verify Ingress is running
 
 Visit the Ingress Admin Port using below curl command or in your browser on `http://$ENDPOINT:80`
+
 > You will get `404 Not Found`
+
 ```bash
 curl http://$ENDPOINT:80
 ```

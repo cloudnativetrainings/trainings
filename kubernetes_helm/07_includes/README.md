@@ -31,12 +31,10 @@ For example, edit `my-chart/templates/deployment.yaml` and add labels to the met
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ template "id" . }}
-  labels:
-    {{- include "labels" . | nindent 2 }}
+  name: { { template "id" . } }
+  labels: { { - include "labels" . | nindent 2 } }
 spec:
   replicas: 1
-...
 ```
 
 You can dry-run the installation:
@@ -54,7 +52,7 @@ helm template ./my-chart
 ## Release the application
 
 ```bash
-helm install includes --set id=includes ./my-chart 
+helm install includes --set id=includes ./my-chart
 ```
 
 Wait until the pods are ready
@@ -63,7 +61,8 @@ Wait until the pods are ready
 kubectl wait pod -l app=includes --for=condition=ready --timeout=120s
 ```
 
-Access the endpoint via 
+Access the endpoint via
+
 ```bash
 curl http://$ENDPOINT
 ```

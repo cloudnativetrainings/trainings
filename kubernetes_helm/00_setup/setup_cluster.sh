@@ -14,7 +14,7 @@ export ZONE=europe-west3-a
 export CLUSTER_NAME=training-kh
 export NETWORK_NAME=$CLUSTER_NAME
 export FIREWALL_NAME=$CLUSTER_NAME
-export CLUSTER_VERSION=1.27
+export CLUSTER_VERSION=1.32
 
 set -euxo pipefail
 

@@ -15,11 +15,11 @@ You will see 2 important files and a directory with manifests.
 
 - Chart.yaml: Contains information about the chart
 - values.yaml: Contains customizable values to be used in templates
-- templates/*.yaml: Manifest files with some go templating to be customized
+- templates/\*.yaml: Manifest files with some go templating to be customized
 
 Check the default values of the chart:
 
-```
+```bash
 cat color-viewer/values.yaml
 ```
 
@@ -46,16 +46,19 @@ helm template ./color-viewer --set replicas=3
 ## Deploy dev
 
 Deploy your application with Helm:
+
 ```bash
 helm install demo-app ./color-viewer --namespace=dev --create-namespace
 ```
 
 Checkout the status of the installation:
+
 ```bash
 helm ls -A
 ```
 
 Checkout the pods and verify that the application is running:
+
 ```bash
 # Wait until the pod is ready:
 kubectl get pods -n dev
@@ -66,21 +69,25 @@ curl http://${ENDPOINT}/dev
 ## Deploy prod
 
 Checkout the values for production:
+
 ```bash
 cat prod-values.yaml
 ```
 
 Deploy your application with Helm:
+
 ```bash
 helm install demo-app ./color-viewer --namespace=prod --create-namespace -f prod-values.yaml
 ```
 
 Checkout the status of the installation:
+
 ```bash
 helm ls -A
 ```
 
 Checkout the pods and verify that the application is running. There must be 3 pods running.
+
 ```bash
 # Wait until the pod is ready:
 kubectl get pods -n prod

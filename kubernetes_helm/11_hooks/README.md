@@ -7,6 +7,7 @@ In this task, you will learn how to write Hooks.
 ## Inspect the Chart
 
 Take a look at the Hooks.
+
 ```bash
 cat ./my-app/templates/hook-pre-install.yaml
 
@@ -16,12 +17,13 @@ cat ./my-app/templates/hook-pre-delete.yaml
 ## Running Hooks
 
 To see what is happening, it is recommended to open an additional Shell and watch resources:
+
 ```bash
 watch -n 1 kubectl get job,pod
 ```
 
 ```bash
-helm install hooks ./my-app 
+helm install hooks ./my-app
 ```
 
 Verify the first Hook was run.
@@ -33,6 +35,7 @@ helm uninstall hooks
 Verify the second Hook was run.
 
 Delete the jobs
+
 ```bash
 kubectl delete job --all
 ```
@@ -44,7 +47,7 @@ Add an additional pre-install Hook by copying the hook-pre-install-yaml file.
 Add weights to the pre-install Hooks via the annotation `"helm.sh/hook-weight": "1"`.
 
 ```bash
-helm install hooks ./my-app 
+helm install hooks ./my-app
 ```
 
 Verify the order of the two pre-install hooks.
@@ -54,6 +57,7 @@ helm uninstall hooks
 ```
 
 Delete the jobs
+
 ```bash
 kubectl delete job --all
 ```
@@ -63,12 +67,13 @@ kubectl delete job --all
 Add the hook-delete-policy to the Hooks via the `"helm.sh/hook-delete-policy": "hook-succeeded"` annotation.
 
 ```bash
-helm install hooks ./my-app 
+helm install hooks ./my-app
 ```
 
 > Note that the Jobs for the Hooks will get deleted, after they are completed successfully.
 
-* Delete the release
+- Delete the release
+
   ```bash
   helm uninstall hooks
   ```

@@ -45,7 +45,7 @@ cat overlays/prod/kustomization.yaml
 - Patch ingress to change the URL path
 - Patch deployment to use different Pod resources
 
-# Deploy using Kustomize
+## Deploy using Kustomize
 
 ## Deploy dev
 
@@ -58,11 +58,13 @@ kustomize build overlays/dev
 You can have 2 options to deploy:
 
 1. Kustomize CLI:
+
 ```bash
 kustomize build overlays/dev | kubectl apply -f -
 ```
 
 2. Kubectl:
+
 ```bash
 kubectl apply -k overlays/dev
 ```
@@ -74,7 +76,8 @@ Checkout the pods and verify that the application is running:
 kubectl get pods -n dev
 ```
 
-Access the page via curl or your browser: 
+Access the page via curl or your browser:
+
 ```bash
 # export ENDPOINT=$(gcloud compute addresses list --filter="region:europe-west3" --filter="name=training-kh-addr" --format="get(address)")
 
@@ -106,7 +109,7 @@ kubectl get pods -n prod
 curl http://${ENDPOINT}/prod
 ```
 
-# Cleanup
+## Cleanup
 
 ```bash
 # delete the deployments:

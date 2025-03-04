@@ -66,7 +66,7 @@ Access the endpoint via
 curl http://$ENDPOINT
 ```
 
->Note the output now gets calculated via the `id` function defined in the file `_helpers.tpl`. The expected output is `my-chart-helper-functions`
+> Note the output now gets calculated via the `id` function defined in the file `_helpers.tpl`. The expected output is `my-chart-helper-functions`
 
 ## Cleanup
 
