@@ -42,7 +42,7 @@ gcloud compute ssh $(kubectl get pod app-a -o jsonpath='{.spec.nodeName}')
 cd /var/log/containers
 
 # [WORKER-NODE] Verify the log files are present
-ls app-*
+sudo ls app-*
 
 # [WORKER-NODE] Tail log file for pod-A
 sudo tail -f app-a<TAB>
