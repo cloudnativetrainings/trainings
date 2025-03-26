@@ -11,7 +11,7 @@ Edit `./my-chart/templates/deployment.yaml` file:
 ```yaml
 containers:
   - name: my-nginx
-    image: nginx:{{ required "A nginx version is required!" .Values.tag }}
+    image: nginx:{{ required "An image tag is required!" .Values.tag }}
 ```
 
 ## Release the application

@@ -25,8 +25,8 @@ sudo apt-get update && sudo apt-get -y install tree bat
 cat <<EOF > $HOME/.customize_environment
 #!/bin/bash
 
-apt-get update
-apt-get -y install tree bat
+sudo apt-get update
+sudo apt-get -y install tree bat
 EOF
 ```
 
