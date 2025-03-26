@@ -12,7 +12,7 @@ Update `./my-chart/templates/configmap.yaml` file as follows"
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: { { template "id" . } }
+  name: {{ template "id" . }}
 data:
   body: |
     {{- if not .Values.meta }}
@@ -76,14 +76,14 @@ This is a Kubernetes feature and you can use it with Helm like this:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: { { template "id" . } }
+  name: {{ template "id" . }}
 spec:
   replicas: 1
   selector:
-    matchLabels: { { - include "labels" . | nindent 6 } }
+    matchLabels: {{ - include "labels" . | nindent 6 }}
   template:
     metadata:
-      labels: { { - include "labels" . | nindent 8 } }
+      labels: {{ - include "labels" . | nindent 8 }}
       annotations:
         ## Here is the magic!
         checksum/config:
@@ -109,7 +109,7 @@ spec:
       volumes:
         - name: html
           configMap:
-            name: { { template "id" . } }
+            name: {{ template "id" . }}
             items:
               - key: body
                 path: index.html

@@ -31,8 +31,8 @@ For example, edit `my-chart/templates/deployment.yaml` and add labels to the met
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: { { template "id" . } }
-  labels: { { - include "labels" . | nindent 2 } }
+  name: {{ template "id" . }}
+  labels: {{ - include "labels" . | nindent 2 }}
 spec:
   replicas: 1
 ```
