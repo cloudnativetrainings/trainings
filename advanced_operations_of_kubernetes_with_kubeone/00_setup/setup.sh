@@ -32,4 +32,7 @@ gcloud config set compute/zone $ZONE
 echo "export GCP_PROJECT_ID=$PROJECT_ID" >> $TRAINING_DIR/.trainingrc
 echo "export GCP_REGION=$REGION" >> $TRAINING_DIR/.trainingrc
 echo "export GCP_ZONE=$ZONE" >> $TRAINING_DIR/.trainingrc
+
+# email, e.g.: student-00.bechtle@cloud-native.training
+echo "export TRAINING_EMAIL=$(echo $GCP_PROJECT_ID | sed 's/\(student-[0-9][0-9]\)-/\1./')@cloud-native.training" >> $TRAINING_DIR/.trainingrc
 . $TRAINING_DIR/.trainingrc

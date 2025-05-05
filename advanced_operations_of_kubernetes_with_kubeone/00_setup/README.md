@@ -11,7 +11,7 @@ Kubermatic provides a container image which consists of all necessary tools to d
 git clone https://github.com/cloudnativetrainings/trainings.git
 
 # start the tooling container
-export KUBEONE_VERSION=1.8.0
+export KUBEONE_VERSION=1.9.2
 docker run -d -it --network host -v $HOME/trainings/advanced_operations_of_kubernetes_with_kubeone:/home/kubermatic/training --name kubeone-tooling-${KUBEONE_VERSION} quay.io/kubermatic-labs/kubeone-tooling:${KUBEONE_VERSION}
 
 # start a shell in the container
@@ -35,7 +35,7 @@ echo "cd $TRAINING_DIR" >> $TRAINING_DIR/.trainingrc
 You can also run this on your Linux box (you need to )
 
 ```bash
-export KUBEONE_VERSION=1.8.0
+export KUBEONE_VERSION=1.9.2
 mkdir -p /tmp/k1 && cd /tmp/k1 && \
   wget https://github.com/kubermatic/kubeone/releases/download/v${KUBEONE_VERSION}/kubeone_${KUBEONE_VERSION}_linux_amd64.zip
 unzip kubeone_${KUBEONE_VERSION}_linux_amd64.zip

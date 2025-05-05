@@ -28,8 +28,6 @@ Create a service account `k1-service-account` for your Google Cloud resources, w
 
   # for avoiding problem with Google Cloud Shell on reconnects we persist this value also into our .trainingrc file
   echo "export GCP_SERVICE_ACCOUNT_ID=$GCP_SERVICE_ACCOUNT_ID" >> $TRAINING_DIR/.trainingrc
-
-
   ```
 
 * Create policy binding
@@ -55,7 +53,6 @@ Create a service account `k1-service-account` for your Google Cloud resources, w
 
   # for avoiding problem with Google Cloud Shell on reconnects we persist this value also into our .trainingrc rile
   echo "export GOOGLE_CREDENTIALS='$(cat ./k8c-cluster-provisioner-sa-key.json)'" >> $TRAINING_DIR/.trainingrc
-
   ```
 
 * Test if your environment variable contains the json key

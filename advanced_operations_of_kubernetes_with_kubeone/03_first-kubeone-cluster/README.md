@@ -9,7 +9,7 @@ apiVersion: kubeone.k8c.io/v1beta2
 kind: KubeOneCluster
 name: k1
 versions:
-  kubernetes: '1.29.10'
+  kubernetes: '1.31.8'
 cloudProvider:
   gce: {}
   cloudConfig: |-
@@ -20,7 +20,7 @@ cloudProvider:
 Start the KubeOne installation:
 
 ```bash
-kubeone install -t $TRAINING_DIR/src/gce/tf-infra -m $TRAINING_DIR/src/gce/kubeone.yaml --verbose
+kubeone apply -t $TRAINING_DIR/src/gce/tf-infra -m $TRAINING_DIR/src/gce/kubeone.yaml --verbose
 ```
 
 <details>
@@ -41,7 +41,7 @@ As to not having to input these values manually to create the machine-controller
 > cd $TRAINING_DIR/src/gce/tf-infra
 > terraform output -json > tf.json
 > cd ..
-> kubeone install --tfjson tf.json --verbose
+> kubeone apply --tfjson tf.json --verbose
 > ```
 >
 
@@ -113,7 +113,7 @@ INFO[23:48:20 CEST] Verifying that nodes in the cluster match nodes defined in t
 INFO[23:48:20 CEST] Verifying that all nodes in the cluster are ready…
 INFO[23:48:20 CEST] Verifying that there is no upgrade in the progress…
 NODE                 VERSION   APISERVER   ETCD
-k1-control-plane-1   v1.29.10   healthy     healthy
+k1-control-plane-1   v1.31.8   healthy     healthy
 ```
 
 ```bash
@@ -122,7 +122,7 @@ kubectl get nodes
 
 ```text
 NAME                           STATUS   ROLES                  AGE     VERSION
-k1-control-plane-1             Ready    control-plane,master   13m     v1.29.10
+k1-control-plane-1              Ready    control-plane   7m56s   v1.31.8
 ```
 
 Why is the worker node missing? -> Check the Machine Controller objects
@@ -132,14 +132,14 @@ kubectl -n kube-system get machinedeployment,machineset,machine
 ```
 
 ```text
-NAME                                               REPLICAS   AVAILABLE-REPLICAS   PROVIDER   OS       KUBELET   AGE
-machinedeployment.cluster.k8s.io/k1-pool-az-a      1          0                    gce        ubuntu   1.29.10    1m19s
+NAME                                            REPLICAS   AVAILABLE-REPLICAS   PROVIDER   OS       KUBELET   AGE
+machinedeployment.cluster.k8s.io/k1-pool-az-a   1          1                    gce        ubuntu   1.31.8    5m
 
-NAME                                               REPLICAS   AVAILABLE-REPLICAS   PROVIDER   OS       KUBELET   AGE
-machineset.cluster.k8s.io/k1-pool-az-a-ff4979f74   1          0                    gce        ubuntu   1.29.10    1m19s
+NAME                                                REPLICAS   AVAILABLE-REPLICAS   PROVIDER   OS       MACHINEDEPLOYMENT   KUBELET   AGE
+machineset.cluster.k8s.io/k1-pool-az-a-7496775458   1          1                    gce        ubuntu   k1-pool-az-a        1.31.8    5m
 
-NAME                                                  PROVIDER   OS       ADDRESS      KUBELET   AGE
-machine.cluster.k8s.io/k1-pool-az-a-ff4979f74-4vg7c   gce        ubuntu   10.240.0.6   1.29.10    1m19s
+NAME                                                   PROVIDER   OS       NODE                            KUBELET   ADDRESS         AGE
+machine.cluster.k8s.io/k1-pool-az-a-7496775458-v92w2   gce        ubuntu   k1-pool-az-a-7496775458-v92w2   1.31.8    34.90.127.118   5m
 ```
 
 The created `machine` object gives you more information
@@ -150,7 +150,7 @@ kubectl -n kube-system describe machine
 
 ```text
 Versions:
-  Kubelet:  1.29.10
+  Kubelet:  1.31.8
 Status:
 Addresses:
   Address:  10.240.0.7
@@ -185,7 +185,7 @@ Node Ref:
   Resource Version:  1884
   UID:               da325955-841f-4538-bfe0-6f46518cbcc8
 Versions:
-  Kubelet:  v1.29.10
+  Kubelet:  v1.31.8
 Events:
 Type    Reason                          Age                    From                Message
 ----    ------                          ----                   ----                -------

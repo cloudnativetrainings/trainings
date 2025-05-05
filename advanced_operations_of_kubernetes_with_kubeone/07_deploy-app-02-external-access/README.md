@@ -6,12 +6,67 @@ The application stack with external access will be created with the following st
 * CertManager will be used to create the necessary SSL certificate from Let's Encrypt 
 * Deploy the hello-world application and try to access it
 
-## Deploy [Nginx Ingress](https://github.com/kubernetes/ingress-nginx)
+## Deploy [Nginx Ingress](https://github.com/kubernetes/ingress-nginx) and [Cert Manager](https://cert-manager.io/docs/) via Helm Integration
 
-* First, we install the ingress controller (Nginx):
-  ```bash
-  kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/cloud/deploy.yaml
-  ```
+Helm integration is a way to automatically deploy a bunch of helm releases together with `kubeone apply`. No helm binary is required. 
+
+* First, add below code block to the `kubeone.yaml`:
+
+```yaml
+apiVersion: kubeone.k8c.io/v1beta2
+kind: KubeOneCluster
+name: k1
+versions:
+  kubernetes: "1.31.8"
+cloudProvider:
+  gce: {}
+  cloudConfig: |-
+    [global]
+    regional = true
+
+# Add below part
+helmReleases:
+  - releaseName: ingress-nginx
+    chart: ingress-nginx
+    repoURL: https://kubernetes.github.io/ingress-nginx
+    namespace: ingress-nginx
+    version: 4.12.2
+    values:
+      - inline:
+          controller:
+            replicaCount: 2
+            autoscaling:
+              enabled: true
+              minReplicas: 2
+              maxReplicas: 5
+              targetCPUUtilizationPercentage: 80
+              targetMemoryUtilizationPercentage: 80
+  - releaseName: cert-manager
+    chart: cert-manager
+    repoURL: https://charts.jetstack.io
+    namespace: cert-manager
+    version: v1.17.2
+    values:
+      - inline:
+          crds:
+            enabled: true
+```
+
+* Run `kubeone apply` to deploy:
+```bash
+kubeone apply -t $TRAINING_DIR/src/gce/tf-infra -m $TRAINING_DIR/src/gce/kubeone.yaml --verbose
+```
+
+* Check helm status:
+```bash
+helm ls -A
+```
+
+```text
+NAME            NAMESPACE       REVISION        UPDATED                                 STATUS          CHART                   APP VERSION
+cert-manager    cert-manager    1               2025-05-05 10:27:19.412427669 +0000 UTC deployed        cert-manager-v1.17.2    v1.17.2
+ingress-nginx   ingress-nginx   1               2025-05-05 10:17:34.442043274 +0000 UTC deployed        ingress-nginx-4.12.2    1.12.2
+```
 
 * Verify the Ingress load balancer
   
@@ -30,29 +85,21 @@ The application stack with external access will be created with the following st
   ```
 
   ```text
-  NAME                                            READY   STATUS      RESTARTS   AGE
-  pod/ingress-nginx-admission-create-ddqn2        0/1     Completed   0          3m11s
-  pod/ingress-nginx-admission-patch-5kg9d         0/1     Completed   0          3m11s
-  pod/ingress-nginx-controller-86cbd65cf7-4s4jh   1/1     Running     0          3m21s
+  NAME                                            READY   STATUS    RESTARTS   AGE
+  pod/ingress-nginx-controller-86578cc48d-cslwb   1/1     Running   0          2m13s
+  pod/ingress-nginx-controller-86578cc48d-fd46w   1/1     Running   0          2m13s
+  pod/ingress-nginx-controller-86578cc48d-glwwd   1/1     Running   0          2m28s
 
-  NAME                                         TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                      AGE
-  service/ingress-nginx-controller             LoadBalancer   10.109.207.66    34.90.218.24   80:30075/TCP,443:32404/TCP   3m21s
-  service/ingress-nginx-controller-admission   ClusterIP      10.104.253.212   <none>         443/TCP                      3m21s
+  NAME                                         TYPE           CLUSTER-IP      EXTERNAL-IP     PORT(S)                      AGE
+  service/ingress-nginx-controller             LoadBalancer   10.99.143.194   34.13.244.165   80:31656/TCP,443:32209/TCP   2m28s
+  service/ingress-nginx-controller-admission   ClusterIP      10.110.133.99   <none>          443/TCP                      2m28s
 
-  NAME                                           ENDPOINTS                      AGE
-  endpoints/ingress-nginx-controller             10.244.7.3:80,10.244.7.3:443   3m21s
-  endpoints/ingress-nginx-controller-admission   10.244.7.3:8443                3m21s
+  NAME                                           ENDPOINTS                                                  AGE
+  endpoints/ingress-nginx-controller             10.244.4.5:443,10.244.5.3:443,10.244.6.3:443 + 3 more...   2m28s
+  endpoints/ingress-nginx-controller-admission   10.244.4.5:8443,10.244.5.3:8443,10.244.6.3:8443            2m28s
   ```
 
-## Deploy the [Cert Manager](https://cert-manager.io/docs/)
-
-Let's deploy the CertManager:
-* Install the CustomResourceDefinitions and cert-manager itself
-  ```bash
-  kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.16.1/cert-manager.yaml
-  ```
-
-* Check the pods
+* Check cert-manager pods
   ```bash
   kubectl get pods -n cert-manager
   ```
@@ -83,7 +130,8 @@ Let's deploy the CertManager:
   ```
   Adjust to your zone name
   ```bash
-  export DNS_ZONE=student-XX-XXXX
+  export DNS_ZONE=$GCP_PROJECT_ID
+  echo "export DNS_ZONE=$DNS_ZONE" >> $TRAINING_DIR/.trainingrc
   gcloud dns record-sets transaction start --zone=$DNS_ZONE
   ```
 
@@ -94,7 +142,7 @@ Let's deploy the CertManager:
   ```
   Use your external service ip
   ```bash
-  export SERVICE_NGINX_EXT_IP=xx.xx.xx.xx
+  export SERVICE_NGINX_EXT_IP=$(kubectl get svc ingress-nginx-controller -n ingress-nginx -o jsonpath='{.status.loadBalancer.ingress[].ip}')
   gcloud dns record-sets transaction add --zone=$DNS_ZONE --name="*.$DNS_ZONE.cloud-native.training" --ttl 300 --type A $SERVICE_NGINX_EXT_IP
   ```
 

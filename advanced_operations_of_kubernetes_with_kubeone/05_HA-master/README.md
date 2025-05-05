@@ -37,13 +37,12 @@ In the next step, we will setup a real HA cluster over 3 availability zones to m
   ```
   Output:
   ```text
-  NAME                           STATUS   ROLES    AGE     VERSION
-  k1-control-plane-1              Ready    control-plane   35m     v1.29.10
-  k1-control-plane-2              Ready    control-plane   3m45s   v1.29.10
-  k1-control-plane-3              Ready    control-plane   2m59s   v1.29.10
-  k1-pool-az-a-7d8ff98f97-4hvnh   Ready    <none>          29m     v1.29.10
+  NAME                            STATUS   ROLES           AGE     VERSION
+  k1-control-plane-1              Ready    control-plane   23m     v1.31.8
+  k1-control-plane-2              Ready    control-plane   4m4s    v1.31.8
+  k1-control-plane-3              Ready    control-plane   3m21s   v1.31.8
+  k1-pool-az-a-7496775458-v92w2   Ready    <none>          17m     v1.31.8
   ```
-  >Hint: Apply Changes of Cluster Properties by Using `kubeone apply`
 
 <details>
 <summary>More info about "kubeone apply"</summary>
@@ -58,11 +57,8 @@ In the next step, we will setup a real HA cluster over 3 availability zones to m
   ```bash
   kubeone apply -t tf.json --manifest ../kubeone.yaml --force-upgrade
   ```
-  Alternatively, the `kubeone upgrade` command can be used as well:
-  ```bash
-  kubeone upgrade --manifest kubeone.yaml -t tf.json --force
-  ```
-  >The `--force` flag instructs KubeOne to ignore the preflight errors, including the error saying that you're trying to upgrade to the already running version. At the upgrade time, KubeOne ensures that the actual cluster configuration matches the expected configuration, and therefore the `upgrade` command can be used to modify cluster properties.
+
+  >The `--force` flag instructs KubeOne to ignore the preflight errors, including the error saying that you're trying to upgrade to the already running version. At the upgrade time, KubeOne ensures that the actual cluster configuration matches the expected configuration.
 </details>
 
 ### Add Master nodes to Kubernetes API Load Balancer
@@ -81,7 +77,7 @@ In the next step, we will setup a real HA cluster over 3 availability zones to m
   control_plane_target_pool_members_count = 3  # <<<< CHANGE
   ```
 
-* Apply to update the Load Balancer backend listener pool. 
+* Apply to update the Load Balancer backend listener pool.
   ```bash
   terraform apply
   ```
@@ -95,17 +91,16 @@ In the next step, we will setup a real HA cluster over 3 availability zones to m
   ```
   
   ```text
-  INFO[23:48:18 CEST] Determine hostname…
-  INFO[23:48:19 CEST] Determine operating system…
-  INFO[23:48:20 CEST] Building Kubernetes clientset…
-  INFO[23:48:20 CEST] Verifying that Docker, Kubelet and Kubeadm are installed…
-  INFO[23:48:20 CEST] Verifying that nodes in the cluster match nodes defined in the manifest…
-  INFO[23:48:20 CEST] Verifying that all nodes in the cluster are ready…
-  INFO[23:48:20 CEST] Verifying that there is no upgrade in the progress…
+  INFO[08:53:01 UTC] Determine hostname...
+  INFO[08:53:01 UTC] Determine operating system...
+  INFO[08:53:02 UTC] Building Kubernetes clientset...
+  INFO[08:53:02 UTC] Verifying that nodes in the cluster match nodes defined in the manifest...
+  INFO[08:53:02 UTC] Verifying that all nodes in the cluster are ready...
+  INFO[08:53:02 UTC] Verifying that there is no upgrade in progress...
   NODE                 VERSION   APISERVER   ETCD
-  k1-control-plane-1   v1.29.10   healthy     healthy   
-  k1-control-plane-2   v1.29.10   healthy     healthy   
-  k1-control-plane-3   v1.29.10   healthy     healthy
+  k1-control-plane-1   v1.31.8   healthy     healthy
+  k1-control-plane-3   v1.31.8   healthy     healthy
+  k1-control-plane-2   v1.31.8   healthy     healthy
   ```
 
 * By default, the machine-controller deploys only one worker node. The number of worker nodes can be controlled in a similar fashion like a Kubernetes deployment, in that the number of worker nodes are controlled by the `replicas` field. You can check the current status of the machine-deployment replicas with the following command:
@@ -115,7 +110,7 @@ In the next step, we will setup a real HA cluster over 3 availability zones to m
   ```
   ```text
   NAME           REPLICAS   AVAILABLE-REPLICAS   PROVIDER   OS       KUBELET   AGE
-  k1-pool-az-a   1          1                    gce        ubuntu   1.29.10   33m
+  k1-pool-az-a   1          1                    gce        ubuntu   1.31.8    22m
   ```
 
 * You can scale it up by using the normal kubectl scale command. The only difference in this scenario is that we are scaling up/down worker nodes instead of Pods.
@@ -129,7 +124,7 @@ In the next step, we will setup a real HA cluster over 3 availability zones to m
 
   ```text
   NAME           REPLICAS   AVAILABLE-REPLICAS   PROVIDER   OS       KUBELET   AGE
-  k1-pool-az-a   2          1                    gce        ubuntu   1.29.10   34m
+  k1-pool-az-a   2          1                    gce        ubuntu   1.31.8    23m
   ```
 
 * After a few minutes the healthy node should show up:
@@ -138,9 +133,9 @@ In the next step, we will setup a real HA cluster over 3 availability zones to m
   ```
 
   ```text
-  NAME                            STATUS   ROLES    AGE   VERSION    INTERNAL-IP   EXTERNAL-IP     OS-IMAGE             KERNEL-VERSION   CONTAINER-RUNTIME
-  k1-pool-az-a-7d8ff98f97-4hvnh   Ready    <none>   34m   v1.29.10   10.164.0.27   34.91.243.116   Ubuntu 22.04.5 LTS   6.8.0-1015-gcp   containerd://1.6.33
-  k1-pool-az-a-7d8ff98f97-k8swf   Ready    <none>   44s   v1.29.10   10.164.0.30   34.34.51.179    Ubuntu 22.04.5 LTS   6.8.0-1015-gcp   containerd://1.6.33
+  NAME                            STATUS   ROLES    AGE   VERSION   INTERNAL-IP   EXTERNAL-IP     OS-IMAGE             KERNEL-VERSION    CONTAINER-RUNTIME
+  k1-pool-az-a-7496775458-4kzlz   Ready    <none>   42s   v1.31.8   10.164.0.7    34.32.128.54    Ubuntu 24.04.2 LTS   6.11.0-1014-gcp   containerd://1.7.27
+  k1-pool-az-a-7496775458-v92w2   Ready    <none>   23m   v1.31.8   10.164.0.4    34.90.127.118   Ubuntu 24.04.2 LTS   6.11.0-1014-gcp   containerd://1.7.27
   ```
 
 * Currently, we don't need more than one node, so we scale down the workers back to 1:
