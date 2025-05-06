@@ -9,9 +9,9 @@ export GCP_SA_MAIL=$GCP_SA_NAME@$GCP_PROJECT_ID.iam.gserviceaccount.com
 export GCP_DOMAIN=$GCP_PROJECT_ID.cloud-native.training
 
 # set K1 && KKP versions
-export KUBEONE_VERSION=1.8.2
-export KKP_VERSION=2.25.11
-export KKP_VERSION_NEW=2.26.0
+export KUBEONE_VERSION=1.10.0
+export KKP_VERSION=2.26.7
+export KKP_VERSION_NEW=2.27.3
 
 # add bin directory to PATH
 export PATH=$PATH:~/bin
