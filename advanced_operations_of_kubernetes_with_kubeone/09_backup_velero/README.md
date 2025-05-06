@@ -47,7 +47,7 @@ A new bucket should be created! Now let's create a dedicated service account for
   gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member serviceAccount:$GCP_VELERO_SERVICE_ACCOUNT_ID --role='roles/storage.admin'
   ```
 * Create a new json key for your service account
-  ```
+  ```bash
   cd $TRAINING_DIR
   cd ./.secrets
   gcloud iam service-accounts keys create --iam-account $GCP_VELERO_SERVICE_ACCOUNT_ID credentials-velero.json

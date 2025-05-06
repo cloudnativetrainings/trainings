@@ -71,38 +71,39 @@
      ```
      After a few minutes you should see, 3 nodes in total.
      ```text
-    NAMESPACE     NAME                                            REPLICAS   AVAILABLE-REPLICAS   PROVIDER   OS       KUBELET   AGE
-    kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-a   1          1                    gce        ubuntu   1.31.8    68m
-    kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-b   1          1                    gce        ubuntu   1.31.8    37m
-    kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-c   1          1                    gce        ubuntu   1.31.8    37m
-
-    NAMESPACE     NAME                                                   PROVIDER   OS       NODE                            KUBELET   ADDRESS          AGE
-    kube-system   machine.cluster.k8s.io/k1-pool-az-a-7496775458-4kzlz   gce        ubuntu   k1-pool-az-a-7496775458-4kzlz   1.31.8    34.32.128.54     45m
-    kube-system   machine.cluster.k8s.io/k1-pool-az-b-5f9d8bcdbf-6kh29   gce        ubuntu   k1-pool-az-b-5f9d8bcdbf-6kh29   1.31.8    35.204.218.152   37m
-    kube-system   machine.cluster.k8s.io/k1-pool-az-c-75c78c754d-6clwg   gce        ubuntu   k1-pool-az-c-75c78c754d-6clwg   1.31.8    34.90.127.118    37m
-
-    NAMESPACE   NAME                                 STATUS   ROLES           AGE   VERSION
-                node/k1-control-plane-1              Ready    control-plane   72m   v1.31.8
-                node/k1-control-plane-2              Ready    control-plane   53m   v1.31.8
-                node/k1-control-plane-3              Ready    control-plane   52m   v1.31.8
-                node/k1-pool-az-a-7496775458-4kzlz   Ready    <none>          43m   v1.31.8
-                node/k1-pool-az-b-5f9d8bcdbf-6kh29   Ready    <none>          34m   v1.31.8
-                node/k1-pool-az-c-75c78c754d-6clwg   Ready    <none>          35m   v1.31.8
+     NAMESPACE     NAME                                            REPLICAS   AVAILABLE-REPLICAS   PROVIDER   OS       KUBELET   AGE
+     kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-a   1          1                    gce        ubuntu   1.31.8    68m
+     kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-b   1          1                    gce        ubuntu   1.31.8    37m
+     kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-c   1          1                    gce        ubuntu   1.31.8    37m
+ 
+     NAMESPACE     NAME                                                   PROVIDER   OS       NODE                            KUBELET   ADDRESS          AGE
+     kube-system   machine.cluster.k8s.io/k1-pool-az-a-7496775458-4kzlz   gce        ubuntu   k1-pool-az-a-7496775458-4kzlz   1.31.8    34.32.128.54     45m
+     kube-system   machine.cluster.k8s.io/k1-pool-az-b-5f9d8bcdbf-6kh29   gce        ubuntu   k1-pool-az-b-5f9d8bcdbf-6kh29   1.31.8    35.204.218.152   37m
+     kube-system   machine.cluster.k8s.io/k1-pool-az-c-75c78c754d-6clwg   gce        ubuntu   k1-pool-az-c-75c78c754d-6clwg   1.31.8    34.90.127.118    37m
+ 
+     NAMESPACE   NAME                                 STATUS   ROLES           AGE   VERSION
+                 node/k1-control-plane-1              Ready    control-plane   72m   v1.31.8
+                 node/k1-control-plane-2              Ready    control-plane   53m   v1.31.8
+                 node/k1-control-plane-3              Ready    control-plane   52m   v1.31.8
+                 node/k1-pool-az-a-7496775458-4kzlz   Ready    <none>          43m   v1.31.8
+                 node/k1-pool-az-b-5f9d8bcdbf-6kh29   Ready    <none>          34m   v1.31.8
+                 node/k1-pool-az-c-75c78c754d-6clwg   Ready    <none>          35m   v1.31.8
      ```
      
-    Now check again the availability zones
-    ```bash
-    kubectl get nodes --label-columns failure-domain.beta.kubernetes.io/zone
-    ```
-    ```text
-    NAME                            STATUS   ROLES           AGE   VERSION   ZONE
-    k1-control-plane-1              Ready    control-plane   72m   v1.31.8   europe-west4-a
-    k1-control-plane-2              Ready    control-plane   53m   v1.31.8   europe-west4-b
-    k1-control-plane-3              Ready    control-plane   52m   v1.31.8   europe-west4-c
-    k1-pool-az-a-7496775458-4kzlz   Ready    <none>          44m   v1.31.8   europe-west4-a
-    k1-pool-az-b-5f9d8bcdbf-6kh29   Ready    <none>          35m   v1.31.8   europe-west4-b
-    k1-pool-az-c-75c78c754d-6clwg   Ready    <none>          35m   v1.31.8   europe-west4-c
-    ```
+     Now check again the availability zones
+     ```bash
+     kubectl get nodes --label-columns failure-domain.beta.kubernetes.io/zone
+     ```
+
+     ```text
+     NAME                            STATUS   ROLES           AGE   VERSION   ZONE
+     k1-control-plane-1              Ready    control-plane   72m   v1.31.8   europe-west4-a
+     k1-control-plane-2              Ready    control-plane   53m   v1.31.8   europe-west4-b
+     k1-control-plane-3              Ready    control-plane   52m   v1.31.8   europe-west4-c
+     k1-pool-az-a-7496775458-4kzlz   Ready    <none>          44m   v1.31.8   europe-west4-a
+     k1-pool-az-b-5f9d8bcdbf-6kh29   Ready    <none>          35m   v1.31.8   europe-west4-b
+     k1-pool-az-c-75c78c754d-6clwg   Ready    <none>          35m   v1.31.8   europe-west4-c
+     ```
 
   5. Change back to the default namespace
      ```bash

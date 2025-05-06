@@ -12,7 +12,7 @@ apiVersion: kubeone.k8c.io/v1beta2
 kind: KubeOneCluster
 name: k1
 versions:
-  kubernetes: "1.30.5"
+  kubernetes: "1.32.4"
 cloudProvider:
   gce: {}
   cloudConfig: |-
@@ -162,37 +162,40 @@ kubectl get md,ms,ma,node -A
 
 ```text
 NAMESPACE     NAME                                            REPLICAS   AVAILABLE-REPLICAS   PROVIDER   OS       KUBELET   AGE
-kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-a   5          5                    gce        ubuntu   1.30.5    119m
-kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-b   3          1                    gce        ubuntu   1.30.5    105m
-kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-c   2          1                    gce        ubuntu   1.30.5    105m
+kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-a   5          5                    gce        ubuntu   1.32.4    5h
+kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-b   2          2                    gce        ubuntu   1.32.4    4h39m
+kube-system   machinedeployment.cluster.k8s.io/k1-pool-az-c   1          1                    gce        ubuntu   1.32.4    4h39m
 
 NAMESPACE     NAME                                                REPLICAS   AVAILABLE-REPLICAS   PROVIDER   OS       MACHINEDEPLOYMENT   KUBELET   AGE
-kube-system   machineset.cluster.k8s.io/k1-pool-az-a-dcbd8b5d5    5          4                    gce        ubuntu   k1-pool-az-a        1.30.5    28m
-kube-system   machineset.cluster.k8s.io/k1-pool-az-b-7fbcf7d6b8   3          1                    gce        ubuntu   k1-pool-az-b        1.30.5    28m
-kube-system   machineset.cluster.k8s.io/k1-pool-az-c-89f84f79     2          1                    gce        ubuntu   k1-pool-az-c        1.30.5    28m
+kube-system   machineset.cluster.k8s.io/k1-pool-az-a-6dbdd9775b   5          5                    gce        ubuntu   k1-pool-az-a        1.32.4    19m
+kube-system   machineset.cluster.k8s.io/k1-pool-az-a-7fb4567dbf   0                               gce        ubuntu   k1-pool-az-a        1.31.8    4h29m
+kube-system   machineset.cluster.k8s.io/k1-pool-az-b-7d57bb75dd   0                               gce        ubuntu   k1-pool-az-b        1.31.8    4h27m
+kube-system   machineset.cluster.k8s.io/k1-pool-az-b-b6cd6698f    2          2                    gce        ubuntu   k1-pool-az-b        1.32.4    19m
+kube-system   machineset.cluster.k8s.io/k1-pool-az-c-7b7fd67fb7   0                               gce        ubuntu   k1-pool-az-c        1.31.8    4h27m
+kube-system   machineset.cluster.k8s.io/k1-pool-az-c-95bf957fd    1          1                    gce        ubuntu   k1-pool-az-c        1.32.4    19m
 
 NAMESPACE     NAME                                                   PROVIDER   OS       NODE                            KUBELET   ADDRESS          AGE
-kube-system   machine.cluster.k8s.io/k1-pool-az-a-dcbd8b5d5-8z4xr    gce        ubuntu   k1-pool-az-a-dcbd8b5d5-8z4xr    1.30.5    35.204.103.213   8m11s
-kube-system   machine.cluster.k8s.io/k1-pool-az-a-dcbd8b5d5-gxshs    gce        ubuntu   k1-pool-az-a-dcbd8b5d5-gxshs    1.30.5    34.147.125.180   8m11s
-kube-system   machine.cluster.k8s.io/k1-pool-az-a-dcbd8b5d5-jbwtj    gce        ubuntu   k1-pool-az-a-dcbd8b5d5-jbwtj    1.30.5    34.141.133.38    8m11s
-kube-system   machine.cluster.k8s.io/k1-pool-az-a-dcbd8b5d5-r5dvb    gce        ubuntu                                   1.30.5    34.32.201.130    7m13s
-kube-system   machine.cluster.k8s.io/k1-pool-az-a-dcbd8b5d5-z97zh    gce        ubuntu   k1-pool-az-a-dcbd8b5d5-z97zh    1.30.5    34.91.101.160    8m25s
-kube-system   machine.cluster.k8s.io/k1-pool-az-b-7fbcf7d6b8-2hqn8   gce        ubuntu                                   1.30.5    34.34.49.93      6m52s
-kube-system   machine.cluster.k8s.io/k1-pool-az-b-7fbcf7d6b8-bkphr   gce        ubuntu   k1-pool-az-b-7fbcf7d6b8-bkphr   1.30.5    34.90.189.9      8m24s
-kube-system   machine.cluster.k8s.io/k1-pool-az-b-7fbcf7d6b8-sdb67   gce        ubuntu                                   1.30.5    34.91.198.135    6m52s
-kube-system   machine.cluster.k8s.io/k1-pool-az-c-89f84f79-jcmq7     gce        ubuntu                                   1.30.5    34.90.231.136    6m30s
-kube-system   machine.cluster.k8s.io/k1-pool-az-c-89f84f79-rrnz7     gce        ubuntu   k1-pool-az-c-89f84f79-rrnz7     1.30.5    34.32.135.224    8m24s
+kube-system   machine.cluster.k8s.io/k1-pool-az-a-6dbdd9775b-dsq8k   gce        ubuntu   k1-pool-az-a-6dbdd9775b-dsq8k   1.32.4    34.34.126.230    4m14s
+kube-system   machine.cluster.k8s.io/k1-pool-az-a-6dbdd9775b-f96ww   gce        ubuntu   k1-pool-az-a-6dbdd9775b-f96ww   1.32.4    34.141.237.8     4m14s
+kube-system   machine.cluster.k8s.io/k1-pool-az-a-6dbdd9775b-gcbjw   gce        ubuntu   k1-pool-az-a-6dbdd9775b-gcbjw   1.32.4    34.90.33.196     4m14s
+kube-system   machine.cluster.k8s.io/k1-pool-az-a-6dbdd9775b-k6gl4   gce        ubuntu   k1-pool-az-a-6dbdd9775b-k6gl4   1.32.4    34.90.198.72     4m14s
+kube-system   machine.cluster.k8s.io/k1-pool-az-a-6dbdd9775b-rrwpv   gce        ubuntu   k1-pool-az-a-6dbdd9775b-rrwpv   1.32.4    34.141.235.231   19m
+kube-system   machine.cluster.k8s.io/k1-pool-az-b-b6cd6698f-68cjk    gce        ubuntu   k1-pool-az-b-b6cd6698f-68cjk    1.32.4    34.32.151.16     3m52s
+kube-system   machine.cluster.k8s.io/k1-pool-az-b-b6cd6698f-c96xz    gce        ubuntu   k1-pool-az-b-b6cd6698f-c96xz    1.32.4    34.90.223.239    19m
+kube-system   machine.cluster.k8s.io/k1-pool-az-c-95bf957fd-t4jv5    gce        ubuntu   k1-pool-az-c-95bf957fd-t4jv5    1.32.4    34.34.76.171     19m
 
 NAMESPACE   NAME                                 STATUS   ROLES           AGE     VERSION
-            node/k1-control-plane-1              Ready    control-plane   123m    v1.30.5
-            node/k1-control-plane-2              Ready    control-plane   114m    v1.30.5
-            node/k1-control-plane-3              Ready    control-plane   114m    v1.30.5
-            node/k1-pool-az-a-dcbd8b5d5-8z4xr    Ready    <none>          4m12s   v1.30.5
-            node/k1-pool-az-a-dcbd8b5d5-gxshs    Ready    <none>          4m19s   v1.30.5
-            node/k1-pool-az-a-dcbd8b5d5-jbwtj    Ready    <none>          4m30s   v1.30.5
-            node/k1-pool-az-a-dcbd8b5d5-z97zh    Ready    <none>          4m44s   v1.30.5
-            node/k1-pool-az-b-7fbcf7d6b8-bkphr   Ready    <none>          4m57s   v1.30.5
-            node/k1-pool-az-c-89f84f79-rrnz7     Ready    <none>          4m47s   v1.30.5
+            node/k1-control-plane-1              Ready    control-plane   5h4m    v1.32.4
+            node/k1-control-plane-2              Ready    control-plane   4h54m   v1.32.4
+            node/k1-control-plane-3              Ready    control-plane   4h54m   v1.32.4
+            node/k1-pool-az-a-6dbdd9775b-dsq8k   Ready    <none>          110s    v1.32.4
+            node/k1-pool-az-a-6dbdd9775b-f96ww   Ready    <none>          51s     v1.32.4
+            node/k1-pool-az-a-6dbdd9775b-gcbjw   Ready    <none>          49s     v1.32.4
+            node/k1-pool-az-a-6dbdd9775b-k6gl4   Ready    <none>          81s     v1.32.4
+            node/k1-pool-az-a-6dbdd9775b-rrwpv   Ready    <none>          15m     v1.32.4
+            node/k1-pool-az-b-b6cd6698f-68cjk    Ready    <none>          20s     v1.32.4
+            node/k1-pool-az-b-b6cd6698f-c96xz    Ready    <none>          16m     v1.32.4
+            node/k1-pool-az-c-95bf957fd-t4jv5    Ready    <none>          16m     v1.32.4
 ```
 
 You can also check that all application pods are Running.
