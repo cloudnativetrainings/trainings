@@ -126,7 +126,7 @@ ingress-nginx   ingress-nginx   1               2025-05-05 10:17:34.442043274 +0
   ```
   ```text
   NAME                DNS_NAME                                DESCRIPTION                 VISIBILITY
-  student-XX-XXXX     student-XX-XXXX.cloud-native.training.  zone for student-XX-XXXX    public
+  student-XX-XXXX     student-XX-XXXX.kubermatic.training.  zone for student-XX-XXXX    public
   ```
   Adjust to your zone name
   ```bash
@@ -136,14 +136,14 @@ ingress-nginx   ingress-nginx   1               2025-05-05 10:17:34.442043274 +0
   ```
 
 * Then proceed to add the A records:
-  `*.student-XX-XXXX.cloud-native.training`  ---->  LoadBalancer IP address of the Nginx Service
+  `*.student-XX-XXXX.kubermatic.training`  ---->  LoadBalancer IP address of the Nginx Service
   ```bash
   kubectl get svc -n ingress-nginx
   ```
   Use your external service ip
   ```bash
   export SERVICE_NGINX_EXT_IP=$(kubectl get svc ingress-nginx-controller -n ingress-nginx -o jsonpath='{.status.loadBalancer.ingress[].ip}')
-  gcloud dns record-sets transaction add --zone=$DNS_ZONE --name="*.$DNS_ZONE.cloud-native.training" --ttl 300 --type A $SERVICE_NGINX_EXT_IP
+  gcloud dns record-sets transaction add --zone=$DNS_ZONE --name="*.$DNS_ZONE.kubermatic.training" --ttl 300 --type A $SERVICE_NGINX_EXT_IP
   ```
 
 * Finally, verify DNS transaction yaml and execute those changes.
@@ -173,7 +173,7 @@ ingress-nginx   ingress-nginx   1               2025-05-05 10:17:34.442043274 +0
   >Use email provided by trainer for `TRAINING_EMAIL`
   ```bash
   cd $TRAINING_DIR/07_deploy-app-02-external-access
-  export TRAINING_EMAIL=student-XX.XXXX@cloud-native.training       
+  export TRAINING_EMAIL=student-XX.XXXX@cloud-native.training
   sed -i "s/your-email@example.com/$TRAINING_EMAIL/g" manifests/lb.cluster-issuer.yaml
   kubectl apply -f manifests/lb.cluster-issuer.yaml
   ```
@@ -210,7 +210,7 @@ Let's deploy a sample application. This will entail creating a deployment, a ser
   kubectl apply -f manifests/app.service.yaml
   ```
 
-Now let's configure a valid SSL certificate for you app. `sed` will replace `TODO-YOUR-DNS-ZONE` with your DNS ZONE, e.g.:`student-XX-XXXX.cloud-native.training`. Please ensure you will use **YOUR STUDENT ID**:
+Now let's configure a valid SSL certificate for you app. `sed` will replace `TODO-YOUR-DNS-ZONE` with your DNS ZONE, e.g.:`student-XX-XXXX.kubermatic.training`. Please ensure you will use **YOUR STUDENT ID**:
 
 * Check no certificate is present
   ```bash
@@ -263,7 +263,7 @@ kubectl get ingresses.networking.k8s.io
 
 ```text
 NAME       CLASS   HOSTS                                           ADDRESS       PORTS     AGE
-helloweb   nginx   app-ext.student-XX-XXXX.cloud-native.training   35.204.66.3   80, 443   108s
+helloweb   nginx   app-ext.student-XX-XXXX.kubermatic.training   35.204.66.3   80, 443   108s
 ```
 
 Ensure that there are endpoints available for the service.
@@ -271,11 +271,11 @@ Ensure that there are endpoints available for the service.
 Test the application (this is being served via the ingress controller with the Let's encrypt SSL certificate):
 
 ```bash
-echo https://app-ext.$DNS_ZONE.cloud-native.training
+echo https://app-ext.$DNS_ZONE.kubermatic.training
 ```
-Your DNS zone should be displayed. Similar to https://app-ext.YOUR-DNS-ZONE.cloud-native.training
+Your DNS zone should be displayed. Similar to https://app-ext.YOUR-DNS-ZONE.kubermatic.training
 ```bash
-curl https://app-ext.$DNS_ZONE.cloud-native.training
+curl https://app-ext.$DNS_ZONE.kubermatic.training
 ```
 
 ```text
